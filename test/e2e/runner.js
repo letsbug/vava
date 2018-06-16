@@ -16,8 +16,7 @@ devConfigPromise.then(devConfig => {
   const port = devServerOptions.port
   const host = devServerOptions.host
   return server.listen(port, host)
-})
-.then(() => {
+}).then(() => {
   // 2. run the nightwatch test suite against it
   // to run in additional browsers:
   //    1. add an entry in test/e2e/nightwatch.conf.js under "test_settings"
@@ -36,12 +35,12 @@ devConfigPromise.then(devConfig => {
   const spawn = require('cross-spawn')
   const runner = spawn('./node_modules/.bin/nightwatch', opts, { stdio: 'inherit' })
 
-  runner.on('exit', function (code) {
+  runner.on('exit', function(code) {
     server.close()
     process.exit(code)
   })
 
-  runner.on('error', function (err) {
+  runner.on('error', function(err) {
     server.close()
     throw err
   })

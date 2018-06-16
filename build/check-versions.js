@@ -4,7 +4,7 @@ const semver = require('semver')
 const packageConfig = require('../package.json')
 const shell = require('shelljs')
 
-function exec (cmd) {
+function exec(cmd) {
   return require('child_process').execSync(cmd).toString().trim()
 }
 
@@ -24,7 +24,7 @@ if (shell.which('npm')) {
   })
 }
 
-module.exports = function () {
+module.exports = function() {
   const warnings = []
 
   for (let i = 0; i < versionRequirements.length; i++) {
