@@ -1,4 +1,4 @@
-import Layout from '@/views/Layouts/Layout'
+import Layout from '@/layouts/Layout'
 
 /**
  * noCache: Marks whether the route is allowed to be cached so that the DOM is repeatedly rendered when routing is frequently switched.

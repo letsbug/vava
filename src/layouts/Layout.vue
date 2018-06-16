@@ -9,9 +9,13 @@
 </template>
 
 <script>
-import { Sidebar, HeaderBar, TabBar, AppMain, FooterBar } from './components'
+import { Sidebar, HeaderBar, TabBar, AppMain, FooterBar } from './components/index'
+import ResizeHandler from '@/utilities/ResizeHandler'
+
 export default {
   name: 'Layout',
-  components: { Sidebar, HeaderBar, TabBar, AppMain, FooterBar }
+  components: { Sidebar, HeaderBar, TabBar, AppMain, FooterBar },
+  mixins: [ResizeHandler],
+  computed: {}
 }
 </script>
