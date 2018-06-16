@@ -6,6 +6,8 @@ import Layout from '@/layouts/Layout'
  * @type {Route[]}
  */
 export const constantRouterMap = [
+  { path: '/login', component: () => import('@/views/login/LoginIndex'), hidden: true },
+  { path: '/404', component: () => import('@/views/errorPages/error404'), hidden: true },
   {
     path: '',
     component: Layout,
