@@ -16,7 +16,7 @@ export default {
   mounted() {
     const isMobile = this.isMobile()
     if (isMobile) {
-      store.dispatch('toggleDevice', 'mobile')
+      store.dispatch('app_toggle_device', 'mobile')
     }
   },
   methods: {
@@ -26,7 +26,7 @@ export default {
     },
     resizeHandler() {
       const isMobile = this.isMobile()
-      store.dispatch('toggleDevice', isMobile ? 'mobile' : 'desktop')
+      store.dispatch('app_toggle_device', isMobile ? 'mobile' : 'desktop')
     }
   }
 }
