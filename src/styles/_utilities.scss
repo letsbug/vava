@@ -1,0 +1,13 @@
+// icon font svg by symbol
+
+.icon-svg {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+
+  &.handle-refresh.doing {
+    color: $theme-color;
+    animation: ani-rotate .8s ease-out infinite;
+  }
+}

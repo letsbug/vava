@@ -1,4 +1,4 @@
-$login-form-padding:  $spacer;
+$login-form-padding:  $spacer-y;
 $login-form-width:    380 + $login-form-padding * 2;
 
 .login-container {
@@ -16,7 +16,7 @@ $login-form-width:    380 + $login-form-padding * 2;
 
     .form-title {
       margin-top: 0;
-      margin-bottom: $spacer * 4;
+      margin-bottom: $spacer-y * 4;
       text-align: center;
     }
 

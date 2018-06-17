@@ -43,15 +43,15 @@ $font-size-xxl:               24px!default;
 
 // Spacers
 
-$spacer:                      10px!default;
-$spacer-lg:                   15px!default;
+$spacer-y:                    10px!default;
+$spacer-x:                    15px!default;
 
 
 // line, borders
 
-$border-fefault-width:        1px;
-$border-default:              solid $border-fefault-width $gray-300!default;
-$border-theme:                solid $border-fefault-width $theme-color;
+$border-default-width:        1px;
+$border-default:              solid $border-default-width $gray-300!default;
+$border-theme:                solid $border-default-width $theme-color;
 
 
 // device breakpoint
@@ -72,6 +72,11 @@ $shadow-md:                   0 .2rem .4rem rgba(0, 0, 0, .075)!default;
 // Transitions
 
 $transition-duration:         .28s!default;
+
+$transition-border:           border $transition-duration ease-out!default;
+$transition-opacity:          opacity $transition-duration ease-out!default;
+$transition-background:       background $transition-duration ease-out!default;
+
 $transition-sidebar-desktop:  width $transition-duration ease-out!default;
 $transition-sidebar-mobile:   transform $transition-duration ease-out!default;
 $transition-main-desktop:     margin-left $transition-duration ease-out!default;
@@ -86,13 +91,29 @@ $sidebar-width-mobile:        $sidebar-width-expanded!default;
 $sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
 
 
+// Header bar
+
+$header-icon-size:            22px;
+
+$header-border-width:         $border-default-width;
+$header-links-border-width:   2px;
+$header-links-border:         solid $header-links-border-width transparent;
+$header-links-hover-border:   solid $header-links-border-width $theme-color;
+
+$header-height:               50px;
+$header-line-height:          $header-height - $header-border-width - $header-links-border-width * 2;
+
+$header-padding:              0 $spacer-x;
+$header-links-padding:        0 $spacer-x $header-links-border-width;
+
+
 // Bottom Footbar
 
 $foobar-bg:                   white!default;
 $foobar-border:               $border-default!default;
 $foobar-shadow:               $shadow-sm-invert!default;
-$foobar-padding-x:            $spacer!default;
-$foobar-padding-y:            $spacer!default;
+$foobar-padding-x:            $spacer-x!default;
+$foobar-padding-y:            $spacer-y!default;
 
 $foobar-height:               49px!default;
 $foobar-line-height:          $foobar-height - $foobar-padding-y * 2!default;

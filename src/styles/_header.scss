@@ -1,0 +1,24 @@
+.container-header {
+  height: $header-height;
+  line-height: $header-line-height;
+  padding: $header-padding;
+  border-bottom: $border-default;
+}
+
+.header-nav {
+  font-size: 0;
+
+  .nav-item {
+    display: inline-block;
+    vertical-align: top;
+    padding: $header-links-padding;
+    font-size: $header-icon-size;
+    border-top: $header-links-border;
+    cursor: pointer;
+    transition: $transition-border;
+
+    &:hover {
+      border-top: $header-links-hover-border;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 @import "variables";
 @import "root";
+@import "animations";
+@import "utilities";
 @import "containers";
 @import "sidebar";
 @import "header";
@@ -10,4 +12,4 @@
 //
 //  pages
 
-@import "login-page";
+@import "views";
