@@ -13,9 +13,11 @@ import store from '@/store'
 
 import App from './App'
 
-Vue.config.productionTip = false
+import '@/simulate'
 
 Vue.use(Element, { size: 'small' })
+
+Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({

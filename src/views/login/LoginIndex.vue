@@ -46,7 +46,6 @@ export default {
         callback(new Error('密码长度过短（最少6位）'))
       } else callback()
     }
-    console.log(this.$store.state.userInfo)
     return {
       loginForm: {
         username: 'admin',
@@ -62,7 +61,7 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      expires: this.$store.state.userInfo.token.expire
+      expires: this.$store.state.user.expire
     }
   },
   methods: {
@@ -73,7 +72,7 @@ export default {
       this.$refs['loginForm'].validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('userLogin', this.loginForm).then(() => {
+          this.$store.dispatch('user_login', this.loginForm).then(() => {
             this.loading = false
             this.$router.push({ path: '/' })
           }).catch(() => {
@@ -88,78 +87,6 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  @import "../../styles/variables";
-
-  $login-form-padding:  $spacer;
-  $login-form-width:    380 + $login-form-padding * 2;
-
-  .login-container {
-    background-color: $color-blue-dark;
-    height: 100%;
-    color: $gray-200;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .login-form {
-      margin-top: -80px;
-      width: 380px;
-      padding: 0 $login-form-padding;
-
-      .form-title {
-        margin-top: 0;
-        margin-bottom: $spacer * 4;
-        text-align: center;
-      }
-
-      .checkbox-green .el-checkbox__input {
-        .el-checkbox__inner:hover {
-          border-color: $color-green !important;
-        }
-
-        &.is-checked .el-checkbox__inner,
-        &.is-indeterminate .el-checkbox__inner{
-          background-color: $color-green !important;
-          border-color: $color-green !important;
-        }
-
-        &.is-checked+.el-checkbox__label {
-          color: $color-green !important;
-        }
-      }
-
-      .forget-link {
-        color: $gray-650;
-      }
-
-      .el-button.btn-login {
-        width: 100%;
-      }
-    }
-
-    .copyright {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      text-align: center;
-      margin-bottom: $foobar-padding-y;
-      white-space: nowrap;
-
-      br {
-        display: none;
-      }
-    }
-  }
-
-  @media screen and (max-width: 767px) {
-    .login-container .login-form {
-      width: 100%;
-    }
-  }
-</style>
 
 <style scoped>
   .icon-eye-close, .icon-eye-open {
