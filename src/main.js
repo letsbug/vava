@@ -6,7 +6,7 @@ import 'normalize.css'
 
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import '@/styles/admin.frame.core.scss'
+import '@/styles/core.admin.frame.scss'
 
 import router from '@/router'
 import '@/router/helper'
