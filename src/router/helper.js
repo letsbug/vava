@@ -4,7 +4,7 @@
  * @date: 2018-06-17 18:39
  */
 
-import router from '@/router'
+import router from '@/router/index'
 // import store from '@/store'
 // element ui global message component
 // import { Message } from 'element-ui'
