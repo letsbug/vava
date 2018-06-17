@@ -13,6 +13,7 @@ import store from '@/store'
 
 import App from './App'
 
+import '@/permission'
 import '@/simulate'
 
 Vue.use(Element, { size: 'small' })

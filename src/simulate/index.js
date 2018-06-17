@@ -11,5 +11,3 @@ import loginApi from './login'
 Mock.mock(/\/login\/login/, 'post', loginApi.login)
 Mock.mock(/\/login\/logout/, 'post', loginApi.logout)
 Mock.mock(/\/login\/info\.*/, 'get', loginApi.information)
-
-export default Mock

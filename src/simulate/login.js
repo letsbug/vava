@@ -11,14 +11,14 @@ const userMap = {
     roles: ['admin'],
     token: 'admin',
     introduction: 'I\'m super manager',
-    avatar: '/static/icon-avatar512x512.jpg',
+    avatar: './static/avatar.png',
     name: 'Super Admin'
   },
   editor: {
     roles: ['editor'],
     token: 'editor',
     introduction: 'I\'m a editor',
-    avatar: '/static/icon-avatar512x512.jpg',
+    avatar: './static/avatar.png',
     name: 'Normal Editor'
   }
 }
