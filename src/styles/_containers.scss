@@ -1,0 +1,58 @@
+.container-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;
+  height: 100%;
+  background-color: $color-blue-dark;
+  color: $white;
+  transition: $transition-sidebar-desktop;
+}
+
+.container-main {
+  position: relative;
+  margin-left: $sidebar-width;
+  height: 100%;
+  overflow: hidden;
+  transition: $transition-main-desktop;
+}
+
+.app-wrapper {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+
+  &.sidebar-expanded {
+    .container-sidebar {
+      width: $sidebar-width-expanded;
+    }
+
+    .container-main {
+      margin-left: $sidebar-width-expanded;
+    }
+  }
+}
+
+@media screen and (max-width: $d-sm) {
+  .container-sidebar {
+    width: $sidebar-width-mobile;
+    transition-property: transform;
+    transform: translate3d(-$sidebar-width-mobile, 0, 0);
+  }
+
+  .container-main {
+    margin-left: 0!important;
+    transition-property: transform;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .app-wrapper.sidebar-expanded {
+    .container-sidebar {
+      transform: translate3d(0, 0, 0);
+    }
+
+    .container-main {
+      transform: translate3d($sidebar-main-offset-mobile, 0, 0);
+    }
+  }
+}

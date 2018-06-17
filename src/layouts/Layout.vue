@@ -1,15 +1,17 @@
 <template>
   <div class="app-wrapper">
     <sidebar></sidebar>
-    <header-bar></header-bar>
-    <tab-bar></tab-bar>
-    <app-main></app-main>
-    <footer-bar></footer-bar>
+    <div class="container-main">
+      <header-bar></header-bar>
+      <tab-bar></tab-bar>
+      <app-main></app-main>
+      <footer-bar></footer-bar>
+    </div>
   </div>
 </template>
 
 <script>
-import { Sidebar, HeaderBar, TabBar, AppMain, FooterBar } from './components/index'
+import { Sidebar, HeaderBar, TabBar, AppMain, FooterBar } from './components'
 import ResizeHandler from '@/utilities/ResizeHandler'
 
 export default {

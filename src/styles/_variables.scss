@@ -54,11 +54,36 @@ $border-default:              solid $border-fefault-width $gray-300!default;
 $border-theme:                solid $border-fefault-width $theme-color;
 
 
+// device breakpoint
+
+$d-sm:  768px;
+$d-md:  992px;
+$d-lg:  1200px;
+$d-xl:  1920px;
+
+
 // Shadows
 
 $shadow-sm:                   0 .1rem .2rem rgba(0, 0, 0, .075)!default;
 $shadow-sm-invert:            0 -.1rem .2rem rgba(0, 0, 0, .075)!default;
 $shadow-md:                   0 .2rem .4rem rgba(0, 0, 0, .075)!default;
+
+
+// Transitions
+
+$transition-duration:         .28s!default;
+$transition-sidebar-desktop:  width $transition-duration ease-out!default;
+$transition-sidebar-mobile:   transform $transition-duration ease-out!default;
+$transition-main-desktop:     margin-left $transition-duration ease-out!default;
+$transition-main-mobile:      left $transition-duration ease-out!default;
+
+
+// Sidebar
+
+$sidebar-width:               60px!default;
+$sidebar-width-expanded:      180px!default;
+$sidebar-width-mobile:        $sidebar-width-expanded!default;
+$sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
 
 
 // Bottom Footbar

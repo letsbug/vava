@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import { constantRouterMap } from './constant'
+import { constantRouterMap } from './static'
 // import { asyncRouterMap } from './async'
 
 Vue.use(Router)
