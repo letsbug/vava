@@ -84,12 +84,25 @@ $transition-main-desktop:     margin-left $transition-duration ease-out!default;
 $transition-main-mobile:      left $transition-duration ease-out!default;
 
 
+// zindex
+
+$zindex-sidebar:              1030;
+$zindex-sidebar-dropdown:     1040;
+$zindex-sidebar-backdrop:     1020;
+$zindex-header:               1000;
+$zindex-header-dropdown:      1010;
+$zindex-tabbar:               1000;
+$zindex-footer:               1000;
+
+
 // Sidebar
 
 $sidebar-width:               60px!default;
 $sidebar-width-expanded:      180px!default;
 $sidebar-width-mobile:        $sidebar-width-expanded!default;
 $sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
+
+$sidebar-backdrop-bg:         rgba(0, 0, 0, .5);
 
 
 // Header bar

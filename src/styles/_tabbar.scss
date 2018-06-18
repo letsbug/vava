@@ -3,4 +3,10 @@
   border-bottom: $tabbar-border;
   line-height: $tabbar-line-height;
   padding: $tabbar-padding;
+  box-shadow: $shadow-sm;
+  position: absolute;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  z-index: $zindex-tabbar;
 }

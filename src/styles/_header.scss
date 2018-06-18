@@ -3,6 +3,11 @@
   line-height: $header-line-height;
   padding: $header-padding;
   border-bottom: $border-default;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $zindex-header;
 }
 
 .header-nav {

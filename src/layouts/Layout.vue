@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper sidebar-expanded">
     <sidebar></sidebar>
     <div class="container-main">
       <header-bar></header-bar>
@@ -7,6 +7,7 @@
       <app-main></app-main>
       <footer-bar></footer-bar>
     </div>
+    <div class="sidebar-backdrop"></div>
   </div>
 </template>
 

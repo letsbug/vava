@@ -3,10 +3,11 @@
   top: 0;
   left: 0;
   width: $sidebar-width;
-  height: 100%;
-  background-color: $color-blue-dark;
-  color: $white;
   transition: $transition-sidebar-desktop;
+}
+
+.sidebar-backdrop {
+  display: none;
 }
 
 .container-main {
@@ -15,6 +16,7 @@
   height: 100%;
   overflow: hidden;
   transition: $transition-main-desktop;
+  padding-top: $header-height + $tabbar-height;
 }
 
 .app-wrapper {
@@ -40,6 +42,20 @@
     transform: translate3d(-$sidebar-width-mobile, 0, 0);
   }
 
+  .sidebar-backdrop {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-sidebar-backdrop;
+    opacity: 0;
+    visibility: hidden;
+    background-color: $sidebar-backdrop-bg;
+    transition: $transition-opacity;
+  }
+
   .container-main {
     margin-left: 0!important;
     transition-property: transform;
@@ -49,6 +65,11 @@
   .app-wrapper.sidebar-expanded {
     .container-sidebar {
       transform: translate3d(0, 0, 0);
+    }
+
+    .sidebar-backdrop {
+      opacity: 1;
+      visibility: visible;
     }
 
     .container-main {
