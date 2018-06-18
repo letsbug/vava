@@ -16,7 +16,7 @@ const service = axios.create({ baseURL: process.env.BASE_API, timeout: 6000 })
 service.interceptors.request.use(
   config => {
     // Let all request carry token, ['X-Token'] is custom key.
-    if (store.getters.user.token) service.defaults.headers['X-Token'] = getToken()
+    if (store.getters.token) service.defaults.headers['X-Token'] = getToken()
     return config
   }, error => Promise.reject(error)
 )

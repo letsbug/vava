@@ -10,4 +10,4 @@ import loginApi from './login'
 // about login
 Mock.mock(/\/login\/login/, 'post', loginApi.login)
 Mock.mock(/\/login\/logout/, 'post', loginApi.logout)
-Mock.mock(/\/login\/info\.*/, 'get', loginApi.information)
+Mock.mock(/\/user\/info\.*/, 'get', loginApi.information)
