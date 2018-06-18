@@ -50,6 +50,7 @@ $spacer-x:                    15px!default;
 // line, borders
 
 $border-default-width:        1px;
+$border-default-color:        $gray-300!default;
 $border-default:              solid $border-default-width $gray-300!default;
 $border-theme:                solid $border-default-width $theme-color;
 
@@ -101,10 +102,22 @@ $header-links-border:         solid $header-links-border-width transparent;
 $header-links-hover-border:   solid $header-links-border-width $theme-color;
 
 $header-height:               50px;
-$header-line-height:          $header-height - $header-border-width - $header-links-border-width * 2;
+$header-line-height:          $header-height - $header-border-width;
+$header-links-line-height:    $header-height - $header-border-width - $header-links-border-width * 2;
 
 $header-padding:              0 $spacer-x;
 $header-links-padding:        0 $spacer-x $header-links-border-width;
+
+
+// Tab bar
+
+$tabbar-border-height:        1px;
+$tabbar-border:               $border-default;
+
+$tabbar-height:               40px;
+$tabbar-line-height:          $tabbar-height - $tabbar-border-height;
+
+$tabbar-padding:              0 $spacer-x;
 
 
 // Bottom Footbar

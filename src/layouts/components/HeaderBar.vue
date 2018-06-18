@@ -1,5 +1,5 @@
 <template>
-  <div class="container-header">
+  <div class="app-header">
     <div class="header-nav nav-left">
       <a class="nav-item"><svg class="icon-svg" aria-hidden="true"><use xlink:href="#if-handle-close"></use></svg></a>
       <a class="nav-item open-in-browser"><svg class="icon-svg" aria-hidden="true"><use

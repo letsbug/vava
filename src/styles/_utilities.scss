@@ -1,3 +1,4 @@
+//
 // icon font svg by symbol
 
 .icon-svg {
@@ -11,3 +12,9 @@
     animation: ani-rotate .8s ease-out infinite;
   }
 }
+//
+// float util
+
+.float-l { float: left; }
+.float-r { float: right; }
+.clearfix:after { content: ''; display: block; clear: both; }

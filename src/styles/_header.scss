@@ -1,4 +1,4 @@
-.container-header {
+.app-header {
   height: $header-height;
   line-height: $header-line-height;
   padding: $header-padding;
@@ -8,9 +8,12 @@
 .header-nav {
   font-size: 0;
 
+  &.nav-left { @extend .float-l }
+
   .nav-item {
     display: inline-block;
     vertical-align: top;
+    line-height: $header-links-line-height;
     padding: $header-links-padding;
     font-size: $header-icon-size;
     border-top: $header-links-border;
@@ -20,5 +23,11 @@
     &:hover {
       border-top: $header-links-hover-border;
     }
+  }
+}
+
+@media screen and (max-width: $d-sm) {
+  .app-header {
+    padding: 0;
   }
 }
