@@ -2,11 +2,16 @@
   <div class="app-header">
     <div class="header-nav nav-left">
       <a class="nav-item" @click.prevent="toggleSidebar"><svg class="icon-svg" aria-hidden="true"><use
-        v-bind:xlink:href="sidebarOpend ? '#if-handle-close' : '#if-handle-expand'"></use></svg></a>
+        :xlink:href="sidebarOpend ? '#if-handle-close' : '#if-handle-expand'"></use></svg></a>
       <a class="nav-item open-in-browser"><svg class="icon-svg" aria-hidden="true"><use
         xlink:href="#if-handle-browse"></use></svg></a>
       <a class="nav-item" @click.prevent="handleRefresh"><svg class="icon-svg handle-refresh" aria-hidden="true"><use
         xlink:href="#if-handle-refresh-half"></use></svg></a>
+    </div>
+    <div class="header-forms">
+      <el-input placeholder="搜索..." @keyup.enter.native="handleSearch">
+        <i slot="suffix" class="el-input__icon el-icon-search" @click.prevent="handleSearch"></i>
+      </el-input>
     </div>
     <div class="header-nav nav-right">
       <el-dropdown>
@@ -45,6 +50,15 @@ export default {
       el.classList.add('doing')
       setTimeout(() => { el.classList.remove('doing') }, 6000)
       // location.reload()
+    },
+    handleSearch(e) {
+      e.preventDefault()
+      let el = e.target
+      if (el.tagName !== 'INPUT') {
+        el = el.parentNode.parentNode.parentNode.childNodes
+        if (!el[0].tagName) el = el[1]
+      }
+      console.log('handle navigation bar search form! The input value is => \'' + el.value + '\'')
     }
   }
 }

@@ -20,6 +20,13 @@ $login-form-width:    380 + $login-form-padding * 2;
       text-align: center;
     }
 
+    .el-input__prefix, .el-input__suffix {
+      font-size: 18px;
+      .icon-svg {
+        vertical-align: -0.4em;
+      }
+    }
+
     .checkbox-green .el-checkbox__input {
       .el-checkbox__inner:hover {
         border-color: $color-green !important;

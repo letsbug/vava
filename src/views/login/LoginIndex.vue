@@ -5,14 +5,15 @@
       <el-form-item prop="username">
         <el-input size="large" name="username" type="text" v-model="loginForm.username" autoComplete="on"
                   placeholder="username">
-          <i slot="prefix" class="iconfont icon-fw icon-user"></i>
+          <svg slot="prefix" class="icon-svg" aria-hidden="true"><use xlink:href="#if-user"></use></svg>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input size="large" name="password" :type="passwordType" v-model="loginForm.password" autoComplete="on"
                   placeholder="password" @keyup.enter.native="handleLogin">
-          <i slot="prefix" class="iconfont icon-fw icon-password"></i>
-          <i slot="suffix" class="iconfont icon-fw" :class="passwordType === 'password'?'icon-eye-close':'icon-eye-open'" @click="showPwd"></i>
+          <svg slot="prefix" class="icon-svg" aria-hidden="true"><use xlink:href="#if-password"></use></svg>
+          <svg slot="suffix" class="icon-svg" aria-hidden="true" @click.prevent="showPwd"><use
+            :xlink:href="(passwordType === 'password') ? '#if-hide' : '#if-show'"></use></svg>
         </el-input>
       </el-form-item>
       <el-form-item>

@@ -9,6 +9,11 @@
   left: 0;
   right: 0;
   z-index: $zindex-header;
+
+  .header-forms {
+    display: inline-block;
+    padding: $header-padding;
+  }
 }
 
 .header-nav {
