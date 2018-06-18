@@ -123,6 +123,9 @@ $header-links-line-height:    $header-height - $header-border-width - $header-li
 
 $header-padding:              0 $spacer-x;
 $header-links-padding:        0 $spacer-x $header-links-border-width;
+$header-links-user-padding:   5px;
+$header-links-img-width:      $header-links-line-height;
+$header-links-img-height:     $header-links-img-width;
 
 
 // Tab bar

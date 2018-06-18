@@ -10,16 +10,20 @@ const userMap = {
   admin: {
     roles: ['admin'],
     token: 'admin',
+    code: '23429jahfaskjhdlf',
     introduction: 'I\'m super manager',
     avatar: './static/avatar.png',
-    name: 'Super Admin'
+    username: 'Super Admin',
+    status: 1
   },
   editor: {
     roles: ['editor'],
     token: 'editor',
+    code: 'asdf542342asdasf3',
     introduction: 'I\'m a editor',
     avatar: './static/avatar.png',
-    name: 'Normal Editor'
+    name: 'Normal Editor',
+    status: 1
   }
 }
 

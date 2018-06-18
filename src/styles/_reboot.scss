@@ -15,3 +15,11 @@ html {
 body {
   background-color: $gray-150;
 }
+
+//
+//
+// reset element-ui some styles
+
+.el-popper[x-placement^=bottom] {
+  margin-top: 0!important;
+}

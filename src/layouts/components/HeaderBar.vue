@@ -8,7 +8,20 @@
       <a class="nav-item" @click.prevent="handleRefresh"><svg class="icon-svg handle-refresh" aria-hidden="true"><use
         xlink:href="#if-handle-refresh-half"></use></svg></a>
     </div>
-    Header Bar
+    <div class="header-nav nav-right">
+      <el-dropdown>
+        <a class="nav-item link-user">
+          <div class="avatar">
+            <img :src="avatar" :alt="username">
+          </div>
+        </a>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>个人中心</el-dropdown-item>
+          <el-dropdown-item>帐号设置</el-dropdown-item>
+          <el-dropdown-item divided>退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
@@ -16,7 +29,9 @@
 export default {
   name: 'HeaderBar',
   computed: {
-    sidebarOpend() { return this.$store.state.application.sidebar.opened }
+    sidebarOpend() { return this.$store.state.application.sidebar.opened },
+    username() { return this.$store.state.user.username },
+    avatar() { return this.$store.state.user.avatar }
   },
   methods: {
     toggleSidebar() {

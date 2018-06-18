@@ -5,7 +5,8 @@ import Vue from 'vue'
 import 'normalize.css'
 
 import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+// Override element-ui primary color
+import '@/styles/element-theme.scss'
 import '@/styles/core.admin.frame.scss'
 
 import router from '@/router'
