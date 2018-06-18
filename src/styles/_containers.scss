@@ -17,6 +17,7 @@
   overflow: hidden;
   transition: $transition-main-desktop;
   padding-top: $header-height + $tabbar-height;
+  padding-bottom: $foobar-height;
 }
 
 .app-wrapper {
@@ -33,6 +34,14 @@
       margin-left: $sidebar-width-expanded;
     }
   }
+}
+
+.app-main {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: $spacer-x;
 }
 
 @media screen and (max-width: $d-sm) {

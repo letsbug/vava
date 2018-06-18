@@ -1,5 +1,5 @@
 <template>
-  <div>Footer Bar</div>
+  <div class="app-footer">Footer Bar</div>
 </template>
 
 <script>

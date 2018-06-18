@@ -43,7 +43,7 @@ $font-size-xxl:               24px!default;
 
 // Spacers
 
-$spacer-y:                    10px!default;
+$spacer-y:                    9px!default;
 $spacer-x:                    15px!default;
 
 
@@ -102,10 +102,13 @@ $sidebar-width-expanded:      180px!default;
 $sidebar-width-mobile:        $sidebar-width-expanded!default;
 $sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
 
+$sidebar-bg:                  $color-blue-dark;
 $sidebar-backdrop-bg:         rgba(0, 0, 0, .5);
 
 
 // Header bar
+
+$header-bg:                   $white;
 
 $header-icon-size:            22px;
 
@@ -124,6 +127,8 @@ $header-links-padding:        0 $spacer-x $header-links-border-width;
 
 // Tab bar
 
+$tabbar-bg:                   $white;
+
 $tabbar-border-height:        1px;
 $tabbar-border:               $border-default;
 
@@ -136,10 +141,13 @@ $tabbar-padding:              0 $spacer-x;
 // Bottom Footbar
 
 $foobar-bg:                   white!default;
+$foobar-border-width:         $border-default-width;
 $foobar-border:               $border-default!default;
+
 $foobar-shadow:               $shadow-sm-invert!default;
+
 $foobar-padding-x:            $spacer-x!default;
 $foobar-padding-y:            $spacer-y!default;
 
-$foobar-height:               49px!default;
-$foobar-line-height:          $foobar-height - $foobar-padding-y * 2!default;
+$foobar-height:               50px!default;
+$foobar-line-height:          $foobar-height - $foobar-padding-y * 2 - $foobar-border-width!default;
