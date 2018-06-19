@@ -64,7 +64,9 @@ export default {
       switch (command) {
         case 'user': break;
         case 'setting': break;
-        case 'logout': this.handleLogout()
+        case 'logout':
+          this.handleLogout()
+          break
       }
     },
     handleLogout() {
