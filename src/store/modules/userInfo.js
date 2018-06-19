@@ -31,7 +31,7 @@ const user = {
     user_login: ({ commit, state }, userInfo) => new Promise((resolve, reject) => {
       Login(userInfo.username.trim(), userInfo.password).then(response => {
         // When the user login successfully, only add user token.
-        // Because routing assistant needed to determine the user permissions and information.
+        // Because the router helper needed to determine the user permissions and information,
         // thus for different users permissions to access the routing dynamically add user information at this time should be only a token.
         // detail in 'src/router/helper.js(line 27)'
         commit('USER_SET_TOKEN', response.data.token)
