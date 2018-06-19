@@ -28,40 +28,69 @@
 .sidebar-menu {
   padding: 0;
   margin: 0;
+  list-style: none;
 
-  .menu-item {
+  a {
     display: block;
-    height: $sidebar-menu-item-height;
-    line-height: $sidebar-menu-item-line-height;
-    padding: $sidebar-menu-item-padding-y 0 $sidebar-menu-item-padding-y $sidebar-menu-item-padding-l;
-    margin-right: -$sidebar-sub-offset;
+    color: $gray-400;
     white-space: nowrap;
-    font-size: $font-size-xl;
-    color: $gray-100;
-    border-left: $sidebar-menu-item-border-default;
-    border-right: $sidebar-menu-item-border-default;
-    position: relative;
-    transition: $transition-border;
-
-    .icon-svg {
-      position: absolute;
-      top: 50%;
-      margin-top: -$font-size-xl/2;
-      left: $spacer-x + $sidebar-menu-item-border-w;
-    }
-
-    cite {
-      display: none;
-      font-style: normal;
-      font-size: 1rem;
-    }
+    text-decoration: none;
 
     &:hover {
-      border-left: $sidebar-menu-item-border-hover;
+      color: $white;
     }
 
     &.active {
       color: $theme-color;
+    }
+  }
+
+  .menu-item {
+    position: relative;
+
+    .item-link {
+      border-left: $sidebar-menu-item-border-default;
+      border-right: $sidebar-menu-item-border-default;
+      height: $sidebar-menu-item-height;
+      line-height: $sidebar-menu-item-line-height;
+      padding: $sidebar-menu-item-padding-y 0 $sidebar-menu-item-padding-y $sidebar-menu-item-padding-l;
+      font-size: $font-size-xl;
+      cursor: pointer;
+      position: relative;
+      transition: $transition-border;
+
+      &:hover {
+        border-left: $sidebar-menu-item-border-hover;
+      }
+
+      .icon-svg {
+        position: absolute;
+        top: 50%;
+        margin-top: -$font-size-xl/2;
+        left: $spacer-x + $sidebar-menu-item-border-w;
+      }
+
+      cite {
+        display: none;
+        font-style: normal;
+        font-size: 1rem;
+      }
+    }
+
+    .menu-subs {
+      border-radius: 3px;
+      background-color: $sidebar-bg;
+
+      .subs-item {
+        height: $sidebar-menu-item-height;
+        line-height: $sidebar-sub-item-line-height;
+        padding: $sidebar-sub-item-padding-y $sidebar-sub-item-padding-x;
+        font-size: 1rem;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, .3);
+        }
+      }
     }
   }
 }

@@ -24,24 +24,6 @@
   position: relative;
   height: 100%;
   overflow: hidden;
-
-  &.sidebar-expanded {
-    .container-sidebar {
-      width: $sidebar-width-expanded;
-    }
-
-    .container-main {
-      margin-left: $sidebar-width-expanded;
-    }
-
-    .sidebar-menu .menu-item {
-      margin-right: 0;
-      padding-right: $sidebar-menu-item-padding-r;
-      text-align: left;
-
-      cite { display: inline-block; }
-    }
-  }
 }
 
 .app-main {
@@ -50,6 +32,70 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: $spacer-x;
+}
+
+@media screen and (min-width: $d-sm) {
+  .app-wrapper {
+    &:not(.sidebar-expanded) {
+      .sidebar-menu .menu-item {
+        margin-right: -$sidebar-sub-offset;
+
+        .menu-subs {
+          padding: $sidebar-sub-menu-padding;
+          position: absolute;
+          top: 0;
+          left: 100%;
+          visibility: hidden;
+          opacity: 0;
+          transition: $transition-transform, $transition-opacity;
+          transform: translate3d(0, 10px, 0);
+
+          .subs-item {
+            width: $sidebar-sub-item-width;
+          }
+        }
+
+        &:hover .menu-subs {
+          visibility: visible;
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+    }
+
+    &.sidebar-expanded {
+      .container-sidebar {
+        width: $sidebar-width-expanded;
+      }
+
+      .container-main {
+        margin-left: $sidebar-width-expanded;
+      }
+
+      .sidebar-menu .menu-item {
+
+        .item-link {
+          padding-right: $sidebar-menu-item-padding-r;
+          text-align: left;
+
+          cite { display: inline-block; }
+        }
+
+        .menu-subs {
+          display: none;
+
+          &.expanded {
+            display: block;
+          }
+
+          .subs-item {
+            width: auto;
+            padding-left: $sidebar-menu-item-padding-l;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: $d-sm) {
@@ -80,11 +126,26 @@
   }
 
   .sidebar-menu .menu-item {
-    margin-right: 0!important;
-    padding-right: $sidebar-menu-item-padding-r!important;
 
-    .icon-svg {margin: 0;}
-    cite { display: inline-block!important; }
+    .item-link {
+      padding-right: $sidebar-menu-item-padding-r!important;
+
+      .icon-svg {margin: 0;}
+      cite { display: inline-block!important; }
+    }
+
+    .menu-subs {
+      display: none;
+
+      .subs-item {
+        padding-left: $sidebar-menu-item-padding-l!important;
+      }
+
+      &.expanded {
+        display: block;
+      }
+    }
+
   }
 
   .app-wrapper.sidebar-expanded {

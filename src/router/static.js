@@ -31,5 +31,25 @@ export const constantRouterMap = [
       component: () => import('@/views/guide/Guide'),
       meta: { title: 'Guide', icon: 'zhiyin', nocache: true }
     }]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: '/avatar-upload',
+    meta: { title: 'Component', icon: 'yingyong' },
+    children: [
+      {
+        path: 'avatar-upload',
+        name: 'avatar-upload',
+        component: () => import('@/views/component-demo/AvatarUpload'),
+        meta: { title: 'AvatarUpload', nocache: true }
+      },
+      {
+        path: 'dropzone',
+        name: 'dropzone',
+        component: () => import('@/views/component-demo/DropZone'),
+        meta: { title: 'Dropzone', nocache: true }
+      }
+    ]
   }
 ]
