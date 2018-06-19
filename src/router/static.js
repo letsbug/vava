@@ -40,7 +40,7 @@ export const constantRouterMap = [
     children: [
       {
         path: 'avatar-upload',
-        name: 'avatar-upload',
+        name: 'avatar upload',
         component: () => import('@/views/component-demo/AvatarUpload'),
         meta: { title: 'AvatarUpload', nocache: true }
       },
