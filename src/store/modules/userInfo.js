@@ -15,6 +15,7 @@ const user = {
     expire: 7,
     username: '',
     avatar: '',
+    introduction: '',
     roles: []
   },
   mutations: {
@@ -23,17 +24,17 @@ const user = {
     USER_SET_TOKEN: (state, token) => { state.token = token },
     USER_SET_NAME: (state, name) => { state.username = name },
     USER_SET_AVATAR: (state, avatar) => { state.avatar = avatar },
+    USER_SET_INTR: (state, introduction) => { state.introduction = introduction },
     USER_SET_ROLS: (state, rols) => { state.roles = rols }
   },
   actions: {
     user_login: ({ commit, state }, userInfo) => new Promise((resolve, reject) => {
       Login(userInfo.username.trim(), userInfo.password).then(response => {
+        // When the user login successfully, only add user token.
+        // Because routing assistant needed to determine the user permissions and information.
+        // thus for different users permissions to access the routing dynamically add user information at this time should be only a token.
+        // detail in 'src/router/helper.js(line 27)'
         commit('USER_SET_TOKEN', response.data.token)
-        commit('USER_SET_NAME', response.data.username)
-        commit('USER_SET_CODE', response.data.code)
-        commit('USER_SET_STAT', response.data.status)
-        commit('USER_SET_AVATAR', response.data.avatar)
-        commit('USER_SET_ROLS', response.data.roles)
         setToken(response.data.token, userInfo.remember ? state.expire : null)
         resolve()
       }).catch(err => { reject(err) })
@@ -48,7 +49,9 @@ const user = {
 
         commit('USER_SET_NAME', data.username)
         commit('USER_SET_CODE', data.code)
+        commit('USER_SET_STAT', response.data.status)
         commit('USER_SET_AVATAR', data.avatar)
+        commit('USER_SET_INTR', data.introduction)
         resolve(response)
       }).catch(err => { reject(err) })
     }),
@@ -59,6 +62,7 @@ const user = {
         commit('USER_SET_CODE', '')
         commit('USER_SET_STAT', '')
         commit('USER_SET_AVATAR', '')
+        commit('USER_SET_INTR', '')
         commit('USER_SET_ROLS', [])
         removeToken()
         resolve()
