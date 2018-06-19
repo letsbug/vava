@@ -3,12 +3,12 @@
     <div class="header-nav nav-left">
       <a class="nav-item" @click.prevent="toggleSidebar"><svg class="icon-svg" aria-hidden="true"><use
         :xlink:href="sidebarOpend ? '#if-handle-close' : '#if-handle-expand'"></use></svg></a>
-      <a class="nav-item open-in-browser"><svg class="icon-svg" aria-hidden="true"><use
+      <a class="nav-item open-in-browser hidden-xs-only"><svg class="icon-svg" aria-hidden="true"><use
         xlink:href="#if-handle-browse"></use></svg></a>
       <a class="nav-item" @click.prevent="handleRefresh"><svg class="icon-svg handle-refresh" aria-hidden="true"><use
         xlink:href="#if-handle-refresh-half"></use></svg></a>
     </div>
-    <div class="header-forms">
+    <div class="header-forms hidden-xs-only">
       <el-input placeholder="搜索..." @keyup.enter.native="handleSearch">
         <i slot="suffix" class="el-input__icon el-icon-search" @click.prevent="handleSearch"></i>
       </el-input>
