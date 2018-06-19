@@ -1,9 +1,9 @@
 <template>
   <div class="sidebar-menu">
-    <a class="menu-item" @click.prevent="test">
+    <router-link class="menu-item" to="/dashboard">
       <svg class="icon-svg" aria-hidden="true"><use xlink:href="#if-home"></use></svg>
       <cite>Dashboard</cite>
-    </a>
+    </router-link>
   </div>
 </template>
 

@@ -37,6 +37,7 @@
     margin-right: -$sidebar-sub-offset;
     white-space: nowrap;
     font-size: $font-size-xl;
+    color: $gray-100;
     border-left: $sidebar-menu-item-border-default;
     border-right: $sidebar-menu-item-border-default;
     position: relative;
@@ -57,6 +58,10 @@
 
     &:hover {
       border-left: $sidebar-menu-item-border-hover;
+    }
+
+    &.active {
+      color: $theme-color;
     }
   }
 }
