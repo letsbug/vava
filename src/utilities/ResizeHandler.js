@@ -11,6 +11,10 @@ const WIDTH = 992
 
 export default {
   beforeMount() {
+    const svgs = document.body.querySelectorAll('svg')[0].querySelectorAll('path')
+    for (const [i] of svgs.entries()) {
+      svgs[i].removeAttribute('fill')
+    }
     window.addEventListener('resize', this.resizeHandler)
   },
   mounted() {

@@ -33,6 +33,14 @@
     .container-main {
       margin-left: $sidebar-width-expanded;
     }
+
+    .sidebar-menu .menu-item {
+      margin-right: 0;
+      padding-right: $sidebar-menu-item-padding-r;
+      text-align: left;
+
+      cite { display: inline-block; }
+    }
   }
 }
 
@@ -69,6 +77,14 @@
     margin-left: 0!important;
     transition-property: transform;
     transform: translate3d(0, 0, 0);
+  }
+
+  .sidebar-menu .menu-item {
+    margin-right: 0!important;
+    padding-right: $sidebar-menu-item-padding-r!important;
+
+    .icon-svg {margin: 0;}
+    cite { display: inline-block!important; }
   }
 
   .app-wrapper.sidebar-expanded {

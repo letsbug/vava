@@ -79,6 +79,7 @@ $transition-duration:         .28s!default;
 $transition-border:           border $transition-duration ease-out!default;
 $transition-opacity:          opacity $transition-duration ease-out!default;
 $transition-background:       background $transition-duration ease-out!default;
+$transition-margin:           margin $transition-duration ease-out!default;
 
 $transition-sidebar-desktop:  width $transition-duration ease-out!default;
 $transition-sidebar-mobile:   transform $transition-duration ease-out!default;
@@ -95,17 +96,6 @@ $zindex-header:               1000;
 $zindex-header-dropdown:      1010;
 $zindex-tabbar:               1000;
 $zindex-footer:               1000;
-
-
-// Sidebar
-
-$sidebar-width:               60px!default;
-$sidebar-width-expanded:      180px!default;
-$sidebar-width-mobile:        $sidebar-width-expanded!default;
-$sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
-
-$sidebar-bg:                  $color-blue-dark;
-$sidebar-backdrop-bg:         rgba(0, 0, 0, .5);
 
 
 // Header bar
@@ -128,6 +118,43 @@ $header-links-padding:        0 $spacer-x $header-links-border-width;
 $header-links-user-padding:   5px;
 $header-links-img-width:      $header-links-line-height;
 $header-links-img-height:     $header-links-img-width;
+
+
+// Sidebar
+
+$sidebar-width:               60px!default;
+$sidebar-width-expanded:      180px!default;
+$sidebar-width-mobile:        $sidebar-width-expanded!default;
+$sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
+
+$sidebar-bg:                  $color-blue-dark;
+$sidebar-backdrop-bg:         rgba(0, 0, 0, .5);
+
+// Sidebar brand
+
+$sidebar-brand-height:        $header-height;
+$sidebar-brand-padding-x:     $spacer-x;
+$sidebar-brand-padding-y:     10px;
+$sidebar-brand-line-height:   $sidebar-brand-height - $sidebar-brand-padding-y*2;
+
+// Sidebar sub menu
+
+$sidebar-sub-offset:              5px;
+
+// Sidebar Menu
+
+$sidebar-menu-item-border-w:          3px;
+$sidebar-menu-item-border-default:    solid $sidebar-menu-item-border-w transparent;
+$sidebar-menu-item-border-hover:      solid $sidebar-menu-item-border-w $theme-color;
+
+$sidebar-menu-item-padding-y:     $spacer-y;
+$sidebar-menu-item-padding-l:     $spacer-x * 2 +18px;
+$sidebar-menu-item-padding-r:     $spacer-x;
+$sidebar-menu-item-height:        50px;
+$sidebar-menu-item-line-height:   $sidebar-menu-item-height - $sidebar-menu-item-padding-y * 2;
+
+
+// Sidebar menus
 
 
 // Tab bar

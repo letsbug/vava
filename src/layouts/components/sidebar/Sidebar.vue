@@ -1,13 +1,22 @@
 <template>
   <div class="container-sidebar app-sidebar">
-    <sidebar-items></sidebar-items>
+    <div class="app-brand">
+      <img class="logo" :src="logo" alt="">
+      <span class="title">Vue Admin</span>
+    </div>
+    <sidebar-menu></sidebar-menu>
   </div>
 </template>
 
 <script>
-import SidebarItems from './SidebarItems'
+import SidebarMenu from './SidebarMenu'
 export default {
   name: 'Sidebar',
-  components: { SidebarItems }
+  data() {
+    return {
+      logo: require('@/assets/logo.png')
+    }
+  },
+  components: { SidebarMenu }
 }
 </script>
