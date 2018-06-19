@@ -14,16 +14,16 @@
       </el-input>
     </div>
     <div class="header-nav nav-right">
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <a class="nav-item link-user">
           <div class="avatar">
             <img :src="avatar" :alt="username">
           </div>
         </a>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item>帐号设置</el-dropdown-item>
-          <el-dropdown-item divided>退出登录</el-dropdown-item>
+          <el-dropdown-item command="user">个人中心</el-dropdown-item>
+          <el-dropdown-item command="setting">帐号设置</el-dropdown-item>
+          <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -59,6 +59,25 @@ export default {
         if (!el[0].tagName) el = el[1]
       }
       console.log('handle navigation bar search form! The input value is => \'' + el.value + '\'')
+    },
+    handleCommand(command) {
+      switch (command) {
+        case 'user': break;
+        case 'setting': break;
+        case 'logout': this.handleLogout()
+      }
+    },
+    handleLogout() {
+      const _this = this
+      _this.$confirm('确认退出当前账户？', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$store.dispatch('user_logout').then(() => {
+          location.reload()
+        })
+      }).catch(() => {})
     }
   }
 }

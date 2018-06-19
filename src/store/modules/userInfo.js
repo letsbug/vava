@@ -64,6 +64,7 @@ const user = {
         resolve()
       }).catch(err => { reject(err) })
     }),
+    // 前端登出
     user_logout_fed: ({ commit }) => new Promise(resolve => {
       commit('USER_SET_TOKEN', '')
       removeToken()

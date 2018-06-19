@@ -40,25 +40,25 @@ function filterAsyncRouter(asyncRouterMap, roles) {
 const permission = {
   state: {
     routes: constantRouterMap,
-    addRouters: []
+    addRoutes: []
   },
   mutations: {
-    PERM_SET_ROUTERS: (state, routers) => {
-      state.addRouters = routers
-      state.routes = constantRouterMap.concat(routers)
+    PERM_SET_ROUTERS: (state, routes) => {
+      state.addRoutes = routes
+      state.routes = constantRouterMap.concat(routes)
     }
   },
   actions: {
     perm_generate_routes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
-        let accessedRouters
+        let accessedRoutes
         if (roles.indexOf('admin') >= 0) {
-          accessedRouters = asyncRouterMap
+          accessedRoutes = asyncRouterMap
         } else {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
+          accessedRoutes = filterAsyncRouter(asyncRouterMap, roles)
         }
-        commit('PERM_SET_ROUTERS', accessedRouters)
+        commit('PERM_SET_ROUTERS', accessedRoutes)
         resolve()
       })
     }
