@@ -4,11 +4,12 @@
       <img class="logo" :src="logo" alt="">
       <span class="title">Vue Admin</span>
     </div>
-    <sidebar-menu></sidebar-menu>
+    <sidebar-menu :routes="permission_routes"></sidebar-menu>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SidebarMenu from './SidebarMenu'
 export default {
   name: 'Sidebar',
@@ -16,6 +17,11 @@ export default {
     return {
       logo: require('@/assets/logo.png')
     }
+  },
+  computed: {
+    ...mapGetters([
+      'permission_routes'
+    ])
   },
   components: { SidebarMenu }
 }
