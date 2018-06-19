@@ -13,6 +13,7 @@ import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
 // get token from cookie
 import { getToken } from '@/utilities/Token'
+NProgress.configure({ showSpinner: false })
 // noredirect whitelist
 const whiteList = ['/login', '/authredirect']
 

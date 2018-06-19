@@ -24,11 +24,12 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
+    redirect: '/guide',
     children: [{
       path: 'guide',
       name: 'guide',
-      component: () => null,
-      meta: { title: 'Guide', icon: 'home', nocache: true }
+      component: () => import('@/views/guide/Guide'),
+      meta: { title: 'Guide', icon: 'zhiyin', nocache: true }
     }]
   }
 ]
