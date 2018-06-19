@@ -27,22 +27,6 @@ $login-form-width:    380 + $login-form-padding * 2;
       }
     }
 
-    .checkbox-green .el-checkbox__input {
-      .el-checkbox__inner:hover {
-        border-color: $color-green !important;
-      }
-
-      &.is-checked .el-checkbox__inner,
-      &.is-indeterminate .el-checkbox__inner{
-        background-color: $color-green !important;
-        border-color: $color-green !important;
-      }
-
-      &.is-checked+.el-checkbox__label {
-        color: $color-green !important;
-      }
-    }
-
     .forget-link {
       color: $gray-650;
     }

@@ -18,7 +18,7 @@
       </el-form-item>
       <el-form-item>
         <el-checkbox class="checkbox-green" v-model="loginForm.remember" :label="expires + '天内自动登录'" name="remember"></el-checkbox>
-        <router-link class="float-right forget-link" to="">忘记密码?</router-link>
+        <router-link class="forget-link float-r" to="">忘记密码?</router-link>
       </el-form-item>
       <el-form-item>
         <el-button size="large" type="success" class="btn-login" :loading="loading" @click.native.prevent="handleLogin">登 录</el-button>
