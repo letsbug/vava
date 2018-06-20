@@ -31,10 +31,32 @@
     &.active {
       color: $theme-color;
       border-bottom-color: $theme-color;
+
+      .icon-svg.icon-close {
+        color: $theme-color;
+      }
     }
 
     .icon-svg {
-      font-size: $font-size-xl;
+      vertical-align: -0.18em;
+
+      &:not(.icon-close) {
+        font-size: $font-size-xl;
+      }
+
+      &.icon-close {
+        width: calc(1em + 2px);
+        height: calc(1em + 2px);
+        border-radius: 50%;
+        color: $link-color-gray;
+        transition: $transition-background, $transition-color;
+        padding: 2px;
+
+        &:hover {
+          color: $white;
+          background-color: $gray-500;
+        }
+      }
     }
   }
 }
