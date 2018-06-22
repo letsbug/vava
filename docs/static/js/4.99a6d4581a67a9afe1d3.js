@@ -1,0 +1,1 @@
+webpackJsonp([4],{"7h+k":function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={render:function(){var e=this.$createElement;return(this._self._c||e)("div",{staticClass:"drop-zone"},[this._v("\n  Drop zone\n")])},staticRenderFns:[]},s=t("VU/8")({name:"DeopZone"},r,!1,null,null,null);n.default=s.exports}});
