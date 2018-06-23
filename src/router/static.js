@@ -49,6 +49,12 @@ export const constantRouterMap = [
         name: 'dropzone',
         component: () => import('@/views/component-demo/DropZone'),
         meta: { title: 'Dropzone', nocache: true }
+      },
+      {
+        path: 'editor',
+        name: 'editor',
+        component: () => import('@/views/component-demo/DropZone'),
+        meta: { title: 'Text Editor', nocache: true }
       }
     ]
   }
