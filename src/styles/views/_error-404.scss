@@ -35,6 +35,11 @@ body {
     justify-content: center;
     margin-right: $spacer-x*3;
   }
+
+  .el-button--text {
+    color: $color-blue-light;
+    font-weight: bold;
+  }
 }
 
 @media screen and (max-width: 768px) {
