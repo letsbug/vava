@@ -1,0 +1,37 @@
+body {
+  background-color: $white;
+}
+
+.app-errs-with404 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-flow: row;
+
+  .options {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    margin-right: $spacer-x*2;
+  }
+
+  .title {
+    font-size: 32px;
+    margin-bottom: $spacer-y;
+    color: $color-blue-light;
+  }
+
+  .subtitle {
+    letter-spacing: 2px;
+  }
+
+  .error-logo {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
