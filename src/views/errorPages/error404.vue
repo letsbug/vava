@@ -19,7 +19,7 @@ export default {
   name: 'error404',
   data() {
     return {
-      img: '/static/errors/404-'
+      img: './static/errors/404-'
     }
   },
   mounted() {
