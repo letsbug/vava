@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted() {
-    const random = Math.floor(Math.random() * 11)
+    const random = Math.floor(Math.random() * 3 + 1)
     this.img += random + '.gif'
   }
 }
