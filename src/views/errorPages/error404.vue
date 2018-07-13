@@ -1,11 +1,15 @@
 <template>
   <div class="app-errs-with404">
+    <div class="error-logo">
+      <img :src="img" alt="">
+    </div>
     <div class="options">
       <div class="title">Oops! 404!!!</div>
       <div class="subtitle">页面调皮了，不知道跑哪儿去了......</div>
-    </div>
-    <div class="error-logo">
-      <img :src="img" alt="">
+      <div>
+        <el-button type="text" @click.prevent="$router.push('/')">HOME</el-button>
+        <el-button type="text" @click.prevent="$router.go(-1)">BACK</el-button>
+      </div>
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ body {
 
 .app-errs-with404 {
   position: absolute;
-  top: 40%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -14,7 +14,6 @@ body {
     display: flex;
     flex-flow: column;
     justify-content: center;
-    margin-right: $spacer-x*2;
   }
 
   .title {
@@ -25,6 +24,7 @@ body {
 
   .subtitle {
     letter-spacing: 2px;
+    margin-bottom: $spacer-y*2;
   }
 
   .error-logo {
@@ -33,5 +33,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: $spacer-x*3;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app-errs-with404 {
+    flex-flow: column;
+    align-items: center;
+
+    .error-logo {
+      margin: 0;
+    }
+
+    .options {
+      white-space: nowrap;
+      text-align: center;
+    }
   }
 }
