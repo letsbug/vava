@@ -89,7 +89,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import "../../styles/pages/login-page";
+
   .icon-eye-close, .icon-eye-open {
     color: #000;
   }
