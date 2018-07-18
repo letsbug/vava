@@ -1,5 +1,5 @@
 <template>
-  <div class="avatar-uploader">
+  <div class="container-body avatar-uploader">
     Avatar Upload
   </div>
 </template>

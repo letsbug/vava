@@ -59,3 +59,17 @@ export const constantRouterMap = [
     ]
   }
 ]
+
+export const asyncRouterMap = [
+  {
+    path: '/settings',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'settings',
+      component: () => import('@/views/settings/Settings'),
+      meta: { title: 'Settings', icon: 'settings', nocache: true }
+    }]
+  },
+  { path: '*', redirect: '/404', hidden: true }
+]

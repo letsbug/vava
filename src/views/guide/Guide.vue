@@ -1,5 +1,5 @@
 <template>
-  <div class="guide">
+  <div class="container-body guide">
     App Guide
   </div>
 </template>

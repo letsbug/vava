@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="container-body no-bg dashboard">
     <div id="chart" style="height: 100px; width: 100%;"></div>
   </div>
 </template>

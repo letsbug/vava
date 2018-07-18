@@ -1,5 +1,5 @@
 <template>
-  <div class="drop-zone">
+  <div class="container-body drop-zone">
     Drop zone
   </div>
 </template>

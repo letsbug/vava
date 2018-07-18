@@ -26,12 +26,21 @@
   overflow: hidden;
 }
 
-.app-main {
+.app-body {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: $spacer-x;
+
+  .container-body {
+    min-height: 100%;
+    padding: $spacer-x;
+    background-color: $white;
+
+    &.no-bg {
+      background-color: transparent;
+    }
+  }
 }
 
 @media screen and (min-width: $d-sm) {

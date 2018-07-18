@@ -1,5 +1,5 @@
 <template>
-  <div class="text-editor">
+  <div class="container-body text-editor">
     Text Editor
   </div>
 </template>

@@ -4,8 +4,7 @@
  * @date: 2018-06-18 20:27
  */
 
-import { constantRouterMap } from '@/router/static'
-import { asyncRouterMap } from '@/router/async'
+import { constantRouterMap, asyncRouterMap } from '@/router/routes'
 
 /**
  * 通过meta.role判断是否与当前用户权限匹配
@@ -58,6 +57,7 @@ const permission = {
         } else {
           accessedRoutes = filterAsyncRouter(asyncRouterMap, roles)
         }
+        console.log(asyncRouterMap)
         commit('PERM_SET_ROUTERS', accessedRoutes)
         resolve()
       })
