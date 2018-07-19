@@ -9,7 +9,7 @@
         xlink:href="#if-handle-refresh-half"></use></svg></a>
     </div>
     <div class="header-forms hidden-xs-only">
-      <el-input placeholder="搜索..." @keyup.enter.native="handleSearch">
+      <el-input placeholder="Search something..." @keyup.enter.native="handleSearch">
         <i slot="suffix" class="el-input__icon el-icon-search" @click.prevent="handleSearch"></i>
       </el-input>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="container-body app-settings">
-    <h3>Website Configurations</h3>
+    <h3>Website Configurations&nbsp;&nbsp;&nbsp;&nbsp;<small class="text-muted">Test page, does not implement the actual function.</small></h3>
     <hr>
     <br>
     <el-form ref="form" :model="form" label-width="100px">
@@ -37,7 +37,7 @@
         <el-input v-model="form.copyright"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submit">确认保存</el-button>
+        <el-button type="primary" @click="onSubmit">Confirm to Save</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -61,7 +61,16 @@
       }
     },
     methods: {
-      submit() {}
+      onSubmit() {
+        this.$confirm('This page is test, dose\'t implement the actual function.', 'Confirm', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'CANCEL'
+        }).then(() => {
+          console.log('confirm submit')
+        }).catch(() => {
+          console.log('cancel submit')
+        })
+      }
     }
   }
 </script>
