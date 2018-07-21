@@ -53,7 +53,7 @@ export const constantRouterMap = [
       {
         path: 'editor',
         name: 'editor',
-        component: () => import('@/views/component-demo/DropZone'),
+        component: () => import('@/views/component-demo/TextEditor'),
         meta: { title: 'Text Editor', nocache: true }
       }
     ]
