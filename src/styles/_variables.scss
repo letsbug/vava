@@ -76,6 +76,7 @@ $shadow-md:                   0 .2rem .4rem rgba(0, 0, 0, .075)!default;
 
 $transition-duration:         .28s!default;
 
+$transition-default:          all $transition-duration ease-out!default;
 $transition-border:           border $transition-duration ease-out!default;
 $transition-opacity:          opacity $transition-duration ease-out!default;
 $transition-background:       background $transition-duration ease-out!default;
@@ -124,7 +125,7 @@ $header-links-img-height:     $header-links-img-width;
 // Sidebar
 
 $sidebar-width:               60px!default;
-$sidebar-width-expanded:      180px!default;
+$sidebar-width-expanded:      210px!default;
 $sidebar-width-mobile:        $sidebar-width-expanded!default;
 $sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
 
@@ -156,8 +157,8 @@ $sidebar-menu-item-border-default:    solid $sidebar-menu-item-border-w transpar
 $sidebar-menu-item-border-hover:      solid $sidebar-menu-item-border-w $theme-color;
 
 $sidebar-menu-item-padding-y:     $spacer-y;
-$sidebar-menu-item-padding-l:     $spacer-x * 2 +18px;
-$sidebar-menu-item-padding-r:     $spacer-x;
+$sidebar-menu-item-padding-l:     $spacer-x * 2 +17px;
+$sidebar-menu-item-padding-r:     $sidebar-menu-item-padding-l;
 $sidebar-menu-item-line-height:   $sidebar-menu-item-height - $sidebar-menu-item-padding-y * 2;
 
 

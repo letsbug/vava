@@ -70,6 +70,17 @@
         left: $spacer-x + $sidebar-menu-item-border-w;
       }
 
+      .el-icon {
+        position: absolute;
+        top: 50%;
+        margin-top: -$font-size-xl*0.8/2;
+        right: $spacer-x;
+        font-size: 0.9em;
+        transform: rotate(0);
+        transition: $transition-default;
+        transition-duration: 0.18s;
+      }
+
       cite {
         display: none;
         font-style: normal;
@@ -79,7 +90,7 @@
 
     .menu-subs {
       border-radius: 3px;
-      background-color: $sidebar-bg;
+      background-color: darken($sidebar-bg, 2%);
 
       .subs-item {
         height: $sidebar-menu-item-height;

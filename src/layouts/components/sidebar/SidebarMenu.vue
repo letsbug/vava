@@ -7,12 +7,13 @@
           <cite>{{ route.children[0].meta.title }}</cite>
         </router-link>
       </li>
-      <li class="menu-item" v-else>
+      <li class="menu-item" :ref="'subMenu' + index" v-else>
         <a class="item-link" @click.prevent="expandSubMenu($refs['subMenu' + index][0])">
           <svg class="icon-svg" aria-hidden="true"><use :xlink:href="'#if-' + route.meta.icon"></use></svg>
           <cite>{{ route.meta.title }}</cite>
+          <i class="el-icon el-icon-arrow-up"></i>
         </a>
-        <div class="menu-subs" :ref="'subMenu' + index">
+        <div class="menu-subs">
           <router-link class="subs-item" v-for="(sub) in route.children" :key="sub.path" :to="sub.path">
             {{ sub.meta.title }}
           </router-link>
@@ -32,6 +33,7 @@ export default {
   },
   methods: {
     expandSubMenu(ref) {
+      console.log(ref)
       ref.classList[1] === 'expanded' ? ref.classList.remove('expanded') : ref.classList.add('expanded')
     }
   }

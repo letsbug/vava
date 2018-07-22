@@ -49,6 +49,10 @@
       .sidebar-menu .menu-item {
         margin-right: -$sidebar-sub-offset;
 
+        .el-icon-arrow-right {
+          display: none;
+        }
+
         .menu-subs {
           padding: $sidebar-sub-menu-padding;
           position: absolute;
@@ -93,13 +97,19 @@
         .menu-subs {
           display: none;
 
-          &.expanded {
-            display: block;
-          }
-
           .subs-item {
             width: auto;
-            padding-left: $sidebar-menu-item-padding-l;
+            padding-left: $sidebar-menu-item-padding-l + 3px;
+          }
+        }
+
+        &.expanded {
+          .el-icon-arrow-up {
+            transform: rotate(180deg);
+          }
+
+          .menu-subs {
+            display: block;
           }
         }
       }
@@ -149,8 +159,14 @@
       .subs-item {
         padding-left: $sidebar-menu-item-padding-l!important;
       }
+    }
 
-      &.expanded {
+    &.expanded {
+      .el-icon-arrow-up {
+        transform: rotate(180deg);
+      }
+
+      .menu-subs {
         display: block;
       }
     }
