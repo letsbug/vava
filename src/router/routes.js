@@ -49,12 +49,32 @@ export const constantRouterMap = [
         name: 'dropzone',
         component: () => import('@/views/component-demo/DropZone'),
         meta: { title: 'Dropzone', nocache: true }
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: '/editor',
+    meta: { title: 'TextEditor', icon: 'editor' },
+    children: [
+      {
+        path: 'tinymce',
+        name: 'tinymce',
+        component: () => import('@/views/TextEditor/TinymceEditor'),
+        meta: { title: 'Tinymce', nocache: true }
       },
       {
-        path: 'editor',
-        name: 'editor',
-        component: () => import('@/views/component-demo/TextEditor'),
-        meta: { title: 'Text Editor', nocache: true }
+        path: 'quill',
+        name: 'quill',
+        component: () => import('@/views/TextEditor/QuillEditor'),
+        meta: { title: 'Quill', nocache: true }
+      },
+      {
+        path: 'ckeditor',
+        name: 'ckeditor',
+        component: () => import('@/views/TextEditor/CKEditor'),
+        meta: { title: 'CKEditor', nocache: true }
       }
     ]
   }
