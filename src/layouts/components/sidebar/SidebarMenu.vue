@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     expandSubMenu(ref) {
-      console.log(ref)
       ref.classList[1] === 'expanded' ? ref.classList.remove('expanded') : ref.classList.add('expanded')
     }
   }

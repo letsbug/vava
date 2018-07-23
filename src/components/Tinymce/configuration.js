@@ -5,8 +5,10 @@
  */
 
 export const document = {
-  // language_url: '@/components/Tinymce/langs/zh_CN.js',
+  skin_url: '/static/tinymce/skins/lightgray',
+  theme: 'modern',
   language: 'zh_CN',
+  language_url: '/static/tinymce/langs/zh_CN.js',
   height: '300',
   'toolbar': 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
   'plugins': ''
