@@ -1,20 +1,25 @@
 <template>
   <div class="container-body text-editor">
-    <editor :init="config" :value="content"></editor>
+    <tiny-editor :setting="config" :value="content" @input="onInput"></tiny-editor>
   </div>
 </template>
 
 <script>
-import Editor from '@tinymce/tinymce-vue'
+import TinyEditor from '@/components/Tinymce/TinyEditor'
 import { document } from '@/components/Tinymce/configuration'
 
 export default {
   name: "TinymceEditor",
-  components: { Editor },
+  components: { TinyEditor },
   data() {
     return {
       config: document,
       content: ''
+    }
+  },
+  methods: {
+    onInput: function (val) {
+      // console.log(val)
     }
   }
 }
