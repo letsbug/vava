@@ -8,7 +8,7 @@ import plugin_list from './plugin_list'
 
 const externals = {}
 
-const prefix = './static/tinymce/plugins/'
+const prefix = (process.env.NODE_ENV === 'development' ? '/static' : '..') + '/tinymce/plugins/'
 const suffix = '/plugin.js'
 
 plugin_list.forEach((n, i) => {

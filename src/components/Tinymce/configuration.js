@@ -15,6 +15,7 @@ export const document = {
 
   // 指定文档中所有相对URL的基本URL
   // document_base_url: process.env.TINYMCE_RES,
+  // document_base_url: 'http://127.0.0.1:9999/',
 
   // Tinymce stylesheets
   skin_url: './static/tinymce/skins/lightgray',
