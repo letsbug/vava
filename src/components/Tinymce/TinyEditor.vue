@@ -1,52 +1,79 @@
 <template>
-  <div class="tinymce-editor" :id="id" :value="value" title="tinymce editor"></div>
+  <div class="tinymce-editor" :id="id" v-html="value" title="tinymce editor"></div>
 </template>
 
 <script>
 import tinymce from 'tinymce/tinymce'
 import 'tinymce/themes/modern'
+import 'tinymce/themes/mobile'
 import 'tinymce/plugins/paste'
 import 'tinymce/plugins/link'
 
-const INIT = 0;
-const CHANGED = 2;
+import configure from './configure'
+
+const INIT = 0
+const CHANGED = 2
 
 export default {
   name: "TinyEditor",
-  props: {
-    value: { type: String, required: true },
-    setting: {}
-  },
-  watch: {
-    value(val) {
-      if (this.status === INIT || tinymce.activeEditor.getContent() !== val) {
-        tinymce.activeEditor.setContent(val);
-      }
-      this.status = CHANGED
-    }
-  },
   data() {
     return {
       status: INIT,
-      id: 'editor-' + new Date().getMilliseconds(),
+      inited: false,
+      changed: false
+    }
+  },
+  props: {
+    id: { type: String, default: 'tinymce-' + new Date().getMilliseconds() },
+    value: { type: String, default: '' },
+    height: { type: Number, default: 500 },
+    toolbar: { type: Array, default: () => [] },
+    setting: { type: Object, required: false }
+  },
+  watch: {
+    value(val) {
+      if (!this.changed && this.inited) {
+        this.$nextTick(() => this.setContent(val || ''))
+      }
     }
   },
   mounted() {
-    const _this = this
-    let setting = {
-      selector: '#' + this.id,
-      init_instance_callback: function (editor) {
-        editor.on('input change undo redo', function() {
-          _this.$emit('input', editor.getContent());
-        });
-      }
-    };
-    setting = Object.assign(setting, this.setting)
-    tinymce.init(setting);
+    this.initTinymce()
   },
-  methods: {},
-  beforeDestroy: function () {
-    tinymce.get(this.id).destroy();
+  activated() {
+    this.initTinymce()
+  },
+  deactivated() {
+    this.destroyTinymce()
+  },
+  destroyed() {
+    this.destroyTinymce()
+  },
+  methods: {
+    initTinymce() {
+      const _this = this
+      const _options = {
+        selector: '#' + this.id,
+        height: this.height,
+        init_instance_callback: editor => {
+          if (_this.value) {
+            editor.setContent(_this.value)
+          }
+          _this.inited = true
+          editor.on('input change undo redo', () => {
+            _this.changed = true
+            _this.$emit('input', editor.getContent())
+          })
+        }
+      }
+      tinymce.init(Object.assign(_options, configure))
+    },
+    setContent(content) {
+      tinymce.get(this.id).setContent(content)
+    },
+    destroyTinymce() {
+      tinymce.get(this.id).destroy()
+    }
   }
 }
 </script>

@@ -1,26 +1,41 @@
 <template>
   <div class="container-body text-editor">
-    <tiny-editor :setting="config" :value="content" @input="onInput"></tiny-editor>
+    <tiny-editor v-model="content" @change="" @input="onInput"></tiny-editor>
   </div>
 </template>
 
 <script>
 import TinyEditor from '@/components/Tinymce/TinyEditor'
-import { document } from '@/components/Tinymce/configuration'
 
 export default {
   name: "TinymceEditor",
   components: { TinyEditor },
   data() {
     return {
-      config: document,
-      content: ''
+      content: `
+        <p><img style="float: right;" src="https://www.tiny.cloud/images/glyph-tinymce@2x.png" alt="TinyMCE" height="150px" data-mce-src="images/glyph-tinymce@2x.png" data-mce-style="float: right;"></p>
+        <h2>The world’s first rich text editor in the cloud</h2>
+        <p>Have you heard about Tiny Cloud? It’s the first step in our journey to help you deliver great content creation experiences, no matter your level of expertise. 50,000 developers already agree. They get free access to our global CDN, image proxy services and auto updates to the TinyMCE editor. They’re also ready for some exciting updates coming soon.</p>
+        <p>One of these enhancements is <strong>Tiny Drive</strong>: imagine file management for TinyMCE, in the cloud, made super easy. Learn more at <a href="https://www.tinymce.com/tinydrive/" data-mce-href="https://www.tinymce.com/tinydrive/" data-mce-linkchecker-status="valid">tinymce.com/tinydrive</a>, where you’ll find a working demo and an opportunity to provide feedback to the product team.</p>
+        <h3>An editor for every project</h3>
+        <p>Here are some of our customer’s most common use cases for TinyMCE:</p>
+        <ul>
+          <li>Content Management Systems (<em>e.g. WordPress, Umbraco</em>)</li>
+          <li>Learning Management Systems (<em>e.g. Blackboard</em>)</li>
+          <li>Customer Relationship Management and marketing automation (<em>e.g. Marketo</em>)</li>
+          <li>Email marketing (<em>e.g. Constant Contact</em>)</li>
+          <li>Content creation in SaaS systems (<em>e.g. Eventbrite, Evernote, GoFundMe, Zendesk</em>)</li>
+        </ul>
+        <p>And those use cases are just the start. TinyMCE is incredibly flexible, and with hundreds of APIs there’s likely a solution for your editor project. If you haven’t experienced Tiny Cloud, get started today. You’ll even get a free trial of our premium plugins – no credit card required!</p>
+      `
     }
   },
   methods: {
     onInput: function (val) {
       // console.log(val)
     }
+  },
+  beforeDestroy: function () {
   }
 }
 </script>

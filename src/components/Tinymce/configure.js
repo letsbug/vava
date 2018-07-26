@@ -4,12 +4,11 @@
  * @datetime: 2018/7/19 19:58
  */
 
-import plugin_list from './plugin_list'
-import external_plugins from './external_plugins'
+import toobar from './toobar'
+import plugins from './plugins'
+import plugin_urls from './plugin_urls'
 
-const plugins = plugin_list.join(' ')
-
-export const document = {
+export const configure = {
   // Enable relative urls
   relative_urls: false,
 
@@ -28,25 +27,30 @@ export const document = {
   // 允许链接和图像
   allow_script_urls: true,
 
-  // Document default height
-  height: '300',
+  object_resizing: false,
+  end_container_on_empty_block: true,
+  code_dialog_height: 450,
+  code_dialog_width: 800,
+  link_title: false,
+  powerpaste_word_import: 'clean',
+
+  // How to open a hyperlink in documents
+  default_link_target: '_blank',
 
   // About tinymce toolbar buttons
-  toolbar: 'restoredraft | ' +
-    'undo redo | ' +
-    'styleselect fontselect fontsizeselect | ' +
-    'bold italic | ' +
-    'forecolor backcolor | ' +
-    'numlist bullist | ' +
-    'hr insertdatetime link unlink image media anchor | ' +
-    'emoticons | ' +
-    'outdent indent | ' +
-    'fullscreen',
+  toolbar: toobar,
 
   // The plug-in for tinymce to be imported.
   // plugins: 'textcolor lists advlist hr link image imagetools media emoticons fullscreen autosave',
   plugins: plugins,
 
   // The plug-in urls
-  external_plugins: external_plugins
+  external_plugins: plugin_urls,
+
+  // About mobile options
+  mobile: {
+    theme: 'mobile'
+  }
 }
+
+export default configure
