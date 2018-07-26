@@ -13,7 +13,6 @@ export default {
   name: 'AppBody',
   computed: {
     cached() {
-      console.log(this.$store.state.tabs.cached)
       return this.$store.state.tabs.cached
     },
     key() {
