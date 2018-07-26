@@ -1,6 +1,6 @@
 <template>
   <div class="container-body app-settings">
-    <h3>Website Configurations&nbsp;&nbsp;&nbsp;&nbsp;<small class="text-muted">Test page, does not implement the actual function.</small></h3>
+    <h3 class="page-title">Website Configurations<small class="text-muted">Test page, does not implement the actual function.</small></h3>
     <hr>
     <br>
     <el-form ref="form" :model="form" label-width="100px">
@@ -54,8 +54,8 @@
           isHttps: 1,
           uploadAllow: 'gif, jpg, jpeg, png, zip, rar, xls, xlxs, doc, docx',
           uploadSize: '1024',
-          title: 'vue+element admin frame',
-          keywords: 'vue, vue.js, admin, element, element ui',
+          title: 'vue+element admin template',
+          keywords: 'vue, vue.js, admin, element, element ui, template',
           copyright: '© 2018 GG Boom, All rights reserved.'
         }
       }

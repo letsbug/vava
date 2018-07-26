@@ -1,0 +1,10 @@
+.page-title {
+  margin-top: $spacer-y;
+  font-size: $font-size-xl;
+  font-weight: 500;
+
+  > small {
+    font-weight: normal;
+    margin-left: $spacer-x;
+  }
+}

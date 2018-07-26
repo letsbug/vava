@@ -26,7 +26,7 @@ export default {
   props: {
     id: { type: String, default: 'tinymce-' + new Date().getMilliseconds() },
     value: { type: String, default: '' },
-    height: { type: Number, default: 500 },
+    height: { type: Number, default: 420 },
     toolbar: { type: Array, default: () => [] },
     setting: { type: Object, required: false }
   },

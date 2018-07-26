@@ -55,25 +55,38 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
+    redirect: '/table',
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/Table'),
+        meta: { title: 'Table', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
     redirect: '/editor',
-    meta: { title: 'TextEditor', icon: 'editor' },
+    meta: { title: 'Editor', icon: 'editor' },
     children: [
       {
         path: 'tinymce',
         name: 'TinymceEditor',
-        component: () => import('@/views/TextEditor/TinymceEditor'),
+        component: () => import('@/views/editor/TinymceEditor'),
         meta: { title: 'Tinymce' }
       },
       {
         path: 'quill',
         name: 'QuillEditor',
-        component: () => import('@/views/TextEditor/QuillEditor'),
+        component: () => import('@/views/editor/QuillEditor'),
         meta: { title: 'Quill' }
       },
       {
         path: 'ckeditor',
         name: 'CKEditor',
-        component: () => import('@/views/TextEditor/CKEditor'),
+        component: () => import('@/views/editor/CKEditor'),
         meta: { title: 'CKEditor' }
       }
     ]
