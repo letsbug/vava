@@ -29,10 +29,8 @@ function filterAsyncRouter(asyncRouterMap, roles) {
     if (hasPermission(roles, route)) {
       if (route.children && route.children.length) {
         route.children = filterAsyncRouter(route.children, roles)
-      }
-      return true
-    }
-    return false
+      } return true
+    } return false
   })
 }
 
@@ -51,13 +49,9 @@ const permission = {
     perm_generate_routes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
-        let accessedRoutes
-        if (roles.indexOf('admin') >= 0) {
-          accessedRoutes = asyncRouterMap
-        } else {
-          accessedRoutes = filterAsyncRouter(asyncRouterMap, roles)
-        }
-        console.log(asyncRouterMap)
+        const accessedRoutes = (roles.indexOf('admin') >= 0)
+          ? asyncRouterMap
+          : filterAsyncRouter(asyncRouterMap, roles)
         commit('PERM_SET_ROUTERS', accessedRoutes)
         resolve()
       })

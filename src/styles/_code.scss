@@ -1,0 +1,28 @@
+code {
+  color: $color-green-500;
+  background-color: $color-green-100;
+  margin: 0 4px;
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: $font-size-xs;
+  border-radius: 3px;
+  height: $font-size-xl;
+  line-height: $font-size-xl;
+  font-family: Menlo, Monaco, Consolas, Courier, monospace;
+}
+
+blockquote {
+  border-left: solid 3px $gray-500;
+  margin-top: 0;
+  margin-left: 0;
+  padding: $spacer-y $spacer-x $spacer-y $spacer-x * 2;
+  background-color: $gray-200;
+
+  > p {
+    margin-top: 0;
+  }
+
+  > p:first-child {
+    margin-bottom: 0;
+  }
+}

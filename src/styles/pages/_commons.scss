@@ -1,10 +1,12 @@
 .page-title {
   margin-top: $spacer-y;
   font-size: $font-size-xl;
-  font-weight: 500;
+  font-weight: 600;
 
   > small {
     font-weight: normal;
     margin-left: $spacer-x;
   }
 }
+
+.page-title-sub {}
