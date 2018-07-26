@@ -1,15 +1,15 @@
 <template>
   <div class="container-body text-editor">
-    <tiny-editor v-model="content" @change="" @input="onInput"></tiny-editor>
+    <tinymce v-model="content" @change="" @input="onInput"></tinymce>
   </div>
 </template>
 
 <script>
-import TinyEditor from '@/components/Tinymce/TinyEditor'
+import Tinymce from '@/components/Tinymce/Index'
 
 export default {
   name: "TinymceEditor",
-  components: { TinyEditor },
+  components: { Tinymce },
   data() {
     return {
       content: `

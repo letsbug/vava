@@ -60,21 +60,21 @@ export const constantRouterMap = [
     children: [
       {
         path: 'tinymce',
-        name: 'tinymce',
+        name: 'TinymceEditor',
         component: () => import('@/views/TextEditor/TinymceEditor'),
-        meta: { title: 'Tinymce', nocache: true }
+        meta: { title: 'Tinymce' }
       },
       {
         path: 'quill',
-        name: 'quill',
+        name: 'QuillEditor',
         component: () => import('@/views/TextEditor/QuillEditor'),
-        meta: { title: 'Quill', nocache: true }
+        meta: { title: 'Quill' }
       },
       {
         path: 'ckeditor',
-        name: 'ckeditor',
+        name: 'CKEditor',
         component: () => import('@/views/TextEditor/CKEditor'),
-        meta: { title: 'CKEditor', nocache: true }
+        meta: { title: 'CKEditor' }
       }
     ]
   }

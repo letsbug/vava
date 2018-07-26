@@ -15,7 +15,7 @@ const INIT = 0
 const CHANGED = 2
 
 export default {
-  name: "TinyEditor",
+  name: "Tinymce",
   data() {
     return {
       status: INIT,

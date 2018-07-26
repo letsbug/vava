@@ -17,7 +17,7 @@ Quill.register('modules/imageDrop', ImageDrop)
 import { document } from '@/components/Quill/configuration'
 
 export default {
-  name: 'TextEditor',
+  name: 'QuillEditor',
   components: { quillEditor },
   data() {
     return {
