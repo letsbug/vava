@@ -1,0 +1,10 @@
+table {
+  .el-button {
+    &.action-drag {
+      cursor: move;
+    }
+    &.el-button--mini {
+      height: 28px;
+    }
+  }
+}

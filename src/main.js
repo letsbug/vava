@@ -16,9 +16,18 @@ import store from '@/store'
 
 import App from './App'
 
+// Data simulation
 import '@/simulate'
 
+// Global filters
+import * as filters from '@/utilities/Filters'
+
 Vue.use(Element, { size: 'small' })
+
+Object.keys(filters).forEach(key => {
+  console.log(key)
+  Vue.filter(key, filters[key])
+})
 
 Vue.config.productionTip = false
 

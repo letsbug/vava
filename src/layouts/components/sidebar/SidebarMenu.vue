@@ -14,7 +14,7 @@
           <i class="el-icon el-icon-arrow-up"></i>
         </a>
         <div class="menu-subs">
-          <router-link class="subs-item" v-for="(sub) in route.children" :key="sub.path" :to="sub.path">
+          <router-link class="subs-item" v-for="(sub) in route.children" :key="sub.path" :to="route.path + '/' + sub.path">
             {{ sub.meta.title }}
           </router-link>
         </div>

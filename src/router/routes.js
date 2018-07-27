@@ -13,82 +13,53 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: 'dashboard',
     children: [{
       path: 'dashboard',
-      name: 'dashboard',
-      component: () => import('@/views/dashboard/Dashboard'),
-      meta: { title: 'Dashboard', icon: 'home', nocache: true }
+      name: 'Dashboard',
+      meta: { title: 'Dashboard', icon: 'home' },
+      component: () => import('@/views/dashboard/Dashboard')
     }]
   },
   {
-    path: '',
+    path: '/guide',
     component: Layout,
-    redirect: '/guide',
     children: [{
-      path: 'guide',
-      name: 'guide',
-      component: () => import('@/views/guide/Guide'),
-      meta: { title: 'Guide', icon: 'zhiyin', nocache: true }
+      path: 'index',
+      name: 'Guide',
+      meta: { title: 'Guide', icon: 'zhiyin', nocache: true },
+      component: () => import('@/views/guide/Guide')
     }]
   },
   {
-    path: '',
+    path: '/components',
     component: Layout,
-    redirect: '/avatar-upload',
     meta: { title: 'Component', icon: 'yingyong' },
     children: [
-      {
-        path: 'avatar-upload',
-        name: 'avatar upload',
-        component: () => import('@/views/component-demo/AvatarUpload'),
-        meta: { title: 'AvatarUpload', nocache: true }
-      },
-      {
-        path: 'dropzone',
-        name: 'dropzone',
-        component: () => import('@/views/component-demo/DropZone'),
-        meta: { title: 'Dropzone', nocache: true }
-      }
+      { path: 'avatarup', name: 'AvatarUpload', meta: { title: 'AvatarUpload', nocache: true }, component: () => import('@/views/component-demo/AvatarUpload') },
+      { path: 'dropzone', name: 'dropzone', meta: { title: 'Dropzone', nocache: true }, component: () => import('@/views/component-demo/DropZone') }
     ]
   },
   {
-    path: '',
+    path: '/table',
     component: Layout,
-    redirect: '/table',
+    meta: { title: 'Table', icon: 'table' },
     children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/Table'),
-        meta: { title: 'Table', icon: 'table' }
-      }
+      { path: 'basicuse', name: 'BasicUse', meta: { title: 'BasicUse' }, component: () => import('@/views/table/BasicUse') },
+      { path: 'dynamic', name: 'Dynamic', meta: { title: 'Dynamic' }, component: () => import('@/views/table/Dynamic') },
+      { path: 'sortable', name: 'Sortable', meta: { title: 'Sortable' }, component: () => import('@/views/table/Sortable') },
+      { path: 'dragable', name: 'Dragable', meta: { title: 'Dragable' }, component: () => import('@/views/table/Dragable') },
+      { path: 'editable', name: 'Editable', meta: { title: 'Editable' }, component: () => import('@/views/table/Editable') }
     ]
   },
   {
-    path: '',
+    path: '/editor',
     component: Layout,
-    redirect: '/editor',
     meta: { title: 'Editor', icon: 'editor' },
     children: [
-      {
-        path: 'tinymce',
-        name: 'TinymceEditor',
-        component: () => import('@/views/editor/TinymceEditor'),
-        meta: { title: 'Tinymce' }
-      },
-      {
-        path: 'quill',
-        name: 'QuillEditor',
-        component: () => import('@/views/editor/QuillEditor'),
-        meta: { title: 'Quill' }
-      },
-      {
-        path: 'ckeditor',
-        name: 'CKEditor',
-        component: () => import('@/views/editor/CKEditor'),
-        meta: { title: 'CKEditor' }
-      }
+      { path: 'tinymce', name: 'TinymceEditor', meta: { title: 'Tinymce' }, component: () => import('@/views/editor/TinymceEditor') },
+      { path: 'quill', name: 'QuillEditor', meta: { title: 'Quill' }, component: () => import('@/views/editor/QuillEditor') },
+      { path: 'ckeditor', name: 'CKEditor', meta: { title: 'CKEditor' }, component: () => import('@/views/editor/CKEditor') }
     ]
   }
 ]
@@ -100,8 +71,8 @@ export const asyncRouterMap = [
     children: [{
       path: 'index',
       name: 'settings',
-      component: () => import('@/views/settings/Settings'),
-      meta: { title: 'Settings', icon: 'settings', nocache: true }
+      meta: { title: 'Settings', icon: 'settings', nocache: true },
+      component: () => import('@/views/settings/Settings')
     }]
   },
   { path: '*', redirect: '/404', hidden: true }

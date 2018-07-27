@@ -12,17 +12,19 @@ code {
 }
 
 blockquote {
-  border-left: solid 3px $gray-500;
-  margin-top: 0;
+  border-left: solid 3px $gray-400;
   margin-left: 0;
-  padding: $spacer-y $spacer-x $spacer-y $spacer-x * 2;
-  background-color: $gray-200;
+  margin-right: 0;
+  padding: $spacer-y*1.5 $spacer-x $spacer-y*1.5 $spacer-x * 2;
+  background-color: $gray-150;
 
   > p {
     margin-top: 0;
+    color: $gray-600;
   }
 
-  > p:first-child {
+  > p:nth-last-child(1):first-child,
+  > p:last-child {
     margin-bottom: 0;
   }
 }
