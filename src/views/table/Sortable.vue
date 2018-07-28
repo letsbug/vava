@@ -4,18 +4,17 @@
       <a :href="document_url" target="_blank">element ui</a></small></h3>
     <hr>
     <blockquote>
-      <p>在列中设置<code>sortable</code>属性即可实现以该列为基准的排序，接受一个<code>Boolean</code>，默认为<code>false</code>...</p>
-      <p>详细文档请移步 <a :href="document_url" target="_blank">element ui</a> 官方文档</p>
+      <p>在列中设置<code>sortable</code>属性即可实现以该列为基准的排序，接受一个<code>Boolean</code>，默认为<code>false</code>。详细使用请移步<a :href="document_url" target="_blank">element ui</a>官方文档。</p>
     </blockquote>
     <el-table ref="sortableTable" tooltip-effect="light" :data="tableData" stripe style="width: 100%"
               :default-sort = "{prop: 'date', order: 'descending'}">
       <el-table-column prop="date" label="Birthday" width="94" sortable></el-table-column>
       <el-table-column prop="name" label="Name" width="78" sortable>
-        <template slot-scope="scope">{{scope.row.name | mergeName}}</template>
+        <template slot-scope="scope">{{scope.row.name}}</template>
       </el-table-column>
       <el-table-column prop="phone" label="Phone" width="90"></el-table-column>
       <el-table-column prop="address" label="Address" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.address | mergeAddress}}</template>
+        <template slot-scope="scope">{{scope.row.address}}</template>
       </el-table-column>
       <el-table-column prop="zip" label="Postcode" width="72"></el-table-column>
       <el-table-column prop="status" label="Status" width="90">

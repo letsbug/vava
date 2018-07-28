@@ -15,15 +15,10 @@ for (let i = 0; i < count; i++) {
     id: '@increment',
     status: Math.floor(Math.random() * 4),
     date: +Mock.Random.date('T'),
-    name: {
-      first: '@cfirst',
-      last: '@clast'
-    },
+    name: '@cfirst' + '@clast',
     phone: '189****7716',
     region: '@region',
-    address: {
-      city: Mock.Random.city(true)
-    },
+    address: Mock.Random.city(true) + 'xxxx乡镇xxxx小区xxxx号xxxx栋xxxx号',
     zip: Mock.Random.zip()
   }))
 }

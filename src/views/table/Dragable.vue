@@ -9,11 +9,11 @@
     <el-table id="dragTable" ref="dragTable" tooltip-effect="light" :data="tableData" stripe style="width: 100%">
       <el-table-column prop="date" label="Birthday" width="94"></el-table-column>
       <el-table-column prop="name" label="Name" width="78">
-        <template slot-scope="scope">{{scope.row.name | mergeName}}</template>
+        <template slot-scope="scope">{{scope.row.name}}</template>
       </el-table-column>
       <el-table-column prop="phone" label="Phone" width="90"></el-table-column>
       <el-table-column prop="address" label="Address" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.address | mergeAddress}}</template>
+        <template slot-scope="scope">{{scope.row.address}}</template>
       </el-table-column>
       <el-table-column prop="zip" label="Postcode" width="72"></el-table-column>
       <el-table-column prop="status" label="Status" width="90">

@@ -1,4 +1,13 @@
+$input-spacer: 6px;
+$input-height: 28px;
+
 table {
+  .edit-input input.el-input__inner {
+    padding-left: $input-spacer;
+    padding-right: $input-spacer;
+    margin-left: -$input-spacer;
+    margin-right: -$input-spacer;
+  }
   .el-button {
     &.action-drag {
       cursor: move;
