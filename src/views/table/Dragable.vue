@@ -6,7 +6,7 @@
     <blockquote>
       <p>此功能依赖于<code>sortablejs</code>拖拽排序插件，详细使用方法请移步<a :href="url_sortablejs" target="_blank">官方文档</a></p>
     </blockquote>
-    <el-table ref="dragTable" tooltip-effect="light" :data="tableData" stripe style="width: 100%">
+    <el-table id="dragTable" ref="dragTable" tooltip-effect="light" :data="tableData" stripe style="width: 100%">
       <el-table-column prop="date" label="Birthday" width="94"></el-table-column>
       <el-table-column prop="name" label="Name" width="78">
         <template slot-scope="scope">{{scope.row.name | mergeName}}</template>
@@ -49,7 +49,20 @@ export default {
     this.list()
   },
   methods: {
-    sort() {},
+    sort() {
+      const els = document.querySelectorAll('#dragTable .el-table__body-wrapper table > tbody')[0]
+      Sortable.create(els, {
+        handle: '.action-drag',
+        ghostClass: 'sortable-ghost', // Class name for the drop placeholder,
+        animation: 150,
+        setData: function(dataTransfer) {
+          // to avoid Firefox bug
+          // Detail see : https://github.com/RubaXa/Sortable/issues/1012
+          dataTransfer.setData('Text', '')
+        }
+      });
+
+    },
     list() {
       clientList(this.page.current, this.page.limit, null).then(res => {
         this.page = res.page
@@ -59,12 +72,19 @@ export default {
           v.date = formatDate(date, 'yyyy-MM-dd')
           return v
         })
+        this.$nextTick(() => { this.sort() })
       })
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+  @import "../../styles/variables";
 
+  .sortable-ghost{
+    opacity: .7;
+    color: $white!important;
+    background: $color-green-200!important;
+  }
 </style>
