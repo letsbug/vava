@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'SidebarItems',
+  name: 'SidebarMenu',
   props: {
     routes: {
       type: Array

@@ -10,6 +10,12 @@ const { body } = document
 const WIDTH = 992
 
 export default {
+  watch: {
+    $route() {
+      // Auto close sidebar in mobile device
+      if (this.isMobile() && this.sidebarOpend) store.dispatch('app_sidebar_close')
+    }
+  },
   beforeMount() {
     const svgs = document.body.querySelectorAll('svg')[0].querySelectorAll('path')
     for (const [i] of svgs.entries()) {
@@ -22,9 +28,6 @@ export default {
     if (isMobile) {
       store.dispatch('app_toggle_device', 'mobile')
     }
-  },
-  computed: {
-
   },
   methods: {
     isMobile() {

@@ -33,7 +33,9 @@ export const constantRouterMap = [
   },
   {
     path: '/components',
+    redirect: '/components/avatarup',
     component: Layout,
+    name: 'components',
     meta: { title: 'Component', icon: 'yingyong' },
     children: [
       { path: 'avatarup', name: 'AvatarUpload', meta: { title: 'AvatarUpload', nocache: true }, component: () => import('@/views/component-demo/AvatarUpload') },
@@ -42,7 +44,9 @@ export const constantRouterMap = [
   },
   {
     path: '/table',
+    redirect: '/table/basicuse',
     component: Layout,
+    name: 'table',
     meta: { title: 'Table', icon: 'table' },
     children: [
       { path: 'basicuse', name: 'BasicUse', meta: { title: 'BasicUse' }, component: () => import('@/views/table/BasicUse') },
@@ -54,7 +58,9 @@ export const constantRouterMap = [
   },
   {
     path: '/editor',
+    redirect: '/editor/tinymce',
     component: Layout,
+    name: 'editor',
     meta: { title: 'Editor', icon: 'editor' },
     children: [
       { path: 'tinymce', name: 'TinymceEditor', meta: { title: 'Tinymce' }, component: () => import('@/views/editor/TinymceEditor') },
