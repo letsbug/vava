@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper" :class="sidebarOpend ? 'sidebar-expanded' : ''">
     <sidebar></sidebar>
-    <div class="container-main">
+    <div class="container-main" :class="device==='mobile'?'no-tab':''">
       <header-bar></header-bar>
-      <tab-bar></tab-bar>
+      <tab-bar v-if="device!=='mobile'"></tab-bar>
       <app-body></app-body>
       <footer-bar></footer-bar>
     </div>
@@ -20,11 +20,12 @@ export default {
   components: { Sidebar, HeaderBar, TabBar, AppBody, FooterBar },
   mixins: [ResizeHandler],
   computed: {
-    sidebarOpend() { return this.$store.state.application.sidebar.opened }
+    sidebarOpend() { return this.$store.state.application.sidebar.opened },
+    device() { return this.$store.state.application.device }
   },
   methods: {
     toggleSidebar() {
-      this.$store.dispatch('app_toggle_sidebar')
+      this.$store.dispatch('app_sidebar_toggle')
     }
   }
 }

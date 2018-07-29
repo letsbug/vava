@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     toggleSidebar() {
-      this.$store.dispatch('app_toggle_sidebar')
+      this.$store.dispatch('app_sidebar_toggle')
     },
     handleRefresh(e) {
       let el = e.target

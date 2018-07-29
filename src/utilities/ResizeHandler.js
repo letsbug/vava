@@ -23,6 +23,9 @@ export default {
       store.dispatch('app_toggle_device', 'mobile')
     }
   },
+  computed: {
+
+  },
   methods: {
     isMobile() {
       const rect = body.getBoundingClientRect()
@@ -31,6 +34,8 @@ export default {
     resizeHandler() {
       const isMobile = this.isMobile()
       store.dispatch('app_toggle_device', isMobile ? 'mobile' : 'desktop')
+
+      if (isMobile) store.dispatch('app_sidebar_close')
     }
   }
 }

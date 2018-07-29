@@ -18,6 +18,10 @@
   transition: $transition-main-desktop;
   padding-top: $header-height + $tabbar-height;
   padding-bottom: $foobar-height;
+
+  &.no-tab {
+    padding-top: $header-height!important;
+  }
 }
 
 .app-wrapper {
@@ -49,7 +53,7 @@
       .sidebar-menu .menu-item {
         margin-right: -$sidebar-sub-offset;
 
-        .el-icon-arrow-right {
+        .el-icon-arrow-up {
           display: none;
         }
 

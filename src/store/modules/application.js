@@ -21,11 +21,18 @@ const application = {
       state.sidebar.opened = !state.sidebar.opened
       state.sidebar.withoutAnimation = true
     },
+    APP_SIDEBAR_CLOSE: state => {
+      Cookies.set('sidebarStatus', 1)
+      state.sidebar.opened = false
+    },
     APP_TOGGLE_DEVICE: (state, device) => { state.device = device }
   },
   actions: {
-    app_toggle_sidebar: ({ commit }) => {
+    app_sidebar_toggle: ({ commit }) => {
       commit('APP_TOGGLE_SIDEBAR')
+    },
+    app_sidebar_close: ({ commit }) => {
+      commit('APP_SIDEBAR_CLOSE')
     },
     app_toggle_device: ({ commit }, device) => {
       commit('APP_TOGGLE_DEVICE', device)
