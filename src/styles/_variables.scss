@@ -97,6 +97,7 @@ $zindex-sidebar-backdrop:     1020;
 $zindex-header:               1000;
 $zindex-header-dropdown:      1010;
 $zindex-tabbar:               1000;
+$zindex-breadcrumb:           1000;
 $zindex-footer:               1000;
 
 $zindex-text-editor:          1031;
@@ -168,7 +169,7 @@ $sidebar-menu-item-line-height:   $sidebar-menu-item-height - $sidebar-menu-item
 
 $tabbar-bg:                   $white;
 
-$tabbar-border-height:        1px;
+$tabbar-border-height:        $border-default-width;
 $tabbar-border:               $border-default;
 $tabbar-item-border:          solid 2px transparent;
 
@@ -176,6 +177,19 @@ $tabbar-height:               40px;
 $tabbar-line-height:          $tabbar-height - $tabbar-border-height;
 
 $tabbar-padding:              0 $spacer-x;
+
+
+// Breadcrumb bar
+
+$breadcrumb-bg:               $white;
+
+$breadcrumb-border-height:    $border-default-width;
+$breadcrumb-border:           $border-default;
+
+$breadcrumb-height:           $tabbar-height;
+$breadcrumb-line-height:      $breadcrumb-height - $breadcrumb-border-height;
+
+$breadcrumb-padding:          0 $spacer-x;
 
 
 // Bottom Footbar

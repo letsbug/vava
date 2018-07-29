@@ -1,9 +1,10 @@
 <template>
   <div class="app-wrapper" :class="sidebarOpend ? 'sidebar-expanded' : ''">
     <sidebar></sidebar>
-    <div class="container-main" :class="device==='mobile'?'no-tab':''">
+    <div class="container-main">
       <header-bar></header-bar>
       <tab-bar v-if="device!=='mobile'"></tab-bar>
+      <breadcrumb v-else></breadcrumb>
       <app-body></app-body>
       <footer-bar></footer-bar>
     </div>
@@ -12,12 +13,12 @@
 </template>
 
 <script>
-import { Sidebar, HeaderBar, TabBar, AppBody, FooterBar } from './components'
+import { Sidebar, HeaderBar, TabBar, Breadcrumb, AppBody, FooterBar } from './components'
 import ResizeHandler from '@/utilities/ResizeHandler'
 
 export default {
   name: 'Layout',
-  components: { Sidebar, HeaderBar, TabBar, AppBody, FooterBar },
+  components: { Sidebar, HeaderBar, TabBar, Breadcrumb, AppBody, FooterBar },
   mixins: [ResizeHandler],
   computed: {
     sidebarOpend() { return this.$store.state.application.sidebar.opened },

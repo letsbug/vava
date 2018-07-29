@@ -4,20 +4,12 @@
 @import "utilities";
 @import "code";
 @import "containers";
-@import "sidebar";
-@import "header";
-@import "tabbar";
-@import "footer";
 
+@import "layouts";
 
-//
-// Data
-
-@import "table";
-
+@import "components";
 
 //
 //  pages
-
 @import "pages/commons";
 @import "views";

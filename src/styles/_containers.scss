@@ -19,7 +19,7 @@
   padding-top: $header-height + $tabbar-height;
   padding-bottom: $foobar-height;
 
-  &.no-tab {
+  &.no-tab-breadcrumb {
     padding-top: $header-height!important;
   }
 }
@@ -174,7 +174,6 @@
         display: block;
       }
     }
-
   }
 
   .app-wrapper.sidebar-expanded {

@@ -1,0 +1,18 @@
+.app-breadcrumb {
+  border-bottom: $breadcrumb-border;
+  height: $breadcrumb-height;
+  line-height: $breadcrumb-line-height;
+  padding: $breadcrumb-padding;
+  background-color: $breadcrumb-bg;
+  box-shadow: $shadow-sm;
+
+  position: absolute;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  z-index: $zindex-tabbar;
+
+  .el-breadcrumb {
+    display: inline-block;
+  }
+}
