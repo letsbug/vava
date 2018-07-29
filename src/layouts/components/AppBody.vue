@@ -1,9 +1,12 @@
 <template>
   <div class="app-body">
     <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cached">
-        <router-view :key="key"/>
-      </keep-alive>
+      <template v-if="device !== 'mobile'">
+        <keep-alive :include="cached">
+          <router-view :key="key"/>
+        </keep-alive>
+      </template>
+      <router-view v-else/>
     </transition>
   </div>
 </template>
@@ -12,12 +15,9 @@
 export default {
   name: 'AppBody',
   computed: {
-    cached() {
-      return this.$store.state.tabs.cached
-    },
-    key() {
-      return this.$route.fullPath
-    }
+    device() { return this.$store.state.application.device },
+    cached() { return this.$store.state.tabs.cached },
+    key() { return this.$route.fullPath }
   }
 }
 </script>
