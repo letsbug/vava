@@ -5,10 +5,9 @@
  */
 
 import Mock from 'mockjs'
-import { paramToObj } from '@/utilities'
 
 const List = []
-const count = 150
+const count = 154
 
 for (let i = 0; i < count; i++) {
   List.push(Mock.mock({
@@ -25,10 +24,15 @@ for (let i = 0; i < count; i++) {
 
 export default {
   list: config => {
-    const { current = 1, limit = 8, keyword } = paramToObj(config.body)
+    const { current = 1, limit = 8, keyword } = JSON.parse(config.body)
 
     const mockList = List.filter(item => {
-      return !(keyword && item.name !== keyword && item.phone !== keyword)
+      return !(
+        keyword &&
+        item.name.indexOf(keyword) < 0 &&
+        item.phone.indexOf(keyword) < 0 &&
+        item.address.indexOf(keyword) < 0
+      )
     })
 
     const pageList = mockList.filter(
