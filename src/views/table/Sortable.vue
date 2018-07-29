@@ -13,11 +13,11 @@
         <template slot-scope="scope">{{scope.row.name}}</template>
       </el-table-column>
       <el-table-column prop="phone" label="Phone" width="90"></el-table-column>
-      <el-table-column prop="address" label="Address" show-overflow-tooltip>
+      <el-table-column prop="address" label="Address" sortable show-overflow-tooltip>
         <template slot-scope="scope">{{scope.row.address}}</template>
       </el-table-column>
-      <el-table-column prop="zip" label="Postcode" width="72"></el-table-column>
-      <el-table-column prop="status" label="Status" width="90">
+      <el-table-column prop="zip" label="Postcode" width="96" sortable></el-table-column>
+      <el-table-column prop="status" label="Status" width="90" sortable>
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusTransStyle">{{scope.row.status | statusTransName}}</el-tag>
         </template>
