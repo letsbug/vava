@@ -14,7 +14,8 @@
 
   .el-breadcrumb__item {
     a {
-      color: $color-blue-light;
+      color: $color-blue-lighter;
+      font-weight: normal;
     }
 
     .no-redirect {

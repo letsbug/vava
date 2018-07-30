@@ -4,9 +4,9 @@
       <a :href="url_document" target="_blank">element ui</a></small></h3>
     <hr>
     <blockquote>
-      <p>此功能依赖于<code>sortablejs</code>拖拽排序插件，详细使用方法请移步<a :href="url_sortablejs" target="_blank">官方文档</a></p>
+      <p>此功能依赖于<code>sortablejs</code>拖拽排序插件。详细使用方法请移步<a :href="url_sortablejs" target="_blank">官方文档</a>。</p>
     </blockquote>
-    <el-table id="dragTable" ref="dragTable" tooltip-effect="light" :data="tableData" stripe style="width: 100%">
+    <el-table id="dragTable" ref="dragTable" tooltip-effect="light" stripe :data="tableData" style="width: 100%">
       <el-table-column prop="date" label="Birthday" width="94"></el-table-column>
       <el-table-column prop="name" label="Name" width="78">
         <template slot-scope="scope">{{scope.row.name}}</template>
@@ -49,16 +49,28 @@ export default {
     this.list()
   },
   methods: {
+    logTableSort() {
+      const _list = this.tableData.map(item => {
+        item = item.name
+        return item
+      })
+      console.log(_list)
+    },
     sort() {
+      const _this = this
       const els = document.querySelectorAll('#dragTable .el-table__body-wrapper table > tbody')[0]
       Sortable.create(els, {
         handle: '.action-drag',
         ghostClass: 'sortable-ghost', // Class name for the drop placeholder,
-        animation: 150,
-        setData: function(dataTransfer) {
+        animation: 120,
+        setData(dataTransfer) {
           // to avoid Firefox bug
           // Detail see : https://github.com/RubaXa/Sortable/issues/1012
           dataTransfer.setData('Text', '')
+        },
+        onEnd(e) {
+          // TODO 对于带 '斑马条纹' 的表格，拖拽结束后，需要解决斑马线排列不正确的问题。
+          _this.logTableSort()
         }
       });
 
@@ -72,6 +84,7 @@ export default {
           v.date = formatDate(date, 'yyyy-MM-dd')
           return v
         })
+        this.logTableSort()
         this.$nextTick(() => { this.sort() })
       })
     }
@@ -82,9 +95,13 @@ export default {
 <style lang="scss">
   @import "../../styles/variables";
 
-  .sortable-ghost{
-    opacity: .7;
+  .sortable-ghost {
+    opacity: .8;
     color: $white!important;
     background: $color-green-200!important;
+
+    > td {
+      background-color: transparent!important;
+    }
   }
 </style>
