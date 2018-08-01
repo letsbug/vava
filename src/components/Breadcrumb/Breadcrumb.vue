@@ -26,13 +26,11 @@ export default {
   methods: {
     getBreadcrumb() {
       let _routes = this.$route.matched.filter(item => item.name)
-      console.log(_routes)
       const first = _routes[0]
       if (first && first.name !== 'Dashboard') {
         _routes = [{ path: '/dashboard', redirect: '/dashboard', meta: { title: 'Dashboard' } }].concat(_routes)
       }
       this.routes = _routes
-      console.log(this.routes)
     }
   }
 }

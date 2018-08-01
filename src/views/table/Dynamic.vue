@@ -33,9 +33,9 @@
     </el-table>
     <br>
     <el-pagination
-      :pager-count="5"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      :pager-count="pagerCount"
       :current-page="page.current"
       :page-sizes="[10, 20, 30, 40]"
       :page-size="page.limit"
@@ -61,6 +61,7 @@ export default {
       keyword: '',
       page: { current: 1, limit: 10, total: 0 },
       layout: 'total, sizes, prev, pager, next, jumper',
+      pagerCount: 7,
       tableData: [],
       multipleSelection: []
     }

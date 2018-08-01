@@ -8,5 +8,6 @@ export default {
   mounted() {
     const isMobile = this.$store.state.application.device === 'mobile'
     this.layout = isMobile ? 'prev, pager, next' : 'total, sizes, prev, pager, next, jumper'
+    this.pagerCount = isMobile ? 5 : 7
   }
 }
