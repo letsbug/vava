@@ -24,8 +24,8 @@ export default {
       img: './static/errors/404-'
     }
   },
-  mounted() {
-    const random = Math.floor(Math.random() * 3 + 1)
+  created() {
+    const random = Math.floor(Math.random() * 4 + 1)
     this.img += random + '.gif'
   }
 }

@@ -39,6 +39,7 @@ export default {
       store.dispatch('app_toggle_device', isMobile ? 'mobile' : 'desktop')
 
       if (isMobile) store.dispatch('app_sidebar_close')
+      else store.dispatch('app_sidebar_open')
     }
   }
 }

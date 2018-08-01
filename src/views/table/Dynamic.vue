@@ -33,12 +33,13 @@
     </el-table>
     <br>
     <el-pagination
+      :pager-count="5"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="page.current"
       :page-sizes="[10, 20, 30, 40]"
       :page-size="page.limit"
-      layout="total, sizes, prev, pager, next, jumper"
+      :layout="layout"
       :total="page.total">
     </el-pagination>
     <br>
@@ -48,15 +49,18 @@
 <script>
 import { formatDate } from '@/utilities'
 import { clientList } from '@/api/clients'
+import PaginationResponsive from '@/utilities/PaginationResponsive'
 
 export default {
   name: "Dynamic",
+  mixins: [PaginationResponsive],
   data() {
     return {
       url_document: 'http://element-cn.eleme.io/#/zh-CN/component/table',
       url_mockjs: 'http://mockjs.com/',
       keyword: '',
       page: { current: 1, limit: 10, total: 0 },
+      layout: 'total, sizes, prev, pager, next, jumper',
       tableData: [],
       multipleSelection: []
     }
@@ -82,6 +86,7 @@ export default {
       this.handleSearch()
     },
     handleCurrentChange(val) {
+      console.log(this.page.current)
       this.page.current = val
       this.handleSearch()
     },

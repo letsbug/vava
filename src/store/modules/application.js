@@ -21,6 +21,10 @@ const application = {
       state.sidebar.opened = !state.sidebar.opened
       state.sidebar.withoutAnimation = true
     },
+    APP_SIDEBAR_OPEN: state => {
+      Cookies.set('sidebarStatus', 0)
+      state.sidebar.opened = true
+    },
     APP_SIDEBAR_CLOSE: state => {
       Cookies.set('sidebarStatus', 1)
       state.sidebar.opened = false
@@ -30,6 +34,9 @@ const application = {
   actions: {
     app_sidebar_toggle: ({ commit }) => {
       commit('APP_TOGGLE_SIDEBAR')
+    },
+    app_sidebar_open: ({ commit }) => {
+      commit('APP_SIDEBAR_OPEN')
     },
     app_sidebar_close: ({ commit }) => {
       commit('APP_SIDEBAR_CLOSE')
