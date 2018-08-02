@@ -3,6 +3,7 @@
   background-color: $sidebar-bg;
   color: $white;
   z-index: $zindex-sidebar;
+  padding-top: $sidebar-brand-height;
 }
 
 .app-brand {
@@ -11,6 +12,10 @@
   line-height: $sidebar-brand-line-height;
   white-space: nowrap;
   overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 
   .logo {
     width: $sidebar-brand-line-height;
@@ -26,9 +31,14 @@
 }
 
 .sidebar-menu {
-  padding: 0;
+  height: 100%;
+  padding: 0 0 $sidebar-menu-offset-padding 0;
   margin: 0;
   list-style: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;    /* Solve the problem of slow scrolling on IOS devices */
+  @include IE-scroll-bar-fixed();
 
   a {
     display: block;

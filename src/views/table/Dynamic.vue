@@ -42,7 +42,6 @@
       :layout="layout"
       :total="page.total">
     </el-pagination>
-    <br>
   </div>
 </template>
 

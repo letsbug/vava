@@ -1,0 +1,22 @@
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb-bg;
+  border-radius: $scrollbar-thumb-radius-size;
+  opacity: .3;
+  transition: $transition-background;
+
+  &:hover {
+    background-color: $scrollbar-thumb-bg-hover;
+  }
+}
+
+@mixin IE-scroll-bar-fixed {
+  scrollbar-face-color: $scrollbar-thumb-bg;
+  scrollbar-3dlight-color: transparent;
+  scrollbar-shadow-color: transparent;
+  scrollbar-darkshadow-color: transparent;
+  border: 0 none;
+}

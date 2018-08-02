@@ -5,6 +5,7 @@ $gray-150:                    #f0f2f5!default;
 $gray-200:                    #e9ecef!default;
 $gray-300:                    #dee2e6!default;
 $gray-400:                    #ced4da!default;
+$gray-450:                    #c1c1c1!default;
 $gray-500:                    #adb5bd!default;
 $gray-600:                    #6c757d!default;
 $gray-650:                    #606266!default;
@@ -20,6 +21,8 @@ $color-blue:                  #072a57!default;
 $color-blue-dark:             #03152a!default;
 $color-blue-light:            lighten($color-blue, 20%)!default;
 $color-blue-lighter:          lighten($color-blue-light, 20%)!default;
+
+$cyan:                        #0ae!default;
 
 $color-green:                 #28a745!default;
 $color-green-100:             #7fda93!default;
@@ -106,6 +109,15 @@ $zindex-footer:               1000;
 $zindex-text-editor:          1031;
 
 
+// About scroll bar variables
+
+$scrollbar-width:             6px;
+$scrollbar-bg:                $gray-300;
+$scrollbar-thumb-bg:          $gray-450;
+$scrollbar-thumb-bg-hover:    $cyan;
+$scrollbar-thumb-radius-size: 3px;
+
+
 // Header bar
 
 $header-bg:                   $white;
@@ -147,7 +159,8 @@ $sidebar-brand-line-height:   $sidebar-brand-height - $sidebar-brand-padding-y*2
 
 // Sidebar sub menu
 
-$sidebar-menu-item-height:        50px;
+$sidebar-menu-item-height:            50px;
+$sidebar-menu-offset-padding:         50px;
 
 $sidebar-sub-offset:                  5px;
 $sidebar-sub-menu-padding:            $spacer-y/2 0;
