@@ -1,0 +1,38 @@
+//
+// Colors
+
+$gray-100:                    #f8f9fa!default;
+$gray-150:                    #f0f2f5!default;
+$gray-200:                    #e9ecef!default;
+$gray-300:                    #dee2e6!default;
+$gray-400:                    #ced4da!default;
+$gray-450:                    #c1c1c1!default;
+$gray-500:                    #adb5bd!default;
+$gray-600:                    #6c757d!default;
+$gray-650:                    #606266!default;
+$gray-700:                    #495057!default;
+$gray-800:                    #343a40!default;
+$gray-900:                    #212529!default;
+
+$white:                       #ffffff!default;
+$black:                       #000000!default;
+$dark:                        #323232!default;
+
+$color-blue:                  #072a57!default;
+$color-blue-dark:             #03152a!default;
+$color-blue-light:            lighten($color-blue, 20%)!default;
+$color-blue-lighter:          lighten($color-blue-light, 20%)!default;
+
+$cyan:                        #0ae!default;
+
+$color-green:                 #28a745!default;
+$color-green-100:             #7fda93!default;
+$color-green-200:             #5bd375!default;
+$color-green-400:             #367d46!default;
+$color-green-500:             #0d6d22!default;
+
+$color-red:                   #F56C6C!default;
+
+$theme-color:                 $color-green !default;
+$link-color-gray:             $gray-600!default;
+$link-color-gray-hover:       $theme-color!default;

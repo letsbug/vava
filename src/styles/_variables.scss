@@ -1,114 +1,12 @@
-// Colors
-
-$gray-100:                    #f8f9fa!default;
-$gray-150:                    #f0f2f5!default;
-$gray-200:                    #e9ecef!default;
-$gray-300:                    #dee2e6!default;
-$gray-400:                    #ced4da!default;
-$gray-450:                    #c1c1c1!default;
-$gray-500:                    #adb5bd!default;
-$gray-600:                    #6c757d!default;
-$gray-650:                    #606266!default;
-$gray-700:                    #495057!default;
-$gray-800:                    #343a40!default;
-$gray-900:                    #212529!default;
-
-$white:                       #ffffff!default;
-$black:                       #000000!default;
-$dark:                        #323232!default;
-
-$color-blue:                  #072a57!default;
-$color-blue-dark:             #03152a!default;
-$color-blue-light:            lighten($color-blue, 20%)!default;
-$color-blue-lighter:          lighten($color-blue-light, 20%)!default;
-
-$cyan:                        #0ae!default;
-
-$color-green:                 #28a745!default;
-$color-green-100:             #7fda93!default;
-$color-green-200:             #5bd375!default;
-$color-green-400:             #367d46!default;
-$color-green-500:             #0d6d22!default;
-
-$color-red:                   #F56C6C!default;
-
-$theme-color:                 $color-green !default;
-$link-color-gray:             $gray-600!default;
-$link-color-gray-hover:       $theme-color!default;
+@import "variables/colors";
+@import "variables/fonts";
+@import "variables/sizes";
+@import "variables/zindex";
+@import "variables/shadows";
+@import "variables/transitions";
 
 
-// Fonts
-
-$font-size-base:              14px!default;
-$font-size-sm:                13px!default;
-$font-size-xs:                12px!default;
-$font-size-lg:                16px!default;
-$font-size-xl:                18px!default;
-$font-size-xxl:               22px!default;
-
-$font-size-icons:             $font-size-lg;
-
-
-// Spacers
-
-$spacer-y:                    9px!default;
-$spacer-x:                    15px!default;
-
-
-// line, borders
-
-$border-default-width:        1px;
-$border-default-color:        $gray-300!default;
-$border-default:              solid $border-default-width $gray-300!default;
-$border-theme:                solid $border-default-width $theme-color;
-
-
-// device breakpoint
-
-$d-sm:  768px;
-$d-md:  992px;
-$d-lg:  1200px;
-$d-xl:  1920px;
-
-
-// Shadows
-
-$shadow-sm:                   0 .1rem .2rem rgba(0, 0, 0, .075)!default;
-$shadow-sm-invert:            0 -.1rem .2rem rgba(0, 0, 0, .075)!default;
-$shadow-md:                   0 .2rem .4rem rgba(0, 0, 0, .075)!default;
-
-
-// Transitions
-
-$transition-duration:         .28s!default;
-
-$transition-default:          all $transition-duration ease-out!default;
-$transition-border:           border $transition-duration ease-out!default;
-$transition-opacity:          opacity $transition-duration ease-out!default;
-$transition-background:       background $transition-duration ease-out!default;
-$transition-color:            color $transition-duration ease-out!default;
-$transition-margin:           margin $transition-duration ease-out!default;
-$transition-transform:        transform $transition-duration ease-out!default;
-
-$transition-sidebar-desktop:  width $transition-duration ease-out!default;
-$transition-main-desktop:     margin-left $transition-duration ease-out!default;
-$transition-main-mobile:      left $transition-duration ease-out!default;
-
-
-// zindex
-
-$zindex-sidebar:              1030;
-$zindex-sidebar-dropdown:     1040;
-$zindex-sidebar-backdrop:     1020;
-$zindex-header:               1000;
-$zindex-header-dropdown:      1010;
-$zindex-tabbar:               1000;
-$zindex-breadcrumb:           1000;
-$zindex-footer:               1000;
-
-$zindex-text-editor:          1031;
-
-
+//
 // About scroll bar variables
 
 $scrollbar-width:             6px;
@@ -118,6 +16,7 @@ $scrollbar-thumb-bg-hover:    $cyan;
 $scrollbar-thumb-radius-size: 3px;
 
 
+//
 // Header bar
 
 $header-bg:                   $white;
@@ -140,6 +39,7 @@ $header-links-img-width:      $header-links-line-height;
 $header-links-img-height:     $header-links-img-width;
 
 
+//
 // Sidebar
 
 $sidebar-width:               60px!default;
@@ -208,6 +108,7 @@ $breadcrumb-line-height:      $breadcrumb-height - $breadcrumb-border-height;
 $breadcrumb-padding:          0 $spacer-x;
 
 
+//
 // Bottom Footbar
 
 $foobar-bg:                   white!default;
@@ -221,3 +122,9 @@ $foobar-padding-y:            $spacer-y!default;
 
 $foobar-height:               50px!default;
 $foobar-line-height:          $foobar-height - $foobar-padding-y * 2 - $foobar-border-width!default;
+
+
+//
+//  About themes
+
+$sidebar-dark-bg:             $color-blue-dark!default;

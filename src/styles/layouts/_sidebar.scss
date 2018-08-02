@@ -37,6 +37,8 @@
   list-style: none;
   overflow-x: hidden;
   overflow-y: scroll;
+  box-shadow: $shadow-sm-horizontal;
+
   -webkit-overflow-scrolling: touch;    /* Solve the problem of slow scrolling on IOS devices */
   @include IE-scroll-bar-fixed();
 
