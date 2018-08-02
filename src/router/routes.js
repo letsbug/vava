@@ -13,13 +13,22 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: 'dashboard',
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      meta: { title: 'Dashboard', icon: 'home' },
-      component: () => import('@/views/dashboard/Dashboard')
-    }]
+    redirect: 'home',
+    children: [
+      { path: 'home', name: 'Home', meta: { title: 'Home', icon: 'home' }, component: () => import('@/views/homepage/AppHome') }
+    ]
+  },
+  {
+    path: '/dashboard',
+    redirect: '/dashboard/visit',
+    component: Layout,
+    name: 'dashboard',
+    meta: { title: 'Dashboard', icon: 'dashboard' },
+    children: [
+      { path: 'visit', name: 'AccessStatistics', meta: { title: 'AccessStatistics' }, component: () => import('@/views/dashboard/AccessStatistics') },
+      { path: 'income', name: 'IncomeStatistics', meta: { title: 'IncomeStatistics' }, component: () => import('@/views/dashboard/IncomeStatistics') },
+      { path: 'user', name: 'UserStatistics', meta: { title: 'UserStatistics' }, component: () => import('@/views/dashboard/UserStatistics') }
+    ]
   },
   {
     path: '/guide',

@@ -5,10 +5,10 @@
         <img :src="img" alt="">
       </div>
       <div class="options">
-        <div class="title">Oops! 404!!!</div>
+        <div class="title">Oops! {{code}}!!!</div>
         <div class="subtitle">页面调皮了，不知道跑哪儿去了......</div>
         <div>
-          <el-button type="text" @click.prevent="$router.push('/')">HOME</el-button>
+          <el-button type="text" @click.prevent="$router.push({ path: '/' })">HOME</el-button>
           <el-button type="text" @click.prevent="$router.go(-1)">BACK</el-button>
         </div>
       </div>
@@ -21,12 +21,16 @@ export default {
   name: 'error404',
   data() {
     return {
-      img: './static/errors/404-'
+      code: 404,
+      img: ''
     }
   },
   created() {
+    // const code = this.$route.params.code
+    // if (code && typeof code === 'number') this.code = code
+    // else this.$router.push({ path: '/404' })
     const random = Math.floor(Math.random() * 4 + 1)
-    this.img += random + '.gif'
+    this.img += './static/errors/' + this.code + '-' + random + '.gif'
   }
 }
 </script>

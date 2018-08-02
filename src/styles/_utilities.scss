@@ -17,6 +17,7 @@
 //
 // Text Colors
 
+.text-primary { color: $theme-color; }
 .text-muted { color: $gray-500; }
 .text-red { color: $color-red; }
 
@@ -26,6 +27,7 @@
 
 .text-left { text-align: left }
 .text-right { text-align: right }
+.text-center { text-align: center }
 
 
 //

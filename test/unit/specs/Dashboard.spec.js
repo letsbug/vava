@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Dashboard from '@/views/dashboard/Dashboard'
+import Dashboard from '@/views/dashboard/AccessStatistics'
 
 describe('Dashboard.vue', () => {
   it('should render correct contents', () => {
