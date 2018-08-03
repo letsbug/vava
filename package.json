@@ -5,7 +5,7 @@
   "author": "BugKiller <724939995@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --host 127.0.0.1 --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --host 192.168.1.190 --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
