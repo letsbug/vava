@@ -1,5 +1,7 @@
 <template>
-  <div class="container-body dashboard"></div>
+  <div class="container-body no-bg dashboard">
+    Income Statistics
+  </div>
 </template>
 
 <script>

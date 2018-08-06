@@ -25,17 +25,17 @@
       </el-form-item>
     </el-form>
 
-    <!--<copyright></copyright>-->
+    <copyright></copyright>
   </div>
 </template>
 
 <script>
-// import { Copyright } from '@/components'
+import Copyright from '@/components/Copyright/Index'
 import { isvalidUsername } from '@/utilities/Validate'
 
 export default {
   name: 'LoginIndex',
-  // components: { Copyright },
+  components: { Copyright },
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!isvalidUsername(value)) {

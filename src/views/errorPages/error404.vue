@@ -13,12 +13,16 @@
         </div>
       </div>
     </div>
+
+    <copyright class="text-muted"></copyright>
   </div>
 </template>
 
 <script>
+import Copyright from '@/components/Copyright/Index'
 export default {
   name: 'error404',
+  components: { Copyright },
   data() {
     return {
       code: 404,
@@ -34,3 +38,20 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  @import "../../styles/variables";
+  .app-errs-container {
+    position: relative;
+
+    .copyright {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+      margin-bottom: $spacer-y;
+      white-space: nowrap;
+    }
+  }
+</style>
