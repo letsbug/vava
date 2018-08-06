@@ -1,7 +1,7 @@
 <template>
   <div class="container-body no-bg app-home text-center">
     <div class="content">
-      <img class="logo" src="/static/avatar.png" alt="">
+      <img class="logo" :src="url_logo" alt="">
       <h1>Welcome to use vue admin</h1>
       <h3 class="text-muted">build with vue.js & element ui</h3>
       <p><small>>></small> <a href="https://github.com/gzb219/Vue-admin-frame" target="_blank">github</a> <small><<</small></p>
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-  name: "AppHome"
+  name: "AppHome",
+  data() {
+    return {
+      url_logo: require('@/assets/images/logo.png')
+    }
+  }
 }
 </script>
 

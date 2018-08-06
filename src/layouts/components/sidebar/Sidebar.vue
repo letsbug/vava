@@ -15,7 +15,7 @@ export default {
   name: 'Sidebar',
   data() {
     return {
-      logo: require('@/assets/logo.png')
+      logo: require('@/assets/images/logo.png')
     }
   },
   computed: {
