@@ -12,7 +12,7 @@ const userMap = {
     token: 'admin',
     code: '23429jahfaskjhdlf',
     introduction: 'I\'m super manager',
-    avatar: './static/avatar.png',
+    avatar: require('@/assets/images/avatar.png'),
     username: 'Super Admin',
     status: 1
   },
