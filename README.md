@@ -1,5 +1,5 @@
 <p align="center"><img src="https://gzb219.github.io/Vue-admin-frame/static/images/logo.png"/></p>
-<p align="center"><h1>Vue Admin Frame</h1></p>
+<h1 align="center">Vue Admin Frame</h1>
 
 [![Build Status](https://travis-ci.org/gzb219/Vue-admin-frame.svg?branch=master)](https://travis-ci.org/gzb219/Vue-admin-frame)
 
