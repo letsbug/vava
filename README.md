@@ -1,4 +1,4 @@
-# vue-admin-frame
+# vue-admin-frame [![Build Status](https://travis-ci.org/gzb219/Vue-admin-frame.svg?branch=master)](https://travis-ci.org/gzb219/Vue-admin-frame)
 
 > Build a Vue admin framework for myself.
 
