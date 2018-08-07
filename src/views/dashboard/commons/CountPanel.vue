@@ -14,7 +14,6 @@ export default {
   name: "CountPanel",
   props: {
     id: { type: String, default: 'totalChart' },
-    sname: { type: String, default: '', required: false },
     stype: { type: String, default: 'line', required: false },
     xAxis: { type: Object, default: {}, required: true },
     yAxis: { type: Object, default: {}, required: true },
@@ -34,10 +33,10 @@ export default {
       this.chart = echarts.init(document.getElementById(this.id), 'infographic')
       const option = {
         title: null,
-        yAxis: this.yAxis,
-        xAxis: this.xAxis,
+        yAxis: Object.assign(this.yAxis, { show: false }),
+        xAxis: Object.assign(this.xAxis, { show: false }),
         series: [{
-          name: this.sname,
+          name: null,
           type: this.stype,
           data: this.datas
         }]

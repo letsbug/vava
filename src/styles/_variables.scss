@@ -12,7 +12,7 @@
 $scrollbar-width:             6px;
 $scrollbar-bg:                $gray-300;
 $scrollbar-thumb-bg:          $gray-450;
-$scrollbar-thumb-bg-hover:    $cyan;
+$scrollbar-thumb-bg-hover:    $color-cyan;
 $scrollbar-thumb-radius-size: 3px;
 
 
@@ -47,7 +47,8 @@ $sidebar-width-expanded:      210px!default;
 $sidebar-width-mobile:        $sidebar-width-expanded!default;
 $sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
 
-$sidebar-bg:                  $color-blue-dark;
+$sidebar-bg-color:            $color-indigo-dark;
+$sidebar-bg-image:            linear-gradient($color-indigo-dark , $color-indigo-darken);
 $sidebar-backdrop-bg:         rgba(0, 0, 0, .5);
 
 // Sidebar brand
@@ -122,9 +123,3 @@ $foobar-padding-y:            $spacer-y!default;
 
 $foobar-height:               50px!default;
 $foobar-line-height:          $foobar-height - $foobar-padding-y * 2 - $foobar-border-width!default;
-
-
-//
-//  About themes
-
-$sidebar-dark-bg:             $color-blue-dark!default;

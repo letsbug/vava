@@ -1,6 +1,7 @@
 .app-sidebar {
   height: 100%;
-  background-color: $sidebar-bg;
+  background-color: $sidebar-bg-color;
+  background-image: $sidebar-bg-image;
   color: $white;
   z-index: $zindex-sidebar;
   padding-top: $sidebar-brand-height;
@@ -23,6 +24,7 @@
     margin-right: $sidebar-brand-padding-x;
     vertical-align: top;
   }
+
   .title {
     display: inline-block;
     vertical-align: middle;
@@ -37,7 +39,7 @@
   list-style: none;
   overflow-x: hidden;
   overflow-y: scroll;
-  box-shadow: $shadow-sm-horizontal;
+  //box-shadow: $shadow-sm-horizontal;
 
   -webkit-overflow-scrolling: touch;    /* Solve the problem of slow scrolling on IOS devices */
   @include IE-scroll-bar-fixed();
@@ -102,7 +104,7 @@
 
     .menu-subs {
       border-radius: 3px;
-      background-color: darken($sidebar-bg, 2%);
+      background-color: $sidebar-bg-color;
 
       .subs-item {
         height: $sidebar-menu-item-height;

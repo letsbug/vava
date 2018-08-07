@@ -1,10 +1,10 @@
 //
 // Override element-ui primary color.
 
-@import "variables";
+@import "../styles/variables";
 
 $--color-primary: $theme-color;
 
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
-@import "~element-ui/packages/theme-chalk/src/index";
+@import "../../node_modules/element-ui/packages/theme-chalk/src/index";

@@ -1,10 +1,11 @@
 @import "../variables";
 
-$login-form-padding:  $spacer-y;
-$login-form-width:    380 + $login-form-padding * 2;
+$login-form-padding:      $spacer-x;
+$login-form-width:        380 + $login-form-padding * 2;
+$login-form-logo-height:  96px;
 
 .login-container {
-  background-color: $color-blue-dark;
+  background-color: $sidebar-bg-color;
   height: 100%;
   color: $gray-200;
   display: flex;
@@ -20,6 +21,13 @@ $login-form-width:    380 + $login-form-padding * 2;
       margin-top: 0;
       margin-bottom: $spacer-y * 4;
       text-align: center;
+      height: $login-form-logo-height;
+      line-height: $login-form-logo-height;
+
+      > img {
+        width: $login-form-logo-height;
+        height: $login-form-logo-height;
+      }
     }
 
     .el-input__prefix, .el-input__suffix {

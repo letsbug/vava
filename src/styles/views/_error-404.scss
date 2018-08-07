@@ -19,7 +19,7 @@
   .title {
     font-size: 32px;
     margin-bottom: $spacer-y;
-    color: $color-blue-light;
+    color: $color-indigo;
   }
 
   .subtitle {
@@ -37,11 +37,11 @@
   }
 
   .el-button--text {
-    color: $color-blue-light;
+    color: $color-indigo;
     font-weight: bold;
 
     &:hover {
-      color: lighten($color-blue-light, 15%);
+      color: lighten($color-indigo, 15%);
     }
   }
 }

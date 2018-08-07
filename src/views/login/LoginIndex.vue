@@ -1,7 +1,9 @@
 <template>
   <div class="login-container">
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm">
-      <h1 class="form-title">Login Form</h1>
+      <h1 class="form-title">
+        <img :src="logo" alt="Vue Admin Frame">
+      </h1>
       <el-form-item prop="username">
         <el-input size="large" name="username" type="text" v-model="loginForm.username" autoComplete="on"
                   placeholder="username">
@@ -21,7 +23,7 @@
         <router-link class="forget-link float-r" to="">忘记密码?</router-link>
       </el-form-item>
       <el-form-item>
-        <el-button size="large" type="success" class="btn-login" :loading="loading" @click.native.prevent="handleLogin">登 录</el-button>
+        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.native.prevent="handleLogin">登 录</el-button>
       </el-form-item>
     </el-form>
 
@@ -48,6 +50,7 @@ export default {
       } else callback()
     }
     return {
+      logo: require('@/assets/images/logo.png'),
       loginForm: {
         username: 'admin',
         password: '1111111111',
