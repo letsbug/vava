@@ -2,3 +2,12 @@
 
 @import "message-box";
 @import "pagination";
+
+
+//
+// Others styles about element ui
+
+// drop-down poppers
+.el-popper[x-placement^=bottom] {
+  margin-top: 0!important;
+}

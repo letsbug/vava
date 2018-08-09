@@ -8,8 +8,7 @@ html, body, #app {
 
 html {
   font-size: $font-size-base;
-  //font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif;;
+  font-family: $font-family-default;
   color: $gray-800;
 }
 
@@ -21,12 +20,4 @@ hr {
   border: 0 none;
   height: 1px;
   background-color: $gray-400;
-}
-
-//
-//
-// reset element-ui some styles
-
-.el-popper[x-placement^=bottom] {
-  margin-top: 0!important;
 }

@@ -4,7 +4,7 @@
       <img class="logo" :src="url_logo" alt="">
       <h1>Welcome to use vue admin</h1>
       <h3 class="text-muted">build with vue.js & element ui</h3>
-      <p><small>>></small> <a href="https://github.com/gzb219/Vue-admin-frame" target="_blank">github</a> <small><<</small></p>
+      <p><small>>></small> <a href="https://github.com/gzb219/vue-admin-frame" target="_blank">github</a> <small><<</small></p>
       <br>
       <br>
     </div>
