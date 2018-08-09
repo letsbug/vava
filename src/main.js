@@ -10,11 +10,10 @@ import '@/style-element-reboot/element-reboots.scss'
 import 'element-ui/lib/theme-chalk/display.css'
 import '@/styles/core.admin.frame.scss'
 
+import App from './App'
+import store from '@/store'
 import router from '@/router'
 import '@/router/helper'
-import store from '@/store'
-
-import App from './App'
 
 // Data simulation
 import '@/simulate'
@@ -22,7 +21,15 @@ import '@/simulate'
 // Global filters
 import * as filters from '@/utilities/Filters'
 
+// 百度统计
+import hmt from 'vue-ba'
+const hmt_options = {
+  siteId: '58f3231698574283202b3c60b6ec3510',
+  debug: process.env.NODE_ENV !== 'production'
+}
+
 Vue.use(Element, { size: 'small' })
+Vue.use(hmt, hmt_options)
 
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
