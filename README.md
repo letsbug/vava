@@ -1,9 +1,9 @@
-<p align="center"><img src="https://gzb219.github.io/vue-admin-frame/static/images/logo.png"/></p>
-<h1 align="center">Vue Admin Frame</h1>
+<p align="center"><img src="https://gzb219.github.io/vava/static/images/logo.png"/></p>
+<h1 align="center">VAVA - vue admin frame</h1>
 
-[![Build Status](https://travis-ci.org/gzb219/vue-admin-frame.svg?branch=master)](https://travis-ci.org/gzb219/vue-admin-frame)
+[![Build Status](https://travis-ci.org/letitbug/vava.svg?branch=master)](https://travis-ci.org/letitbug/vava)
 
-> Build a Vue admin framework for myself.
+> A magical management-side framework built on vue.
 
 ## Build Setup
 
