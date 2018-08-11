@@ -1,7 +1,7 @@
-<p align="center"><img src="https://github.com/letitbug/vava/blob/master/static/images/logo.png"/></p>
+<p align="center"><img src="https://github.com/letsbug/vava/blob/master/static/images/logo.png"/></p>
 <h1 align="center">VAVA - vue admin frame</h1>
 
-[![Build Status](https://travis-ci.org/letitbug/vava.svg?branch=master)](https://travis-ci.org/letitbug/vava)
+[![Build Status](https://www.travis-ci.org/letsbug/vava.svg?branch=master)](https://www.travis-ci.org/letsbug/vava)
 
 > A magical management-side framework built on vue.
 
