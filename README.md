@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/letsbug/vava/blob/master/static/images/logo.png"/></p>
+<p align="center"><img src="./static/images/logo.png"/></p>
 <h1 align="center">VAVA - vue admin frame</h1>
 
 [![Build Status](https://www.travis-ci.org/letsbug/vava.svg?branch=master)](https://www.travis-ci.org/letsbug/vava)
