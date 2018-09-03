@@ -24,7 +24,7 @@ import * as filters from '@/utilities/Filters'
 // 百度统计
 import hmt from 'vue-ba'
 const hmt_options = {
-  siteId: '58f3231698574283202b3c60b6ec3510',
+  siteId: '9e73d1f3aef423e62a00c7575a9c0f08',
   debug: process.env.NODE_ENV !== 'production'
 }
 
