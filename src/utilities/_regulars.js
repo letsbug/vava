@@ -1,4 +1,12 @@
 /**
+ * 空字符串（含空格）校验
+ * @param v
+ */
+const empty = (v) => {
+  return new RegExp(/^[ ]*$/).test(v)
+}
+
+/**
  * 数字字符串校验（只允许数字）
  * @param v
  * @returns {*}
@@ -82,13 +90,34 @@ const IDCard = v => {
 /**
  * 常规URL校验
  * @param v
- * @returns {*}
+ * @returns {boolean}
  */
 const url = v => {
   return new RegExp(/[a-zA-z]+:\/\/[^\s]*/).test(v)
 }
 
+/**
+ * 地区编码校验
+ * @param v
+ * @returns {boolean}
+ */
+const addrcode = v => {
+  const addrs = { 11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内蒙古', 21: '辽宁', 22: '吉林', 23: '黑龙江', 31: '上海', 32: '江苏', 33: '浙江', 34: '安徽', 35: '福建', 36: '江西', 37: '山东', 41: '河南', 42: '湖北', 43: '湖南', 44: '广东', 45: '广西', 46: '海南', 50: '重庆', 51: '四川', 52: '贵州', 53: '云南', 54: '西藏', 61: '陕西', 62: '甘肃', 63: '青海', 64: '宁夏', 65: '新疆', 71: '台湾', 81: '香港', 82: '澳门', 91: '国外' }
+  const check = new RegExp(/^[1-9]\d{5}$/).test(v)
+  return check && addrs[parseInt(v.substring(0, 2))]
+}
+
+/**
+ * 组织机构代码校验
+ * @param v
+ * @returns {boolean}
+ */
+const orgcode = v => {
+  return new RegExp(/^([0-9A-Z]){8}([0-9]|X)$/).test(v)
+}
+
 export default {
+  empty,
   number,
   english,
   chinese,
@@ -98,5 +127,7 @@ export default {
   postcode,
   captcha,
   IDCard,
-  url
+  url,
+  addrcode,
+  orgcode
 }
