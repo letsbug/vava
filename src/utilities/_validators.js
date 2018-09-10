@@ -115,12 +115,40 @@ const bankcard = (r, v, c) => {
  * @param v
  * @param c
  */
-const orgcode = (r, v, c) => {
+const orgCode = (r, v, c) => {
   console.log(r, v)
   if (Regulars.empty(v)) c(new Error('请输入组织机构代码.'))
   else if (v.length !== 9) c(new Error('组织机构代码由9位字符组成，请重新填写.'))
-  else if (!new RegExp(/^[0-9A-Z]+$/).test(v)) c(new Error('组织机构代码由大写字母和数字组成，请重新填写.'))
-  else if (!new RegExp(/^[0-9X]+$/).test(v)) c(new Error('组织机构代码最后一位只可为数字或大写拉丁字母“X”'))
+  else if (Regulars.orgCode(v)) c(new Error('组织机构代码由大写字母和数字组成，请重新填写.'))
+  else c()
+}
+
+/**
+ * 纳税人识别号校验
+ * @param r
+ * @param v
+ * @param c
+ */
+const taxpayerCode = (r, v, c) => {
+  console.log(r, v)
+  if (Regulars.empty(v)) c(new Error('请输入纳税人识别号.'))
+  else if (v.length !== 9) c(new Error('纳税人识别号由15位字符组成，请重新填写.'))
+  else if (Regulars.taxpayerCode(v)) c(new Error('纳税人识别号由大写字母和数字组成，请重新填写.'))
+  else c()
+}
+
+/**
+ * 统一社会信用代码
+ * @param r
+ * @param v
+ * @param c
+ */
+const unifiedSocialCreditCode = (r, v, c) => {
+  console.log(r, v)
+  if (Regulars.empty(v)) c(new Error('请输入统一社会信用代码.'))
+  else if (v.length !== 9) c(new Error('统一社会信用代码由18位字符组成，请重新填写.'))
+  else if (Regulars.unifiedSocialCreditCode(v)) c(new Error('统一社会信用代码不符合规范，请重新填写.'))
+  else c()
 }
 
 export default {
@@ -132,5 +160,7 @@ export default {
   name,
   postcode,
   bankcard,
-  orgcode
+  orgCode,
+  taxpayerCode,
+  unifiedSocialCreditCode
 }
