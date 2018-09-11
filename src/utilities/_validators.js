@@ -67,7 +67,6 @@ const email = (r, v, c) => {
  * @param c
  */
 const IDCard = (r, v, c) => {
-  console.log('Valid IDCard: ', v, v.length)
   if (!v || Regulars.empty(v)) c(new Error('请输入身份证号码！'))
   else if (v.length !== 15 && v.length !== 18) c(new Error('请输入正确的15或18位身份证号码！'))
   else if (!Regulars.IDCard(v)) c(new Error('请输入正确的身份证号码！'))

@@ -157,7 +157,7 @@ const taxpayerCode = v => {
  */
 const unifiedSocialCreditCode = v => {
   const valid = new RegExp(/^[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/g).test(v)
-  // console.log('Valid Unified Social Credit Code: ', valid)
+  console.log('Valid Unified Social Credit Code: ', valid)
   return valid && orgCode(v.substr(8, 9))
 }
 
