@@ -2,7 +2,7 @@
  * 空字符串（含空格）校验
  * @param v
  */
-const empty = (v) => {
+const empty = v => {
   return new RegExp(/^[ ]*$/).test(v)
 }
 
@@ -75,7 +75,7 @@ const postcode = v => {
  * @returns {boolean}
  */
 const captcha = v => {
-  return new RegExp(/^.{4}$/).test(v)
+  return new RegExp(/^(\d|[A-Z]){4}$/).test(v)
 }
 
 /**
@@ -93,7 +93,7 @@ const IDCard = v => {
  * @returns {boolean}
  */
 const url = v => {
-  return new RegExp(/[a-zA-z]+:\/\/[^\s]*/).test(v)
+  return new RegExp(/^(https?|ftp):\/\/[^\s]*/).test(v)
 }
 
 /**
@@ -114,7 +114,11 @@ const addressCode = v => {
  * @returns {boolean}
  */
 const orgCode = v => {
-  if (!new RegExp(/^([0-9A-Z]){8}-[0-9]|X$/).test(v)) return false
+  // console.log('Valid Organization Code: ', v)
+  if (!new RegExp(/^([0-9A-Z]){8}[0-9|X]$/).test(v)) {
+    // console.log('Valid org step1, Result: ', new RegExp(/^([0-9A-Z]){8}[0-9|X]$/).test(v))
+    return false
+  }
 
   const ws = [3, 7, 9, 10, 5, 8, 4, 2]
   const str = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -123,9 +127,11 @@ const orgCode = v => {
     sum += str.indexOf(v.charAt(i)) * ws[i]
   }
   let c9 = 11 - (sum % 11)
+  // console.log('Valid org step2, c9: ', c9)
   c9 = (c9 === 10) ? 'X' : (c9 === 11) ? '0' : c9 + ''
 
-  return c9 === v.charAt(9)
+  // console.log('Valid Organization Code: ', c9 === v.charAt(8))
+  return c9 === v.charAt(8)
 }
 
 /**
@@ -135,7 +141,6 @@ const orgCode = v => {
  * @returns {boolean}
  */
 const taxpayerCode = v => {
-  console.log(v)
   return addressCode(v.substr(0, 6)) && orgCode(v.substr(6, 9))
 }
 
@@ -151,8 +156,8 @@ const taxpayerCode = v => {
  * @returns {boolean}
  */
 const unifiedSocialCreditCode = v => {
-  console.log(v)
   const valid = new RegExp(/^[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/g).test(v)
+  // console.log('Valid Unified Social Credit Code: ', valid)
   return valid && orgCode(v.substr(8, 9))
 }
 
