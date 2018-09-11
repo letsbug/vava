@@ -1,5 +1,5 @@
 /**
- * 空字符串（含空格）校验
+ * 空字符串校验（含空格）
  * @param v
  */
 const empty = v => {
@@ -16,12 +16,30 @@ const number = v => {
 }
 
 /**
- * 英文字母校验（只允许英文字母）
+ * 大写&小写英文字母校验（只允许英文字母）
  * @param v
  * @returns {*}
  */
-const english = v => {
+const alphabets = v => {
   return new RegExp(/^[a-zA-Z]*$/).test(v)
+}
+
+/**
+ * 小写因为字母校验（只允许小写英文字母）
+ * @param v
+ * @returns {boolean}
+ */
+const lowercase = v => {
+  return new RegExp(/^[a-z]+$/).test(v)
+}
+
+/**
+ * 大写因为字母校验（只允许大写英文字母）
+ * @param v
+ * @returns {boolean}
+ */
+const uppercase = v => {
+  return new RegExp(/^[A-Z]+$/).test(v)
 }
 
 /**
@@ -34,7 +52,7 @@ const chinese = v => {
 }
 
 /**
- * 货币校验
+ * 货币格式校验
  * @param v
  * @returns {boolean}
  */
@@ -79,7 +97,7 @@ const postcode = v => {
 }
 
 /**
- * 手机验证码校验
+ * 手机验证码校验（仅允许4位数字或大写英文字母）
  * @param v
  * @returns {boolean}
  */
@@ -89,20 +107,22 @@ const captcha = v => {
 
 /**
  * 身份证正确性校验
+ * 身份证由15位数字或17位数字+1位数字或大写英文字母X组成
  * @param v
  * @returns {boolean}
  */
 const IDCard = v => {
-  return new RegExp(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/).test(v)
+  return new RegExp(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X)$)/).test(v)
 }
 
 /**
- * 常规URL校验
+ * URL合法性校验
  * @param v
  * @returns {boolean}
  */
 const url = v => {
-  return new RegExp(/^(https?|ftp):\/\/[^\s]*/).test(v)
+  const reg = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
+  return new RegExp(reg).test(v)
 }
 
 /**
@@ -173,7 +193,9 @@ const unifiedSocialCreditCode = v => {
 export default {
   empty,
   number,
-  english,
+  alphabets,
+  lowercase,
+  uppercase,
   chinese,
   currency,
   mobile,

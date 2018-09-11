@@ -20,7 +20,7 @@ function padLeftZero(str) {
 }
 
 /**
- * Formate Date & Time formate
+ * Format Date & Time format
  * @param date
  * @param fmt   like 'yyyy-MM-dd hh:mm:ss'
  * @returns {*}
@@ -59,3 +59,4 @@ export const firstNameBook = [
 ]
 
 export { default as Regulars } from './_regulars'
+export { default as Validators } from './_validators'
