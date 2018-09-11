@@ -34,6 +34,15 @@ const chinese = v => {
 }
 
 /**
+ * 货币校验
+ * @param v
+ * @returns {boolean}
+ */
+const currency = v => {
+  return new RegExp(/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0)$)|(^[0-9]\.[0-9]([0-9])?$)/).test(v)
+}
+
+/**
  * 手机号码校验
  * @param v
  * @returns {boolean}
@@ -166,6 +175,7 @@ export default {
   number,
   english,
   chinese,
+  currency,
   mobile,
   phone,
   email,

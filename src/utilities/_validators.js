@@ -11,6 +11,18 @@ const required = (r, v, c) => {
 }
 
 /**
+ * 货币输入校验
+ * @param r
+ * @param v
+ * @param c
+ */
+const currency = (r, v, c) => {
+  if (!v || Regulars.empty(v)) c(new Error('必填项，请填写！'))
+  else if (!Regulars.currency(v)) c(new Error('请填写一个正确的人民币金额！'))
+  else c()
+}
+
+/**
  * 手机号校验
  * @param r
  * @param v
@@ -152,6 +164,7 @@ const unifiedSocialCreditCode = (r, v, c) => {
 
 export default {
   required,
+  currency,
   mobile,
   phone,
   captcha,

@@ -57,3 +57,5 @@ export const firstNameBook = [
   '戚', '谢', '邹', '喻', '柏', '水', '窦', '章',
   '云', '苏', '潘', '葛', '奚', '范', '彭', '郎'
 ]
+
+export { default as Regulars } from './_regulars'
