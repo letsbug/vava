@@ -8,15 +8,33 @@ import Cookies from 'js-cookie'
 
 const TokenKey = 'Admin-Token'
 
-export function getToken() {
+/**
+ * Returns token value
+ * @returns {string}
+ */
+const get = () => {
   return Cookies.get(TokenKey)
 }
 
-export function setToken(token, expires) {
-  return expires ? Cookies.set(TokenKey, token, { expires: expires })
-    : Cookies.set(TokenKey, token)
+/**
+ * Set token
+ * @param token   token value
+ * @param expires token expires
+ * @returns {void}
+ */
+const set = (token, expires) => {
+  if (expires) Cookies.set(TokenKey, token, { expires })
+  else Cookies.set(TokenKey, token)
 }
 
-export function removeToken() {
-  return Cookies.remove(TokenKey)
+/**
+ * Remove token
+ * @returns {void}
+ */
+const remove = () => {
+  Cookies.remove(TokenKey)
+}
+
+export default {
+  get, set, remove
 }

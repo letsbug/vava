@@ -5,13 +5,13 @@
  */
 
 import { Login, Logout, Information } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utilities/Token'
+import Token from '@/utilities/Token'
 
 const user = {
   state: {
     code: '',
     status: '',
-    token: getToken(),
+    token: Token.get(),
     expire: 7,
     username: '',
     avatar: '',
@@ -35,7 +35,7 @@ const user = {
         // thus for different users permissions to access the routing dynamically add user information at this time should be only a token.
         // detail in 'src/router/helper.js(line 27)'
         commit('USER_SET_TOKEN', response.data.token)
-        setToken(response.data.token, userInfo.remember ? state.expire : null)
+        Token.set(response.data.token, userInfo.remember ? state.expire : null)
         resolve()
       }).catch(err => { reject(err) })
     }),
@@ -64,14 +64,14 @@ const user = {
         commit('USER_SET_AVATAR', '')
         commit('USER_SET_INTR', '')
         commit('USER_SET_ROLS', [])
-        removeToken()
+        Token.remove()
         resolve()
       }).catch(err => { reject(err) })
     }),
     // 前端登出
     user_logout_fed: ({ commit }) => new Promise(resolve => {
       commit('USER_SET_TOKEN', '')
-      removeToken()
+      Token.remove()
       resolve()
     })
   }

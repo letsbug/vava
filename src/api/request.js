@@ -7,7 +7,7 @@
 import axios from 'axios'
 import store from '@/store'
 
-import { getToken } from '@/utilities/Token'
+import Token from '@/utilities/Token'
 import { Message } from 'element-ui'
 
 const service = axios.create({ baseURL: process.env.BASE_API, timeout: 6000 })
@@ -16,7 +16,7 @@ const service = axios.create({ baseURL: process.env.BASE_API, timeout: 6000 })
 service.interceptors.request.use(
   config => {
     // Let all request carry token, ['X-Token'] is custom key.
-    if (store.getters.token) service.defaults.headers['X-Token'] = getToken()
+    if (store.getters.token) service.defaults.headers['X-Token'] = Token.get()
     return config
   }, error => Promise.reject(error)
 )

@@ -12,14 +12,14 @@ import { Message } from 'element-ui'
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
 // get token from cookie
-import { getToken } from '@/utilities/Token'
+import Token from '@/utilities/Token'
 NProgress.configure({ showSpinner: false })
 // noredirect whitelist
 const whiteList = ['/login', '/authredirect']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  if (getToken()) {
+  if (Token.get()) {
     if (to.path === '/login') {
       next({ path: '/' })
       NProgress.done()
