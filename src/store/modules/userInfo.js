@@ -5,7 +5,7 @@
  */
 
 import { Login, Logout, Information } from '@/api/login'
-import Token from '@/utilities/Token'
+import { Token } from '@/utilities'
 
 const user = {
   state: {

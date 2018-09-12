@@ -60,3 +60,4 @@ export const firstNameBook = [
 
 export { default as Regulars } from './_regulars'
 export { default as Validators } from './_validators'
+export { default as Token } from './_token'

@@ -12,7 +12,7 @@ import { Message } from 'element-ui'
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
 // get token from cookie
-import Token from '@/utilities/Token'
+import { Token } from '@/utilities'
 NProgress.configure({ showSpinner: false })
 // noredirect whitelist
 const whiteList = ['/login', '/authredirect']
