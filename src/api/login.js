@@ -4,23 +4,23 @@
  * @date: 2018-06-17 15:00
  */
 
-import request from './request'
+import { service } from './request'
 
 export function Login(username, password) {
   const data = { username, password }
-  return request({
+  return service({
     url: '/login/login', method: 'post', data
   })
 }
 
 export function Logout() {
-  return request({
+  return service({
     url: '/login/logout', method: 'post'
   })
 }
 
 export function Information(token) {
-  return request({
+  return service({
     url: 'user/info', method: 'get', params: { token }
   })
 }

@@ -1,5 +1,5 @@
 /**
- * StatusFilter (Create by ggboom)
+ * Vue extend Filters
  * @author: ggboom
  * @datetime: 2018/7/27 14:24
  */
@@ -18,7 +18,7 @@ const statusTransStyle = status => {
 /**
  * Returns the corresponding status name according to the status code
  * @param status - Status code
- * @returns {*}
+ * @returns {string}
  */
 const statusTransName = status => {
   const statusNames = ['creat', 'audit', 'published', 'defeat']
@@ -28,7 +28,7 @@ const statusTransName = status => {
 /**
  * Returns the full name after the merged
  * @param name
- * @returns {*}
+ * @returns {string}
  */
 const mergeName = name => {
   return name.first + name.last
@@ -37,7 +37,7 @@ const mergeName = name => {
 /**
  * Returns the full address after the merge
  * @param addr
- * @returns {*}
+ * @returns {string}
  */
 const mergeAddress = addr => {
   return addr.city + 'xxxx乡镇xxxx小区xxxx号xxxx栋xxxx号'

@@ -4,7 +4,7 @@
  * @datetime: 2018/7/27 12:15
  */
 
-import request from './request'
+import { service } from './request'
 
 /**
  * Returns the client list.
@@ -14,7 +14,7 @@ import request from './request'
  */
 export function clientList(current, limit, keyword) {
   const data = { current, limit, keyword }
-  return request({
+  return service({
     method: 'post', url: '/clients/list', data
   }).then(res => res.data)
 }
