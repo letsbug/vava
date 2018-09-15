@@ -1,0 +1,139 @@
+// Colors
+$color-white:         #ffffff !default;
+$color-gray-100:      #f6f7fb !default;
+$color-gray-200:      #e6edf1 !default;
+$color-gray-300:      #dee2e6 !default;
+$color-gray-400:      #ced4da !default;
+$color-gray-500:      #adb5bd !default;
+$color-gray-600:      #6c757d !default;
+$color-gray-700:      #495057 !default;
+$color-gray-800:      #343a40 !default;
+$color-gray-900:      #252834 !default;
+$color-gray-1000:     #1c1f27 !default;
+$color-black:         #000000 !default;
+
+$color-blue:          #007bff !default;
+$color-indigo:        #6610f2 !default;
+$color-purple:        #6f42c1 !default;
+$color-red:           #dc3545 !default;
+$color-pink:          #d90378 !default;
+$color-orange:        #fe613c !default;
+$color-yellow:        #ffc107 !default;
+$color-green:         #28a745 !default;
+$color-teal:          #20c997 !default;
+$color-cyan:          #4ec1fa !default;
+
+// Theme colors
+$color-theme-pink:      $color-pink !default;
+$color-theme-green:     $color-green !default;
+$color-theme-blue:      $color-cyan !default;
+
+$color-theme:           $color-theme-blue;
+$color-line:            $color-gray-200 !default;
+
+$color-text-primary:    $color-gray-800;
+$color-text-secondary:  $color-gray-600;
+$color-link:            $color-blue;
+
+$color-actives:         $color-theme;
+
+$color-overlay:         rgba($color-black, .3) !default;
+
+
+// System Fonts
+$font-family-base:    Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif !default;
+
+$font-size-h1:        32px !default;
+$font-size-h2:        28px !default;
+$font-size-h3:        22px !default;
+$font-size-h4:        18px !default;
+$font-size-h5:        16px !default;
+$font-size-h6:        14px !default;
+
+$font-size-sm:        12px !default;
+$font-size-lg:        $font-size-h4 !default;
+$font-size-base:      $font-size-h6 !default;
+
+$font-size-icons:     $font-size-h5 !default;
+
+
+// System spacers
+$spacer-base:         15px !default;
+$spacer-sm:           10px !default;
+$spacer-xs:           8px !default;
+$spacer-xxs:          5px !default;
+$spacer-lg:           20px !default;
+$spacer-xl:           25px !default;
+$spacer-xxl:          30px !default;
+
+
+// Device screen width breakpoint
+$device-sm:           576px !default;
+$device-md:           768px !default;
+$device-lg:           992px !default;
+$device-xl:           1200px !default;
+
+
+// Lines, Borders
+$border-default-width:      1px !default;
+$border-color:              $color-line !default;
+$border-color-active:       $color-theme !default;
+$border-default:            solid $border-default-width $border-color !default;
+$border-actived:            solid $border-default-width $border-color-active !default;
+
+
+// Z-index
+$z-index-sidebar:           130!default;
+$z-index-sidebar-popups:    140!default;
+$z-index-sidebar-backdrop:  120!default;
+
+$z-index-header:            100!default;
+$z-index-header-popups:     110!default;
+$z-index-tabbar:            100!default;
+$z-index-breadcrumb:        100!default;
+$z-index-footer:            100!default;
+
+$z-index-editors:           135!default;
+
+
+// Shadows
+$shadow-color-base:         rgba(0, 0, 0, .075) !default;
+
+$shadow-sm-offset:          1px!default;
+$shadow-sm-distance:        3px!default;
+$shadow-sm-size:            0!default;
+
+$shadow-base-offset:        2px!default;
+$shadow-base-distance:      5px!default;
+$shadow-base-size:          0!default;
+
+$shadow-lg-offset:          4px!default;
+$shadow-lg-distance:        8px!default;
+$shadow-lg-size:            0!default;
+
+// vertical shadows
+$shadow-sm-vr:              0 $shadow-sm-offset $shadow-sm-distance $shadow-sm-size $shadow-color-base;
+$shadow-sm-vr-inverse:      0 (-$shadow-sm-offset) $shadow-sm-distance $shadow-sm-size $shadow-color-base;
+// horizontal shadows
+$shadow-sm-hr:              $shadow-sm-offset 0 $shadow-sm-distance $shadow-sm-size $shadow-color-base;
+$shadow-sm-hr-inverse:      (-$shadow-sm-offset) 0 $shadow-sm-distance $shadow-sm-size $shadow-color-base;
+
+
+// Transitions
+$transition-duration:         .28s !default;
+$transition-timing-function:  ease-out !default;
+$transition-timing-fun-in:    ease-in !default;
+
+$transition-all:              all $transition-duration $transition-timing-function !default;
+$transition-border:           border $transition-duration $transition-timing-function !default;
+$transition-opacity:          opacity $transition-duration $transition-timing-function !default;
+$transition-visibility:       visibility $transition-duration $transition-timing-function !default;
+$transition-background:       background $transition-duration $transition-timing-function !default;
+$transition-color:            color $transition-duration $transition-timing-function !default;
+$transition-width:            width $transition-duration $transition-timing-function !default;
+$transition-height:           height $transition-duration $transition-timing-function !default;
+$transition-max-height:       max-height $transition-duration $transition-timing-fun-in !default;
+$transition-margin:           margin $transition-duration $transition-timing-function !default;
+$transition-padding:          padding $transition-duration $transition-timing-function !default;
+$transition-position-left:    left $transition-duration $transition-timing-function !default;
+$transition-transform:        transform $transition-duration $transition-timing-function !default;

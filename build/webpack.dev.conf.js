@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const meta = require('./meta')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -57,7 +58,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true,
       favicon: path.resolve(__dirname, '../favicon.ico'),
-      title: 'Vue-admin-frame'
+      title: 'Vava',
+      meta: meta
     }),
     // copy custom static assets
     new CopyWebpackPlugin([

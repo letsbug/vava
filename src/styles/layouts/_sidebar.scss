@@ -1,121 +1,97 @@
-.app-sidebar {
+.va-sidebar {
   height: 100%;
-  background-color: $sidebar-bg-color;
-  background-image: $sidebar-bg-image;
-  color: $white;
-  z-index: $zindex-sidebar;
   padding-top: $sidebar-brand-height;
+  background-color: $sidebar-bg-color;
+
+  position: absolute;
+  z-index: $z-index-sidebar;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  transition: $transition-width, $transition-padding, $transition-transform;
+
+  &, & a {
+    color: $sidebar-color;
+    text-decoration: none;
+  }
 }
 
-.app-brand {
-  padding: $sidebar-brand-padding-y $sidebar-brand-padding-x;
+.va-side-backdrop {
+  background-color: $color-overlay;
+
+  position: absolute;
+  z-index: $z-index-sidebar-backdrop;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  transition: $transition-opacity;
+}
+
+.va-side-brand {
   height: $sidebar-brand-height;
   line-height: $sidebar-brand-line-height;
-  white-space: nowrap;
+  padding: $sidebar-brand-padding-y $sidebar-brand-padding-x;
+  font-size: $sidebar-brand-font-size;
+  color: $sidebar-color-brand;
+  text-align: center;
   overflow: hidden;
+  white-space: nowrap;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
+  transition: $transition-padding, $transition-height;
 
-  .logo {
-    width: $sidebar-brand-line-height;
-    height: $sidebar-brand-line-height;
-    margin-right: $sidebar-brand-padding-x;
-    vertical-align: top;
-  }
-
-  .title {
+  .brand-name {
     display: inline-block;
-    vertical-align: middle;
-    font-size: $font-size-xl;
+    vertical-align: top;
+    overflow: hidden;
+    text-transform: uppercase;
+    font-weight: 300;
+
+    > strong {
+      font-weight: 500;
+    }
   }
 }
 
-.sidebar-menu {
+.va-side-main {
   height: 100%;
-  padding: 0 0 $sidebar-menu-offset-padding 0;
-  margin: 0;
-  list-style: none;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  //box-shadow: $shadow-sm-horizontal;
+  padding-bottom: $sidebar-nav-link-height + $border-default-width;
+  position: relative;
+}
 
-  -webkit-overflow-scrolling: touch;    /* Solve the problem of slow scrolling on IOS devices */
-  @include IE-scroll-bar-fixed();
-
-  a {
-    display: block;
-    color: $gray-400;
-    white-space: nowrap;
-    text-decoration: none;
-
-    &:hover {
-      color: $white;
-    }
-
-    &.active {
-      color: $theme-color;
-    }
+@media screen and (min-width: $device-md) {
+  .va-side-backdrop {
+    display: none;
   }
 
-  .menu-item {
-    position: relative;
+  .va-app-wrapper {
 
-    .item-link {
-      border-left: $sidebar-menu-item-border-default;
-      border-right: $sidebar-menu-item-border-default;
-      height: $sidebar-menu-item-height;
-      line-height: $sidebar-menu-item-line-height;
-      padding: $sidebar-menu-item-padding-y 0 $sidebar-menu-item-padding-y $sidebar-menu-item-padding-l;
-      font-size: $font-size-xl;
-      cursor: pointer;
-      position: relative;
-      transition: $transition-border;
+    &.sidebar-collapse {
+      .va-side-brand .subname { display: none; }
 
-      &:hover {
-        border-left: $sidebar-menu-item-border-hover;
-      }
-
-      .icon-svg {
-        position: absolute;
-        top: 50%;
-        margin-top: -$font-size-xl/2;
-        left: $spacer-x + $sidebar-menu-item-border-w;
-      }
-
-      .el-icon {
-        position: absolute;
-        top: 50%;
-        margin-top: -$font-size-xl*0.8/2;
-        right: $spacer-x;
-        font-size: 0.9em;
-        transform: rotate(0);
-        transition: $transition-default;
-        transition-duration: 0.18s;
-      }
-
-      cite {
-        display: none;
-        font-style: normal;
-        font-size: 1rem;
+      .va-side-nav {
+        .item-name, .expander-icon { display: none; }
       }
     }
+  }
+}
 
-    .menu-subs {
-      border-radius: 3px;
-      background-color: $sidebar-bg-color;
 
-      .subs-item {
-        height: $sidebar-menu-item-height;
-        line-height: $sidebar-sub-item-line-height;
-        padding: $sidebar-sub-item-padding-y $sidebar-sub-item-padding-x;
-        font-size: 1rem;
+@media screen and (max-width: $device-md) {
+  .va-app-wrapper {
+    &.sidebar-expanded .va-side-backdrop {
+      visibility: visible;
+      opacity: 1;
+    }
 
-        &:hover {
-          background-color: rgba(0, 0, 0, .3);
-        }
-      }
+    &.sidebar-collapse .va-side-backdrop {
+      visibility: hidden;
+      opacity: 0;
     }
   }
 }

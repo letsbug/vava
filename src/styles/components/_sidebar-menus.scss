@@ -1,0 +1,77 @@
+.va-side-nav {
+  font-size: $sidebar-nav-icon-size;
+  transition: $transition-background;
+
+  .va-icon {
+    vertical-align: -0.2em;
+    margin-right: 5px;
+  }
+
+  .item-name {
+    text-transform: capitalize;
+    font-size: 1rem;
+  }
+
+  .expander-icon {
+    font-size: 12px;
+    position: absolute;
+    right: $sidebar-nav-link-padding-x;
+    top: ($sidebar-nav-link-height - 8) / 2;
+
+    transition: $transition-transform;
+  }
+
+  .nav-title, .nav-item {
+    display: block;
+    height: $sidebar-nav-link-height;
+    line-height: $sidebar-nav-link-line-height;
+    padding: 0 $sidebar-nav-link-padding-x;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    transition: $transition-color;
+
+    &.active {
+      color: $sidebar-color-active;
+      cursor: default;
+    }
+
+    &:not(.active):hover {
+      color: $sidebar-color-focus;
+    }
+  }
+
+  .nav-dropdown {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+
+    transition: $transition-height;
+  }
+
+  &.expanded {
+    background-color: $sidebar-nav-expanded-bg;
+
+    .expander-icon {
+      transform: rotate(90deg);
+    }
+
+    .nav-dropdown {
+      @for $i from 1 through 10 {
+        &.child-count-#{$i} {
+          height: $sidebar-nav-link-height * $i;
+        }
+      }
+    }
+  }
+
+  &.fixed-bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}

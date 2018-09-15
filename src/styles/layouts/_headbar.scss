@@ -1,0 +1,44 @@
+.va-head-bar {
+  width: 100%;
+  height: $head-height;
+  line-height: $head-line-height;
+  background-color: $head-bg-color;
+  border-bottom: $head-border;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-header;
+}
+
+.va-head-nav {
+  display: inline-block;
+  height: $head-nav-height;
+  line-height: $head-nav-line-height;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .nav-left {
+    float: left;
+  }
+
+  .nav-right {
+    float: right;
+  }
+
+  .va-nav-item {
+    display: inline-block;
+    vertical-align: top;
+    height: $head-nav-height;
+    line-height: $head-nav-line-height;
+    padding: $head-nav-item-padding;
+    border-top: $head-nav-item-border;
+    font-size: $head-nav-font-size;
+    cursor: pointer;
+
+    &:hover {
+      border-top: $head-nav-item-border-hover;
+    }
+  }
+}

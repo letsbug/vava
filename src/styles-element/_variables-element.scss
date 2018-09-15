@@ -1,0 +1,12 @@
+@import "../styles/variable-constants";
+
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+// reboot element ui system colors.
+$--color-primary:         $color-theme;
+$--color-danger:          $color-red;
+$--color-success:         $color-green;
+$--color-warning:         $color-yellow;
+$--color-info:            $color-text-secondary;
+$--color-text-primary:    $color-text-primary;
+$--color-text-secondary:  $color-text-secondary;

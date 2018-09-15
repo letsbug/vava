@@ -1,23 +1,72 @@
-*, *:before, *:after {
+*,
+*:before,
+*::before,
+*:after,
+*::after {
   box-sizing: border-box;
 }
 
-html, body, #app {
+html,
+body,
+#app {
   height: 100%;
+  overflow: hidden;
 }
 
 html {
+  font-family: $font-family-base;
   font-size: $font-size-base;
-  font-family: $font-family-default;
-  color: $gray-800;
+  color: $color-text-primary;
 }
 
 body {
-  background-color: $gray-200;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $color-gray-100;
 }
 
-hr {
-  border: 0 none;
-  height: 1px;
-  background-color: $gray-400;
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb-bg;
+  border-radius: $scrollbar-thumb-radius-size;
+  opacity: .3;
+  transition: $transition-background;
+
+  &:hover {
+    background-color: $scrollbar-thumb-bg-hover;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+h1 { font-size: $font-size-h1 }
+h2 { font-size: $font-size-h2 }
+h3 { font-size: $font-size-h3 }
+h4 { font-size: $font-size-h4 }
+h5 { font-size: $font-size-h5 }
+h6 { font-size: $font-size-h6 }
+
+a {
+  color: $color-gray-600;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  outline:none;
+
+  &:hover {
+    color: $color-actives;
+  }
+
+  &.linker {
+    color: $color-link;
+    font-weight: 500;
+
+    &:hover {
+      color: darken($color-link, 10%);
+    }
+  }
 }

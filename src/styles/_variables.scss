@@ -1,125 +1,85 @@
-@import "variables/colors";
-@import "variables/fonts";
-@import "variables/sizes";
-@import "variables/zindex";
-@import "variables/shadows";
-@import "variables/transitions";
+//
+// System scss variables
+
+@import "variable-constants";
 
 
 //
 // About scroll bar variables
 
-$scrollbar-width:             6px;
-$scrollbar-bg:                $gray-300;
-$scrollbar-thumb-bg:          $gray-450;
-$scrollbar-thumb-bg-hover:    $color-cyan;
-$scrollbar-thumb-radius-size: 3px;
+$scrollbar-width:                 6px;
+$scrollbar-bg:                    $color-gray-300;
+$scrollbar-thumb-bg:              $color-gray-400;
+$scrollbar-thumb-bg-hover:        $color-actives;
+$scrollbar-thumb-radius-size:     3px;
 
 
 //
-// Header bar
+// About sidebar
+$sidebar-width-collapse:          60px;
+$sidebar-width-expanded:          210px;
+$sidebar-bg-color:                $color-gray-900;
+$sidebar-color:                   $color-gray-600;
+$sidebar-color-focus:             $color-white;
+$sidebar-color-active:            $color-actives;
+$sidebar-color-brand:             $color-gray-500;
 
-$header-bg:                   $white;
+$sidebar-brand-padding-x:         $spacer-sm;
+$sidebar-brand-padding-y:         $spacer-xxs;
+$sidebar-brand-height:            100px;
+$sidebar-brand-line-height:       $sidebar-brand-height - ($sidebar-brand-padding-y * 2);
+$sidebar-brand-font-size:         $font-size-h2;
 
-$header-icon-size:            22px;
+$sidebar-nav-expanded-bg:         $color-gray-1000;
+$sidebar-nav-icon-size:           $font-size-h4;
 
-$header-border-width:         $border-default-width;
-$header-links-border-width:   2px;
-$header-links-border:         solid $header-links-border-width transparent;
-$header-links-hover-border:   solid $header-links-border-width $theme-color;
+$sidebar-nav-link-height:            50px;
+$sidebar-nav-link-line-height:       $sidebar-nav-link-height;
+$sidebar-nav-link-border-left-width:  3px;
+$sidebar-nav-link-border-color:       $color-theme;
+$sidebar-nav-link-padding-x:          $spacer-lg;
 
-$header-height:               50px;
-$header-line-height:          $header-height - $header-border-width;
-$header-links-line-height:    $header-height - $header-border-width - $header-links-border-width * 2;
+//
+// About head bar
+$head-border:                   $border-default;
+$head-height:                   50px;
+$head-line-height:              $head-height - $border-default-width;
+$head-bg-color:                 $color-white;
 
-$header-padding:              0 $spacer-x;
-$header-links-padding:        0 $spacer-x $header-links-border-width;
-$header-links-user-padding:   5px;
-$header-links-img-width:      $header-links-line-height;
-$header-links-img-height:     $header-links-img-width;
+$head-nav-height:               $head-line-height;
+$head-nav-line-height:          $head-nav-height;
+$head-nav-item-padding:         0 $spacer-base;
+$head-nav-item-border-width:    2px;
+$head-nav-item-border:          solid $head-nav-item-border-width transparent;
+$head-nav-item-border-hover:    solid $head-nav-item-border-width $color-theme;
+$head-nav-font-size:            $font-size-h3;
+
 
 
 //
-// Sidebar
-
-$sidebar-width:               60px!default;
-$sidebar-width-expanded:      210px!default;
-$sidebar-width-mobile:        $sidebar-width-expanded!default;
-$sidebar-main-offset-mobile:  $sidebar-width-mobile/2!default;
-
-$sidebar-bg-color:            $color-indigo-dark;
-$sidebar-bg-image:            linear-gradient($color-indigo-dark , $color-indigo-darken);
-$sidebar-backdrop-bg:         rgba(0, 0, 0, .5);
-
-// Sidebar brand
-
-$sidebar-brand-height:        $header-height;
-$sidebar-brand-padding-x:     $spacer-x;
-$sidebar-brand-padding-y:     10px;
-$sidebar-brand-line-height:   $sidebar-brand-height - $sidebar-brand-padding-y*2;
-
-// Sidebar sub menu
-
-$sidebar-menu-item-height:            50px;
-$sidebar-menu-offset-padding:         50px;
-
-$sidebar-sub-offset:                  5px;
-$sidebar-sub-menu-padding:            $spacer-y/2 0;
-$sidebar-sub-item-padding-y:          0;
-$sidebar-sub-item-padding-x:          $spacer-x;
-$sidebar-sub-item-width:              140px;
-$sidebar-sub-item-line-height:        $sidebar-menu-item-height;
-
-// Sidebar Menus
-
-$sidebar-menu-item-border-w:          3px;
-$sidebar-menu-item-border-default:    solid $sidebar-menu-item-border-w transparent;
-$sidebar-menu-item-border-hover:      solid $sidebar-menu-item-border-w $theme-color;
-
-$sidebar-menu-item-padding-y:     $spacer-y;
-$sidebar-menu-item-padding-l:     $spacer-x * 2 +17px;
-$sidebar-menu-item-padding-r:     $sidebar-menu-item-padding-l;
-$sidebar-menu-item-line-height:   $sidebar-menu-item-height - $sidebar-menu-item-padding-y * 2;
-
-
-// Tab bar
-
-$tabbar-bg:                   $white;
-
-$tabbar-border-height:        $border-default-width;
-$tabbar-border:               $border-default;
-$tabbar-item-border:          solid 2px transparent;
-
-$tabbar-height:               40px;
-$tabbar-line-height:          $tabbar-height - $tabbar-border-height;
-
-$tabbar-padding:              0 $spacer-x;
-
-
-// Breadcrumb bar
-
-$breadcrumb-bg:               $white;
-
-$breadcrumb-border-height:    $border-default-width;
-$breadcrumb-border:           $border-default;
-
-$breadcrumb-height:           $tabbar-height;
-$breadcrumb-line-height:      $breadcrumb-height - $breadcrumb-border-height;
-
-$breadcrumb-padding:          0 $spacer-x;
+// About tabs bar
+$tabs-border:                   $border-default;
+$tabs-bg-color:                 $color-white;
+$tabs-height:                   40px;
+$tabs-line-height:              $tabs-height;
+$tabs-wrapper-padding:          0 $spacer-base;
 
 
 //
-// Bottom Footbar
+// About foot bar
+$foot-border:                   $border-default;
+$foot-bg-color:                 $color-white;
+$foot-padding-y:                $spacer-sm;
+$foot-padding-x:                $spacer-base;
+$foot-wrapper-padding:          $foot-padding-y $foot-padding-x;
+$foot-height:                   50px + $border-default-width;
+$foot-line-height:              $foot-height - $border-default-width - $foot-padding-y * 2;
 
-$foobar-bg:                   white!default;
-$foobar-border-width:         $border-default-width;
-$foobar-border:               $border-default!default;
 
-$foobar-shadow:               $shadow-sm-invert!default;
+//
+// App wrapper vars
+$main-wrapper-padding-top:      $head-height + $tabs-height;
+$main-wrapper-padding-bottom:   $foot-height;
 
-$foobar-padding-x:            $spacer-x!default;
-$foobar-padding-y:            $spacer-y!default;
-
-$foobar-height:               50px!default;
-$foobar-line-height:          $foobar-height - $foobar-padding-y * 2 - $foobar-border-width!default;
+$body-wrapper-padding:          $spacer-base;
+$body-wrapper-bg-color:         $color-white;

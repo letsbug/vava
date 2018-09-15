@@ -5,7 +5,18 @@
 </template>
 
 <script>
+import { meta } from './meta'
+
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      routeName: ''
+    }
+  },
+  metaInfo: meta,
+  created() {
+    this.routeName = 'aa'
+  }
 }
 </script>

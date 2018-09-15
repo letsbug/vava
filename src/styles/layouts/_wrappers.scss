@@ -1,0 +1,91 @@
+.va-app-wrapper {
+  height:   100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.va-main-wrapper {
+  height:     100%;
+  overflow:   hidden;
+  position:   relative;
+  transition: $transition-margin, $transition-transform;
+  padding: $main-wrapper-padding-top 0 $main-wrapper-padding-bottom 0;
+}
+
+.va-body-wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+.va-body-container {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: $body-wrapper-padding;
+  background-color: $body-wrapper-bg-color;
+
+  transition: $transition-background;
+
+  &.no-bg {
+    background-color: transparent;
+  }
+}
+
+//
+// In desktop
+@media screen and (min-width: $device-md) {
+  .va-app-wrapper {
+    &.sidebar-expanded {
+      .va-main-wrapper {
+        margin-left: $sidebar-width-expanded;
+      }
+
+      .va-sidebar {
+        width: $sidebar-width-expanded;
+        overflow: hidden;
+      }
+    }
+
+    // sidebar collapsed.
+    &.sidebar-collapse {
+      .va-main-wrapper {
+        margin-left: $sidebar-width-collapse;
+      }
+
+      .va-sidebar {
+        width: $sidebar-width-collapse;
+      }
+    }
+  }
+}
+
+//
+// In mobile
+@media screen and (max-width: $device-md) {
+  .va-app-wrapper {
+    .va-sidebar {
+      width: $sidebar-width-expanded;
+    }
+    .va-main-wrapper {
+      margin: 0;
+    }
+
+    &.sidebar-expanded {
+      .va-sidebar {
+        transform: translate(0, 0);
+      }
+      .va-main-wrapper {
+        transform: translate($sidebar-width-expanded/2, 0);
+      }
+    }
+
+    &.sidebar-collapse {
+      .va-sidebar {
+        transform: translate(-$sidebar-width-expanded, 0);
+      }
+      .va-main-wrapper {
+        transform: translate(0, 0);
+      }
+    }
+  }
+}

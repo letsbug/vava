@@ -1,0 +1,14 @@
+.va-tabs-bar {
+  height: $tabs-height;
+  line-height: $tabs-line-height;
+  padding: $tabs-wrapper-padding;
+  background-color: $tabs-bg-color;
+  border-bottom: $tabs-border;
+  position: absolute;
+  top: $head-height;
+  left: 0;
+  right: 0;
+  z-index: $z-index-tabbar;
+
+  box-shadow: $shadow-sm-vr;
+}
