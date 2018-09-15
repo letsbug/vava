@@ -1,8 +1,8 @@
 {
   "name": "vue-admin-template",
   "version": "1.0.0",
-  "description": "A admin template based on vue2 and element-ui.",
-  "author": "ggboom | <724939933@qq.com> | <xman724939995@gmail.com>",
+  "description": "A magical vue admin template, based on vue@2.5.2 & element-ui@2.4.5",
+  "author": "Letsbug, 724939933@qq.com, xman724939995@gmail.com",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
