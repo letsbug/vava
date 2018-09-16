@@ -54,6 +54,7 @@ h6 { font-size: $font-size-h6 }
 a {
   color: $color-link-default;
   text-decoration: none;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   outline:none;
 
