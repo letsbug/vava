@@ -52,7 +52,7 @@ h5 { font-size: $font-size-h5 }
 h6 { font-size: $font-size-h6 }
 
 a {
-  color: $color-gray-600;
+  color: $color-link-default;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   outline:none;
@@ -62,11 +62,11 @@ a {
   }
 
   &.linker {
-    color: $color-link;
+    color: $color-link-highlight;
     font-weight: 500;
 
     &:hover {
-      color: darken($color-link, 10%);
+      color: darken($color-link-highlight, 10%);
     }
   }
 }

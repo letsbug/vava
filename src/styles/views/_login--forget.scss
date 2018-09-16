@@ -1,0 +1,70 @@
+@import "../variables";
+
+$login-form-padding:      $spacer-base;
+$login-form-width:        320px;
+$login-form-logo-size:    56px;
+$login-form-icon-size:    $font-size-h4;
+$login-form-icon-color:   $color-gray-600;
+
+.container-login--password {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  color: $color-gray-300;
+  background-color: $sidebar-bg-color;
+
+  .form-login--password {
+    margin-top: 56px;
+    width: $login-form-width;
+    padding: 0 $login-form-padding;
+
+    .form-logo {
+      text-align: center;
+    }
+
+    .brand {
+      width: $login-form-logo-size;
+    }
+
+    .title {
+      font-weight: 300;
+    }
+
+    .va-icon {
+      margin-left: 2px;
+      width: $login-form-icon-size;
+      height: $login-form-icon-size;
+      vertical-align: -3px;
+      fill: $login-form-icon-color;
+    }
+
+    .forget-link {
+      color: $color-link-default;
+
+      &:hover {
+        color: $color-theme;
+      }
+    }
+
+    .btn-login {
+      width: 100%;
+    }
+  }
+
+  .va-copyright {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    margin-bottom: $spacer-base;
+    white-space: nowrap;
+    color: $color-gray-300;
+  }
+}
+
+@media screen and (max-width: $device-sm) {
+  .container-login--password .form-login--password {
+    width: 100%;
+  }
+}

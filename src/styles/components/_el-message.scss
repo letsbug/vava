@@ -1,0 +1,15 @@
+@media screen and (max-width: $device-sm) {
+  .el-message {
+    min-width: auto;
+    left: $spacer-base;
+    right: $spacer-base;
+    transform: none;
+    align-items: start;
+  }
+
+  .el-message-fade-enter,
+  .el-message-fade-leave-active {
+    opacity: 0;
+    transform: translate(0, -100%);
+  }
+}

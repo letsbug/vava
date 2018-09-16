@@ -1,0 +1,22 @@
+//
+// Text Colors
+
+.text-primary { color: $color-theme; }
+.text-muted { color: $color-gray-500; }
+.text-red { color: $color-red; }
+
+
+//
+// Text align
+
+.text-left { text-align: left }
+.text-right { text-align: right }
+.text-center { text-align: center }
+
+
+//
+// float util
+
+.float-l { float: left; }
+.float-r { float: right; }
+.clear-fix:after { content: ''; display: block; clear: both; }

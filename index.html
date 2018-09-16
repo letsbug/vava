@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <!--<meta http-equiv="Cache-Control" content="no-siteapp">-->
 
-  <% Object.keys(htmlWebpackPlugin.options.meta).forEach(function(key){ %>
+  <% Object.keys(htmlWebpackPlugin.options.meta).forEach(key => { %>
   <meta name="<%= key %>" content="<%= htmlWebpackPlugin.options.meta[key] %>">
   <% }) %>
 
