@@ -55,7 +55,7 @@ const phone = (r, v, c) => {
  */
 const captcha = (r, v, c) => {
   if (!v || Regulars.empty(v)) c(new Error('请输入手机验证码！'))
-  else if (v.length !== 4) c(new Error('请输入正确的4位手机验证码！'))
+  else if (v.length !== 6) c(new Error('请输入正确的6位手机验证码！'))
   else if (!Regulars.captcha(v)) c(new Error('手机验证码由数字和大写字母组成，请重新填写！'))
   else c()
 }

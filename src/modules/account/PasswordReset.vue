@@ -5,24 +5,25 @@
         <img class="brand" :src="logo" alt="Vava">
         <h2 class="title">Reset your password</h2>
       </div>
-      <el-form ref="confirmEmail" v-if="step === 1" autoComplete="on" aria-autocomplete="list" :model="form" :rules="rules">
+      <el-form ref="formAccount" v-if="step === 1" autoComplete="off" aria-autocomplete="list" :model="form" :rules="rules">
+        <p><strong>Please enter your account binding email address or phone number.</strong></p>
         <el-form-item prop="username">
-          <el-input size="large" name="username" type="text" v-model="form.username" autoComplete="on" placeholder="Your email address or phone number."></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.native.prevent="validEmailOrPhone">
-            Send password reset security code
-          </el-button>
+          <el-input size="large" name="username" type="text" v-model="form.username"
+                    placeholder="Your email address or phone number."></el-input>
         </el-form-item>
       </el-form>
-      <el-form ref="confirmSecurityCode" v-if="step === 2" autoComplete="off">
-        <p><strong>The security code of your reset password has been sent, please check.</strong></p>
+      <el-form ref="formSecurityCode" v-if="step === 1" autoComplete="off" aria-autocomplete="list" :model="form" :rules="rules">
         <el-form-item prop="securityCode">
-          <el-input size="large" name="securityCode" type="text" autoComplete="off" placeholder="Your email or phone security code."></el-input>
+          <el-input size="large" name="securityCode" class="input-security__code" type="text"
+                    v-model="form.securityCode" placeholder="Security code">
+            <a slot="suffix" class="link-theme handle-get__code" :class="timing ? 'disabled' : ''" @click.prevent="sendSecurityCode">
+              Send code {{counter ? '(' + counter + ')' : undefined}}
+            </a>
+          </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.native.prevent="validSecurityCode">
-            Submit this security code
+          <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.prevent="submitSecurityCode">
+            Valid security code
           </el-button>
         </el-form-item>
       </el-form>
@@ -34,7 +35,7 @@
 
 <script>
 import Copyright from '@/components/copyright/VaCopyright'
-import { Regulars } from '@/tools'
+import { Validators, Regulars } from '@/tools'
 
 export default {
   name: 'PasswordReset',
@@ -51,37 +52,49 @@ export default {
     return {
       logo: require('@/assets/images/logo.png'),
       step: 1,
-      form: { username: 'Example@email.com' },
+      form: {
+        username: 'Example@email.com',
+        securityCode: '',
+        password: '',
+        confirm: ''
+      },
       rules: {
         username: [{ validator: validator, trigger: 'blur' }],
+        securityCode: [{ validator: Validators.captcha, trigger: 'blur' }]
       },
-      loading: false
+      timing: false,
+      loading: false,
+      counter: 0
     }
   },
   methods: {
-    validEmailOrPhone() {
-      this.$refs['confirmEmail'].validate(v => {
-        if (!v) return false
-        this.loading = true
-        this.sendSecurityCode()
-        return true
-      })
+    validAccount() {
+      let valid = false
+      this.$refs['formAccount'].validate(v => valid = v)
+      return valid
     },
     validSecurityCode() {
-      this.$refs['confirmSecurityCode'].validate(v => {
-        if (!v) return false
-        this.loading = true
-        return true
-      })
+      let valid = false
+      this.$refs['formSecurityCode'].validate(v => valid = v)
+      return valid
+    },
+    timingSecurityBtn() {
+      this.counter = 60
+      this.timing = true
+      const timer = setInterval(() => {
+        this.counter--
+        if (this.counter === 0) {
+          clearInterval(timer)
+          this.timing = false
+        }
+      }, 1000)
     },
     sendSecurityCode() {
-      this.$message({
-        type: 'success',
-        duration: 4000,
-        message: 'The security code of your reset password has been sent, please check.'
-      })
-      this.step++
-      this.loading = false
+      if (!this.validAccount() || this.timing) return false
+      this.timingSecurityBtn()
+    },
+    submitSecurityCode() {
+      if (!this.validAccount() || !this.validSecurityCode()) return false
     }
   }
 }
@@ -89,4 +102,15 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/views/login--forget";
+$handle-get__code-width:  120px;
+
+.el-input--suffix.input-security__code {
+  & /deep/ .el-input__inner {
+    padding-right: $handle-get__code-width!important;
+  }
+
+  .handle-get__code {
+    margin-right: 4px;
+  }
+}
 </style>

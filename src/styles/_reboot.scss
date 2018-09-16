@@ -69,4 +69,17 @@ a {
       color: darken($color-link-highlight, 10%);
     }
   }
+
+  &.link-theme {
+    color: $color-theme;
+
+    &:hover {
+      color: darken($color-theme, 10%);
+    }
+  }
+
+  &.disabled {
+    color: $color-text-secondary!important;
+    cursor: not-allowed;
+  }
 }

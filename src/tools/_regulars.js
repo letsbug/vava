@@ -116,12 +116,12 @@ const postcode = v => {
 }
 
 /**
- * 手机验证码校验（仅允许4位数字或大写英文字母）
+ * 手机验证码校验（由6位数字和大写英文字母组成）
  * @param v
  * @returns {boolean}
  */
 const captcha = v => {
-  return new RegExp(/^(\d|[A-Z]){4}$/).test(v)
+  return new RegExp(/^(\d|[A-Z]){6}$/).test(v)
 }
 
 /**
