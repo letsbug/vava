@@ -73,6 +73,53 @@ const email = (r, v, c) => {
 }
 
 /**
+ * 用户名、账户名校验
+ * @param r
+ * @param v
+ * @param c
+ */
+const username = (r, v, c) => {
+  if (!v || Regulars.empty(v)) c(new Error('请输入用户名！'))
+  else if (v.length < 4 || v.length > 16) c(new Error('请输入4至16位用户名！'))
+  else if (!Regulars.username(v)) c(new Error('用户名须以英文字母开头，允许数字和特殊字符 "." "_" "@"。'))
+  else c()
+}
+
+/**
+ * 密码校验
+ * @param r
+ * @param v
+ * @param c
+ * @param rule {boolean} 是否进行密码规则校验
+ */
+const password = (r, v, c, rule) => {
+  if (!v || Regulars.empty(v)) c(new Error('请输入密码！'))
+  else if (v.length < 6 || v.length > 18) c(new Error('请输入6至18位密码！'))
+  else if (rule && !Regulars.password(v)) c(new Error('密码应包含大写、小写英文字母和数字，不能有特殊符号！'))
+  else c()
+}
+
+/**
+ * 密码设置校验
+ * @param r
+ * @param v
+ * @param c
+ */
+const passwordSetting = (r, v, c) => {
+  password(r, v, c, true)
+}
+
+/**
+ * 密码登录校验
+ * @param r
+ * @param v
+ * @param c
+ */
+const passwordLogin = (r, v, c) => {
+  password(r, v, c)
+}
+
+/**
  * 身份证号码校验
  * @param r
  * @param v
@@ -169,6 +216,9 @@ export default {
   phone,
   captcha,
   email,
+  username,
+  passwordSetting,
+  passwordLogin,
   IDCard,
   name,
   postcode,

@@ -88,6 +88,25 @@ const email = v => {
 }
 
 /**
+ * 用户名校验规则（4-16位，以英文字母开头，可包含下'.','_','@'）
+ * @param v
+ * @returns {boolean}
+ */
+const username = v => {
+  return new RegExp(/^[a-zA-Z]([a-zA-Z0-9]|[._@]){3,15}/).test(v)
+}
+
+/**
+ * 密码强度校验（6-16位，必须包含大写字母，小写字母，数字，特殊字符中的3种）
+ * @param v
+ * @returns {boolean}
+ */
+const password = v => {
+  /* eslint-disable-next-line */
+  return new RegExp(/^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,18}$/).test(v)
+}
+
+/**
  * 邮政编码校验
  * @param v
  * @returns {boolean}
@@ -121,6 +140,7 @@ const IDCard = v => {
  * @returns {boolean}
  */
 const url = v => {
+  /* eslint-disable-next-line */
   const reg = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
   return new RegExp(reg).test(v)
 }
@@ -131,9 +151,10 @@ const url = v => {
  * @returns {boolean}
  */
 const addressCode = v => {
-  const addrs = { 11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内蒙古', 21: '辽宁', 22: '吉林', 23: '黑龙江', 31: '上海', 32: '江苏', 33: '浙江', 34: '安徽', 35: '福建', 36: '江西', 37: '山东', 41: '河南', 42: '湖北', 43: '湖南', 44: '广东', 45: '广西', 46: '海南', 50: '重庆', 51: '四川', 52: '贵州', 53: '云南', 54: '西藏', 61: '陕西', 62: '甘肃', 63: '青海', 64: '宁夏', 65: '新疆', 71: '台湾', 81: '香港', 82: '澳门', 91: '国外' }
+  /* eslint-disable-next-line */
+  const address = { 11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内蒙古', 21: '辽宁', 22: '吉林', 23: '黑龙江', 31: '上海', 32: '江苏', 33: '浙江', 34: '安徽', 35: '福建', 36: '江西', 37: '山东', 41: '河南', 42: '湖北', 43: '湖南', 44: '广东', 45: '广西', 46: '海南', 50: '重庆', 51: '四川', 52: '贵州', 53: '云南', 54: '西藏', 61: '陕西', 62: '甘肃', 63: '青海', 64: '宁夏', 65: '新疆', 71: '台湾', 81: '香港', 82: '澳门', 91: '国外' }
   const check = new RegExp(/^[1-9]\d{5}$/).test(v)
-  return check && addrs[parseInt(v.substring(0, 2))]
+  return check && address[parseInt(v.substring(0, 2))]
 }
 
 /**
@@ -201,6 +222,8 @@ export default {
   mobile,
   phone,
   email,
+  username,
+  password,
   postcode,
   captcha,
   IDCard,
