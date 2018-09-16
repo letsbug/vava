@@ -7,5 +7,6 @@
 <script>
 export default {
   name: 'Dashboard',
+  metaInfo: {}
 }
 </script>

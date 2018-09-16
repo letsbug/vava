@@ -9,14 +9,6 @@ import { meta } from './meta'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      routeName: ''
-    }
-  },
-  metaInfo: meta,
-  created() {
-    this.routeName = 'aa'
-  }
+  metaInfo: meta
 }
 </script>

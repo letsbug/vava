@@ -6,5 +6,5 @@
 
 export const meta = {
   title: 'A Magical vue admin template',
-  titleTemplate: 'Vava - %s'
+  titleTemplate: '%s · Vava'
 }
