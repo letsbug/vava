@@ -1,5 +1,5 @@
 <template>
-<svg class="va-icon" aria-hidden="true">
+<svg class="va-icon" aria-hidden="true" @click.prevent="clicked">
   <use :xlink:href="iconName"></use>
 </svg>
 </template>
@@ -13,6 +13,11 @@ export default {
   computed: {
     iconName() {
       return `#icon-${this.icon}`
+    }
+  },
+  methods: {
+    clicked() {
+      this.$emit('click')
     }
   }
 }

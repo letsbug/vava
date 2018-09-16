@@ -7,15 +7,14 @@
       </div>
       <el-form-item prop="username">
         <el-input size="large" name="username" type="text" v-model="form.username" autoComplete="on" placeholder="username">
-          <va-icon icon="user"></va-icon>
+          <va-icon slot="prefix" icon="user"></va-icon>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input size="large" name="password" :type="passwordType" v-model="form.password" autoComplete="on"
+        <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password" autoComplete="on"
                   placeholder="password" @keyup.enter.native="handleLogin">
-          <svg slot="prefix" class="icon-svg" aria-hidden="true"><use xlink:href="#if-password"></use></svg>
-          <svg slot="suffix" class="icon-svg" aria-hidden="true" @click.prevent="pwdShowHide"><use
-            :xlink:href="(passwordType === 'password') ? '#if-hide' : '#if-show'"></use></svg>
+          <va-icon slot="prefix" icon="lock"></va-icon>
+          <va-icon slot="suffix" :icon="password ? 'eye-close' : 'eye-open'" @click="pwdShowHide"></va-icon>
         </el-input>
       </el-form-item>
     </el-form>
@@ -38,14 +37,14 @@ export default {
       form: { username: 'admin', password: '123456789', remember: false },
       rules: {
         username: [{ validator: Validators.username, trigger: 'blur' }],
-        password: [{ validator: Validators.password, trigger: 'blur' }]
+        password: [{ validator: Validators.passwordLogin, trigger: 'blur' }]
       },
       loading: false,
-      passwordType: 'password'
+      password: true
     }
   },
   methods: {
-    pwdShowHide() {},
+    pwdShowHide() { this.password = !this.password },
     handleLogin() {}
   }
 }
@@ -55,8 +54,10 @@ export default {
 @import "../../styles/variables";
 
 $login-form-padding:      $spacer-base;
-$login-form-width:        410px;
+$login-form-width:        380px;
 $login-form-logo-size:    56px;
+$login-form-icon-size:    $font-size-h4;
+$login-form-icon-color:   $color-gray-600;
 
 .container-login {
   display: flex;
@@ -92,6 +93,14 @@ $login-form-logo-size:    56px;
 
   .title {
     font-weight: 300;
+  }
+
+  .va-icon {
+    margin-left: 2px;
+    width: $login-form-icon-size;
+    height: $login-form-icon-size;
+    vertical-align: -3px;
+    fill: $login-form-icon-color;
   }
 }
 
