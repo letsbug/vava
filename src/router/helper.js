@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
         store.dispatch('user_info').then(res => {
           const roles = res.data.roles
           store.dispatch('perm_generate_routes', { roles }).then(() => {
-            router.addRoutes(store.getters.addons)
+            router.addRoutes(store.getters.routes_addons)
             // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
             next({ ...to, replace: true })
           })
@@ -38,7 +38,10 @@ router.beforeEach((to, from, next) => {
     // When the user is not logged in, the route is redirected to the login page.
     if (whitelist.indexOf(to.path) === -1) {
       console.log(to.path)
-      next(`/login?redirect=${to.path}`)
+      next({
+        path: '/login',
+        query: { redirect: to.path }
+      })
       NProgress.done()
     } else {
       next()

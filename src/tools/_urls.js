@@ -8,6 +8,6 @@ const parse = url => {
     : {}
 }
 
-export const Urls = {
+export default {
   parse
 }
