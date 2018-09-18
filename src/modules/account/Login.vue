@@ -18,8 +18,8 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox class="checkbox-green" v-model="form.remember" :label="expires + '天内自动登录'" name="remember"></el-checkbox>
-        <router-link class="forget-link float-r" to="/password">忘记密码?</router-link>
+        <el-checkbox class="checkbox-green" v-model="form.remember" :label="'Remember (' + expires + ' days)'" name="remember"></el-checkbox>
+        <router-link class="forget-link float-r" to="/password">Forgot password?</router-link>
       </el-form-item>
       <el-form-item>
         <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.native.prevent="handleLogin">Sign in</el-button>

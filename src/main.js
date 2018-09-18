@@ -9,9 +9,12 @@ import 'element-ui/lib/theme-chalk/display.css'
 import '@/styles/va.core.scss'
 
 import App from './App'
-import router from './router'
 import store from './store'
+import router from './router'
 import Meta from 'vue-meta'
+
+import '@/router/helper'
+import '@/simulates'
 
 import '@/assets/icons'
 
