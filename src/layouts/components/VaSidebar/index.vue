@@ -3,14 +3,19 @@
     <div class="va-side-brand">
       <span class="brand-name"><strong>Va</strong><span class="subname">va</span></span>
     </div>
-    <va-side-menu></va-side-menu>
+    <va-side-menu :routes="routes_permission"></va-side-menu>
   </div>
 </template>
 
 <script>
-import VaSideMenu from '@/components/sidebar-menus/VaSideMenu'
+import VaSideMenu from './VaSideMenu'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'VaSideBar',
-  components: { VaSideMenu }
+  components: { VaSideMenu },
+  computed: {
+    ...mapGetters(['routes_permission'])
+  }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
 <div class="va-body-container no-bg">
-  <h1>Dashboard</h1>
+  <h1>Dashboard Visits</h1>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'Dashboard',
+  name: 'Visits',
   metaInfo: {}
 }
 </script>

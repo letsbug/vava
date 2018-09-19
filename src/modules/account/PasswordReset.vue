@@ -74,7 +74,6 @@ export default {
       } else c()
     }
     const validConfirm = (r, v, c) => {
-      console.log(this.form)
       if (!v || Regulars.empty(v)) c(new Error('Please confirm your password!'))
       else if (v !== this.form.password) c(new Error('Password confirmation doesn\'t match the password!'))
       else c()

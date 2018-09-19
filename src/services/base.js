@@ -9,7 +9,8 @@ Service.interceptors.request.use(
   config => {
     if (store.getters.token) Service.defaults.headers['X-Token'] = Token.get()
     return config
-  }, err => Promise.reject(err)
+  },
+  err => Promise.reject(err)
 )
 
 Service.interceptors.response.use(
