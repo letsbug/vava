@@ -30,5 +30,10 @@ export default {
     const { token } = Urls.parse(config.url)
     return userMap[token] || undefined
   },
+  update: config => {
+    const data = JSON.parse(config.body)
+    console.log(data)
+    return 'success'
+  },
   logout: () => 'success'
 }

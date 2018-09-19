@@ -8,13 +8,13 @@ import NProgress from 'nprogress'
 NProgress.configure({ showSpinner: false })
 
 // Route redirect whitelist.
-const whitelist = ['/login', 'join', 'password']
+const whitelist = ['/login', '/join', '/password']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (Token.get()) {
     // When the user has already logged in.
-    if (to.path === '/login') {
+    if (whitelist.indexOf(to.path) !== -1) {
       next('/')
       NProgress.done()
     } else {
@@ -28,7 +28,7 @@ router.beforeEach((to, from, next) => {
           })
         }).catch(err => {
           store.dispatch('user_exit').then(() => {
-            Message.error(err.message || 'Verification failed, please login again')
+            Message.error(err.message || 'Verification failed, please login again.')
             next('/')
           })
         })
