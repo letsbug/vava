@@ -16,7 +16,7 @@ const userMap = {
     code: '',
     username: 'editor',
     intro: 'I\'m a editor',
-    avatar: require('@/assets/images/avatar.png'),
+    avatar: require('@/assets/images/avatar-editor.jpg'),
     status: 1
   }
 }

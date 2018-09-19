@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
           const roles = res.data.roles
           store.dispatch('perm_generate_routes', { roles }).then(() => {
             router.addRoutes(store.getters.routes_addons)
-            // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+            // hack方法 确保addRoutes已完成, set the replace: true so the navigation will not leave a history record
             next({ ...to, replace: true })
           })
         }).catch(err => {
