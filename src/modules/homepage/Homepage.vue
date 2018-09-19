@@ -1,5 +1,5 @@
 <template>
-  <div>Homepage</div>
+  <div class="va-body-container no-bg">Homepage</div>
 </template>
 
 <script>

@@ -11,13 +11,13 @@
       <ul class="nav-dropdown" :class="'child-count-' + route.children.length">
         <li v-for="child in route.children">
           <router-link class="nav-item" :to="route.path + '/' + child.path">
-            <va-icon icon="browser"></va-icon> <span class="item-name">website</span>
+            <va-icon :icon="child.meta.icon"></va-icon> <span class="item-name">{{ child.meta.title }}</span>
           </router-link>
         </li>
       </ul>
     </template>
     <router-link v-else class="nav-title" :to="route.path + (route.children[0].path ? ('/' + route.children[0].path) : '')">
-      <va-icon :icon="route.children[0].meta.icon"></va-icon> <span class="item-name">{{ route.children[0].meta.title }}</span>
+      <va-icon :icon="route.meta.icon"></va-icon> <span class="item-name">{{ route.meta.title }}</span>
     </router-link>
   </div>
 

@@ -18,10 +18,10 @@ export const constantRouteMap = [
     path: '',
     component: Layout,
     redirect: 'home',
+    meta: { title: 'Home', icon: 'house' },
     children: [{
       path: 'home',
       name: 'Homepage',
-      meta: { title: 'Home', icon: 'home' },
       component: () => import('@/modules/homepage/Homepage')
     }]
   },
@@ -32,11 +32,21 @@ export const constantRouteMap = [
   {
     path: '/report',
     component: Layout,
+    meta: { title: 'Reports', icon: 'chart' },
     children: [{
       path: '',
       name: 'Reports',
-      meta: { title: 'Reports', icon: 'chart' },
       component: () => import('@/modules/reports/Reports')
+    }]
+  },
+  {
+    path: 'icons',
+    component: Layout,
+    meta: { title: 'icon views', icon: 'store' },
+    children: [{
+      path: '',
+      name: 'VaIcons',
+      component: () => import('@/modules/icons/SystemIcons')
     }]
   },
   { path: '*', redirect: '/error/404', hidden: true }
