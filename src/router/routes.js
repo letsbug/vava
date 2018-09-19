@@ -27,9 +27,7 @@ export const constantRouteMap = [
     }]
   },
 
-  // router modules
   Dashboard,
-  Tables,
 
   {
     path: '/report',
@@ -41,6 +39,9 @@ export const constantRouteMap = [
       component: () => import('@/modules/reports/Reports')
     }]
   },
+
+  Tables,
+
   {
     path: 'icons',
     component: Layout,
