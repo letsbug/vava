@@ -14,7 +14,7 @@
         <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password" autoComplete="on"
                   placeholder="password" @keyup.enter.native="handleLogin">
           <va-icon slot="prefix" icon="lock"></va-icon>
-          <va-icon slot="suffix" :icon="password ? 'eye-close' : 'eye-open'" @click="pwdShowHide"></va-icon>
+          <va-icon slot="suffix" :icon="password ? 'eye-close' : 'eye-open'" @click="password = !password"></va-icon>
         </el-input>
       </el-form-item>
       <el-form-item>
@@ -52,7 +52,6 @@ export default {
     }
   },
   methods: {
-    pwdShowHide() { this.password = !this.password },
     handleLogin() {
       this.$refs['loginForm'].validate(v => {
         if (!v) return false

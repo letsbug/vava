@@ -97,13 +97,13 @@ const username = v => {
 }
 
 /**
- * 密码强度校验（6-16位，必须包含大写字母，小写字母，数字，特殊字符中的3种）
+ * 密码强度校验（8-16位，数字加字母组合）
  * @param v
  * @returns {boolean}
  */
 const password = v => {
   /* eslint-disable-next-line */
-  return new RegExp(/^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,18}$/).test(v)
+  return new RegExp(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/).test(v)
 }
 
 /**

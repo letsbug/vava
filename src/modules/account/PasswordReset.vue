@@ -5,14 +5,16 @@
         <img class="brand" :src="logo" alt="Vava">
         <h2 class="title">Reset your password</h2>
       </div>
-      <el-form ref="formAccount" v-if="step === 1" autoComplete="off" aria-autocomplete="list" :model="form" :rules="rules">
+
+      <!-- Send & verify email or mobile phone security code -->
+      <el-form ref="formAccount" v-if="step === 1" autoComplete="off" :model="form" :rules="rules">
         <p><strong>Please enter your account binding email address or phone number.</strong></p>
         <el-form-item prop="username">
           <el-input size="large" name="username" type="text" v-model="form.username"
                     placeholder="Your email address or phone number."></el-input>
         </el-form-item>
       </el-form>
-      <el-form ref="formSecurityCode" v-if="step === 1" autoComplete="off" aria-autocomplete="list" :model="form" :rules="rules">
+      <el-form ref="formSecurityCode" v-if="step === 1" autoComplete="off" :model="form" :rules="rules">
         <el-form-item prop="securityCode">
           <el-input size="large" name="securityCode" class="input-security__code" type="text"
                     v-model="form.securityCode" placeholder="Security code">
@@ -24,6 +26,28 @@
         <el-form-item>
           <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.prevent="submitSecurityCode">
             Valid security code
+          </el-button>
+        </el-form-item>
+      </el-form>
+
+      <!-- Reset password -->
+      <el-form ref="confirmPassword" v-if="step === 2" autoComplete="off" :model="form" :rules="rules">
+        <p><small>Password must be a combination of Numbers and letters, and between 8 and 16 characters.</small></p>
+        <p><strong>Password</strong></p>
+        <el-form-item prop="password">
+          <el-input size="large" name="password" :type="pwdType.password ? 'password' : 'text'" v-model="form.password">
+            <va-icon slot="suffix" :icon="pwdType.password ? 'eye-close' : 'eye-open'" @click="pwdType.password = !pwdType.password"></va-icon>
+          </el-input>
+        </el-form-item>
+        <p><strong>Confirm password</strong></p>
+        <el-form-item prop="confirm">
+          <el-input size="large" name="password" :type="pwdType.confirm ? 'password' : 'text'" v-model="form.confirm">
+            <va-icon slot="suffix" :icon="pwdType.confirm ? 'eye-close' : 'eye-open'" @click="pwdType.confirm = !pwdType.confirm"></va-icon>
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.prevent="resetSubmit">
+            Reset password
           </el-button>
         </el-form-item>
       </el-form>
@@ -42,25 +66,37 @@ export default {
   metaInfo: { title: 'Reset your password' },
   components: { Copyright },
   data() {
-    const validator = (r, v, c) => {
+    const validName = (r, v, c) => {
       if (!v || Regulars.empty(v)) {
-        c(new Error('Please enter your email address or phone number.'))
+        c(new Error('Please enter your email address or phone number!'))
       } else if (!Regulars.email(v) && !Regulars.mobile(v)) {
-        c(new Error('Please enter a correct email address or phone number.'))
+        c(new Error('Please enter a correct email address or phone number!'))
       } else c()
+    }
+    const validConfirm = (r, v, c) => {
+      console.log(this.form)
+      if (!v || Regulars.empty(v)) c(new Error('Please confirm your password!'))
+      else if (v !== this.form.password) c(new Error('Password confirmation doesn\'t match the password!'))
+      else c()
     }
     return {
       logo: require('@/assets/images/logo.png'),
       step: 1,
       form: {
         username: 'Example@email.com',
-        securityCode: '',
+        securityCode: 'ABC123',
         password: '',
         confirm: ''
       },
       rules: {
-        username: [{ validator: validator, trigger: 'blur' }],
-        securityCode: [{ validator: Validators.captcha, trigger: 'blur' }]
+        username: [{ validator: validName, trigger: 'blur' }],
+        securityCode: [{ validator: Validators.captcha, trigger: 'blur' }],
+        password: [{ validator: Validators.passwordSetting, trigger: 'blur' }],
+        confirm: [{ validator: validConfirm, trigger: 'blur' }]
+      },
+      pwdType: {
+        password: true,
+        confirm: true
       },
       timing: false,
       loading: false,
@@ -95,6 +131,13 @@ export default {
     },
     submitSecurityCode() {
       if (!this.validAccount() || !this.validSecurityCode()) return false
+      this.step = 2
+    },
+    resetSubmit() {
+      this.$refs['confirmPassword'].validate(v => {
+        if (!v) return false
+        console.log(v)
+      })
     }
   }
 }

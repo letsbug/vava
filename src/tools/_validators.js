@@ -93,9 +93,9 @@ const username = (r, v, c) => {
  * @param rule {boolean} 是否进行密码规则校验
  */
 const password = (r, v, c, rule) => {
-  if (!v || Regulars.empty(v)) c(new Error('请输入密码！'))
-  else if (v.length < 6 || v.length > 18) c(new Error('请输入6至18位密码！'))
-  else if (rule && !Regulars.password(v)) c(new Error('密码应包含大写、小写英文字母和数字，不能有特殊符号！'))
+  if (!v || Regulars.empty(v)) c(new Error('Please enter your password!'))
+  else if (v.length < 8 || v.length > 16) c(new Error('Wrong password length!'))
+  else if (rule && !Regulars.password(v)) c(new Error('Does not comply with password rules!'))
   else c()
 }
 
