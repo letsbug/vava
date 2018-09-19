@@ -2,6 +2,7 @@ import Layout from '@/layouts/Layout'
 
 // modules
 import Dashboard from './modules/dashboards'
+import Tables from './modules/tables'
 
 /**
  * @param nocache {boolean} - Whether the tag needs to cache the route to avoid repeating the rendered DOM
@@ -28,6 +29,7 @@ export const constantRouteMap = [
 
   // router modules
   Dashboard,
+  Tables,
 
   {
     path: '/report',
