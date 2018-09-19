@@ -6,7 +6,7 @@ const dashboards = {
   component: Layout,
   name: 'Dashboard',
   meta: {
-    title: 'Dashboard',
+    title: 'dashboard',
     icon: 'dashboard'
   },
   children: [

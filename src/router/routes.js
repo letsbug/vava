@@ -18,7 +18,7 @@ export const constantRouteMap = [
     path: '',
     component: Layout,
     redirect: 'home',
-    meta: { title: 'Home', icon: 'house' },
+    meta: { title: 'home', icon: 'house' },
     children: [{
       path: 'home',
       name: 'Homepage',
@@ -32,7 +32,7 @@ export const constantRouteMap = [
   {
     path: '/report',
     component: Layout,
-    meta: { title: 'Reports', icon: 'chart' },
+    meta: { title: 'reports', icon: 'chart' },
     children: [{
       path: '',
       name: 'Reports',
@@ -42,7 +42,7 @@ export const constantRouteMap = [
   {
     path: 'icons',
     component: Layout,
-    meta: { title: 'icon views', icon: 'store' },
+    meta: { title: 'icon store', icon: 'store' },
     children: [{
       path: '',
       name: 'VaIcons',
