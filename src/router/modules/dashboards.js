@@ -11,22 +11,22 @@ const dashboards = {
   },
   children: [
     {
-      path: 'visits',
-      name: 'Visits',
-      meta: { title: 'visits', icon: '' },
-      component: () => import('@/modules/dashboard/Visits')
-    },
-    {
-      path: 'income',
-      name: 'income',
-      meta: { title: 'income', icon: '' },
-      component: () => import('@/modules/dashboard/Income')
+      path: 'visitor',
+      name: 'Visitor',
+      meta: { title: 'visitor', icon: '' },
+      component: () => import('@/modules/dashboard/Visitor')
     },
     {
       path: 'users',
-      name: 'users',
+      name: 'Users',
       meta: { title: 'users', icon: '' },
       component: () => import('@/modules/dashboard/Users')
+    },
+    {
+      path: 'capital',
+      name: 'Capital',
+      meta: { title: 'capital', icon: '' },
+      component: () => import('@/modules/dashboard/Capital')
     }
   ]
 }

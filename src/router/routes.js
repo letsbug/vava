@@ -8,6 +8,9 @@ import Tables from './modules/tables'
  * @param nocache {boolean} - Whether the tag needs to cache the route to avoid repeating the rendered DOM
  *                            when switching routes frequently (true - not allow)
  * @param hidden {boolean} - Marks whether the route is visible and displayed when the template is rendered.
+ * @param meta {Object}
+ *        title - side-menu & tab-bar display name
+ *        icon -  side-menu display icon.
  * @type {VueRouter[]}
  */
 export const constantRouteMap = [
