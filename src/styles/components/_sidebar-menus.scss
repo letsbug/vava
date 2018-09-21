@@ -34,12 +34,15 @@
 
     &.active {
       color: $sidebar-color-active;
-      cursor: default;
     }
 
     &:not(.active):hover {
       color: $sidebar-color-focus;
     }
+  }
+
+  .nav-item.active {
+    cursor: default;
   }
 
   .nav-dropdown {
