@@ -28,14 +28,15 @@
   }
 
   .va-nav-item {
-    display: inline-block;
-    vertical-align: top;
+    float: left;
     height: $head-nav-height;
     line-height: $head-nav-line-height;
     padding: $head-nav-item-padding;
     border-top: $head-nav-item-border;
     font-size: $head-nav-font-size;
     cursor: pointer;
+
+    transition: $transition-border;
 
     &:hover {
       border-top: $head-nav-item-border-hover;

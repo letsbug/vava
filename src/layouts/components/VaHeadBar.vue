@@ -1,8 +1,11 @@
 <template>
   <div class="va-head-bar">
-    <ul class="va-head-nav">
+    <ul class="va-head-nav clear-fix">
       <li class="va-nav-item" @click.stop="toggleSidebar">
         <va-icon :icon="sidebarOpend ? 'handle-collapse' : 'handle-expand'"></va-icon>
+      </li>
+      <li class="va-nav-item">
+        <va-icon icon="browser"></va-icon>
       </li>
     </ul>
   </div>
