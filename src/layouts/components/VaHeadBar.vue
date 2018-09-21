@@ -22,10 +22,17 @@
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
-      <a class="va-nav-item spacer-xs link-user">
-        <img class="avatar" :src="user.avatar" alt="">
-      </a>
-      <a class="va-nav-item spacer-xs">
+      <el-dropdown @command="userDropdown" :show-timeout="100" style="float: left;">
+        <a class="va-nav-item spacer-xs link-user">
+          <img class="avatar" :src="user.avatar" alt="">
+        </a>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item :command="handleUserInfo">Profile</el-dropdown-item>
+          <el-dropdown-item :command="handleSettings">Settings</el-dropdown-item>
+          <el-dropdown-item :command="handleLogout" divided>Log out</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <a class="va-nav-item hidden-sm-and-up">
         <va-icon icon="more"></va-icon>
       </a>
     </div>
@@ -45,6 +52,25 @@ export default {
       el = el.target
       console.log('handle navigation bar search form! The input value is => "' + el.value + '"')
     },
+    userDropdown(target) {
+      target()
+    },
+    handleUserInfo() {
+      // TODO build user information route
+      console.log('clicked user info')
+    },
+    handleSettings() {
+      // TODO build user settings route
+    },
+    handleLogout() {
+      this.$confirm('Are you sure to exit the currently logged in account?', 'Log out', {
+        type: 'warning',
+        confirmButtonText: 'I\'m sure',
+        cancelButtonText: 'Cancel'
+      }).then(() => {
+        this.$store.dispatch('user_logout').then(() => { location.reload() })
+      }).catch(() => {})
+    }
   }
 }
 </script>
