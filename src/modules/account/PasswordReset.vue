@@ -36,13 +36,13 @@
         <p><strong>Password</strong></p>
         <el-form-item prop="password">
           <el-input size="large" name="password" :type="pwdType.password ? 'password' : 'text'" v-model="form.password">
-            <va-icon slot="suffix" :icon="pwdType.password ? 'eye-close' : 'eye-open'" @click="pwdType.password = !pwdType.password"></va-icon>
+            <va-icon slot="suffix" :icon="pwdType.password ? 'eye-close' : 'eye-open'" @click.native="pwdType.password = !pwdType.password"></va-icon>
           </el-input>
         </el-form-item>
         <p><strong>Confirm password</strong></p>
         <el-form-item prop="confirm">
           <el-input size="large" name="password" :type="pwdType.confirm ? 'password' : 'text'" v-model="form.confirm">
-            <va-icon slot="suffix" :icon="pwdType.confirm ? 'eye-close' : 'eye-open'" @click="pwdType.confirm = !pwdType.confirm"></va-icon>
+            <va-icon slot="suffix" :icon="pwdType.confirm ? 'eye-close' : 'eye-open'" @click.native="pwdType.confirm = !pwdType.confirm"></va-icon>
           </el-input>
         </el-form-item>
         <el-form-item>

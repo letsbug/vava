@@ -13,19 +13,19 @@ const dashboards = {
     {
       path: 'visitor',
       name: 'Visitor',
-      meta: { title: 'visitor', icon: '' },
+      meta: { title: 'visitor', icon: 'history' },
       component: () => import('@/modules/dashboard/Visitor')
     },
     {
       path: 'users',
       name: 'Users',
-      meta: { title: 'users', icon: '' },
+      meta: { title: 'users', icon: 'user' },
       component: () => import('@/modules/dashboard/Users')
     },
     {
       path: 'capital',
       name: 'Capital',
-      meta: { title: 'capital', icon: '' },
+      meta: { title: 'capital', icon: 'capital' },
       component: () => import('@/modules/dashboard/Capital')
     }
   ]

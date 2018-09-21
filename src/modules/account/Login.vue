@@ -14,7 +14,7 @@
         <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password" autoComplete="on"
                   placeholder="password" @keyup.enter.native="handleLogin">
           <va-icon slot="prefix" icon="lock"></va-icon>
-          <va-icon slot="suffix" :icon="password ? 'eye-close' : 'eye-open'" @click="password = !password"></va-icon>
+          <va-icon slot="suffix" :icon="password ? 'eye-close' : 'eye-open'" @click.native="password = !password"></va-icon>
         </el-input>
       </el-form-item>
       <el-form-item>
@@ -22,7 +22,7 @@
         <router-link class="forget-link float-r" to="/password">Forgot password?</router-link>
       </el-form-item>
       <el-form-item>
-        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.native.prevent="handleLogin">Sign in</el-button>
+        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">Sign in</el-button>
       </el-form-item>
     </el-form>
 

@@ -3,7 +3,7 @@
   <!-- Each all routes -->
   <div v-for="(route, index) in routes" v-if="!route.hidden" :ref="'side_menu_' + index" class="va-side-nav">
     <template v-if="route.children.length > 1">
-      <a class="nav-title expander" :class="(current === route.path) ? 'active' : ''" @click.stop.prevent="expandMenu($refs['side_menu_' + index][0])">
+      <a class="nav-title expander" :class="(current === route.path) ? 'active' : ''" @click="expandMenu($refs['side_menu_' + index][0])">
         <va-icon :icon="route.meta.icon"></va-icon>
         <span class="item-name">{{ route.meta.title }}</span>
         <i class="el-icon-arrow-right expander-icon"></i>
