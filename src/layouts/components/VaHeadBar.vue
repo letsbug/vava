@@ -22,12 +22,12 @@
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
-      <el-tooltip effect="dark" content="you have no unread notifications" placement="bottom">
-        <a class="va-nav-item">
+      <el-tooltip effect="dark" content="you have unread notifications" placement="bottom">
+        <router-link class="va-nav-item" to="/notifications">
           <el-badge is-dot>
             <va-icon icon="notice"></va-icon>
           </el-badge>
-        </a>
+        </router-link>
       </el-tooltip>
       <a class="va-nav-item hidden-xs-only">
         <va-icon icon="theme"></va-icon>

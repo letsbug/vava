@@ -46,7 +46,7 @@ export const constantRouteMap = [
   Tables,
 
   {
-    path: 'icons',
+    path: '/icons',
     component: Layout,
     meta: { title: 'icon store', icon: 'store' },
     children: [{
@@ -55,6 +55,19 @@ export const constantRouteMap = [
       component: () => import('@/modules/icons/SystemIcons')
     }]
   },
+
+  {
+    path: '/notifications',
+    component: Layout,
+    meta: { title: 'notifications', icon: 'notice' },
+    children: [{
+      path: '',
+      name: 'Notification',
+      component: () => import('@/modules/notification/Notification')
+    }],
+    hidden: true
+  },
+
   { path: '*', redirect: '/error/404', hidden: true }
 ]
 
