@@ -14,7 +14,7 @@
     </div>
 
     <!-- nav forms -->
-    <el-tooltip class="item" effect="dark" content="Input something and press enter for search" placement="bottom">
+    <el-tooltip effect="dark" content="Input something and press enter for search" placement="bottom">
       <el-input class="nav-head-search hidden-xs-only" placeholder="search something..."
                 @keyup.enter.native="handleSearch">
       </el-input>
@@ -22,6 +22,16 @@
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
+      <el-tooltip effect="dark" content="you have no unread notifications" placement="bottom">
+        <a class="va-nav-item">
+          <el-badge is-dot>
+            <va-icon icon="notice"></va-icon>
+          </el-badge>
+        </a>
+      </el-tooltip>
+      <a class="va-nav-item hidden-xs-only">
+        <va-icon icon="theme"></va-icon>
+      </a>
       <el-dropdown @command="userDropdown" :show-timeout="100" style="float: left;">
         <a class="va-nav-item spacer-xs link-user">
           <img class="avatar" :src="user.avatar" alt="">

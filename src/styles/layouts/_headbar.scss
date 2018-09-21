@@ -55,6 +55,16 @@
     .va-icon {
       vertical-align: -3px;
     }
+
+    .el-badge {
+      display: inline;
+      vertical-align: unset;
+
+      .el-badge__content {
+        top: 6px;
+        right: 6px;
+      }
+    }
   }
 }
 
