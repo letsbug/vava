@@ -52,6 +52,9 @@
 <script>
 export default {
   name: 'VaHeadBar',
+  created() {
+    this.getNotificationList()
+  },
   computed: {
     sidebarOpend() { return this.$store.state.application.sidebar.opened },
     user() { return this.$store.state.user }
@@ -80,7 +83,10 @@ export default {
       }).then(() => {
         this.$store.dispatch('user_logout').then(() => { location.reload() })
       }).catch(() => {})
-    }
+    },
+    getNotificationList() {
+      this.$store.dispatch('notification_list')
+    },
   }
 }
 </script>

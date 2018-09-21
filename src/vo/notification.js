@@ -7,6 +7,7 @@ class NotificationVo {
     this.title = obj.title
     this.content = obj.content
     this.unread = obj.unread
+    this.deleted = obj.deleted
   }
 }
 

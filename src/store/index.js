@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import application from './modules/application'
 import user from './modules/user'
 import permission from './modules/permission'
+import notification from './modules/notification'
 
 import getters from './getters'
 
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
   modules: {
     application,
     user,
-    permission
+    permission,
+    notification
   },
   getters
 })
