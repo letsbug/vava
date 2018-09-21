@@ -55,6 +55,10 @@
   &.expanded {
     background-color: $sidebar-nav-expanded-bg;
 
+    .nav-title.active {
+      color: $sidebar-color-focus;
+    }
+
     .expander-icon {
       transform: rotate(90deg);
     }

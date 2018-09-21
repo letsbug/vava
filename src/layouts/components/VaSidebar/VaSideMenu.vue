@@ -42,12 +42,9 @@ export default {
   props: {
     routes: { type: Array, required: true }
   },
-  data() {
-    return { current: false }
-  },
-  watch: {
-    $route() {
-      this.current = this.$route.path.split('/')[1]
+  computed: {
+    current() {
+      return '/' + this.$route.path.split('/')[1]
     }
   },
   methods: {
