@@ -42,17 +42,21 @@ $sidebar-nav-link-padding-x:          $spacer-lg;
 //
 // About head bar
 $head-border:                   $border-default;
-$head-height:                   46px;
-$head-line-height:              $head-height - $border-default-width;
+$head-height:                   45px;
+$head-line-height:              $head-height - $border-default-width; // 44px
 $head-bg-color:                 $color-white;
 
-$head-nav-height:               $head-line-height;
-$head-nav-line-height:          $head-nav-height;
-$head-nav-item-padding:         0 $spacer-base;
 $head-nav-item-border-width:    2px;
 $head-nav-item-border:          solid $head-nav-item-border-width transparent;
 $head-nav-item-border-hover:    solid $head-nav-item-border-width $color-theme;
+$head-nav-height:               $head-line-height;  // 44px
+$head-nav-line-height:          $head-nav-height - ($head-nav-item-border-width * 2);
+$head-nav-item-spacer:          $spacer-base;
+$head-nav-item-padding:         0 $head-nav-item-spacer;
 $head-nav-font-size:            $font-size-h3;
+$head-nav-item-avatar-size:     32px;
+
+$head-nav-form-spacer:          6px;
 
 
 //
