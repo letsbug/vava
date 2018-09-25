@@ -107,6 +107,15 @@ const password = v => {
 }
 
 /**
+ * 公司名校验（6-32位，可包含中文，字母，数字，空格，英文符号'.'、','）
+ * @param v
+ * @returns {boolean}
+ */
+const company = v => {
+  return /^[\u4E00-\u9FA5a-z0-9.,\s]{6,32}$/i.test(v)
+}
+
+/**
  * 邮政编码校验
  * @param v
  * @returns {boolean}
@@ -224,6 +233,7 @@ export default {
   email,
   username,
   password,
+  company,
   postcode,
   captcha,
   IDCard,
