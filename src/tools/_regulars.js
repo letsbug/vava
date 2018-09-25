@@ -3,7 +3,7 @@
  * @param v
  */
 const empty = v => {
-  return new RegExp(/^[ ]*$/).test(v)
+  return /^[ ]*$/.test(v)
 }
 
 /**
@@ -12,7 +12,7 @@ const empty = v => {
  * @returns {*}
  */
 const number = v => {
-  return new RegExp(/^[0-9]+$/).test(v)
+  return /^[0-9]+$/.test(v)
 }
 
 /**
@@ -21,7 +21,7 @@ const number = v => {
  * @returns {*}
  */
 const alphabets = v => {
-  return new RegExp(/^[a-zA-Z]*$/).test(v)
+  return /^[a-zA-Z]*$/.test(v)
 }
 
 /**
@@ -30,7 +30,7 @@ const alphabets = v => {
  * @returns {boolean}
  */
 const lowercase = v => {
-  return new RegExp(/^[a-z]+$/).test(v)
+  return /^[a-z]+$/.test(v)
 }
 
 /**
@@ -39,7 +39,7 @@ const lowercase = v => {
  * @returns {boolean}
  */
 const uppercase = v => {
-  return new RegExp(/^[A-Z]+$/).test(v)
+  return /^[A-Z]+$/.test(v)
 }
 
 /**
@@ -48,7 +48,7 @@ const uppercase = v => {
  * @returns {boolean}
  */
 const chinese = v => {
-  return new RegExp(/^[\u0391-\uFFE5]+$/).test(v)
+  return /^[\u4E00-\u9FA5]+$/.test(v)
 }
 
 /**
@@ -57,7 +57,7 @@ const chinese = v => {
  * @returns {boolean}
  */
 const currency = v => {
-  return new RegExp(/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0)$)|(^[0-9]\.[0-9]([0-9])?$)/).test(v)
+  return /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0)$)|(^[0-9]\.[0-9]([0-9])?$)/.test(v)
 }
 
 /**
@@ -66,7 +66,7 @@ const currency = v => {
  * @returns {boolean}
  */
 const mobile = v => {
-  return new RegExp(/^[1][3|456789][0-9]{9}$/).test(v)
+  return /^[1][3456789][0-9]{9}$/.test(v)
 }
 
 /**
@@ -75,7 +75,7 @@ const mobile = v => {
  * @returns {boolean}
  */
 const phone = v => {
-  return new RegExp(/^0\d{2,3}-?\d{7,8}$/).test(v)
+  return /^0\d{2,3}-?\d{7,8}$/.test(v)
 }
 
 /**
@@ -84,7 +84,7 @@ const phone = v => {
  * @returns {boolean}
  */
 const email = v => {
-  return new RegExp(/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/).test(v)
+  return /^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(v)
 }
 
 /**
@@ -93,7 +93,7 @@ const email = v => {
  * @returns {boolean}
  */
 const username = v => {
-  return new RegExp(/^[a-zA-Z]([a-zA-Z0-9]|[._@]){3,15}/).test(v)
+  return /^[a-zA-Z]([a-zA-Z0-9]|[._@]){3,15}/.test(v)
 }
 
 /**
@@ -103,7 +103,7 @@ const username = v => {
  */
 const password = v => {
   /* eslint-disable-next-line */
-  return new RegExp(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/).test(v)
+  return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(v)
 }
 
 /**
@@ -112,7 +112,7 @@ const password = v => {
  * @returns {boolean}
  */
 const company = v => {
-  return /^[\u4E00-\u9FA5a-z0-9.,\s]{6,32}$/i.test(v)
+  return /^[\u4E00-\u9FA5|a-z0-9.,\s]{6,32}$/i.test(v)
 }
 
 /**
@@ -121,7 +121,7 @@ const company = v => {
  * @returns {boolean}
  */
 const postcode = v => {
-  return new RegExp(/^[1-9][0-9]{5}$/).test(v)
+  return /^[1-9][0-9]{5}$/.test(v)
 }
 
 /**
@@ -130,7 +130,7 @@ const postcode = v => {
  * @returns {boolean}
  */
 const captcha = v => {
-  return new RegExp(/^(\d|[A-Z]){6}$/).test(v)
+  return /^(\d|[A-Z]){6}$/.test(v)
 }
 
 /**
@@ -140,7 +140,7 @@ const captcha = v => {
  * @returns {boolean}
  */
 const IDCard = v => {
-  return new RegExp(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X)$)/).test(v)
+  return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X)$)/.test(v)
 }
 
 /**
@@ -151,7 +151,7 @@ const IDCard = v => {
 const url = v => {
   /* eslint-disable-next-line */
   const reg = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
-  return new RegExp(reg).test(v)
+  return reg.test(v)
 }
 
 /**
@@ -162,7 +162,7 @@ const url = v => {
 const addressCode = v => {
   /* eslint-disable-next-line */
   const address = { 11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内蒙古', 21: '辽宁', 22: '吉林', 23: '黑龙江', 31: '上海', 32: '江苏', 33: '浙江', 34: '安徽', 35: '福建', 36: '江西', 37: '山东', 41: '河南', 42: '湖北', 43: '湖南', 44: '广东', 45: '广西', 46: '海南', 50: '重庆', 51: '四川', 52: '贵州', 53: '云南', 54: '西藏', 61: '陕西', 62: '甘肃', 63: '青海', 64: '宁夏', 65: '新疆', 71: '台湾', 81: '香港', 82: '澳门', 91: '国外' }
-  const check = new RegExp(/^[1-9]\d{5}$/).test(v)
+  const check = /^[1-9]\d{5}$/.test(v)
   return check && address[parseInt(v.substring(0, 2))]
 }
 
@@ -174,8 +174,8 @@ const addressCode = v => {
  */
 const orgCode = v => {
   // console.log('Valid Organization Code: ', v)
-  if (!new RegExp(/^([0-9A-Z]){8}[0-9|X]$/).test(v)) {
-    // console.log('Valid org step1, Result: ', new RegExp(/^([0-9A-Z]){8}[0-9|X]$/).test(v))
+  if (!/^([0-9A-Z]){8}[0-9|X]$/.test(v)) {
+    // console.log('Valid org step1, Result: ', /^([0-9A-Z]){8}[0-9|X]$/).test(v))
     return false
   }
 
@@ -215,8 +215,8 @@ const taxpayerCode = v => {
  * @returns {boolean}
  */
 const unifiedSocialCreditCode = v => {
-  const valid = new RegExp(/^[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/g).test(v)
-  console.log('Valid Unified Social Credit Code: ', valid)
+  const valid = /^[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/g.test(v)
+  // console.log('Valid Unified Social Credit Code: ', valid)
   return valid && orgCode(v.substr(8, 9))
 }
 
