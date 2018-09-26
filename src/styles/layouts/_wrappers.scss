@@ -72,19 +72,19 @@
 
     &.sidebar-expanded {
       .va-sidebar {
-        transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
       }
       .va-main-wrapper {
-        transform: translate($sidebar-width-expanded/2, 0);
+        transform: translate3d($sidebar-width-expanded/2, 0, 0);
       }
     }
 
     &.sidebar-collapse {
       .va-sidebar {
-        transform: translate(-$sidebar-width-expanded, 0);
+        transform: translate3d(-$sidebar-width-expanded, 0, 0);
       }
       .va-main-wrapper {
-        transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
       }
     }
   }
