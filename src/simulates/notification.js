@@ -3,14 +3,14 @@ import NotificationVo from '@/vo/notification'
 
 const notifications = []
 
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 40; i++) {
   const nt = Mock.mock({
-    id: '@title',
+    id: '@id',
     creatime: Mock.Random.datetime(),
     uid: '',
-    from: '',
+    from: 'system',
     title: '@title',
-    content: '@title',
+    content: '@paragraph(1, 3)',
     unread: Mock.Random.boolean(),
     deleted: false
   })
@@ -21,6 +21,17 @@ export default {
   list: config => {
     return notifications
   },
-  read: config => {},
-  readall: config => {}
+  read: config => {
+    const { id } = config.body
+    const tar = notifications.find(v => v.id === id)
+    if (!tar) return 'error'
+    tar['unread'] = false
+    return 'success'
+  },
+  readall: config => {
+    for (const [v, i] of notifications) {
+      console.log('Simulate notifications iterator read all: ', v, i)
+      notifications[i]['unread'] = false
+    }
+  }
 }

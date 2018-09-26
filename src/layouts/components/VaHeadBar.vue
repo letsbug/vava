@@ -85,7 +85,9 @@ export default {
       }).catch(() => {})
     },
     getNotificationList() {
-      this.$store.dispatch('notification_list')
+      this.$store.dispatch('notification_list').then(res => {
+        if (res && res.length > 0) this.$store.dispatch('notification_has_unread')
+      })
     },
   }
 }
