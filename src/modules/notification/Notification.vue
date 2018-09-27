@@ -13,11 +13,11 @@
         Cancel
       </el-button>
       <el-button size="small" plain :type="multipleSelection.length > 0 ? 'primary' : ''"
-                 @click="handleMarkRead" v-show="tabsActived === 'unread'">
+                 @click="handleMarkRead()" v-show="tabsActived === 'unread'">
         Mark {{ multipleSelection.length > 0 ? 'selected' : 'all' }} as read
       </el-button>
       <el-button size="small" plain :type="multipleSelection.length > 0 ? 'primary' : ''"
-                 @click="handleDelete">
+                 @click="handleDelete()">
         Delete {{ multipleSelection.length > 0 ? 'selected' : 'all' }}
       </el-button>
     </div>
@@ -49,7 +49,7 @@
             <i class="el-icon-check" @click="handleMarkRead(scope.row)"></i>
           </el-tooltip>&nbsp;&nbsp;
           <el-tooltip content="Delete this notification" placement="left">
-            <i class="el-icon-close" @click="handleDelete(scope)"></i>
+            <i class="el-icon-close" @click="handleDelete(scope.row)"></i>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -81,6 +81,7 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
+      console.log(val)
     },
     handleTabsChange() {
       this.clearSelection()
