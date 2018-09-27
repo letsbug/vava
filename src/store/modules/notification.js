@@ -1,17 +1,15 @@
-import NotificationVo from '@/vo/notification'
 import Notification from '@/services/notification'
 
 const notification = {
   state: {
-    list: [NotificationVo],
-    unread: false
+    read: [],
+    unread: []
   },
   mutations: {
-    NOTIFICATION_HAS_UNREAD: (state, unread) => {
-      state.unread = unread
-    },
     NOTIFICATION_LIST: (state, list) => {
-      state.list = list
+      state.read.length = 0
+      state.unread.length = 0
+      list.map(v => state[v.unread ? 'unread' : 'read'].push(v))
     },
     NOTIFICATION_READ: (state, id) => {
       const target = state.list.find(v => v.id === id)
@@ -27,14 +25,6 @@ const notification = {
     }
   },
   actions: {
-    notification_has_unread: ({ commit, state }) => {
-      for (const v of state.list.entries()) {
-        if (v[1]['unread']) {
-          commit('NOTIFICATION_HAS_UNREAD', true)
-          break
-        }
-      }
-    },
     notification_list: ({ commit }) => new Promise((resolve, reject) => {
       Notification.list().then(res => {
         if (!res.data) reject(new Error('Got a error when get notification list.'))

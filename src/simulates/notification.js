@@ -3,7 +3,7 @@ import NotificationVo from '@/vo/notification'
 
 const notifications = []
 
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 60; i++) {
   const nt = Mock.mock({
     id: '@id',
     creatime: Mock.Random.datetime(),

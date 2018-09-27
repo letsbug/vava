@@ -23,6 +23,7 @@
   overflow-y: scroll;
   padding: $body-wrapper-padding;
   background-color: $body-wrapper-bg-color;
+  position: relative;
 
   transition: $transition-background;
 

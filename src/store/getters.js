@@ -7,7 +7,7 @@ const getters = {
   routes_permission: state => state.permission.routes,
   routes_addons: state => state.permission.addons,
   // User notifications
-  notifications: state => state.notification.list
+  notifications: state => state.notification
 }
 
 export default getters

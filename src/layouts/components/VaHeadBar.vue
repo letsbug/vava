@@ -58,7 +58,7 @@ export default {
   computed: {
     sidebarOpend() { return this.$store.state.application.sidebar.opened },
     user() { return this.$store.state.user },
-    notificationHasUnread() { return this.$store.state.notification.unread }
+    notificationHasUnread() { return this.$store.state.notification.unread.length > 0 }
   },
   methods: {
     toggleSidebar() { this.$store.dispatch('app_sidebar_toggle') },
@@ -86,9 +86,7 @@ export default {
       }).catch(() => {})
     },
     getNotificationList() {
-      this.$store.dispatch('notification_list').then(res => {
-        if (res && res.length > 0) this.$store.dispatch('notification_has_unread')
-      })
+      this.$store.dispatch('notification_list').then(res => {})
     },
   }
 }
