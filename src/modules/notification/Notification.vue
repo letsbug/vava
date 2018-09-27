@@ -46,7 +46,7 @@
       <el-table-column label="options" width="70" align="right">
         <template slot-scope="scope">
           <el-tooltip content="Mark this as read" placement="left" v-show="tabsActived === 'unread'">
-            <i class="el-icon-check" @click="handleMarkRead(scope)"></i>
+            <i class="el-icon-check" @click="handleMarkRead(scope.row)"></i>
           </el-tooltip>&nbsp;&nbsp;
           <el-tooltip content="Delete this notification" placement="left">
             <i class="el-icon-close" @click="handleDelete(scope)"></i>
@@ -86,12 +86,13 @@ export default {
       this.clearSelection()
     },
     handleShowDetail(row) {
-      this.$alert(row.title, 'notification', { confirmButtonText: 'Ok', callback: () => {
-        this.$store.dispatch('notification_read', [row.id]).then(() => {})
-      } })
+      this.$alert(row.title, 'notification', {
+        confirmButtonText: 'Ok',
+        callback: () => { this.handleMarkRead(row) }
+      })
     },
-    handleMarkRead(target) {
-      console.log(target)
+    handleMarkRead(row) {
+      this.$store.dispatch('notification_read', [row.id]).then(() => {})
     },
     handleDelete(target) {
       console.log(target)
