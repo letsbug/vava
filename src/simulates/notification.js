@@ -3,7 +3,7 @@ import NotificationVo from '@/vo/notification'
 
 const notifications = []
 
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 10; i++) {
   const nt = Mock.mock({
     id: '@id',
     creatime: Mock.Random.datetime(),
@@ -21,10 +21,10 @@ export default {
     return notifications
   },
   read: config => {
-    const { id } = config.body
-    const tar = notifications.find(v => v.id === id)
-    if (!tar) return 'error'
-    tar['unread'] = false
+    const { ids } = JSON.parse(config.body)
+    notifications.forEach((value, index) => {
+      if (ids.indexOf(value.id + '') !== -1) notifications[index].unread = false
+    })
     return 'success'
   },
   readall: () => {

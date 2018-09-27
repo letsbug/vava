@@ -4,8 +4,8 @@ const list = () => {
   return Service.post('/notification/list')
 }
 
-const read = id => {
-  const data = { id }
+const read = ids => {
+  const data = { ids }
   return Service.post('/notification/read', data)
 }
 

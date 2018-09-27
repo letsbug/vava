@@ -1,27 +1,32 @@
 <template>
   <div class="va-body-container container-notifications">
     <!-- page title -->
-    <div class="options">
-      <el-button size="small" plain v-if="multipleSelection.length > 0"
-                 @click="$refs['notifications'].clearSelection()">
-        Cancel
-      </el-button>
-      <el-button size="small" plain :type="multipleSelection.length > 0 ? 'primary' : ''"
-                 @click="handleDelete">
-        Mark {{ multipleSelection.length > 0 ? 'selected' : 'all' }} as read
-      </el-button>
-    </div>
     <el-tabs v-model="tabsActived" @tab-click="handleTabsChange">
       <el-tab-pane label="unread" name="unread"></el-tab-pane>
       <el-tab-pane label="read" name="read"></el-tab-pane>
     </el-tabs>
 
+    <!-- handle options -->
+    <div class="options">
+      <el-button size="small" plain v-if="multipleSelection.length > 0"
+                 @click="clearSelection">
+        Cancel
+      </el-button>
+      <el-button size="small" plain :type="multipleSelection.length > 0 ? 'primary' : ''"
+                 @click="handleMarkRead" v-show="tabsActived === 'unread'">
+        Mark {{ multipleSelection.length > 0 ? 'selected' : 'all' }} as read
+      </el-button>
+      <el-button size="small" plain :type="multipleSelection.length > 0 ? 'primary' : ''"
+                 @click="handleDelete">
+        Delete {{ multipleSelection.length > 0 ? 'selected' : 'all' }}
+      </el-button>
+    </div>
+
     <!-- notification list -->
-    <el-table ref="notifications" style="width: 100%;" size="medium" row-class-name="clickable"
+    <el-table ref="notifications" style="width: 100%;" size="medium"
               :show-header="false" highlight-current-row show-overflow-tooltip
               :data="tabsActived === 'unread' ? notifications.unread : notifications.read"
-              @selection-change="handleSelectionChange"
-              @row-click="handleShowDetail">
+              @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="40"></el-table-column>
       <el-table-column prop="from" lable="from" width="80">
         <template slot-scope="scope">
@@ -30,17 +35,17 @@
       </el-table-column>
       <el-table-column prop="title" label="title" show-overflow-tooltip>
         <template slot-scope="scope">
-          <span :class="transClass(scope)">{{ scope.row.title }}</span>
+          <a :class="transUnreadClass(scope)" @click="handleShowDetail(scope.row)">{{ scope.row.title }}</a>
         </template>
       </el-table-column>
       <el-table-column prop="creatime" width="160" label="date">
         <template slot-scope="scope">
-          <span :class="transClass(scope)">{{ scope.row.creatime }}</span>
+          <span :class="transUnreadClass(scope)">{{ scope.row.creatime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="options" width="70">
+      <el-table-column label="options" width="70" align="right">
         <template slot-scope="scope">
-          <el-tooltip content="Mark this as read" placement="left">
+          <el-tooltip content="Mark this as read" placement="left" v-show="tabsActived === 'unread'">
             <i class="el-icon-check" @click="handleMarkRead(scope)"></i>
           </el-tooltip>&nbsp;&nbsp;
           <el-tooltip content="Delete this notification" placement="left">
@@ -68,17 +73,22 @@ export default {
     notifications() { return this.$store.getters.notifications }
   },
   methods: {
-    handleTabsChange(tab, ev) {
-      console.log(tab, ev)
-    },
-    transClass(scope) {
+    transUnreadClass(scope) {
       return scope.row.unread ? 'unread' : ''
+    },
+    clearSelection() {
+      this.$refs['notifications'].clearSelection()
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    handleShowDetail(row, event, column) {
-      console.log(row, event, column)
+    handleTabsChange() {
+      this.clearSelection()
+    },
+    handleShowDetail(row) {
+      this.$alert(row.title, 'notification', { confirmButtonText: 'Ok', callback: () => {
+        this.$store.dispatch('notification_read', [row.id]).then(() => {})
+      } })
     },
     handleMarkRead(target) {
       console.log(target)
@@ -102,6 +112,6 @@ export default {
   cursor: pointer;
 }
 .unread {
-  font-weight: bold;
+  font-weight: 500;
 }
 </style>
