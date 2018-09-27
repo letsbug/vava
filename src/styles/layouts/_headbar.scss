@@ -41,6 +41,10 @@
       border-top: $head-nav-item-border-hover;
     }
 
+    &.active {
+      color: $color-actives;
+    }
+
     &.spacer-xs {
       padding: 0 5px;
     }
