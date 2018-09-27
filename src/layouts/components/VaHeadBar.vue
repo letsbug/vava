@@ -24,7 +24,7 @@
     <div class="va-head-nav nav-right clear-fix">
       <el-tooltip effect="dark" content="you have unread notifications" placement="bottom">
         <router-link class="va-nav-item" to="/notifications">
-          <el-badge is-dot>
+          <el-badge is-dot :hidden="!notificationHasUnread">
             <va-icon icon="notice"></va-icon>
           </el-badge>
         </router-link>
@@ -57,7 +57,8 @@ export default {
   },
   computed: {
     sidebarOpend() { return this.$store.state.application.sidebar.opened },
-    user() { return this.$store.state.user }
+    user() { return this.$store.state.user },
+    notificationHasUnread() { return this.$store.state.notification.unread }
   },
   methods: {
     toggleSidebar() { this.$store.dispatch('app_sidebar_toggle') },

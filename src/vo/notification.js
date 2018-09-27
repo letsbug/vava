@@ -5,7 +5,6 @@ class NotificationVo {
     this.uid = obj.uid
     this.from = obj.from
     this.title = obj.title
-    this.content = obj.content
     this.unread = obj.unread
     this.deleted = obj.deleted
   }

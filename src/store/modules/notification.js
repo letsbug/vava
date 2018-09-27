@@ -4,7 +4,7 @@ import Notification from '@/services/notification'
 const notification = {
   state: {
     list: [NotificationVo],
-    unread: true
+    unread: false
   },
   mutations: {
     NOTIFICATION_HAS_UNREAD: (state, unread) => {

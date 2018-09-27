@@ -9,8 +9,7 @@ for (let i = 0; i < 40; i++) {
     creatime: Mock.Random.datetime(),
     uid: '',
     from: 'system',
-    title: '@title',
-    content: '@paragraph(1, 3)',
+    title: '@sentence',
     unread: Mock.Random.boolean(),
     deleted: false
   })
@@ -18,7 +17,7 @@ for (let i = 0; i < 40; i++) {
 }
 
 export default {
-  list: config => {
+  list: () => {
     return notifications
   },
   read: config => {
@@ -28,10 +27,11 @@ export default {
     tar['unread'] = false
     return 'success'
   },
-  readall: config => {
+  readall: () => {
     for (const [v, i] of notifications) {
       console.log('Simulate notifications iterator read all: ', v, i)
       notifications[i]['unread'] = false
     }
+    return 'success'
   }
 }

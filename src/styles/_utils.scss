@@ -14,6 +14,16 @@
 .text-center { text-align: center }
 
 
+// Text transform
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+
 //
 // float util
 
