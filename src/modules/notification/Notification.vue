@@ -3,7 +3,7 @@
     <!-- page title -->
     <el-tabs v-model="tabsActived" @tab-click="handleTabsChange">
       <el-tab-pane label="unread" name="unread"></el-tab-pane>
-      <el-tab-pane label="read" name="read"></el-tab-pane>
+      <el-tab-pane :label="notifications.unread.length > 0 ? 'read' : 'notifications'" name="read"></el-tab-pane>
     </el-tabs>
 
     <!-- handle options -->
@@ -92,7 +92,19 @@ export default {
       })
     },
     handleMarkRead(row) {
-      this.$store.dispatch('notification_read', [row.id]).then(() => {})
+      if (!row && this.multipleSelection.length < 1) {
+        this.$store.dispatch('notification_read_all').then(() => {})
+        return
+      }
+      const ids = []
+      if (row) ids.push(row.id)
+      else if (this.multipleSelection.length > 0) {
+        this.multipleSelection.forEach(v => {
+          ids.push(v.id)
+        })
+      }
+      console.log(ids)
+      this.$store.dispatch('notification_read', ids).then(() => {})
     },
     handleDelete(target) {
       console.log(target)

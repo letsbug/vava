@@ -22,9 +22,8 @@ const notification = {
       })
     },
     NOTIFICATION_READ_ALL: (state) => {
-      for (const [v, i] of state.list) {
-        console.log('Vuex store notifications iterator read all: ', v, i)
-      }
+      state.read = [].concat(state.read, state.unread)
+      state.unread.length = 0
     }
   },
   actions: {
