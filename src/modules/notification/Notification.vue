@@ -6,7 +6,7 @@
 
       <!-- handle options -->
       <span class="options">
-        <el-button size="small" plain @click="handleMarkRead()">
+        <el-button size="small" plain @click="handleMarkRead()" v-if="notifications.hasUnread">
           Mark all as read
         </el-button>
         <el-button size="small" plain @click="handleDelete()">
@@ -29,9 +29,14 @@
           <a :class="transUnreadClass(scope)" @click="handleShowDetail(scope.row)">{{ scope.row.title }}</a>
         </template>
       </el-table-column>
-      <el-table-column prop="date" width="160" label="date">
+      <el-table-column width="160" label="date">
         <template slot-scope="scope">
-          <span :class="transUnreadClass(scope)">{{ scope.row.date }}</span>
+          <span>{{ scope.row.date | dateFormat('yyyy.MM.dd hh:mm:ss') }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="120" label="date">
+        <template slot-scope="scope">
+          <span :class="transUnreadClass(scope)">{{ scope.row.date | dateAgo }}</span>
         </template>
       </el-table-column>
       <el-table-column label="options" width="70" align="right">
@@ -71,10 +76,10 @@ export default {
     },
     handleMarkRead(row) {
       if (row && row.unread) this.$store.dispatch('notification_read', [row.id])
-      else this.$alert('Are you sure you want to mark all unread notifications as read?', 'Are you sure?', {
-        confirmButtonText: 'Ok',
-        callback: () => { this.$store.dispatch('notification_read_all') }
-      })
+      else this.$confirm('Are you sure you want to mark all unread notifications as read?', 'Are you sure?', {
+        confirmButtonText: 'Mark all notifications as read',
+        cancelButtonText: 'Cancel'
+      }).then(() => { this.$store.dispatch('notification_read_all') })
     },
     handleDelete(target) {
       console.log(target)
