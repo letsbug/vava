@@ -9,9 +9,6 @@
         <el-button size="small" plain @click="handleMarkAllRead" v-if="notifications.hasUnread">
           Mark all as read
         </el-button>
-        <el-button size="small" plain @click="handleDelete()">
-          Delete all
-        </el-button>
       </span>
     </h3>
 
@@ -43,9 +40,6 @@
         <template slot-scope="scope">
           <el-tooltip content="Mark this as read" placement="left" v-if="scope.row.unread">
             <i class="el-icon-check" @click="handleMarkRead(scope.row)"></i>
-          </el-tooltip>&nbsp;&nbsp;
-          <el-tooltip content="Delete this notification" placement="left">
-            <i class="el-icon-close" @click="handleDelete(scope.row)"></i>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -76,16 +70,14 @@ export default {
       if (row && row.unread) this.$store.dispatch('notification_read', [row.id])
     },
     handleMarkAllRead() {
-      this.$confirm('You will mark all unread notifications as read.', 'Are you sure?', {
+      const options = {
         confirmButtonText: 'Mark all',
         cancelButtonText: 'Cancel',
         callback: action => {
           if (action === 'confirm') this.$store.dispatch('notification_read_all')
         }
-      })
-    },
-    handleDelete(target) {
-      console.log(target)
+      }
+      this.$confirm('You will mark all unread notifications as read.', 'Are you sure?', options)
     }
   }
 }
