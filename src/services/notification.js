@@ -10,7 +10,7 @@ const read = ids => {
 }
 
 const readall = () => {
-  return Service.post('/notification/readall')
+  return Service.post('/notification/allread')
 }
 
 export default {

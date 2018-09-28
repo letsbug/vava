@@ -33,14 +33,10 @@
 
   .va-body-title {
     font-size: $font-size-h3;
-
-    .options {
-      float: right;
-
-      .el-button {
-        vertical-align: top;
-      }
-    }
+    position: relative;
+    border-bottom: $border-default;
+    padding-bottom: $spacer-base;
+    margin: $spacer-base 0;
   }
 }
 

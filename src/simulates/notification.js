@@ -5,8 +5,8 @@ const notifications = []
 
 for (let i = 0; i < 10; i++) {
   const nt = Mock.mock({
-    id: '@id',
-    creatime: Mock.Random.datetime(),
+    id: '@guid',
+    date: Mock.Random.datetime(),
     uid: '',
     from: 'system',
     title: '@sentence',
@@ -18,7 +18,7 @@ for (let i = 0; i < 10; i++) {
 
 export default {
   list: () => {
-    return notifications
+    return notifications.sort((a, b) => (a.date < b.date ? 1 : -1))
   },
   read: config => {
     const { ids } = JSON.parse(config.body)
@@ -28,10 +28,9 @@ export default {
     return 'success'
   },
   readall: () => {
-    for (const [v, i] of notifications) {
-      console.log('Simulate notifications iterator read all: ', v, i)
+    notifications.forEach((v, i) => {
       notifications[i]['unread'] = false
-    }
+    })
     return 'success'
   }
 }

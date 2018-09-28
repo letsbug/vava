@@ -53,12 +53,12 @@
 export default {
   name: 'VaHeadBar',
   created() {
-    this.getNotificationList()
+    this.$store.dispatch('notification_list')
   },
   computed: {
     sidebarOpend() { return this.$store.state.application.sidebar.opened },
     user() { return this.$store.state.user },
-    notificationHasUnread() { return this.$store.state.notification.unread.length > 0 }
+    notificationHasUnread() { return this.$store.state.notification.hasUnread }
   },
   methods: {
     toggleSidebar() { this.$store.dispatch('app_sidebar_toggle') },
@@ -84,10 +84,7 @@ export default {
       }).then(() => {
         this.$store.dispatch('user_logout').then(() => { location.reload() })
       }).catch(() => {})
-    },
-    getNotificationList() {
-      this.$store.dispatch('notification_list').then(res => {})
-    },
+    }
   }
 }
 </script>

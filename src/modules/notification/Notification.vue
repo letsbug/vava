@@ -1,33 +1,24 @@
 <template>
   <div class="va-body-container container-notifications">
     <!-- page title -->
-    <el-tabs v-model="tabsActived" @tab-click="handleTabsChange">
-      <el-tab-pane label="unread" name="unread"></el-tab-pane>
-      <el-tab-pane :label="notifications.unread.length > 0 ? 'read' : 'notifications'" name="read"></el-tab-pane>
-    </el-tabs>
+    <h3 class="va-body-title">
+      Notifications
 
-    <!-- handle options -->
-    <div class="options">
-      <el-button size="small" plain v-if="multipleSelection.length > 0"
-                 @click="clearSelection">
-        Cancel
-      </el-button>
-      <el-button size="small" plain :type="multipleSelection.length > 0 ? 'primary' : ''"
-                 @click="handleMarkRead()" v-show="tabsActived === 'unread'">
-        Mark {{ multipleSelection.length > 0 ? 'selected' : 'all' }} as read
-      </el-button>
-      <el-button size="small" plain :type="multipleSelection.length > 0 ? 'primary' : ''"
-                 @click="handleDelete()">
-        Delete {{ multipleSelection.length > 0 ? 'selected' : 'all' }}
-      </el-button>
-    </div>
+      <!-- handle options -->
+      <span class="options">
+        <el-button size="small" plain @click="handleMarkRead()">
+          Mark all as read
+        </el-button>
+        <el-button size="small" plain @click="handleDelete()">
+          Delete all
+        </el-button>
+      </span>
+    </h3>
 
     <!-- notification list -->
-    <el-table ref="notifications" style="width: 100%;" size="medium"
-              :show-header="false" highlight-current-row show-overflow-tooltip
-              :data="tabsActived === 'unread' ? notifications.unread : notifications.read"
-              @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="40"></el-table-column>
+    <el-table ref="notifications" size="medium" :show-header="false" highlight-current-row show-overflow-tooltip
+              :data="notifications.list" style="width: 100%;">
+      <el-table-column type="index" label="#" width="40"></el-table-column>
       <el-table-column prop="from" lable="from" width="80">
         <template slot-scope="scope">
           <el-tag size="mini">{{ scope.row.from }}</el-tag>
@@ -38,14 +29,14 @@
           <a :class="transUnreadClass(scope)" @click="handleShowDetail(scope.row)">{{ scope.row.title }}</a>
         </template>
       </el-table-column>
-      <el-table-column prop="creatime" width="160" label="date">
+      <el-table-column prop="date" width="160" label="date">
         <template slot-scope="scope">
-          <span :class="transUnreadClass(scope)">{{ scope.row.creatime }}</span>
+          <span :class="transUnreadClass(scope)">{{ scope.row.date }}</span>
         </template>
       </el-table-column>
       <el-table-column label="options" width="70" align="right">
         <template slot-scope="scope">
-          <el-tooltip content="Mark this as read" placement="left" v-show="tabsActived === 'unread'">
+          <el-tooltip content="Mark this as read" placement="left">
             <i class="el-icon-check" @click="handleMarkRead(scope.row)"></i>
           </el-tooltip>&nbsp;&nbsp;
           <el-tooltip content="Delete this notification" placement="left">
@@ -54,9 +45,6 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <!-- notification detail dialog -->
-
   </div>
 </template>
 
@@ -65,7 +53,6 @@ export default {
   name: 'Notification',
   data() {
     return {
-      tabsActived: 'unread',
       multipleSelection: []
     }
   },
@@ -76,16 +63,6 @@ export default {
     transUnreadClass(scope) {
       return scope.row.unread ? 'unread' : ''
     },
-    clearSelection() {
-      this.$refs['notifications'].clearSelection()
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-      console.log(val)
-    },
-    handleTabsChange() {
-      this.clearSelection()
-    },
     handleShowDetail(row) {
       this.$alert(row.title, 'notification', {
         confirmButtonText: 'Ok',
@@ -93,19 +70,11 @@ export default {
       })
     },
     handleMarkRead(row) {
-      if (!row && this.multipleSelection.length < 1) {
-        this.$store.dispatch('notification_read_all').then(() => {})
-        return
-      }
-      const ids = []
-      if (row) ids.push(row.id)
-      else if (this.multipleSelection.length > 0) {
-        this.multipleSelection.forEach(v => {
-          ids.push(v.id)
-        })
-      }
-      console.log(ids)
-      this.$store.dispatch('notification_read', ids).then(() => {})
+      if (row && row.unread) this.$store.dispatch('notification_read', [row.id])
+      else this.$alert('Are you sure you want to mark all unread notifications as read?', 'Are you sure?', {
+        confirmButtonText: 'Ok',
+        callback: () => { this.$store.dispatch('notification_read_all') }
+      })
     },
     handleDelete(target) {
       console.log(target)
@@ -115,12 +84,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/_variables.scss";
-
 .options {
-  position: absolute;
-  top: $body-wrapper-padding;
-  right: $body-wrapper-padding;
+  float: right;
+  margin-top: -4px;
 }
 .notifications {
   cursor: pointer;

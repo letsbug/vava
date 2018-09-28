@@ -11,4 +11,4 @@ Mock.mock(/\/account\/update/, 'get', Account.update)
 // About notifications
 Mock.mock(/\/notification\/list/, 'post', Notification.list)
 Mock.mock(/\/notification\/read/, 'post', Notification.read)
-Mock.mock(/\/notification\/readall/, 'post', Notification.readall)
+Mock.mock(/\/notification\/allread/, 'post', Notification.readall)
