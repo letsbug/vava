@@ -45,11 +45,11 @@ export const dateAgo = date => {
   const diff = (new Date() - date) / 1000
 
   if (diff < 60) return 'just now'
-  else if (diff < 3600) return Math.ceil(diff / 60) + ' minutes ago'
-  else if (diff < 3600 * 24) return Math.ceil(diff / 3600) + ' hours ago'
-  else if (diff < 3600 * 24 * 30) return Math.ceil(diff / 3600 / 24) + ' days ago'
-  else if (diff < 3600 * 24 * 30 * 12) return Math.ceil(diff / 3600 / 24 / 30) + ' months ago'
-  else return Math.ceil(diff / 3600 / 24 / 30 / 12) + ' years ago'
+  else if (diff < 3600) return Math.floor(diff / 60) + ' minutes ago'
+  else if (diff < 3600 * 24) return Math.floor(diff / 3600) + ' hours ago'
+  else if (diff < 3600 * 24 * 30) return Math.floor(diff / 3600 / 24) + ' days ago'
+  else if (diff < 3600 * 24 * 30 * 12) return Math.floor(diff / 3600 / 24 / 30) + ' months ago'
+  else return Math.floor(diff / 3600 / 24 / 30 / 12) + ' years ago'
 }
 
 export default {
