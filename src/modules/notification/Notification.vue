@@ -6,7 +6,7 @@
 
       <!-- handle options -->
       <span class="options">
-        <el-button size="small" plain @click="handleMarkRead()" v-if="notifications.hasUnread">
+        <el-button size="small" plain @click="handleMarkAllRead" v-if="notifications.hasUnread">
           Mark all as read
         </el-button>
         <el-button size="small" plain @click="handleDelete()">
@@ -26,7 +26,7 @@
       </el-table-column>
       <el-table-column prop="title" label="title" show-overflow-tooltip>
         <template slot-scope="scope">
-          <a :class="transUnreadClass(scope)" @click="handleShowDetail(scope.row)">{{ scope.row.title }}</a>
+          <a :class="transUnreadClass(scope.row)" @click="handleShowDetail(scope.row)">{{ scope.row.title }}</a>
         </template>
       </el-table-column>
       <el-table-column width="160" label="date">
@@ -36,12 +36,12 @@
       </el-table-column>
       <el-table-column width="120" label="date">
         <template slot-scope="scope">
-          <span :class="transUnreadClass(scope)">{{ scope.row.date | dateAgo }}</span>
+          <span :class="transUnreadClass(scope.row)">{{ scope.row.date | dateAgo }}</span>
         </template>
       </el-table-column>
       <el-table-column label="options" width="70" align="right">
         <template slot-scope="scope">
-          <el-tooltip content="Mark this as read" placement="left">
+          <el-tooltip content="Mark this as read" placement="left" v-if="scope.row.unread">
             <i class="el-icon-check" @click="handleMarkRead(scope.row)"></i>
           </el-tooltip>&nbsp;&nbsp;
           <el-tooltip content="Delete this notification" placement="left">
@@ -65,9 +65,7 @@ export default {
     notifications() { return this.$store.getters.notifications }
   },
   methods: {
-    transUnreadClass(scope) {
-      return scope.row.unread ? 'unread' : ''
-    },
+    transUnreadClass: row => row.unread ? 'unread' : '',
     handleShowDetail(row) {
       this.$alert(row.title, 'notification', {
         confirmButtonText: 'Ok',
@@ -76,10 +74,15 @@ export default {
     },
     handleMarkRead(row) {
       if (row && row.unread) this.$store.dispatch('notification_read', [row.id])
-      else this.$confirm('Are you sure you want to mark all unread notifications as read?', 'Are you sure?', {
-        confirmButtonText: 'Mark all notifications as read',
-        cancelButtonText: 'Cancel'
-      }).then(() => { this.$store.dispatch('notification_read_all') })
+    },
+    handleMarkAllRead() {
+      this.$confirm('You will mark all unread notifications as read.', 'Are you sure?', {
+        confirmButtonText: 'Mark all',
+        cancelButtonText: 'Cancel',
+        callback: action => {
+          if (action === 'confirm') this.$store.dispatch('notification_read_all')
+        }
+      })
     },
     handleDelete(target) {
       console.log(target)
