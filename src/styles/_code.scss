@@ -1,0 +1,28 @@
+code {
+  color: $color-theme;
+  background-color: lighten($color-theme, 30%);
+  margin: 0 4px;
+  display: inline-block;
+  padding: 1px 5px;
+  //font-size: $font-size-xs;
+  border-radius: 3px;
+  font-family: Menlo, Monaco, Consolas, Courier, monospace;
+}
+
+blockquote {
+  border-left: solid 3px $color-gray-400;
+  margin-left: 0;
+  margin-right: 0;
+  padding: $spacer-base $spacer-base $spacer-base $spacer-xxl;
+  background-color: $color-gray-100;
+
+  > p {
+    margin-top: 0;
+    color: $color-gray-600;
+  }
+
+  > p:nth-last-child(1):first-child,
+  > p:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="va-body-container container-notifications">
     <!-- page title -->
-    <h3 class="va-body-title">
+    <h4 class="va-body-title">
       Notifications
 
       <!-- handle options -->
@@ -10,7 +10,7 @@
           Mark all as read
         </el-button>
       </span>
-    </h3>
+    </h4>
 
     <!-- notification list -->
     <el-table ref="notifications" size="medium" :show-header="false" highlight-current-row show-overflow-tooltip
@@ -86,7 +86,7 @@ export default {
 <style scoped lang="scss">
 .options {
   float: right;
-  margin-top: -4px;
+  margin-top: -5px;
 }
 .notifications {
   cursor: pointer;
