@@ -4,11 +4,11 @@
       Usage
     </h4>
     <pre v-highlight><code class="html">
-      Just use <strong>va-icon</strong> component to use icons, Like &lt;va-icon icon="dashboard"/&gt;. Click them to copy HTML.
+      Just use <strong>va-icon</strong> component to use icons, Like &lt;va-icon icon="dashboard"/&gt;.
     </code></pre>
     <h4 class="va-body-title">
       ICONS&nbsp;&nbsp;
-      <small class="text-muted hidden-sm-and-down">Sets of ICONS used by the system itself.</small>
+      <small class="text-muted hidden-sm-and-down">Click them to copy HTML.</small>
     </h4>
     <el-row>
       <el-col :xl="3" :lg="4" :md="6" :sm="6" :xs="8" v-for="icon of icons" :key="icon">
