@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container icon-viewer">
-    <h4 class="va-body-title">SVG Icons&nbsp;&nbsp;<small class="text-muted">Provides a set of commonly used ICONS</small></h4>
+    <h4 class="va-body-title">SVG Icons&nbsp;&nbsp;<small class="text-muted">Sets of ICONS used by the system itself.</small></h4>
     <blockquote>
       <p>You can use the built-in SVG icons by using the <code>va-icon</code> component.</p>
       <p>Click them to copy the code.</p>
