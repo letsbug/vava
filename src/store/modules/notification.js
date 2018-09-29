@@ -13,9 +13,12 @@ const notification = {
       })
     },
     NOTIFICATION_READ: (state, ids) => {
+      let has = false
       state.list.forEach((value, index) => {
         if (~ids.indexOf(value.id)) state.list[index].unread = false
+        if (value.unread) has = true
       })
+      state.hasUnread = has
     },
     NOTIFICATION_READ_ALL: (state) => {
       state.list.forEach((v, i) => { state.list[i].unread = false })
