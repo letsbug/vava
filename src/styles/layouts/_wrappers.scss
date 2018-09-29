@@ -37,6 +37,7 @@
     border-bottom: $border-default;
     padding-bottom: $spacer-base;
     margin-bottom: $spacer-base;
+    text-transform: capitalize;
 
     &:first-child {
       margin-top: $spacer-sm;

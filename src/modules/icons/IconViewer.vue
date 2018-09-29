@@ -7,7 +7,7 @@
       Just use <strong>va-icon</strong> component to use icons, Like &lt;va-icon icon="dashboard"/&gt;.
     </code></pre>
     <h4 class="va-body-title">
-      ICONS&nbsp;&nbsp;
+      Icons&nbsp;&nbsp;
       <small class="text-muted hidden-sm-and-down">Click them to copy HTML.</small>
     </h4>
     <el-row>
