@@ -5,7 +5,10 @@
 </template>
 
 <script>
+import { meta } from './meta'
+
 export default {
-  name: 'App'
+  name: 'App',
+  metaInfo: meta
 }
 </script>

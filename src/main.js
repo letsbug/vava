@@ -2,40 +2,38 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 
-import 'normalize.css'
-
 import Element from 'element-ui'
-// Override element-ui primary color
-import '@/style-element-reboot/element-reboots.scss'
+import 'normalize.css'
+import '@/styles/element-reboot.scss'
 import 'element-ui/lib/theme-chalk/display.css'
-import '@/styles/core.admin.frame.scss'
+import '@/styles/va.core.scss'
 
 import App from './App'
-import store from '@/store'
-import router from '@/router'
+import store from './store'
+import router from './router'
+import Meta from 'vue-meta'
+
 import '@/router/helper'
+import '@/simulates'
 
-// Data simulation
-import '@/simulate'
+// load system svg icons by symbol.
+import '@/assets/icons'
 
-// Global filters
-import * as filters from '@/utilities/Filters'
+import * as filters from '@/filters'
 
-// 百度统计
+// Baidu analytics
 import hmt from 'vue-ba'
-const hmt_options = {
-  siteId: '9e73d1f3aef423e62a00c7575a9c0f08',
-  debug: process.env.NODE_ENV !== 'production'
-}
 
-Vue.use(Element, { size: 'small' })
-Vue.use(hmt, hmt_options)
+Vue.config.productionTip = false
 
+Vue.use(Element)
+Vue.use(Meta)
+Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
+
+// register global filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
-
-Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({

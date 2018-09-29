@@ -1,34 +1,14 @@
-/**
- * permission.
- * @author: gzb
- * @date: 2018-06-18 20:27
- */
+import { constantRouteMap, asyncRouteMap } from '@/router/routes'
 
-import { constantRouterMap, asyncRouterMap } from '@/router/routes'
-
-/**
- * 通过meta.role判断是否与当前用户权限匹配
- * @param roles
- * @param route
- */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.indexOf(role) >= 0)
-  } else {
-    return true
-  }
+const hasPermission = (roles, route) => {
+  return (route.meta && route.meta.roles) ? roles.some(role => route.meta.roles.indexOf(role) >= 0) : true
 }
 
-/**
- * 递归过滤异步路由表，返回符合用户角色权限的路由表
- * @param asyncRouterMap
- * @param roles
- */
-function filterAsyncRouter(asyncRouterMap, roles) {
-  return asyncRouterMap.filter(route => {
+const filterAsyncRoutes = (asyncRouteMap, roles) => {
+  return asyncRouteMap.filters(route => {
     if (hasPermission(roles, route)) {
       if (route.children && route.children.length) {
-        route.children = filterAsyncRouter(route.children, roles)
+        route.children = filterAsyncRoutes(route.children, roles)
       } return true
     } return false
   })
@@ -36,26 +16,24 @@ function filterAsyncRouter(asyncRouterMap, roles) {
 
 const permission = {
   state: {
-    routes: constantRouterMap,
-    addRoutes: []
+    routes: constantRouteMap,
+    addons: []
   },
   mutations: {
-    PERM_SET_ROUTERS: (state, routes) => {
-      state.addRoutes = routes
-      state.routes = constantRouterMap.concat(routes)
+    PERM_SET_ROUTES: (state, routes) => {
+      state.addons = routes
+      state.routes = constantRouteMap.concat(routes)
     }
   },
   actions: {
-    perm_generate_routes({ commit }, data) {
-      return new Promise(resolve => {
-        const { roles } = data
-        const accessedRoutes = (roles.indexOf('admin') >= 0)
-          ? asyncRouterMap
-          : filterAsyncRouter(asyncRouterMap, roles)
-        commit('PERM_SET_ROUTERS', accessedRoutes)
-        resolve()
-      })
-    }
+    perm_generate_routes: ({ commit }, data) => new Promise(resolve => {
+      const { roles } = data
+      const accessRoutes = (roles.indexOf('admin') >= 0)
+        ? asyncRouteMap
+        : filterAsyncRoutes(asyncRouteMap, roles)
+      commit('PERM_SET_ROUTES', accessRoutes)
+      resolve()
+    })
   }
 }
 

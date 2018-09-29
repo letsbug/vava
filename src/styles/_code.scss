@@ -1,26 +1,24 @@
 code {
-  color: $color-green-500;
-  background-color: $color-green-100;
+  color: $color-theme;
+  background-color: lighten($color-theme, 30%);
   margin: 0 4px;
   display: inline-block;
   padding: 1px 5px;
-  font-size: $font-size-xs;
+  //font-size: $font-size-xs;
   border-radius: 3px;
-  height: $font-size-xl;
-  line-height: $font-size-xl;
   font-family: Menlo, Monaco, Consolas, Courier, monospace;
 }
 
 blockquote {
-  border-left: solid 3px $gray-400;
+  border-left: solid 3px $color-gray-400;
   margin-left: 0;
   margin-right: 0;
-  padding: $spacer-y*1.5 $spacer-x $spacer-y*1.5 $spacer-x * 1.5;
-  background-color: $gray-150;
+  padding: $spacer-base $spacer-base $spacer-base $spacer-xxl;
+  background-color: $color-gray-100;
 
   > p {
     margin-top: 0;
-    color: $gray-600;
+    color: $color-gray-600;
   }
 
   > p:nth-last-child(1):first-child,

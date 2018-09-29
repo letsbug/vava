@@ -1,0 +1,18 @@
+.va-foot-bar {
+  height: $foot-height;
+  line-height: $foot-line-height;
+  padding: $foot-wrapper-padding;
+  background-color: $foot-bg-color;
+  border-top: $foot-border;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-footer;
+
+  box-shadow: $shadow-sm-vr-inverse;
+
+  .va-copyright {
+    float: right;
+  }
+}

@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+// modules
 import application from './modules/application'
-import user from './modules/userInfo'
+import user from './modules/user'
 import permission from './modules/permission'
-import tabs from './modules/apptab'
+import notification from './modules/notification'
 
 import getters from './getters'
 
@@ -15,7 +16,7 @@ const store = new Vuex.Store({
     application,
     user,
     permission,
-    tabs
+    notification
   },
   getters
 })

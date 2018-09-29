@@ -1,14 +1,13 @@
 const getters = {
-  // about user informations
+  // Information about the currently logged in user.
   user: state => state.user,
   token: state => state.user.token,
   roles: state => state.user.roles,
-  // async routes
-  permission_routes: state => state.permission.routes,
-  addRoutes: state => state.permission.addRoutes,
-  // visited and cached routes in app tab bar
-  tabs_visited: state => state.tabs.visited,
-  tabs_cached: state => state.tabs.cached
+  // User permission routes
+  routes_permission: state => state.permission.routes,
+  routes_addons: state => state.permission.addons,
+  // User notifications
+  notifications: state => state.notification
 }
 
 export default getters

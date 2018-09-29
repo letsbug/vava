@@ -1,0 +1,117 @@
+.va-head-bar {
+  width: 100%;
+  height: $head-height;
+  line-height: $head-line-height;
+  background-color: $head-bg-color;
+  border-bottom: $head-border;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-header;
+}
+
+.va-head-nav {
+  display: inline-block;
+  padding: 0 $head-nav-item-spacer;
+  height: $head-nav-height;
+  list-style: none;
+  margin: 0;
+
+  &.nav-left {
+    float: left;
+  }
+
+  &.nav-right {
+    float: right;
+  }
+
+  .va-nav-item {
+    float: left;
+    height: $head-nav-height;
+    line-height: $head-nav-line-height;
+    padding: $head-nav-item-padding;
+    border-top: $head-nav-item-border;
+    font-size: $head-nav-font-size;
+    cursor: pointer;
+
+    transition: $transition-border, $transition-color;
+
+    &:hover {
+      border-top: $head-nav-item-border-hover;
+    }
+
+    &.active {
+      color: $color-actives;
+    }
+
+    &.spacer-xs {
+      padding: 0 5px;
+    }
+
+    &.link-user .avatar {
+      width: $head-nav-item-avatar-size;
+      height: $head-nav-item-avatar-size;
+      border-radius: 50%;
+      vertical-align: -($head-nav-height - $head-nav-item-avatar-size)/2;
+    }
+
+    .va-icon {
+      vertical-align: -3px;
+    }
+
+    .el-badge {
+      display: inline;
+      vertical-align: unset;
+
+      .el-badge__content {
+        top: 6px;
+        right: 6px;
+      }
+    }
+
+    &.nav-search {
+      padding-left: 0;
+      padding-right: 0;
+      border: 0 none;
+      position: relative;
+
+      .va-icon {
+        vertical-align: -5px;
+        margin-right: $head-nav-item-spacer;
+      }
+
+      .nav-search-inner {
+        width: 0;
+        height: $head-nav-height;
+        line-height: $head-nav-line-height;
+        padding: 0 ($head-nav-item-spacer + $head-nav-font-size) $head-nav-item-border-width $head-nav-item-spacer;
+        border-top: $head-nav-item-border;
+        border-right-width: 0;
+        border-bottom-width: 0;
+        border-left-width: 0;
+        border-radius: unset;
+        outline: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        font-size: 1rem;
+
+        transition: $transition-border, $transition-width;
+
+        &:hover, &:focus {
+          width: $head-nav-form-width;
+          border-top: $head-nav-item-border-hover;
+          padding-right: $head-nav-item-spacer * 2 + $head-nav-font-size;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $device-sm) {
+  .va-head-nav {
+    padding: 0;
+  }
+}

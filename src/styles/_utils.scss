@@ -1,0 +1,32 @@
+//
+// Text Colors
+
+.text-primary { color: $color-theme; }
+.text-muted { color: $color-gray-500; }
+.text-red { color: $color-red; }
+
+
+//
+// Text align
+
+.text-left { text-align: left }
+.text-right { text-align: right }
+.text-center { text-align: center }
+
+
+// Text transform
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+
+//
+// float util
+
+.float-l { float: left; }
+.float-r { float: right; }
+.clear-fix:after { content: ''; display: block; clear: both; }

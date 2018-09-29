@@ -17,6 +17,7 @@ module.exports = {
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/essential',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
+    // 'airbnb-base'
     'standard'
   ],
   // required to lint *.vue files
@@ -34,6 +35,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    'max-len': [2, 120, 4, { 'ignoreUrls': true }],
     'accessor-pairs': 2,
     'array-bracket-spacing': [2, 'never'],
     'arrow-spacing': [2, {
