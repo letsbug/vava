@@ -5,8 +5,8 @@
       <p>You can use the built-in SVG icons by using the <code>va-icon</code> component.</p>
       <p>Click them to copy the code.</p>
     </blockquote>
-    <el-row :gutter="30">
-      <el-col :span="4" v-for="icon of icons" :key="icon">
+    <el-row :gutter="20">
+      <el-col :xl="3" :lg="4" :md="6" :sm="6" :xs="8" v-for="icon of icons" :key="icon">
         <div class="grid-content" @click="handleClipboard(generateIconCode(icon), $event)">
           <el-tooltip placement="top">
             <div slot="content">
