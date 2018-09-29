@@ -1,6 +1,0 @@
-export { default as Sidebar } from './sidebar/Sidebar'
-export { default as HeaderBar } from './HeaderBar'
-export { default as TabBar } from './TabBar'
-export { default as Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
-export { default as AppBody } from './AppBody'
-export { default as FooterBar } from './FooterBar'
