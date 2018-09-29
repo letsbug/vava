@@ -1,12 +1,13 @@
 code {
-  color: $color-theme;
-  background-color: lighten($color-theme, 30%);
-  margin: 0 4px;
-  display: inline-block;
-  padding: 1px 5px;
-  //font-size: $font-size-xs;
-  border-radius: 3px;
-  font-family: Menlo, Monaco, Consolas, Courier, monospace;
+  font-family: Consolas, Courier, monospace;
+}
+
+pre {
+  display: block;
+  height: auto;
+  min-height: auto;
+  max-height: none;
+  padding: 0;
 }
 
 blockquote {
@@ -24,5 +25,15 @@ blockquote {
   > p:nth-last-child(1):first-child,
   > p:last-child {
     margin-bottom: 0;
+  }
+
+  code {
+    color: $color-theme;
+    background-color: lighten($color-theme, 30%);
+    margin: 0 4px;
+    display: inline-block;
+    padding: 1px 5px;
+    //font-size: $font-size-xs;
+    border-radius: 3px;
   }
 }

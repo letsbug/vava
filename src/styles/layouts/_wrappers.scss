@@ -36,7 +36,11 @@
     position: relative;
     border-bottom: $border-default;
     padding-bottom: $spacer-base;
-    margin: 0 0 $spacer-base 0;
+    margin-bottom: $spacer-base;
+
+    &:first-child {
+      margin-top: $spacer-sm;
+    }
   }
 }
 
