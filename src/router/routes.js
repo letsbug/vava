@@ -48,7 +48,7 @@ export const constantRouteMap = [
   {
     path: '/icons',
     component: Layout,
-    meta: { title: 'icon viewer', icon: 'store' },
+    meta: { title: 'icon viewer', icon: 'folder' },
     children: [{
       path: '',
       name: 'VaIcons',
