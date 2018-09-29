@@ -13,6 +13,7 @@ import store from './store'
 import router from './router'
 import Meta from 'vue-meta'
 
+import '@/tools/highlight'
 import '@/router/helper'
 import '@/simulates'
 
