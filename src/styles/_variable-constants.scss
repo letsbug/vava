@@ -128,19 +128,20 @@ $shadow-sm-hr-inverse:      (-$shadow-sm-offset) 0 $shadow-sm-distance $shadow-s
 
 // Transitions
 $transition-duration:         .28s !default;
-$transition-timing-function:  ease-out !default;
+$transition-timing-fun-out:   ease-out !default;
 $transition-timing-fun-in:    ease-in !default;
+$transition-timing-fun-all:   ease-in-out !default;
 
-$transition-all:              all $transition-duration $transition-timing-function !default;
-$transition-border:           border $transition-duration $transition-timing-function !default;
-$transition-opacity:          opacity $transition-duration $transition-timing-function !default;
-$transition-visibility:       visibility $transition-duration $transition-timing-function !default;
-$transition-background:       background $transition-duration $transition-timing-function !default;
-$transition-color:            color $transition-duration $transition-timing-function !default;
-$transition-width:            width $transition-duration $transition-timing-function !default;
-$transition-height:           height $transition-duration $transition-timing-function !default;
-$transition-max-height:       max-height $transition-duration $transition-timing-fun-in !default;
-$transition-margin:           margin $transition-duration $transition-timing-function !default;
-$transition-padding:          padding $transition-duration $transition-timing-function !default;
-$transition-position-left:    left $transition-duration $transition-timing-function !default;
-$transition-transform:        transform $transition-duration $transition-timing-function !default;
+$transition-all:              all $transition-duration $transition-timing-fun-all !default;
+$transition-border:           border $transition-duration $transition-timing-fun-all !default;
+$transition-opacity:          opacity $transition-duration $transition-timing-fun-all !default;
+$transition-visibility:       visibility $transition-duration $transition-timing-fun-all !default;
+$transition-background:       background $transition-duration $transition-timing-fun-all !default;
+$transition-color:            color $transition-duration $transition-timing-fun-all !default;
+$transition-width:            width $transition-duration $transition-timing-fun-all !default;
+$transition-height:           height $transition-duration $transition-timing-fun-all !default;
+$transition-max-height:       max-height $transition-duration $transition-timing-fun-all !default;
+$transition-margin:           margin $transition-duration $transition-timing-fun-all !default;
+$transition-padding:          padding $transition-duration $transition-timing-fun-all !default;
+$transition-position-left:    left $transition-duration $transition-timing-fun-all !default;
+$transition-transform:        transform $transition-duration $transition-timing-fun-all !default;

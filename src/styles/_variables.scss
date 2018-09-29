@@ -52,9 +52,10 @@ $head-nav-item-border-hover:    solid $head-nav-item-border-width $color-theme;
 $head-nav-height:               $head-line-height;  // 44px
 $head-nav-line-height:          $head-nav-height - ($head-nav-item-border-width * 2);
 $head-nav-item-spacer:          $spacer-base;
-$head-nav-item-padding:         0 $head-nav-item-spacer;
+$head-nav-item-padding:         0 $head-nav-item-spacer $head-nav-item-border-width;
 $head-nav-font-size:            $font-size-h3;
 $head-nav-item-avatar-size:     32px;
+$head-nav-form-width:           220px;
 
 $head-nav-form-spacer:          6px;
 

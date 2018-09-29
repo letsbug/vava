@@ -3,29 +3,26 @@
     <!-- left navs -->
     <div class="va-head-nav clear-fix">
       <a class="va-nav-item" @click.stop="toggleSidebar">
-        <va-icon :icon="sidebarOpend ? 'handle-collapse' : 'handle-expand'"></va-icon>
+        <va-icon :icon="sidebarOpend ? 'handle-collapse' : 'handle-expand'"/>
       </a>
       <a class="va-nav-item hidden-xs-only">
-        <va-icon icon="browser"></va-icon>
+        <va-icon icon="browser"/>
       </a>
       <a class="va-nav-item">
-        <va-icon icon="refresh"></va-icon>
+        <va-icon icon="refresh"/>
       </a>
     </div>
 
-    <!-- nav forms -->
-    <el-tooltip effect="dark" content="Input something and press enter for search" placement="bottom">
-      <el-input class="nav-head-search hidden-xs-only" placeholder="search something..."
-                @keyup.enter.native="handleSearch">
-      </el-input>
-    </el-tooltip>
-
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
+      <a class="va-nav-item nav-search">
+        <input class="nav-search-inner" placeholder="search something..." @keyup.enter.native="handleSearch"/>
+        <va-icon icon="search"/>
+      </a>
       <el-tooltip effect="dark" content="you have unread notifications" placement="bottom">
         <router-link class="va-nav-item" to="/notifications">
           <el-badge is-dot :hidden="!notificationHasUnread">
-            <va-icon icon="notice"></va-icon>
+            <va-icon icon="notice"/>
           </el-badge>
         </router-link>
       </el-tooltip>
@@ -43,7 +40,7 @@
         </el-dropdown-menu>
       </el-dropdown>
       <a class="va-nav-item hidden-sm-and-up">
-        <va-icon icon="more"></va-icon>
+        <va-icon icon="more"/>
       </a>
     </div>
   </div>
