@@ -83,6 +83,12 @@ $border-default:            solid $border-default-width $border-color !default;
 $border-actived:            solid $border-default-width $border-color-active !default;
 
 
+// Border radius
+$radius-base:               4px;
+$radius-lg:                 8px;
+$radius-sm:                 2px;
+
+
 // Z-index
 $z-index-sidebar:           130!default;
 $z-index-sidebar-popups:    140!default;
