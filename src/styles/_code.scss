@@ -2,12 +2,7 @@ code {
   font-family: Consolas, Courier, monospace;
 
   strong {
-    color: $color-theme;
-    background-color: lighten($color-theme, 30%);
-    display: inline-block;
-    padding: 1px 5px;
-    //font-size: $font-size-xs;
-    border-radius: 3px;
+    color: $color-red;
   }
 }
 
