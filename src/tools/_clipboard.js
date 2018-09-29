@@ -16,23 +16,21 @@ function clipboardError() {
   })
 }
 
-export default {
-  copy: (text, event) => {
-    const clipboard = new Clipboard(event.target, {
-      text: () => text
-    })
-    clipboard.on('success', () => {
-      clipboardSuccess()
-      clipboard.off('error')
-      clipboard.off('success')
-      clipboard.destroy()
-    })
-    clipboard.on('error', () => {
-      clipboardError()
-      clipboard.off('error')
-      clipboard.off('success')
-      clipboard.destroy()
-    })
-    clipboard.onClick(event)
-  }
+export default function(text, event) {
+  const clipboard = new Clipboard(event.currentTarget, {
+    text: () => text
+  })
+  clipboard.on('success', () => {
+    clipboardSuccess()
+    clipboard.off('error')
+    clipboard.off('success')
+    clipboard.destroy()
+  })
+  clipboard.on('error', () => {
+    clipboardError()
+    clipboard.off('error')
+    clipboard.off('success')
+    clipboard.destroy()
+  })
+  clipboard.onClick(event)
 }

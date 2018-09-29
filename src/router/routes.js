@@ -48,11 +48,11 @@ export const constantRouteMap = [
   {
     path: '/icons',
     component: Layout,
-    meta: { title: 'icon store', icon: 'store' },
+    meta: { title: 'icon viewer', icon: 'store' },
     children: [{
       path: '',
       name: 'VaIcons',
-      component: () => import('@/modules/icons/SystemIcons')
+      component: () => import('@/modules/icons/IconViewer')
     }]
   },
 

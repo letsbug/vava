@@ -5,12 +5,15 @@
       <p>You can use the built-in SVG icons by using the <code>va-icon</code> component.</p>
       <p>Click them to copy the code.</p>
     </blockquote>
-    <el-row>
+    <el-row :gutter="30">
       <el-col :span="4" v-for="icon of icons" :key="icon">
-        <div class="grid-content" @click.stop="clipboard(generateIconCode(icon), $event)">
-          <el-tooltip placement="top" :content="generateIconCode(icon)">
+        <div class="grid-content" @click="handleClipboard(generateIconCode(icon), $event)">
+          <el-tooltip placement="top">
+            <div slot="content">
+              {{ generateIconCode(icon) }}
+            </div>
             <div class="icon-item">
-              <va-icon :icon="icon"></va-icon>
+              <va-icon :icon="icon"/>
               <span>{{ icon }}</span>
             </div>
           </el-tooltip>
@@ -22,19 +25,19 @@
 
 <script>
 import icons from './requires'
-import { Clipboard } from '@/tools'
+import { clipboard } from '@/tools'
 
 export default {
-  name: 'SystemIcons',
+  name: 'IconViewer',
   data() {
     return { icons }
   },
   methods: {
     generateIconCode(name) {
-      return `<va-icon icon="${name}"></va-icon>`
+      return `<va-icon icon="${name}"/>`
     },
-    clipboard(code, event) {
-      Clipboard.copy(code, event)
+    handleClipboard(code, e) {
+      clipboard(code, e)
     }
   }
 }
