@@ -4,7 +4,7 @@
       Usage
     </h4>
     <pre v-highlight><code class="html">
-      Just use <strong>va-icon</strong> component, Like &lt;va-icon icon="dashboard"/&gt;. Click them to copy HTML.
+      Just use <strong>va-icon</strong> component to use icons, Like &lt;va-icon icon="dashboard"/&gt;. Click them to copy HTML.
     </code></pre>
     <h4 class="va-body-title">
       ICONS&nbsp;&nbsp;
