@@ -61,6 +61,7 @@ export default {
     toggleSidebar() { this.$store.dispatch('app_sidebar_toggle') },
     handleSearch(el) {
       el = el.target
+      if (!el.value) return
       this.$router.push({ path: '/search', query: { keyword: el.value } })
       el.value = ''
     },

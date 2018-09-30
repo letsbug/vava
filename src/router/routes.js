@@ -67,7 +67,7 @@ export const constantRouteMap = [
     hidden: true
   },
   {
-    path: '/search/:keyword',
+    path: '/search',
     component: Layout,
     meta: { title: 'search', icon: 'search' },
     children: [{
