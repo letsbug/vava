@@ -18,9 +18,7 @@ export default {
     this.add()
   },
   watch: {
-    $route() {
-      this.add()
-    }
+    $route: 'add'
   },
   computed: {
     history() { return this.$store.getters.tabs_history }
@@ -35,7 +33,6 @@ export default {
       this.$store.dispatch('tabs_add', route)
     },
     close(target) {
-      console.log(target)
       this.$store.dispatch('tabs_del', target).then(routes => {
         if (!this.isActive(target)) return
         const latest = routes.splice(-1)[0]
