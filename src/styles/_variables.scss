@@ -64,9 +64,17 @@ $head-nav-form-spacer:          6px;
 // About tabs bar
 $tabs-border:                   $border-default;
 $tabs-bg-color:                 $color-white;
-$tabs-height:                   40px;
+
+$tabs-item-border-width:        2px;
+$tabs-item-spacer:              12px;
+$tabs-item-icon-size:           $font-size-h4;
+
+$tabs-height:                   36px;
 $tabs-line-height:              $tabs-height;
 $tabs-wrapper-padding:          0 $spacer-base;
+
+$tabs-item-close-size:          18px;
+$tabs-item-close-padding:       2px;
 
 
 //
@@ -76,8 +84,8 @@ $foot-bg-color:                 $color-white;
 $foot-padding-y:                $spacer-sm;
 $foot-padding-x:                $spacer-base;
 $foot-wrapper-padding:          $foot-padding-y $foot-padding-x;
-$foot-height:                   50px + $border-default-width;
-$foot-line-height:              $foot-height - $border-default-width - $foot-padding-y * 2;
+$foot-height:                   50px;
+$foot-line-height:              $foot-height - $foot-padding-y * 2;
 
 
 //

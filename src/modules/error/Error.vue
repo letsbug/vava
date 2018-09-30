@@ -1,8 +1,8 @@
 <template>
 <div class="va-error-wrapper">
   <img :src="flag" alt=""><br>
-  <h4 style="margin: 0">Oops!  !!!</h4>
-  <h5></h5>
+  <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
+  <h5>{{ message }}</h5>
   <p>
     <a class="linker" @click.prevent.stop="$router.go(-1)" href="/">BACK</a>
     <router-link class="linker" to="/">HOME</router-link>
@@ -17,23 +17,15 @@ export default {
   name: 'Error',
   components: { VaCopyright },
   metaInfo: {
-    title: 'Oops! get error!!!'
+    title: 'Oops! got an error!'
   },
-  data() {
-    return {
-      code: 404,
-      flag: '',
-      notice: ''
-    }
-  },
-  created() {
-    this.code = this.$route.params.code
-    const random = Math.floor(Math.random() * 4 + 1)
-    this.flag = require('@/assets/flags/errors/err-' + random + '.gif')
-    this.convertNotice()
-  },
-  methods: {
-    convertNotice() {
+  computed: {
+    code() { return this.$route.params['code'] },
+    flag() {
+      const random = Math.floor(Math.random() * 4 + 1)
+      return require('@/assets/flags/errors/err-' + random + '.gif')
+    },
+    message() {
       const _normalize = '瞎JB点，这回出错了吧！该！！！'
       const notices = {
         err404: 'The page you want to see may have moved...',
@@ -43,7 +35,7 @@ export default {
         err400: _normalize,
         err500: 'The server broke down and threw an error code at you ...',
       }
-      this.notice = notices['err' + this.code]
+      return notices['err' + this.code]
     }
   }
 }

@@ -16,8 +16,9 @@
         </li>
       </ul>
     </template>
-    <router-link v-else class="nav-title" :to="route.path + (route.children[0].path ? ('/' + route.children[0].path) : '')">
-      <va-icon :icon="route.meta.icon"></va-icon> <span class="item-name">{{ route.meta.title }}</span>
+    <router-link v-else class="nav-title" :to="route.path + '/' + (route.children[0].path || '')">
+      <va-icon :icon="route.children[0].meta.icon"></va-icon>
+      <span class="item-name">{{ route.children[0].meta.title }}</span>
     </router-link>
   </div>
 

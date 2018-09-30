@@ -50,6 +50,9 @@
 <script>
 export default {
   name: 'Notification',
+  metaInfo: {
+    title: 'Notifications'
+  },
   data() {
     return {
       multipleSelection: []

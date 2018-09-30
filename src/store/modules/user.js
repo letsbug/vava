@@ -51,7 +51,6 @@ const user = {
     }),
     user_logout: ({ commit, state }) => new Promise((resolve, reject) => {
       Account.logout(state.token).then(res => {
-        console.log(res)
         commit('USER_SET_TOKEN', '')
         commit('USER_SET_ROLES', [])
         commit('USER_SET_NAME', '')

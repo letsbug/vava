@@ -29,7 +29,7 @@ $color-theme-green:     $color-green !default;
 $color-theme-blue:      $color-cyan !default;
 
 $color-theme:           $color-theme-blue;
-$color-line:            $color-gray-200 !default;
+$color-line:            $color-gray-100 !default;
 
 $color-text-primary:    $color-gray-800;
 $color-text-secondary:  $color-gray-500;
@@ -78,6 +78,7 @@ $device-xl:           1200px !default;
 // Lines, Borders
 $border-default-width:      1px !default;
 $border-color:              $color-line !default;
+$border-color-dark:         $color-gray-200 !default;
 $border-color-active:       $color-theme !default;
 $border-default:            solid $border-default-width $border-color !default;
 $border-actived:            solid $border-default-width $border-color-active !default;
@@ -104,10 +105,10 @@ $z-index-editors:           135!default;
 
 
 // Shadows
-$shadow-color-base:         rgba(0, 0, 0, .075) !default;
+$shadow-color-base:         rgba(0, 0, 0, .1) !default;
 
 $shadow-sm-offset:          1px!default;
-$shadow-sm-distance:        3px!default;
+$shadow-sm-distance:        2px!default;
 $shadow-sm-size:            0!default;
 
 $shadow-base-offset:        2px!default;
