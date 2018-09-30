@@ -16,7 +16,7 @@
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
       <a class="va-nav-item nav-search">
-        <input class="nav-search-inner" placeholder="search something..." @keyup.enter.native="handleSearch"/>
+        <input class="nav-search-inner" placeholder="search something..." @keyup.enter="handleSearch"/>
         <va-icon icon="search"/>
       </a>
       <el-tooltip effect="dark" content="you have unread notifications" placement="bottom">
@@ -61,7 +61,8 @@ export default {
     toggleSidebar() { this.$store.dispatch('app_sidebar_toggle') },
     handleSearch(el) {
       el = el.target
-      console.log('handle navigation bar search form! The input value is => "' + el.value + '"')
+      this.$router.push({ path: '/search', query: { keyword: el.value } })
+      el.value = ''
     },
     userDropdown(target) {
       target()
@@ -74,13 +75,14 @@ export default {
       // TODO build user settings route
     },
     handleLogout() {
-      this.$confirm('Are you sure to exit the currently logged in account?', 'Log out', {
+      this.$confirm('Exit the currently logged in account?', 'Are you sure?', {
         type: 'warning',
-        confirmButtonText: 'I\'m sure',
-        cancelButtonText: 'Cancel'
-      }).then(() => {
-        this.$store.dispatch('user_logout').then(() => { location.reload() })
-      }).catch(() => {})
+        confirmButtonText: 'Sure Exit',
+        cancelButtonText: 'Cancel',
+        callback: action => {
+          if (action === 'confirm') this.$store.dispatch('user_logout').then(() => { location.reload() })
+        }
+      })
     }
   }
 }

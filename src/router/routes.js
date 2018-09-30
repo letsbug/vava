@@ -55,7 +55,6 @@ export const constantRouteMap = [
       component: () => import('@/modules/icons/IconViewer')
     }]
   },
-
   {
     path: '/notifications',
     component: Layout,
@@ -67,7 +66,19 @@ export const constantRouteMap = [
     }],
     hidden: true
   },
+  {
+    path: '/search/:keyword',
+    component: Layout,
+    meta: { title: 'search', icon: 'search' },
+    children: [{
+      path: '',
+      name: 'GlobalSearch',
+      component: () => import('@/modules/search/GlobalSearch')
+    }],
+    hidden: true
+  },
 
+  // The path not found in the router list will be forced a redirect to the 404 page
   { path: '*', redirect: '/error/404', hidden: true }
 ]
 

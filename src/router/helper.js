@@ -37,7 +37,6 @@ router.beforeEach((to, from, next) => {
   } else {
     // When the user is not logged in, the route is redirected to the login page.
     if (whitelist.indexOf(to.path) === -1) {
-      console.log(to.path)
       next({
         path: '/login',
         query: { redirect: to.path }
