@@ -22,10 +22,10 @@ export const constantRouteMap = [
     path: '',
     component: Layout,
     redirect: 'home',
-    meta: { title: 'home', icon: 'house' },
     children: [{
       path: 'home',
       name: 'Homepage',
+      meta: { title: 'home', icon: 'house' },
       component: () => import('@/modules/homepage/Homepage')
     }]
   },
@@ -35,10 +35,10 @@ export const constantRouteMap = [
   {
     path: '/report',
     component: Layout,
-    meta: { title: 'reports', icon: 'chart' },
     children: [{
       path: '',
       name: 'Reports',
+      meta: { title: 'reports', icon: 'chart' },
       component: () => import('@/modules/reports/Reports')
     }]
   },
@@ -48,20 +48,20 @@ export const constantRouteMap = [
   {
     path: '/icons',
     component: Layout,
-    meta: { title: 'icon viewer', icon: 'folder' },
     children: [{
       path: '',
       name: 'VaIcons',
+      meta: { title: 'icon viewer', icon: 'folder' },
       component: () => import('@/modules/icons/IconViewer')
     }]
   },
   {
     path: '/notifications',
     component: Layout,
-    meta: { title: 'notifications', icon: 'notice' },
     children: [{
       path: '',
       name: 'Notification',
+      meta: { title: 'notifications', icon: 'notice' },
       component: () => import('@/modules/notification/Notification')
     }],
     hidden: true
@@ -69,10 +69,10 @@ export const constantRouteMap = [
   {
     path: '/search',
     component: Layout,
-    meta: { title: 'search', icon: 'search' },
     children: [{
       path: '',
       name: 'GlobalSearch',
+      meta: { title: 'search', icon: 'search' },
       component: () => import('@/modules/search/GlobalSearch')
     }],
     hidden: true
