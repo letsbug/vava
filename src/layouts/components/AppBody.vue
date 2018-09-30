@@ -22,17 +22,18 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/variables";
+$transform-distance:  $spacer-base;
 
 .transform-fade-leave-active,
 .transform-fade-enter-active {
-  transition: all $transition-duration;
+  transition: all $transition-duration/2;
 }
 .transform-fade-enter {
   opacity: 0;
-  transform: translate3d(0, 10px, 0);
+  transform: translate3d(0, $transform-distance, 0);
 }
 .transform-fade-leave-to {
   opacity: 0;
-  transform: translate3d(0, 10px, -100px);
+  transform: translate3d(0, $transform-distance, 0);
 }
 </style>
