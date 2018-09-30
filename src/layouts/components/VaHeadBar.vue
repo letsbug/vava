@@ -62,7 +62,10 @@ export default {
     handleSearch(el) {
       el = el.target
       if (!el.value) return
-      this.$router.push({ path: '/search', query: { keyword: el.value } })
+      this.$router.push({
+        path: '/search',
+        query: { keyword: el.value }
+      })
       el.value = ''
     },
     userDropdown(target) {

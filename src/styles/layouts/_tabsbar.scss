@@ -11,4 +11,8 @@
   z-index: $z-index-tabbar;
 
   box-shadow: $shadow-sm-vr;
+
+  .tabs-item {
+    height: $tabs-height;
+  }
 }

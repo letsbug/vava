@@ -14,6 +14,11 @@
 <script>
 export default {
   name: 'GlobalSearch',
+  metaInfo() {
+    return {
+      title: `Search for "${this.keyword}"`
+    }
+  },
   computed: {
     keyword() { return this.$route.query['keyword'] }
   }

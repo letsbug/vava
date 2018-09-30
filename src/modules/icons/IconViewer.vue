@@ -29,6 +29,9 @@ import { clipboard } from '@/tools'
 
 export default {
   name: 'IconViewer',
+  metaInfo: {
+    title: 'Icons'
+  },
   data() {
     return { icons }
   },
