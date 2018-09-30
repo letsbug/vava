@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "description": "A magical vue admin template, based on vue@2.5.2 & element-ui@2.4.5",
   "author": "Letsbug, 724939933@qq.com, xman724939995@gmail.com",
-  "private": true,
+  "license": "MIT",
   "scripts": {
+    "svgo": "svgo -f src/assets/icons --config=./svgo.yml",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "build": "node build/build.js",
     "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "test": "npm run unit && npm run e2e"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -94,6 +95,7 @@
     "sinon": "^4.0.0",
     "sinon-chai": "^2.8.0",
     "svg-sprite-loader": "^3.9.2",
+    "svgo": "^1.1.1",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
