@@ -22,7 +22,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/variables";
-$transform-distance:  $spacer-base;
+$transform-distance:  $spacer-sm;
 
 .transform-fade-leave-active,
 .transform-fade-enter-active {
