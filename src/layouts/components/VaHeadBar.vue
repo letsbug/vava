@@ -15,8 +15,9 @@
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
-      <a class="va-nav-item nav-search">
+      <a class="va-nav-item nav-search hidden-sm-and-down">
         <va-icon icon="search"/>
+        <!-- TODO Add mobile layout to here -->
         <input ref="globalSearch" class="nav-search-inner" placeholder="search something..." autocomplete="on"
                :class="currRouteIsSearch"
                v-model="search.keyword"

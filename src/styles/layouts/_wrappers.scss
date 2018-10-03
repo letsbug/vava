@@ -78,7 +78,7 @@
 
 //
 // In mobile
-@media screen and (max-width: $device-md) {
+@media screen and (max-width: $device-md - 1px) {
   .va-app-wrapper {
     .va-sidebar {
       width: $sidebar-width-expanded;
