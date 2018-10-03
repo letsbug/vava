@@ -7,5 +7,6 @@ Vue.use(Router)
 
 export default new Router({
   linkExactActiveClass: 'active',
+  // linkActiveClass: 'active',
   routes: constantRouteMap
 })

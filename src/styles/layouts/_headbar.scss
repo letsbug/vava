@@ -71,38 +71,39 @@
     }
 
     &.nav-search {
-      padding-left: 0;
-      padding-right: 0;
+      padding: 0;
       border: 0 none;
       position: relative;
 
       .va-icon {
-        vertical-align: -5px;
-        margin-right: $head-nav-item-spacer;
+        position: absolute;
+        top: 50%;
+        right: $head-nav-item-spacer;
+        margin-top: -$head-nav-font-size/2;
+        z-index: -1;
       }
 
       .nav-search-inner {
+        display: block;
         width: 0;
         height: $head-nav-height;
         line-height: $head-nav-line-height;
         padding: 0 ($head-nav-item-spacer + $head-nav-font-size) $head-nav-item-border-width $head-nav-item-spacer;
+        border: 0 none;
         border-top: $head-nav-item-border;
-        border-right-width: 0;
-        border-bottom-width: 0;
-        border-left-width: 0;
-        border-radius: unset;
         outline: none;
-        position: absolute;
-        top: 0;
-        right: 0;
         background-color: transparent;
         font-size: 1rem;
+        cursor: pointer;
 
         transition: $transition-border, $transition-width;
 
-        &:hover, &:focus {
-          width: $head-nav-form-width;
+        &:hover {
           border-top: $head-nav-item-border-hover;
+        }
+
+        &:hover, &:focus, &.active {
+          width: $head-nav-form-width;
           padding-right: $head-nav-item-spacer * 2 + $head-nav-font-size;
         }
       }
