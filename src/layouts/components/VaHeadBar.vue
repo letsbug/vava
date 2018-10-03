@@ -16,8 +16,13 @@
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
       <a class="va-nav-item nav-search">
-        <input class="nav-search-inner" placeholder="search something..." @keyup.enter="handleSearch"/>
         <va-icon icon="search"/>
+        <input ref="globalSearch" class="nav-search-inner" placeholder="search something..." autocomplete="on"
+               :class="currRouteIsSearch"
+               v-model="search.keyword"
+               @click="handleSearch"
+               @keyup.enter="handleSearch"/>
+        <!-- TODO Add the history search drop-down list to here to autocomplete -->
       </a>
       <el-tooltip effect="dark" content="you have unread notifications" placement="bottom">
         <router-link class="va-nav-item" to="/notifications">
@@ -49,24 +54,45 @@
 <script>
 export default {
   name: 'VaHeadBar',
+  data() {
+    return {
+      search: {
+        old: '',
+        keyword: ''
+      }
+    }
+  },
   created() {
     this.$store.dispatch('notification_list')
   },
   computed: {
-    sidebarOpend() { return this.$store.state.application.sidebar.opened },
-    user() { return this.$store.state.user },
-    notificationHasUnread() { return this.$store.state.notification.hasUnread }
+    sidebarOpend() {
+      return this.$store.state.application.sidebar.opened
+    },
+    currRouteIsSearch() {
+      return /^\/search/.test(this.$route.path) ? 'active' : ''
+    },
+    user() {
+      return this.$store.state.user
+    },
+    notificationHasUnread() {
+      return this.$store.state.notification.hasUnread
+    }
   },
   methods: {
-    toggleSidebar() { this.$store.dispatch('app_sidebar_toggle') },
-    handleSearch(el) {
-      el = el.target
-      if (!el.value) return
+    toggleSidebar() {
+      this.$store.dispatch('app_sidebar_toggle')
+    },
+    handleSearch() {
+      const old = this.search.old
+      const key = this.search.keyword
+      if (!key || (key === old)) return
+      this.search.old = key
+      console.log('start search')
       this.$router.push({
         path: '/search',
-        query: { keyword: el.value }
+        query: { keyword: key }
       })
-      el.value = ''
     },
     userDropdown(target) {
       target()
