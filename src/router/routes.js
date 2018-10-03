@@ -11,6 +11,7 @@ import Tables from './modules/tables'
  * @param meta {Object}
  *        title - side-menu & tab-bar display name
  *        icon -  side-menu display icon.
+ *        notab - Do not add in tabs-bar
  * @type {VueRouter[]}
  */
 export const constantRouteMap = [
@@ -72,7 +73,7 @@ export const constantRouteMap = [
     children: [{
       path: '',
       name: 'GlobalSearch',
-      meta: { title: 'search', icon: 'search' },
+      meta: { title: 'search', icon: 'search', notab: true },
       component: () => import('@/modules/search/GlobalSearch')
     }],
     hidden: true

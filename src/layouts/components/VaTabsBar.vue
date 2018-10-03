@@ -4,7 +4,11 @@
     <router-link class="tabs-item" to="/home"><va-icon class="link-home" icon="house"></va-icon></router-link>
 
     <!-- Closable tab control list -->
-    <router-link class="tabs-item" v-for="route in history" :key="route.path" :to="route.path">
+    <router-link class="tabs-item"
+                 v-for="route in history"
+                 v-if="!route.notab"
+                 :key="route.path"
+                 :to="route.path">
       <span class="tabs-item-name">{{ route.title }}</span>
       <span class="tabs-item__close"><va-icon icon="handle-close" @click.prevent.native="close(route)"></va-icon></span>
     </router-link>
@@ -28,9 +32,9 @@ export default {
       return route.path === this.$route.path
     },
     add() {
-      const route = this.$route
-      if (!route.name || route.path === '/home') return
-      this.$store.dispatch('tabs_add', route)
+      const { name, path, meta } = this.$route
+      if (meta.notab || !name || path === '/home') return
+      this.$store.dispatch('tabs_add', this.$route)
     },
     close(target) {
       this.$store.dispatch('tabs_del', target).then(routes => {
