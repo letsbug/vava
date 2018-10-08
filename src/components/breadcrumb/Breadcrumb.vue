@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb class="va-breadcrumb" separator-class="el-icon-arrow-right">
-    <transition-group name="breadcrumb">
+    <transition-group name="transition-breadcrumb">
       <el-breadcrumb-item v-for="(route, index) in routes" :key="route.path">
         <span v-if="!route.redirect || index === routes.length - 1" class="no-redirect">{{route.meta.title}}</span>
         <router-link v-else :to="route.redirect || route.path">{{ route.meta.title }}</router-link>

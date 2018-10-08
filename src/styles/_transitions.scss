@@ -1,40 +1,30 @@
 //
 // Application body transition animations
 
-$transform-distance:  $spacer-sm;
-
 .transform-fade-leave-active,
 .transform-fade-enter-active {
-  transition: all $transition-duration/2;
+  transition: all $transition-duration / 2;
 }
-.transform-fade-enter {
+.transform-fade-enter, .transform-fade-leave-to {
   opacity: 0;
-  transform: translate3d(0, $transform-distance, 0);
-}
-.transform-fade-leave-to {
-  opacity: 0;
-  transform: translate3d(0, $transform-distance, 0);
+  transform: translate3d(0, $spacer-sm, 0);
 }
 
 
 //
 // breadcrumb transition animations
 
-.breadcrumb-enter-active,
-.breadcrumb-leave-active {
-  transition: all .5s;
+.transition-breadcrumb-enter-active,
+.transition-breadcrumb-leave-active {
+  transition: all $transition-duration * 2;
 }
 
-.breadcrumb-enter,
-.breadcrumb-leave-active {
+.transition-breadcrumb-enter,
+.transition-breadcrumb-leave-active {
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateX($spacer-lg);
 }
 
-.breadcrumb-move {
-  transition: all .5s;
-}
-
-.breadcrumb-leave-active {
+.transition-breadcrumb-leave-active {
   position: absolute;
 }
