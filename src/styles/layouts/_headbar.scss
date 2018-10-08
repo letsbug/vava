@@ -13,7 +13,6 @@
 
 .va-head-nav {
   display: inline-block;
-  padding: 0 $head-nav-item-spacer;
   height: $head-nav-height;
   list-style: none;
   margin: 0;
@@ -57,7 +56,7 @@
     }
 
     .va-icon {
-      vertical-align: -3px;
+      vertical-align: -2px;
     }
 
     .el-badge {
@@ -108,11 +107,5 @@
         }
       }
     }
-  }
-}
-
-@media screen and (max-width: $device-sm) {
-  .va-head-nav {
-    padding: 0;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb separator-class="el-icon-arrow-right">
+  <el-breadcrumb class="va-breadcrumb" separator-class="el-icon-arrow-right">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(route, index) in routes" :key="route.path">
         <span v-if="!route.redirect || index === routes.length - 1" class="no-redirect">{{route.meta.title}}</span>
@@ -37,8 +37,14 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/variables";
 
-.va-breadcrumb .el-breadcrumb {
-  height: $tabs-height;
-  line-height: $tabs-line-height;
+.va-breadcrumb {
+  a {
+    font-weight: normal;
+    color: $color-cyan;
+  }
+
+  .no-redirect {
+    color: $color-gray-500!important;
+  }
 }
 </style>

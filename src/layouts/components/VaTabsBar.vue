@@ -1,5 +1,5 @@
 <template>
-  <div class="va-tabs-bar" :class="isMobile ? 'va-breadcrumb' : ''">
+  <div class="va-tabs-bar">
     <breadcrumb v-if="isMobile"></breadcrumb>
     <template v-else>
       <!-- Resident tab control, link to home -->
@@ -53,3 +53,12 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+@import "../../styles/variables";
+
+.va-tabs-bar .el-breadcrumb {
+  height: $tabs-height;
+  line-height: $tabs-line-height;
+}
+</style>

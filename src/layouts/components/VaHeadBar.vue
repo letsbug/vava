@@ -5,12 +5,10 @@
       <a class="va-nav-item" @click.stop="toggleSidebar">
         <va-icon :icon="sidebarOpend ? 'handle-collapse' : 'handle-expand'"/>
       </a>
-      <a class="va-nav-item hidden-xs-only">
-        <va-icon icon="browser"/>
-      </a>
-      <a class="va-nav-item">
+      <a class="va-nav-item hidden-sm-and-up">
         <va-icon icon="refresh"/>
       </a>
+      <breadcrumb v-if="!isMobile"></breadcrumb>
     </div>
 
     <!-- right navs -->
@@ -24,6 +22,9 @@
                @click="handleSearch"
                @keyup.enter="handleSearch"/>
         <!-- TODO Add the history search drop-down list to here to autocomplete -->
+      </a>
+      <a class="va-nav-item hidden-xs-only">
+        <va-icon icon="refresh"/>
       </a>
       <el-tooltip effect="dark" content="you have unread notifications" placement="bottom">
         <router-link class="va-nav-item" to="/notifications">
@@ -53,8 +54,11 @@
 </template>
 
 <script>
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+
 export default {
   name: 'VaHeadBar',
+  components: { Breadcrumb },
   data() {
     return {
       search: {
@@ -67,6 +71,9 @@ export default {
     this.$store.dispatch('notification_list')
   },
   computed: {
+    isMobile() {
+      return this.$store.getters.device === 'mobile'
+    },
     sidebarOpend() {
       return this.$store.state.application.sidebar.opened
     },
@@ -118,3 +125,26 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+@import "../../styles/variables";
+
+.va-head-nav .el-breadcrumb {
+  float: left;
+  height: $head-line-height;
+  line-height: $head-line-height;
+  padding-left: $head-nav-item-spacer;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: $spacer-sm;
+    bottom: $spacer-sm;
+    width: 1px;
+    background-color: $color-gray-200;
+  }
+}
+</style>
