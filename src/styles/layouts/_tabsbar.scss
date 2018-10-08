@@ -1,7 +1,6 @@
 .va-tabs-bar {
   height: $tabs-height;
   line-height: $tabs-line-height;
-  padding: $tabs-wrapper-padding;
   background-color: $tabs-bg-color;
   position: absolute;
   top: $head-height;
@@ -10,6 +9,10 @@
   z-index: $z-index-tabbar;
   box-shadow: $shadow-sm-vr;
   @extend .clear-fix;
+
+  &.breadcrumb {
+    padding: $tabs-wrapper-padding;
+  }
 
   .tabs-item {
     display: block;
@@ -28,36 +31,13 @@
       border-left: solid $color-gray-100 1px;
     }
 
-    &:after {
-      display: block;
-      height: $tabs-item-border-width;
-      position: absolute;
-      left: -1px;
-      right: -1px;
-      bottom: 0;
-      content: '';
-      transition: $transition-background;
-    }
-
     .link-home {
       width: $tabs-item-icon-size;
       height: $tabs-item-icon-size;
       vertical-align: -3px;
     }
 
-    //.tabs-item-name {
-    //  position: relative;
-    //  left: $tabs-item-close-size / 2;
-    //  transition: $transition-position-left;
-    //}
-
     .tabs-item__close {
-      //display: inline-block;
-      //opacity: 0;
-      //position: relative;
-      //left: $tabs-item-close-size / 2;
-      //transform: rotate(90deg);
-      //transition: $transition-transform, $transition-position-left, $transition-opacity;
 
       .va-icon {
         width: $tabs-item-close-size;
@@ -65,7 +45,6 @@
         border-radius: 50%;
         padding: $tabs-item-close-padding;
         vertical-align: -4px;
-        //transition: $transition-background, $transition-color;
       }
 
       &:hover {
@@ -79,25 +58,11 @@
 
     &:hover {
       color: $color-text-primary;
-
-      //.tabs-item-name {
-      //  left: 0;
-      //}
-      //
-      //.tabs-item__close {
-      //  opacity: 1;
-      //  left: 0;
-      //  transform: rotate(0deg);
-      //}
     }
 
     &.active {
-      color: $color-text-primary;
       background-color: $border-color;
-
-      &:after {
-        background-color: $color-theme;
-      }
+      color: $color-theme;
     }
   }
 }
