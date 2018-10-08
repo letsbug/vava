@@ -26,16 +26,16 @@
       <a class="va-nav-item hidden-xs-only">
         <va-icon icon="refresh"/>
       </a>
-      <el-tooltip effect="dark" content="you have unread notifications" placement="bottom">
+      <a class="va-nav-item hidden-xs-only">
+        <va-icon icon="theme"></va-icon>
+      </a>
+      <el-tooltip effect="dark" :content="notificationTips" placement="bottom">
         <router-link class="va-nav-item" to="/notifications">
           <el-badge is-dot :hidden="!notificationHasUnread">
             <va-icon icon="notice"/>
           </el-badge>
         </router-link>
       </el-tooltip>
-      <a class="va-nav-item hidden-xs-only">
-        <va-icon icon="theme"></va-icon>
-      </a>
       <el-dropdown @command="userDropdown" :show-timeout="100" style="float: left;">
         <a class="va-nav-item spacer-xs link-user">
           <img class="avatar" :src="user.avatar" alt="">
@@ -85,6 +85,9 @@ export default {
     },
     notificationHasUnread() {
       return this.$store.state.notification.hasUnread
+    },
+    notificationTips() {
+      return 'you have ' + (this.notificationHasUnread ? '' : 'no ') + 'unread notifications'
     }
   },
   methods: {
