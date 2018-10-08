@@ -144,7 +144,8 @@ export default {
     top: $spacer-sm;
     bottom: $spacer-sm;
     width: 1px;
-    background-color: $color-gray-200;
+    border-left: solid $border-default-width $color-gray-400;
+    border-right: solid $border-default-width $color-gray-200;
   }
 }
 </style>
