@@ -3,7 +3,7 @@
     <el-form ref="loginForm" class="form-login--password" autoComplete="on" aria-autocomplete="list" :model="form" :rules="rules">
       <div class="form-logo">
         <img class="brand" :src="logo" alt="Vava">
-        <h2 class="title">Sign in to Vava</h2>
+        <h2 class="title">Sign in to Vava <va-icon icon="info" @click.native="tipsVisible = true"></va-icon></h2>
       </div>
       <el-form-item prop="username">
         <el-input size="large" name="username" type="text" v-model="form.username" autoComplete="on" placeholder="username">
@@ -25,6 +25,13 @@
         <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">Sign in</el-button>
       </el-form-item>
     </el-form>
+
+    <el-dialog title="Simulate with mock.js" :visible.sync="tipsVisible" append-to-body width="310px">
+      <div class="form-tips">
+        <p>Use admin or editor username to login.</p>
+        <p>Password can be any string that meets password rules.</p>
+      </div>
+    </el-dialog>
 
     <copyright></copyright>
   </div>
@@ -48,7 +55,8 @@ export default {
       },
       loading: false,
       password: true,
-      expires: 7
+      expires: 7,
+      tipsVisible: false
     }
   },
   methods: {
@@ -69,4 +77,13 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/views/login--forget";
+
+.form-tips {
+  p:first-child {
+    margin-top: 0;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
 </style>

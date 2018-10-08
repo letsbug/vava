@@ -1,4 +1,5 @@
 @media screen and (max-width: $device-sm) {
+  // Reboot message styles in mobile device
   .el-message {
     min-width: auto;
     left: $spacer-base;
@@ -11,5 +12,15 @@
   .el-message-fade-leave-active {
     opacity: 0;
     transform: translate(0, -100%);
+  }
+
+  // Reboot message box styles in mobile device
+  .el-message-box {
+    display: block;
+    position: absolute;
+    top: 36%;
+    width: auto;
+    left: $spacer-base;
+    right: $spacer-base;
   }
 }
