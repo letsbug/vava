@@ -39,6 +39,7 @@ export default {
       return route.path === this.$route.path
     },
     add() {
+      if (this.isMobile) return
       const { name, path, meta } = this.$route
       if (meta.notab || !name || path === '/home') return
       this.$store.dispatch('tabs_add', this.$route)
