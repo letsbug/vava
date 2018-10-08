@@ -25,21 +25,6 @@ body {
   background-color: $color-gray-100;
 }
 
-::-webkit-scrollbar {
-  width: $scrollbar-width;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: $scrollbar-thumb-bg;
-  border-radius: $scrollbar-thumb-radius-size;
-  opacity: .3;
-  transition: $transition-background;
-
-  &:hover {
-    background-color: $scrollbar-thumb-bg-hover;
-  }
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
@@ -82,5 +67,21 @@ a {
   &.disabled {
     color: $color-text-secondary!important;
     cursor: not-allowed;
+  }
+}
+
+
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb-bg;
+  border-radius: $scrollbar-thumb-radius-size;
+  opacity: .3;
+  transition: $transition-background;
+
+  &:hover {
+    background-color: $scrollbar-thumb-bg-hover;
   }
 }

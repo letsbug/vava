@@ -36,6 +36,7 @@ export const constantRouteMap = [
   {
     path: '/report',
     component: Layout,
+    redirect: '/report/',
     children: [{
       path: '',
       name: 'Reports',
@@ -49,6 +50,7 @@ export const constantRouteMap = [
   {
     path: '/icons',
     component: Layout,
+    redirect: '/icons/',
     children: [{
       path: '',
       name: 'VaIcons',
@@ -59,6 +61,7 @@ export const constantRouteMap = [
   {
     path: '/notifications',
     component: Layout,
+    redirect: '/notifications/',
     children: [{
       path: '',
       name: 'Notification',
@@ -70,6 +73,7 @@ export const constantRouteMap = [
   {
     path: '/search',
     component: Layout,
+    redirect: '/search/',
     children: [{
       path: '',
       name: 'GlobalSearch',

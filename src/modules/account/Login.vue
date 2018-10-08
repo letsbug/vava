@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/views/login--forget";
+@import "./styles/login--forget";
 
 .form-tips {
   p:first-child {

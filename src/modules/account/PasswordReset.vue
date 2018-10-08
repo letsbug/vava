@@ -143,7 +143,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/views/login--forget";
+@import "./styles/login--forget";
 $handle-get__code-width:  120px;
 
 .el-input--suffix.input-security__code {

@@ -1,0 +1,40 @@
+//
+// Application body transition animations
+
+$transform-distance:  $spacer-sm;
+
+.transform-fade-leave-active,
+.transform-fade-enter-active {
+  transition: all $transition-duration/2;
+}
+.transform-fade-enter {
+  opacity: 0;
+  transform: translate3d(0, $transform-distance, 0);
+}
+.transform-fade-leave-to {
+  opacity: 0;
+  transform: translate3d(0, $transform-distance, 0);
+}
+
+
+//
+// breadcrumb transition animations
+
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all .5s;
+}
+
+.breadcrumb-enter,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.breadcrumb-move {
+  transition: all .5s;
+}
+
+.breadcrumb-leave-active {
+  position: absolute;
+}

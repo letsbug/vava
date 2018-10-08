@@ -14,5 +14,11 @@ export default {
 </script>
 
 <style scoped>
-
+  .va-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.05em;
+    fill: currentColor;
+    overflow: hidden;
+  }
 </style>

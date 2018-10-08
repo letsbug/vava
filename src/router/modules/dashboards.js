@@ -2,7 +2,7 @@ import Layout from '@/layouts/Layout'
 
 const dashboards = {
   path: '/dashboard',
-  redirect: '/dashboard/visits',
+  redirect: '/dashboard/visitor',
   component: Layout,
   name: 'Dashboard',
   meta: {

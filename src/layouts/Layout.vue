@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar,Breadcrumb,  AppBody } from './components'
+import { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar,  AppBody } from './components'
 
 const { body } = document
 const WIDTH = 768
 
 export default {
   name: 'Layout',
-  components: { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar, Breadcrumb, AppBody },
+  components: { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
   watch: {
     $route: 'SidebarAutoCloseInMobile'
   },
@@ -27,8 +27,7 @@ export default {
     window.addEventListener('resize', this.resizeHandler)
   },
   mounted() {
-    const isMobile = this.isMobile()
-    if (isMobile) {
+    if (this.isMobile()) {
       this.$store.dispatch('app_device_toggle', 'mobile')
     }
   },

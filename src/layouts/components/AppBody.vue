@@ -19,21 +19,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import "../../styles/variables";
-$transform-distance:  $spacer-sm;
-
-.transform-fade-leave-active,
-.transform-fade-enter-active {
-  transition: all $transition-duration/2;
-}
-.transform-fade-enter {
-  opacity: 0;
-  transform: translate3d(0, $transform-distance, 0);
-}
-.transform-fade-leave-to {
-  opacity: 0;
-  transform: translate3d(0, $transform-distance, 0);
-}
-</style>
