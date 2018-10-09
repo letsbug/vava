@@ -8,9 +8,9 @@
 // About scroll bar variables
 
 $scrollbar-width:                 6px;
-$scrollbar-bg:                    $color-gray-300;
-$scrollbar-thumb-bg:              $color-gray-400;
-$scrollbar-thumb-bg-hover:        $color-actives;
+$scrollbar-bg:                    $color-gray-300 !default;
+$scrollbar-thumb-bg:              $color-gray-400 !default;
+$scrollbar-thumb-bg-hover:        $color-actives !default;
 $scrollbar-thumb-radius-size:     3px;
 
 
@@ -18,11 +18,11 @@ $scrollbar-thumb-radius-size:     3px;
 // About sidebar
 $sidebar-width-collapse:          60px;
 $sidebar-width-expanded:          210px;
-$sidebar-bg-color:                $color-gray-900;
-$sidebar-color:                   $color-gray-600;
-$sidebar-color-focus:             $color-white;
-$sidebar-color-active:            $color-actives;
-$sidebar-color-brand:             $color-gray-500;
+$sidebar-bg-color:                $color-gray-900 !default;
+$sidebar-color:                   $color-gray-600 !default;
+$sidebar-color-focus:             $color-white !default;
+$sidebar-color-active:            $color-actives !default;
+$sidebar-color-brand:             $color-gray-500 !default;
 
 $sidebar-brand-padding-x:         $spacer-sm;
 $sidebar-brand-padding-y:         $spacer-xxs;
@@ -30,7 +30,7 @@ $sidebar-brand-height:            100px;
 $sidebar-brand-line-height:       $sidebar-brand-height - ($sidebar-brand-padding-y * 2);
 $sidebar-brand-font-size:         $font-size-h2;
 
-$sidebar-nav-expanded-bg:         $color-gray-1000;
+$sidebar-nav-expanded-bg:         $color-gray-1000 !default;
 $sidebar-nav-icon-size:           $font-size-h4;
 
 $sidebar-nav-link-height:            50px;
@@ -44,7 +44,7 @@ $sidebar-nav-link-padding-x:          $spacer-lg;
 $head-border:                   $border-default;
 $head-height:                   45px;
 $head-line-height:              $head-height - $border-default-width; // 44px
-$head-bg-color:                 $color-white;
+$head-bg-color:                 $color-white !default;
 
 $head-nav-item-border-width:    2px;
 $head-nav-item-border:          solid $head-nav-item-border-width transparent;
@@ -63,7 +63,7 @@ $head-nav-form-spacer:          6px;
 //
 // About tabs bar
 $tabs-border:                   $border-default;
-$tabs-bg-color:                 $color-white;
+$tabs-bg-color:                 $color-white !default;
 
 $tabs-item-border-width:        2px;
 $tabs-item-spacer:              12px;
@@ -80,7 +80,7 @@ $tabs-item-close-padding:       2px;
 //
 // About foot bar
 $foot-border:                   $border-default;
-$foot-bg-color:                 $color-white;
+$foot-bg-color:                 $color-white !default;
 $foot-padding-y:                $spacer-sm;
 $foot-padding-x:                $spacer-base;
 $foot-wrapper-padding:          $foot-padding-y $foot-padding-x;
@@ -94,4 +94,4 @@ $main-wrapper-padding-top:      $head-height + $tabs-height;
 $main-wrapper-padding-bottom:   $foot-height;
 
 $body-wrapper-padding:          $spacer-base;
-$body-wrapper-bg-color:         $color-white;
+$body-wrapper-bg-color:         $color-white !default;
