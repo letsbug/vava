@@ -34,9 +34,7 @@
       <refresh v-if="!isMobile"></refresh>
 
       <!-- theme selector -->
-      <a class="va-nav-item hidden-xs-only">
-        <va-icon icon="theme"></va-icon>
-      </a>
+      <theme-selector></theme-selector>
 
       <!-- user notifications -->
       <el-tooltip effect="dark" :content="notificationTips" placement="bottom">
@@ -68,10 +66,11 @@
 <script>
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import Refresh from './Refresh'
+import ThemeSelector from './ThemeSelector'
 
 export default {
   name: 'VaHeadBar',
-  components: { Breadcrumb, Refresh },
+  components: { Breadcrumb, Refresh, ThemeSelector },
   data() {
     return {
       search: { old: '', keyword: '' }

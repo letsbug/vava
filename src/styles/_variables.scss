@@ -70,7 +70,7 @@ $tabs-item-spacer:              12px;
 $tabs-item-icon-size:           $font-size-h4;
 
 $tabs-height:                   36px;
-$tabs-line-height:              $tabs-height - ($tabs-item-border-width * 2);
+$tabs-line-height:              $tabs-height;
 $tabs-wrapper-padding:          0 $spacer-base;
 
 $tabs-item-close-size:          18px;
