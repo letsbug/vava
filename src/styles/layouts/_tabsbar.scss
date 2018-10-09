@@ -18,14 +18,23 @@
     float: left;
     vertical-align: top;
     border-right: solid $color-gray-100 1px;
-    border-top: solid $tabs-item-border-width transparent;
     position: relative;
     text-transform: capitalize;
     color: $color-text-secondary;
-    transition: $transition-color, $transition-border, $transition-background;
+    transition: $transition-color, $transition-background;
 
     &:first-child {
       border-left: solid $color-gray-100 1px;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      border-top: solid $tabs-item-border-width transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
     }
 
     .link-home {
@@ -59,8 +68,11 @@
 
     &.active {
       background-color: $border-color;
-      border-top-color: $color-theme;
       color: $color-theme;
+
+      &:before {
+        border-color: $color-theme;
+      }
     }
   }
 }
