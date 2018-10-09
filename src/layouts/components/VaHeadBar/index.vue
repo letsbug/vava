@@ -9,9 +9,7 @@
       </a>
 
       <!-- refresh button -->
-      <a class="va-nav-item hidden-sm-and-up">
-        <va-icon icon="refresh"/>
-      </a>
+      <refresh v-if="isMobile"></refresh>
 
       <!-- breadcrumb in desktop -->
       <breadcrumb v-if="!isMobile"></breadcrumb>
@@ -21,7 +19,7 @@
     <div class="va-head-nav nav-right clear-fix">
 
       <!-- global search -->
-      <a class="va-nav-item nav-search hidden-sm-and-down">
+      <a class="va-nav-item nav-search" v-if="!isMobile">
         <va-icon icon="search"/>
         <!-- TODO Add mobile layout to here -->
         <input ref="globalSearch" class="nav-search-inner" placeholder="search something..." autocomplete="on"
@@ -33,9 +31,7 @@
       </a>
 
       <!-- refresh button -->
-      <a class="va-nav-item hidden-xs-only">
-        <va-icon icon="refresh"/>
-      </a>
+      <refresh v-if="!isMobile"></refresh>
 
       <!-- theme selector -->
       <a class="va-nav-item hidden-xs-only">
@@ -71,16 +67,14 @@
 
 <script>
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+import Refresh from './Refresh'
 
 export default {
   name: 'VaHeadBar',
-  components: { Breadcrumb },
+  components: { Breadcrumb, Refresh },
   data() {
     return {
-      search: {
-        old: '',
-        keyword: ''
-      }
+      search: { old: '', keyword: '' }
     }
   },
   created() {
@@ -145,7 +139,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/variables";
+@import "../../../styles/variables";
 
 .va-head-nav .el-breadcrumb {
   float: left;
