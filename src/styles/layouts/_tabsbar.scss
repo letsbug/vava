@@ -1,6 +1,6 @@
 .va-tabs-bar {
   height: $tabs-height;
-  line-height: $tabs-line-height;
+  line-height: $tabs-height;
   background-color: $tabs-bg-color;
   position: absolute;
   top: $head-height;
@@ -10,10 +10,6 @@
   box-shadow: $shadow-sm-vr;
   @extend .clear-fix;
 
-  &.breadcrumb {
-    padding: $tabs-wrapper-padding;
-  }
-
   .tabs-item {
     display: block;
     height: $tabs-height;
@@ -22,6 +18,7 @@
     float: left;
     vertical-align: top;
     border-right: solid $color-gray-100 1px;
+    border-top: solid $tabs-item-border-width transparent;
     position: relative;
     text-transform: capitalize;
     color: $color-text-secondary;
@@ -62,6 +59,7 @@
 
     &.active {
       background-color: $border-color;
+      border-top-color: $color-theme;
       color: $color-theme;
     }
   }

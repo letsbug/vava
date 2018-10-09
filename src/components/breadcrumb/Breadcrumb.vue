@@ -40,7 +40,6 @@ export default {
 .va-breadcrumb {
   a {
     font-weight: normal;
-    color: $color-cyan;
   }
 
   .no-redirect {

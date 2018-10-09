@@ -2,17 +2,25 @@
   <div class="va-head-bar clear-fix">
     <!-- left navs -->
     <div class="va-head-nav clear-fix">
+
+      <!-- sidebar expander -->
       <a class="va-nav-item" @click.stop="toggleSidebar">
         <va-icon :icon="sidebarOpend ? 'handle-collapse' : 'handle-expand'"/>
       </a>
+
+      <!-- refresh button -->
       <a class="va-nav-item hidden-sm-and-up">
         <va-icon icon="refresh"/>
       </a>
+
+      <!-- breadcrumb in desktop -->
       <breadcrumb v-if="!isMobile"></breadcrumb>
     </div>
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
+
+      <!-- global search -->
       <a class="va-nav-item nav-search hidden-sm-and-down">
         <va-icon icon="search"/>
         <!-- TODO Add mobile layout to here -->
@@ -23,12 +31,18 @@
                @keyup.enter="handleSearch"/>
         <!-- TODO Add the history search drop-down list to here to autocomplete -->
       </a>
+
+      <!-- refresh button -->
       <a class="va-nav-item hidden-xs-only">
         <va-icon icon="refresh"/>
       </a>
+
+      <!-- theme selector -->
       <a class="va-nav-item hidden-xs-only">
         <va-icon icon="theme"></va-icon>
       </a>
+
+      <!-- user notifications -->
       <el-tooltip effect="dark" :content="notificationTips" placement="bottom">
         <router-link class="va-nav-item" to="/notifications">
           <el-badge is-dot :hidden="!notificationHasUnread">
@@ -36,6 +50,8 @@
           </el-badge>
         </router-link>
       </el-tooltip>
+
+      <!-- user actions -->
       <el-dropdown @command="userDropdown" :show-timeout="100" style="float: left;">
         <a class="va-nav-item spacer-xs link-user">
           <img class="avatar" :src="user.avatar" alt="">
@@ -99,7 +115,6 @@ export default {
       const key = this.search.keyword
       if (!key || (key === old)) return
       this.search.old = key
-      console.log('start search')
       this.$router.push({
         path: '/search',
         query: { keyword: key }

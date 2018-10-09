@@ -66,7 +66,7 @@ export default {
 
   .el-breadcrumb {
     height: $tabs-height;
-    line-height: $tabs-line-height;
+    line-height: $tabs-height;
   }
 }
 </style>

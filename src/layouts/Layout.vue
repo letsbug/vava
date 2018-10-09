@@ -21,7 +21,7 @@ export default {
   name: 'Layout',
   components: { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
   watch: {
-    $route: 'SidebarAutoCloseInMobile'
+    $route: 'sidebarCloseInMobile'
   },
   beforeMount() {
     window.addEventListener('resize', this.resizeHandler)
@@ -43,10 +43,7 @@ export default {
     resizeHandler() {
       const isMobile = this.isMobile()
       this.$store.dispatch('app_device_toggle', isMobile ? 'mobile' : 'desktop')
-
-      // Auto close sidebar when user resize window to mobile
       if (isMobile) this.$store.dispatch('app_sidebar_close')
-      // else store.dispatch('app_sidebar_open')
     },
     toggleDevice() {
       this.device = this.device === 'desktop' ? 'mobile' : 'desktop'
@@ -54,7 +51,7 @@ export default {
     closeSidebar() {
       this.$store.dispatch('app_sidebar_close')
     },
-    SidebarAutoCloseInMobile() {
+    sidebarCloseInMobile() {
       // In mobile devices, auto close the sidebar when route jump.
       if (this.isMobile() && this.sidebarOpened) this.closeSidebar()
     }
