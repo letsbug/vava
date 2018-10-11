@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import Copyright from '@/components/copyright/VaCopyright'
+import Copyright from '@/components/Copyright'
 import { Validators, Regulars } from '@/tools'
 
 export default {

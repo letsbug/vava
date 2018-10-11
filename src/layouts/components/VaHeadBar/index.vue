@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+import Breadcrumb from '@/components/Breadcrumb'
 import Refresh from './Refresh'
 import ThemeSelector from './ThemeSelector'
 

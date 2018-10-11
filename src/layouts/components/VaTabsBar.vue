@@ -36,7 +36,7 @@
 
 <script>
 import ScrollPane from '@/components/ScrollPane'
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default {
   name: 'VaTabsBar',

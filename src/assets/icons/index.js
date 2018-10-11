@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VaIcon from '@/components/va-icons'
+import VaIcon from '@/components/VaIcons'
 
 // Register as a global component
 Vue.component('va-icon', VaIcon)

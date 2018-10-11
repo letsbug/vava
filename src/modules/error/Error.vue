@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import VaCopyright from '@/components/copyright/VaCopyright'
+import VaCopyright from '@/components/Copyright'
 export default {
   name: 'Error',
   components: { VaCopyright },
