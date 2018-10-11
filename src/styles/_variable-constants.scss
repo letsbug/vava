@@ -115,13 +115,19 @@ $shadow-base-offset:        2px!default;
 $shadow-base-distance:      5px!default;
 $shadow-base-size:          0!default;
 
-$shadow-lg-offset:          4px!default;
-$shadow-lg-distance:        8px!default;
+$shadow-lg-offset:          2px!default;
+$shadow-lg-distance:        12px!default;
 $shadow-lg-size:            0!default;
 
 // vertical shadows
+$shadow-base-vr:            0 $shadow-base-offset $shadow-base-distance $shadow-base-size $shadow-color-base;
+$shadow-base-vr-inverse:    0 (-$shadow-base-offset) $shadow-base-distance $shadow-base-size $shadow-color-base;
+
 $shadow-sm-vr:              0 $shadow-sm-offset $shadow-sm-distance $shadow-sm-size $shadow-color-base;
 $shadow-sm-vr-inverse:      0 (-$shadow-sm-offset) $shadow-sm-distance $shadow-sm-size $shadow-color-base;
+
+$shadow-lg-vr:              0 $shadow-lg-offset $shadow-lg-distance $shadow-lg-size $shadow-color-base;
+$shadow-lg-vr-inverse:      0 (-$shadow-lg-offset) $shadow-lg-distance $shadow-lg-size $shadow-color-base;
 // horizontal shadows
 $shadow-sm-hr:              $shadow-sm-offset 0 $shadow-sm-distance $shadow-sm-size $shadow-color-base;
 $shadow-sm-hr-inverse:      (-$shadow-sm-offset) 0 $shadow-sm-distance $shadow-sm-size $shadow-color-base;

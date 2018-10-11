@@ -1,0 +1,25 @@
+$context-menu-padding:    $spacer-sm 0;
+$context-item-padding:    0 $spacer-lg;
+$context-item-height:     36px;
+
+.va-context-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: $context-menu-padding;
+  background-color: $color-white;
+  border-radius: $radius-base;
+  box-shadow: $shadow-lg-vr;
+  position: absolute;
+
+  .context-menu-item {
+    height: $context-item-height;
+    line-height: $context-item-height;
+    padding: $context-item-padding;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-theme;
+      background-color: $--color-primary-light-9;
+    }
+  }
+}

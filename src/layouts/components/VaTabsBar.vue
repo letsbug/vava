@@ -10,10 +10,17 @@
                    v-for="route in history"
                    v-if="!route.notab"
                    :key="route.path"
-                   :to="route.path">
+                   :to="route.path"
+                   @contextmenu.prevent.native="menuOpen(route, $event)">
         <span class="tabs-item-name">{{ route.title }}</span>
         <span class="tabs-item__close"><va-icon icon="handle-close" @click.prevent.native="close(route)"></va-icon></span>
       </router-link>
+
+      <ul class="va-context-menu" v-show="contextVisible" :style="{ left: this.left + 'px', top: this.top + 'px' }">
+        <li class="context-menu-item" @click="close(selected)">Close</li>
+        <li class="context-menu-item" @click="closeOthers(selected)">Close Others</li>
+        <li class="context-menu-item" @click="closeAll">Close All</li>
+      </ul>
     </template>
   </div>
 </template>
@@ -24,11 +31,20 @@ import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 export default {
   name: 'VaTabsBar',
   components: { Breadcrumb },
+  data() {
+    return {
+      contextVisible: false,
+      left: 0,
+      top: 0,
+      selected: {}
+    }
+  },
   mounted() {
     this.add()
   },
   watch: {
-    $route: 'add'
+    $route: 'add',
+    contextVisible: 'listenerOnContOpened'
   },
   computed: {
     history() { return this.$store.getters.tabs_history },
@@ -50,6 +66,31 @@ export default {
         const latest = routes.splice(-1)[0]
         this.$router.push({ path: latest ? latest.path : '/home' })
       })
+    },
+    closeOthers(tar) {
+      this.$router.push(this.selected)
+      this.$store.dispatch('tabs_del_others', tar).then(() => {
+        // ...
+      })
+    },
+    closeAll() {
+      this.$store.dispatch('tabs_empty').then(() => {
+        this.$router.push('/')
+      })
+    },
+    menuOpen(tar, e) {
+      this.contextVisible = true
+      this.selected = tar
+      const tabBarRect = this.$el.getBoundingClientRect()
+      this.left = e.clientX - tabBarRect.left
+      this.top = e.clientY - tabBarRect.top
+    },
+    menuClose() {
+      this.contextVisible = false
+    },
+    listenerOnContOpened(v) {
+      if (v) document.body.addEventListener('click', this.menuClose)
+      else document.body.removeEventListener('click', this.menuClose)
     }
   }
 }
