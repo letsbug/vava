@@ -5,9 +5,6 @@
 <script>
   export default {
     name: 'ContextMenu',
-    metaInfo: {
-      title: 'Index'
-    },
     data() {
       return {}
     }

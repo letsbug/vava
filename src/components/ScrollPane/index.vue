@@ -7,9 +7,6 @@
 <script>
 export default {
   name: 'index',
-  metaInfo: {
-    title: 'index'
-  },
   data() {
     return { left: 0 }
   },
