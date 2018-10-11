@@ -2,6 +2,7 @@
   height: $tabs-height;
   line-height: $tabs-height;
   background-color: $tabs-bg-color;
+  font-size: 0;
   position: absolute;
   top: $head-height;
   left: 0;
@@ -11,11 +12,11 @@
   @extend .clear-fix;
 
   .tabs-item {
-    display: block;
+    display: inline-block;
     height: $tabs-height;
     line-height: $tabs-line-height;
     padding: 0 $tabs-item-spacer;
-    float: left;
+    font-size: 1rem;
     vertical-align: top;
     border-right: solid $color-gray-100 1px;
     position: relative;

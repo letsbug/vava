@@ -2,21 +2,30 @@
   <div class="va-tabs-bar" :class="isMobile ? 'mobile' : ''">
     <breadcrumb v-if="isMobile"></breadcrumb>
     <template v-else>
-      <!-- Resident tab control, link to home -->
-      <router-link class="tabs-item" to="/home"><va-icon class="link-home" icon="house"></va-icon></router-link>
 
       <!-- Closable tab control list -->
-      <router-link class="tabs-item"
-                   v-for="route in history"
-                   v-if="!route.notab"
-                   :key="route.path"
-                   :to="route.path"
-                   @contextmenu.prevent.native="menuOpen(route, $event)">
-        <span class="tabs-item-name">{{ route.title }}</span>
-        <span class="tabs-item__close"><va-icon icon="handle-close" @click.prevent.native="close(route)"></va-icon></span>
+      <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
+        <router-link class="tabs-item" ref="tabs"
+                     v-for="route in history"
+                     v-if="!route.notab"
+                     :key="route.path"
+                     :to="route.path"
+                     @contextmenu.prevent.native="menuOpen(route, $event)">
+          <span class="tabs-item-name">{{ route.title }}</span>
+          <span class="tabs-item__close">
+            <va-icon icon="handle-close" @click.prevent.native="close(route)"></va-icon>
+          </span>
+        </router-link>
+      </scroll-pane>
+
+      <!-- Resident tab control, link to home -->
+      <router-link class="tabs-item tabs-home" to="/home">
+        <va-icon class="link-home" icon="house"></va-icon>
       </router-link>
 
-      <ul class="va-context-menu" v-show="contextVisible" :style="{ left: this.left + 'px', top: this.top + 'px' }">
+      <!-- Closeable tabs context menu -->
+      <ul ref="tabsContextMenu" class="va-context-menu" v-show="contextVisible"
+          :style="{ left: this.left + 'px', top: this.top + 'px' }">
         <li class="context-menu-item" @click="close(selected)">Close</li>
         <li class="context-menu-item" @click="closeOthers(selected)">Close Others</li>
         <li class="context-menu-item" @click="closeAll">Close All</li>
@@ -26,11 +35,12 @@
 </template>
 
 <script>
+import ScrollPane from '@/components/ScrollPane'
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 
 export default {
   name: 'VaTabsBar',
-  components: { Breadcrumb },
+  components: { ScrollPane, Breadcrumb },
   data() {
     return {
       contextVisible: false,
@@ -53,6 +63,9 @@ export default {
   methods: {
     isActive(route) {
       return route.path === this.$route.path
+    },
+    scrollToCurrentTab() {
+      const tabs = this.$refs['tabs']
     },
     add() {
       if (this.isMobile) return
@@ -79,11 +92,15 @@ export default {
       })
     },
     menuOpen(tar, e) {
-      this.contextVisible = true
       this.selected = tar
+
+      const width = 130
       const tabBarRect = this.$el.getBoundingClientRect()
       this.left = e.clientX - tabBarRect.left
       this.top = e.clientY - tabBarRect.top
+      if ((tabBarRect.width - this.left) < width) this.left = this.left - width
+
+      this.contextVisible = true
     },
     menuClose() {
       this.contextVisible = false
@@ -99,7 +116,21 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/variables";
 
+$tabs-home-width: 44px;
+
 .va-tabs-bar {
+  padding-left: $tabs-home-width;
+
+  .tabs-scroll-pane {
+    height: $tabs-height;
+  }
+
+  .tabs-home {
+    width: $tabs-home-width;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 
   &.mobile {
     padding: 0 $spacer-base;
