@@ -6,11 +6,8 @@
     <template v-else>
       <!-- Closable tab control list -->
       <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
-        <router-link class="va-tabs-item" ref="tabs"
-                     v-for="route in history"
-                     v-if="!route.notab"
-                     :key="route.path"
-                     :to="route.path"
+        <router-link class="va-tabs-item" ref="tabs" v-if="!route.notab" :key="route.path"
+                     v-for="route in history" :to="route.path"
                      @contextmenu.prevent.native="menuOpen(route, $event)">
           <span class="tabs-item-name">{{ route.title }}</span>
           <span class="tabs-item__close">
@@ -25,9 +22,16 @@
       </router-link>
 
       <!-- TODO Add some tabs options or tabs out to here -->
-      <span class="va-tabs-item tabs-more">
-        <i class="el-icon-arrow-down"></i>
-      </span>
+      <el-dropdown class="tabs-more" trigger="click" @command="onOptionCommand">
+        <a class="va-tabs-item">
+          <i class="el-icon-arrow-down"></i>
+        </a>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item :command="close" :disabled="history.length < 1">Close</el-dropdown-item>
+          <el-dropdown-item :command="closeOthers" :disabled="history.length < 2">Close Others</el-dropdown-item>
+          <el-dropdown-item :command="closeAll" :disabled="history.length < 2">Close All</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
 
       <!-- Closeable tabs context menu -->
       <ul ref="tabsContextMenu" class="va-context-menu" v-show="contextVisible"
@@ -80,15 +84,19 @@ export default {
       this.$store.dispatch('tabs_add', this.$route)
     },
     close(target) {
+      const _$route = this.$route
+      if (!target) target = { name: _$route.name, path: _$route.path, title: _$route.meta.title }
       this.$store.dispatch('tabs_del', target).then(routes => {
         if (!this.isActive(target)) return
         const latest = routes.splice(-1)[0]
         this.$router.push({ path: latest ? latest.path : '/home' })
       })
     },
-    closeOthers(tar) {
+    closeOthers(target) {
+      const _$route = this.$route
+      if (!target) target = { name: _$route.name, path: _$route.path, title: _$route.meta.title }
       this.$router.push(this.selected)
-      this.$store.dispatch('tabs_del_others', tar).then(() => {
+      this.$store.dispatch('tabs_del_others', target).then(() => {
         // ...
       })
     },
@@ -114,7 +122,8 @@ export default {
     listenerOnContOpened(v) {
       if (v) document.body.addEventListener('click', this.menuClose)
       else document.body.removeEventListener('click', this.menuClose)
-    }
+    },
+    onOptionCommand(tar) { tar() }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <el-dropdown @command="chooseTheme" :show-timeout="100" style="float: left;">
+  <el-dropdown trigger="click" @command="chooseTheme" :show-timeout="100" style="float: left;">
     <a class="va-nav-item hidden-xs-only">
       <va-icon icon="theme"></va-icon>
     </a>

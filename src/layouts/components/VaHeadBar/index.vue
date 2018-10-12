@@ -46,7 +46,7 @@
       </el-tooltip>
 
       <!-- user actions -->
-      <el-dropdown @command="userDropdown" :show-timeout="100" style="float: left;">
+      <el-dropdown trigger="click" @command="userDropdown" :show-timeout="100" style="float: left;">
         <a class="va-nav-item spacer-xs link-user">
           <img class="avatar" :src="user.avatar" alt="">
         </a>

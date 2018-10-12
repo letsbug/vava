@@ -14,11 +14,18 @@ $context-item-height:     36px;
   box-shadow: $shadow-lg-vr;
   position: absolute;
 
-  .context-menu-item {
+  .context-menu-title, .context-menu-item {
     width: 100%;
     height: $context-item-height;
     line-height: $context-item-height;
     padding: $context-item-padding;
+  }
+
+  .context-menu-title {
+    color: $color-text-primary;
+  }
+
+  .context-menu-item {
     cursor: pointer;
 
     &:hover {

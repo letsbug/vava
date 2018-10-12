@@ -27,6 +27,27 @@ $tabs-icon-btn-width:   44px;
     height: $tabs-height;
     line-height: $tabs-height;
   }
+
+  .tabs-home, .tabs-more {
+    width: $tabs-icon-btn-width;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+  }
+
+  .tabs-more {
+    right: 0;
+    font-size: $tabs-item-icon-size;
+
+    .va-tabs-item {
+      width: 100%;
+      color: $color-text-primary;
+
+      &:hover {
+        color: $color-theme;
+      }
+    }
+  }
 }
 
 .va-tabs-item {
@@ -57,13 +78,6 @@ $tabs-icon-btn-width:   44px;
     right: 0;
   }
 
-  &.tabs-home, &.tabs-more {
-    width: $tabs-icon-btn-width;
-    position: absolute;
-    top: 0;
-    cursor: pointer;
-  }
-
   &.tabs-home {
     left: 0;
 
@@ -72,11 +86,6 @@ $tabs-icon-btn-width:   44px;
       height: $tabs-item-icon-size;
       vertical-align: -3px;
     }
-  }
-
-  &.tabs-more {
-    right: 0;
-    font-size: $tabs-item-icon-size;
   }
 
   &:hover {
