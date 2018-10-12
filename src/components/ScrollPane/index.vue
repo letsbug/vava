@@ -13,9 +13,16 @@ export default {
   methods: {
     handleScroll(e) {
       const data = e.wheelDelta
-      console.log(data)
       const wrapper = this.$refs['scrollPane'].$refs['wrap']
       wrapper.scrollLeft = wrapper.scrollLeft - data / 3
+    },
+    scrollTo(target) {
+      const container = this.$refs['scrollPane'].$el
+      const containerWidth = container.offsetWidth
+      const wrapper = this.$refs['scrollPane'].$refs['wrap']
+      const targetLeft = target.offsetLeft
+      const targetWidth = target.offsetWidth
+      wrapper.scrollLeft = (targetLeft > containerWidth) ? (targetLeft - containerWidth + targetWidth) : targetLeft
     }
   }
 }
@@ -31,12 +38,17 @@ export default {
   position: relative;
 
   /deep/ {
-    .el-scrollbar__bar {
-      bottom: 0;
+    .el-scrollbar__wrap {
+      height: $tabs-height + 23px;
     }
 
-    .el-scrollbar__wrap {
-      height: $tabs-height + 18px;
+    .el-scrollbar__view {
+      display: inline-block;
+      font-size: 1rem;
+    }
+
+    .el-scrollbar__bar {
+      bottom: 0;
     }
   }
 }

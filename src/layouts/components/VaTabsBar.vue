@@ -63,8 +63,14 @@ export default {
     this.add()
   },
   watch: {
-    $route: 'add',
-    contextVisible: 'listenerOnContOpened'
+    $route() {
+      this.add()
+      this.scrollToCurrentTab()
+    },
+    contextVisible(v) {
+      if (v) document.body.addEventListener('click', this.menuClose)
+      else document.body.removeEventListener('click', this.menuClose)
+    }
   },
   computed: {
     history() { return this.$store.getters.tabs_history },
@@ -76,6 +82,14 @@ export default {
     },
     scrollToCurrentTab() {
       const tabs = this.$refs['tabs']
+      this.$nextTick(() => {
+        for (const tab of tabs) {
+          if (tab.to === this.$route.path) {
+            this.$refs['scrollPane'].scrollTo(tab.$el)
+            break
+          }
+        }
+      })
     },
     add() {
       if (this.isMobile) return
@@ -119,11 +133,9 @@ export default {
     menuClose() {
       this.contextVisible = false
     },
-    listenerOnContOpened(v) {
-      if (v) document.body.addEventListener('click', this.menuClose)
-      else document.body.removeEventListener('click', this.menuClose)
-    },
-    onOptionCommand(tar) { tar() }
+    onOptionCommand(tar) {
+      tar()
+    }
   }
 }
 </script>
