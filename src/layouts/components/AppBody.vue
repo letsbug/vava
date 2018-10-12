@@ -1,12 +1,12 @@
 <template>
-  <div class="va-body-wrapper">
+  <el-scrollbar class="va-body-wrapper" :class="background" ref="bodyScrollPane">
     <transition name="transform-fade" mode="out-in">
       <router-view v-if="isMobile"/>
       <keep-alive v-else :include="routeCache">
         <router-view :key="key"></router-view>
       </keep-alive>
     </transition>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script>
@@ -15,7 +15,29 @@ export default {
   computed: {
     isMobile() { return this.$store.getters.device === 'mobile' },
     routeCache() { return this.$store.getters.tabs_cached },
-    key() { return this.$route.name }
+    key() { return this.$route.name },
+    background() {
+      console.log(this.$route)
+      return this.$route.meta['nobg'] ? 'no-bg' : ''
+    }
   }
 }
 </script>
+
+<style scoped lang="scss">
+
+.va-body-wrapper /deep/ {
+  .el-scrollbar__wrap {
+    overflow-x: hidden !important;
+    margin-bottom: 0 !important;
+  }
+
+  .el-scrollbar__view {
+    width: 100%;
+
+    .va-body-container {
+      width: 100%;
+    }
+  }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-<div class="va-body-container no-bg">
+<div class="va-body-container">
   <h1>Dashboard Users</h1>
 </div>
 </template>

@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import ScrollPane from '@/components/ScrollPane'
-import Breadcrumb from '@/components/Breadcrumb'
+import ScrollPane from './ScrollPane'
+import Breadcrumb from '@/components/Breadcrumb/index'
 
 export default {
   name: 'VaTabsBar',
@@ -139,3 +139,23 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+@import "../../../styles/variables";
+
+.va-tabs-bar /deep/ .va-scroll-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+
+  .el-scrollbar__wrap {
+    height: $tabs-height + 23px;
+  }
+
+  .el-scrollbar__view {
+    display: inline-block;
+    font-size: 1rem;
+  }
+}
+</style>

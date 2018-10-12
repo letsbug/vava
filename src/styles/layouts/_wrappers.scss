@@ -15,21 +15,19 @@
 .va-body-wrapper {
   height: 100%;
   overflow: hidden;
-}
-
-.va-body-container {
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding: $body-wrapper-padding;
   background-color: $body-wrapper-bg-color;
-  position: relative;
 
   transition: $transition-background;
 
   &.no-bg {
     background-color: transparent;
   }
+}
+
+.va-body-container {
+  padding: $body-wrapper-padding;
+  overflow-x: hidden;
+  position: relative;
 
   .va-body-title {
     font-size: $font-size-h4;

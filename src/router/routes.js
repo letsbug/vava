@@ -11,7 +11,8 @@ import Tables from './modules/tables'
  * @param meta {Object}
  *        title - side-menu & tab-bar display name
  *        icon -  side-menu display icon.
- *        notab - Do not add in tabs-bar
+ *        notab - Do not add in tabs-bar.
+ *        nobg - remove AppBody component's background, must use in secondary route.
  * @type {VueRouter[]}
  */
 export const constantRouteMap = [
@@ -26,7 +27,7 @@ export const constantRouteMap = [
     children: [{
       path: 'home',
       name: 'Homepage',
-      meta: { title: 'home', icon: 'house' },
+      meta: { title: 'home', icon: 'house', nobg: true },
       component: () => import('@/modules/homepage/Homepage')
     }]
   },
@@ -40,7 +41,7 @@ export const constantRouteMap = [
     children: [{
       path: '',
       name: 'Reports',
-      meta: { title: 'reports', icon: 'chart' },
+      meta: { title: 'reports', icon: 'chart', nobg: true },
       component: () => import('@/modules/reports/Reports')
     }]
   },

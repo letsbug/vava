@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar ref="scrollPane" class="va-scroll-container" :vertical="false" @wheel.prevent.native="handleScroll">
+  <el-scrollbar ref="scrollPane" class="va-scroll-container" @wheel.prevent.native="handleScroll">
     <slot/>
   </el-scrollbar>
 </template>
@@ -27,25 +27,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "../../styles/variables";
-
-.va-scroll-container {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-
-  /deep/ {
-    .el-scrollbar__wrap {
-      height: $tabs-height + 23px;
-    }
-
-    .el-scrollbar__view {
-      display: inline-block;
-      font-size: 1rem;
-    }
-  }
-}
-</style>
