@@ -1,11 +1,12 @@
 <template>
   <div class="va-tabs-bar" :class="isMobile ? 'mobile' : ''">
-    <breadcrumb v-if="isMobile"></breadcrumb>
-    <template v-else>
 
+    <breadcrumb v-if="isMobile"></breadcrumb>
+
+    <template v-else>
       <!-- Closable tab control list -->
       <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
-        <router-link class="tabs-item" ref="tabs"
+        <router-link class="va-tabs-item" ref="tabs"
                      v-for="route in history"
                      v-if="!route.notab"
                      :key="route.path"
@@ -19,9 +20,14 @@
       </scroll-pane>
 
       <!-- Resident tab control, link to home -->
-      <router-link class="tabs-item tabs-home" to="/home">
+      <router-link class="va-tabs-item tabs-home" to="/home">
         <va-icon class="link-home" icon="house"></va-icon>
       </router-link>
+
+      <!-- TODO Add some tabs options or tabs out to here -->
+      <span class="va-tabs-item tabs-more">
+        <i class="el-icon-arrow-down"></i>
+      </span>
 
       <!-- Closeable tabs context menu -->
       <ul ref="tabsContextMenu" class="va-context-menu" v-show="contextVisible"
@@ -112,33 +118,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import "../../styles/variables";
-
-$tabs-home-width: 44px;
-
-.va-tabs-bar {
-  padding-left: $tabs-home-width;
-
-  .tabs-scroll-pane {
-    height: $tabs-height;
-  }
-
-  .tabs-home {
-    width: $tabs-home-width;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
-  &.mobile {
-    padding: 0 $spacer-base;
-  }
-
-  .el-breadcrumb {
-    height: $tabs-height;
-    line-height: $tabs-height;
-  }
-}
-</style>

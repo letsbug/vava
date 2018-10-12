@@ -1,7 +1,11 @@
+$tabs-icon-btn-width:   44px;
+
 .va-tabs-bar {
   height: $tabs-height;
   line-height: $tabs-height;
   background-color: $tabs-bg-color;
+  padding-left: $tabs-icon-btn-width;
+  padding-right: $tabs-icon-btn-width;
   font-size: 0;
   position: absolute;
   top: $head-height;
@@ -11,68 +15,98 @@
   box-shadow: $shadow-sm-vr;
   @extend .clear-fix;
 
-  .tabs-item {
-    display: inline-block;
+  &.mobile {
+    padding: 0 $spacer-base;
+  }
+
+  .tabs-scroll-pane {
     height: $tabs-height;
-    line-height: $tabs-line-height;
-    padding: 0 $tabs-item-spacer;
-    font-size: 1rem;
-    vertical-align: top;
-    border-right: solid $color-gray-100 1px;
-    position: relative;
-    text-transform: capitalize;
-    color: $color-text-secondary;
-    transition: $transition-color, $transition-background;
+  }
 
-    &:first-child {
-      border-left: solid $color-gray-100 1px;
-    }
+  .el-breadcrumb {
+    height: $tabs-height;
+    line-height: $tabs-height;
+  }
+}
 
-    &:before {
-      content: '';
-      display: block;
-      border-top: solid $tabs-item-border-width transparent;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-    }
+.va-tabs-item {
+  display: inline-block;
+  height: $tabs-height;
+  line-height: $tabs-line-height;
+  padding: 0 $tabs-item-spacer;
+  border-right: solid $color-gray-100 1px;
+  vertical-align: top;
+  font-size: 1rem;
+  text-transform: capitalize;
+  text-align: center;
+  color: $color-text-secondary;
+  position: relative;
+  transition: $transition-color, $transition-background;
+
+  &:first-child {
+    border-left: solid $color-gray-100 1px;
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    border-top: solid $tabs-item-border-width transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &.tabs-home, &.tabs-more {
+    width: $tabs-icon-btn-width;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+  }
+
+  &.tabs-home {
+    left: 0;
 
     .link-home {
       width: $tabs-item-icon-size;
       height: $tabs-item-icon-size;
       vertical-align: -3px;
     }
+  }
 
-    .tabs-item__close {
+  &.tabs-more {
+    right: 0;
+    font-size: $tabs-item-icon-size;
+  }
 
-      .va-icon {
-        width: $tabs-item-close-size;
-        height: $tabs-item-close-size;
-        border-radius: 50%;
-        padding: $tabs-item-close-padding;
-        vertical-align: -4px;
-      }
+  &:hover {
+    color: $color-text-primary;
+  }
 
-      &:hover {
-        color: $color-white;
+  &.active {
+    background-color: $border-color;
+    color: $color-theme;
 
-        .va-icon {
-          background-color: $color-theme;
-        }
-      }
+    &:before {
+      border-color: $color-theme;
+    }
+  }
+
+  .tabs-item__close {
+
+    .va-icon {
+      width: $tabs-item-close-size;
+      height: $tabs-item-close-size;
+      border-radius: 50%;
+      padding: $tabs-item-close-padding;
+      vertical-align: -4px;
     }
 
     &:hover {
-      color: $color-text-primary;
-    }
+      color: $color-white;
 
-    &.active {
-      background-color: $border-color;
-      color: $color-theme;
-
-      &:before {
-        border-color: $color-theme;
+      .va-icon {
+        background-color: $color-theme;
       }
     }
   }
