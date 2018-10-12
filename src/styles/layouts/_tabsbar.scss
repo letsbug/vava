@@ -76,6 +76,7 @@ $tabs-icon-btn-width:   44px;
     top: 0;
     left: 0;
     right: 0;
+    transition: $transition-border;
   }
 
   &.tabs-home {
