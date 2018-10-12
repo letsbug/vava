@@ -46,10 +46,6 @@ export default {
       display: inline-block;
       font-size: 1rem;
     }
-
-    .el-scrollbar__bar {
-      bottom: 0;
-    }
   }
 }
 </style>
