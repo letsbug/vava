@@ -1,0 +1,1 @@
+webpackJsonp([3],{gO31:function(e,t){},xpkT:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a={render:function(){var e=this.$createElement;return(this._self._c||e)("div")},staticRenderFns:[]};var i=n("VU/8")({name:"Join",metaInfo:{title:"Join Vava"}},a,!1,function(e){n("gO31")},"data-v-7ec496a4",null);t.default=i.exports}});

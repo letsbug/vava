@@ -1,1 +1,0 @@
-webpackJsonp([0],{"7zLi":function(t,n,r){"use strict";n.a=function(t,n,r){var a={current:t,limit:n,keyword:r};return Object(e.a)({method:"post",url:"/clients/list",data:a}).then(function(t){return t.data})};var e=r("l/JR")}});

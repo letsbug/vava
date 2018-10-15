@@ -1,1 +1,0 @@
-webpackJsonp([18],{pryO:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n={render:function(){var e=this.$createElement;return(this._self._c||e)("div",{staticClass:"container-body avatar-uploader"},[this._v("\n  Avatar Upload\n")])},staticRenderFns:[]},r=a("VU/8")({name:"AvatarUpload"},n,!1,null,null,null);t.default=r.exports}});
