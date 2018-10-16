@@ -48,8 +48,10 @@ const tabs = {
   },
   actions: {
     tabs_add: ({ commit, state }, route) => new Promise(resolve => {
+      const before = [...state.history].length
       commit('TABS_ADD', route)
-      resolve([...state.history])
+      const after = [...state.history].length
+      resolve(after > before)
     }),
     tabs_del: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_DEL', route)

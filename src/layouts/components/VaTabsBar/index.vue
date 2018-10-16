@@ -90,8 +90,13 @@ export default {
         tabsWidth += tab.$el.getBoundingClientRect().width
       }
       if (tabsWidth > tabsPaneWidth) {
-        const route = this.tabs.splice(0, 1)
-        this.overflows.push(route[0])
+        const has = this.overflows.findIndex(v => v.path === this.$route.path)
+        if (~has) {
+          this.overflows.push(this.tabs.splice(-1, 1)[0])
+          this.tabs.push(this.overflows.splice(has, 1)[0])
+        } else {
+          this.overflows.push(this.tabs.splice(0, 1)[0])
+        }
       } else {
         console.log('tabs total width was less than tabs pane...')
       }
