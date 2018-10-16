@@ -62,7 +62,8 @@ export default {
   },
   mounted() {
     this.add()
-    this.tabs = this.$store.getters.tabs_history
+    this.tabs = this.$store.getters.tabs_list
+    this.overflows = this.$store.getters.tabs_overflows
   },
   watch: {
     $route() {
@@ -83,6 +84,7 @@ export default {
       return route.path === this.$route.path
     },
     setTabsLayout() {
+      console.log('Start set tabs layout.')
       const tabsPaneWidth = this.$refs['tabsPane'].getBoundingClientRect().width
       const tabs = this.$refs['tabs']
       let tabsWidth = 0
@@ -90,17 +92,10 @@ export default {
         tabsWidth += tab.$el.getBoundingClientRect().width
       }
       if (tabsWidth > tabsPaneWidth) {
-        const has = this.overflows.findIndex(v => v.path === this.$route.path)
-        if (~has) {
-          this.overflows.push(this.tabs.splice(-1, 1)[0])
-          this.tabs.push(this.overflows.splice(has, 1)[0])
-        } else {
-          this.overflows.push(this.tabs.splice(0, 1)[0])
-        }
+        console.log('tabs total width was more than tabs pane...')
       } else {
         console.log('tabs total width was less than tabs pane...')
       }
-      console.log(this.overflows)
     },
     add() {
       if (this.isMobile) return

@@ -1,12 +1,13 @@
 const tabs = {
   state: {
-    history: [],
+    list: [],
+    overflows: [],
     cached: []
   },
   mutations: {
     TABS_ADD: (state, route) => {
-      if (state.history.some(v => v.path === route.path)) return
-      state.history.push({
+      if (state.list.some(v => v.path === route.path)) return
+      state.list.push({
         name: route.name,
         path: route.path,
         title: route.meta.title || 'no-name'
@@ -14,9 +15,9 @@ const tabs = {
       if (!route.meta.nocache) state.cached.push(route.name)
     },
     TABS_DEL: (state, route) => {
-      for (const [i, v] of state.history.entries()) {
+      for (const [i, v] of state.list.entries()) {
         if (v.path === route.path) {
-          state.history.splice(i, 1)
+          state.list.splice(i, 1)
           break
         }
       }
@@ -28,9 +29,9 @@ const tabs = {
       }
     },
     TABS_DEL_OTHERS: (state, route) => {
-      for (const [i, v] of state.history.entries()) {
+      for (const [i, v] of state.list.entries()) {
         if (v.path === route.path) {
-          state.history = state.history.splice(i, 1)
+          state.list = state.list.splice(i, 1)
           break
         }
       }
@@ -42,28 +43,28 @@ const tabs = {
       }
     },
     TABS_EMPTY: state => {
-      state.history = []
+      state.list = []
       state.cached = []
     }
   },
   actions: {
     tabs_add: ({ commit, state }, route) => new Promise(resolve => {
-      const before = [...state.history].length
+      const before = [...state.list].length
       commit('TABS_ADD', route)
-      const after = [...state.history].length
+      const after = [...state.list].length
       resolve(after > before)
     }),
     tabs_del: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_DEL', route)
-      resolve([...state.history])
+      resolve([...state.list])
     }),
     tabs_del_others: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_DEL_OTHERS', route)
-      resolve([...state.history])
+      resolve([...state.list])
     }),
     tabs_empty: ({ commit, state }) => new Promise(resolve => {
       commit('TABS_EMPTY')
-      resolve([...state.history])
+      resolve([...state.list])
     })
   }
 }
