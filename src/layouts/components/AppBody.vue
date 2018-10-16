@@ -16,10 +16,7 @@ export default {
     isMobile() { return this.$store.getters.device === 'mobile' },
     routeCache() { return this.$store.getters.tabs_cached },
     key() { return this.$route.name },
-    background() {
-      console.log(this.$route)
-      return this.$route.meta['nobg'] ? 'no-bg' : ''
-    }
+    background() { return this.$route.meta['nobg'] ? 'no-bg' : '' }
   }
 }
 </script>

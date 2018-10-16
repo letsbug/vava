@@ -5,16 +5,16 @@
 
     <template v-else>
       <!-- Closable tab control list -->
-      <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
+      <div ref="tabsPane" class="tabs-pane">
         <router-link class="va-tabs-item" ref="tabs" v-if="!route.notab" :key="route.path"
-                     v-for="route in history" :to="route.path"
+                     v-for="route in tabs" :to="route.path"
                      @contextmenu.prevent.native="menuOpen(route, $event)">
           <span class="tabs-item-name">{{ route.title }}</span>
           <span class="tabs-item__close">
             <va-icon icon="handle-close" @click.prevent.native="close(route)"></va-icon>
           </span>
         </router-link>
-      </scroll-pane>
+      </div>
 
       <!-- Resident tab control, link to home -->
       <router-link class="va-tabs-item tabs-home" to="/home">
@@ -22,14 +22,14 @@
       </router-link>
 
       <!-- TODO Add some tabs options or tabs out to here -->
-      <el-dropdown class="tabs-more" trigger="click" @command="onOptionCommand">
+      <el-dropdown class="tabs-more" trigger="click" @command="onClickOverflows" v-if="overflows.length > 0">
         <a class="va-tabs-item">
           <i class="el-icon-arrow-down"></i>
         </a>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item :command="close" :disabled="history.length < 1">Close</el-dropdown-item>
-          <el-dropdown-item :command="closeOthers" :disabled="history.length < 2">Close Others</el-dropdown-item>
-          <el-dropdown-item :command="closeAll" :disabled="history.length < 2">Close All</el-dropdown-item>
+          <el-dropdown-item v-for="item in overflows" :key="item.path" :command="item">
+            {{ item.title }}
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -45,14 +45,15 @@
 </template>
 
 <script>
-import ScrollPane from './ScrollPane'
 import Breadcrumb from '@/components/Breadcrumb/index'
 
 export default {
   name: 'VaTabsBar',
-  components: { ScrollPane, Breadcrumb },
+  components: { Breadcrumb },
   data() {
     return {
+      tabs: [],
+      overflows: [],
       contextVisible: false,
       left: 0,
       top: 0,
@@ -61,11 +62,11 @@ export default {
   },
   mounted() {
     this.add()
+    this.tabs = this.$store.getters.tabs_history
   },
   watch: {
     $route() {
       this.add()
-      this.scrollToCurrentTab()
     },
     contextVisible(v) {
       if (v) document.body.addEventListener('click', this.menuClose)
@@ -73,29 +74,36 @@ export default {
     }
   },
   computed: {
-    history() { return this.$store.getters.tabs_history },
-    isMobile() { return this.$store.getters.device === 'mobile' }
+    isMobile() {
+      return this.$store.getters.device === 'mobile'
+    }
   },
   methods: {
     isActive(route) {
       return route.path === this.$route.path
     },
-    scrollToCurrentTab() {
+    setTabsLayout() {
+      const tabsPaneWidth = this.$refs['tabsPane'].getBoundingClientRect().width
       const tabs = this.$refs['tabs']
-      this.$nextTick(() => {
-        for (const tab of tabs) {
-          if (tab.to === this.$route.path) {
-            this.$refs['scrollPane'].scrollTo(tab.$el)
-            break
-          }
-        }
-      })
+      let tabsWidth = 0
+      for (const tab of tabs) {
+        tabsWidth += tab.$el.getBoundingClientRect().width
+      }
+      if (tabsWidth > tabsPaneWidth) {
+        const route = this.tabs.splice(0, 1)
+        this.overflows.push(route[0])
+      } else {
+        console.log('tabs total width was less than tabs pane...')
+      }
+      console.log(this.overflows)
     },
     add() {
       if (this.isMobile) return
       const { name, path, meta } = this.$route
       if (meta.notab || !name || path === '/home') return
-      this.$store.dispatch('tabs_add', this.$route)
+      this.$store.dispatch('tabs_add', this.$route).then(() => {
+        this.setTabsLayout()
+      })
     },
     close(target) {
       const _$route = this.$route
@@ -104,6 +112,7 @@ export default {
         if (!this.isActive(target)) return
         const latest = routes.splice(-1)[0]
         this.$router.push({ path: latest ? latest.path : '/home' })
+        this.setTabsLayout()
       })
     },
     closeOthers(target) {
@@ -111,12 +120,13 @@ export default {
       if (!target) target = { name: _$route.name, path: _$route.path, title: _$route.meta.title }
       this.$router.push(this.selected)
       this.$store.dispatch('tabs_del_others', target).then(() => {
-        // ...
+        this.setTabsLayout()
       })
     },
     closeAll() {
       this.$store.dispatch('tabs_empty').then(() => {
         this.$router.push('/')
+        this.setTabsLayout()
       })
     },
     menuOpen(tar, e) {
@@ -133,8 +143,8 @@ export default {
     menuClose() {
       this.contextVisible = false
     },
-    onOptionCommand(tar) {
-      tar()
+    onClickOverflows(tar) {
+      this.$router.push(tar)
     }
   }
 }
@@ -143,19 +153,10 @@ export default {
 <style scoped lang="scss">
 @import "../../../styles/variables";
 
-.va-tabs-bar /deep/ .va-scroll-container {
+.va-tabs-bar .tabs-pane {
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-
-  .el-scrollbar__wrap {
-    height: $tabs-height + 23px;
-  }
-
-  .el-scrollbar__view {
-    display: inline-block;
-    font-size: 1rem;
-  }
 }
 </style>

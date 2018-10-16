@@ -47,9 +47,10 @@ const tabs = {
     }
   },
   actions: {
-    tabs_add: ({ commit }, route) => {
+    tabs_add: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_ADD', route)
-    },
+      resolve([...state.history])
+    }),
     tabs_del: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_DEL', route)
       resolve([...state.history])
