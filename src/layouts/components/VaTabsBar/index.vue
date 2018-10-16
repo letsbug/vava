@@ -28,7 +28,7 @@
         </a>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="item in overflows" :key="item.path" :command="item">
-            {{ item.title }}
+            {{ item.title | capitalize }}
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
