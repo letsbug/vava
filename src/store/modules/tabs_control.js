@@ -1,7 +1,6 @@
 const tabs = {
   state: {
     list: [],
-    overflows: [],
     cached: []
   },
   mutations: {

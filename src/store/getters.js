@@ -9,8 +9,7 @@ const getters = {
   routes_permission: state => state.permission.routes,
   routes_addons: state => state.permission.addons,
   // Tabs control (history and cached routes in tab-bar)
-  tabs_list: state => state.tabs.list,
-  tabs_overflows: state => state.tabs.overflows,
+  tabs_history: state => state.tabs.list,
   tabs_cached: state => state.tabs.cached,
   // User notifications
   notifications: state => state.notification

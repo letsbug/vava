@@ -27,9 +27,9 @@
           <i class="el-icon-arrow-down"></i>
         </a>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-for="item in overflows" :key="item.path" :command="item">
-            {{ item.title | capitalize }}
-          </el-dropdown-item>
+          <el-dropdown-item :command="close" :disabled="history.length < 1">Close</el-dropdown-item>
+          <el-dropdown-item :command="closeOthers" :disabled="history.length < 2">Close Others</el-dropdown-item>
+          <el-dropdown-item :command="closeAll" :disabled="history.length < 2">Close All</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -62,8 +62,6 @@ export default {
   },
   mounted() {
     this.add()
-    this.tabs = this.$store.getters.tabs_list
-    this.overflows = this.$store.getters.tabs_overflows
   },
   watch: {
     $route() {
@@ -83,19 +81,16 @@ export default {
     isActive(route) {
       return route.path === this.$route.path
     },
-    setTabsLayout() {
-      console.log('Start set tabs layout.')
-      const tabsPaneWidth = this.$refs['tabsPane'].getBoundingClientRect().width
+    scrollToCurrentTab() {
       const tabs = this.$refs['tabs']
-      let tabsWidth = 0
-      for (const tab of tabs) {
-        tabsWidth += tab.$el.getBoundingClientRect().width
-      }
-      if (tabsWidth > tabsPaneWidth) {
-        console.log('tabs total width was more than tabs pane...')
-      } else {
-        console.log('tabs total width was less than tabs pane...')
-      }
+      this.$nextTick(() => {
+        for (const tab of tabs) {
+          if (tab.to === this.$route.path) {
+            this.$refs['scrollPane'].scrollTo(tab.$el)
+            break
+          }
+        }
+      })
     },
     add() {
       if (this.isMobile) return
