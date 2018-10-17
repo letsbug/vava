@@ -1,12 +1,12 @@
 const tabs = {
   state: {
-    list: [],
+    history: [],
     cached: []
   },
   mutations: {
     TABS_ADD: (state, route) => {
-      if (state.list.some(v => v.path === route.path)) return
-      state.list.push({
+      if (state.history.some(v => v.path === route.path)) return
+      state.history.push({
         name: route.name,
         path: route.path,
         title: route.meta.title || 'no-name'
@@ -48,10 +48,8 @@ const tabs = {
   },
   actions: {
     tabs_add: ({ commit, state }, route) => new Promise(resolve => {
-      const before = [...state.list].length
       commit('TABS_ADD', route)
-      const after = [...state.list].length
-      resolve(after > before)
+      resolve([...state.list])
     }),
     tabs_del: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_DEL', route)
