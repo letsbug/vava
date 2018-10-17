@@ -14,9 +14,9 @@ const tabs = {
       if (!route.meta.nocache) state.cached.push(route.name)
     },
     TABS_DEL: (state, route) => {
-      for (const [i, v] of state.list.entries()) {
+      for (const [i, v] of state.history.entries()) {
         if (v.path === route.path) {
-          state.list.splice(i, 1)
+          state.history.splice(i, 1)
           break
         }
       }
@@ -28,9 +28,9 @@ const tabs = {
       }
     },
     TABS_DEL_OTHERS: (state, route) => {
-      for (const [i, v] of state.list.entries()) {
+      for (const [i, v] of state.history.entries()) {
         if (v.path === route.path) {
-          state.list = state.list.splice(i, 1)
+          state.history = state.history.splice(i, 1)
           break
         }
       }
@@ -42,26 +42,26 @@ const tabs = {
       }
     },
     TABS_EMPTY: state => {
-      state.list = []
+      state.history = []
       state.cached = []
     }
   },
   actions: {
     tabs_add: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_ADD', route)
-      resolve([...state.list])
+      resolve([...state.history])
     }),
     tabs_del: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_DEL', route)
-      resolve([...state.list])
+      resolve([...state.history])
     }),
     tabs_del_others: ({ commit, state }, route) => new Promise(resolve => {
       commit('TABS_DEL_OTHERS', route)
-      resolve([...state.list])
+      resolve([...state.history])
     }),
     tabs_empty: ({ commit, state }) => new Promise(resolve => {
       commit('TABS_EMPTY')
-      resolve([...state.list])
+      resolve([...state.history])
     })
   }
 }
