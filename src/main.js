@@ -5,7 +5,6 @@ import Vue from 'vue'
 import 'normalize.css'
 
 import Element from 'element-ui'
-import '@/styles/element-reboot.scss'
 import 'element-ui/lib/theme-chalk/display.css'
 import '@/styles/va.core.scss'
 

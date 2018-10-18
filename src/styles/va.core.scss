@@ -1,4 +1,12 @@
 @import "variables";
+
+
+// Reboot element imports
+@import "variables-element";
+@import "~element-ui/packages/theme-chalk/src/index";
+
+
+// System imports
 @import "reboot";
 @import "utils";
 @import "layouts";
