@@ -1,0 +1,5 @@
+//
+// Fix the problem with carton on IOS
+.el-scrollbar .el-scrollbar__wrap {
+  -webkit-overflow-scrolling: touch;
+}

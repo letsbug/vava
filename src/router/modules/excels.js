@@ -17,7 +17,7 @@ export default {
     },
     {
       path: 'export',
-      name: 'Import',
+      name: 'Export',
       meta: { title: 'Export Excel', icon: 'export' },
       component: () => import('@/modules/excel/Export')
     }
