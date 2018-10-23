@@ -28,7 +28,7 @@ export const constantRouteMap = [
     children: [{
       path: 'home',
       name: 'Homepage',
-      meta: { title: 'home', icon: 'house', nobg: true },
+      meta: { title: 'Home', icon: 'house', nobg: true },
       component: () => import('@/modules/homepage/Homepage')
     }]
   },
