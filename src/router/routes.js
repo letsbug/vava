@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout'
 // modules
 import Dashboard from './modules/dashboards'
 import Tables from './modules/tables'
+import Excels from './modules/excels'
 
 /**
  * @param nocache {boolean} - Whether the tag needs to cache the route to avoid repeating the rendered DOM
@@ -59,6 +60,9 @@ export const constantRouteMap = [
       component: () => import('@/modules/icons/IconViewer')
     }]
   },
+
+  Excels,
+
   {
     path: '/notifications',
     component: Layout,
