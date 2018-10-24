@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar class="va-body-wrapper" :class="background" ref="bodyScrollPane">
+  <el-scrollbar id="vaBodyWrapper" class="va-body-wrapper" :class="background" ref="bodyScrollPane">
     <transition name="transform-fade" mode="out-in">
       <router-view v-if="isMobile"/>
       <keep-alive v-else :include="routeCache">
