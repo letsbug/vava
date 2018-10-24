@@ -1,11 +1,16 @@
 <template>
   <div class="excel-importer">
     <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile">
-    <div class="file-drop" :class="working ? 'working' : ''"
+    <div class="file-drop" :class="working ? 'working' : ''" v-if="enableDragDrop"
          @click="(working = true) && $refs['excelImportInput'].click()">
       Drag the excel here or
       <span class="text-primary browse-hint">Browse</span>
       <span class="working-flag"><i class="el-icon-loading"></i></span>
+    </div>
+    <div class="text-center" v-else>
+      <el-button plain @click="(working = true) && $refs['excelImportInput'].click()" :loading="working">
+        Browse and select an excel file ...
+      </el-button>
     </div>
   </div>
 </template>
@@ -16,13 +21,14 @@ import Xlsx from 'xlsx'
 export default {
   props: {
     // Allow import by drag and drop one file
-    dragImport: { type: Boolean, default: false },
+    enableDragDrop: { type: Boolean, default: false },
     beforeImport: { type: Function },
     onSuccess: { type: Function }
   },
   data() {
     return {
-      working: false
+      working: false,
+      excelData: {}
     }
   },
   methods: {
@@ -39,8 +45,8 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/variables";
 
-$file-drop-width:   360px;
-$file-drop-height:  140px;
+$file-drop-width:   100%;
+$file-drop-height:  90px;
 
 .excel-import-input {
   display: none;

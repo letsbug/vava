@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <excel-importer></excel-importer>
+    <excel-importer enable-drag-drop></excel-importer>
     <br>
     Import Results
   </div>
