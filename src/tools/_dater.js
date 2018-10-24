@@ -2,7 +2,7 @@
  * Format Date & Time format
  * @param date {number|string|Date} 毫秒型日期或者Date
  * @param fmt {string|undefined} like 'yyyy.MM.dd hh:mm:ss'
- * @returns {string|null}
+ * @returns {string|null|undefined}
  */
 export const dateFormat = (date, fmt) => {
   if (!date) return null
