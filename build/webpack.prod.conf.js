@@ -40,7 +40,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // extract css into its own file
     new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash:8].css'),
-      chunkFilename: utils.assetsPath('css/[name].[contenthash:8].css')
+      allChunks: true
     }),
 
     // generate dist index.html with correct asset hash for caching.
@@ -62,8 +62,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
@@ -79,56 +77,25 @@ const webpackConfig = merge(baseWebpackConfig, {
     ])
   ],
   optimization: {
-    runtimeChunk: {
-      name: 'manifest'
-    },
+    runtimeChunk: 'single',
     minimizer: [
       new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false
-          }
-        },
         sourceMap: config.build.productionSourceMap,
         cache: true,
         parallel: true
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
-      new OptimizeCSSPlugin({
-        cssProcessorOptions: config.build.productionSourceMap
-          ? { safe: true, map: { inline: false } }
-          : { safe: true }
-      }),
+      new OptimizeCSSPlugin(),
     ],
     splitChunks: {
-      chunks: 'async',
-      minSize: 30000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      name: false,
+      chunks: 'all',
       cacheGroups: {
         libs: {
           name: 'chunk-libs',
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
           chunks: 'initial' // 只打包初始时依赖的第三方
-        },
-        vendor: {
-          name: 'vendor',
-          chunks: 'initial',
-          priority: -10,
-          reuseExistingChunk: false,
-          test: /node_modules\/(.*)\.js/
-        },
-        styles: {
-          name: 'styles',
-          test: /\.(scss|css)$/,
-          chunks: 'all',
-          minChunks: 1,
-          reuseExistingChunk: true,
-          enforce: true
         },
         elementUI: {
           name: 'chunk-elementUI', // 单独将 elementUI 拆包
@@ -148,9 +115,7 @@ if (config.build.productionGzip) {
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: new RegExp(
-        '\\.(' +
-        config.build.productionGzipExtensions.join('|') +
-        ')$'
+        '\\.(' + config.build.productionGzipExtensions.join('|') + ')$'
       ),
       threshold: 10240,
       minRatio: 0.8
