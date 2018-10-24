@@ -6,19 +6,19 @@ export default {
   name: 'Excel',
   meta: {
     title: 'Excel',
-    icon: 'excel'
+    icon: 'file-excel'
   },
   children: [
     {
       path: 'import',
       name: 'Import',
-      meta: { title: 'Excel Import', icon: 'import' },
+      meta: { title: 'Excel Import', icon: 'file-import' },
       component: () => import('@/modules/excel/Import')
     },
     {
       path: 'export',
       name: 'Export',
-      meta: { title: 'Excel Export', icon: 'export' },
+      meta: { title: 'Excel Export', icon: 'file-export' },
       component: () => import('@/modules/excel/Export')
     }
   ]

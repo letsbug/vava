@@ -1,5 +1,5 @@
 <template>
-  <div>Export</div>
+  <div class="va-body-container">Export</div>
 </template>
 
 <script>

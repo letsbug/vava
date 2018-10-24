@@ -6,13 +6,19 @@
          @drop.prevent.stop="!working && handleDrop($event)"
          @dragover.prevent.stop="onDragOver"
          @dragenter.prevent.stop="onDragOver">
-      Drag the excel here or
-      <span class="text-primary browse-hint">Browse</span>
+      <div><va-icon icon="file-import"/></div>
+      <template v-if="file">
+        Selected "{{ file.name }}" <span class="text-primary browse-hint">Click to change</span>
+      </template>
+      <template v-else>
+        <div>Drag the excel here or <span class="text-primary browse-hint">Browse</span></div>
+      </template>
       <span class="working-flag"><i class="el-icon-loading"></i></span>
     </div>
     <div class="text-center" v-else>
       <el-button plain @click="!working && $refs['excelImportInput'].click()" :loading="working">
-        Browse and select an excel file ...
+        <template v-if="file">Imported: "{{ file.name }}", Click to change.</template>
+        <template v-else>Browse and select an excel file ...</template>
       </el-button>
     </div>
   </div>
@@ -31,6 +37,7 @@ export default {
   data() {
     return {
       working: false,
+      file: null,
       excelData: {
         header: null,
         results: null
@@ -70,7 +77,6 @@ export default {
       return o
     },
     readerData(rawFile) {
-      this.working = true
       return new Promise((resolve, reject) => {
         const reader = new FileReader()
         reader.onload = e => {
@@ -82,13 +88,17 @@ export default {
           const header = this.getHeaderRow(worksheet)
           const results = XLSX.utils.sheet_to_json(worksheet)
           this.generateData({ header, results })
-          this.working = false
+          setTimeout(() => {
+            this.working = false
+          }, 400)
           resolve()
         }
         reader.readAsArrayBuffer(rawFile)
       })
     },
     import(rawFile) {
+      this.working = true
+      this.file = rawFile
       this.$refs['excelImportInput'].value = null // fix can't select the same excel
 
       if (!this.beforeImport) {
@@ -138,8 +148,8 @@ $file-drop-height:  90px;
   width: $file-drop-width;
   height: $file-drop-height;
   overflow: hidden;
-  line-height: $file-drop-height;
   margin: 0 auto;
+  padding: $spacer-base;
   border: dashed $border-default-width $border-color-dark;
   border-radius: $radius-lg;
   font-size: $font-size-lg;
@@ -153,6 +163,12 @@ $file-drop-height:  90px;
     border-color: $color-theme;
   }
 
+  .va-icon {
+    width: $font-size-h2;
+    height: $font-size-h2;
+    margin-bottom: $spacer-xs;
+  }
+
   .browse-hint {
     margin-left: $spacer-xxs;
     font-weight: 500;
@@ -161,6 +177,7 @@ $file-drop-height:  90px;
   .working-flag {
     display: block;
     background-color: $color-white;
+    line-height: $file-drop-height;
     font-size: $font-size-h3;
     position: absolute;
     top: 0;
