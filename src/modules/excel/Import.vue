@@ -26,15 +26,11 @@ export default {
   },
   methods: {
     beforeImport(file) {
-      if (file.size / 1024 / 1024 < this.allowSizeMax) {
-        return true
-      }
+      const isLtMax = file.size / 1024 / 1024 < this.allowSizeMax
 
-      this.$message({
-        message: `Please do not upload files larger than ${this.allowSizeMax}m in size.`,
-        type: 'warning'
-      })
-      return false
+      if (!isLtMax) this.$message.warning(`Please do not upload files larger than ${this.allowSizeMax}m in size.`)
+
+      return isLtMax
     },
     onSuccess({ results, header }) {
       this.tableData = results

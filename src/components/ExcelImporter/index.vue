@@ -2,8 +2,8 @@
   <div class="excel-importer">
     <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile">
     <div class="file-drop" :class="working ? 'working' : ''" v-if="enableDragDrop"
-         @click="(working = true) && $refs['excelImportInput'].click()"
-         @drop.prevent.stop="handleDrop"
+         @click="!working && $refs['excelImportInput'].click()"
+         @drop.prevent.stop="!working && handleDrop($event)"
          @dragover.prevent.stop="onDragOver"
          @dragenter.prevent.stop="onDragOver">
       Drag the excel here or
@@ -11,7 +11,7 @@
       <span class="working-flag"><i class="el-icon-loading"></i></span>
     </div>
     <div class="text-center" v-else>
-      <el-button plain @click="(working = true) && $refs['excelImportInput'].click()" :loading="working">
+      <el-button plain @click="!working && $refs['excelImportInput'].click()" :loading="working">
         Browse and select an excel file ...
       </el-button>
     </div>
@@ -44,8 +44,8 @@ export default {
     getHeaderRow(sheet) {
       const headers = []
       const range = XLSX.utils.decode_range(sheet['!ref'])
-      let C
       const R = range.s.r
+      let C
       /* start in the first row */
       for (C = range.s.c; C <= range.e.c; ++C) { /* walk every column in the range */
         const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]
@@ -96,18 +96,12 @@ export default {
         return
       }
       const before = this.beforeImport(rawFile)
-      if (before) {
-        this.readerData(rawFile)
-      }
+      before && this.readerData(rawFile)
     },
     onDragOver(e) {
       e.dataTransfer.dropEffect = 'copy'
     },
     handleDrop(e) {
-      if (this.working) {
-        return
-      }
-
       const files = e.dataTransfer.files
       if (files.length !== 1) {
         this.$message.error('Only support importing one file!')
@@ -123,10 +117,8 @@ export default {
       this.import(file)
     },
     onInputFile(e) {
-      this.working = false
       const file = e.target.files[0]
-      if (!file) return
-      this.import(file)
+      file && this.import(file)
     }
   }
 }
