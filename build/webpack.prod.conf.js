@@ -13,6 +13,10 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const meta = require('./meta')
 
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : require('../config/prod.env')
@@ -82,17 +86,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     ])
   ],
   optimization: {
-    runtimeChunk: 'single',
-    minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: config.build.productionSourceMap,
-        cache: true,
-        parallel: true
-      }),
-      // Compress extracted CSS. We are using this plugin so that possible
-      // duplicated CSS from different components can be deduped.
-      new OptimizeCSSPlugin()
-    ],
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
@@ -107,15 +100,31 @@ const webpackConfig = merge(baseWebpackConfig, {
           priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
           test: /[\\/]node_modules[\\/]element-ui[\\/]/
         },
+        xlsx: {
+          name: 'chunk-xlsx', // 单独将 elementUI 拆包
+          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+          test: /[\\/]node_modules[\\/]xlsx[\\/]/
+        },
         commons: {
           name: 'chunk-commons',
-          test: path.resolve(__dirname, 'src/components'),
-          minChunks: 3, // 最小公用次数
+          test: resolve('src/components'),
+          minChunks: 2, // 最小公用次数
           priority: 5,
           reuseExistingChunk: true
         }
       }
-    }
+    },
+    runtimeChunk: 'single',
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: config.build.productionSourceMap,
+        cache: true,
+        parallel: true
+      }),
+      // Compress extracted CSS. We are using this plugin so that possible
+      // duplicated CSS from different components can be deduped.
+      new OptimizeCSSPlugin()
+    ]
   }
 })
 
