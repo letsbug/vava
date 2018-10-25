@@ -7,7 +7,7 @@
   "scripts": {
     "svgo": "svgo -f src/assets/icons --config=./svgo.yml",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "build": "node build/build.js",
+    "build": "cross-env NODE_ENV=production env_config=prod node build/build.js",
     "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
