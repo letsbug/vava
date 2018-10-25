@@ -141,7 +141,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../../styles/variables";
+@import "~@/styles/_variables";
 
 .va-tabs-bar /deep/ .va-scroll-container {
   width: 100%;

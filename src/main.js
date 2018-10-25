@@ -6,19 +6,18 @@ import 'normalize.css'
 
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/display.css'
-import '@/styles/va.core.scss'
+
+import '@/styles/va.core.scss' // System global css
 
 import App from './App'
 import store from './store'
 import router from './router'
 import Meta from 'vue-meta'
 
-import '@/tools/highlight'
-import '@/router/helper'
-import '@/simulates'
-
-// load system svg icons by symbol.
-import '@/assets/icons'
+import '@/assets/icons' // load system svg icons by symbol.
+import '@/router/helper' // router helper, user permission control.
+import '@/simulates' // mock simulate
+import '@/tools/highlight' // code highlight
 
 import * as filters from '@/filters'
 

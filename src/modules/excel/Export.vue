@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/variables";
+@import "~@/styles/_variables";
 
 /deep/.el-form--inline .el-form-item {
   margin-right: 0;

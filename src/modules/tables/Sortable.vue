@@ -7,7 +7,3 @@ export default {
   name: 'Sortable'
 }
 </script>
-
-<style scoped>
-
-</style>

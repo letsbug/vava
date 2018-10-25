@@ -7,7 +7,3 @@ export default {
   name: 'Editable'
 }
 </script>
-
-<style scoped>
-
-</style>

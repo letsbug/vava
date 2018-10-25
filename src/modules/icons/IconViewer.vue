@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/variables";
+@import "~@/styles/_variables";
 
 .grid-content {
   padding: $spacer-xs $spacer-sm;

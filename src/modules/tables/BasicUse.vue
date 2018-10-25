@@ -7,7 +7,3 @@ export default {
   name: 'BasicUse'
 }
 </script>
-
-<style scoped>
-
-</style>
