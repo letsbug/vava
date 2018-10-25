@@ -61,7 +61,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
-      },
+      }
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
@@ -86,7 +86,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
-      new OptimizeCSSPlugin(),
+      new OptimizeCSSPlugin()
     ],
     splitChunks: {
       chunks: 'all',
