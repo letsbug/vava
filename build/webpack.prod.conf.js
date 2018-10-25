@@ -30,7 +30,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -41,7 +41,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // extract css into its own file
     new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash:8].css'),
-      allChunks: true
+      chunkFilename: utils.assetsPath('css/[name].[contenthash:8].css')
     }),
 
     // generate dist index.html with correct asset hash for caching.
@@ -96,18 +96,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        vendor: {
-          name: 'vendor',
-          chunks: 'all',
-          priority: 10,
-          reuseExistingChunk: false,
-          test: /node_modules\/(.*)\.js/
-        },
         libs: {
           name: 'chunk-libs',
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
-          chunks: 'all' // 只打包初始时依赖的第三方
+          chunks: 'initial'
         },
         elementUI: {
           name: 'chunk-elementUI', // 单独将 elementUI 拆包
@@ -116,7 +109,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         },
         commons: {
           name: 'chunk-commons',
-          test: path.resolve(__dirname, 'src/components'), // 可自定义拓展你的规则
+          test: path.resolve(__dirname, 'src/components'),
           minChunks: 3, // 最小公用次数
           priority: 5,
           reuseExistingChunk: true
