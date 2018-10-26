@@ -4,7 +4,7 @@
     <br>
     <el-table style="width: 100%;" size="mini" tooltip-effect="light" empty-text="Please import an excel first"
               :data="tableData" highlight-current-row>
-      <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item"/>
+      <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item" show-overflow-tooltip/>
     </el-table>
   </div>
 </template>
