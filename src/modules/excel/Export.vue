@@ -21,18 +21,30 @@
     </el-form>
 
     <!-- table list -->
-    <el-table></el-table>
+    <el-table :data="list" tooltip-effect="light" empty-text="Sorry! This category have nothing data.">
+      <el-table-column prop="name" label="name"></el-table-column>
+      <el-table-column prop="card" label="ID Card" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="city" label="city" show-tooltip-when-overflow></el-table-column>
+      <el-table-column prop="postcode" label="zip" width="70"></el-table-column>
+      <el-table-column prop="tel" label="tel" width="110"></el-table-column>
+      <el-table-column prop="mobile" label="mobile" width="105"></el-table-column>
+      <el-table-column prop="fax" label="fax" width="110"></el-table-column>
+      <el-table-column prop="email" label="email" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="qq" label="QQ" width="110"></el-table-column>
+      <el-table-column prop="company" label="company" show-overflow-tooltip></el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
+import { contacts } from '@/services/contacts'
 import { Dater } from '@/tools'
 
 export default {
   name: 'Export',
   data() {
     return {
-      filenameDefault: `Now-${Dater.format(new Date(), undefined)}`,
+      filenameDefault: `xlsx-${Dater.format(new Date(), undefined)}`,
       exportOpts: {
         filename: '',
         cellAutoWidth: true,
@@ -40,6 +52,12 @@ export default {
       },
       list: []
     }
+  },
+  mounted() {
+    contacts().then(res => {
+      console.log(res)
+      this.list = res
+    })
   }
 }
 </script>
