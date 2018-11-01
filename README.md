@@ -30,4 +30,11 @@ npm run e2e
 npm test
 ```
 
+## Contribution
+
+1. Fork the project
+2. Create Feat_xxx branch
+3. Commit your code
+4. Create Pull Request
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
