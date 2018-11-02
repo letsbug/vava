@@ -51,7 +51,7 @@
 
 <script>
 import { contacts } from '@/services/contacts'
-import { Dater } from '@/tools'
+import { Dater, Excel } from '@/tools'
 
 export default {
   name: 'Export',
@@ -95,6 +95,11 @@ export default {
   },
   created() {
     this.getContacts()
+    Excel.exportExlByJson({
+      header: 1,
+      data: 'body',
+      filename: this.exportOpts.filename || this.filenameDefault
+    })
   }
 }
 </script>
