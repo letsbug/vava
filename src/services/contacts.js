@@ -1,5 +1,5 @@
 import api from './base'
 
-export const contacts = () => {
-  return api.post('/contacts/list').then(res => res.data)
+export const contacts = pages => {
+  return api.post('/contacts/list', pages).then(res => res.data)
 }

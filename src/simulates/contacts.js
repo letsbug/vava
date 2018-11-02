@@ -1,7 +1,8 @@
 import Mock from 'mockjs'
 import ContactsVo from '@/vo/ContactsVo'
+import BaseVo from '@/vo/BaseVo'
 
-const list = []
+let list = []
 
 const random = cn => Mock.mock({
   id: '@guid',
@@ -21,10 +22,18 @@ const random = cn => Mock.mock({
 for (let i = 0; i < 100; i++) {
   list.push(new ContactsVo(random(false)))
 }
+list = list.sort((a, b) => a.name > b.name ? 1 : -1)
 
 export default {
   list: config => {
-    console.log(config)
-    return list.sort((a, b) => a.id > b.id ? 1 : -1)
+    const { page, size } = JSON.parse(config.body)
+    const total = list.length
+    const vo = new BaseVo({ page, size, total })
+    const min = (vo.page - 1) * vo.size
+    const max = vo.page * vo.size
+    return {
+      pages: vo,
+      list: list.filter((v, i) => (i > min && i <= max))
+    }
   }
 }

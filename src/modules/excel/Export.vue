@@ -16,15 +16,16 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">Export Excel</el-button>
+        <el-button type="primary" :loading="exportOpts.exporting" @click="handleExport">Export Excel</el-button>
       </el-form-item>
     </el-form>
 
     <!-- table list -->
-    <el-table :data="list" tooltip-effect="light" empty-text="Sorry! This category have nothing data.">
-      <el-table-column prop="name" label="name"></el-table-column>
+    <el-table :data="list" tooltip-effect="light" :height="48*11 + 'px'"
+              :empty-text="tableEmptyHint">
+      <el-table-column prop="name" label="name" width="120" show-overflow-tooltip></el-table-column>
       <el-table-column prop="card" label="ID Card" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="city" label="city" show-tooltip-when-overflow></el-table-column>
+      <el-table-column prop="city" label="city" width="70" show-overflow-tooltip></el-table-column>
       <el-table-column prop="postcode" label="zip" width="70"></el-table-column>
       <el-table-column prop="tel" label="tel" width="110"></el-table-column>
       <el-table-column prop="mobile" label="mobile" width="105"></el-table-column>
@@ -33,6 +34,18 @@
       <el-table-column prop="qq" label="QQ" width="110"></el-table-column>
       <el-table-column prop="company" label="company" show-overflow-tooltip></el-table-column>
     </el-table>
+
+    <el-pagination
+      class="excel-pagination"
+      v-if="list && list.length > 0"
+      layout="total, sizes, prev, pager, next, jumper"
+      :page-sizes="[10, 30, 50]"
+      :current-page="pages.page"
+      :page-size="pages.size"
+      :total="pages.total"
+      @size-change="handleSizeChange"
+      @current-change="handlePageChange">
+    </el-pagination>
   </div>
 </template>
 
@@ -44,20 +57,44 @@ export default {
   name: 'Export',
   data() {
     return {
-      filenameDefault: `xlsx-${Dater.format(new Date(), undefined)}`,
+      filenameDefault: `xlsx-${Dater.format(new Date())}`,
       exportOpts: {
         filename: '',
-        cellAutoWidth: true,
-        type: 'xlsx'
+        cellAutoWidth: false,
+        type: 'xlsx',
+        exporting: false
       },
-      list: []
+      list: null,
+      pages: { page: 1, size: 10, total: 0 }
     }
   },
-  mounted() {
-    contacts().then(res => {
-      console.log(res)
-      this.list = res
-    })
+  computed: {
+    tableEmptyHint() {
+      const list = this.list
+      return !list ? 'Loading...' : list.length < 1 ? 'Sorry! This category have nothing data.' : ''
+    }
+  },
+  methods: {
+    handlePageChange(val) {
+      this.pages.page = val
+      this.getContacts()
+    },
+    handleSizeChange(val) {
+      this.pages.size = val
+      this.getContacts()
+    },
+    getContacts() {
+      contacts(this.pages).then(res => {
+        this.pages = res.pages
+        this.list = res.list
+      })
+    },
+    handleExport() {
+      this.exportOpts.exporting = true
+    }
+  },
+  created() {
+    this.getContacts()
   }
 }
 </script>
@@ -75,5 +112,9 @@ export default {
   .el-switch {
     vertical-align: text-top
   }
+}
+.excel-pagination {
+  text-align: right;
+  margin-top: $spacer-base;
 }
 </style>

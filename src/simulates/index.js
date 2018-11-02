@@ -3,7 +3,7 @@ import Account from './account'
 import Notification from './notification'
 import Contacts from './contacts'
 
-Mock.setup({ timeout: '400-800' })
+// Mock.setup({ timeout: '400-800' })
 
 // About account apis
 Mock.mock(/\/account\/login/, 'post', Account.login)
