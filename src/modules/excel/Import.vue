@@ -4,7 +4,7 @@
     <br>
     <el-table style="width: 100%;" size="mini" tooltip-effect="light" empty-text="Please import an excel first"
               :data="tableData" highlight-current-row>
-      <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item"/>
+      <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item" show-overflow-tooltip/>
     </el-table>
   </div>
 </template>
@@ -22,13 +22,11 @@ export default {
       tableHeader: []
     }
   },
-  computed: {
-  },
   methods: {
     beforeImport(file) {
       const isLtMax = file.size / 1024 / 1024 < this.allowSizeMax
 
-      if (!isLtMax) this.$message.warning(`Please do not upload files larger than ${this.allowSizeMax}m in size.`)
+      if (!isLtMax) this.$message.warning(`Please do not import files larger than ${this.allowSizeMax}m in size.`)
 
       return isLtMax
     },
@@ -36,6 +34,18 @@ export default {
       this.tableData = results
       this.tableHeader = header
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    const tableData = this.tableData
+    if (tableData && tableData.length > 0) {
+      const msg = 'You have an excel that has been imported. Are you sure you want to leave?'
+      this.$confirm(msg, 'Are you sure?', {
+        type: 'warning',
+        confirmButtonText: 'Sure Leave',
+        cancelButtonText: 'Cancel',
+        callback: action => (action === 'confirm') && next()
+      })
+    } else next()
   }
 }
 </script>

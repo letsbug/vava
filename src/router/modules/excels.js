@@ -12,7 +12,7 @@ export default {
     {
       path: 'import',
       name: 'Import',
-      meta: { title: 'Excel Import', icon: 'file-import' },
+      meta: { title: 'Excel Import', icon: 'file-import', nocache: true },
       component: () => import('@/modules/excel/Import')
     },
     {
