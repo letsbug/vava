@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[23],{q5YX:function(e,t,n){"use strict";n.r(t);var a={name:"Editable"},i=n("KHd+"),l=Object(i.a)(a,function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"va-body-container"},[e._v("Editable")])},[],!1,null,null,null);l.options.__file="Editable.vue";t.default=l.exports}}]);
