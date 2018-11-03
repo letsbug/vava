@@ -57,7 +57,7 @@ export default {
   name: 'Export',
   data() {
     return {
-      filenameDefault: `xlsx-${Dater.format(new Date())}`,
+      filenameDefault: `xlsx-${Dater.format(new Date(), 'yyyy.MM.dd hh:mm')}`,
       exportOpts: {
         filename: '',
         cellAutoWidth: false,
@@ -89,17 +89,23 @@ export default {
         this.list = res.list
       })
     },
+    formatJson(props, json) {
+      return json.map(v => props.map(k => v[k]))
+    },
     handleExport() {
       this.exportOpts.exporting = true
+      const tHeader = ['NAME', 'ID CARD', 'CITY', 'POSTCODE', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY']
+      const exportProps = ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company']
+      const data = this.formatJson(exportProps, this.list)
+      Excel.exportExlByJson({
+        header: tHeader,
+        data: data,
+        filename: this.exportOpts.filename || this.filenameDefault
+      }).then(() => { this.exportOpts.exporting = false })
     }
   },
   created() {
     this.getContacts()
-    Excel.exportExlByJson({
-      header: 1,
-      data: 'body',
-      filename: this.exportOpts.filename || this.filenameDefault
-    })
   }
 }
 </script>
