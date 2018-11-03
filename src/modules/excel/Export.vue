@@ -51,7 +51,7 @@
 
 <script>
 import { contacts } from '@/services/contacts'
-import { Dater, Excel } from '@/tools'
+import { Dater } from '@/tools'
 
 export default {
   name: 'Export',
@@ -97,11 +97,14 @@ export default {
       const tHeader = ['NAME', 'ID CARD', 'CITY', 'POSTCODE', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY']
       const exportProps = ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company']
       const data = this.formatJson(exportProps, this.list)
-      Excel.exportExlByJson({
-        header: tHeader,
-        data: data,
-        filename: this.exportOpts.filename || this.filenameDefault
-      }).then(() => { this.exportOpts.exporting = false })
+      import('@/vendor/ExportToExcel').then(Excel => {
+        Excel.handleExport({
+          header: tHeader,
+          data: data,
+          filename: this.exportOpts.filename || this.filenameDefault
+        })
+        this.exportOpts.exporting = false
+      })
     }
   },
   created() {
