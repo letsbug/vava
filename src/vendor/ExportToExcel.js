@@ -2,6 +2,13 @@
 import XLSX from 'xlsx'
 require('script-loader!file-saver')
 
+class Workbook {
+  constructor() {
+    this.SheetNames = []
+    this.Sheets = {}
+  }
+}
+
 const datenum = (v, date1904) => {
   if (date1904) v += 1462
   const epoch = Date.parse(v)
@@ -48,13 +55,6 @@ const sheet_from_array_of_arrays = data => {
   }
   if (range.s.c < 10000000) ws['!ref'] = XLSX.utils.encode_range(range)
   return ws
-}
-
-class Workbook {
-  constructor() {
-    this.SheetNames = []
-    this.Sheets = {}
-  }
 }
 
 function s2ab(s) {

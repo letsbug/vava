@@ -5,15 +5,15 @@
         <el-input :placeholder="`default ${filenameDefault}`" prefix-icon="el-icon-document" clearable
                   v-model="exportOpts.filename"></el-input>
       </el-form-item>
-      <el-form-item label="Cell Auto-Width">
-        <el-switch v-model="exportOpts.cellAutoWidth"></el-switch>
-      </el-form-item>
       <el-form-item label="File Type">
         <el-select value style="width: 100px;" v-model="exportOpts.type">
           <el-option label="xlsx" value="xlsx"></el-option>
           <el-option label="cvx" value="cvx"></el-option>
           <el-option label="txt" value="txt"></el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item label="Cell Auto-Width">
+        <el-switch v-model="exportOpts.cellAutoWidth"></el-switch>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="exportOpts.exporting" @click="handleExport">Export Excel</el-button>
@@ -94,14 +94,16 @@ export default {
     },
     handleExport() {
       this.exportOpts.exporting = true
-      const tHeader = ['NAME', 'ID CARD', 'CITY', 'POSTCODE', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY']
+      const tHeader = ['NAME', 'ID CARD', 'CITY', 'ZIP', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY']
       const exportProps = ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company']
       const data = this.formatJson(exportProps, this.list)
       import('@/vendor/ExportToExcel').then(Excel => {
         Excel.handleExport({
           header: tHeader,
           data: data,
-          filename: this.exportOpts.filename || this.filenameDefault
+          filename: this.exportOpts.filename || this.filenameDefault,
+          autoWidth: this.exportOpts.cellAutoWidth,
+          type: this.exportOpts.type
         })
         this.exportOpts.exporting = false
       })
