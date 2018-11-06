@@ -33,7 +33,8 @@ export default {
     const max = vo.page * vo.size
     return {
       pages: vo,
-      list: list.filter((v, i) => (i > min && i <= max))
+      list: list.filter((v, i) => (i >= min && i < max))
     }
-  }
+  },
+  all: () => list
 }

@@ -5,9 +5,6 @@
         <el-input :placeholder="`default ${filenameDefault}`" prefix-icon="el-icon-document" clearable
                   v-model="exportOpts.filename"></el-input>
       </el-form-item>
-      <el-form-item label="Cell Auto-Width">
-        <el-switch v-model="exportOpts.cellAutoWidth"></el-switch>
-      </el-form-item>
       <el-form-item label="File Type">
         <el-select value style="width: 100px;" v-model="exportOpts.type">
           <el-option label="xlsx" value="xlsx"></el-option>
@@ -15,8 +12,19 @@
           <el-option label="txt" value="txt"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" :loading="exportOpts.exporting" @click="handleExport">Export Excel</el-button>
+      <el-form-item label="Cell Auto-Width">
+        <el-switch v-model="exportOpts.cellAutoWidth"></el-switch>
+      </el-form-item>
+      <el-form-item label="Perform Export">
+        <el-button-group style="vertical-align: top;">
+          <el-button type="primary" :disabled="exportOpts.exporting" @click="handleExport(list)">
+            Current Page
+          </el-button>
+          <el-button type="primary" :disabled="exportOpts.exporting" @click="handleExportAll">
+            All Pages
+          </el-button>
+        </el-button-group>
+        <i class="el-icon-loading export-handler-loading" v-show="exportOpts.exporting"></i>
       </el-form-item>
     </el-form>
 
@@ -50,7 +58,7 @@
 </template>
 
 <script>
-import { contacts } from '@/services/contacts'
+import Contacts from '@/services/contacts'
 import { Dater } from '@/tools'
 
 export default {
@@ -60,6 +68,8 @@ export default {
       filenameDefault: `xlsx-${Dater.format(new Date(), 'yyyy.MM.dd hh:mm')}`,
       exportOpts: {
         filename: '',
+        tHeader: ['NAME', 'ID CARD', 'CITY', 'ZIP', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY'],
+        exportProps: ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company'],
         cellAutoWidth: false,
         type: 'xlsx',
         exporting: false
@@ -84,7 +94,7 @@ export default {
       this.getContacts()
     },
     getContacts() {
-      contacts(this.pages).then(res => {
+      Contacts.list(this.pages).then(res => {
         this.pages = res.pages
         this.list = res.list
       })
@@ -92,18 +102,27 @@ export default {
     formatJson(props, json) {
       return json.map(v => props.map(k => v[k]))
     },
-    handleExport() {
+    handleExport(data) {
       this.exportOpts.exporting = true
-      const tHeader = ['NAME', 'ID CARD', 'CITY', 'POSTCODE', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY']
-      const exportProps = ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company']
-      const data = this.formatJson(exportProps, this.list)
-      import('@/vendor/ExportToExcel').then(Excel => {
-        Excel.handleExport({
-          header: tHeader,
-          data: data,
-          filename: this.exportOpts.filename || this.filenameDefault
+      const _data = this.formatJson(this.exportOpts.exportProps, data)
+
+      setTimeout(() => { // Simulated elapsed time
+        import('@/vendor/ExportToExcel').then(Excel => {
+          Excel.handleExport({
+            header: this.exportOpts.tHeader,
+            data: _data,
+            filename: this.exportOpts.filename || this.filenameDefault,
+            autoWidth: this.exportOpts.cellAutoWidth,
+            type: this.exportOpts.type
+          })
+          this.exportOpts.exporting = false
         })
-        this.exportOpts.exporting = false
+      }, 500)
+    },
+    handleExportAll() {
+      this.exportOpts.exporting = true
+      Contacts.all().then(res => {
+        this.handleExport(res)
       })
     }
   },
@@ -125,6 +144,10 @@ export default {
 
   .el-switch {
     vertical-align: text-top
+  }
+
+  .export-handler-loading {
+    margin-left: $spacer-base;
   }
 }
 .excel-pagination {

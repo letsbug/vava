@@ -18,3 +18,4 @@ Mock.mock(/\/notification\/allread/, 'post', Notification.readall)
 
 // About contacts
 Mock.mock(/\/contacts\/list/, 'post', Contacts.list)
+Mock.mock(/\/contacts\/all/, 'post', Contacts.all)
