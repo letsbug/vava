@@ -16,7 +16,13 @@
         <el-switch v-model="exportOpts.cellAutoWidth"></el-switch>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="exportOpts.exporting" @click="handleExport">Export Excel</el-button>
+        <el-dropdown split-button type="primary">
+          Export Current Page
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>Export All</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <!--<el-button type="primary" :loading="exportOpts.exporting" @click="handleExport">Export Excel</el-button>-->
       </el-form-item>
     </el-form>
 
