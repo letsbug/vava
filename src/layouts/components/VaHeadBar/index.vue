@@ -108,10 +108,7 @@ export default {
       const key = this.search.keyword
       if (!key || (key === old)) return
       this.search.old = key
-      this.$router.push({
-        path: '/search',
-        query: { keyword: key }
-      })
+      this.$router.push(`/search/${key}`)
     },
     userDropdown(target) {
       target()

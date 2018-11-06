@@ -20,7 +20,7 @@ export default {
     }
   },
   computed: {
-    keyword() { return this.$route.query['keyword'] }
+    keyword() { return this.$route.params['keyword'] }
   }
 }
 </script>
