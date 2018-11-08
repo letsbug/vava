@@ -13,12 +13,21 @@ export default {
     }
   },
   methods: {
+    replace(route) {
+      this.$nextTick(() => {
+        this.$router.replace({
+          path: '/redirect' + route.fullPath
+        })
+        this.doing = false
+      })
+    },
     handleRefresh() {
-      const _this = this
-      _this.doing = !_this.doing
-      setTimeout(() => {
-        _this.doing = !_this.doing
-      }, 6000)
+      if (this.doing) return
+      this.doing = true
+      const route = this.$route
+      this.$store.dispatch('tabs_del', route).then(() => {
+        setTimeout(() => { this.replace(route) }, 500)
+      })
     }
   }
 }

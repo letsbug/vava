@@ -17,6 +17,17 @@ import Excels from './modules/excels'
  * @type {VueRouter[]}
  */
 export const constantRouteMap = [
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path*',
+        component: () => import('@/modules/redirect/index')
+      }
+    ]
+  },
   { path: '/login', component: () => import('@/modules/account/Login'), hidden: true },
   { path: '/join', component: () => import('@/modules/account/Join'), hidden: true },
   { path: '/password', component: () => import('@/modules/account/PasswordReset'), hidden: true },

@@ -2,7 +2,7 @@
   <el-scrollbar id="vaBodyWrapper" class="va-body-wrapper" :class="background" ref="bodyScrollPane">
     <transition name="transform-fade" mode="out-in">
       <router-view v-if="isMobile"/>
-      <keep-alive v-else :include="routeCache">
+      <keep-alive v-else :include="cachedRoutes">
         <router-view :key="key"></router-view>
       </keep-alive>
     </transition>
@@ -14,7 +14,7 @@ export default {
   name: 'AppBody',
   computed: {
     isMobile() { return this.$store.getters.device === 'mobile' },
-    routeCache() { return this.$store.getters.tabs_cached },
+    cachedRoutes() { return this.$store.getters.tabs_cached },
     key() { return this.$route.name },
     background() { return this.$route.meta['nobg'] ? 'no-bg' : '' }
   }

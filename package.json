@@ -1,8 +1,14 @@
 {
   "name": "vava",
   "version": "2.0.0",
-  "description": "A magical vue admin template, based on vue@2.5.2 & element-ui@2.4.5",
-  "author": "Letsbug, 724939933@qq.com, xman724939995@gmail.com",
+  "homepage": "https://letsbug.github.io/vava/",
+  "keywords": ["vue", "element-ui", "admin", "management", "admin", "template"],
+  "description": "A magical vue admin template, based on vue & element-ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/letsbug/vava.git"
+  },
+  "author": "Letsbug <724939933@qq.com> <xman724939995@gmail.com> (https://github.com/letsbug/vava)",
   "license": "MIT",
   "scripts": {
     "svgo": "svgo -f src/assets/icons --config=./svgo.yml",
