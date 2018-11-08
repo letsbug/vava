@@ -32,13 +32,13 @@
 
       <template v-if="!isMobile">
         <!-- refresh button -->
-        <refresh></refresh>
+        <router-refresh></router-refresh>
 
         <!-- full screen action -->
         <screen-full></screen-full>
 
         <!-- theme selector -->
-        <theme-selector></theme-selector>
+        <theme-picker></theme-picker>
       </template>
 
       <!-- user notifications -->
@@ -70,13 +70,13 @@
 
 <script>
 import Breadcrumb from '@/components/Breadcrumb'
-import Refresh from './Refresh'
+import RouterRefresh from '@/components/RouterRefresh'
 import ScreenFull from '@/components/ScreenFull'
-import ThemeSelector from './ThemeSelector'
+import ThemePicker from './ThemePicker'
 
 export default {
   name: 'VaHeadBar',
-  components: { Breadcrumb, Refresh, ScreenFull, ThemeSelector },
+  components: { Breadcrumb, RouterRefresh, ScreenFull, ThemePicker },
   data() {
     return {
       search: { old: '', keyword: '' }

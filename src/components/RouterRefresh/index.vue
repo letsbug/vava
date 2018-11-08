@@ -25,9 +25,11 @@ export default {
       if (this.doing) return
       this.doing = true
       const route = this.$route
-      this.$store.dispatch('tabs_del', route).then(() => {
-        setTimeout(() => { this.replace(route) }, 500)
-      })
+      setTimeout(() => {
+        this.$store.dispatch('tabs_del', route).then(() => {
+          this.replace(route)
+        })
+      }, 1000)
     }
   }
 }
