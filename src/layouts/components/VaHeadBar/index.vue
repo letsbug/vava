@@ -30,11 +30,16 @@
         <!-- TODO Add the history search drop-down list to here to autocomplete -->
       </a>
 
-      <!-- refresh button -->
-      <refresh v-if="!isMobile"></refresh>
+      <template v-if="!isMobile">
+        <!-- refresh button -->
+        <refresh></refresh>
 
-      <!-- theme selector -->
-      <theme-selector></theme-selector>
+        <!-- full screen action -->
+        <screen-full></screen-full>
+
+        <!-- theme selector -->
+        <theme-selector></theme-selector>
+      </template>
 
       <!-- user notifications -->
       <el-tooltip effect="dark" :content="notificationTips" placement="bottom">
@@ -66,11 +71,12 @@
 <script>
 import Breadcrumb from '@/components/Breadcrumb'
 import Refresh from './Refresh'
+import ScreenFull from '@/components/ScreenFull'
 import ThemeSelector from './ThemeSelector'
 
 export default {
   name: 'VaHeadBar',
-  components: { Breadcrumb, Refresh, ThemeSelector },
+  components: { Breadcrumb, Refresh, ScreenFull, ThemeSelector },
   data() {
     return {
       search: { old: '', keyword: '' }
