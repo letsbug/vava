@@ -3,18 +3,22 @@
     <el-form ref="loginForm" class="form-login--password" autoComplete="on" aria-autocomplete="list" :model="form" :rules="rules">
       <div class="form-logo">
         <img class="brand" :src="logo" alt="Vava">
-        <h2 class="title">Sign in to Vava <va-icon icon="mark-info" @click.native="tipsVisible = true"></va-icon></h2>
+        <h2 class="title">Sign in to Vava <va-icon icon="mark-states-info" @click.native="tipsVisible = true"></va-icon></h2>
       </div>
       <el-form-item prop="username">
         <el-input size="large" name="username" type="text" v-model="form.username" autoComplete="on" placeholder="username">
-          <va-icon slot="prefix" icon="user"></va-icon>
+          <va-icon slot="prefix" icon="people-user"></va-icon>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password" autoComplete="on"
                   placeholder="password" @keyup.enter.native="handleLogin">
           <va-icon slot="prefix" icon="mark-lock"></va-icon>
-          <va-icon slot="suffix" :icon="password ? 'eye-close' : 'eye-open'" @click.native="password = !password"></va-icon>
+          <va-icon
+            slot="suffix"
+            :icon="password ? 'mark-eye-close' : 'mark-eye-open'"
+            @click.native="password = !password">
+          </va-icon>
         </el-input>
       </el-form-item>
       <el-form-item>

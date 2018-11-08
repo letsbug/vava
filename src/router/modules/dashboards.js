@@ -7,25 +7,25 @@ const dashboards = {
   name: 'Dashboard',
   meta: {
     title: 'dashboard',
-    icon: 'dashboard'
+    icon: 'chart-dashboard'
   },
   children: [
     {
       path: 'visitor',
       name: 'Visitor',
-      meta: { title: 'visitor', icon: 'history', nobg: true },
+      meta: { title: 'visitor', icon: 'thing-footprint', nobg: true },
       component: () => import('@/modules/dashboard/Visitor')
     },
     {
       path: 'users',
       name: 'Users',
-      meta: { title: 'users', icon: 'user', nobg: true },
+      meta: { title: 'users', icon: 'people-user', nobg: true },
       component: () => import('@/modules/dashboard/Users')
     },
     {
       path: 'capital',
       name: 'Capital',
-      meta: { title: 'capital', icon: 'capital', nobg: true },
+      meta: { title: 'capital', icon: 'mark-capital', nobg: true },
       component: () => import('@/modules/dashboard/Capital')
     }
   ]

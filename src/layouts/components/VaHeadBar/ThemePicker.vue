@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" @command="chooseTheme" :show-timeout="100" style="float: left;">
     <a class="va-nav-item hidden-xs-only">
-      <va-icon icon="theme"></va-icon>
+      <va-icon icon="thing-shirt"></va-icon>
     </a>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="default">default</el-dropdown-item>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'ThemeSelector',
+  name: 'ThemePicker',
   data() {
     return {}
   },

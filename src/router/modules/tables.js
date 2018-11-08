@@ -7,19 +7,19 @@ const tables = {
   name: 'Tables',
   meta: {
     title: 'tables',
-    icon: 'table'
+    icon: 'chart-table'
   },
   children: [
     {
       path: 'basic',
       name: 'Basic',
-      meta: { title: 'basic use', icon: 'table-default' },
+      meta: { title: 'basic use', icon: 'chart-list' },
       component: () => import('@/modules/tables/BasicUse')
     },
     {
       path: 'dynamic',
       name: 'Dynamic',
-      meta: { title: 'dynamic', icon: 'dynamic' },
+      meta: { title: 'dynamic', icon: 'chart-dynamic' },
       component: () => import('@/modules/tables/Dynamic')
     },
     {
@@ -31,7 +31,7 @@ const tables = {
     {
       path: 'sortable',
       name: 'Sortable',
-      meta: { title: 'sortable', icon: 'mark-sort' },
+      meta: { title: 'sortable', icon: 'mark-list' },
       component: () => import('@/modules/tables/Sortable')
     },
     {

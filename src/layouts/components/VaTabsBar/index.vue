@@ -18,7 +18,7 @@
 
       <!-- Resident tab control, link to home -->
       <router-link class="va-tabs-item tabs-home" to="/home">
-        <va-icon class="link-home" icon="house"></va-icon>
+        <va-icon class="link-home" icon="thing-house"></va-icon>
       </router-link>
 
       <!-- TODO Add some tabs options or tabs out to here -->

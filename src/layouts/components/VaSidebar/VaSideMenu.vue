@@ -33,7 +33,7 @@
 
   <div class="va-side-nav fixed-bottom">
     <router-link class="nav-title" to="/error/402">
-      <va-icon icon="settings"></va-icon> <span class="item-name">Settings</span>
+      <va-icon icon="action-settings"></va-icon> <span class="item-name">Settings</span>
     </router-link>
   </div>
 </div>

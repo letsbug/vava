@@ -20,7 +20,7 @@
 
       <!-- global search -->
       <a class="va-nav-item nav-search" v-if="!isMobile">
-        <va-icon icon="search"/>
+        <va-icon icon="action-search"/>
         <!-- TODO Add mobile layout to here -->
         <input ref="globalSearch" class="nav-search-inner" placeholder="search something..." autocomplete="on"
                :class="currRouteIsSearch"

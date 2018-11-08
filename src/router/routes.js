@@ -39,7 +39,7 @@ export const constantRouteMap = [
     children: [{
       path: 'home',
       name: 'Homepage',
-      meta: { title: 'Home', icon: 'house', nobg: true },
+      meta: { title: 'Home', icon: 'thing-house', nobg: true },
       component: () => import('@/modules/homepage/Homepage')
     }]
   },
@@ -53,7 +53,7 @@ export const constantRouteMap = [
     children: [{
       path: '',
       name: 'Reports',
-      meta: { title: 'reports', icon: 'chart', nobg: true },
+      meta: { title: 'reports', icon: 'chart-bar', nobg: true },
       component: () => import('@/modules/reports/Reports')
     }]
   },
@@ -67,7 +67,7 @@ export const constantRouteMap = [
     children: [{
       path: '',
       name: 'VaIcons',
-      meta: { title: 'icon viewer', icon: 'folder' },
+      meta: { title: 'icon viewer', icon: 'file-folder' },
       component: () => import('@/modules/icons/IconViewer')
     }]
   },
@@ -93,7 +93,7 @@ export const constantRouteMap = [
     children: [{
       path: '',
       name: 'GlobalSearch',
-      meta: { title: 'search', icon: 'search', notab: true },
+      meta: { title: 'search', icon: 'action-search', notab: true },
       component: () => import('@/modules/search/GlobalSearch')
     }],
     hidden: true
