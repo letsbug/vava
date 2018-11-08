@@ -25,19 +25,19 @@ const tables = {
     {
       path: 'editable',
       name: 'Editable',
-      meta: { title: 'editable', icon: 'edit' },
+      meta: { title: 'editable', icon: 'action-edit' },
       component: () => import('@/modules/tables/Editable')
     },
     {
       path: 'sortable',
       name: 'Sortable',
-      meta: { title: 'sortable', icon: 'sort' },
+      meta: { title: 'sortable', icon: 'mark-sort' },
       component: () => import('@/modules/tables/Sortable')
     },
     {
       path: 'draggable',
       name: 'Draggable',
-      meta: { title: 'draggable', icon: 'drag' },
+      meta: { title: 'draggable', icon: 'action-drag' },
       component: () => import('@/modules/tables/Draggable')
     }
   ]

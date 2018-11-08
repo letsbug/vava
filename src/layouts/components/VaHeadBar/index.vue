@@ -5,7 +5,7 @@
 
       <!-- sidebar expander -->
       <a class="va-nav-item" @click.stop="toggleSidebar">
-        <va-icon :icon="sidebarOpend ? 'handle-collapse' : 'handle-expand'"/>
+        <va-icon :icon="sidebarOpend ? 'action-collapse' : 'action-expand'"/>
       </a>
 
       <!-- refresh button -->
@@ -45,7 +45,7 @@
       <el-tooltip effect="dark" :content="notificationTips" placement="bottom">
         <router-link class="va-nav-item" to="/notifications">
           <el-badge is-dot :hidden="!notificationHasUnread">
-            <va-icon icon="notice"/>
+            <va-icon icon="mark-notice"/>
           </el-badge>
         </router-link>
       </el-tooltip>
@@ -62,7 +62,7 @@
         </el-dropdown-menu>
       </el-dropdown>
       <a class="va-nav-item hidden-sm-and-up">
-        <va-icon icon="more"/>
+        <va-icon icon="mark-more"/>
       </a>
     </div>
   </div>

@@ -12,13 +12,13 @@ export default {
     {
       path: 'export',
       name: 'Export',
-      meta: { title: 'Excel Export', icon: 'file-export' },
+      meta: { title: 'Excel Export', icon: 'action-export' },
       component: () => import('@/modules/excel/Export')
     },
     {
       path: 'import',
       name: 'Import',
-      meta: { title: 'Excel Import', icon: 'file-import', nocache: true },
+      meta: { title: 'Excel Import', icon: 'action-import', nocache: true },
       component: () => import('@/modules/excel/Import')
     }
   ]

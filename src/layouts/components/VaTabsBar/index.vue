@@ -11,7 +11,7 @@
                      @contextmenu.prevent.native="menuOpen(route, $event)">
           <span class="tabs-item-name">{{ route.title }}</span>
           <span class="tabs-item__close">
-            <va-icon icon="handle-close" @click.prevent.native="close(route)"></va-icon>
+            <va-icon icon="action-close" @click.prevent.native="close(route)"></va-icon>
           </span>
         </router-link>
       </scroll-pane>

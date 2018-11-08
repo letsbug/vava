@@ -25,7 +25,7 @@
   <!-- Statics for test -->
   <div class="va-side-nav">
     <router-link class="nav-title" to="/others">
-      <va-icon icon="others"></va-icon> <span class="item-name">others</span>
+      <va-icon icon="mark-others"></va-icon> <span class="item-name">others</span>
     </router-link>
   </div>
 
