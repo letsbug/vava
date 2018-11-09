@@ -3,6 +3,7 @@ import ContactsVo from '@/vo/ContactsVo'
 import BaseVo from '@/vo/BaseVo'
 
 let list = []
+const count = 100
 
 const random = cn => Mock.mock({
   id: '@guid',
@@ -16,10 +17,10 @@ const random = cn => Mock.mock({
   fax: '@integer(100, 999)' + '-' + '@integer(10000000, 99999999)',
   email: '@email',
   qq: '@integer(10000000, 13999999999)',
-  company: '@city' + '@cword(3, 8)' + '责任有限公司'
+  company: '@city@cword(3, 8)有限责任公司'
 })
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < count; i++) {
   list.push(new ContactsVo(random(false)))
 }
 list = list.sort((a, b) => a.name > b.name ? 1 : -1)

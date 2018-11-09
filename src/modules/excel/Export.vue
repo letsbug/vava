@@ -29,8 +29,7 @@
     </el-form>
 
     <!-- table list -->
-    <el-table :data="list" tooltip-effect="light" :height="48*11 + 'px'"
-              :empty-text="tableEmptyHint">
+    <el-table :data="list" tooltip-effect="light" :empty-text="tableEmptyHint">
       <el-table-column prop="name" label="name" width="120" show-overflow-tooltip></el-table-column>
       <el-table-column prop="card" label="ID Card" show-overflow-tooltip></el-table-column>
       <el-table-column prop="city" label="city" width="70" show-overflow-tooltip></el-table-column>

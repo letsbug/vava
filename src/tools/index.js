@@ -8,5 +8,3 @@ export { default as Regulars } from './_regulars'
 export { default as Validators } from './_validators'
 export { default as Dater } from './_dater'
 export { default as clipboard } from './_clipboard'
-export { default as Excel } from './_excel'
-
