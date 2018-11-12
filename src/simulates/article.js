@@ -4,7 +4,7 @@ import ArticleVo from '@/vo/ArticleVo'
 import BaseVo from '@/vo/BaseVo'
 
 const list = []
-const count = 100
+const total = 100
 
 const random = cn => Mock.mock({
   id: '@increment',
@@ -21,14 +21,14 @@ const random = cn => Mock.mock({
   'origin|1': ['@platform-a', '@platform-b', '@platform-c', '@platform-d']
 })
 
-for (let i = 0; i < count; i++) {
+for (let i = 0; i < total; i++) {
   list.push(new ArticleVo(random(false)))
 }
 
 export default {
   list: config => {
     const { page, size } = JSON.parse(config.body)
-    const vo = new BaseVo({ page, size, count })
+    const vo = new BaseVo({ page, size, total })
 
     const min = (vo.page - 1) * vo.size
     const max = vo.page * vo.size

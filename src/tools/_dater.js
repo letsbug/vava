@@ -37,6 +37,8 @@ export const dateFormat = (date, fmt) => {
 export const dateAgo = date => {
   if (!date) return null
 
+  if (typeof date === 'string') date = new Date(date)
+
   if (typeof date !== 'object') {
     if (('' + date).length === 10) date = +date * 1000
     date = new Date(+date)

@@ -29,7 +29,7 @@
     </el-form>
 
     <!-- table list -->
-    <el-table :data="list" tooltip-effect="light" :empty-text="tableEmptyHint">
+    <el-table :data="list" tooltip-effect="light" v-loading="loading" empty-text="Sorry! This category have nothing data.">
       <el-table-column prop="name" label="name" width="120" show-overflow-tooltip></el-table-column>
       <el-table-column prop="card" label="ID Card" show-overflow-tooltip></el-table-column>
       <el-table-column prop="city" label="city" width="70" show-overflow-tooltip></el-table-column>
@@ -74,13 +74,8 @@ export default {
         exporting: false
       },
       list: null,
+      loading: false,
       pages: { page: 1, size: 10, total: 0 }
-    }
-  },
-  computed: {
-    tableEmptyHint() {
-      const list = this.list
-      return !list ? 'Loading...' : list.length < 1 ? 'Sorry! This category have nothing data.' : ''
     }
   },
   methods: {
@@ -93,7 +88,9 @@ export default {
       this.getContacts()
     },
     getContacts() {
+      this.loading = true
       Contacts.list(this.pages).then(res => {
+        this.loading = false
         this.pages = res.pages
         this.list = res.list
       })
@@ -148,9 +145,5 @@ export default {
   .export-handler-loading {
     margin-left: $spacer-base;
   }
-}
-.excel-pagination {
-  text-align: right;
-  margin-top: $spacer-base;
 }
 </style>

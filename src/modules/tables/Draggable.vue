@@ -32,7 +32,7 @@ import Sortable from 'sortablejs'
 
 export default {
   name: 'Draggable',
-  metaInfo: { title: 'draggable table' },
+  metaInfo: { title: 'Draggable Table' },
   data() {
     return {
       pages: {
