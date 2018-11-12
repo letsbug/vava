@@ -1,3 +1,16 @@
-.el-table .el-table__body-wrapper .clickable {
-  cursor: pointer;
+.el-table .el-table__body-wrapper {
+  .clickable {
+    cursor: pointer;
+  }
+
+  // Class name for the drop placeholder in the Drag to sort tables.
+  .sortable-ghost {
+    background-color: $color-theme !important;
+    color: $color-white !important;
+    opacity: .4;
+
+    > td {
+      background-color: transparent !important;
+    }
+  }
 }

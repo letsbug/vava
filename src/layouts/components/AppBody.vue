@@ -1,12 +1,12 @@
 <template>
-  <el-scrollbar class="va-body-wrapper" :class="background">
+  <div class="va-body-wrapper" :class="background">
     <transition name="transform-fade" mode="out-in">
       <router-view v-if="isMobile"/>
       <keep-alive v-else :include="cachedRoutes">
         <router-view :key="key"></router-view>
       </keep-alive>
     </transition>
-  </el-scrollbar>
+  </div>
 </template>
 
 <script>
@@ -26,6 +26,7 @@ export default {
 .va-body-wrapper /deep/ {
   .el-scrollbar__wrap {
     overflow-x: hidden !important;
+    overflow-y: scroll !important;
     margin-bottom: 0 !important;
   }
 

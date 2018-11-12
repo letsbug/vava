@@ -2,6 +2,7 @@ import Mock from 'mockjs'
 import Account from './account'
 import Notification from './notification'
 import Contacts from './contacts'
+import Article from './article'
 
 Mock.setup({ timeout: '400-1000' })
 
@@ -31,7 +32,7 @@ Mock.mock(/\/contacts\/list/, 'post', Contacts.list)
 Mock.mock(/\/contacts\/all/, 'post', Contacts.all)
 
 // About articles
-Mock.mock(/\/articles\/list/, 'post', Contacts.all)
-Mock.mock(/\/articles\/detail/, 'post', Contacts.all)
-Mock.mock(/\/articles\/create/, 'post', Contacts.all)
-Mock.mock(/\/articles\/update/, 'post', Contacts.all)
+Mock.mock(/\/articles\/list/, 'post', Article.list)
+Mock.mock(/\/articles\/detail/, 'get', Article.detail)
+Mock.mock(/\/articles\/create/, 'post', Article.create)
+Mock.mock(/\/articles\/update/, 'post', Article.update)

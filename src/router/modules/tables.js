@@ -2,7 +2,7 @@ import Layout from '@/layouts'
 
 const tables = {
   path: '/tables',
-  redirect: '/tables/basic',
+  redirect: '/tables/dynamic',
   component: Layout,
   name: 'Tables',
   meta: {
@@ -10,12 +10,6 @@ const tables = {
     icon: 'chart-table'
   },
   children: [
-    {
-      path: 'basic',
-      name: 'Basic',
-      meta: { title: 'basic use', icon: 'chart-list' },
-      component: () => import('@/modules/tables/BasicUse')
-    },
     {
       path: 'dynamic',
       name: 'Dynamic',

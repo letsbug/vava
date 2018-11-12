@@ -28,8 +28,7 @@ list = list.sort((a, b) => a.name > b.name ? 1 : -1)
 export default {
   list: config => {
     const { page, size } = JSON.parse(config.body)
-    const total = list.length
-    const vo = new BaseVo({ page, size, total })
+    const vo = new BaseVo({ page, size, count })
     const min = (vo.page - 1) * vo.size
     const max = vo.page * vo.size
     return {
