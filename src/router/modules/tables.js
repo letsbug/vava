@@ -17,10 +17,10 @@ const tables = {
       component: () => import('@/modules/tables/Dynamic')
     },
     {
-      path: 'editable',
-      name: 'Editable',
-      meta: { title: 'editable', icon: 'action-edit' },
-      component: () => import('@/modules/tables/Editable')
+      path: 'table-inline-edit',
+      name: 'InlineEdit',
+      meta: { title: 'InlineEdit', icon: 'action-edit' },
+      component: () => import('@/modules/tables/InlineEdit')
     },
     {
       path: 'sortable',
