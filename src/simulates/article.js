@@ -10,6 +10,7 @@ const random = cn => Mock.mock({
   id: '@increment',
   timestamp: +Mock.Random.date('T'),
   'author|1': cn ? '@cname' : '@first',
+  'auditor|1': cn ? '@cname' : '@first',
   title: cn ? '@ctitle(5, 20)' : '@title(5, 20)',
   summery: cn ? '@cparagraph(1, 2)' : '@paragraph(1, 2)',
   content: cn ? `<p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p>`

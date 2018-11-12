@@ -25,8 +25,10 @@
 }
 
 .va-body-container {
+  height: 100%;
   padding: $body-wrapper-padding;
   overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
 
   .va-body-title {

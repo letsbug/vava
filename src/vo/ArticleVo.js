@@ -19,6 +19,11 @@ class ArticleVo {
     this.author = props.author
 
     /**
+     * 审核者
+     */
+    this.auditor = props.auditor
+
+    /**
      * 文章标题
      * @type {string}
      */

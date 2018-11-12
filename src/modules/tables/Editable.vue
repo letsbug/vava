@@ -7,13 +7,14 @@
       <el-table-column label="CREATE" prop="display" width="148">
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
       </el-table-column>
-      <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip></el-table-column>
       <el-table-column label="LEVEL" prop="level" width="60" align="center"></el-table-column>
       <el-table-column label="STATUS" prop="status" width="100" align="center">
         <template slot-scope="scope">
           <el-tag size="small" :type="scope.row.status | articleStatus">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
+      <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip></el-table-column>
+      <el-table-column label="AUDITOR" prop="auditor" width="96" show-overflow-tooltip></el-table-column>
       <el-table-column label="PV" prop="pv" width="60">
         <template slot-scope="scope">{{ scope.row.pv | articlePV }}</template>
       </el-table-column>
