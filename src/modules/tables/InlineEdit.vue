@@ -3,12 +3,24 @@
     <el-table tooltip-effect="light" :data="list" fit highlight-current-row v-loading="loading" row-key="id"
               empty-text="Sorry! This category have nothing data.">
       <el-table-column label="ID" prop="id" width="36" align="right"></el-table-column>
-      <el-table-column label="TITLE" prop="title" show-overflow-tooltip></el-table-column>
+      <el-table-column label="TITLE" prop="title" show-overflow-tooltip class-name="has-actions">
+        <template slot-scope="scope">
+          <transition-group name="transform-fade">
+            <span class="inline-edit-form" v-if="scope.row.editing" key="edit">
+              <el-input size="mini" v-model="scope.row.title"/>
+              <el-button icon="el-icon-close" type="danger" plain size="mini" @click="scope.row.editing = false">
+                Cancel
+              </el-button>
+            </span>
+            <span v-else key="cancel" style="line-height: 27px;">{{ scope.row.title }}</span>
+          </transition-group>
+        </template>
+      </el-table-column>
       <el-table-column label="CREATE" prop="display" width="110">
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
       </el-table-column>
       <el-table-column label="LEVEL" prop="level" width="60" align="center"></el-table-column>
-      <el-table-column label="STATUS" prop="status" width="100" align="center" class-name="not-overflow table-status">
+      <el-table-column label="STATUS" prop="status" width="100" align="center" class-name="has-actions table-status">
         <template slot-scope="scope">
           <el-tag size="small" :type="scope.row.status | articleStatus">{{ scope.row.status }}</el-tag>
         </template>
@@ -18,9 +30,12 @@
       <el-table-column label="PV" prop="pv" width="60">
         <template slot-scope="scope">{{ scope.row.pv | articlePV }}</template>
       </el-table-column>
-      <el-table-column label="ACTIONS" width="90" align="center" class-name="not-overflow table-actions">
+      <el-table-column label="ACTIONS" width="90" align="center" class-name="has-actions table-actions">
         <template slot-scope="scope">
-          <el-button icon="el-icon-edit" type="primary" plain size="mini">Edit</el-button>
+          <el-button icon="el-icon-check" type="success" plain size="mini" @click="scope.row.editing = false"
+                     v-if="scope.row.editing">OK</el-button>
+          <el-button icon="el-icon-edit" type="primary" plain size="mini" @click="scope.row.editing = true"
+                     v-else>Edit</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -60,9 +75,13 @@ export default {
     getList() {
       this.loading = true
       Service.list(this.pages).then(res => {
-        this.loading = false
-        this.list = res.list
+        this.list = res.list.map(v => {
+          this.$set(v, 'editing', false)
+          this.$set(v, 'originalTitle', v.title)
+          return v
+        })
         this.pages = res.pages
+        this.loading = false
       })
     },
     handlePageChange(val) {
@@ -72,6 +91,9 @@ export default {
     handleSizeChange(val) {
       this.pages.size = val
       this.getList()
+    },
+    handleEdit(row) {
+      row.editing = true
     }
   },
   mounted() {
@@ -81,11 +103,27 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.table-actions .el-button, .table-status .el-tag {
+/*.table-actions .el-button, .table-status .el-tag {
   margin: -6px 0;
 }
 .table-actions .el-button {
   position: relative;
   top: -1px;
+}*/
+.inline-edit-form {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  padding-right: 100px;
+
+  /deep/ .el-input__inner {
+    height: 29px;
+    line-height: 27px;
+  }
+
+  .el-button {
+    position: absolute;
+    right: 0;
+  }
 }
 </style>
