@@ -4,7 +4,7 @@
               empty-text="Sorry! This category have nothing data." height="548px">
       <el-table-column label="ID" prop="id" width="36" align="right"></el-table-column>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip></el-table-column>
-      <el-table-column label="CREATE" prop="display" width="148">
+      <el-table-column label="CREATE" prop="display" width="110">
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
       </el-table-column>
       <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip></el-table-column>

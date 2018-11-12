@@ -13,4 +13,10 @@
       background-color: transparent !important;
     }
   }
+
+  .not-overflow {
+    .cell {
+      overflow: visible;
+    }
+  }
 }

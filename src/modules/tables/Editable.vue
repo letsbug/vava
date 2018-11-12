@@ -4,11 +4,11 @@
               empty-text="Sorry! This category have nothing data.">
       <el-table-column label="ID" prop="id" width="36" align="right"></el-table-column>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip></el-table-column>
-      <el-table-column label="CREATE" prop="display" width="148">
+      <el-table-column label="CREATE" prop="display" width="110">
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
       </el-table-column>
       <el-table-column label="LEVEL" prop="level" width="60" align="center"></el-table-column>
-      <el-table-column label="STATUS" prop="status" width="100" align="center">
+      <el-table-column label="STATUS" prop="status" width="100" align="center" class-name="not-overflow table-status">
         <template slot-scope="scope">
           <el-tag size="small" :type="scope.row.status | articleStatus">{{ scope.row.status }}</el-tag>
         </template>
@@ -18,10 +18,11 @@
       <el-table-column label="PV" prop="pv" width="60">
         <template slot-scope="scope">{{ scope.row.pv | articlePV }}</template>
       </el-table-column>
-      <!--<el-table-column label="ACTIONS" width="90" align="center">
+      <el-table-column label="ACTIONS" width="90" align="center" class-name="not-overflow table-actions">
         <template slot-scope="scope">
+          <el-button icon="el-icon-edit" type="primary" plain size="mini">Edit</el-button>
         </template>
-      </el-table-column>-->
+      </el-table-column>
     </el-table>
 
     <el-pagination
@@ -78,3 +79,13 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.table-actions .el-button, .table-status .el-tag {
+  margin: -6px 0;
+}
+.table-actions .el-button {
+  position: relative;
+  top: -1px;
+}
+</style>
