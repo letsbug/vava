@@ -8,8 +8,8 @@
           <transition-group name="transform-fade">
             <span class="inline-edit-form" v-if="scope.row.editing" key="edit">
               <el-input size="mini" v-model="scope.row.title"/>
-              <el-button icon="el-icon-close" type="danger" plain size="mini" @click="scope.row.editing = false">
-                Cancel
+              <el-button icon="el-icon-close" type="danger" plain size="mini" @click="handleCancel(scope.row)"
+                         :disabled="scope.row.submitting">Cancel
               </el-button>
             </span>
             <span v-else key="cancel" style="line-height: 27px;">{{ scope.row.title }}</span>
@@ -32,8 +32,8 @@
       </el-table-column>
       <el-table-column label="ACTIONS" width="90" align="center" class-name="has-actions table-actions">
         <template slot-scope="scope">
-          <el-button icon="el-icon-check" type="success" plain size="mini" @click="scope.row.editing = false"
-                     v-if="scope.row.editing">OK</el-button>
+          <el-button icon="el-icon-check" type="success" plain size="mini" @click="handleEdit(scope.row)"
+                     v-if="scope.row.editing" :loading="scope.row.submitting">OK</el-button>
           <el-button icon="el-icon-edit" type="primary" plain size="mini" @click="scope.row.editing = true"
                      v-else>Edit</el-button>
         </template>
@@ -62,11 +62,7 @@ export default {
   metaInfo: { title: 'Editable Table' },
   data() {
     return {
-      pages: {
-        page: 1,
-        size: 10,
-        total: 0
-      },
+      pages: { page: 1, size: 10, total: 0 },
       list: [],
       loading: false
     }
@@ -77,6 +73,7 @@ export default {
       Service.list(this.pages).then(res => {
         this.list = res.list.map(v => {
           this.$set(v, 'editing', false)
+          this.$set(v, 'submitting', false)
           this.$set(v, 'originalTitle', v.title)
           return v
         })
@@ -93,7 +90,21 @@ export default {
       this.getList()
     },
     handleEdit(row) {
-      row.editing = true
+      row.submitting = true
+      row.originalTitle = row.title
+      Service.update({ id: row.id, title: row.title }).then(res => {
+        if (res.success) row.editing = false
+        this.$message({
+          type: res.success ? 'success' : 'error',
+          message: res.success ? 'Modify successfully' : res.message,
+          center: true
+        })
+        row.submitting = false
+      })
+    },
+    handleCancel(row) {
+      row.title = row.originalTitle
+      row.editing = false
     }
   },
   mounted() {
@@ -103,13 +114,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-/*.table-actions .el-button, .table-status .el-tag {
-  margin: -6px 0;
-}
-.table-actions .el-button {
-  position: relative;
-  top: -1px;
-}*/
 .inline-edit-form {
   display: inline-block;
   width: 100%;

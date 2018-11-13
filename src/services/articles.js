@@ -8,5 +8,8 @@ export default {
   detail: id => {
     const params = { id }
     return Service.get('/articles/detail', { params: params }).then(res => res.data)
+  },
+  update: params => {
+    return Service.post('/articles/update', params).then(res => res.data)
   }
 }

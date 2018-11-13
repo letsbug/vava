@@ -1,8 +1,8 @@
 <template>
   <div class="va-body-container">
     <el-table tooltip-effect="light" :data="list" fit highlight-current-row v-loading="loading" row-key="id"
-              empty-text="Sorry! This category have nothing data." height="548px">
-      <el-table-column label="ID" prop="id" width="36" align="right"></el-table-column>
+              border empty-text="Sorry! This category have nothing data." height="549px">
+      <el-table-column label="ID" prop="id" width="40" align="right"></el-table-column>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip></el-table-column>
       <el-table-column label="CREATE" prop="display" width="110">
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
@@ -14,10 +14,10 @@
           <el-tag size="small" :type="scope.row.status | articleStatus">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="PV" prop="pv" width="60">
+      <el-table-column label="PV" prop="pv" width="66">
         <template slot-scope="scope">{{ scope.row.pv | articlePV }}</template>
       </el-table-column>
-      <el-table-column label="DRAG" width="60" align="center">
+      <el-table-column label="DRAG" width="66" align="center">
         <template slot-scope="scope">
           <span class="handle-drag"><va-icon icon="action-drag"></va-icon></span>
         </template>

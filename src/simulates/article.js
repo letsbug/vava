@@ -43,6 +43,23 @@ export default {
     const { id } = Urls.parse(config.url)
     return list.filter(v => v.id === id)
   },
-  create: () => {},
-  update: () => {}
+  create: () => 'success',
+  update: config => {
+    const params = JSON.parse(config.body)
+    if (!params.id) return { success: false, message: 'The params \'id\' is not defined.' }
+    let modified = false
+    for (const i in list) {
+      if (list[i].id === params.id) {
+        Object.keys(params).forEach(key => {
+          list[i][key] = params[key]
+        })
+        modified = true
+        break
+      }
+    }
+    return {
+      success: modified,
+      message: modified ? 'success' : 'failed'
+    }
+  }
 }
