@@ -1,5 +1,6 @@
 import Mock from 'mockjs'
 import { Urls } from '@/tools'
+import Account from './account'
 import ArticleVo from '@/vo/ArticleVo'
 import BaseVo from '@/vo/BaseVo'
 
@@ -10,7 +11,7 @@ const random = cn => Mock.mock({
   id: '@increment',
   timestamp: +Mock.Random.date('T'),
   'author|1': cn ? '@cname' : '@first',
-  'auditor|1': cn ? '@cname' : '@first',
+  'auditor|1': Account.auditors().map(v => v.username),
   title: cn ? '@ctitle(5, 20)' : '@title(5, 20)',
   summery: cn ? '@cparagraph(1, 2)' : '@paragraph(1, 2)',
   content: cn ? `<p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p>`

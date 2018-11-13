@@ -87,11 +87,12 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Auditor" prop="auditor">
-          <el-input v-model="editForm.auditor" placeholder="Article auditor" clearable></el-input>
+          <el-autocomplete v-model="editForm.auditor" placeholder="Article auditor" clearable
+                    :fetch-suggestions="inputQuerySearch"></el-autocomplete>
         </el-form-item>
       </el-form>
       <div slot="footer">
-        <el-button plain>Cancel</el-button>
+        <el-button plain @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary">Submit</el-button>
       </div>
     </el-dialog>
@@ -113,6 +114,7 @@ export default {
       levelMap: ['all', 1, 2, 3, 4, 5],
       selected: [],
       dialogVisible: false,
+      auditors: [],
       editForm: {
         isEdit: false,
         author: this.$store.getters.user.username,
@@ -143,6 +145,15 @@ export default {
     },
     handleEdit(rowData) {
       this.dialogVisible = true
+    },
+    createInputQueryFilter(queryString) {
+      return (restaurant) => {
+        return (restaurant.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+    inputQuerySearch(str, callback) {
+      const res = str ? this.auditors.filter(this.createInputQueryFilter(str)) : this.auditors
+      callback(res)
     },
     handleDeleteOrAudit(isAudit, rowData) {
       const status = { status: isAudit ? 'audited' : 'deleted' }
@@ -183,6 +194,11 @@ export default {
         options
       )
     }
+  },
+  mounted() {
+    Service.auditors().then(res => {
+      this.auditors = res
+    })
   }
 }
 </script>

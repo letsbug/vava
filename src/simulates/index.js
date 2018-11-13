@@ -21,6 +21,7 @@ Mock.mock(/\/account\/login/, 'post', Account.login)
 Mock.mock(/\/account\/logout/, 'post', Account.logout)
 Mock.mock(/\/account\/info/, 'get', Account.info)
 Mock.mock(/\/account\/update/, 'get', Account.update)
+Mock.mock(/\/account\/auditors/, 'post', Account.auditors)
 
 // About notifications
 Mock.mock(/\/notification\/list/, 'post', Notification.list)

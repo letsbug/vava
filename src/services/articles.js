@@ -14,5 +14,8 @@ export default {
   },
   updates: lst => {
     return Service.post('/articles/batch', lst).then(res => res.data)
+  },
+  auditors: () => {
+    return Service.post('/account/auditors').then(res => res.data)
   }
 }

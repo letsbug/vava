@@ -3,7 +3,7 @@ import { Urls } from '@/tools'
 
 const userMap = {
   admin: Mock.mock({
-    roles: ['admin', 'editor'],
+    roles: ['admin', 'editor', 'auditor'],
     token: 'admin',
     code: '@id',
     username: 'admin',
@@ -22,6 +22,28 @@ const userMap = {
   })
 }
 
+const userList = []
+const total = 10
+userList.push(userMap.admin)
+userList.push(userMap.editor)
+
+const random = () => {
+  const username = '@first'
+  return Mock.mock({
+    roles: ['auditor'],
+    token: username,
+    code: '@id',
+    username,
+    intro: 'My name is ' + username,
+    avatar: require('@/assets/images/avatar-admin.png'),
+    status: 1
+  })
+}
+
+for (let i = 0; i < total; i++) {
+  userList.push(random())
+}
+
 export default {
   login: config => {
     const { username } = JSON.parse(config.body)
@@ -36,5 +58,6 @@ export default {
     console.log(data)
     return 'success'
   },
-  logout: () => 'success'
+  logout: () => 'success',
+  auditors: () => userList.filter(v => ~v.roles.indexOf('auditor'))
 }
