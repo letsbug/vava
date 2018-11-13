@@ -21,9 +21,9 @@
         <el-button-group style="vertical-align: top;">
           <el-button type="primary" icon="el-icon-plus" @click="handleEdit()">Add</el-button>
           <el-button type="primary" icon="el-icon-delete" :disabled="!selected || selected.length < 1"
-                     @click="handleDeleteOrAudit(true)">Audit</el-button>
+                     @click="handleBatchUpdate(true)">Audit</el-button>
           <el-button type="primary" icon="el-icon-delete" :disabled="!selected || selected.length < 1"
-                     @click="handleDeleteOrAudit(false)">Delete</el-button>
+                     @click="handleBatchUpdate(false)">Delete</el-button>
         </el-button-group>
       </el-form-item>
     </el-form>
@@ -38,6 +38,7 @@
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
       </el-table-column>
       <el-table-column label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable></el-table-column>
+      <el-table-column label="AUDITOR" prop="auditor" width="110" show-overflow-tooltip sortable></el-table-column>
       <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable></el-table-column>
       <el-table-column label="STATUS" prop="status" width="100" align="center" sortable>
         <template slot-scope="scope">
@@ -50,10 +51,10 @@
       <el-table-column label="ACTIONS" width="164" class-name="has-actions actions-small">
         <template slot-scope="scope">
           <el-button type="primary" size="small" icon="el-icon-check"
-                     @click="handleDeleteOrAudit(true, scope.row)"></el-button>
+                     @click="handleBatchUpdate(true, scope.row)"></el-button>
           <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)"></el-button>
           <el-button type="primary" size="small" icon="el-icon-delete"
-                     @click="handleDeleteOrAudit(false, scope.row)"></el-button>
+                     @click="handleBatchUpdate(false, scope.row)"></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -87,7 +88,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Auditor" prop="auditor">
-          <el-autocomplete v-model="editForm.auditor" placeholder="Article auditor" clearable
+          <el-autocomplete v-model="editForm.auditor" placeholder="Article auditor" :debounce="0"
                     :fetch-suggestions="inputQuerySearch"></el-autocomplete>
         </el-form-item>
       </el-form>
@@ -115,15 +116,7 @@ export default {
       selected: [],
       dialogVisible: false,
       auditors: [],
-      editForm: {
-        isEdit: false,
-        author: this.$store.getters.user.username,
-        title: '',
-        summery: '',
-        content: '',
-        level: '',
-        auditor: ''
-      }
+      editForm: null
     }
   },
   methods: {
@@ -143,19 +136,33 @@ export default {
     handleSelectionChange(val) {
       this.selected = val;
     },
-    handleEdit(rowData) {
-      this.dialogVisible = true
+    rebuildEditData() {
+      this.editForm = {
+        isEdit: false,
+        author: this.$store.getters.user.username,
+        title: '',
+        summery: '',
+        content: '',
+        level: '',
+        auditor: ''
+      }
     },
-    createInputQueryFilter(queryString) {
-      return (restaurant) => {
-        return (restaurant.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-      };
+    handleEdit(rowData) {
+      console.log(rowData)
+      this.dialogVisible = true
+      if (rowData) this.editForm = Object.assign({}, rowData)
+      else this.rebuildEditData()
+    },
+    inputQueryFilter(queryString) {
+      return restaurant => {
+        return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+      }
     },
     inputQuerySearch(str, callback) {
-      const res = str ? this.auditors.filter(this.createInputQueryFilter(str)) : this.auditors
+      const res = str ? this.auditors.filter(this.inputQueryFilter(str)) : this.auditors
       callback(res)
     },
-    handleDeleteOrAudit(isAudit, rowData) {
+    handleBatchUpdate(isAudit, rowData) {
       const status = { status: isAudit ? 'audited' : 'deleted' }
       let lst = []
       if (rowData) {
@@ -172,7 +179,6 @@ export default {
         callback: action => {
           if (action === 'confirm') {
             Service.updates(lst).then(res => {
-              console.log(res)
               this.$message({
                 center: true,
                 type: res.success ? 'success' : 'error',
@@ -195,9 +201,15 @@ export default {
       )
     }
   },
+  created() {
+    this.rebuildEditData()
+  },
   mounted() {
     Service.auditors().then(res => {
-      this.auditors = res
+      this.auditors = res.map(v => {
+        this.$set(v, 'value', v.username)
+        return v
+      })
     })
   }
 }

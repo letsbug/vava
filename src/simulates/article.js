@@ -14,8 +14,8 @@ const random = cn => Mock.mock({
   'auditor|1': Account.auditors().map(v => v.username),
   title: cn ? '@ctitle(5, 20)' : '@title(5, 20)',
   summery: cn ? '@cparagraph(1, 2)' : '@paragraph(1, 2)',
-  content: cn ? `<p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p>`
-    : `<p>@paragraph</p><p>@paragraph</p><p>@paragraph</p><p>@paragraph</p>`,
+  content: cn ? '<p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p>'
+    : '<p>@paragraph</p><p>@paragraph</p><p>@paragraph</p><p>@paragraph</p>',
   level: '@integer(1, 5)',
   'status|1': ['draft', 'committed', 'failing', 'auditing', 'audited', 'deleted'],
   display: '@datetime',
@@ -88,9 +88,6 @@ export default {
         }
       })
     })
-    for (let i = 0; i < 10; i++) {
-      console.log(i, list[i].status)
-    }
     return {
       success: true,
       message: 'success'
