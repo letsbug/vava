@@ -15,6 +15,12 @@
   }
 
   .has-actions {
-    padding: 9px 0;
+    &.actions-mini {
+      padding: 9px 0;
+    }
+
+    &.actions-small {
+      padding: 5px 0;
+    }
   }
 }

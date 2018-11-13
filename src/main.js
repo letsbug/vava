@@ -26,7 +26,7 @@ import hmt from 'vue-ba'
 
 Vue.config.productionTip = false
 
-Vue.use(Element)
+Vue.use(Element, { size: 'medium' })
 Vue.use(Meta)
 Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
 

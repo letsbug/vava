@@ -1,7 +1,7 @@
 <template>
   <div class="va-body-container">
     <el-table tooltip-effect="light" :data="list" fit highlight-current-row v-loading="loading" row-key="id"
-              border empty-text="Sorry! This category have nothing data." height="549px">
+              empty-text="Sorry! This category have nothing data." height="504px">
       <el-table-column label="ID" prop="id" width="40" align="right"></el-table-column>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip></el-table-column>
       <el-table-column label="CREATE" prop="display" width="110">
@@ -27,23 +27,14 @@
 </template>
 
 <script>
+import mixins from './mixins'
 import Service from '@/services/articles'
 import Sortable from 'sortablejs'
 
 export default {
   name: 'Draggable',
   metaInfo: { title: 'Draggable Table' },
-  data() {
-    return {
-      pages: {
-        page: 1,
-        size: 10,
-        total: 0
-      },
-      list: [],
-      loading: false
-    }
-  },
+  mixins: [mixins],
   methods: {
     sortSetup() {
       const el = document.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
@@ -65,16 +56,12 @@ export default {
     getList() {
       this.loading = true
       Service.list(this.pages).then(res => {
-        this.loading = false
         this.list = res.list
         this.pages = res.pages
         this.$nextTick(() => this.sortSetup())
+        this.loading = false
       })
     }
-  },
-  computed: {},
-  mounted() {
-    this.getList()
   }
 }
 </script>

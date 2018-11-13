@@ -28,15 +28,29 @@ for (let i = 0; i < total; i++) {
 
 export default {
   list: config => {
-    const { page, size } = JSON.parse(config.body)
-    const vo = new BaseVo({ page, size, total })
+    const params = JSON.parse(config.body)
+
+    const title = params.title || null
+    const level = params.level || null
+    const status = params.status || null
+
+    const _list = list.filter(v => {
+      let is = true
+      if (title) is = ~v.title.indexOf(title)
+      if (level) is = v.level === level
+      if (status) is = v.status === status
+      return is
+    })
+
+    const { page, size } = params
+    const vo = new BaseVo({ page, size, total: _list.length })
 
     const min = (vo.page - 1) * vo.size
     const max = vo.page * vo.size
 
     return {
       pages: vo,
-      list: list.filter((v, i) => (i >= min && i < max))
+      list: _list.filter((v, i) => (i >= min && i < max))
     }
   },
   detail: config => {
@@ -60,6 +74,25 @@ export default {
     return {
       success: modified,
       message: modified ? 'success' : 'failed'
+    }
+  },
+  batch: config => {
+    const lst = JSON.parse(config.body)
+    list.forEach((v, i) => {
+      lst.forEach(p => {
+        if (v.id === p.id) {
+          Object.keys(p).forEach(key => {
+            list[i][key] = p[key]
+          })
+        }
+      })
+    })
+    for (let i = 0; i < 10; i++) {
+      console.log(i, list[i].status)
+    }
+    return {
+      success: true,
+      message: 'success'
     }
   }
 }

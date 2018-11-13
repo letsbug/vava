@@ -11,12 +11,6 @@ const tables = {
   },
   children: [
     {
-      path: 'dynamic',
-      name: 'Dynamic',
-      meta: { title: 'dynamic', icon: 'chart-dynamic' },
-      component: () => import('@/modules/tables/Dynamic')
-    },
-    {
       path: 'table-inline-edit',
       name: 'InlineEdit',
       meta: { title: 'InlineEdit', icon: 'action-edit' },
@@ -33,6 +27,12 @@ const tables = {
       name: 'Draggable',
       meta: { title: 'draggable', icon: 'action-drag' },
       component: () => import('@/modules/tables/Draggable')
+    },
+    {
+      path: 'table-full-feature',
+      name: 'FullFeature',
+      meta: { title: 'FullFeature', icon: 'chart-dynamic' },
+      component: () => import('@/modules/tables/FullFeature')
     }
   ]
 }

@@ -6,7 +6,7 @@
          @drop.prevent.stop="!working && handleDrop($event)"
          @dragover.prevent.stop="onDragOver"
          @dragenter.prevent.stop="onDragOver">
-      <div><va-icon icon="file-import"/></div>
+      <div><va-icon icon="action-import"/></div>
       <template v-if="file">
         Selected "{{ file.name }}" <span class="text-primary browse-hint">Click to change</span>
       </template>

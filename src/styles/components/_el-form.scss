@@ -1,0 +1,11 @@
+.el-form {
+  &:not(.el-form--inline) {
+    .el-form-item:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .el-form-item {
+    margin-bottom: $spacer-base;
+  }
+}

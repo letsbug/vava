@@ -1,9 +1,9 @@
 import Service from './base'
 
 export default {
-  list: ({ page, size }) => {
-    const pages = { page, size }
-    return Service.post('/articles/list', pages).then(res => res.data)
+  list: ({ page, size, title, level, status }) => {
+    const params = { page, size, title, level, status }
+    return Service.post('/articles/list', params).then(res => res.data)
   },
   detail: id => {
     const params = { id }
@@ -11,5 +11,8 @@ export default {
   },
   update: params => {
     return Service.post('/articles/update', params).then(res => res.data)
+  },
+  updates: lst => {
+    return Service.post('/articles/batch', lst).then(res => res.data)
   }
 }

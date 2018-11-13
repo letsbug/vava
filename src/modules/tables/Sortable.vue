@@ -2,7 +2,7 @@
   <div class="va-body-container">
     <el-table tooltip-effect="light" :data="list" fit highlight-current-row v-loading="loading"
               :default-sort = "{prop: 'display', order: 'descending'}"
-              empty-text="Sorry! This category have nothing data." height="549px">
+              empty-text="Sorry! This category have nothing data.">
       <el-table-column label="ID" prop="id" width="60" align="right" sortable></el-table-column>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable></el-table-column>
       <el-table-column label="CREATE" prop="display" width="110" sortable>
@@ -35,44 +35,11 @@
 </template>
 
 <script>
-import Service from '@/services/articles'
+import mixins from './mixins'
 
 export default {
   name: 'Sortable',
   metaInfo: { title: 'Sortable table' },
-  data() {
-    return {
-      pages: { page: 1, size: 10, total: 0 },
-      list: [],
-      loading: false
-    }
-  },
-  methods: {
-    getList() {
-      this.loading = true
-      Service.list(this.pages).then(res => {
-        this.list = res.list.map(v => {
-          this.$set(v, 'editing', false)
-          this.$set(v, 'submitting', false)
-          this.$set(v, 'originalTitle', v.title)
-          return v
-        })
-        this.pages = res.pages
-        this.loading = false
-      })
-    },
-    handlePageChange(val) {
-      this.pages.page = val
-      this.getList()
-    },
-    handleSizeChange(val) {
-      this.pages.size = val
-      this.getList()
-    }
-  },
-  computed: {},
-  mounted() {
-    this.getList()
-  }
+  mixins: [mixins]
 }
 </script>
