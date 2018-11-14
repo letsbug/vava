@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[26],{p6PA:function(e,t,n){"use strict";n.r(t);var a={name:"Sortable"},l=n("KHd+"),o=Object(l.a)(a,function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"va-body-container"},[e._v("Sortable")])},[],!1,null,null,null);o.options.__file="Sortable.vue";t.default=o.exports}}]);
