@@ -5,17 +5,17 @@
         <img class="brand" :src="logo" alt="Vava">
         <h2 class="title">
           Sign in to Vava
-          <va-icon icon="mark-states-question" style="vertical-align: -6px;" @click.native="tipsVisible = true"></va-icon>
+          <va-icon icon="mark-states-question" style="vertical-align: -6px;" @click.native="listDialogVisible = true"></va-icon>
         </h2>
       </div>
       <el-form-item prop="username">
-        <el-input size="large" name="username" type="text" v-model="form.username" autoComplete="on" placeholder="username">
+        <el-input size="large" name="username" type="text" v-model="form.username" placeholder="username">
           <va-icon slot="prefix" icon="people-user"></va-icon>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password" autoComplete="on"
-                  placeholder="password" @keyup.enter.native="handleLogin">
+        <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password"
+                  @keyup.enter.native="handleLogin" placeholder="password (All strings within the rule)">
           <va-icon slot="prefix" icon="mark-lock"></va-icon>
           <va-icon
             slot="suffix"
@@ -34,23 +34,29 @@
       </el-form-item>
     </el-form>
 
-    <el-dialog title="Simulate with mock.js" :visible.sync="tipsVisible" append-to-body width="310px">
-      <div class="form-tips">
-        <p>Use admin or editor username to login.</p>
-        <p>Password can be any string that meets password rules.</p>
-      </div>
-    </el-dialog>
-
     <copyright></copyright>
 
-    <el-dialog title="User Simulates" custom-class="user-simulate-dialog" append-to-body :visible.sync="listDialogVisible">
-      <h5 style="margin-top: 0">Simulate with mock.js</h5>
+    <el-dialog title="User Simulates" custom-class="user-simulate-dialog" append-to-body center :visible.sync="listDialogVisible">
+      <h5 style="margin-top: 0; text-align: center; font-weight: normal">
+        Simulate with mock.js. <strong>Pick any one to auto fill login form</strong>.
+      </h5>
+      <el-row :gutter="15">
+        <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" v-for="(user, index) in userSimulateList" :key="index">
+          <div class="user-list" :class="{ 'checked': user.checked }" @click="fillLoginForm(user)">
+            <img class="avatar" :src="user.avatar" alt="">
+            <h5 class="username">{{ user.username }}</h5>
+            <span class="text-muted"><span class="hidden-xs-only">role: </span>{{ user.roles[0] }}</span>
+            <span class="checked-flag"><i class="el-icon-check"></i></span>
+          </div>
+        </el-col>
+      </el-row>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import Copyright from '@/components/Copyright'
+import Service from '@/services/account'
 import { Validators } from '@/tools'
 
 export default {
@@ -68,12 +74,27 @@ export default {
       loading: false,
       password: true,
       expires: 7,
-      tipsVisible: false,
       listDialogVisible: false,
-      userSimulateStyles: ''
+      userSimulateList: []
     }
   },
   methods: {
+    getUserList() {
+      Service.list().then(res => {
+        this.userSimulateList = res.map(v => {
+          this.$set(v, 'checked', false)
+          return v
+        })
+        this.fillLoginForm(this.userSimulateList[0])
+      })
+    },
+    fillLoginForm(user) {
+      this.userSimulateList.forEach(v => {
+        v.checked = user.token === v.token
+      })
+      this.form.username = user.username
+      this.listDialogVisible = false
+    },
     handleLogin() {
       this.$refs['loginForm'].validate(v => {
         if (!v) return false
@@ -85,6 +106,9 @@ export default {
         return true
       })
     }
+  },
+  mounted() {
+    this.getUserList()
   }
 }
 </script>
@@ -101,6 +125,55 @@ export default {
   }
 }
 
+$avatar-size:   40px;
+$list-padding:  $spacer-xs;
+.user-list {
+  height: $avatar-size + $list-padding * 2;
+  padding: $list-padding $list-padding $list-padding ($avatar-size + $spacer-sm + $list-padding);
+  margin-bottom: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border-radius: $radius-base;
+  border: $border-default;
+  transition: $transition-border;
+
+  .avatar {
+    display: block;
+    width: $avatar-size;
+    height: $avatar-size;
+    position: absolute;
+    left: $list-padding;
+    top: $list-padding;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .username {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .checked-flag {
+    padding: 6px 8px;
+    color: $color-theme;
+    font-size: $font-size-h4;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transform: $transition-opacity;
+  }
+
+  &:hover, &.checked {
+    border-color: $color-theme;
+  }
+
+  &.checked .checked-flag {
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: $device-md) {
   /deep/ .user-simulate-dialog {
     position: absolute;
@@ -110,6 +183,16 @@ export default {
     left: 0;
     width: auto !important;
     margin: $spacer-base !important;
+    padding-top: 54px;
+
+    .el-dialog__header {
+      margin-top: -54px;
+    }
+
+    .el-dialog__body {
+      height: 100%;
+      overflow-y: auto;
+    }
   }
 }
 </style>

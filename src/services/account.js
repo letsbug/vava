@@ -14,8 +14,13 @@ const info = token => {
   return Service.get('/account/info', { params: data })
 }
 
+const list = () => {
+  return Service.get('/account/list').then(res => res.data)
+}
+
 export default {
   login,
   logout,
-  info
+  info,
+  list
 }
