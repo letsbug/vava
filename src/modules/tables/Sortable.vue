@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <el-table tooltip-effect="light" :data="list" fit highlight-current-row v-loading="loading"
+    <el-table tooltip-effect="theme" :data="list" fit highlight-current-row v-loading="loading"
               :default-sort = "{prop: 'display', order: 'descending'}"
               empty-text="Sorry! This category have nothing data.">
       <el-table-column label="ID" prop="id" width="60" align="right" sortable></el-table-column>

@@ -152,3 +152,17 @@ $transition-margin:           margin $transition-duration $transition-timing-fun
 $transition-padding:          padding $transition-duration $transition-timing-fun-all !default;
 $transition-position-left:    left $transition-duration $transition-timing-fun-all !default;
 $transition-transform:        transform $transition-duration $transition-timing-fun-all !default;
+
+
+//
+// Placement directions
+$placement-directions: ();
+$placement-directions: map_merge(
+    (
+      "top":    "top",
+      "right":  "right",
+      "bottom": "bottom",
+      "left":   "left"
+    ),
+    $placement-directions
+);

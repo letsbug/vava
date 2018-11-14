@@ -20,7 +20,7 @@
       <el-form-item>
         <el-button-group style="vertical-align: top;">
           <el-button type="primary" icon="el-icon-plus" @click="handleEdit()">Add</el-button>
-          <el-button type="primary" icon="el-icon-delete" :disabled="!selected || selected.length < 1"
+          <el-button type="primary" icon="el-icon-check" :disabled="!selected || selected.length < 1"
                      @click="handleBatchUpdate(true)">Audit</el-button>
           <el-button type="primary" icon="el-icon-delete" :disabled="!selected || selected.length < 1"
                      @click="handleBatchUpdate(false)">Delete</el-button>
@@ -28,7 +28,7 @@
       </el-form-item>
     </el-form>
 
-    <el-table tooltip-effect="light" :data="list" fit highlight-current-row v-loading="loading"
+    <el-table tooltip-effect="theme" :data="list" fit highlight-current-row v-loading="loading"
               :default-sort = "{prop: 'id', order: 'ascending'}" @selection-change="handleSelectionChange"
               empty-text="Sorry! This category have nothing data." height="505px">
       <el-table-column type="selection" width="38"></el-table-column>

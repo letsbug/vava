@@ -1,0 +1,19 @@
+.el-tooltip__popper {
+  opacity: .9;
+
+  &.is-theme {
+    border: solid 1px $color-theme;
+    background-color: $color-white;
+    color: $color-theme;
+
+    @each $direction, $value in $placement-directions {
+      &[x-placement^=#{$direction}] .popper__arrow {
+        border-#{$direction}-color: $color-theme;
+
+        &:after {
+          border-#{$direction}-color: $color-white;
+        }
+      }
+    }
+  }
+}
