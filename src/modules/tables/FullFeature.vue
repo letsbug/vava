@@ -30,7 +30,7 @@
 
     <el-table tooltip-effect="theme" :data="list" fit highlight-current-row v-loading="loading"
               :default-sort = "{prop: 'id', order: 'ascending'}" @selection-change="handleSelectionChange"
-              empty-text="Sorry! This category have nothing data." height="505px">
+              empty-text="Sorry! This category have nothing data.">
       <el-table-column type="selection" width="38"></el-table-column>
       <el-table-column label="ID" prop="id" width="38" align="right"></el-table-column>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable></el-table-column>

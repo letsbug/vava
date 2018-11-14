@@ -7,6 +7,8 @@ import BaseVo from '@/vo/BaseVo'
 const list = []
 const total = 100
 
+const contents = cn => cn ? Mock.Random.cparagraph() : Mock.Random.paragraph()
+
 const random = cn => Mock.mock({
   id: '@increment',
   timestamp: +Mock.Random.date('T'),
@@ -14,11 +16,10 @@ const random = cn => Mock.mock({
   'auditor|1': Account.auditors().map(v => v.username),
   title: cn ? '@ctitle(5, 20)' : '@title(5, 20)',
   summery: cn ? '@cparagraph(1, 2)' : '@paragraph(1, 2)',
-  content: cn ? '<p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p><p>@cparagraph</p>'
-    : '<p>@paragraph</p><p>@paragraph</p><p>@paragraph</p><p>@paragraph</p>',
+  content: '<p>' + contents(cn) + '</p>',
   level: '@integer(1, 5)',
   'status|1': ['draft', 'committed', 'failing', 'auditing', 'audited', 'deleted'],
-  display: '@datetime',
+  display: +Mock.Random.datetime('T'),
   pv: '@integer(100, 29999)',
   'origin|1': ['@platform-a', '@platform-b', '@platform-c', '@platform-d']
 })

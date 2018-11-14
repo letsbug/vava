@@ -6,6 +6,10 @@
   }
 
   .el-form-item {
-    margin-bottom: $spacer-base;
+    margin-bottom: $spacer-lg;
+  }
+
+  .el-form-item__error {
+    padding-top: 2px;
   }
 }

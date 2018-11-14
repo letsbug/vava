@@ -9,7 +9,7 @@
       <!-- Send & verify email or mobile phone security code -->
       <el-form ref="formAccount" v-if="step === 1" autoComplete="off" :model="form" :rules="rules">
         <p><strong>Please enter your account binding email address or phone number.</strong></p>
-        <el-form-item prop="username">
+        <el-form-item prop="username" style="margin-bottom: 20px;">
           <el-input size="large" name="username" type="text" v-model="form.username"
                     placeholder="Your email address or phone number."></el-input>
         </el-form-item>
@@ -33,9 +33,9 @@
       <!-- Reset password -->
       <el-form ref="confirmPassword" v-if="step === 2" autoComplete="off" :model="form" :rules="rules">
         <p><small>Password must be a combination of Numbers and letters, and between 8 and 16 characters.</small></p>
-        <p><strong>Password</strong></p>
         <el-form-item prop="password">
-          <el-input size="large" name="password" :type="pwdType.password ? 'password' : 'text'" v-model="form.password">
+          <el-input size="large" name="password" :type="pwdType.password ? 'password' : 'text'" v-model="form.password"
+                    placeholder="Password">
             <va-icon
               slot="suffix"
               :icon="pwdType.password ? 'mark-eye-close' : 'mark-eye-open'"
@@ -43,9 +43,9 @@
             </va-icon>
           </el-input>
         </el-form-item>
-        <p><strong>Confirm password</strong></p>
         <el-form-item prop="confirm">
-          <el-input size="large" name="password" :type="pwdType.confirm ? 'password' : 'text'" v-model="form.confirm">
+          <el-input size="large" name="password" :type="pwdType.confirm ? 'password' : 'text'" v-model="form.confirm"
+                    placeholder="Confirm">
             <va-icon
               slot="suffix"
               :icon="pwdType.confirm ? 'mark-eye-close' : 'mark-eye-open'"
@@ -143,7 +143,7 @@ export default {
     resetSubmit() {
       this.$refs['confirmPassword'].validate(v => {
         if (!v) return false
-        console.log(v)
+        this.$message.success('Password validate success, do something...')
       })
     }
   }

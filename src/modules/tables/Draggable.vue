@@ -1,7 +1,7 @@
 <template>
   <div class="va-body-container">
     <el-table tooltip-effect="theme" :data="list" fit highlight-current-row v-loading="loading" row-key="id"
-              empty-text="Sorry! This category have nothing data." height="504px">
+              empty-text="Sorry! This category have nothing data.">
       <el-table-column label="ID" prop="id" width="40" align="right"></el-table-column>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip></el-table-column>
       <el-table-column label="CREATE" prop="display" width="110">

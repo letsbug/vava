@@ -3,7 +3,7 @@ import { Urls } from '@/tools'
 
 const userMap = {
   admin: Mock.mock({
-    roles: ['admin', 'editor', 'auditor'],
+    roles: ['admin', 'edit', 'audit'],
     token: 'admin',
     code: '@id',
     username: 'admin',
@@ -12,7 +12,7 @@ const userMap = {
     status: 1
   }),
   editor: Mock.mock({
-    roles: ['editor'],
+    roles: ['edit'],
     token: 'editor',
     code: '@id',
     username: 'editor',
@@ -23,14 +23,14 @@ const userMap = {
 }
 
 const userList = []
-const total = 10
+const total = 20
 userList.push(userMap.admin)
 userList.push(userMap.editor)
 
 const random = () => {
   const username = '@first'
   return Mock.mock({
-    roles: ['auditor'],
+    'roles|1': ['audit', 'edit'],
     token: username,
     code: '@id',
     username,
@@ -47,11 +47,11 @@ for (let i = 0; i < total; i++) {
 export default {
   login: config => {
     const { username } = JSON.parse(config.body)
-    return userMap[username]
+    return userList.find(v => v.username === username ? v : null)
   },
   info: config => {
     const { token } = Urls.parse(config.url)
-    return userMap[token] || undefined
+    return userList.find(v => v.token === token ? v : null)
   },
   update: config => {
     const data = JSON.parse(config.body)
@@ -59,5 +59,5 @@ export default {
     return 'success'
   },
   logout: () => 'success',
-  auditors: () => userList.filter(v => ~v.roles.indexOf('auditor'))
+  auditors: () => userList.filter(v => ~v.roles.indexOf('audit'))
 }
