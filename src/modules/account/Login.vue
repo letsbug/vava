@@ -3,7 +3,10 @@
     <el-form ref="loginForm" class="form-login--password" autoComplete="on" aria-autocomplete="list" :model="form" :rules="rules">
       <div class="form-logo">
         <img class="brand" :src="logo" alt="Vava">
-        <h2 class="title">Sign in to Vava <va-icon icon="mark-states-info" @click.native="tipsVisible = true"></va-icon></h2>
+        <h2 class="title">
+          Sign in to Vava
+          <va-icon icon="mark-states-question" style="vertical-align: -6px;" @click.native="tipsVisible = true"></va-icon>
+        </h2>
       </div>
       <el-form-item prop="username">
         <el-input size="large" name="username" type="text" v-model="form.username" autoComplete="on" placeholder="username">
@@ -23,7 +26,8 @@
       </el-form-item>
       <el-form-item>
         <el-checkbox class="checkbox-green" v-model="form.remember" :label="'Remember (' + expires + ' days)'" name="remember"></el-checkbox>
-        <router-link class="forget-link float-r" to="/password">Forgot password?</router-link>
+        <!--<router-link class="forget-link float-r" to="/password">Forgot password?</router-link>-->
+        <a class="forget-link float-r" @click="listDialogVisible = true">User Simulate List ?</a>
       </el-form-item>
       <el-form-item>
         <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">Sign in</el-button>
@@ -38,6 +42,10 @@
     </el-dialog>
 
     <copyright></copyright>
+
+    <el-dialog title="User Simulates" custom-class="user-simulate-dialog" append-to-body :visible.sync="listDialogVisible">
+      <h5 style="margin-top: 0">Simulate with mock.js</h5>
+    </el-dialog>
   </div>
 </template>
 
@@ -60,7 +68,9 @@ export default {
       loading: false,
       password: true,
       expires: 7,
-      tipsVisible: false
+      tipsVisible: false,
+      listDialogVisible: false,
+      userSimulateStyles: ''
     }
   },
   methods: {
@@ -88,6 +98,18 @@ export default {
   }
   p:last-child {
     margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: $device-md) {
+  /deep/ .user-simulate-dialog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto !important;
+    margin: $spacer-base !important;
   }
 }
 </style>
