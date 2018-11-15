@@ -4,7 +4,7 @@ import { Token } from '@/tools'
 import { Message } from 'element-ui'
 
 const Service = Axios.create({
-  baseURL: process.env.BABEL_ENV,
+  baseURL: process.env.BASE_API,
   timeout: 6000
 })
 
