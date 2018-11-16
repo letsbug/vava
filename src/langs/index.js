@@ -20,6 +20,8 @@ const messages = {
   }
 }
 
+console.log(messages)
+
 const i18n = new VueI18n({
   locale: Cookie.get('language') || 'en',
   messages

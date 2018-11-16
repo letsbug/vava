@@ -39,7 +39,7 @@ export const constantRouteMap = [
     children: [{
       path: 'home',
       name: 'Homepage',
-      meta: { title: 'Home', icon: 'thing-house', nobg: true },
+      meta: { title: 'home', icon: 'thing-house', nobg: true },
       component: () => import('@/modules/homepage/Homepage')
     }]
   },
@@ -52,9 +52,9 @@ export const constantRouteMap = [
     redirect: '/report/',
     children: [{
       path: '',
-      name: 'Reports',
-      meta: { title: 'reports', icon: 'chart-bar', nobg: true },
-      component: () => import('@/modules/reports/Reports')
+      name: 'Report',
+      meta: { title: 'report', icon: 'chart-bar', nobg: true },
+      component: () => import('@/modules/report/Report')
     }]
   },
 
@@ -67,7 +67,7 @@ export const constantRouteMap = [
     children: [{
       path: '',
       name: 'VaIcons',
-      meta: { title: 'icon viewer', icon: 'file-folder' },
+      meta: { title: 'iconViewer', icon: 'file-folder' },
       component: () => import('@/modules/icons/IconViewer')
     }]
   },
@@ -75,13 +75,13 @@ export const constantRouteMap = [
   Excels,
 
   {
-    path: '/notifications',
+    path: '/notification',
     component: Layout,
-    redirect: '/notifications/',
+    redirect: '/notification/',
     children: [{
       path: '',
       name: 'Notification',
-      meta: { title: 'notifications', icon: 'notice' },
+      meta: { title: 'notification', icon: 'notice' },
       component: () => import('@/modules/notification/Notification')
     }],
     hidden: true

@@ -6,14 +6,14 @@ const tables = {
   component: Layout,
   name: 'Tables',
   meta: {
-    title: 'tables',
+    title: 'table',
     icon: 'chart-table'
   },
   children: [
     {
       path: 'table-inline-edit',
       name: 'InlineEdit',
-      meta: { title: 'InlineEdit', icon: 'action-edit' },
+      meta: { title: 'inlineEdit', icon: 'action-edit' },
       component: () => import('@/modules/tables/InlineEdit')
     },
     {
@@ -31,7 +31,7 @@ const tables = {
     {
       path: 'table-full-feature',
       name: 'FullFeature',
-      meta: { title: 'FullFeature', icon: 'chart-dynamic' },
+      meta: { title: 'fullFeature', icon: 'chart-dynamic' },
       component: () => import('@/modules/tables/FullFeature')
     }
   ]

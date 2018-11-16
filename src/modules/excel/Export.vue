@@ -1,27 +1,27 @@
 <template>
   <div class="va-body-container">
     <el-form inline size="medium" :model="exportOpts">
-      <el-form-item label="Filename">
-        <el-input :placeholder="`default ${filenameDefault}`" prefix-icon="el-icon-document" clearable
+      <el-form-item :label="$t('excelExport.filename')">
+        <el-input :placeholder="filenameDefault" prefix-icon="el-icon-document" clearable
                   v-model="exportOpts.filename"></el-input>
       </el-form-item>
-      <el-form-item label="File Type">
+      <el-form-item :label="$t('excelExport.fileType')">
         <el-select value style="width: 100px;" v-model="exportOpts.type">
           <el-option label="xlsx" value="xlsx"></el-option>
           <el-option label="cvx" value="cvx"></el-option>
           <el-option label="txt" value="txt"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="Cell Auto-Width">
+      <el-form-item :label="$t('excelExport.autoWidth')">
         <el-switch v-model="exportOpts.cellAutoWidth"></el-switch>
       </el-form-item>
-      <el-form-item label="Perform Export">
+      <el-form-item :label="$t('excelExport.execute')">
         <el-button-group style="vertical-align: top;">
           <el-button type="primary" :disabled="exportOpts.exporting" @click="handleExport(list)">
-            Current Page
+            {{ $t('excelExport.currentPage') }}
           </el-button>
           <el-button type="primary" :disabled="exportOpts.exporting" @click="handleExportAll">
-            All Pages
+            {{ $t('excelExport.allPages') }}
           </el-button>
         </el-button-group>
         <i class="el-icon-loading export-handler-loading" v-show="exportOpts.exporting"></i>
@@ -29,7 +29,7 @@
     </el-form>
 
     <!-- table list -->
-    <el-table :data="list" tooltip-effect="light" v-loading="loading" empty-text="Sorry! This category have nothing data.">
+    <el-table :data="list" tooltip-effect="light" v-loading="loading">
       <el-table-column prop="name" label="name" width="120" show-overflow-tooltip></el-table-column>
       <el-table-column prop="card" label="ID Card" show-overflow-tooltip></el-table-column>
       <el-table-column prop="city" label="city" width="70" show-overflow-tooltip></el-table-column>

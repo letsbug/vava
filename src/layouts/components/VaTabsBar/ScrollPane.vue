@@ -22,7 +22,9 @@ export default {
       const wrapper = this.$refs['scrollPane'].$refs['wrap']
       const targetLeft = target.offsetLeft
       const targetWidth = target.offsetWidth
-      wrapper.scrollLeft = (targetLeft > containerWidth) ? (targetLeft - containerWidth + targetWidth) : targetLeft
+      wrapper.scrollLeft = (targetLeft > containerWidth)
+        ? (targetLeft - containerWidth + targetWidth)
+        : targetLeft
     }
   }
 }

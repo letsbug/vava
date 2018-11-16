@@ -9,7 +9,7 @@
         <router-link class="va-tabs-item" ref="tabs" v-if="!route.notab" :key="route.path"
                      v-for="route in history" :to="route.path"
                      @contextmenu.prevent.native="menuOpen(route, $event)">
-          <span class="tabs-item-name">{{ route.title }}</span>
+          <span class="tabs-item-name">{{ generateTitle(route.title) }}</span>
           <span class="tabs-item__close">
             <va-icon icon="action-close" @click.prevent.native="close(route)"></va-icon>
           </span>
@@ -21,25 +21,23 @@
         <va-icon class="link-home" icon="thing-house"></va-icon>
       </router-link>
 
-      <!-- TODO Add some tabs options or tabs out to here -->
+      <!-- Tabs options -->
       <el-dropdown class="tabs-more" trigger="click" @command="onOptionCommand">
         <a class="va-tabs-item">
           <i class="el-icon-arrow-down"></i>
         </a>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item :command="close" :disabled="history.length < 1">Close</el-dropdown-item>
-          <el-dropdown-item :command="closeOthers" :disabled="history.length < 2">Close Others</el-dropdown-item>
-          <el-dropdown-item :command="closeAll" :disabled="history.length < 2">Close All</el-dropdown-item>
+          <el-dropdown-item :command="close" :disabled="history.length < 1">
+            {{ $t('tabBar.close') }}
+          </el-dropdown-item>
+          <el-dropdown-item :command="closeOthers" :disabled="history.length < 2">
+            {{ $t('tabBar.closeOthers') }}
+          </el-dropdown-item>
+          <el-dropdown-item :command="closeAll" :disabled="history.length < 2">
+            {{ $t('tabBar.closeAll') }}
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-
-      <!-- Closeable tabs context menu -->
-      <ul ref="tabsContextMenu" class="va-context-menu" v-show="contextVisible"
-          :style="{ left: this.left + 'px', top: this.top + 'px' }">
-        <li class="context-menu-item" @click="close(selected)">Close</li>
-        <li class="context-menu-item" @click="closeOthers(selected)">Close Others</li>
-        <li class="context-menu-item" @click="closeAll">Close All</li>
-      </ul>
     </template>
   </div>
 </template>
@@ -47,6 +45,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import Breadcrumb from '@/components/Breadcrumb/index'
+import { generateTitle } from '@/tools/i18n'
 
 export default {
   name: 'VaTabsBar',
@@ -135,7 +134,8 @@ export default {
     },
     onOptionCommand(tar) {
       tar()
-    }
+    },
+    generateTitle
   }
 }
 </script>

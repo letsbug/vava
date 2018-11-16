@@ -9,7 +9,7 @@
       </a>
 
       <!-- refresh button -->
-      <refresh v-if="isMobile"></refresh>
+      <router-refresh v-if="isMobile"></router-refresh>
 
       <!-- breadcrumb in desktop -->
       <breadcrumb v-if="!isMobile"></breadcrumb>
@@ -22,7 +22,7 @@
       <a class="va-nav-item nav-search" v-if="!isMobile">
         <va-icon icon="action-search"/>
         <!-- TODO Add mobile layout to here -->
-        <input ref="globalSearch" class="nav-search-inner" placeholder="search something..." autocomplete="on"
+        <input ref="globalSearch" class="nav-search-inner" :placeholder="$t('header.search')" autocomplete="on"
                :class="currRouteIsSearch"
                v-model="search.keyword"
                @click="handleSearch"
@@ -41,9 +41,11 @@
         <theme-picker></theme-picker>
       </template>
 
+      <language-picker class="va-nav-item"></language-picker>
+
       <!-- user notifications -->
       <el-tooltip effect="dark" :content="notificationTips" placement="bottom">
-        <router-link class="va-nav-item" to="/notifications">
+        <router-link class="va-nav-item" to="/notification">
           <el-badge is-dot :hidden="!notificationHasUnread">
             <va-icon icon="mark-notice"/>
           </el-badge>
@@ -56,9 +58,9 @@
           <img class="avatar" :src="user.avatar" alt="">
         </a>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item :command="handleUserInfo">Profile</el-dropdown-item>
-          <el-dropdown-item :command="handleSettings">Settings</el-dropdown-item>
-          <el-dropdown-item :command="handleLogout" divided>Log out</el-dropdown-item>
+          <el-dropdown-item :command="handleUserInfo">{{ $t('header.profile') }}</el-dropdown-item>
+          <el-dropdown-item :command="handleSettings">{{ $t('header.settings') }}</el-dropdown-item>
+          <el-dropdown-item :command="handleLogout" divided>{{ $t('header.logout.title') }}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <a class="va-nav-item hidden-sm-and-up">
@@ -72,11 +74,12 @@
 import Breadcrumb from '@/components/Breadcrumb'
 import RouterRefresh from '@/components/RouterRefresh'
 import ScreenFull from '@/components/ScreenFull'
+import LanguagePicker from '@/components/LanguagePicker'
 import ThemePicker from './ThemePicker'
 
 export default {
   name: 'VaHeadBar',
-  components: { Breadcrumb, RouterRefresh, ScreenFull, ThemePicker },
+  components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker },
   data() {
     return {
       search: { old: '', keyword: '' }
@@ -102,7 +105,8 @@ export default {
       return this.$store.state.notification.hasUnread
     },
     notificationTips() {
-      return 'you have ' + (this.notificationHasUnread ? '' : 'no ') + 'unread notifications'
+      return this.$t(`header.notification${this.notificationHasUnread ? 'Has' : 'No'}`)
+      // return 'you have ' + (this.notificationHasUnread ? '' : 'no') + ' unread notifications'
     }
   },
   methods: {
@@ -127,10 +131,10 @@ export default {
       // TODO build user settings route
     },
     handleLogout() {
-      this.$confirm('Exit the currently logged in account?', 'Are you sure?', {
+      this.$confirm(this.$t('header.logout.confirm'), this.$t('options.confirm.title'), {
         type: 'warning',
-        confirmButtonText: 'Sure Exit',
-        cancelButtonText: 'Cancel',
+        confirmButtonText: this.$t('header.logout.button'),
+        // cancelButtonText: 'Cancel',
         callback: action => {
           if (action === 'confirm') this.$store.dispatch('user_logout').then(() => { location.reload() })
         }

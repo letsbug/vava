@@ -2,12 +2,12 @@
   <div class="va-body-container container-notifications">
     <!-- page title -->
     <h4 class="va-body-title">
-      Notifications
+      {{ $t('notification.title') }}
 
       <!-- handle options -->
       <span class="options">
         <el-button size="small" plain @click="handleMarkAllRead" v-if="notifications.hasUnread">
-          Mark all as read
+          {{ $t('notification.markAll') }}
         </el-button>
       </span>
     </h4>
@@ -38,8 +38,10 @@
       </el-table-column>
       <el-table-column label="options" width="70" align="right">
         <template slot-scope="scope">
-          <el-tooltip content="Mark this as read" placement="left" v-if="scope.row.unread">
-            <i class="el-icon-check" @click="handleMarkRead(scope.row)"></i>
+          <el-tooltip :content="$t('notification.mark')" placement="left" v-if="scope.row.unread">
+            <a @click="handleMarkRead(scope.row)">
+              <i class="el-icon-check"></i>
+            </a>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -74,13 +76,12 @@ export default {
     },
     handleMarkAllRead() {
       const options = {
-        confirmButtonText: 'Mark all',
-        cancelButtonText: 'Cancel',
+        confirmButtonText: this.$t('notification.button'),
         callback: action => {
           if (action === 'confirm') this.$store.dispatch('notification_read_all')
         }
       }
-      this.$confirm('You will mark all unread notifications as read.', 'Are you sure?', options)
+      this.$confirm(this.$t('notification.confirm'), this.$t('options.confirm.title'), options)
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div class="container-login--password">
-    <el-form ref="loginForm" class="form-login--password" autoComplete="on" aria-autocomplete="list" :model="form" :rules="rules">
+    <el-form ref="loginForm" class="form-login--password" autoComplete="on" aria-autocomplete="list"
+             :model="form" :rules="rules">
       <div class="form-logo">
         <img class="brand" :src="logo" alt="VAVA">
         <h2 class="title text-left">
@@ -25,18 +26,22 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox class="checkbox-green" v-model="form.remember" :label="$t('login.remember')" name="remember"></el-checkbox>
+        <el-checkbox class="checkbox-green" v-model="form.remember" :label="$t('login.remember')" name="remember"
+        ></el-checkbox>
         <!--<router-link class="forget-link float-r" to="/password">Forgot password?</router-link>-->
         <a class="forget-link float-r" @click="listDialogVisible = true">{{ $t('login.list') }}</a>
       </el-form-item>
       <el-form-item>
-        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">{{ $t('login.login') }}</el-button>
+        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">
+          {{ $t('login.login') }}
+        </el-button>
       </el-form-item>
     </el-form>
 
     <copyright></copyright>
 
-    <el-dialog :title="$t('login.list')" custom-class="user-simulate-dialog" append-to-body center :visible.sync="listDialogVisible">
+    <el-dialog :title="$t('login.list')" custom-class="user-simulate-dialog" append-to-body center
+               :visible.sync="listDialogVisible">
       <h5 style="margin-top: 0; text-align: center; font-weight: normal" v-html="$t('login.listHint')"></h5>
       <el-row :gutter="15">
         <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" v-for="(user, index) in userSimulateList" :key="index">

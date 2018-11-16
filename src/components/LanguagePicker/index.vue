@@ -1,8 +1,7 @@
 <template>
   <el-dropdown trigger="click" @command="pickLang">
     <span class="lang-picker">
-      <va-icon icon="action-translate" style="vertical-align: -4px;"
-               @click.native="listDialogVisible = true"></va-icon>
+      <va-icon icon="action-translate"></va-icon>
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item :disabled="language === 'zh'" command="zh">中文</el-dropdown-item>

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Refresh',
+  name: 'RouterRefresh',
   data() {
     return {
       doing: false

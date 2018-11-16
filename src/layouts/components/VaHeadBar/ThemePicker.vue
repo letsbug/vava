@@ -4,9 +4,9 @@
       <va-icon icon="thing-shirt"></va-icon>
     </a>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="default">default</el-dropdown-item>
-      <el-dropdown-item command="light">light</el-dropdown-item>
-      <el-dropdown-item command="dark">dark</el-dropdown-item>
+      <el-dropdown-item command="default">{{ $t('theme.default') }}</el-dropdown-item>
+      <el-dropdown-item command="light">{{ $t('theme.light') }}</el-dropdown-item>
+      <el-dropdown-item command="dark">{{ $t('theme.dark') }}</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>

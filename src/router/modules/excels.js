@@ -5,20 +5,20 @@ export default {
   component: Layout,
   name: 'Excel',
   meta: {
-    title: 'Excel',
+    title: 'excel',
     icon: 'file-excel'
   },
   children: [
     {
       path: 'export',
       name: 'Export',
-      meta: { title: 'Excel Export', icon: 'action-export' },
+      meta: { title: 'excelExport', icon: 'action-export' },
       component: () => import('@/modules/excel/Export')
     },
     {
       path: 'import',
       name: 'Import',
-      meta: { title: 'Excel Import', icon: 'action-import', nocache: true },
+      meta: { title: 'excelImport', icon: 'action-import', nocache: true },
       component: () => import('@/modules/excel/Import')
     }
   ]

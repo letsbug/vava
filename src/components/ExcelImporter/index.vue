@@ -8,17 +8,22 @@
          @dragenter.prevent.stop="onDragOver">
       <div><va-icon icon="action-import"/></div>
       <template v-if="file">
-        Selected "{{ file.name }}" <span class="text-primary browse-hint">Click to change</span>
+        {{ $t('excelImport.selected') }}
+        "{{ file.name }}"
+        <span class="text-primary browse-hint">{{ $t('excelImport.change') }}</span>
       </template>
       <template v-else>
-        <div>Drag the excel here or <span class="text-primary browse-hint">Browse</span></div>
+        {{ $t('excelImport.drag') }}
+        <span class="text-primary browse-hint">{{ $t('excelImport.browse') }}</span>
       </template>
       <span class="working-flag"><i class="el-icon-loading"></i></span>
     </div>
     <div class="text-center" v-else>
       <el-button plain @click="!working && $refs['excelImportInput'].click()" :loading="working">
-        <template v-if="file">Imported: "{{ file.name }}", Click to change.</template>
-        <template v-else>Browse and select an excel file ...</template>
+        <template v-if="file">
+          {{ $t('excelImport.selected') }}: "{{ file.name }}", {{ $t('excelImport.change') }}.
+        </template>
+        <template v-else>{{ $t('excelImport.browseNotDrag') }}</template>
       </el-button>
     </div>
   </div>
@@ -106,6 +111,7 @@ export default {
         return
       }
       const before = this.beforeImport(rawFile)
+      if (!before) this.working = false
       before && this.readerData(rawFile)
     },
     onDragOver(e) {
@@ -114,13 +120,13 @@ export default {
     handleDrop(e) {
       const files = e.dataTransfer.files
       if (files.length !== 1) {
-        this.$message.error('Only support importing one file!')
+        this.$message.error(this.$t('excelImport.errorExcess'))
         return
       }
 
       const file = files[0]
       if (!this.isExcel(file)) {
-        this.$message.error('Only supports import .xlsx, .xls, .csv suffix files')
+        this.$message.error(this.$t('excelImport.errorTypes'))
         return
       }
 

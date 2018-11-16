@@ -2,14 +2,17 @@
   <el-breadcrumb class="va-breadcrumb" separator-class="el-icon-arrow-right">
     <transition-group name="transition-breadcrumb">
       <el-breadcrumb-item v-for="(route, index) in routes" :key="route.path">
-        <span v-if="!route.redirect || index === routes.length - 1" class="no-redirect">{{route.meta.title}}</span>
-        <router-link v-else :to="route.redirect || route.path">{{ route.meta.title }}</router-link>
+        <span v-if="!route.redirect || index === routes.length - 1" class="no-redirect">
+          {{ generateTitle(route.meta.title) }}
+        </span>
+        <router-link v-else :to="route.redirect || route.path">{{ generateTitle(route.meta.title) }}</router-link>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
 </template>
 
 <script>
+import { generateTitle } from '@/tools/i18n'
 export default {
   name: 'Breadcrumb',
   data() {
@@ -23,7 +26,8 @@ export default {
         routes = [{ path: '/home', redirect: '/home', meta: { title: 'home' } }].concat(routes)
       }
       this.routes = routes
-    }
+    },
+    generateTitle
   },
   mounted() {
     this.breadcrumbList()
