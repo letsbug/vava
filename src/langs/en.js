@@ -63,15 +63,17 @@ export default {
     required: 'you must fill this!',
     formatBad: 'Bad input! ',
     lengthBad: 'length has to be {length}, please fill in again.',
+    lengthTwoBad: 'length has to be {one} or {two}, please fill in again.',
     lengthMinBad: 'must be more than {min}, please fill in again.',
     lengthMaxBad: 'must be less than {min}, please fill in again.',
     lengthMinMaxBad: 'length is between {min} and {max}, please fill in again.',
     rules: {
       username: `Beginning with a letter may contain.'.','_','@'.`,
-      password: '',
-      email: '',
-      mobile: '',
-      phone: ''
+      password: 'Just Numbers and letters',
+      email: '(eg. example@domain)',
+      mobile: 'can be only number',
+      phone: '(Area code-phone number)',
+      captcha: '(only numbers and capital letters)'
     }
   },
   // About pages

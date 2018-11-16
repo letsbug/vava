@@ -61,17 +61,19 @@ export default {
   // About forms validates
   validate: {
     required: '你必须填写此项！',
-    formatBad: '糟糕的输入！',
+    formatBad: '错误的输入！',
     lengthBad: '长度必须是{length}，请重新输入。',
+    lengthTwoBad: '长度必须是{one}或者{two}，请重新输入。',
     lengthMinBad: '长度必须大于{min}，请重新输入。',
     lengthMaxBad: '长度必须小于{min}，请重新输入。',
     lengthMinMaxBad: '长度必须在{min}到{max}之间，请重新输入。',
     rules: {
       username: `以字母开头，可包含'.','_','@'`,
-      password: '',
-      email: '',
-      mobile: '',
-      phone: ''
+      password: '密码由数字和字母组成',
+      email: '（例：example@xx.com）',
+      mobile: '只能是数字',
+      phone: '（区号-电话号码）',
+      captcha: '（仅限数字和大写字母）'
     }
   },
   // About pages

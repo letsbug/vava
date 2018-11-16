@@ -4,7 +4,7 @@
              :model="form" :rules="rules">
       <div class="form-logo">
         <img class="brand" :src="logo" alt="VAVA">
-        <h2 class="title text-left">
+        <h2 class="title">
           {{ $t('login.title') }}
           <language-picker class="float-r"></language-picker>
         </h2>
