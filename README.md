@@ -1,7 +1,21 @@
 <p align="center"><img src="./static/images/logo.png"/></p>
 <h1 align="center">VAVA - vue admin template</h1>
 
-[![Build Status](https://www.travis-ci.org/letsbug/vava.svg?branch=master)](https://www.travis-ci.org/letsbug/vava)
+<p align="center">
+  <a href="https://github.com/vuejs/vue">
+    <img src="https://img.shields.io/badge/vue-2.5.10-brightgreen.svg" alt="vue">
+  </a>
+  <a href="https://github.com/ElemeFE/element">
+    <img src="https://img.shields.io/badge/element--ui-2.4.9-brightgreen.svg" alt="element-ui">
+  </a>
+  <a href="https://github.com/letsbug/vava/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/letsbug/vava.svg" alt="license">
+  </a>
+  <a href="https://www.travis-ci.org/letsbug/vava">
+    <img src="https://www.travis-ci.org/letsbug/vava.svg?branch=master" alt="Build Status">
+  </a>
+</p>
+
 
 > A magical management-side framework built on vue.
 

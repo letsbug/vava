@@ -2,7 +2,7 @@ import Cookie from 'js-cookie'
 
 const application = {
   state: {
-    language: Cookie.get('language') || 'zh-cmn-Hans',
+    language: Cookie.get('language') || 'en',
     device: 'desktop',
     sidebar: {
       opened: !+Cookie.get('sidebar_status')
@@ -23,6 +23,11 @@ const application = {
     },
     APP_DEVICE_TOGGLE: (state, device) => {
       state.device = device || (state.device === 'desktop' ? 'mobile' : 'desktop')
+    },
+    APP_LANGUAGE_SET: (state, lang) => {
+      console.log(lang)
+      state.language = lang
+      Cookie.set('language', lang)
     }
   },
   actions: {
@@ -37,6 +42,9 @@ const application = {
     },
     app_device_toggle: ({ commit }, device) => {
       commit('APP_DEVICE_TOGGLE', device)
+    },
+    app_language_set: ({ commit }, lang) => {
+      commit('APP_LANGUAGE_SET', lang)
     }
   }
 }

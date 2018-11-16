@@ -2,20 +2,20 @@
   <div class="container-login--password">
     <el-form ref="loginForm" class="form-login--password" autoComplete="on" aria-autocomplete="list" :model="form" :rules="rules">
       <div class="form-logo">
-        <img class="brand" :src="logo" alt="Vava">
-        <h2 class="title">
-          Sign in to Vava
-          <va-icon icon="mark-states-question" style="vertical-align: -6px;" @click.native="listDialogVisible = true"></va-icon>
+        <img class="brand" :src="logo" alt="VAVA">
+        <h2 class="title text-left">
+          {{ $t('login.title') }}
+          <language-picker class="float-r"></language-picker>
         </h2>
       </div>
       <el-form-item prop="username">
-        <el-input size="large" name="username" type="text" v-model="form.username" placeholder="username">
+        <el-input size="large" name="username" type="text" v-model="form.username" :placeholder="$t('login.username')">
           <va-icon slot="prefix" icon="people-user"></va-icon>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password"
-                  @keyup.enter.native="handleLogin" placeholder="password (All strings within the rule)">
+                  @keyup.enter.native="handleLogin" :placeholder="$t('login.password')">
           <va-icon slot="prefix" icon="mark-lock"></va-icon>
           <va-icon
             slot="suffix"
@@ -25,21 +25,19 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox class="checkbox-green" v-model="form.remember" :label="'Remember (' + expires + ' days)'" name="remember"></el-checkbox>
+        <el-checkbox class="checkbox-green" v-model="form.remember" :label="$t('login.remember')" name="remember"></el-checkbox>
         <!--<router-link class="forget-link float-r" to="/password">Forgot password?</router-link>-->
-        <a class="forget-link float-r" @click="listDialogVisible = true">User Simulate List ?</a>
+        <a class="forget-link float-r" @click="listDialogVisible = true">{{ $t('login.list') }}</a>
       </el-form-item>
       <el-form-item>
-        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">Sign in</el-button>
+        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">{{ $t('login.login') }}</el-button>
       </el-form-item>
     </el-form>
 
     <copyright></copyright>
 
-    <el-dialog title="User Simulates" custom-class="user-simulate-dialog" append-to-body center :visible.sync="listDialogVisible">
-      <h5 style="margin-top: 0; text-align: center; font-weight: normal">
-        Simulate with mock.js. <strong>Pick any one to auto fill login form</strong>.
-      </h5>
+    <el-dialog :title="$t('login.list')" custom-class="user-simulate-dialog" append-to-body center :visible.sync="listDialogVisible">
+      <h5 style="margin-top: 0; text-align: center; font-weight: normal" v-html="$t('login.listHint')"></h5>
       <el-row :gutter="15">
         <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" v-for="(user, index) in userSimulateList" :key="index">
           <div class="user-list" :class="{ 'checked': user.checked }" @click="fillLoginForm(user)">
@@ -55,6 +53,7 @@
 </template>
 
 <script>
+import LanguagePicker from '@/components/LanguagePicker'
 import Copyright from '@/components/Copyright'
 import Service from '@/services/account'
 import { Validators } from '@/tools'
@@ -62,11 +61,11 @@ import { Validators } from '@/tools'
 export default {
   name: 'Login',
   metaInfo: { title: 'Sign in to Vava' },
-  components: { Copyright },
+  components: { LanguagePicker, Copyright },
   data() {
     return {
       logo: require('@/assets/images/logo.png'),
-      form: { username: 'admin', password: '123456789', remember: false },
+      form: { username: '', password: '', remember: false },
       rules: {
         username: [{ validator: Validators.username, trigger: 'blur' }],
         password: [{ validator: Validators.passwordLogin, trigger: 'blur' }]
@@ -85,7 +84,7 @@ export default {
           this.$set(v, 'checked', false)
           return v
         })
-        this.fillLoginForm(this.userSimulateList[0])
+        // this.fillLoginForm(this.userSimulateList[0])
       })
     },
     fillLoginForm(user) {
@@ -93,6 +92,7 @@ export default {
         v.checked = user.token === v.token
       })
       this.form.username = user.username
+      this.form.password = '123456789'
       this.listDialogVisible = false
     },
     handleLogin() {
@@ -123,6 +123,11 @@ export default {
   p:last-child {
     margin-bottom: 0;
   }
+}
+
+/deep/ .lang-picker {
+  color: $color-white;
+  font-size: $font-size-h2;
 }
 
 $avatar-size:   40px;
