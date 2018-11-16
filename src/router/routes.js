@@ -75,6 +75,17 @@ export const constantRouteMap = [
   Excels,
 
   {
+    path: '/clipboard',
+    component: Layout,
+    redirect: '/clipboard/',
+    children: [{
+      path: '',
+      name: 'Clipboard',
+      meta: { title: 'clipboard', icon: 'action-clipboard' },
+      component: () => import('@/modules/clipboard')
+    }]
+  },
+  {
     path: '/notification',
     component: Layout,
     redirect: '/notification/',

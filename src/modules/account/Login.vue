@@ -133,6 +133,10 @@ export default {
 /deep/ .lang-picker {
   color: $color-white;
   font-size: $font-size-h2;
+
+  .va-icon {
+    vertical-align: -5px;
+  }
 }
 
 $avatar-size:   40px;
