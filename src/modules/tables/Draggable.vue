@@ -42,7 +42,7 @@ export default {
         handle: '.handle-drag',
         ghostClass: 'sortable-ghost',
         animation: 70,
-        setData: function(dataTransfer) {
+        setData(dataTransfer) {
           // to avoid Firefox bug
           // Detail see : https://github.com/RubaXa/Sortable/issues/1012
           dataTransfer.setData('Text', '')
@@ -68,10 +68,9 @@ export default {
 
 <style scoped lang="scss">
 @import "~@/styles/_variables";
-
 .handle-drag {
-  font-size: 19px;
-  cursor: move;
+  font-size:      19px;
+  cursor:         move;
   vertical-align: -4px;
 }
 </style>

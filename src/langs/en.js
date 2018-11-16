@@ -58,6 +58,22 @@ export default {
     light: 'Light',
     dark: 'Dark'
   },
+  // About forms validates
+  validate: {
+    required: 'you must fill this!',
+    formatBad: 'Bad input! ',
+    lengthBad: 'length has to be {length}, please fill in again.',
+    lengthMinBad: 'must be more than {min}, please fill in again.',
+    lengthMaxBad: 'must be less than {min}, please fill in again.',
+    lengthMinMaxBad: 'length is between {min} and {max}, please fill in again.',
+    rules: {
+      username: `Beginning with a letter may contain.'.','_','@'.`,
+      password: '',
+      email: '',
+      mobile: '',
+      phone: ''
+    }
+  },
   // About pages
   notification: {
     title: 'notification',

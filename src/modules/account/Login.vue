@@ -10,7 +10,8 @@
         </h2>
       </div>
       <el-form-item prop="username">
-        <el-input size="large" name="username" type="text" v-model="form.username" :placeholder="$t('login.username')">
+        <el-input size="large" name="username" type="text" v-model="form.username"
+                  @keyup.enter.native="handleLogin" :placeholder="$t('login.username')">
           <va-icon slot="prefix" icon="people-user"></va-icon>
         </el-input>
       </el-form-item>
@@ -61,7 +62,7 @@
 import LanguagePicker from '@/components/LanguagePicker'
 import Copyright from '@/components/Copyright'
 import Service from '@/services/account'
-import { Validators } from '@/tools'
+import { validUsername, validPassword } from '@/tools/validators'
 
 export default {
   name: 'Login',
@@ -72,8 +73,8 @@ export default {
       logo: require('@/assets/images/logo.png'),
       form: { username: '', password: '', remember: false },
       rules: {
-        username: [{ validator: Validators.username, trigger: 'blur' }],
-        password: [{ validator: Validators.passwordLogin, trigger: 'blur' }]
+        username: [{ validator: this.validUsername, trigger: 'blur' }],
+        password: [{ validator: this.validPassword, trigger: 'blur' }]
       },
       loading: false,
       password: true,
@@ -110,7 +111,9 @@ export default {
         }).catch(() => { this.loading = false })
         return true
       })
-    }
+    },
+    validUsername,
+    validPassword
   },
   mounted() {
     this.getUserList()

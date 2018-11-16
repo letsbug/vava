@@ -58,6 +58,22 @@ export default {
     light: '亮色主题',
     dark: '暗色主题'
   },
+  // About forms validates
+  validate: {
+    required: '你必须填写此项！',
+    formatBad: '糟糕的输入！',
+    lengthBad: '长度必须是{length}，请重新输入。',
+    lengthMinBad: '长度必须大于{min}，请重新输入。',
+    lengthMaxBad: '长度必须小于{min}，请重新输入。',
+    lengthMinMaxBad: '长度必须在{min}到{max}之间，请重新输入。',
+    rules: {
+      username: `以字母开头，可包含'.','_','@'`,
+      password: '',
+      email: '',
+      mobile: '',
+      phone: ''
+    }
+  },
   // About pages
   notification: {
     title: '通知中心',

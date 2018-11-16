@@ -30,7 +30,7 @@ export default {
       this.timing = true
       setTimeout(() => {
         this.timing = false
-      }, 1600)
+      }, 3000)
     }
   }
 }

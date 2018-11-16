@@ -67,25 +67,14 @@
 
 <script>
 import Copyright from '@/components/Copyright'
-import { Validators, Regulars } from '@/tools'
+import { Regulars } from '@/tools'
+import { validCaptcha, validPassword } from '@/tools/validators'
 
 export default {
   name: 'PasswordReset',
   metaInfo: { title: 'Reset your password' },
   components: { Copyright },
   data() {
-    const validName = (r, v, c) => {
-      if (!v || Regulars.empty(v)) {
-        c(new Error('Please enter your email address or phone number!'))
-      } else if (!Regulars.email(v) && !Regulars.mobile(v)) {
-        c(new Error('Please enter a correct email address or phone number!'))
-      } else c()
-    }
-    const validConfirm = (r, v, c) => {
-      if (!v || Regulars.empty(v)) c(new Error('Please confirm your password!'))
-      else if (v !== this.form.password) c(new Error('Password confirmation doesn\'t match the password!'))
-      else c()
-    }
     return {
       logo: require('@/assets/images/logo.png'),
       step: 1,
@@ -96,10 +85,10 @@ export default {
         confirm: ''
       },
       rules: {
-        username: [{ validator: validName, trigger: 'blur' }],
-        securityCode: [{ validator: Validators.captcha, trigger: 'blur' }],
-        password: [{ validator: Validators.passwordSetting, trigger: 'blur' }],
-        confirm: [{ validator: validConfirm, trigger: 'blur' }]
+        username: [{ validator: this.validName, trigger: 'blur' }],
+        securityCode: [{ validator: this.validCaptcha, trigger: 'blur' }],
+        password: [{ validator: this.validPassword, trigger: 'blur' }],
+        confirm: [{ validator: this.validConfirm, trigger: 'blur' }]
       },
       pwdType: {
         password: true,
@@ -145,6 +134,20 @@ export default {
         if (!v) return false
         this.$message.success('Password validate success, do something...')
       })
+    },
+    validCaptcha,
+    validPassword,
+    validName(r, v, c) {
+      if (!v || Regulars.empty(v)) {
+        c(new Error('Please enter your email address or phone number!'))
+      } else if (!Regulars.email(v) && !Regulars.mobile(v)) {
+        c(new Error('Please enter a correct email address or phone number!'))
+      } else c()
+    },
+    validConfirm(r, v, c) {
+      if (!v || Regulars.empty(v)) c(new Error('Please confirm your password!'))
+      else if (v !== this.form.password) c(new Error('Password confirmation doesn\'t match the password!'))
+      else c()
     }
   }
 }

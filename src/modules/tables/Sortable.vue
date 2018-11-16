@@ -23,6 +23,7 @@
     <el-pagination
       class="excel-pagination"
       v-if="list && list.length > 0"
+      background
       layout="total, sizes, prev, pager, next, jumper"
       :page-sizes="[10, 30, 50]"
       :current-page="pages.page"
