@@ -25,7 +25,6 @@ const application = {
       state.device = device || (state.device === 'desktop' ? 'mobile' : 'desktop')
     },
     APP_LANGUAGE_SET: (state, lang) => {
-      console.log(lang)
       state.language = lang
       Cookie.set('language', lang)
     }

@@ -148,7 +148,6 @@ export default {
       }
     },
     handleEdit(rowData) {
-      console.log(rowData)
       this.dialogVisible = true
       if (rowData) this.editForm = Object.assign({}, rowData)
       else this.rebuildEditData()

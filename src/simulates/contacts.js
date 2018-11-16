@@ -31,7 +31,6 @@ export default {
     const vo = new BaseVo({ page, size, total })
     const min = (vo.page - 1) * vo.size
     const max = vo.page * vo.size
-    console.log(vo)
     return {
       pages: vo,
       list: list.filter((v, i) => (i >= min && i < max))
