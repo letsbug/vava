@@ -68,8 +68,8 @@ export default {
     lengthMaxBad: 'must be less than {min}, please fill in again.',
     lengthMinMaxBad: 'length is between {min} and {max}, please fill in again.',
     rules: {
-      username: `Beginning with a letter may contain.'.','_','@'.`,
-      password: 'Just Numbers and letters',
+      username: 'begin with a letter, allows " . _ @ "',
+      password: 'just numbers and letters',
       email: '(eg. example@domain)',
       mobile: 'can be only number',
       phone: '(Area code-phone number)',

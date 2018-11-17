@@ -68,7 +68,7 @@ export default {
     lengthMaxBad: '长度必须小于{min}，请重新输入。',
     lengthMinMaxBad: '长度必须在{min}到{max}之间，请重新输入。',
     rules: {
-      username: `以字母开头，可包含'.','_','@'`,
+      username: '以字母开头，可包含 " . _ @ "',
       password: '密码由数字和字母组成',
       email: '（例：example@xx.com）',
       mobile: '只能是数字',

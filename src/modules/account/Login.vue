@@ -98,7 +98,7 @@ export default {
         v.checked = user.token === v.token
       })
       this.form.username = user.username
-      this.form.password = '123456789'
+      this.form.password = 'a1234567'
       this.listDialogVisible = false
     },
     handleLogin() {
