@@ -17,7 +17,7 @@
 </p>
 
 
-> A magical management-side framework built on vue.
+> A magical management-side framework built on vue & element-ui & vava-mini.
 
 ## Build Setup
 

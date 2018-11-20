@@ -1,6 +1,6 @@
 {
   "name": "vava",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "homepage": "https://letsbug.github.io/vava/",
   "keywords": [
     "vue",
@@ -10,7 +10,7 @@
     "admin",
     "template"
   ],
-  "description": "A magical vue admin template, based on vue & element-ui",
+  "description": "A magical vue admin template, based on vue & element-ui & vava-mini",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/letsbug/vava.git"
