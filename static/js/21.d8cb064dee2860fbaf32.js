@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{WOHB:function(n,e,t){"use strict";t.r(e);var i={name:"Join",metaInfo:{title:"Join Vava"}},o=t("KHd+"),a=Object(o.a)(i,function(){var n=this.$createElement;return(this._self._c||n)("div")},[],!1,null,null,null);a.options.__file="Join.vue";e.default=a.exports}}]);
