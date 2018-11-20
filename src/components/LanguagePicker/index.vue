@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import Cookie from 'js-cookie'
+// import Cookie from 'js-cookie'
+
 export default {
   computed: {
     language() {

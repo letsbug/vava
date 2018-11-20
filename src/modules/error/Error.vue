@@ -33,7 +33,7 @@ export default {
         err402: _normalize,
         err401: 'unauthorized! This requests require authentication.',
         err400: _normalize,
-        err500: 'The server broke down and threw an error code at you ...',
+        err500: 'The server broke down and threw an error code at you ...'
       }
       return notices['err' + this.code]
     }

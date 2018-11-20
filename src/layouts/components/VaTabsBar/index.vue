@@ -81,10 +81,11 @@ export default {
     },
     scrollToCurrentTab() {
       const tabs = this.$refs['tabs']
-      if (tabs && tabs.length > 0) this.$nextTick(() => {
+      if (tabs && tabs.length <= 0) return
+      this.$nextTick(() => {
         for (const tab of tabs) {
           if (tab.to === this.$route.path) {
-            this.$refs['scrollPane'].scrollTo(tab.$el)
+            this.$refs['scrollPane'].scrollTo(tab['$el'])
             break
           }
         }

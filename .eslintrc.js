@@ -11,33 +11,20 @@ module.exports = {
     node: true,
     es6: true
   },
-  extends: [
-    'eslint:recommended',
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential',
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    // 'airbnb-base'
-    'standard'
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue',
-    'html'
-  ],
-  // check if imports actually resolve
-  settings: {
-    'import/resolver': {
-      webpack: {
-        config: 'build/webpack.base.conf.js'
-      }
-    }
-  },
+  extends: ['eslint:recommended', 'plugin:vue/recommended'],
   // add your custom rules here
   rules: {
-    'max-len': [2, 120, 4, { 'ignoreUrls': true }],
+    // About vue settings
+    "vue/max-attributes-per-line": [2, {
+      "singleline": 10,
+      "multiline": {
+        "max": 6,
+        "allowFirstLine": false
+      }
+    }],
+    "vue/name-property-casing": ["error", "PascalCase"],
+    'max-len': [2, 120, 4],
     'accessor-pairs': 2,
-    'array-bracket-spacing': [2, 'never'],
     'arrow-spacing': [2, {
       'before': true,
       'after': true

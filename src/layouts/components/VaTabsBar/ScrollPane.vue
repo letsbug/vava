@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'index',
   data() {
     return { left: 0 }
   },

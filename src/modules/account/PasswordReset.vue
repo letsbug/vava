@@ -18,13 +18,15 @@
         <el-form-item prop="securityCode">
           <el-input size="large" name="securityCode" class="input-security__code" type="text"
                     v-model="form.securityCode" placeholder="Security code">
-            <a slot="suffix" class="link-theme handle-get__code" :class="timing ? 'disabled' : ''" @click.prevent="sendSecurityCode">
+            <a slot="suffix" class="link-theme handle-get__code" :class="timing ? 'disabled' : ''"
+               @click.prevent="sendSecurityCode">
               Send code {{counter ? '(' + counter + ')' : undefined}}
             </a>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.prevent="submitSecurityCode">
+          <el-button size="large" type="primary" class="btn-login" :loading="loading"
+                     @click.prevent="submitSecurityCode">
             Valid security code
           </el-button>
         </el-form-item>
@@ -102,12 +104,12 @@ export default {
   methods: {
     validAccount() {
       let valid = false
-      this.$refs['formAccount'].validate(v => valid = v)
+      this.$refs['formAccount'].validate(v => { valid = v })
       return valid
     },
     validSecurityCode() {
       let valid = false
-      this.$refs['formSecurityCode'].validate(v => valid = v)
+      this.$refs['formSecurityCode'].validate(v => { valid = v })
       return valid
     },
     timingSecurityBtn() {

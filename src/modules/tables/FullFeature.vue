@@ -135,7 +135,7 @@ export default {
       })
     },
     handleSelectionChange(val) {
-      this.selected = val;
+      this.selected = val
     },
     rebuildEditData() {
       this.editForm = {
@@ -186,16 +186,14 @@ export default {
               })
               if (res.success) {
                 if (rowData) rowData.status = status.status
-                else this.selected.forEach((v, i) => {
-                  this.selected[i].status = status.status
-                })
+                else this.selected.forEach((v, i) => { this.selected[i].status = status.status })
               }
             })
           }
         }
       }
       this.$confirm(
-        `Are you sure you want to ${ isAudit ? 'audit' : 'delete' } ${lst.length > 1 ? 'these' : 'this'} data?`,
+        `Are you sure you want to ${isAudit ? 'audit' : 'delete'} ${lst.length > 1 ? 'these' : 'this'} data?`,
         'Are you sure?',
         options
       )

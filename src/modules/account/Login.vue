@@ -83,6 +83,9 @@ export default {
       userSimulateList: []
     }
   },
+  mounted() {
+    this.getUserList()
+  },
   methods: {
     getUserList() {
       Service.list().then(res => {
@@ -114,9 +117,6 @@ export default {
     },
     validUsername,
     validPassword
-  },
-  mounted() {
-    this.getUserList()
   }
 }
 </script>

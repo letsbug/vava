@@ -22,7 +22,8 @@
       <a class="va-nav-item nav-search" v-if="!isMobile">
         <va-icon icon="action-search"/>
         <!-- TODO Add mobile layout to here -->
-        <input ref="globalSearch" class="nav-search-inner" :placeholder="$t('header.search')" autocomplete="on"
+        <input ref="globalSearch" class="nav-search-inner" :placeholder="$t('header.search')" title=""
+               autocomplete="on"
                :class="currRouteIsSearch"
                v-model="search.keyword"
                @click="handleSearch"

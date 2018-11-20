@@ -1,17 +1,18 @@
 <template>
   <div class="va-body-container">
-    <el-table tooltip-effect="theme" :data="list" fit highlight-current-row v-loading="loading" row-key="id"
-              empty-text="Sorry! This category have nothing data.">
-      <el-table-column label="ID" prop="id" width="40" align="right"></el-table-column>
-      <el-table-column label="TITLE" prop="title" show-overflow-tooltip></el-table-column>
+    <el-table
+      v-loading="loading" :data="list" tooltip-effect="theme" fit highlight-current-row row-key="id"
+      empty-text="Sorry! This category have nothing data.">
+      <el-table-column label="ID" prop="id" width="40" align="right"/>
+      <el-table-column label="TITLE" prop="title" show-overflow-tooltip/>
       <el-table-column label="CREATE" prop="display" width="110">
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
       </el-table-column>
-      <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip></el-table-column>
-      <el-table-column label="LEVEL" prop="level" width="60" align="center"></el-table-column>
+      <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip/>
+      <el-table-column label="LEVEL" prop="level" width="60" align="center"/>
       <el-table-column label="STATUS" prop="status" width="100" align="center">
         <template slot-scope="scope">
-          <el-tag size="small" :type="scope.row.status | articleStatus">{{ scope.row.status }}</el-tag>
+          <el-tag :type="scope.row.status | articleStatus" size="small">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="PV" prop="pv" width="66">
@@ -19,7 +20,7 @@
       </el-table-column>
       <el-table-column label="DRAG" width="66" align="center">
         <template slot-scope="scope">
-          <span class="handle-drag"><va-icon icon="action-drag"></va-icon></span>
+          <span class="handle-drag"><va-icon icon="action-drag"/></span>
         </template>
       </el-table-column>
     </el-table>

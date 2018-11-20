@@ -18,22 +18,22 @@ export default {
   data() {
     return { routes: [] }
   },
+  watch: {
+    $route: 'breadcrumbList'
+  },
+  mounted() {
+    this.breadcrumbList()
+  },
   methods: {
     breadcrumbList() {
       let routes = this.$route.matched.filter(v => v.name)
       const first = routes[0]
       if (first && first.name.trim().toLowerCase() !== 'homepage') {
-        routes = [{ path: '/home', redirect: '/home', meta: { title: 'home' } }].concat(routes)
+        routes = [{ path: '/home', meta: { title: 'home' }, redirect: '/home' }].concat(routes)
       }
       this.routes = routes
     },
     generateTitle
-  },
-  mounted() {
-    this.breadcrumbList()
-  },
-  watch: {
-    $route: 'breadcrumbList'
   }
 }
 </script>

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar,  AppBody } from './components'
+import { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar, AppBody } from './components'
 
 const { body } = document
 const WIDTH = 768
