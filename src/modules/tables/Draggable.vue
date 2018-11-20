@@ -1,8 +1,9 @@
 <template>
   <div class="va-body-container">
     <el-table
-      v-loading="loading" :data="list" tooltip-effect="theme" fit highlight-current-row row-key="id"
-      empty-text="Sorry! This category have nothing data.">
+      v-loading="loading" :data="list" tooltip-effect="theme" fit
+      highlight-current-row row-key="id" empty-text="Sorry! This category have nothing data."
+    >
       <el-table-column label="ID" prop="id" width="40" align="right"/>
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip/>
       <el-table-column label="CREATE" prop="display" width="110">

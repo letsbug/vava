@@ -18,12 +18,24 @@ module.exports = {
     "vue/max-attributes-per-line": [2, {
       "singleline": 10,
       "multiline": {
-        "max": 6,
+        "max": 4,
         "allowFirstLine": false
       }
     }],
     "vue/name-property-casing": ["error", "PascalCase"],
-    'max-len': [2, 120, 4],
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "always",
+        "normal": "any",
+        "component": "always"
+      },
+      "svg": "any",
+      "math": "always"
+    }],
+    "vue/html-closing-bracket-newline": ["error", {
+      "singleline": "never",
+      "multiline": "always"
+    }],
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
       'before': true,
@@ -154,9 +166,6 @@ module.exports = {
     'one-var': [2, {
       'initialized': 'never'
     }],
-    'object-curly-spacing': [2, 'always', {
-      objectsInObjects: false
-    }],
     'operator-linebreak': [2, 'after', {
       'overrides': {
         '?': 'before',
@@ -191,7 +200,10 @@ module.exports = {
     'yield-star-spacing': [2, 'both'],
     'yoda': [2, 'never'],
     'prefer-const': 2,
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'object-curly-spacing': [2, 'always', {
+      objectsInObjects: false
+    }],
+    'array-bracket-spacing': [2, 'never']
   }
 }

@@ -1,13 +1,11 @@
 <template>
   <div class="va-body-container">
     <h5>Direct use</h5>
-    <el-input v-model="url" readonly disabled style="width: 400px;"></el-input>
+    <el-input v-model="url" readonly disabled style="width: 400px;"/>
     <el-button
-      class="copy-handler"
-      :type="timing ? 'success' : 'primary'"
-      :icon="timing ? 'el-icon-check' : 'el-icon-document'"
-      :disabled="timing"
-      @click="clipboard(url, $event, onSuccess)">
+      :type="timing ? 'success' : 'primary'" :icon="timing ? 'el-icon-check' : 'el-icon-document'" :disabled="timing"
+      class="copy-handler" @click="clipboard(url, $event, onSuccess)"
+    >
       {{ timing ? 'Copied' : 'Copy' }}
     </el-button>
   </div>
@@ -17,7 +15,7 @@
 import { clipboard } from '@/tools'
 
 export default {
-  name: 'index',
+  name: 'Index',
   data() {
     return {
       url: 'https://github.com/letsbug/vava',

@@ -1,53 +1,53 @@
 <template>
   <div class="container-login--password">
-    <el-form ref="loginForm" class="form-login--password" autoComplete="on" aria-autocomplete="list"
-             :model="form" :rules="rules">
+    <el-form ref="loginForm" :model="form" :rules="rules" class="form-login--password" aria-autocomplete="list">
       <div class="form-logo">
-        <img class="brand" :src="logo" alt="VAVA">
-        <h2 class="title">
-          {{ $t('login.title') }}
-          <language-picker class="float-r"></language-picker>
-        </h2>
+        <img :src="logo" alt="VAVA" class="brand"/>
+        <h2 class="title">{{ $t('login.title') }}<language-picker class="float-r"/></h2>
       </div>
       <el-form-item prop="username">
-        <el-input size="large" name="username" type="text" v-model="form.username"
-                  @keyup.enter.native="handleLogin" :placeholder="$t('login.username')">
-          <va-icon slot="prefix" icon="people-user"></va-icon>
+        <el-input
+          v-model="form.username" :placeholder="$t('login.username')" type="text" size="large"
+          name="username" @keyup.enter.native="handleLogin"
+        >
+          <va-icon slot="prefix" icon="people-user"/>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input size="large" name="password" :type="password ? 'password' : 'text'" v-model="form.password"
-                  @keyup.enter.native="handleLogin" :placeholder="$t('login.password')">
-          <va-icon slot="prefix" icon="mark-lock"></va-icon>
+        <el-input
+          v-model="form.password" :placeholder="$t('login.password')" :type="password ? 'password' : 'text'"
+          size="large" name="password" @keyup.enter.native="handleLogin"
+        >
+          <va-icon slot="prefix" icon="mark-lock"/>
           <va-icon
-            slot="suffix"
-            :icon="password ? 'mark-eye-close' : 'mark-eye-open'"
-            @click.native="password = !password">
-          </va-icon>
+            slot="suffix" :icon="password ? 'mark-eye-close' : 'mark-eye-open'"
+            @click.native="password = !password"
+          />
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox class="checkbox-green" v-model="form.remember" :label="$t('login.remember')" name="remember"
-        ></el-checkbox>
+        <el-checkbox v-model="form.remember" :label="$t('login.remember')" class="checkbox-green" name="remember"/>
         <!--<router-link class="forget-link float-r" to="/password">Forgot password?</router-link>-->
         <a class="forget-link float-r" @click="listDialogVisible = true">{{ $t('login.list') }}</a>
       </el-form-item>
       <el-form-item>
-        <el-button size="large" type="primary" class="btn-login" :loading="loading" @click="handleLogin">
+        <el-button :loading="loading" size="large" type="primary" class="btn-login" @click="handleLogin">
           {{ $t('login.login') }}
         </el-button>
       </el-form-item>
     </el-form>
 
-    <copyright></copyright>
+    <copyright/>
 
-    <el-dialog :title="$t('login.list')" custom-class="user-simulate-dialog" append-to-body center
-               :visible.sync="listDialogVisible">
+    <el-dialog
+      :title="$t('login.list')" :visible.sync="listDialogVisible" custom-class="user-simulate-dialog"
+      append-to-body center
+    >
       <h5 style="margin-top: 0; text-align: center; font-weight: normal" v-html="$t('login.listHint')"></h5>
       <el-row :gutter="15">
-        <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="6" v-for="(user, index) in userSimulateList" :key="index">
-          <div class="user-list" :class="{ 'checked': user.checked }" @click="fillLoginForm(user)">
-            <img class="avatar" :src="user.avatar" alt="">
+        <el-col v-for="(user, index) in userSimulateList" :xs="12" :sm="12" :md="8" :lg="8" :xl="6" :key="index">
+          <div :class="{ 'checked': user.checked }" class="user-list" @click="fillLoginForm(user)">
+            <img :src="user.avatar" alt="" class="avatar"/>
             <h5 class="username">{{ user.username }}</h5>
             <span class="text-muted"><span class="hidden-xs-only">role: </span>{{ user.roles[0] }}</span>
             <span class="checked-flag"><i class="el-icon-check"></i></span>

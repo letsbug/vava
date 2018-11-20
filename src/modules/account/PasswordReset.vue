@@ -2,68 +2,75 @@
   <div class="container-login--password">
     <div class="form-login--password">
       <div class="form-logo">
-        <img class="brand" :src="logo" alt="Vava">
+        <img :src="logo" class="brand" alt="Vava"/>
         <h2 class="title">Reset your password</h2>
       </div>
 
       <!-- Send & verify email or mobile phone security code -->
-      <el-form ref="formAccount" v-if="step === 1" autoComplete="off" :model="form" :rules="rules">
+      <el-form v-if="step === 1" ref="formAccount" :model="form" :rules="rules">
         <p><strong>Please enter your account binding email address or phone number.</strong></p>
         <el-form-item prop="username" style="margin-bottom: 20px;">
-          <el-input size="large" name="username" type="text" v-model="form.username"
-                    placeholder="Your email address or phone number."></el-input>
+          <el-input
+            v-model="form.username" size="large" name="username" type="text"
+            placeholder="Your email address or phone number."
+          />
         </el-form-item>
       </el-form>
-      <el-form ref="formSecurityCode" v-if="step === 1" autoComplete="off" :model="form" :rules="rules">
+      <el-form v-if="step === 1" ref="formSecurityCode" :model="form" :rules="rules">
         <el-form-item prop="securityCode">
-          <el-input size="large" name="securityCode" class="input-security__code" type="text"
-                    v-model="form.securityCode" placeholder="Security code">
-            <a slot="suffix" class="link-theme handle-get__code" :class="timing ? 'disabled' : ''"
-               @click.prevent="sendSecurityCode">
-              Send code {{counter ? '(' + counter + ')' : undefined}}
+          <el-input
+            v-model="form.securityCode" size="large" name="securityCode" class="input-security__code"
+            type="text" placeholder="Security code"
+          >
+            <a
+              slot="suffix" :class="timing ? 'disabled' : ''" class="link-theme handle-get__code"
+              @click.prevent="sendSecurityCode"
+            >
+              Send code {{ counter ? '(' + counter + ')' : undefined }}
             </a>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="large" type="primary" class="btn-login" :loading="loading"
-                     @click.prevent="submitSecurityCode">
+          <el-button :loading="loading" size="large" type="primary" class="btn-login" @click.prevent="submitSecurityCode">
             Valid security code
           </el-button>
         </el-form-item>
       </el-form>
 
       <!-- Reset password -->
-      <el-form ref="confirmPassword" v-if="step === 2" autoComplete="off" :model="form" :rules="rules">
+      <el-form v-if="step === 2" ref="confirmPassword" :model="form" :rules="rules">
         <p><small>Password must be a combination of Numbers and letters, and between 8 and 16 characters.</small></p>
         <el-form-item prop="password">
-          <el-input size="large" name="password" :type="pwdType.password ? 'password' : 'text'" v-model="form.password"
-                    placeholder="Password">
+          <el-input
+            :type="pwdType.password ? 'password' : 'text'" v-model="form.password" size="large" name="password"
+            placeholder="Password"
+          >
             <va-icon
-              slot="suffix"
-              :icon="pwdType.password ? 'mark-eye-close' : 'mark-eye-open'"
-              @click.native="pwdType.password = !pwdType.password">
-            </va-icon>
+              slot="suffix" :icon="pwdType.password ? 'mark-eye-close' : 'mark-eye-open'"
+              @click.native="pwdType.password = !pwdType.password"
+            />
           </el-input>
         </el-form-item>
         <el-form-item prop="confirm">
-          <el-input size="large" name="password" :type="pwdType.confirm ? 'password' : 'text'" v-model="form.confirm"
-                    placeholder="Confirm">
+          <el-input
+            :type="pwdType.confirm ? 'password' : 'text'" v-model="form.confirm" size="large" name="password"
+            placeholder="Confirm"
+          >
             <va-icon
-              slot="suffix"
-              :icon="pwdType.confirm ? 'mark-eye-close' : 'mark-eye-open'"
-              @click.native="pwdType.confirm = !pwdType.confirm">
-            </va-icon>
+              slot="suffix" :icon="pwdType.confirm ? 'mark-eye-close' : 'mark-eye-open'"
+              @click.native="pwdType.confirm = !pwdType.confirm"
+            />
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="large" type="primary" class="btn-login" :loading="loading" @click.prevent="resetSubmit">
+          <el-button :loading="loading" size="large" type="primary" class="btn-login" @click.prevent="resetSubmit">
             Reset password
           </el-button>
         </el-form-item>
       </el-form>
     </div>
 
-    <copyright></copyright>
+    <copyright/>
   </div>
 </template>
 

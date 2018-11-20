@@ -1,24 +1,26 @@
 <template>
-  <div class="va-tabs-bar" :class="isMobile ? 'mobile' : ''">
-
-    <breadcrumb v-if="isMobile"></breadcrumb>
+  <div :class="isMobile ? 'mobile' : ''" class="va-tabs-bar">
+    <!-- breadcrumb -->
+    <breadcrumb v-if="isMobile"/>
 
     <template v-else>
       <!-- Closable tab control list -->
       <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
-        <router-link class="va-tabs-item" ref="tabs" v-if="!route.notab" :key="route.path"
-                     v-for="route in history" :to="route.path"
-                     @contextmenu.prevent.native="menuOpen(route, $event)">
+        <router-link
+          v-for="route in history" v-if="!route.notab" ref="tabs"
+          :key="route.path" :to="route.path" class="va-tabs-item"
+          @contextmenu.prevent.native="menuOpen(route, $event)"
+        >
           <span class="tabs-item-name">{{ generateTitle(route.title) }}</span>
           <span class="tabs-item__close">
-            <va-icon icon="action-close" @click.prevent.native="close(route)"></va-icon>
+            <va-icon icon="action-close" @click.prevent.native="close(route)"/>
           </span>
         </router-link>
       </scroll-pane>
 
       <!-- Resident tab control, link to home -->
       <router-link class="va-tabs-item tabs-home" to="/home">
-        <va-icon class="link-home" icon="thing-house"></va-icon>
+        <va-icon class="link-home" icon="thing-house"/>
       </router-link>
 
       <!-- Tabs options -->
@@ -58,8 +60,9 @@ export default {
       selected: {}
     }
   },
-  mounted() {
-    this.add()
+  computed: {
+    history() { return this.$store.getters.tabs_history },
+    isMobile() { return this.$store.getters.device === 'mobile' }
   },
   watch: {
     $route() {
@@ -71,9 +74,8 @@ export default {
       else document.body.removeEventListener('click', this.menuClose)
     }
   },
-  computed: {
-    history() { return this.$store.getters.tabs_history },
-    isMobile() { return this.$store.getters.device === 'mobile' }
+  mounted() {
+    this.add()
   },
   methods: {
     isActive(route) {

@@ -6,16 +6,18 @@
 
       <!-- handle options -->
       <span class="options">
-        <el-button size="small" plain @click="handleMarkAllRead" v-if="notifications.hasUnread">
+        <el-button v-if="notifications.hasUnread" size="small" plain @click="handleMarkAllRead">
           {{ $t('notification.markAll') }}
         </el-button>
       </span>
     </h4>
 
     <!-- notification list -->
-    <el-table ref="notifications" size="medium" :show-header="false" highlight-current-row show-overflow-tooltip
-              :data="notifications.list" style="width: 100%;">
-      <el-table-column type="index" label="#" width="40"></el-table-column>
+    <el-table
+      ref="notifications" :show-header="false" :data="notifications.list" size="medium"
+      highlight-current-row show-overflow-tooltip style="width: 100%;"
+    >
+      <el-table-column type="index" label="#" width="40"/>
       <el-table-column prop="from" lable="from" width="80">
         <template slot-scope="scope">
           <el-tag size="mini">{{ scope.row.from }}</el-tag>
@@ -38,7 +40,7 @@
       </el-table-column>
       <el-table-column label="options" width="70" align="right">
         <template slot-scope="scope">
-          <el-tooltip :content="$t('notification.mark')" placement="left" v-if="scope.row.unread">
+          <el-tooltip v-if="scope.row.unread" :content="$t('notification.mark')" placement="left">
             <a @click="handleMarkRead(scope.row)">
               <i class="el-icon-check"></i>
             </a>

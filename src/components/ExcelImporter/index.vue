@@ -1,11 +1,13 @@
 <template>
   <div class="excel-importer">
-    <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile">
-    <div class="file-drop" :class="working ? 'working' : ''" v-if="enableDragDrop"
-         @click="!working && $refs['excelImportInput'].click()"
-         @drop.prevent.stop="!working && handleDrop($event)"
-         @dragover.prevent.stop="onDragOver"
-         @dragenter.prevent.stop="onDragOver">
+    <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile"/>
+    <div
+      v-if="enableDragDrop" :class="working ? 'working' : ''" class="file-drop"
+      @click="!working && $refs['excelImportInput'].click()"
+      @drop.prevent.stop="!working && handleDrop($event)"
+      @dragover.prevent.stop="onDragOver"
+      @dragenter.prevent.stop="onDragOver"
+    >
       <div><va-icon icon="action-import"/></div>
       <template v-if="file">
         {{ $t('excelImport.selected') }}
@@ -18,8 +20,8 @@
       </template>
       <span class="working-flag"><i class="el-icon-loading"></i></span>
     </div>
-    <div class="text-center" v-else>
-      <el-button plain @click="!working && $refs['excelImportInput'].click()" :loading="working">
+    <div v-else class="text-center">
+      <el-button :loading="working" plain @click="!working && $refs['excelImportInput'].click()">
         <template v-if="file">
           {{ $t('excelImport.selected') }}: "{{ file.name }}", {{ $t('excelImport.change') }}.
         </template>
@@ -36,8 +38,8 @@ export default {
   props: {
     // Allow import by drag and drop one file
     enableDragDrop: { type: Boolean, default: false },
-    beforeImport: { type: Function },
-    onSuccess: { type: Function }
+    beforeImport: { type: Function, default: null },
+    onSuccess: { type: Function, default: null }
   },
   data() {
     return {
@@ -84,7 +86,7 @@ export default {
       return o
     },
     readerData(rawFile) {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         const reader = new FileReader()
         reader.onload = e => {
           const data = e.target['result']

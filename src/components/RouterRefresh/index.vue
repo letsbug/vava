@@ -1,6 +1,6 @@
 <template>
   <a class="va-nav-item" @click="handleRefresh">
-    <va-icon icon="action-refresh" class="handle-refresh" :class="doing ? 'doing' : ''"/>
+    <va-icon :class="doing ? 'doing' : ''" icon="action-refresh" class="handle-refresh"/>
   </a>
 </template>
 

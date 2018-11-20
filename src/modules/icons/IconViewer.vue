@@ -4,7 +4,7 @@
     <pre v-highlight><code class="html" v-html="$t('icons.content')"></code></pre>
     <h4 class="va-body-title" v-html="$t('icons.list')"></h4>
     <el-row>
-      <el-col :xl="3" :lg="4" :md="6" :sm="6" :xs="8" v-for="icon of icons" :key="icon">
+      <el-col v-for="icon of icons" :key="icon" :xl="3" :lg="4" :md="6" :sm="6" :xs="8">
         <div class="grid-content" @click="handleClipboard(generateIconCode(icon), $event)">
           <div class="icon-item">
             <va-icon :icon="icon"/>

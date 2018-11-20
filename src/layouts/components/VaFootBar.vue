@@ -1,7 +1,7 @@
 <template>
   <div class="va-foot-bar">
     App foot bar.
-    <va-copyright></va-copyright>
+    <va-copyright/>
   </div>
 </template>
 

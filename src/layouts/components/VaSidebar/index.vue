@@ -3,7 +3,7 @@
     <div class="va-side-brand">
       <span class="brand-name"><strong>Va</strong><span class="subname">va</span></span>
     </div>
-    <va-side-menu :routes="routes_permission"></va-side-menu>
+    <va-side-menu :routes="routes_permission"/>
   </div>
 </template>
 

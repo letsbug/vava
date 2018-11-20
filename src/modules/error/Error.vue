@@ -1,14 +1,15 @@
 <template>
-<div class="va-error-wrapper">
-  <img :src="flag" alt=""><br>
-  <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
-  <h5>{{ message }}</h5>
-  <p>
-    <a class="linker" @click.prevent.stop="$router.go(-1)" href="/">BACK</a>
-    <router-link class="linker" to="/">HOME</router-link>
-  </p>
-  <va-copyright></va-copyright>
-</div>
+  <div class="va-error-wrapper">
+    <img :src="flag" alt=""/>
+    <br/>
+    <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
+    <h5>{{ message }}</h5>
+    <p>
+      <a href="/" class="linker" @click.prevent.stop="$router.go(-1)">BACK</a>
+      <router-link class="linker" to="/">HOME</router-link>
+    </p>
+    <va-copyright/>
+  </div>
 </template>
 
 <script>

@@ -9,54 +9,51 @@
       </a>
 
       <!-- refresh button -->
-      <router-refresh v-if="isMobile"></router-refresh>
+      <router-refresh v-if="isMobile"/>
 
       <!-- breadcrumb in desktop -->
-      <breadcrumb v-if="!isMobile"></breadcrumb>
+      <breadcrumb v-if="!isMobile"/>
     </div>
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
 
       <!-- global search -->
-      <a class="va-nav-item nav-search" v-if="!isMobile">
+      <a v-if="!isMobile" class="va-nav-item nav-search">
         <va-icon icon="action-search"/>
         <!-- TODO Add mobile layout to here -->
-        <input ref="globalSearch" class="nav-search-inner" :placeholder="$t('header.search')" title=""
-               autocomplete="on"
-               :class="currRouteIsSearch"
-               v-model="search.keyword"
-               @click="handleSearch"
-               @keyup.enter="handleSearch"/>
         <!-- TODO Add the history search drop-down list to here to autocomplete -->
+        <input
+          ref="globalSearch" v-model="search.keyword" :class="currRouteIsSearch" :placeholder="$t('header.search')"
+          title class="nav-search-inner" autocomplete="on"
+          @click="handleSearch" @keyup.enter="handleSearch"
+        />
       </a>
 
       <template v-if="!isMobile">
         <!-- refresh button -->
-        <router-refresh></router-refresh>
-
+        <router-refresh/>
         <!-- full screen action -->
-        <screen-full></screen-full>
-
+        <screen-full/>
         <!-- theme selector -->
-        <theme-picker></theme-picker>
+        <theme-picker/>
       </template>
 
-      <language-picker class="va-nav-item"></language-picker>
+      <language-picker class="va-nav-item"/>
 
       <!-- user notifications -->
-      <el-tooltip effect="dark" :content="notificationTips" placement="bottom">
+      <el-tooltip :content="notificationTips" effect="dark" placement="bottom">
         <router-link class="va-nav-item" to="/notification">
-          <el-badge is-dot :hidden="!notificationHasUnread">
+          <el-badge :hidden="!notificationHasUnread" is-dot>
             <va-icon icon="mark-notice"/>
           </el-badge>
         </router-link>
       </el-tooltip>
 
       <!-- user actions -->
-      <el-dropdown trigger="click" @command="userDropdown" :show-timeout="100" style="float: left;">
+      <el-dropdown :show-timeout="100" trigger="click" style="float: left;" @command="userDropdown">
         <a class="va-nav-item spacer-xs link-user">
-          <img class="avatar" :src="user.avatar" alt="">
+          <img :src="user.avatar" alt="" class="avatar"/>
         </a>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item :command="handleUserInfo">{{ $t('header.profile') }}</el-dropdown-item>
@@ -86,9 +83,6 @@ export default {
       search: { old: '', keyword: '' }
     }
   },
-  created() {
-    this.$store.dispatch('notification_list')
-  },
   computed: {
     isMobile() {
       return this.$store.getters.device === 'mobile'
@@ -109,6 +103,9 @@ export default {
       return this.$t(`header.notification${this.notificationHasUnread ? 'Has' : 'No'}`)
       // return 'you have ' + (this.notificationHasUnread ? '' : 'no') + ' unread notifications'
     }
+  },
+  created() {
+    this.$store.dispatch('notification_list')
   },
   methods: {
     toggleSidebar() {

@@ -1,7 +1,7 @@
 <template>
-  <el-dropdown trigger="click" @command="chooseTheme" :show-timeout="100" style="float: left;">
+  <el-dropdown :show-timeout="100" trigger="click" style="float: left;" @command="chooseTheme">
     <a class="va-nav-item hidden-xs-only">
-      <va-icon icon="thing-shirt"></va-icon>
+      <va-icon icon="thing-shirt"/>
     </a>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="default">{{ $t('theme.default') }}</el-dropdown-item>

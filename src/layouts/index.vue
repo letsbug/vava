@@ -1,11 +1,11 @@
 <template>
-  <div class="va-app-wrapper" :class="device + ' ' + sidebarStatus">
-    <va-side-bar></va-side-bar>
+  <div :class="device + ' ' + sidebarStatus" class="va-app-wrapper">
+    <va-side-bar/>
     <div class="va-main-wrapper">
-      <va-head-bar></va-head-bar>
-      <va-tabs-bar></va-tabs-bar>
-      <app-body></app-body>
-      <va-foot-bar></va-foot-bar>
+      <va-head-bar/>
+      <va-tabs-bar/>
+      <app-body/>
+      <va-foot-bar/>
     </div>
     <div class="va-side-backdrop" @click.prevent="closeSidebar"></div>
   </div>
@@ -20,6 +20,11 @@ const WIDTH = 768
 export default {
   name: 'Layout',
   components: { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
+  computed: {
+    sidebarOpened() { return this.$store.state.application.sidebar.opened },
+    sidebarStatus() { return 'sidebar-' + (this.sidebarOpened ? 'expanded' : 'collapse') },
+    device() { return this.$store.state.application.device }
+  },
   watch: {
     $route: 'sidebarCloseInMobile'
   },
@@ -30,11 +35,6 @@ export default {
     if (this.isMobile()) {
       this.$store.dispatch('app_device_toggle', 'mobile')
     }
-  },
-  computed: {
-    sidebarOpened() { return this.$store.state.application.sidebar.opened },
-    sidebarStatus() { return 'sidebar-' + (this.sidebarOpened ? 'expanded' : 'collapse') },
-    device() { return this.$store.state.application.device }
   },
   methods: {
     isMobile() {

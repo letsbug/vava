@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <github-corner></github-corner>
+    <github-corner/>
     <div class="content-homepage">
       <h1>Welcome!</h1>
     </div>
@@ -9,6 +9,7 @@
 
 <script>
 import GithubCorner from '@/components/GithubCorner'
+
 export default {
   name: 'Homepage',
   components: { GithubCorner }

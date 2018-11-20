@@ -1,17 +1,17 @@
 <template>
   <div class="va-body-container">
-    <el-form class="filter-and-actions" ref="formFilter" :model="filterData" inline>
+    <el-form ref="formFilter" :model="filterData" class="filter-and-actions" inline>
       <el-form-item>
-        <el-input v-model="filterData.title" placeholder="Title" clearable></el-input>
+        <el-input v-model="filterData.title" placeholder="Title" clearable/>
       </el-form-item>
       <el-form-item>
         <el-select v-model="filterData.status" value="" placeholder="Status" style="width: 120px;">
-          <el-option v-for="(st, i) in statusMap" :label="st" :value="i === 0 ? null : st" :key="st"></el-option>
+          <el-option v-for="(st, i) in statusMap" :label="st" :value="i === 0 ? null : st" :key="st"/>
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-select v-model="filterData.level" value="" placeholder="Level" style="width: 80px;">
-          <el-option v-for="(lv, i) in levelMap" :label="lv" :value="i === 0 ? null : lv" :key="lv"></el-option>
+          <el-option v-for="(lv, i) in levelMap" :label="lv" :value="i === 0 ? null : lv" :key="lv"/>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -20,29 +20,44 @@
       <el-form-item>
         <el-button-group style="vertical-align: top;">
           <el-button type="primary" icon="el-icon-plus" @click="handleEdit()">Add</el-button>
-          <el-button type="primary" icon="el-icon-check" :disabled="!selected || selected.length < 1"
-                     @click="handleBatchUpdate(true)">Audit</el-button>
-          <el-button type="primary" icon="el-icon-delete" :disabled="!selected || selected.length < 1"
-                     @click="handleBatchUpdate(false)">Delete</el-button>
+          <el-button
+            :disabled="!selected || selected.length < 1"
+            type="primary"
+            icon="el-icon-check"
+            @click="handleBatchUpdate(true)"
+          >Audit</el-button>
+          <el-button
+            :disabled="!selected || selected.length < 1"
+            type="primary"
+            icon="el-icon-delete"
+            @click="handleBatchUpdate(false)"
+          >Delete</el-button>
         </el-button-group>
       </el-form-item>
     </el-form>
 
-    <el-table tooltip-effect="theme" :data="list" fit highlight-current-row v-loading="loading"
-              :default-sort = "{prop: 'id', order: 'ascending'}" @selection-change="handleSelectionChange"
-              empty-text="Sorry! This category have nothing data.">
-      <el-table-column type="selection" width="38"></el-table-column>
-      <el-table-column label="ID" prop="id" width="38" align="right"></el-table-column>
-      <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable></el-table-column>
+    <el-table
+      v-loading="loading"
+      :data="list"
+      :default-sort="{prop: 'id', order: 'ascending'}"
+      fit
+      tooltip-effect="theme"
+      highlight-current-row
+      empty-text="Sorry! This category have nothing data."
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" width="38"/>
+      <el-table-column label="ID" prop="id" width="38" align="right"/>
+      <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable/>
       <el-table-column label="CREATE" prop="display" width="114" sortable>
         <template slot-scope="scope">{{ scope.row.display | dateAgo }}</template>
       </el-table-column>
-      <el-table-column label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable></el-table-column>
-      <el-table-column label="AUDITOR" prop="auditor" width="110" show-overflow-tooltip sortable></el-table-column>
-      <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable></el-table-column>
+      <el-table-column label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable/>
+      <el-table-column label="AUDITOR" prop="auditor" width="110" show-overflow-tooltip sortable/>
+      <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable/>
       <el-table-column label="STATUS" prop="status" width="100" align="center" sortable>
         <template slot-scope="scope">
-          <el-tag size="small" :type="scope.row.status | articleStatus">{{ scope.row.status }}</el-tag>
+          <el-tag :type="scope.row.status | articleStatus" size="small">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="PV" prop="pv" width="66" sortable>
@@ -50,47 +65,49 @@
       </el-table-column>
       <el-table-column label="ACTIONS" width="164" class-name="has-actions actions-small">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" icon="el-icon-check"
-                     @click="handleBatchUpdate(true, scope.row)"></el-button>
-          <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)"></el-button>
-          <el-button type="primary" size="small" icon="el-icon-delete"
-                     @click="handleBatchUpdate(false, scope.row)"></el-button>
+          <el-button type="primary" size="small" icon="el-icon-check" @click="handleBatchUpdate(true, scope.row)"/>
+          <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)"/>
+          <el-button type="primary" size="small" icon="el-icon-delete" @click="handleBatchUpdate(false, scope.row)"/>
         </template>
       </el-table-column>
     </el-table>
 
     <el-pagination
-      class="excel-pagination"
       v-if="list && list.length > 0"
-      background
-      layout="total, sizes, prev, pager, next, jumper"
       :page-sizes="[10, 30, 50]"
       :current-page="pages.page"
       :page-size="pages.size"
       :total="pages.total"
+      class="excel-pagination"
+      background
+      layout="total, sizes, prev, pager, next, jumper"
       @size-change="handleSizeChange"
-      @current-change="handlePageChange">
-    </el-pagination>
+      @current-change="handlePageChange"
+    />
 
     <el-dialog :visible.sync="dialogVisible" :title="`Article ${editForm.isEdit ? 'Edit' : 'Add'}`" width="50%">
       <el-form :model="editForm" label-width="80px" style="margin-right: 60px">
         <el-form-item label="Title" prop="title">
-          <el-input v-model="editForm.title" placeholder="Article title"></el-input>
+          <el-input v-model="editForm.title" placeholder="Article title"/>
         </el-form-item>
         <el-form-item label="Summery" prop="summery">
-          <el-input v-model="editForm.summery" placeholder="Article summery"></el-input>
+          <el-input v-model="editForm.summery" placeholder="Article summery"/>
         </el-form-item>
         <el-form-item label="Content" prop="content">
-          <el-input v-model="editForm.content" placeholder="Article content"></el-input>
+          <el-input v-model="editForm.content" placeholder="Article content"/>
         </el-form-item>
         <el-form-item label="Level" prop="level">
           <el-select v-model="editForm.level" value placeholder="Article level">
-            <el-option v-for="(lv, i) in levelMap" :label="lv" :value="lv" :key="lv" v-if="i !== 0"></el-option>
+            <el-option v-for="(lv, i) in levelMap" v-if="i !== 0" :label="lv" :value="lv" :key="lv"/>
           </el-select>
         </el-form-item>
         <el-form-item label="Auditor" prop="auditor">
-          <el-autocomplete v-model="editForm.auditor" placeholder="Article auditor" :debounce="0"
-                    :fetch-suggestions="inputQuerySearch"></el-autocomplete>
+          <el-autocomplete
+            v-model="editForm.auditor"
+            :debounce="0"
+            :fetch-suggestions="inputQuerySearch"
+            placeholder="Article auditor"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer">
@@ -119,6 +136,17 @@ export default {
       auditors: [],
       editForm: null
     }
+  },
+  created() {
+    this.rebuildEditData()
+  },
+  mounted() {
+    Service.auditors().then(res => {
+      this.auditors = res.map(v => {
+        this.$set(v, 'value', v.username)
+        return v
+      })
+    })
   },
   methods: {
     getList() {
@@ -198,17 +226,6 @@ export default {
         options
       )
     }
-  },
-  created() {
-    this.rebuildEditData()
-  },
-  mounted() {
-    Service.auditors().then(res => {
-      this.auditors = res.map(v => {
-        this.$set(v, 'value', v.username)
-        return v
-      })
-    })
   }
 }
 </script>
