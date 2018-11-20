@@ -1,14 +1,14 @@
 <template>
-    <div>Index</div>
+  <div>Index</div>
 </template>
 
 <script>
-  export default {
-    name: 'ContextMenu',
-    data() {
-      return {}
-    }
+export default {
+  name: 'ContextMenu',
+  data() {
+    return {}
   }
+}
 </script>
 
 <style scoped>
