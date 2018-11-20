@@ -14,6 +14,9 @@
   <a href="https://www.travis-ci.org/letsbug/vava">
     <img src="https://www.travis-ci.org/letsbug/vava.svg?branch=master" alt="Build Status">
   </a>
+  <a href="https://github.com/letsbug/vava/releases">
+    <img src="https://img.shields.io/github/release/letsbug/vava.svg" alt="GitHub release">
+  </a>
 </p>
 
 
