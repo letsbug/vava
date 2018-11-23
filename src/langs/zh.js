@@ -77,6 +77,15 @@ export default {
     }
   },
   // About pages
+  errors: {
+    actionHome: '回到首页',
+    actionBack: '返回',
+    type400: '瞎JB点，这下爽了撒！该！！！',
+    type401: '你未经授权！这个请求需要身份验证！',
+    type403: '你没有权限！想要吗？我不给你！',
+    type404: '哎呀！！！这里什么都没有！',
+    type500: '服务器不想理你，还丢给了你这个错误代码 ...'
+  },
   notification: {
     title: '通知中心',
     mark: '标记为已读',

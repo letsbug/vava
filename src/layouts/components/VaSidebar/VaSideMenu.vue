@@ -38,7 +38,7 @@
     </el-scrollbar>
 
     <div class="va-side-nav fixed-bottom">
-      <router-link class="nav-title" to="/error/402">
+      <router-link class="nav-title" to="/error/403">
         <va-icon icon="action-settings"/> <span class="item-name">{{ generateTitle('settings') }}</span>
       </router-link>
     </div>

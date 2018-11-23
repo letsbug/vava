@@ -3,10 +3,10 @@
     <img :src="flag" alt=""/>
     <br/>
     <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
-    <h5>{{ message }}</h5>
+    <h5>{{ $t(`errors.type${code}`) }}</h5>
     <p>
-      <a href="/" class="linker" @click.prevent.stop="$router.go(-1)">BACK</a>
-      <router-link class="linker" to="/">HOME</router-link>
+      <a href="/" class="linker" @click.prevent.stop="$router.go(-1)">{{ $t('errors.actionBack') }}</a>
+      <router-link class="linker" to="/">{{ $t('errors.actionHome') }}</router-link>
     </p>
     <va-copyright/>
   </div>
@@ -21,22 +21,12 @@ export default {
     title: 'Oops! got an error!'
   },
   computed: {
-    code() { return this.$route.params['code'] },
+    code() {
+      return this.$route.params['code']
+    },
     flag() {
       const random = Math.floor(Math.random() * 4 + 1)
-      return require('@/assets/flags/errors/err-' + random + '.gif')
-    },
-    message() {
-      const _normalize = '瞎JB点，这回出错了吧！该！！！'
-      const notices = {
-        err404: 'The page you want to see may have moved...',
-        err403: 'You don\'t have access to this page, do you want it? I won\'t give it to you!!!',
-        err402: _normalize,
-        err401: 'unauthorized! This requests require authentication.',
-        err400: _normalize,
-        err500: 'The server broke down and threw an error code at you ...'
-      }
-      return notices['err' + this.code]
+      return require(`@/assets/flags/errors/err-${random}.gif`)
     }
   }
 }
@@ -50,20 +40,20 @@ export default {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  padding: $spacer-base $spacer-base $spacer-xxl * 3;
+  padding: $spacer-base $spacer-base 15vh;
   background-color: $color-white;
   text-align: center;
   position: relative;
+
+  .linker {
+    margin: 0 $spacer-base;
+  }
 
   .va-copyright {
     position: absolute;
     bottom: $spacer-base;
     left: 0;
     right: 0;
-  }
-
-  .linker {
-    margin: 0 $spacer-base;
   }
 }
 </style>

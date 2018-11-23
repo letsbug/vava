@@ -77,6 +77,15 @@ export default {
     }
   },
   // About pages
+  errors: {
+    actionHome: 'HOME',
+    actionBack: 'BACK',
+    type400: 'Please don\'t mess around here, something will happen ...',
+    type401: 'Unauthorized! This requests require authentication.',
+    type403: 'You don\'t have access to this page, do you want it? I won\'t give it to you !!!',
+    type404: 'The page you want to see may have moved ...',
+    type500: 'The server doesn\'t want to talk to you and throws you an error code ...'
+  },
   notification: {
     title: 'notification',
     mark: 'mark as read',
