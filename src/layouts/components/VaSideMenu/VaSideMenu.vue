@@ -3,13 +3,6 @@
     <el-scrollbar class="va-side-scroller" wrap-class="va-side-scroller--wrapper">
       <!-- Each all routes -->
       <nav-item v-for="route in routes" v-if="!route.hidden" :key="route.path" :route="route"/>
-
-      <!-- Statics for test -->
-      <div class="va-side-nav">
-        <router-link class="nav-title" to="/others">
-          <va-icon icon="mark-others"/> <span class="item-name">{{ generateTitle('others') }}</span>
-        </router-link>
-      </div>
     </el-scrollbar>
 
     <div class="va-side-nav fixed-bottom">

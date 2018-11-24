@@ -26,6 +26,7 @@ export default {
     permissionPage: '页面权限',
     permissionDirective: '指令权限',
     settings: '配置',
+    externalLink: '外部链接',
     others: '其它',
     // hidden in side bar
     notification: '通知中心'

@@ -1,7 +1,8 @@
 <template>
-  <div :class="{ 'expanded': visible }" class="va-side-nav">
+  <div :class="{ 'expanded': visible && route.children.length > 1 }" class="va-side-nav">
     <template v-if="route.children.length > 1">
       <a
+        :data-path="route.path"
         :class="{ 'active': current === route.path }" class="nav-title expander"
         @click="visible = !visible"
       >
@@ -22,10 +23,16 @@
         </ul>
       </el-collapse-transition>
     </template>
-    <router-link v-else :to="route.path + '/' + (route.children[0].path || '')" class="nav-title">
-      <va-icon :icon="route.children[0].meta.icon"/>
-      <span class="item-name">{{ generateTitle(route.children[0].meta.title) }}</span>
-    </router-link>
+    <template v-else>
+      <a v-if="isExternal(route.children[0].path)" :href="route.children[0].path" target="_blank" class="nav-title">
+        <va-icon :icon="route.children[0].meta.icon"/>
+        <span class="item-name">{{ generateTitle(route.children[0].meta.title) }}</span>
+      </a>
+      <router-link v-else :to="route.path + '/' + (route.children[0].path || '')" class="nav-title">
+        <va-icon :icon="route.children[0].meta.icon"/>
+        <span class="item-name">{{ generateTitle(route.children[0].meta.title) }}</span>
+      </router-link>
+    </template>
   </div>
 </template>
 
@@ -49,11 +56,17 @@ export default {
   },
   computed: {
     current() {
-      return '/' + this.$route.path.split('/')[1]
+      return this.$route.matched[0].path
     }
   },
+  mounted() {
+    this.visible = this.current === this.route.path
+  },
   methods: {
-    generateTitle
+    generateTitle,
+    isExternal(link) {
+      return /^(https?:|mailto:|tel:|tencent:)/.test(link)
+    }
   }
 }
 </script>

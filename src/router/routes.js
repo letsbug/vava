@@ -28,10 +28,15 @@ export const constantRouteMap = [
       }
     ]
   },
+
   { path: '/login', component: () => import('@/modules/account/Login'), hidden: true },
+
   { path: '/join', component: () => import('@/modules/account/Join'), hidden: true },
+
   { path: '/password', component: () => import('@/modules/account/PasswordReset'), hidden: true },
+
   { path: '/error/:code', component: () => import('@/modules/errors'), hidden: true },
+
   {
     path: '',
     component: Layout,
@@ -45,6 +50,42 @@ export const constantRouteMap = [
   },
 
   Dashboard,
+
+  {
+    path: '/search/:keyword',
+    component: Layout,
+    redirect: '/search/',
+    children: [{
+      path: '',
+      name: 'GlobalSearch',
+      meta: { title: 'search', icon: 'action-search', notab: true },
+      component: () => import('@/modules/search/GlobalSearch')
+    }],
+    hidden: true
+  }
+]
+
+export const asyncRouteMap = [
+  {
+    path: '/permission',
+    component: Layout,
+    meta: { title: 'permission', icon: 'mark-vip' },
+    redirect: '/permission/page',
+    children: [
+      {
+        path: 'page',
+        name: 'PermissionPage',
+        meta: { title: 'permissionPage', icon: 'action-clipboard' },
+        component: () => import('@/modules/permission/Page')
+      },
+      {
+        path: 'directive',
+        name: 'PermissionDirective',
+        meta: { title: 'permissionDirective', icon: 'mark-terminal' },
+        component: () => import('@/modules/permission/Directive')
+      }
+    ]
+  },
 
   {
     path: '/report',
@@ -85,6 +126,7 @@ export const constantRouteMap = [
       component: () => import('@/modules/clipboard')
     }]
   },
+
   {
     path: '/notification',
     component: Layout,
@@ -97,41 +139,18 @@ export const constantRouteMap = [
     }],
     hidden: true
   },
+
   {
-    path: '/search/:keyword',
+    path: 'externals',
     component: Layout,
-    redirect: '/search/',
-    children: [{
-      path: '',
-      name: 'GlobalSearch',
-      meta: { title: 'search', icon: 'action-search', notab: true },
-      component: () => import('@/modules/search/GlobalSearch')
-    }],
-    hidden: true
+    children: [
+      {
+        path: 'https://google.com',
+        meta: { title: 'externalLink', icon: 'thing-clip' }
+      }
+    ]
   },
 
   // The path not found in the router list will be forced a redirect to the 404 page
   { path: '*', redirect: '/error/404', hidden: true }
-]
-
-export const asyncRouteMap = [
-  {
-    path: '/permission',
-    component: Layout,
-    meta: { title: 'permission', icon: 'mark-vip' },
-    children: [
-      {
-        path: 'page',
-        name: 'PermissionPage',
-        meta: { title: 'permissionPage', icon: 'action-clipboard' },
-        component: () => import('@/modules/permission/Page')
-      },
-      {
-        path: 'directive',
-        name: 'PermissionDirective',
-        meta: { title: 'permissionDirective', icon: 'mark-terminal' },
-        component: () => import('@/modules/permission/Directive')
-      }
-    ]
-  }
 ]

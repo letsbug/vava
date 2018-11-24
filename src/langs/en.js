@@ -26,6 +26,7 @@ export default {
     permissionPage: 'Page',
     permissionDirective: 'Directive',
     settings: 'Settings',
+    externalLink: 'External Link',
     others: 'Others',
     // hidden in side bar
     notification: 'Notification'
