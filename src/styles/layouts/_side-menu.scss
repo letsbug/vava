@@ -1,7 +1,8 @@
-.va-sidebar {
+.va-side-wrapper {
   height: 100%;
   padding-top: $sidebar-brand-height;
   background-color: $sidebar-bg-color;
+  color: $sidebar-color;
 
   position: absolute;
   z-index: $z-index-sidebar;
@@ -11,8 +12,7 @@
 
   transition: $transition-width, $transition-padding, $transition-transform;
 
-  &, & a {
-    color: $sidebar-color;
+  a {
     text-decoration: none;
   }
 }
@@ -69,13 +69,15 @@
     display: none;
   }
 
-  .va-app-wrapper {
+  .va-app-wrapper.sidebar-collapse {
 
-    &.sidebar-collapse {
-      .va-side-brand .subname { display: none; }
+    .va-side-brand .subname {
+      display: none;
+    }
 
-      .va-side-nav {
-        .item-name, .expander-icon { display: none; }
+    .va-side-nav {
+      .item-name, .expander-icon {
+        display: none;
       }
     }
   }

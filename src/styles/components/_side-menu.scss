@@ -2,9 +2,16 @@
   font-size: $sidebar-nav-icon-size;
   transition: $transition-background;
 
+  a {
+    color: $color-white;
+    opacity: .45;
+  }
+
   .va-icon {
-    vertical-align: -4px !important;
-    margin-right: 5px;
+    position: absolute;
+    left: $sidebar-nav-link-padding-x;
+    top: 50%;
+    transform: translateY(-42%);
   }
 
   .item-name {
@@ -25,19 +32,19 @@
     display: block;
     height: $sidebar-nav-link-height;
     line-height: $sidebar-nav-link-line-height;
-    padding: 0 $sidebar-nav-link-padding-x;
+    padding: 0 $sidebar-nav-link-padding-x 0 ($sidebar-nav-icon-size + $sidebar-nav-link-padding-x + $spacer-sm);
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
     position: relative;
-    transition: $transition-color;
+    transition: $transition-all;
 
     &.active {
       color: $sidebar-color-active;
     }
 
-    &:not(.active):hover {
-      color: $sidebar-color-focus;
+    &:hover, &.active {
+      opacity: 1;
     }
   }
 
@@ -49,10 +56,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    height: 0;
     overflow: hidden;
-
-    transition: $transition-height;
   }
 
   &.expanded {
@@ -64,14 +68,6 @@
 
     .expander-icon {
       transform: rotate(90deg);
-    }
-
-    .nav-dropdown {
-      @for $i from 1 through 10 {
-        &.child-count-#{$i} {
-          height: $sidebar-nav-link-height * $i;
-        }
-      }
     }
   }
 

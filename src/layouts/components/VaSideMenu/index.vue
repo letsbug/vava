@@ -1,5 +1,5 @@
 <template>
-  <div class="va-sidebar">
+  <div class="va-side-wrapper">
     <div class="va-side-brand">
       <span class="brand-name"><strong>Va</strong><span class="subname">va</span></span>
     </div>

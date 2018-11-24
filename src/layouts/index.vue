@@ -1,6 +1,6 @@
 <template>
   <div :class="device + ' ' + sidebarStatus" class="va-app-wrapper">
-    <va-side-bar/>
+    <va-side-menu/>
     <div class="va-main-wrapper">
       <va-head-bar/>
       <va-tabs-bar/>
@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar, AppBody } from './components'
+import { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody } from './components'
 
 const { body } = document
 const WIDTH = 768
 
 export default {
   name: 'Layout',
-  components: { VaSideBar, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
+  components: { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
   computed: {
     sidebarOpened() { return this.$store.state.application.sidebar.opened },
     sidebarStatus() { return 'sidebar-' + (this.sidebarOpened ? 'expanded' : 'collapse') },

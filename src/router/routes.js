@@ -114,4 +114,24 @@ export const constantRouteMap = [
   { path: '*', redirect: '/error/404', hidden: true }
 ]
 
-export const asyncRouteMap = []
+export const asyncRouteMap = [
+  {
+    path: '/permission',
+    component: Layout,
+    meta: { title: 'permission', icon: 'mark-vip' },
+    children: [
+      {
+        path: 'page',
+        name: 'PermissionPage',
+        meta: { title: 'permissionPage', icon: 'action-clipboard' },
+        component: () => import('@/modules/permission/Page')
+      },
+      {
+        path: 'directive',
+        name: 'PermissionDirective',
+        meta: { title: 'permissionDirective', icon: 'mark-terminal' },
+        component: () => import('@/modules/permission/Directive')
+      }
+    ]
+  }
+]

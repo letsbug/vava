@@ -21,6 +21,10 @@ export default {
     excel: 'Excel',
     excelExport: '导出',
     excelImport: '导入',
+    clipboard: '粘贴板',
+    permission: '权限管理',
+    permissionPage: '页面权限',
+    permissionDirective: '指令权限',
     settings: '配置',
     others: '其它',
     // hidden in side bar
@@ -96,7 +100,7 @@ export default {
   icons: {
     usage: '使用方法',
     content: '使用 <strong>va-icon</strong> 组件来使用内置图标, 例如： &lt;va-icon icon="dashboard"/&gt;.',
-    list: '图标列表<small class="text-muted hidden-sm-and-down">点击任意一个直接复制.</small>'
+    list: '图标列表<small class="text-muted hidden-sm-and-down">点击任意一个直接复制代码.</small>'
   },
   excelExport: {
     filename: '文件名',

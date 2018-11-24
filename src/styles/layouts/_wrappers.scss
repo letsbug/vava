@@ -61,7 +61,7 @@
         margin-left: $sidebar-width-expanded;
       }
 
-      .va-sidebar {
+      .va-side-wrapper {
         width: $sidebar-width-expanded;
         overflow: hidden;
       }
@@ -73,7 +73,7 @@
         margin-left: $sidebar-width-collapse;
       }
 
-      .va-sidebar {
+      .va-side-wrapper {
         width: $sidebar-width-collapse;
       }
     }
@@ -84,7 +84,7 @@
 // In mobile
 @media screen and (max-width: $device-md - 1px) {
   .va-app-wrapper {
-    .va-sidebar {
+    .va-side-wrapper {
       width: $sidebar-width-expanded;
     }
     .va-main-wrapper {
@@ -92,7 +92,7 @@
     }
 
     &.sidebar-expanded {
-      .va-sidebar {
+      .va-side-wrapper {
         transform: translate3d(0, 0, 0);
       }
       .va-main-wrapper {
@@ -101,7 +101,7 @@
     }
 
     &.sidebar-collapse {
-      .va-sidebar {
+      .va-side-wrapper {
         transform: translate3d(-$sidebar-width-expanded, 0, 0);
       }
       .va-main-wrapper {

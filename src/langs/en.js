@@ -21,6 +21,10 @@ export default {
     excel: 'Excel',
     excelExport: 'Export Excel',
     excelImport: 'Import Excel',
+    clipboard: 'Clipboard',
+    permission: 'Permission',
+    permissionPage: 'Page',
+    permissionDirective: 'Directive',
     settings: 'Settings',
     others: 'Others',
     // hidden in side bar
