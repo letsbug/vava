@@ -1,0 +1,53 @@
+$context-menu-padding:    6px 0;
+$context-menu-width:      60px;
+$context-item-padding:    0 $spacer-lg;
+$context-item-height:     30px;
+$context-item-divider-m:  10px;
+
+.va-context-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: $context-menu-padding;
+  background-color: $color-white;
+  border-radius: $radius-base;
+  font-size: 1rem;
+  box-shadow: $shadow-lg-vr;
+  position: absolute;
+  z-index: $z-index-contextmenu;
+}
+
+.va-context-menu-item {
+  min-width: $context-menu-width;
+  height: $context-item-height;
+  line-height: $context-item-height;
+  padding: $context-item-padding;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-theme;
+    background-color: $--color-primary-light-9;
+  }
+
+  &.disabled {
+    color: $color-text-secondary;
+    cursor: default;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &.divided {
+    margin-top: $context-item-divider-m * 2 + $border-default-width;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -$context-item-divider-m + $border-default-width;
+      right: 0;
+      left: 0;
+      border-bottom: $border-default;
+    }
+  }
+}

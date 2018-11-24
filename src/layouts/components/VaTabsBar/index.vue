@@ -4,12 +4,17 @@
     <breadcrumb v-if="isMobile"/>
 
     <template v-else>
+      <!-- Resident tab control, link to home -->
+      <router-link class="va-tabs-item tabs-home" to="/home">
+        <va-icon class="link-home" icon="thing-house"/>
+      </router-link>
+
       <!-- Closable tab control list -->
       <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
         <router-link
           v-for="route in history" v-if="!route.notab" ref="tabs"
           :key="route.path" :to="route.path" class="va-tabs-item"
-          @contextmenu.prevent.native="menuOpen(route, $event)"
+          @contextmenu.prevent.native="handleOpenContextMenu"
         >
           <span class="tabs-item-name">{{ generateTitle(route.title) }}</span>
           <span class="tabs-item__close">
@@ -18,16 +23,12 @@
         </router-link>
       </scroll-pane>
 
-      <!-- Resident tab control, link to home -->
-      <router-link class="va-tabs-item tabs-home" to="/home">
-        <va-icon class="link-home" icon="thing-house"/>
-      </router-link>
+      <!-- Closeable tabs context menu -->
+      <context-menu ref="tabsContext" :options="tabsOptions" class="tabs-context-menu"/>
 
       <!-- Tabs options -->
       <el-dropdown class="tabs-more" trigger="click" @command="onOptionCommand">
-        <a class="va-tabs-item">
-          <i class="el-icon-arrow-down"></i>
-        </a>
+        <a class="va-tabs-item"><i class="el-icon-arrow-down"></i></a>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item :command="close" :disabled="history.length < 1">
             {{ $t('tabBar.close') }}
@@ -47,17 +48,19 @@
 <script>
 import ScrollPane from './ScrollPane'
 import Breadcrumb from '@/components/Breadcrumb/index'
+import ContextMenu from '@/components/ContextMenu'
 import { generateTitle } from '@/tools/i18n'
 
 export default {
   name: 'VaTabsBar',
-  components: { ScrollPane, Breadcrumb },
+  components: { ScrollPane, Breadcrumb, ContextMenu },
   data() {
     return {
-      contextVisible: false,
-      left: 0,
-      top: 0,
-      selected: {}
+      tabsOptions: [
+        { name: this.$t('tabBar.close'), callback: this.close },
+        { name: this.$t('tabBar.closeOthers'), callback: this.closeOthers },
+        { name: this.$t('tabBar.closeAll'), callback: this.closeAll }
+      ]
     }
   },
   computed: {
@@ -68,14 +71,12 @@ export default {
     $route() {
       this.add()
       this.scrollToCurrentTab()
-    },
-    contextVisible(v) {
-      if (v) document.body.addEventListener('click', this.menuClose)
-      else document.body.removeEventListener('click', this.menuClose)
+      this.handleReCalcContextStatus()
     }
   },
   mounted() {
     this.add()
+    this.handleReCalcContextStatus()
   },
   methods: {
     isActive(route) {
@@ -83,15 +84,16 @@ export default {
     },
     scrollToCurrentTab() {
       const tabs = this.$refs['tabs']
-      if (tabs && tabs.length <= 0) return
-      this.$nextTick(() => {
-        for (const tab of tabs) {
-          if (tab.to === this.$route.path) {
-            this.$refs['scrollPane'].scrollTo(tab['$el'])
-            break
+      if (tabs && tabs.length > 0) {
+        this.$nextTick(() => {
+          for (const tab of tabs) {
+            if (tab.to === this.$route.path) {
+              this.$refs['scrollPane'].scrollTo(tab['$el'])
+              break
+            }
           }
-        }
-      })
+        })
+      }
     },
     add() {
       if (this.isMobile) return
@@ -99,41 +101,32 @@ export default {
       if (meta.notab || !name || path === '/home') return
       this.$store.dispatch('tabs_add', this.$route)
     },
-    close(target) {
-      const _$route = this.$route
-      if (!target) target = { name: _$route.name, path: _$route.path, title: _$route.meta.title }
+    close() {
+      const target = { name: this.$route.name, path: this.$route.path, title: this.$route.meta.title }
       this.$store.dispatch('tabs_del', target).then(routes => {
         if (!this.isActive(target)) return
         const latest = routes.splice(-1)[0]
         this.$router.push({ path: latest ? latest.path : '/home' })
       })
     },
-    closeOthers(target) {
-      const _$route = this.$route
-      if (!target) target = { name: _$route.name, path: _$route.path, title: _$route.meta.title }
-      this.$router.push(this.selected)
-      this.$store.dispatch('tabs_del_others', target).then(() => {
-        // ...
-      })
+    closeOthers() {
+      const target = { name: this.$route.name, path: this.$route.path, title: this.$route.meta.title }
+      this.$router.push(target)
+      this.$store.dispatch('tabs_del_others', target)
     },
     closeAll() {
       this.$store.dispatch('tabs_empty').then(() => {
         this.$router.push('/')
       })
     },
-    menuOpen(tar, e) {
-      this.selected = tar
-
-      const width = 130
-      const tabBarRect = this.$el.getBoundingClientRect()
-      this.left = e.clientX - tabBarRect.left
-      this.top = e.clientY - tabBarRect.top
-      if ((tabBarRect.width - this.left) < width) this.left = this.left - width
-
-      this.contextVisible = true
+    handleReCalcContextStatus() {
+      const tabsLength = this.history.length
+      this.$set(this.tabsOptions[0], 'disabled', tabsLength < 1)
+      this.$set(this.tabsOptions[1], 'disabled', tabsLength < 2)
+      this.$set(this.tabsOptions[2], 'disabled', tabsLength < 2)
     },
-    menuClose() {
-      this.contextVisible = false
+    handleOpenContextMenu($e) {
+      this.$refs['tabsContext'].open($e)
     },
     onOptionCommand(tar) {
       tar()
