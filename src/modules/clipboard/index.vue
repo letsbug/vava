@@ -15,7 +15,7 @@
 import { clipboard } from '@/tools'
 
 export default {
-  name: 'Index',
+  name: 'Clipboard',
   data() {
     return {
       url: 'https://github.com/letsbug/vava',

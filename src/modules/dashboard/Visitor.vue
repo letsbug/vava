@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Visits',
+  name: 'Visitor',
   metaInfo: {}
 }
 </script>
