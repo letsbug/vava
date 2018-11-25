@@ -6,7 +6,9 @@
 export default {
   name: 'Directive',
   data() {
-    return {}
+    return {
+      userPickerVisible: false
+    }
   }
 }
 </script>

@@ -28,7 +28,7 @@
       <el-form-item>
         <el-checkbox v-model="form.remember" :label="$t('login.remember')" class="checkbox-green" name="remember"/>
         <!--<router-link class="forget-link float-r" to="/password">Forgot password?</router-link>-->
-        <a class="forget-link float-r" @click="listDialogVisible = true">{{ $t('login.list') }}</a>
+        <a class="forget-link float-r" @click="userPickerVisible = true">{{ $t('login.list') }}</a>
       </el-form-item>
       <el-form-item>
         <el-button :loading="loading" size="large" type="primary" class="btn-login" @click="handleLogin">
@@ -37,37 +37,22 @@
       </el-form-item>
     </el-form>
 
-    <copyright/>
+    <user-picker :visible.sync="userPickerVisible" @on-change="fillLoginForm"/>
 
-    <el-dialog
-      :title="$t('login.list')" :visible.sync="listDialogVisible" custom-class="user-simulate-dialog"
-      append-to-body center
-    >
-      <h5 style="margin-top: 0; text-align: center; font-weight: normal" v-html="$t('login.listHint')"></h5>
-      <el-row :gutter="15">
-        <el-col v-for="(user, index) in userSimulateList" :xs="12" :sm="12" :md="8" :lg="8" :xl="6" :key="index">
-          <div :class="{ 'checked': user.checked }" class="user-list" @click="fillLoginForm(user)">
-            <img :src="user.avatar" alt="" class="avatar"/>
-            <h5 class="username">{{ user.username }}</h5>
-            <span class="text-muted"><span class="hidden-xs-only">role: </span>{{ user.roles[0] }}</span>
-            <span class="checked-flag"><i class="el-icon-check"></i></span>
-          </div>
-        </el-col>
-      </el-row>
-    </el-dialog>
+    <copyright/>
   </div>
 </template>
 
 <script>
 import LanguagePicker from '@/components/LanguagePicker'
+import UserPicker from '@/components/UserPicker'
 import Copyright from '@/components/Copyright'
-import Service from '@/services/account'
 import { validUsername, validPassword } from '@/tools/validators'
 
 export default {
   name: 'Login',
   metaInfo: { title: 'Sign in to Vava' },
-  components: { LanguagePicker, Copyright },
+  components: { LanguagePicker, UserPicker, Copyright },
   data() {
     return {
       logo: require('@/assets/images/logo.png'),
@@ -79,30 +64,14 @@ export default {
       loading: false,
       password: true,
       expires: 7,
-      listDialogVisible: false,
-      userSimulateList: []
+      userPickerVisible: false
     }
   },
-  mounted() {
-    this.getUserList()
-  },
   methods: {
-    getUserList() {
-      Service.list().then(res => {
-        this.userSimulateList = res.map(v => {
-          this.$set(v, 'checked', false)
-          return v
-        })
-        // this.fillLoginForm(this.userSimulateList[0])
-      })
-    },
     fillLoginForm(user) {
-      this.userSimulateList.forEach(v => {
-        v.checked = user.token === v.token
-      })
       this.form.username = user.username
       this.form.password = 'a1234567'
-      this.listDialogVisible = false
+      this.userPickerVisible = false
     },
     handleLogin() {
       this.$refs['loginForm'].validate(v => {
@@ -139,77 +108,6 @@ export default {
 
   .va-icon {
     vertical-align: -5px;
-  }
-}
-
-$avatar-size:   40px;
-$list-padding:  $spacer-xs;
-.user-list {
-  height: $avatar-size + $list-padding * 2;
-  padding: $list-padding $list-padding $list-padding ($avatar-size + $spacer-sm + $list-padding);
-  margin-bottom: 15px;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  border-radius: $radius-base;
-  border: $border-default;
-  transition: $transition-border;
-
-  .avatar {
-    display: block;
-    width: $avatar-size;
-    height: $avatar-size;
-    position: absolute;
-    left: $list-padding;
-    top: $list-padding;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
-  .username {
-    margin-top: 0;
-    margin-bottom: 5px;
-  }
-
-  .checked-flag {
-    padding: 6px 8px;
-    color: $color-theme;
-    font-size: $font-size-h4;
-    position: absolute;
-    top: 0;
-    right: 0;
-    opacity: 0;
-    transform: $transition-opacity;
-  }
-
-  &:hover, &.checked {
-    border-color: $color-theme;
-  }
-
-  &.checked .checked-flag {
-    opacity: 1;
-  }
-}
-
-@media screen and (max-width: $device-md) {
-  /deep/ .user-simulate-dialog {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: auto !important;
-    margin: $spacer-base !important;
-    padding-top: 54px;
-
-    .el-dialog__header {
-      margin-top: -54px;
-    }
-
-    .el-dialog__body {
-      height: 100%;
-      overflow-y: auto;
-    }
   }
 }
 </style>

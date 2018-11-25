@@ -1,11 +1,13 @@
 import { constantRouteMap, asyncRouteMap } from '@/router/routes'
 
 const hasPermission = (roles, route) => {
-  return (route.meta && route.meta.roles) ? roles.some(role => route.meta.roles.indexOf(role) >= 0) : true
+  return (route.meta && route.meta.roles)
+    ? roles.some(role => route.meta.roles.includes(role))
+    : true
 }
 
 const filterAsyncRoutes = (asyncRouteMap, roles) => {
-  return asyncRouteMap.filters(route => {
+  return asyncRouteMap.filter(route => {
     if (hasPermission(roles, route)) {
       if (route.children && route.children.length) {
         route.children = filterAsyncRoutes(route.children, roles)
