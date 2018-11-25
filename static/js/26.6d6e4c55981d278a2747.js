@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[26],{"o//w":function(e,n,t){"use strict";t.r(n);var a={name:"Page",data:function(){return{}}},u=t("KHd+"),o=Object(u.a)(a,function(){var e=this,n=e.$createElement;return(e._self._c||n)("div",[e._v("page")])},[],!1,null,null,null);o.options.__file="Page.vue";n.default=o.exports}}]);
