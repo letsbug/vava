@@ -19,7 +19,7 @@
   "license": "MIT",
   "scripts": {
     "svgo": "svgo -f src/assets/icons --config=./svgo.yml",
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "cross-env BABEL_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "cross-env NODE_ENV=production env_config=prod node build/build.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
     "clipboard": "^2.0.1",
     "element-ui": "^2.4.8",
     "file-saver": "^2.0.0-rc.4",
@@ -52,6 +51,7 @@
     "babel-eslint": "^10.0.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.23.0",

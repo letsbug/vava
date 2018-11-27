@@ -13,11 +13,11 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const meta = require('./meta')
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
-
 const env = require('../config/prod.env')
+
+// For NamedChunksPlugin
+const seen = new Set()
+const nameLength = 4
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -70,10 +70,25 @@ const webpackConfig = merge(baseWebpackConfig, {
       //`runtime` must same as runtimeChunk name. default is `runtime`
       inline: /runtime\..*\.js$/
     }),
+    // keep chunk.id stable when chunk has no name
+    new webpack.NamedChunksPlugin(chunk => {
+      if (chunk.name) {
+        return chunk.name
+      }
+      const modules = Array.from(chunk.modulesIterable)
+      if (modules.length > 1) {
+        const hash = require('hash-sum')
+        const joinedHash = hash(modules.map(m => m.id).join('_'))
+        let len = nameLength
+        while (seen.has(joinedHash.substr(0, len))) len++
+        seen.add(joinedHash.substr(0, len))
+        return `chunk-${joinedHash.substr(0, len)}`
+      } else {
+        return modules[0].id
+      }
+    }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
-    // enable scope hoisting
-    new webpack.optimize.ModuleConcatenationPlugin(),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
@@ -93,28 +108,36 @@ const webpackConfig = merge(baseWebpackConfig, {
           priority: 10,
           chunks: 'initial'
         },
-        elementUI: {
-          name: 'chunk-elementUI', // 单独将 elementUI 拆包
-          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-          test: /[\\/]node_modules[\\/]element-ui[\\/]/
-        },
-        xlsx: {
-          name: 'chunk-xlsx', // 单独将 elementUI 拆包
-          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-          test: /[\\/]node_modules[\\/]xlsx[\\/]/
-        },
         commons: {
           name: 'chunk-commons',
           test: path.resolve(__dirname, 'src/components'),
-          minChunks: 3, // 最小公用次数
+          minChunks: 2, // 最小公用次数
           priority: 5,
           reuseExistingChunk: true
+        },
+        // 单独拆包
+        // priority: 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+        elementUI: {
+          name: 'chunk-elementUI',
+          priority: 20,
+          test: /[\\/]node_modules[\\/]element-ui[\\/]/
+        },
+        xlsx: {
+          name: 'chunk-xlsx',
+          priority: 20,
+          test: /[\\/]node_modules[\\/]xlsx[\\/]/
+        },
+        highlight: {
+          name: 'chunk-highlight',
+          priority: 20,
+          test: /[\\/]node_modules[\\/]highlight.js[\\/]/
         }
       }
     },
     runtimeChunk: 'single',
     minimizer: [
       new UglifyJsPlugin({
+        // mangle: {},
         sourceMap: config.build.productionSourceMap,
         cache: true,
         parallel: true
