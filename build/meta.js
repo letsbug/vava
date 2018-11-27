@@ -14,7 +14,7 @@ module.exports = {
    * @param user-scalable 是否允许用户缩放(yes/no)
    * @param shrink-to-fit 禁止IOS9强制缩放以适应屏幕的功能
    */
-  'viewport': 'width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, shrink-to-fit=no',
+  'viewport': 'width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no',
 
   /*
    * 设置国产双核浏览器使用什么内核渲染
