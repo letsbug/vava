@@ -6,7 +6,7 @@
 
 import Cookies from 'js-cookie'
 
-const TokenKey = 'Admin-Token'
+const TokenKey = 'User-Token'
 
 /**
  * Returns token value

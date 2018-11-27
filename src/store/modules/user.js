@@ -16,9 +16,9 @@ const user = {
     USER_SET_CODE: (state, code) => { state.code = code },
     USER_SET_STATUS: (state, status) => { state.status = status },
     USER_SET_TOKEN: (state, token) => { state.token = token },
-    USER_SET_NAME: (state, name) => { state.name = name },
+    USER_SET_NAME: (state, name) => { state.username = name },
     USER_SET_AVATAR: (state, avatar) => { state.avatar = avatar },
-    USER_SET_INTRO: (state, intro) => { state.intro = intro },
+    USER_SET_INTRO: (state, intro) => { state.introduction = intro },
     USER_SET_ROLES: (state, roles) => { state.roles = roles }
   },
   actions: {

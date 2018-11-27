@@ -37,6 +37,11 @@ export default {
       checkedIndex: -1
     }
   },
+  computed: {
+    user() {
+      return this.$store.state.user
+    }
+  },
   watch: {
     visible(v) {
       this.dialogVisible = v
@@ -44,9 +49,9 @@ export default {
   },
   mounted() {
     Service.list().then(res => {
-      this.list = res.map(v => {
-        this.$set(v, 'checked', false)
-        return v
+      this.list = res
+      this.list.forEach((v, i) => {
+        if (v.token === this.user.token) this.checkedIndex = i
       })
     })
   },
