@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+import Roles from './roles'
 import Account from './account'
 import Notification from './notification'
 import Contacts from './contacts'
@@ -15,6 +16,9 @@ Mock.XHR.prototype.send = function() {
   }
   this.proxy_send(...arguments)
 }
+
+// Roles permissions
+Mock.mock(/\/roles\/list/, 'post', Roles)
 
 // About account apis
 Mock.mock(/\/account\/login/, 'post', Account.login)

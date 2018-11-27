@@ -17,9 +17,7 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : require('../config/prod.env')
+const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',

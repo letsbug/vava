@@ -1,38 +1,22 @@
 import Mock from 'mockjs'
-import { Urls } from '@/tools'
+import Roles from './roles'
 import avatars from './avatars'
+import { Urls } from '@/tools'
 
 const userList = []
 const total = 10
 
-const permission_list = ['admin', 'assigner', 'auditor', 'editor', 'visitor']
-// export const role_list = ['administrator', 'auditor', 'editor']
-
 const generateRole = index => {
-  return permission_list.filter((v, i) => index <= i)
+  return Roles.filter((v, i) => index <= i)
 }
 
 const randomRole = () => {
-  const rd = Math.floor(Math.random() * permission_list.length)
+  const rd = Math.floor(Math.random() * Roles.length)
   return generateRole(rd)
 }
 
-const random = () => {
-  const username = '@first'
-  const avatar = avatars[Math.floor(Math.random() * avatars.length)]
-  return Mock.mock({
-    roles: randomRole(),
-    token: username,
-    code: '@id',
-    username,
-    intro: 'My name is ' + username,
-    avatar: require(`@/assets/images/avatars/${avatar}`),
-    status: 1
-  })
-}
-
-permission_list.forEach((v, i) => {
-  const token = permission_list[i]
+Roles.forEach((v, i) => {
+  const token = Roles[i]
   const rd = Mock.mock({
     roles: generateRole(i),
     token: token,
@@ -46,7 +30,17 @@ permission_list.forEach((v, i) => {
 })
 
 for (let i = 0; i < total; i++) {
-  const rd = random()
+  const username = '@first'
+  const avatar = avatars[Math.floor(Math.random() * avatars.length)]
+  const rd = Mock.mock({
+    roles: randomRole(),
+    token: username,
+    code: '@id',
+    username,
+    intro: 'My name is ' + username,
+    avatar: require(`@/assets/images/avatars/${avatar}`),
+    status: 1
+  })
   userList.push(rd)
 }
 
