@@ -41,6 +41,7 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+// Inject global directives, or local calls, as needed.
 // Object.keys(Directives).forEach(key => {
 //   Vue.directive(key, Directives[key])
 // })
