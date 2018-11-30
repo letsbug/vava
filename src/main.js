@@ -3,7 +3,6 @@
 import Vue from 'vue'
 
 import 'normalize.css'
-
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/display.css'
 
@@ -19,9 +18,11 @@ import i18n from '@/langs'
 import '@/assets/icons' // load system svg icons by symbol.
 import '@/router/helper' // router helper, user permission control.
 import '@/simulates' // mock simulate
-import '@/tools/highlight' // code highlight
 
 import * as filters from '@/filters'
+
+// Inject global directives, or local calls, as needed.
+// import * as Directives from '@/directives'
 
 // Baidu analytics
 import hmt from 'vue-ba'
@@ -39,6 +40,10 @@ Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NO
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+
+// Object.keys(Directives).forEach(key => {
+//   Vue.directive(key, Directives[key])
+// })
 
 /* eslint-disable no-new */
 new Vue({

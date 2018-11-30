@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { Highlight } from '@/directives'
 import icons from './requires'
 import { clipboard } from '@/tools'
 
@@ -25,6 +26,7 @@ export default {
   metaInfo: {
     title: 'Icons'
   },
+  directives: { Highlight },
   data() {
     return { icons }
   },
