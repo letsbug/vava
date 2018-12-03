@@ -4,45 +4,42 @@ import avatars from './avatars'
 import { Urls } from '@/tools'
 
 const userList = []
-const total = 10
+const Preset = ['Charles', 'Linda', 'Nancy', 'Karen', 'Jennifer']
 
 const generateRole = index => {
   return Roles.filter((v, i) => index <= i)
 }
 
-const randomRole = () => {
-  const rd = Math.floor(Math.random() * Roles.length)
-  return generateRole(rd)
-}
-
 Roles.forEach((v, i) => {
   const token = Roles[i]
+  const avatar = avatars[i]
   const rd = Mock.mock({
     roles: generateRole(i),
     token: token,
     code: '@id',
     username: token,
     intro: 'I\'m a ' + token,
-    avatar: require(`@/assets/images/avatar-${token}.gif`),
+    avatar: require('@/assets/images/avatars/' + avatar),
     status: 1
   })
   userList.push(rd)
 })
 
-for (let i = 0; i < total; i++) {
-  const username = '@first'
-  const avatar = avatars[Math.floor(Math.random() * avatars.length)]
+Preset.forEach((v, i) => {
+  const avatar = avatars[i + 5]
   const rd = Mock.mock({
-    roles: randomRole(),
-    token: username,
+    roles: generateRole(i),
+    token: v,
     code: '@id',
-    username,
-    intro: 'My name is ' + username,
-    avatar: require(`@/assets/images/avatars/${avatar}`),
+    username: v,
+    intro: 'My name is ' + v,
+    avatar: require('@/assets/images/avatars/' + avatar),
     status: 1
   })
   userList.push(rd)
-}
+})
+
+userList.sort((a, b) => a.roles.length > b.roles.length ? -1 : 1)
 
 export default {
   login: config => {
