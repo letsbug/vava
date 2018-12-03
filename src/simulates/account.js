@@ -10,9 +10,16 @@ const generateRole = index => {
   return Roles.filter((v, i) => index <= i)
 }
 
+const generateAvatar = () => {
+  const index = Math.floor(Math.random() * avatars.length)
+  const target = avatars[index]
+  avatars.splice(index, 1)
+  return target
+}
+
 Roles.forEach((v, i) => {
   const token = Roles[i]
-  const avatar = avatars[i]
+  const avatar = generateAvatar()
   const rd = Mock.mock({
     roles: generateRole(i),
     token: token,
@@ -26,7 +33,7 @@ Roles.forEach((v, i) => {
 })
 
 Preset.forEach((v, i) => {
-  const avatar = avatars[i + 5]
+  const avatar = generateAvatar()
   const rd = Mock.mock({
     roles: generateRole(i),
     token: v,
