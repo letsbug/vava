@@ -34,7 +34,7 @@
       <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip/>
       <el-table-column label="AUDITOR" prop="auditor" width="96" show-overflow-tooltip/>
       <el-table-column label="PV" prop="pv" width="60">
-        <template slot-scope="scope">{{ scope.row.pv | articlePV }}</template>
+        <template slot-scope="scope">{{ scope.row.pv | pageview }}</template>
       </el-table-column>
       <el-table-column label="ACTIONS" width="90" align="center" class-name="has-actions table-actions actions-small">
         <template slot-scope="scope">

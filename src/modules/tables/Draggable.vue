@@ -17,7 +17,7 @@
         </template>
       </el-table-column>
       <el-table-column label="PV" prop="pv" width="66">
-        <template slot-scope="scope">{{ scope.row.pv | articlePV }}</template>
+        <template slot-scope="scope">{{ scope.row.pv | pageview }}</template>
       </el-table-column>
       <el-table-column label="DRAG" width="66" align="center">
         <template slot-scope="scope">

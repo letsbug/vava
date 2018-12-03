@@ -61,7 +61,7 @@
         </template>
       </el-table-column>
       <el-table-column label="PV" prop="pv" width="66" sortable>
-        <template slot-scope="scope">{{ scope.row.pv | articlePV }}</template>
+        <template slot-scope="scope">{{ scope.row.pv | pageview }}</template>
       </el-table-column>
       <el-table-column label="ACTIONS" width="164" class-name="has-actions actions-small">
         <template slot-scope="scope">
