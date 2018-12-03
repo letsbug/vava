@@ -12,7 +12,7 @@ const contents = cn => cn ? Mock.Random.cparagraph() : Mock.Random.paragraph()
 const random = cn => Mock.mock({
   id: '@increment',
   timestamp: +Mock.Random.date('T'),
-  'author|1': cn ? '@cname' : '@first',
+  'author|1': Account.editors().map(v => v.username),
   'auditor|1': Account.auditors().map(v => v.username),
   title: cn ? '@ctitle(5, 20)' : '@title(5, 20)',
   summery: cn ? '@cparagraph(1, 2)' : '@paragraph(1, 2)',
@@ -38,7 +38,7 @@ export default {
 
     const _list = list.filter(v => {
       let is = true
-      if (title) is = ~v.title.indexOf(title)
+      if (title) is = v.title.indexOf(title) > -1
       if (level) is = v.level === level
       if (status) is = v.status === status
       return is

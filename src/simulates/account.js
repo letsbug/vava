@@ -57,5 +57,6 @@ export default {
   },
   logout: () => 'success',
   list: () => userList,
-  auditors: () => userList.filter(v => ~v.roles.indexOf('audit'))
+  editors: () => userList.filter(v => v.roles[0] === 'editor'),
+  auditors: () => userList.filter(v => v.roles[0] === 'auditor')
 }
