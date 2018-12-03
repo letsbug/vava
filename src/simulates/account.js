@@ -13,6 +13,7 @@ const generateRole = index => {
 const generateAvatar = () => {
   const index = Math.floor(Math.random() * avatars.length)
   const target = avatars[index]
+  // To avoid repetition
   avatars.splice(index, 1)
   return target
 }
