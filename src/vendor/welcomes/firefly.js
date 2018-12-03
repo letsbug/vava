@@ -2,13 +2,13 @@
 
 /* eslint-disable */
 
-let num = 200
 let w = window.innerWidth
 let h = window.innerHeight
-let _x = 0
-let _y = 0
-let _z = 150
-let dtr = function(d) {
+const num = 200
+const _x = 0
+const _y = 0
+const _z = 150
+const dtr = function(d) {
   return d * Math.PI / 180
 }
 
@@ -246,7 +246,7 @@ Build.prototype.draw = function() {
   this.rotObj.z += 0.1
 
   for (let i = 0; i < this.varr.length; i++) {
-    for (let val in this.calc[i]) {
+    for (const val in this.calc[i]) {
       if (this.calc[i].hasOwnProperty(val)) {
         this.calc[i][val] += this.vel
         if (this.calc[i][val] > this.lim) this.calc[i][val] = 0
