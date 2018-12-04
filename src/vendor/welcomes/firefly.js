@@ -1,7 +1,5 @@
 'use strict'
 
-/* eslint-disable */
-
 let w = window.innerWidth
 let h = window.innerHeight
 const num = 200
@@ -17,40 +15,20 @@ const rnd = function() {
 }
 
 const cam = {
-  obj: {
-    x: _x,
-    y: _y,
-    z: _z
-  },
-  dest: {
-    x: 0,
-    y: 0,
-    z: 1
-  },
-  dist: {
-    x: 0,
-    y: 0,
-    z: 200
-  },
-  ang: {
-    cplane: 0,
-    splane: 0,
-    ctheta: 0,
-    stheta: 0
-  },
+  obj: { x: _x, y: _y, z: _z },
+  dest: { x: 0, y: 0, z: 1 },
+  dist: { x: 0, y: 0, z: 200 },
+  ang: { cplane: 0, splane: 0, ctheta: 0, stheta: 0 },
   zoom: 1,
-  disp: {
-    x: w / 2,
-    y: h / 2,
-    z: 0
-  },
+  disp: { x: w / 2, y: h / 2, z: 0 },
   upd: function() {
     cam.dist.x = cam.dest.x - cam.obj.x
     cam.dist.y = cam.dest.y - cam.obj.y
     cam.dist.z = cam.dest.z - cam.obj.z
     cam.ang.cplane = -cam.dist.z / Math.sqrt(cam.dist.x * cam.dist.x + cam.dist.z * cam.dist.z)
     cam.ang.splane = cam.dist.x / Math.sqrt(cam.dist.x * cam.dist.x + cam.dist.z * cam.dist.z)
-    cam.ang.ctheta = Math.sqrt(cam.dist.x * cam.dist.x + cam.dist.z * cam.dist.z) / Math.sqrt(cam.dist.x * cam.dist.x + cam.dist.y * cam.dist.y + cam.dist.z * cam.dist.z)
+    cam.ang.ctheta = Math.sqrt(cam.dist.x * cam.dist.x + cam.dist.z * cam.dist.z) /
+      Math.sqrt(cam.dist.x * cam.dist.x + cam.dist.y * cam.dist.y + cam.dist.z * cam.dist.z)
     cam.ang.stheta = -cam.dist.y / Math.sqrt(cam.dist.x * cam.dist.x + cam.dist.y * cam.dist.y + cam.dist.z * cam.dist.z)
   }
 }
@@ -149,7 +127,7 @@ const trans = {
   }
 }
 
-const threeD = function(param) {
+const ThreeD = function(param) {
   this.transIn = {}
   this.transOut = {}
   this.transIn.vtx = (param.vtx)
@@ -158,7 +136,7 @@ const threeD = function(param) {
   this.transIn.pos = (param.pos)
 }
 
-threeD.prototype.vupd = function() {
+ThreeD.prototype.vupd = function() {
   this.transOut = trans.steps(
     this.transIn.vtx,
     this.transIn.sz,
@@ -181,7 +159,6 @@ Build.prototype.go = function() {
   this.canvas = document.getElementById('canv')
   this.canvas.width = window.innerWidth
   this.canvas.height = window.innerHeight
-  console.log(this.canvas)
   this.$ = this.canvas.getContext('2d')
   this.$.globalCompositeOperation = 'source-over'
   this.varr = []
@@ -191,35 +168,15 @@ Build.prototype.go = function() {
     this.add()
   }
 
-  this.rotObj = {
-    x: 0,
-    y: 0,
-    z: 0
-  }
-  this.objSz = {
-    x: w / 5,
-    y: h / 5,
-    z: w / 5
-  }
+  this.rotObj = { x: 0, y: 0, z: 0 }
+  this.objSz = { x: w / 5, y: h / 5, z: w / 5 }
 }
 
 Build.prototype.add = function() {
-  this.varr.push(new threeD({
-    vtx: {
-      x: rnd(),
-      y: rnd(),
-      z: rnd()
-    },
-    sz: {
-      x: 0,
-      y: 0,
-      z: 0
-    },
-    rot: {
-      x: 20,
-      y: -20,
-      z: 0
-    },
+  this.varr.push(new ThreeD({
+    vtx: { x: rnd(), y: rnd(), z: rnd() },
+    sz: { x: 0, y: 0, z: 0 },
+    rot: { x: 20, y: -20, z: 0 },
     pos: {
       x: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
       y: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
@@ -289,24 +246,34 @@ Build.prototype.anim = function() {
   window.requestAnimationFrame(anim)
 }
 
-Build.prototype.run = function() {
-  this.anim()
-
-  window.addEventListener('mousemove', function(e) {
-    this.toX = (e.clientX - this.canvas.width / 2) * -0.8
-    this.toY = (e.clientY - this.canvas.height / 2) * 0.8
-  }.bind(this))
-  window.addEventListener('touchmove', function(e) {
-    e.preventDefault()
-    this.toX = (e.touches[0].clientX - this.canvas.width / 2) * -0.8
-    this.toY = (e.touches[0].clientY - this.canvas.height / 2) * 0.8
-  }.bind(this))
+const onMouseMove = function(e) {
+  this.toX = (e.clientX - this.canvas.width / 2) * -0.8
+  this.toY = (e.clientY - this.canvas.height / 2) * 0.8
+}
+const onTouchMove = function(e) {
+  e.preventDefault()
+  this.toX = (e.touches[0].clientX - this.canvas.width / 2) * -0.8
+  this.toY = (e.touches[0].clientY - this.canvas.height / 2) * 0.8
+}
+const onResize = function(e) {
+  e.preventDefault()
+  this.canvas.width = w = window.innerWidth
+  this.canvas.height = h = window.innerHeight
 }
 
-const app = new Build()
-app.run()
+Build.prototype.run = function() {
+  this.anim()
+  window.addEventListener('mousemove', onMouseMove.bind(this))
+  window.addEventListener('touchmove', onTouchMove.bind(this))
+  window.addEventListener('resize', onResize.bind(this))
+}
 
-window.addEventListener('resize', function() {
-  app.canvas.width = w = window.innerWidth
-  app.canvas.height = h = window.innerHeight
-}, false)
+Build.prototype.stop = function() {
+  window.removeEventListener('mousemove', onMouseMove)
+  window.removeEventListener('touchmove', onTouchMove)
+  window.removeEventListener('resize', onResize)
+}
+
+export const run = function() {
+  new Build().run()
+}
