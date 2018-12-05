@@ -4,6 +4,7 @@ export default {
     username: 'username',
     password: 'password (All strings within the rule)',
     remember: `Remember (7days)`,
+    rememberDefault: 'Cookie are stored for 10 minutes by default',
     login: 'Sign in',
     list: 'About accounts?',
     listHint: 'Simulate with mock.js, <strong>Pick any one to auto fill login form</strong>!'

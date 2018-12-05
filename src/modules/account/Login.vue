@@ -26,7 +26,9 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox v-model="form.remember" :label="$t('login.remember')" class="checkbox-green" name="remember"/>
+        <el-tooltip :content="$t('login.rememberDefault')" effect="theme" placement="top-start">
+          <el-checkbox v-model="form.remember" :label="$t('login.remember')" class="checkbox-green" name="remember"/>
+        </el-tooltip>
         <!--<router-link class="forget-link float-r" to="/password">Forgot password?</router-link>-->
         <a class="forget-link float-r" @click="userPickerVisible = true">{{ $t('login.list') }}</a>
       </el-form-item>
