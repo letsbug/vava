@@ -10,6 +10,11 @@ NProgress.configure({ showSpinner: false })
 // Route redirect whitelist.
 const whitelist = ['/login', '/join', '/password']
 
+function hasPermission(roles, permissionRoles) {
+  if (~roles.indexOf('admin') || !permissionRoles) return true // admin permission passed directly
+  return roles.some(role => ~permissionRoles.indexOf(role))
+}
+
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (Token.get()) {
@@ -32,10 +37,20 @@ router.beforeEach((to, from, next) => {
             next('/')
           })
         })
-      } else next()
+      } else {
+        if (hasPermission(store.getters.roles, to.meta.roles)) {
+          next()
+        } else {
+          next({ path: '/error', replace: true, query: { code: 401, noGoBack: true }})
+        }
+      }
     }
   } else {
-    // When the user is not logged in, the route is redirected to the login page.
+    if (store.getters.user.token) {
+      Message.error('Your login has expired. Please login again.')
+    }
+    // The user is not logged in or login has expired
+    // redirected to the login page.
     if (whitelist.indexOf(to.path) === -1) {
       next({
         path: '/login',

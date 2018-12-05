@@ -26,7 +26,7 @@ const user = {
       Account.login(userInfo.username.trim(), userInfo.password).then(res => {
         commit('USER_SET_TOKEN', res.data.token)
         // User Token are stored for 10 minutes by default in cookie.js
-        const expire = userInfo.remember ? state.expire : 1 / 24 / 6
+        const expire = userInfo.remember ? state.expire : 1 / 24 / 60
         Token.set(res.data.token, expire)
         resolve()
       }).catch(err => {

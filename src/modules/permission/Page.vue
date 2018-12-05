@@ -15,6 +15,9 @@
       </div>
     </div>
     <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser"/>
+
+    <br/>
+    <h1>This page is accessible only to admin and assigner</h1>
   </div>
 </template>
 
@@ -36,6 +39,7 @@ export default {
   },
   methods: {
     onChooseUser(user) {
+      // TODO change user or user roles.
       console.log(user)
     }
   }

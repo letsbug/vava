@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     code() {
-      return this.$route.params['code']
+      return this.$route.query['code'] || 404
     },
     flag() {
       const random = Math.floor(Math.random() * 4 + 1)

@@ -35,7 +35,7 @@ export const constantRouteMap = [
 
   { path: '/password', component: () => import('@/modules/account/PasswordReset'), hidden: true },
 
-  { path: '/error/:code', component: () => import('@/modules/errors'), hidden: true },
+  { path: '/error', component: () => import('@/modules/errors'), hidden: true },
 
   {
     path: '',
@@ -69,19 +69,29 @@ export const asyncRouteMap = [
   {
     path: '/permission',
     component: Layout,
-    meta: { title: 'permission', icon: 'mark-vip' },
+    meta: {
+      title: 'permission',
+      icon: 'mark-vip',
+      roles: ['admin', 'assigner']
+    },
     redirect: '/permission/page',
     children: [
       {
         path: 'page',
         name: 'PermissionPage',
-        meta: { title: 'permissionPage', icon: 'action-clipboard' },
+        meta: {
+          title: 'permissionPage',
+          icon: 'action-clipboard'
+        },
         component: () => import('@/modules/permission/Page')
       },
       {
         path: 'directive',
         name: 'PermissionDirective',
-        meta: { title: 'permissionDirective', icon: 'mark-terminal' },
+        meta: {
+          title: 'permissionDirective',
+          icon: 'mark-terminal'
+        },
         component: () => import('@/modules/permission/Directive')
       }
     ]
@@ -152,5 +162,5 @@ export const asyncRouteMap = [
   },
 
   // The path not found in the router list will be forced a redirect to the 404 page
-  { path: '*', redirect: '/error/404', hidden: true }
+  { path: '*', redirect: '/error', hidden: true }
 ]
