@@ -17,6 +17,8 @@ $login-form-icon-color:   $color-gray-600;
     margin-top: 56px;
     width: $login-form-width;
     padding: 0 $login-form-padding;
+    position: relative;
+    z-index: 1;
 
     .form-logo {
       text-align: center;

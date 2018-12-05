@@ -1,4 +1,8 @@
-const canvas = document.getElementById('canv')
+'use strict'
+
+// firefly-joint
+
+const canvas = document.getElementById('appBackDrop')
 
 const ctx = canvas.getContext('2d')
 canvas.width = window.innerWidth
@@ -12,7 +16,7 @@ const mousePosition = {
 }
 
 const dots = {
-  nb: 150,
+  nb: 300,
   distance: 50,
   d_radius: 100,
   array: []
@@ -48,20 +52,18 @@ function Color(min) {
   this.style = createColorStyle(this.r, this.g, this.b)
 }
 
-function Dot() {
-  this.x = Math.random() * canvas.width
-  this.y = Math.random() * canvas.height
+class Dot {
+  constructor() {
+    this.x = Math.random() * canvas.width
+    this.y = Math.random() * canvas.height
+    this.vx = -0.5 + Math.random()
+    this.vy = -0.5 + Math.random()
 
-  this.vx = -0.5 + Math.random()
-  this.vy = -0.5 + Math.random()
+    this.radius = Math.random() * 2
+    this.color = new Color()
+  }
 
-  this.radius = Math.random() * 2
-
-  this.color = new Color()
-}
-
-Dot.prototype = {
-  draw: function() {
+  draw() {
     ctx.beginPath()
     ctx.fillStyle = this.color.style
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
@@ -80,12 +82,11 @@ function moveDots() {
     const dot = dots.array[i]
 
     if (dot.y < 0 || dot.y > canvas.height) {
-      dot.vx = dot.vx
       dot.vy = -dot.vy
     } else if (dot.x < 0 || dot.x > canvas.width) {
       dot.vx = -dot.vx
-      dot.vy = dot.vy
     }
+
     dot.x += dot.vx
     dot.y += dot.vy
   }
@@ -94,18 +95,26 @@ function moveDots() {
 function connectDots() {
   for (let i = 0; i < dots.nb; i++) {
     for (let j = 0; j < dots.nb; j++) {
-      i_dot = dots.array[i]
-      j_dot = dots.array[j]
+      const i_dot = dots.array[i]
+      const j_dot = dots.array[j]
 
-      if ((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance && (i_dot.x - j_dot.x) > -dots.distance && (i_dot.y - j_dot.y) > -dots.distance) {
-        if ((i_dot.x - mousePosition.x) < dots.d_radius && (i_dot.y - mousePosition.y) < dots.d_radius && (i_dot.x - mousePosition.x) > -dots.d_radius && (i_dot.y - mousePosition.y) > -dots.d_radius) {
-          ctx.beginPath()
-          ctx.strokeStyle = averageColorStyles(i_dot, j_dot)
-          ctx.moveTo(i_dot.x, i_dot.y)
-          ctx.lineTo(j_dot.x, j_dot.y)
-          ctx.stroke()
-          ctx.closePath()
-        }
+      const inDotsDistance = (i_dot.x - j_dot.x) < dots.distance &&
+        (i_dot.y - j_dot.y) < dots.distance &&
+        (i_dot.x - j_dot.x) > -dots.distance &&
+        (i_dot.y - j_dot.y) > -dots.distance
+
+      const dotsInMouseRadius = (i_dot.x - mousePosition.x) < dots.d_radius &&
+        (i_dot.y - mousePosition.y) < dots.d_radius &&
+        (i_dot.x - mousePosition.x) > -dots.d_radius &&
+        (i_dot.y - mousePosition.y) > -dots.d_radius
+
+      if (inDotsDistance && dotsInMouseRadius) {
+        ctx.beginPath()
+        ctx.strokeStyle = averageColorStyles(i_dot, j_dot)
+        ctx.moveTo(i_dot.x, i_dot.y)
+        ctx.lineTo(j_dot.x, j_dot.y)
+        ctx.stroke()
+        ctx.closePath()
       }
     }
   }
@@ -131,7 +140,7 @@ window.addEventListener('mousemove', function(e) {
   mousePosition.y = e.pageY
 })
 
-window.addEventListener('mouseleave', function(e) {
+window.addEventListener('mouseleave', function() {
   mousePosition.x = canvas.width / 2
   mousePosition.y = canvas.height / 2
 })

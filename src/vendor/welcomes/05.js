@@ -1,4 +1,4 @@
-const canvas = document.getElementById('canv')
+const canvas = document.getElementById('appBackDrop')
 let w = canvas.width = window.innerWidth
 let h = canvas.height = window.innerHeight
 const ctx = canvas.getContext('2d')
@@ -86,7 +86,7 @@ window.addEventListener('resize', function() {
   ctx.fillRect(0, 0, w, h)
 })
 
-export function anim() {
+!(function anim() {
   window.requestAnimationFrame(anim)
 
   ctx.globalCompositeOperation = 'source-over'
@@ -104,4 +104,4 @@ export function anim() {
   particles.map(function(particle) {
     particle.step()
   })
-}
+})()

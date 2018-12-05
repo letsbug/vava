@@ -1,5 +1,7 @@
 'use strict'
 
+// firefly-3d
+
 let w = window.innerWidth
 let h = window.innerHeight
 const num = 200
@@ -146,134 +148,139 @@ ThreeD.prototype.vupd = function() {
   )
 }
 
-const Build = function() {
-  this.vel = 0.04
-  this.lim = 360
-  this.diff = 200
-  this.toX = _x
-  this.toY = _y
-  this.go()
-}
-
-Build.prototype.go = function() {
-  this.canvas = document.getElementById('canv')
-  this.canvas.width = window.innerWidth
-  this.canvas.height = window.innerHeight
-  this.$ = this.canvas.getContext('2d')
-  this.$.globalCompositeOperation = 'source-over'
-  this.varr = []
-  this.calc = []
-
-  for (let i = 0, len = num; i < len; i++) {
-    this.add()
+class Build {
+  constructor() {
+    this.vel = 0.04
+    this.lim = 360
+    this.diff = 200
+    this.toX = _x
+    this.toY = _y
+    this.go()
   }
 
-  this.rotObj = { x: 0, y: 0, z: 0 }
-  this.objSz = { x: w / 5, y: h / 5, z: w / 5 }
-}
+  go() {
+    this.canvas = document.getElementById('appBackDrop')
+    this.canvas.width = window.innerWidth
+    this.canvas.height = window.innerHeight
+    this.$ = this.canvas.getContext('2d')
+    this.$.globalCompositeOperation = 'source-over'
+    this.varr = []
+    this.calc = []
 
-Build.prototype.add = function() {
-  this.varr.push(new ThreeD({
-    vtx: { x: rnd(), y: rnd(), z: rnd() },
-    sz: { x: 0, y: 0, z: 0 },
-    rot: { x: 20, y: -20, z: 0 },
-    pos: {
-      x: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
-      y: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
-      z: this.diff * Math.sin(360 * Math.random() * Math.PI / 180)
+    for (let i = 0, len = num; i < len; i++) {
+      this.add()
     }
-  }))
-  this.calc.push({
-    x: 360 * Math.random(),
-    y: 360 * Math.random(),
-    z: 360 * Math.random()
-  })
-}
 
-Build.prototype.upd = function() {
-  cam.obj.x += (this.toX - cam.obj.x) * 0.05
-  cam.obj.y += (this.toY - cam.obj.y) * 0.05
-}
+    this.rotObj = { x: 0, y: 0, z: 0 }
+    this.objSz = { x: w / 5, y: h / 5, z: w / 5 }
+  }
 
-Build.prototype.draw = function() {
-  this.$.clearRect(0, 0, this.canvas.width, this.canvas.height)
-  cam.upd()
-  this.rotObj.x += 0.1
-  this.rotObj.y += 0.1
-  this.rotObj.z += 0.1
-
-  for (let i = 0; i < this.varr.length; i++) {
-    for (const val in this.calc[i]) {
-      if (this.calc[i].hasOwnProperty(val)) {
-        this.calc[i][val] += this.vel
-        if (this.calc[i][val] > this.lim) this.calc[i][val] = 0
+  add() {
+    this.varr.push(new ThreeD({
+      vtx: { x: rnd(), y: rnd(), z: rnd() },
+      sz: { x: 0, y: 0, z: 0 },
+      rot: { x: 20, y: -20, z: 0 },
+      pos: {
+        x: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
+        y: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
+        z: this.diff * Math.sin(360 * Math.random() * Math.PI / 180)
       }
-    }
-
-    this.varr[i].transIn.pos = {
-      x: this.diff * Math.cos(this.calc[i].x * Math.PI / 180),
-      y: this.diff * Math.sin(this.calc[i].y * Math.PI / 180),
-      z: this.diff * Math.sin(this.calc[i].z * Math.PI / 180)
-    }
-    this.varr[i].transIn.rot = this.rotObj
-    this.varr[i].transIn.sz = this.objSz
-    this.varr[i].vupd()
-    if (this.varr[i].transOut.p < 0) continue
-    const g = this.$.createRadialGradient(this.varr[i].transOut.x, this.varr[i].transOut.y, this.varr[i].transOut.p, this.varr[i].transOut.x, this.varr[i].transOut.y, this.varr[i].transOut.p * 2)
-    this.$.globalCompositeOperation = 'lighter'
-    g.addColorStop(0, 'hsla(255, 255%, 255%, 1)')
-    g.addColorStop(0.5, 'hsla(' + (i + 2) + ',85%, 40%,1)')
-    g.addColorStop(1, 'hsla(' + (i) + ',85%, 40%,.5)')
-    this.$.fillStyle = g
-    this.$.beginPath()
-    this.$.arc(this.varr[i].transOut.x, this.varr[i].transOut.y, this.varr[i].transOut.p * 2, 0, Math.PI * 2, false)
-    this.$.fill()
-    this.$.closePath()
+    }))
+    this.calc.push({
+      x: 360 * Math.random(),
+      y: 360 * Math.random(),
+      z: 360 * Math.random()
+    })
   }
-}
-Build.prototype.anim = function() {
-  window.requestAnimationFrame = (function() {
-    return window.requestAnimationFrame ||
+
+  upd() {
+    cam.obj.x += (this.toX - cam.obj.x) * 0.05
+    cam.obj.y += (this.toY - cam.obj.y) * 0.05
+  }
+
+  draw() {
+    this.$.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    cam.upd()
+    this.rotObj.x += 0.1
+    this.rotObj.y += 0.1
+    this.rotObj.z += 0.1
+
+    for (let i = 0; i < this.varr.length; i++) {
+      for (const val in this.calc[i]) {
+        if (this.calc[i].hasOwnProperty(val)) {
+          this.calc[i][val] += this.vel
+          if (this.calc[i][val] > this.lim) this.calc[i][val] = 0
+        }
+      }
+
+      this.varr[i].transIn.pos = {
+        x: this.diff * Math.cos(this.calc[i].x * Math.PI / 180),
+        y: this.diff * Math.sin(this.calc[i].y * Math.PI / 180),
+        z: this.diff * Math.sin(this.calc[i].z * Math.PI / 180)
+      }
+      this.varr[i].transIn.rot = this.rotObj
+      this.varr[i].transIn.sz = this.objSz
+      this.varr[i].vupd()
+      if (this.varr[i].transOut.p < 0) continue
+      const g = this.$.createRadialGradient(
+        this.varr[i].transOut.x,
+        this.varr[i].transOut.y,
+        this.varr[i].transOut.p,
+        this.varr[i].transOut.x,
+        this.varr[i].transOut.y,
+        this.varr[i].transOut.p * 2
+      )
+      this.$.globalCompositeOperation = 'lighter'
+      g.addColorStop(0, 'hsla(255, 255%, 255%, 1)')
+      g.addColorStop(0.5, 'hsla(' + (i + 2) + ',85%, 40%,1)')
+      g.addColorStop(1, 'hsla(' + (i) + ',85%, 40%,.5)')
+      this.$.fillStyle = g
+      this.$.beginPath()
+      this.$.arc(
+        this.varr[i].transOut.x,
+        this.varr[i].transOut.y,
+        this.varr[i].transOut.p * 2,
+        0,
+        Math.PI * 2,
+        false
+      )
+      this.$.fill()
+      this.$.closePath()
+    }
+  }
+
+  anim() {
+    const _this = this
+    window.requestAnimationFrame = window.requestAnimationFrame ||
       function(callback) {
         window.setTimeout(callback, 1000 / 60)
       }
-  })()
-  const anim = function() {
-    this.upd()
-    this.draw()
+    const anim = function() {
+      _this.upd()
+      _this.draw()
+      window.requestAnimationFrame(anim)
+    }
     window.requestAnimationFrame(anim)
-  }.bind(this)
-  window.requestAnimationFrame(anim)
+  }
+
+  run() {
+    const _this = this
+    _this.anim()
+    window.addEventListener('mousemove', function(e) {
+      _this.toX = (e.clientX - _this.canvas.width / 2) * -0.8
+      _this.toY = (e.clientY - _this.canvas.height / 2) * 0.8
+    })
+    window.addEventListener('touchmove', function(e) {
+      e.preventDefault()
+      _this.toX = (e.touches[0].clientX - _this.canvas.width / 2) * -0.8
+      _this.toY = (e.touches[0].clientY - _this.canvas.height / 2) * 0.8
+    })
+    window.addEventListener('resize', function(e) {
+      e.preventDefault()
+      _this.canvas.width = w = window.innerWidth
+      _this.canvas.height = h = window.innerHeight
+    })
+  }
 }
 
-const onMouseMove = function(e) {
-  this.toX = (e.clientX - this.canvas.width / 2) * -0.8
-  this.toY = (e.clientY - this.canvas.height / 2) * 0.8
-}
-const onTouchMove = function(e) {
-  e.preventDefault()
-  this.toX = (e.touches[0].clientX - this.canvas.width / 2) * -0.8
-  this.toY = (e.touches[0].clientY - this.canvas.height / 2) * 0.8
-}
-const onResize = function(e) {
-  e.preventDefault()
-  this.canvas.width = w = window.innerWidth
-  this.canvas.height = h = window.innerHeight
-}
-
-Build.prototype.run = function() {
-  this.anim()
-  window.addEventListener('mousemove', onMouseMove.bind(this))
-  window.addEventListener('touchmove', onTouchMove.bind(this))
-  window.addEventListener('resize', onResize.bind(this))
-}
-
-Build.prototype.stop = function() {
-  window.removeEventListener('mousemove', onMouseMove)
-  window.removeEventListener('touchmove', onTouchMove)
-  window.removeEventListener('resize', onResize)
-}
-
-export const run = function() {
-  new Build().run()
-}
+new Build().run()

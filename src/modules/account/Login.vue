@@ -40,6 +40,8 @@
     <user-picker :visible.sync="userPickerVisible" @on-change="fillLoginForm"/>
 
     <copyright/>
+
+    <canvas id="appBackDrop" ref="appBackDrop"></canvas>
   </div>
 </template>
 
@@ -66,6 +68,14 @@ export default {
       expires: 7,
       userPickerVisible: false
     }
+  },
+  mounted() {
+    this.backdrop = this.$refs['appBackDrop']
+    document.body.insertBefore(this.backdrop, document.getElementById('app'))
+    import(`@/vendor/welcomes/0${Math.floor(Math.random() * 5) + 1}`)
+  },
+  destroyed() {
+    document.body.removeChild(this.backdrop)
   },
   methods: {
     fillLoginForm(user) {
@@ -109,5 +119,16 @@ export default {
   .va-icon {
     vertical-align: -5px;
   }
+}
+
+#appBackDrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
 }
 </style>

@@ -9,14 +9,6 @@ import { meta } from './meta'
 
 export default {
   name: 'App',
-  metaInfo: meta,
-  data() {
-    return {
-      theme: 'pink'
-    }
-  },
-  mounted() {
-    if (this.theme === 'pink') require('@/themes/light.scss')
-  }
+  metaInfo: meta
 }
 </script>
