@@ -8,9 +8,7 @@ Vue.use(Router)
 export default new Router({
   linkExactActiveClass: 'active',
 
-  // When loading on demand, only constants need to be initialize here
-  // routes: constantRouteMap
-
-  // Fully loaded when no need to load as needed
+  // Fully import only when permissions need to be changed dynamically.
   routes: constantRouteMap.concat(asyncRouteMap)
+  // routes: constantRouteMap
 })

@@ -27,9 +27,8 @@ router.beforeEach((to, from, next) => {
         store.dispatch('user_info').then(res => {
           const roles = res.data.roles
           store.dispatch('perm_generate_routes', { roles }).then(() => {
-            // Initializes routing on demand based on permissions.
-            // Or loads it all at the time the routing instance is created.
-            //
+            // Remove this line when you need to change permissions dynamically,
+            // and import all routes when the vue route is initialized
             // router.addRoutes(store.getters.routes_addons)
 
             // replace: true so the navigation will not leave a history record
