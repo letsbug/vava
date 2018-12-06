@@ -27,8 +27,13 @@ router.beforeEach((to, from, next) => {
         store.dispatch('user_info').then(res => {
           const roles = res.data.roles
           store.dispatch('perm_generate_routes', { roles }).then(() => {
-            router.addRoutes(store.getters.routes_addons)
-            // hack方法 确保addRoutes已完成, set the replace: true so the navigation will not leave a history record
+            // Initializes routing on demand based on permissions.
+            // Or loads it all at the time the routing instance is created.
+            //
+            // router.addRoutes(store.getters.routes_addons)
+
+            // replace: true so the navigation will not leave a history record
+            // hack方法 确保addRoutes已完成,
             next({ ...to, replace: true })
           })
         }).catch(err => {
@@ -41,14 +46,11 @@ router.beforeEach((to, from, next) => {
         if (hasPermission(store.getters.roles, to.meta.roles)) {
           next()
         } else {
-          next({ path: '/error', replace: true, query: { code: 401, noGoBack: true }})
+          next({ path: '/error', replace: true, query: { code: 403, noGoBack: true }})
         }
       }
     }
   } else {
-    if (store.getters.user.token) {
-      Message.error('Your login has expired. Please login again.')
-    }
     // The user is not logged in or login has expired
     // redirected to the login page.
     if (whitelist.indexOf(to.path) === -1) {
@@ -59,6 +61,9 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     } else {
       next()
+    }
+    if (store.getters.user.token) {
+      Message.error('Your login has expired. Please login again.')
     }
   }
 })

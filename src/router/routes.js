@@ -9,6 +9,7 @@ import Excels from './modules/excels'
  * @param nocache {boolean} - Whether the tag needs to cache the route to avoid repeating the rendered DOM
  *                            when switching routes frequently (true - not allow)
  * @param hidden {boolean} - Marks whether the route is visible and displayed when the template is rendered.
+ * @param alwaysShow: {boolean} - Always show the root menu in side-menu, whatever its child routes length
  * @param meta {Object}
  *        title - side-menu & tab-bar display name
  *        icon -  side-menu display icon.
@@ -72,16 +73,18 @@ export const asyncRouteMap = [
     meta: {
       title: 'permission',
       icon: 'mark-vip',
-      roles: ['admin', 'assigner']
+      roles: ['admin', 'assigner', 'auditor']
     },
     redirect: '/permission/page',
+    alwaysShow: true,
     children: [
       {
         path: 'page',
         name: 'PermissionPage',
         meta: {
           title: 'permissionPage',
-          icon: 'action-clipboard'
+          icon: 'action-clipboard',
+          roles: ['admin']
         },
         component: () => import('@/modules/permission/Page')
       },
@@ -90,7 +93,8 @@ export const asyncRouteMap = [
         name: 'PermissionDirective',
         meta: {
           title: 'permissionDirective',
-          icon: 'mark-terminal'
+          icon: 'mark-terminal',
+          roles: ['assigner', 'auditor']
         },
         component: () => import('@/modules/permission/Directive')
       }

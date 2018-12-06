@@ -1,6 +1,6 @@
 <template>
-  <div :class="{ 'expanded': visible && route.children.length > 1 }" class="va-side-nav">
-    <template v-if="route.children.length > 1">
+  <div :class="{ 'expanded': visible && (route.children.length > 1 || route.alwaysShow) }" class="va-side-nav">
+    <template v-if="route.children.length > 1 || route.alwaysShow">
       <a
         :data-path="route.path"
         :class="{ 'active': current === route.path }" class="nav-title expander"
