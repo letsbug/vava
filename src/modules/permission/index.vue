@@ -7,17 +7,17 @@
       <div class="attrs">
         <div class="username">
           {{ user.username }}
-          <el-tooltip content="change current user">
+          <el-tooltip content="switch user">
             <va-icon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true"/>
           </el-tooltip>
         </div>
-        <div class="text-muted">Your roles: {{ user.roles }}</div>
+        <div class="text-muted">Your roles：{{ user.roles.join('、') }}</div>
       </div>
     </div>
     <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser"/>
 
     <br/>
-    <h1>This page is accessible only to admin and assigner</h1>
+    <h2>This page is accessible only to {{ $route.meta.roles.join(' & ') }}.</h2>
   </div>
 </template>
 
@@ -25,7 +25,7 @@
 import UserPicker from '@/components/UserPicker'
 
 export default {
-  name: 'Page',
+  name: 'Admin',
   components: { UserPicker },
   data() {
     return {
@@ -39,8 +39,14 @@ export default {
   },
   methods: {
     onChooseUser(user) {
-      // TODO change user or user roles.
-      console.log(user)
+      this.$store.dispatch('user_switch', user.token).then(() => {
+        this.userPickerVisible = false
+        this.$nextTick(() => {
+          this.$router.replace({
+            path: '/redirect' + this.$route.fullPath
+          })
+        })
+      })
     }
   }
 }

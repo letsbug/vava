@@ -24,8 +24,6 @@ export default {
     excelImport: '导入',
     clipboard: '粘贴板',
     permission: '权限管理',
-    permissionPage: '页面权限',
-    permissionDirective: '指令权限',
     settings: '配置',
     externalLink: '外部链接',
     others: '其它',
@@ -89,7 +87,7 @@ export default {
     actionBack: '返回',
     type400: '瞎JB点，这下爽了撒！该！！！',
     type401: '你未经授权！这个请求需要身份验证！',
-    type403: '你没有权限！想要吗？我不给你！',
+    type403: '你没有这个页面的访问权限！想要吗？我不会给你的！！！',
     type404: '哎呀！！！这里什么都没有！',
     type500: '服务器不想理你，还丢给了你这个错误代码 ...'
   },
