@@ -51,16 +51,8 @@
       </el-tooltip>
 
       <!-- user actions -->
-      <el-dropdown :show-timeout="100" trigger="click" style="float: left;" @command="userDropdown">
-        <a class="va-nav-item spacer-xs link-user">
-          <img :src="user.avatar" alt="" class="avatar"/>
-        </a>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item :command="handleUserInfo">{{ $t('header.profile') }}</el-dropdown-item>
-          <el-dropdown-item :command="handleSettings">{{ $t('header.settings') }}</el-dropdown-item>
-          <el-dropdown-item :command="handleLogout" divided>{{ $t('header.logout.title') }}</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <user-actions/>
+
       <a class="va-nav-item hidden-sm-and-up">
         <va-icon icon="mark-more"/>
       </a>
@@ -74,10 +66,11 @@ import RouterRefresh from '@/components/RouterRefresh'
 import ScreenFull from '@/components/ScreenFull'
 import LanguagePicker from '@/components/LanguagePicker'
 import ThemePicker from './ThemePicker'
+import UserActions from './UserActions'
 
 export default {
   name: 'VaHeadBar',
-  components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker },
+  components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions },
   data() {
     return {
       search: { old: '', keyword: '' }
@@ -93,15 +86,11 @@ export default {
     currRouteIsSearch() {
       return /^\/search/.test(this.$route.path) ? 'active' : ''
     },
-    user() {
-      return this.$store.state.user
-    },
     notificationHasUnread() {
       return this.$store.state.notification.hasUnread
     },
     notificationTips() {
       return this.$t(`header.notification${this.notificationHasUnread ? 'Has' : 'No'}`)
-      // return 'you have ' + (this.notificationHasUnread ? '' : 'no') + ' unread notifications'
     }
   },
   created() {
@@ -117,26 +106,6 @@ export default {
       if (!key || (key === old)) return
       this.search.old = key
       this.$router.push(`/search/${key}`)
-    },
-    userDropdown(target) {
-      target()
-    },
-    handleUserInfo() {
-      // TODO build user information route
-      console.log('clicked user info')
-    },
-    handleSettings() {
-      // TODO build user settings route
-    },
-    handleLogout() {
-      this.$confirm(this.$t('header.logout.confirm'), this.$t('options.confirm.title'), {
-        type: 'warning',
-        confirmButtonText: this.$t('header.logout.button'),
-        // cancelButtonText: 'Cancel',
-        callback: action => {
-          if (action === 'confirm') this.$store.dispatch('user_logout').then(() => { location.reload() })
-        }
-      })
     }
   }
 }

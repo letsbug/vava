@@ -9,6 +9,7 @@ import Excels from './modules/excels'
  * @param nocache {boolean} - Whether the tag needs to cache the route to avoid repeating the rendered DOM
  *                            when switching routes frequently (true - not allow)
  * @param hidden {boolean} - Marks whether the route is visible and displayed when the template is rendered.
+ * @param alwaysShow: {boolean} - Always show the root menu in side-menu, whatever its child routes length
  * @param meta {Object}
  *        title - side-menu & tab-bar display name
  *        icon -  side-menu display icon.
@@ -35,7 +36,7 @@ export const constantRouteMap = [
 
   { path: '/password', component: () => import('@/modules/account/PasswordReset'), hidden: true },
 
-  { path: '/error/:code', component: () => import('@/modules/errors'), hidden: true },
+  { path: '/error', component: () => import('@/modules/errors'), hidden: true },
 
   {
     path: '',
@@ -69,19 +70,32 @@ export const asyncRouteMap = [
   {
     path: '/permission',
     component: Layout,
-    meta: { title: 'permission', icon: 'mark-vip' },
+    meta: {
+      title: 'permission',
+      icon: 'mark-vip',
+      roles: ['admin', 'assigner', 'auditor']
+    },
     redirect: '/permission/page',
+    alwaysShow: true,
     children: [
       {
         path: 'page',
         name: 'PermissionPage',
-        meta: { title: 'permissionPage', icon: 'action-clipboard' },
+        meta: {
+          title: 'permissionPage',
+          icon: 'action-clipboard',
+          roles: ['admin']
+        },
         component: () => import('@/modules/permission/Page')
       },
       {
         path: 'directive',
         name: 'PermissionDirective',
-        meta: { title: 'permissionDirective', icon: 'mark-terminal' },
+        meta: {
+          title: 'permissionDirective',
+          icon: 'mark-terminal',
+          roles: ['assigner', 'auditor']
+        },
         component: () => import('@/modules/permission/Directive')
       }
     ]
@@ -152,5 +166,5 @@ export const asyncRouteMap = [
   },
 
   // The path not found in the router list will be forced a redirect to the 404 page
-  { path: '*', redirect: '/error/404', hidden: true }
+  { path: '*', redirect: '/error', hidden: true }
 ]

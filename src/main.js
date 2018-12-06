@@ -24,8 +24,9 @@ import * as filters from '@/filters'
 // Inject global directives, or local calls, as needed.
 // import * as Directives from '@/directives'
 
-// Baidu analytics
+// Baidu & Google analytics
 import hmt from 'vue-ba'
+import vga from 'vue-analytics'
 
 Vue.config.productionTip = false
 
@@ -35,6 +36,7 @@ Vue.use(Element, {
 })
 Vue.use(Meta)
 Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
+Vue.use(vga, { id: 'UA-106135225-2' })
 
 // register global filters.
 Object.keys(filters).forEach(key => {

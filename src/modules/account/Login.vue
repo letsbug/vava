@@ -74,7 +74,7 @@ export default {
   mounted() {
     this.backdrop = this.$refs['appBackDrop']
     document.body.insertBefore(this.backdrop, document.getElementById('app'))
-    import(`@/vendor/welcomes/0${Math.floor(Math.random() * 5) + 1}`)
+    import(`@/vendor/backdrops/0${Math.floor(Math.random() * 5) + 1}`)
   },
   destroyed() {
     document.body.removeChild(this.backdrop)

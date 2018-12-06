@@ -7,7 +7,7 @@ export default {
     rememberDefault: 'Cookie are stored for 10 minutes by default',
     login: 'Sign in',
     list: 'About accounts?',
-    listHint: 'Simulate with mock.js, <strong>Pick any one to auto fill login form</strong>!'
+    listHint: 'Simulate with mock.js, <strong>Pick any one to log in</strong>!'
   },
   router: {
     home: 'Home',
@@ -42,6 +42,7 @@ export default {
     notificationNo: 'you have no unread notifications',
     profile: 'Profile',
     settings: 'Settings',
+    switchUser: 'Switch user',
     logout: {
       title: 'Sign out',
       confirm: 'Exit the currently logged in account?',

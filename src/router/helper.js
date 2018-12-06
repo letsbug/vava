@@ -10,6 +10,11 @@ NProgress.configure({ showSpinner: false })
 // Route redirect whitelist.
 const whitelist = ['/login', '/join', '/password']
 
+function hasPermission(roles, permissionRoles) {
+  if (~roles.indexOf('admin') || !permissionRoles) return true // admin permission passed directly
+  return roles.some(role => ~permissionRoles.indexOf(role))
+}
+
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (Token.get()) {
@@ -22,8 +27,12 @@ router.beforeEach((to, from, next) => {
         store.dispatch('user_info').then(res => {
           const roles = res.data.roles
           store.dispatch('perm_generate_routes', { roles }).then(() => {
-            router.addRoutes(store.getters.routes_addons)
-            // hack方法 确保addRoutes已完成, set the replace: true so the navigation will not leave a history record
+            // Remove this line when you need to change permissions dynamically,
+            // and import all routes when the vue route is initialized
+            // router.addRoutes(store.getters.routes_addons)
+
+            // replace: true so the navigation will not leave a history record
+            // hack方法 确保addRoutes已完成,
             next({ ...to, replace: true })
           })
         }).catch(err => {
@@ -32,10 +41,17 @@ router.beforeEach((to, from, next) => {
             next('/')
           })
         })
-      } else next()
+      } else {
+        if (hasPermission(store.getters.roles, to.meta.roles)) {
+          next()
+        } else {
+          next({ path: '/error', replace: true, query: { code: 403, noGoBack: true }})
+        }
+      }
     }
   } else {
-    // When the user is not logged in, the route is redirected to the login page.
+    // The user is not logged in or login has expired
+    // redirected to the login page.
     if (whitelist.indexOf(to.path) === -1) {
       next({
         path: '/login',
@@ -44,6 +60,9 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     } else {
       next()
+    }
+    if (store.getters.user.token) {
+      Message.error('Your login has expired. Please login again.')
     }
   }
 })
