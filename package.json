@@ -38,6 +38,7 @@
     "screenfull": "^3.3.3",
     "sortablejs": "^1.7.0",
     "vue": "^2.5.17",
+    "vue-analytics": "^5.16.1",
     "vue-ba": "^1.2.5",
     "vue-i18n": "^8.3.1",
     "vue-meta": "^1.5.5",

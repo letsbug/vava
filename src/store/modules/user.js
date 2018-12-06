@@ -1,6 +1,8 @@
 import Account from '@/services/account'
 import { Token } from '@/tools'
 
+const TOKEN_EXPIRE = 1 / 24 / 6 // By default, it is stored in the cookie for 10 minutes.
+
 const user = {
   state: {
     code: '',
@@ -13,20 +15,34 @@ const user = {
     expire: 7
   },
   mutations: {
-    USER_SET_CODE: (state, code) => { state.code = code },
-    USER_SET_STATUS: (state, status) => { state.status = status },
-    USER_SET_TOKEN: (state, token) => { state.token = token },
-    USER_SET_NAME: (state, name) => { state.username = name },
-    USER_SET_AVATAR: (state, avatar) => { state.avatar = avatar },
-    USER_SET_INTRO: (state, intro) => { state.introduction = intro },
-    USER_SET_ROLES: (state, roles) => { state.roles = roles }
+    USER_SET_CODE: (state, code) => {
+      state.code = code
+    },
+    USER_SET_STATUS: (state, status) => {
+      state.status = status
+    },
+    USER_SET_TOKEN: (state, token) => {
+      state.token = token
+    },
+    USER_SET_NAME: (state, name) => {
+      state.username = name
+    },
+    USER_SET_AVATAR: (state, avatar) => {
+      state.avatar = avatar
+    },
+    USER_SET_INTRO: (state, intro) => {
+      state.introduction = intro
+    },
+    USER_SET_ROLES: (state, roles) => {
+      state.roles = roles
+    }
   },
   actions: {
     user_login: ({ commit, state }, userInfo) => new Promise((resolve, reject) => {
       Account.login(userInfo.username.trim(), userInfo.password).then(res => {
         commit('USER_SET_TOKEN', res.data.token)
-        // User Token are stored for 10 minutes by default in cookie.js
-        const expire = userInfo.remember ? state.expire : 1 / 24 / 60
+
+        const expire = userInfo.remember ? state.expire : TOKEN_EXPIRE
         Token.set(res.data.token, expire)
         resolve()
       }).catch(err => {
@@ -38,8 +54,11 @@ const user = {
         if (!res.data) reject(new Error('Got a error when get user info.'))
 
         const data = res.data
-        if (data.roles && data.roles.length > 0) commit('USER_SET_ROLES', data.roles)
-        else reject(new Error('Got a error when get user info: roles must be a non-null array!'))
+        if (data.roles && data.roles.length > 0) {
+          commit('USER_SET_ROLES', data.roles)
+        } else {
+          reject(new Error('Got a error when get user info: roles must be a non-null array!'))
+        }
 
         commit('USER_SET_NAME', data.username)
         commit('USER_SET_CODE', data.code)
@@ -71,6 +90,22 @@ const user = {
       commit('USER_SET_TOKEN', '')
       Token.remove()
       resolve()
+    }),
+    user_switch: ({ commit, dispatch }, token) => new Promise(resolve => {
+      commit('USER_SET_TOKEN', token)
+      Token.set(token, TOKEN_EXPIRE)
+      // Account.info(token).then(res => {
+      //   console.log(res.data)
+      //   const data = res.data
+      commit('USER_SET_ROLES', [])
+      commit('USER_SET_NAME', '')
+      commit('USER_SET_CODE', '')
+      commit('USER_SET_STATUS', '')
+      commit('USER_SET_AVATAR', '')
+      commit('USER_SET_INTRO', '')
+      //   dispatch('perm_generate_routes', data)
+      resolve()
+      // })
     })
   }
 }

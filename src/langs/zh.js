@@ -42,6 +42,7 @@ export default {
     notificationNo: '你没有未读信息',
     profile: '个人中心',
     settings: '个人设置',
+    switchUser: '切换用户',
     logout: {
       title: '退出系统',
       confirm: '确定退出当前登录的账户吗？',

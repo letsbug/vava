@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="$t('login.list')" :visible.sync="dialogVisible"
+    :title="title || $t('login.list')" :visible.sync="dialogVisible"
     custom-class="user-simulate-dialog" top="10vh"
     append-to-body center
     @closed="handleClose"
@@ -28,6 +28,10 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    },
+    title: {
+      type: String,
+      default: null
     }
   },
   data() {
