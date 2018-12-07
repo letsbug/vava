@@ -1,4 +1,11 @@
 export default {
+  roles: {
+    admin: '系统管理员',
+    assigner: '授权管理员',
+    auditor: '审核管理员',
+    editor: '文案编辑员',
+    visitor: '访客'
+  },
   login: {
     title: 'VAVA 系统登录',
     username: '用户名',
@@ -90,6 +97,9 @@ export default {
     type403: '你没有这个页面的访问权限！想要吗？我不会给你的！！！',
     type404: '哎呀！！！这里什么都没有！',
     type500: '服务器不想理你，还丢给了你这个错误代码 ...'
+  },
+  homepage: {
+    welcome: '欢迎回来，亲爱的 '
   },
   notification: {
     title: '通知中心',

@@ -1,4 +1,11 @@
 export default {
+  roles: {
+    admin: 'admin',
+    assigner: 'assigner',
+    auditor: 'auditor',
+    editor: 'editor',
+    visitor: 'visitor'
+  },
   login: {
     title: 'Sign in to VAVA',
     username: 'username',
@@ -90,6 +97,9 @@ export default {
     type403: 'You do not have access to this page! Want it? I won\'t give it to you!!!',
     type404: 'The page you want to see may have moved ...',
     type500: 'The server doesn\'t want to talk to you and throws you an error code ...'
+  },
+  homepage: {
+    welcome: 'Welcome back, dear '
   },
   notification: {
     title: 'notification',
