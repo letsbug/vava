@@ -4,7 +4,8 @@
       <img :src="user.avatar" alt="" class="avatar"/>
     </a>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item :command="handleUserInfo">{{ $t('header.profile') }}</el-dropdown-item>
+      <el-dropdown-item :command="handleUserInfo">Sign in as <strong>{{ user.username }}</strong></el-dropdown-item>
+      <el-dropdown-item :command="handleUserInfo" divided>{{ $t('header.profile') }}</el-dropdown-item>
       <el-dropdown-item :command="handleSettings">{{ $t('header.settings') }}</el-dropdown-item>
       <el-dropdown-item :command="handleUserSwitch" divided>{{ $t('header.switchUser') }}</el-dropdown-item>
       <el-dropdown-item :command="handleLogout">{{ $t('header.logout.title') }}</el-dropdown-item>
