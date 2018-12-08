@@ -1,5 +1,6 @@
 export default {
   roles: {
+    title: 'role',
     admin: 'admin',
     assigner: 'assigner',
     auditor: 'auditor',
@@ -107,6 +108,10 @@ export default {
     markAll: 'mark all as read',
     confirm: 'You will mark all unread notifications as read.',
     button: 'Mark All'
+  },
+  permissions: {
+    yours: 'Your roles: {roles}',
+    title: 'This page is accessible only to <span class="text-red">{role}</span>.'
   },
   icons: {
     usage: 'Usage',

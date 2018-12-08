@@ -1,9 +1,10 @@
 export default {
   roles: {
+    title: '角色',
     admin: '系统管理员',
     assigner: '授权管理员',
-    auditor: '审核管理员',
-    editor: '文案编辑员',
+    auditor: '审核员',
+    editor: '编辑员',
     visitor: '访客'
   },
   login: {
@@ -30,7 +31,7 @@ export default {
     excelExport: '导出',
     excelImport: '导入',
     clipboard: '粘贴板',
-    permission: '权限管理',
+    permission: '权限测试',
     settings: '配置',
     externalLink: '外部链接',
     others: '其它',
@@ -107,6 +108,10 @@ export default {
     markAll: '标记所有为已读',
     confirm: '确定将所有未读消息标记为已读吗？',
     button: '确定'
+  },
+  permissions: {
+    yours: '你的角色：{roles}',
+    title: '这个页面只有 <span class="text-red">{role}</span> 能访问。'
   },
   icons: {
     usage: '使用方法',

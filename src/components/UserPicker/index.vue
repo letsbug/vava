@@ -11,7 +11,9 @@
         <div :class="{ 'checked': index === checkedIndex }" class="user-list" @click="handleChoose(user, index)">
           <img :src="user.avatar" alt="" class="avatar"/>
           <h5 class="username">{{ user.username }}</h5>
-          <span class="text-muted"><span class="hidden-xs-only">role: </span>{{ user.roles[0] }}</span>
+          <span class="text-muted">
+            <span class="hidden-xs-only">{{ $t('roles.title') }}: </span>{{ $t(`roles.${user.roles[0]}`) }}
+          </span>
           <span class="checked-flag"><i class="el-icon-check"></i></span>
         </div>
       </el-col>

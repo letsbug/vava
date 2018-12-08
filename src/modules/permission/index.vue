@@ -7,17 +7,17 @@
       <div class="attrs">
         <div class="username">
           {{ user.username }}
-          <el-tooltip content="switch user">
+          <el-tooltip :content="$t('header.switchUser')">
             <va-icon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true"/>
           </el-tooltip>
         </div>
-        <div class="text-muted">Your roles：{{ user.roles.join('、') }}</div>
+        <div class="text-muted">{{ $t('permissions.yours', { roles }) }}</div>
       </div>
     </div>
     <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser"/>
 
     <br/>
-    <h2>This page is accessible only to {{ $route.meta.roles.join(' & ') }}.</h2>
+    <h2 v-html="$t('permissions.title', { role: allowRoles })"></h2>
   </div>
 </template>
 
@@ -35,6 +35,14 @@ export default {
   computed: {
     user() {
       return this.$store.state.user
+    },
+    roles() {
+      const roles = [...this.user.roles]
+      return roles.map(v => this.$t(`roles.${v}`)).join('、')
+    },
+    allowRoles() {
+      const role = [...this.$route.meta.roles]
+      return role.map(v => this.$t(`roles.${v}`)).join(' & ')
     }
   },
   methods: {
