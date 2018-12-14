@@ -21,6 +21,8 @@ export default {
     home: '首页',
     dashboard: '仪表盘',
     report: '报表',
+    components: '组件',
+    ckeditor: '富文本编辑器',
     table: '表格',
     inlineEdit: '行内编辑',
     sortable: '排序',

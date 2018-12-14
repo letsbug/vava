@@ -3,6 +3,7 @@ import Layout from '@/layouts'
 // modules
 import Dashboard from './modules/dashboards'
 import Permissions from './modules/permissions'
+import Components from './modules/components'
 import Tables from './modules/tables'
 import Excels from './modules/excels'
 
@@ -81,6 +82,8 @@ export const asyncRouteMap = [
       component: () => import('@/modules/report/Report')
     }]
   },
+
+  Components,
 
   Tables,
 

@@ -11,6 +11,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin' )
 const meta = require('./meta')
 
 const env = require('../config/prod.env')
@@ -96,7 +97,12 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new CKEditorWebpackPlugin({
+      // See https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
+      language: 'en',
+      additionalLanguages: ['zh-cn']
+    })
   ],
   optimization: {
     splitChunks: {
@@ -121,6 +127,11 @@ const webpackConfig = merge(baseWebpackConfig, {
           name: 'chunk-elementUI',
           priority: 20,
           test: /[\\/]node_modules[\\/]element-ui[\\/]/
+        },
+        ckeditor: {
+          name: 'chunk-ckeditor',
+          priority: 40,
+          test: /[\\/]node_modules[\\/]@ckeditor[\\/]/
         },
         xlsx: {
           name: 'chunk-xlsx',

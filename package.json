@@ -26,6 +26,8 @@
     "test": "npm run lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^11.2.0",
+    "@ckeditor/ckeditor5-vue": "^1.0.0-beta.1",
     "axios": "^0.18.0",
     "clipboard": "^2.0.1",
     "element-ui": "^2.4.8",
@@ -47,6 +49,9 @@
     "xlsx": "^0.14.0"
   },
   "devDependencies": {
+    "@ckeditor/ckeditor5-core": "^11.1.0",
+    "@ckeditor/ckeditor5-dev-utils": "^11.0.1",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^7.0.1",
     "autoprefixer": "^9.3.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
@@ -81,6 +86,8 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-url": "^8.0.0",
+    "raw-loader": "^1.0.0",
+    "regenerator-runtime": "^0.13.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",
     "script-ext-html-webpack-plugin": "^2.0.1",

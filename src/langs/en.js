@@ -21,6 +21,8 @@ export default {
     home: 'Home',
     dashboard: 'Dashboard',
     reports: 'Reports',
+    components: 'Components',
+    ckeditor: 'CKEditor',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',
