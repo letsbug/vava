@@ -38,6 +38,7 @@
     "nprogress": "^0.2.0",
     "screenfull": "^3.3.3",
     "sortablejs": "^1.7.0",
+    "tinymce": "^4.9.1",
     "vue": "^2.5.17",
     "vue-analytics": "^5.16.1",
     "vue-ba": "^1.2.5",

@@ -1,10 +1,13 @@
 <template>
   <div class="va-body-container">
+    <editor id="tinymce"/>
   </div>
 </template>
 
 <script>
+import tinymce from 'tinymce/tinymce'
 import Editor from '@tinymce/tinymce-vue'
+import 'tinymce/themes/modern/theme'
 import config from '@/vendor/tinymce/configuration-classic'
 
 export default {
@@ -17,6 +20,9 @@ export default {
     return {
       config: config
     }
+  },
+  mounted() {
+    tinymce.init({})
   }
 }
 </script>
