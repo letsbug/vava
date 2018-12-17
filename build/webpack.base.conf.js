@@ -52,8 +52,7 @@ module.exports = {
         loader: 'babel-loader?cacheDirectory',
         include: [
           resolve('src'),
-          resolve('node_modules/webpack-dev-server/client'),
-          resolve('node_modules/@ckeditor')
+          resolve('node_modules/webpack-dev-server/client')
         ]
       },
       {

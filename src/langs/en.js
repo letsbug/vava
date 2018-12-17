@@ -22,7 +22,7 @@ export default {
     dashboard: 'Dashboard',
     reports: 'Reports',
     components: 'Components',
-    ckeditor: 'CKEditor',
+    tinymce: 'TinyMCE',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',

@@ -24,8 +24,6 @@ import * as filters from '@/filters'
 // Inject global directives, or local calls, as needed.
 // import * as Directives from '@/directives'
 
-import CKEditor from '@ckeditor/ckeditor5-vue'
-
 // Baidu & Google analytics
 import hmt from 'vue-ba'
 import vga from 'vue-analytics'
@@ -47,8 +45,6 @@ Object.keys(filters).forEach(key => {
 // Object.keys(Directives).forEach(key => {
 //   Vue.directive(key, Directives[key])
 // })
-
-Vue.use(CKEditor)
 
 Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
 Vue.use(vga, { id: 'UA-106135225-2' })

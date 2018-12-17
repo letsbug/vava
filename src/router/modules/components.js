@@ -3,19 +3,19 @@ import Layout from '@/layouts'
 export default {
   path: '/components',
   component: Layout,
-  redirect: '/components/ckeditor',
+  redirect: '/components/tinymce',
   meta: {
     title: 'components',
     icon: 'thing-component'
   },
   alwaysShow: true,
   children: [{
-    path: 'ckeditor',
-    name: 'CKEditor',
+    path: 'tinymce',
+    name: 'Tinymce',
     meta: {
-      title: 'ckeditor',
-      icon: 'thing-editor-ckeditor'
+      title: 'tinymce',
+      icon: 'thing-editor-tinymce'
     },
-    component: () => import('@/modules/components/ckeditor')
+    component: () => import('@/modules/components/tinymce')
   }]
 }
