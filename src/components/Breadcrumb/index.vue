@@ -1,14 +1,16 @@
 <template>
-  <el-breadcrumb class="va-breadcrumb" separator-class="el-icon-arrow-right">
-    <transition-group name="transition-breadcrumb">
-      <el-breadcrumb-item v-for="(route, index) in routes" :key="route.path">
+  <ElBreadcrumb class="va-breadcrumb" separator-class="el-icon-arrow-right">
+    <TransitionGroup name="transition-breadcrumb">
+      <ElBreadcrumbItem v-for="(route, index) in routes" :key="route.path">
         <span v-if="!route.redirect || index === routes.length - 1" class="no-redirect">
           {{ generateTitle(route.meta.title) }}
         </span>
-        <router-link v-else :to="route.redirect || route.path">{{ generateTitle(route.meta.title) }}</router-link>
-      </el-breadcrumb-item>
-    </transition-group>
-  </el-breadcrumb>
+        <RouterLink v-else :to="route.redirect || route.path">
+          {{ generateTitle(route.meta.title) }}
+        </RouterLink>
+      </ElBreadcrumbItem>
+    </TransitionGroup>
+  </ElBreadcrumb>
 </template>
 
 <script>

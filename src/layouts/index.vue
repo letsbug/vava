@@ -1,11 +1,11 @@
 <template>
   <div :class="device + ' ' + sidebarStatus" class="va-app-wrapper">
-    <va-side-menu/>
+    <VaSideMenu />
     <div class="va-main-wrapper">
-      <va-head-bar/>
-      <va-tabs-bar/>
-      <app-body/>
-      <va-foot-bar/>
+      <VaHeadBar />
+      <VaTabsBar />
+      <AppBody />
+      <VaFootBar />
     </div>
     <div class="va-side-backdrop" @click.prevent="closeSidebar"></div>
   </div>

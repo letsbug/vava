@@ -15,7 +15,7 @@ export default {
     rememberDefault: 'Cookie are stored for 10 minutes by default',
     login: 'Sign in',
     list: 'About accounts?',
-    listHint: 'Simulate with mock.js, <strong>Pick any one to log in</strong>!'
+    listHint: 'Simulate with mock.js, Pick any one to log in!'
   },
   router: {
     home: 'Home',

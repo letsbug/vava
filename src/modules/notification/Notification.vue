@@ -6,48 +6,54 @@
 
       <!-- handle options -->
       <span class="options">
-        <el-button v-if="notifications.hasUnread" size="small" plain @click="handleMarkAllRead">
+        <ElButton v-if="notifications.hasUnread" size="small" plain @click="handleMarkAllRead">
           {{ $t('notification.markAll') }}
-        </el-button>
+        </ElButton>
       </span>
     </h4>
 
     <!-- notification list -->
-    <el-table
+    <ElTable
       ref="notifications" :show-header="false" :data="notifications.list" size="medium"
       highlight-current-row show-overflow-tooltip style="width: 100%;"
     >
-      <el-table-column type="index" label="#" width="40"/>
-      <el-table-column prop="from" lable="from" width="80">
+      <ElTableColumn type="index" label="#" width="40" />
+      <ElTableColumn prop="from" lable="from" width="80">
         <template slot-scope="scope">
-          <el-tag size="mini">{{ scope.row.from }}</el-tag>
+          <ElTag size="mini">
+            {{ scope.row.from }}
+          </ElTag>
         </template>
-      </el-table-column>
-      <el-table-column prop="title" label="title" show-overflow-tooltip>
+      </ElTableColumn>
+      <ElTableColumn prop="title" label="title" show-overflow-tooltip>
         <template slot-scope="scope">
-          <a :class="transUnreadClass(scope.row)" @click="handleShowDetail(scope.row)">{{ scope.row.title }}</a>
+          <a :class="transUnreadClass(scope.row)" @click="handleShowDetail(scope.row)">
+            {{ scope.row.title }}
+          </a>
         </template>
-      </el-table-column>
-      <el-table-column width="160" label="date">
+      </ElTableColumn>
+      <ElTableColumn width="160" label="date">
         <template slot-scope="scope">
           <span>{{ scope.row.date | dateFormat('yyyy.MM.dd hh:mm:ss') }}</span>
         </template>
-      </el-table-column>
-      <el-table-column width="120" label="date">
+      </ElTableColumn>
+      <ElTableColumn width="120" label="date">
         <template slot-scope="scope">
-          <span :class="transUnreadClass(scope.row)">{{ scope.row.date | dateAgo }}</span>
+          <span :class="transUnreadClass(scope.row)">
+            {{ scope.row.date | dateAgo }}
+          </span>
         </template>
-      </el-table-column>
-      <el-table-column label="options" width="70" align="right">
+      </ElTableColumn>
+      <ElTableColumn label="options" width="70" align="right">
         <template slot-scope="scope">
-          <el-tooltip v-if="scope.row.unread" :content="$t('notification.mark')" placement="left">
+          <ElTooltip v-if="scope.row.unread" :content="$t('notification.mark')" placement="left">
             <a @click="handleMarkRead(scope.row)">
               <i class="el-icon-check"></i>
             </a>
-          </el-tooltip>
+          </ElTooltip>
         </template>
-      </el-table-column>
-    </el-table>
+      </ElTableColumn>
+    </ElTable>
   </div>
 </template>
 

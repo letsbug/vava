@@ -1,14 +1,18 @@
 <template>
   <div class="va-side-main">
-    <el-scrollbar class="va-side-scroller" wrap-class="va-side-scroller--wrapper">
+    <ElScrollbar class="va-side-scroller" wrap-class="va-side-scroller--wrapper">
       <!-- Each all routes -->
-      <nav-item v-for="route in routes" v-if="!route.hidden" :key="route.path" :route="route"/>
-    </el-scrollbar>
+      <template v-for="route in routes">
+        <NavItem v-if="!route.hidden" :key="route.path" :route="route" />
+      </template>
+    </ElScrollbar>
 
     <div class="va-side-nav fixed-bottom">
-      <router-link class="nav-title" to="/error/403">
-        <va-icon icon="action-settings"/> <span class="item-name">{{ generateTitle('settings') }}</span>
-      </router-link>
+      <RouterLink class="nav-title" to="/error/403">
+        <VaIcon icon="action-settings" /> <span class="item-name">
+          {{ generateTitle('settings') }}
+        </span>
+      </RouterLink>
     </div>
   </div>
 </template>

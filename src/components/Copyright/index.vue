@@ -1,5 +1,7 @@
 <template>
-  <div class="va-copyright"><small>© 2018 letsbug.</small></div>
+  <div class="va-copyright">
+    <small>© 2018 letsbug.</small>
+  </div>
 </template>
 
 <script>

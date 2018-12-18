@@ -2,21 +2,23 @@
   <div class="va-body-container">
     <div class="user-info">
       <div class="avatar">
-        <img :src="user.avatar" alt=""/>
+        <img :src="user.avatar" alt="" />
       </div>
       <div class="attrs">
         <div class="username">
           {{ user.username }}
-          <el-tooltip :content="$t('header.switchUser')">
-            <va-icon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true"/>
-          </el-tooltip>
+          <ElTooltip :content="$t('header.switchUser')">
+            <VaIcon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true" />
+          </ElTooltip>
         </div>
-        <div class="text-muted">{{ $t('permissions.yours', { roles }) }}</div>
+        <div class="text-muted">
+          {{ $t('permissions.yours', { roles }) }}
+        </div>
       </div>
     </div>
-    <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser"/>
+    <UserPicker :visible.sync="userPickerVisible" @on-change="onChooseUser" />
 
-    <br/>
+    <br />
     <h2 v-html="$t('permissions.title', { role: allowRoles })"></h2>
   </div>
 </template>

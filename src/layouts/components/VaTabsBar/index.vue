@@ -1,46 +1,52 @@
 <template>
   <div :class="isMobile ? 'mobile' : ''" class="va-tabs-bar">
     <!-- breadcrumb -->
-    <breadcrumb v-if="isMobile"/>
+    <Breadcrumb v-if="isMobile" />
 
     <template v-else>
       <!-- Resident tab control, link to home -->
-      <router-link class="va-tabs-item tabs-home" to="/home">
-        <va-icon class="link-home" icon="thing-house"/>
-      </router-link>
+      <RouterLink class="va-tabs-item tabs-home" to="/home">
+        <VaIcon class="link-home" icon="thing-house" />
+      </RouterLink>
 
       <!-- Closable tab control list -->
-      <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
-        <router-link
-          v-for="route in history" v-if="!route.notab" ref="tabs"
-          :key="route.path" :to="route.path" class="va-tabs-item"
-          @contextmenu.prevent.native="handleOpenContextMenu"
-        >
-          <span class="tabs-item-name">{{ generateTitle(route.title) }}</span>
-          <span class="tabs-item__close">
-            <va-icon icon="action-close" @click.prevent.native="close(route)"/>
-          </span>
-        </router-link>
-      </scroll-pane>
+      <ScrollPane ref="scrollPane" class="tabs-scroll-pane">
+        <template v-for="route in history">
+          <RouterLink
+            v-if="!route.notab" ref="tabs"
+            :key="route.path" :to="route.path" class="va-tabs-item"
+            @contextmenu.prevent.native="handleOpenContextMenu"
+          >
+            <span class="tabs-item-name">
+              {{ generateTitle(route.title) }}
+            </span>
+            <span class="tabs-item__close">
+              <VaIcon icon="action-close" @click.prevent.native="close(route)" />
+            </span>
+          </RouterLink>
+        </template>
+      </ScrollPane>
 
       <!-- Closeable tabs context menu -->
-      <context-menu ref="tabsContext" :options="tabsOptions" class="tabs-context-menu"/>
+      <ContextMenu ref="tabsContext" :options="tabsOptions" class="tabs-context-menu" />
 
       <!-- Tabs options -->
-      <el-dropdown class="tabs-more" trigger="click" @command="onOptionCommand">
-        <a class="va-tabs-item"><i class="el-icon-arrow-down"></i></a>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item :command="close" :disabled="history.length < 1">
+      <ElDropdown class="tabs-more" trigger="click" @command="onOptionCommand">
+        <a class="va-tabs-item">
+          <i class="el-icon-arrow-down"></i>
+        </a>
+        <ElDropdownMenu slot="dropdown">
+          <ElDropdownItem :command="close" :disabled="history.length < 1">
             {{ $t('tabBar.close') }}
-          </el-dropdown-item>
-          <el-dropdown-item :command="closeOthers" :disabled="history.length < 2">
+          </ElDropdownItem>
+          <ElDropdownItem :command="closeOthers" :disabled="history.length < 2">
             {{ $t('tabBar.closeOthers') }}
-          </el-dropdown-item>
-          <el-dropdown-item :command="closeAll" :disabled="history.length < 2">
+          </ElDropdownItem>
+          <ElDropdownItem :command="closeAll" :disabled="history.length < 2">
             {{ $t('tabBar.closeAll') }}
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+          </ElDropdownItem>
+        </ElDropdownMenu>
+      </ElDropdown>
     </template>
   </div>
 </template>

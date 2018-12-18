@@ -1,47 +1,47 @@
 <template>
   <div class="va-body-container">
-    <el-form :model="exportOpts" inline size="medium">
-      <el-form-item :label="$t('excelExport.filename')">
-        <el-input v-model="exportOpts.filename" :placeholder="filenameDefault" prefix-icon="el-icon-document" clearable/>
-      </el-form-item>
-      <el-form-item :label="$t('excelExport.fileType')">
-        <el-select v-model="exportOpts.type" value style="width: 100px;">
-          <el-option label="xlsx" value="xlsx"/>
-          <el-option label="cvx" value="cvx"/>
-          <el-option label="txt" value="txt"/>
-        </el-select>
-      </el-form-item>
-      <el-form-item :label="$t('excelExport.autoWidth')">
-        <el-switch v-model="exportOpts.cellAutoWidth"/>
-      </el-form-item>
-      <el-form-item :label="$t('excelExport.execute')">
-        <el-button-group style="vertical-align: top;">
-          <el-button :disabled="exportOpts.exporting" type="primary" @click="handleExport(list)">
+    <ElForm :model="exportOpts" inline size="medium">
+      <ElFormItem :label="$t('excelExport.filename')">
+        <ElInput v-model="exportOpts.filename" :placeholder="filenameDefault" prefix-icon="el-icon-document" clearable />
+      </ElFormItem>
+      <ElFormItem :label="$t('excelExport.fileType')">
+        <ElSelect v-model="exportOpts.type" value style="width: 100px;">
+          <ElOption label="xlsx" value="xlsx" />
+          <ElOption label="cvx" value="cvx" />
+          <ElOption label="txt" value="txt" />
+        </ElSelect>
+      </ElFormItem>
+      <ElFormItem :label="$t('excelExport.autoWidth')">
+        <ElSwitch v-model="exportOpts.cellAutoWidth" />
+      </ElFormItem>
+      <ElFormItem :label="$t('excelExport.execute')">
+        <ElButtonGroup style="vertical-align: top;">
+          <ElButton :disabled="exportOpts.exporting" type="primary" @click="handleExport(list)">
             {{ $t('excelExport.currentPage') }}
-          </el-button>
-          <el-button :disabled="exportOpts.exporting" type="primary" @click="handleExportAll">
+          </ElButton>
+          <ElButton :disabled="exportOpts.exporting" type="primary" @click="handleExportAll">
             {{ $t('excelExport.allPages') }}
-          </el-button>
-        </el-button-group>
+          </ElButton>
+        </ElButtonGroup>
         <i v-show="exportOpts.exporting" class="el-icon-loading export-handler-loading"></i>
-      </el-form-item>
-    </el-form>
+      </ElFormItem>
+    </ElForm>
 
     <!-- table list -->
-    <el-table v-loading="loading" :data="list" tooltip-effect="light">
-      <el-table-column prop="name" label="name" width="120" show-overflow-tooltip/>
-      <el-table-column prop="card" label="ID Card" show-overflow-tooltip/>
-      <el-table-column prop="city" label="city" width="70" show-overflow-tooltip/>
-      <el-table-column prop="postcode" label="zip" width="70"/>
-      <el-table-column prop="tel" label="tel" width="110"/>
-      <el-table-column prop="mobile" label="mobile" width="105"/>
-      <el-table-column prop="fax" label="fax" width="110"/>
-      <el-table-column prop="email" label="email" show-overflow-tooltip/>
-      <el-table-column prop="qq" label="QQ" width="110"/>
-      <el-table-column prop="company" label="company" show-overflow-tooltip/>
-    </el-table>
+    <ElTable v-loading="loading" :data="list" tooltip-effect="light">
+      <ElTableColumn prop="name" label="name" width="120" show-overflow-tooltip />
+      <ElTableColumn prop="card" label="ID Card" show-overflow-tooltip />
+      <ElTableColumn prop="city" label="city" width="70" show-overflow-tooltip />
+      <ElTableColumn prop="postcode" label="zip" width="70" />
+      <ElTableColumn prop="tel" label="tel" width="110" />
+      <ElTableColumn prop="mobile" label="mobile" width="105" />
+      <ElTableColumn prop="fax" label="fax" width="110" />
+      <ElTableColumn prop="email" label="email" show-overflow-tooltip />
+      <ElTableColumn prop="qq" label="QQ" width="110" />
+      <ElTableColumn prop="company" label="company" show-overflow-tooltip />
+    </ElTable>
 
-    <el-pagination
+    <ElPagination
       v-if="list && list.length > 0"
       :page-sizes="[10, 30, 50]"
       :current-page="pages.page"

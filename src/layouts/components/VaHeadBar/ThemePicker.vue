@@ -1,14 +1,20 @@
 <template>
-  <el-dropdown :show-timeout="100" trigger="click" style="float: left;" @command="chooseTheme">
+  <ElDropdown :show-timeout="100" trigger="click" style="float: left;" @command="chooseTheme">
     <a class="va-nav-item hidden-xs-only">
-      <va-icon icon="thing-shirt"/>
+      <VaIcon icon="thing-shirt" />
     </a>
-    <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="default">{{ $t('theme.default') }}</el-dropdown-item>
-      <el-dropdown-item command="light">{{ $t('theme.light') }}</el-dropdown-item>
-      <el-dropdown-item command="dark">{{ $t('theme.dark') }}</el-dropdown-item>
-    </el-dropdown-menu>
-  </el-dropdown>
+    <ElDropdownMenu slot="dropdown">
+      <ElDropdownItem command="default">
+        {{ $t('theme.default') }}
+      </ElDropdownItem>
+      <ElDropdownItem command="light">
+        {{ $t('theme.light') }}
+      </ElDropdownItem>
+      <ElDropdownItem command="dark">
+        {{ $t('theme.dark') }}
+      </ElDropdownItem>
+    </ElDropdownMenu>
+  </ElDropdown>
 </template>
 
 <script>

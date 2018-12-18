@@ -1,6 +1,6 @@
 <template>
   <div class="excel-importer">
-    <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile"/>
+    <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile" />
     <div
       v-if="enableDragDrop" :class="working ? 'working' : ''" class="file-drop"
       @click="!working && $refs['excelImportInput'].click()"
@@ -8,25 +8,33 @@
       @dragover.prevent.stop="onDragOver"
       @dragenter.prevent.stop="onDragOver"
     >
-      <div><va-icon icon="action-import"/></div>
+      <div><VaIcon icon="action-import" /></div>
       <template v-if="file">
         {{ $t('excelImport.selected') }}
         "{{ file.name }}"
-        <span class="text-primary browse-hint">{{ $t('excelImport.change') }}</span>
+        <span class="text-primary browse-hint">
+          {{ $t('excelImport.change') }}
+        </span>
       </template>
       <template v-else>
         {{ $t('excelImport.drag') }}
-        <span class="text-primary browse-hint">{{ $t('excelImport.browse') }}</span>
+        <span class="text-primary browse-hint">
+          {{ $t('excelImport.browse') }}
+        </span>
       </template>
-      <span class="working-flag"><i class="el-icon-loading"></i></span>
+      <span class="working-flag">
+        <i class="el-icon-loading"></i>
+      </span>
     </div>
     <div v-else class="text-center">
-      <el-button :loading="working" plain @click="!working && $refs['excelImportInput'].click()">
+      <ElButton :loading="working" plain @click="!working && $refs['excelImportInput'].click()">
         <template v-if="file">
           {{ $t('excelImport.selected') }}: "{{ file.name }}", {{ $t('excelImport.change') }}.
         </template>
-        <template v-else>{{ $t('excelImport.browseNotDrag') }}</template>
-      </el-button>
+        <template v-else>
+          {{ $t('excelImport.browseNotDrag') }}
+        </template>
+      </ElButton>
     </div>
   </div>
 </template>

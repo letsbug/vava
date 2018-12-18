@@ -1,5 +1,5 @@
 <template>
-  <transition name="el-zoom-in-top">
+  <Transition name="el-zoom-in-top">
     <ul v-show="visible" ref="contextMenus" :style="axis" class="va-context-menu">
       <li
         v-for="item in options"
@@ -7,9 +7,11 @@
         :class="{ 'disabled': item.disabled, 'divided': item.divided }"
         class="va-context-menu-item"
         @click="handleClick(item)"
-      >{{ item.name }}</li>
+      >
+        {{ item.name }}
+      </li>
     </ul>
-  </transition>
+  </Transition>
 </template>
 
 <script>

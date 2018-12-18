@@ -36,6 +36,7 @@ module.exports = {
       "singleline": "never",
       "multiline": "always"
     }],
+    "vue/no-v-html": "never",
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
       'before': true,
