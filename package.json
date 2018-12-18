@@ -26,7 +26,6 @@
     "test": "npm run lint"
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "^1.1.0",
     "axios": "^0.18.0",
     "clipboard": "^2.0.1",
     "element-ui": "^2.4.8",
@@ -38,7 +37,6 @@
     "nprogress": "^0.2.0",
     "screenfull": "^3.3.3",
     "sortablejs": "^1.7.0",
-    "tinymce": "^4.9.1",
     "vue": "^2.5.17",
     "vue-analytics": "^5.16.1",
     "vue-ba": "^1.2.5",
@@ -83,7 +81,6 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-url": "^8.0.0",
-    "raw-loader": "^1.0.0",
     "regenerator-runtime": "^0.13.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",

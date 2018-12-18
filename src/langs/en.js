@@ -22,7 +22,7 @@ export default {
     dashboard: 'Dashboard',
     reports: 'Reports',
     components: 'Components',
-    tinymce: 'TinyMCE',
+    richEditor: 'Rich Editor',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',
