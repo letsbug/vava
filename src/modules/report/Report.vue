@@ -4,7 +4,7 @@
       Reports
     </h3>
     <p>Test route cache in desktop, input something, and jump to others route and back.</p>
-    <ElInput v-model="input" type="text" title="route cache test" />
+    <el-input v-model="input" type="text" title="route cache test" />
   </div>
 </template>
 

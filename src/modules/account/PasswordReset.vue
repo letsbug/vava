@@ -9,18 +9,18 @@
       </div>
 
       <!-- Send & verify email or mobile phone security code -->
-      <ElForm v-if="step === 1" ref="formAccount" :model="form" :rules="rules">
+      <el-form v-if="step === 1" ref="formAccount" :model="form" :rules="rules">
         <p><strong>Please enter your account binding email address or phone number.</strong></p>
-        <ElFormItem prop="username" style="margin-bottom: 20px;">
-          <ElInput
+        <el-form-item prop="username" style="margin-bottom: 20px;">
+          <el-input
             v-model="form.username" size="large" name="username" type="text"
             placeholder="Your email address or phone number."
           />
-        </ElFormItem>
-      </ElForm>
-      <ElForm v-if="step === 1" ref="formSecurityCode" :model="form" :rules="rules">
-        <ElFormItem prop="securityCode">
-          <ElInput
+        </el-form-item>
+      </el-form>
+      <el-form v-if="step === 1" ref="formSecurityCode" :model="form" :rules="rules">
+        <el-form-item prop="securityCode">
+          <el-input
             v-model="form.securityCode" size="large" name="securityCode" class="input-security__code"
             type="text" placeholder="Security code"
           >
@@ -30,49 +30,49 @@
             >
               Send code {{ counter ? '(' + counter + ')' : undefined }}
             </a>
-          </ElInput>
-        </ElFormItem>
-        <ElFormItem>
-          <ElButton :loading="loading" size="large" type="primary" class="btn-login" @click.prevent="submitSecurityCode">
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button :loading="loading" size="large" type="primary" class="btn-login" @click.prevent="submitSecurityCode">
             Valid security code
-          </ElButton>
-        </ElFormItem>
-      </ElForm>
+          </el-button>
+        </el-form-item>
+      </el-form>
 
       <!-- Reset password -->
-      <ElForm v-if="step === 2" ref="confirmPassword" :model="form" :rules="rules">
+      <el-form v-if="step === 2" ref="confirmPassword" :model="form" :rules="rules">
         <p><small>Password must be a combination of Numbers and letters, and between 8 and 16 characters.</small></p>
-        <ElFormItem prop="password">
-          <ElInput
+        <el-form-item prop="password">
+          <el-input
             v-model="form.password" :type="pwdType.password ? 'password' : 'text'" size="large" name="password"
             placeholder="Password"
           >
-            <VaIcon
+            <va-icon
               slot="suffix" :icon="pwdType.password ? 'mark-eye-close' : 'mark-eye-open'"
               @click.native="pwdType.password = !pwdType.password"
             />
-          </ElInput>
-        </ElFormItem>
-        <ElFormItem prop="confirm">
-          <ElInput
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="confirm">
+          <el-input
             v-model="form.confirm" :type="pwdType.confirm ? 'password' : 'text'" size="large" name="password"
             placeholder="Confirm"
           >
-            <VaIcon
+            <va-icon
               slot="suffix" :icon="pwdType.confirm ? 'mark-eye-close' : 'mark-eye-open'"
               @click.native="pwdType.confirm = !pwdType.confirm"
             />
-          </ElInput>
-        </ElFormItem>
-        <ElFormItem>
-          <ElButton :loading="loading" size="large" type="primary" class="btn-login" @click.prevent="resetSubmit">
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button :loading="loading" size="large" type="primary" class="btn-login" @click.prevent="resetSubmit">
             Reset password
-          </ElButton>
-        </ElFormItem>
-      </ElForm>
+          </el-button>
+        </el-form-item>
+      </el-form>
     </div>
 
-    <Copyright />
+    <copyright />
   </div>
 </template>
 

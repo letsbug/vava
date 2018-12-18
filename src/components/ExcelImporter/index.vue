@@ -8,7 +8,7 @@
       @dragover.prevent.stop="onDragOver"
       @dragenter.prevent.stop="onDragOver"
     >
-      <div><VaIcon icon="action-import" /></div>
+      <div><va-icon icon="action-import" /></div>
       <template v-if="file">
         {{ $t('excelImport.selected') }}
         "{{ file.name }}"
@@ -27,14 +27,14 @@
       </span>
     </div>
     <div v-else class="text-center">
-      <ElButton :loading="working" plain @click="!working && $refs['excelImportInput'].click()">
+      <el-button :loading="working" plain @click="!working && $refs['excelImportInput'].click()">
         <template v-if="file">
           {{ $t('excelImport.selected') }}: "{{ file.name }}", {{ $t('excelImport.change') }}.
         </template>
         <template v-else>
           {{ $t('excelImport.browseNotDrag') }}
         </template>
-      </ElButton>
+      </el-button>
     </div>
   </div>
 </template>

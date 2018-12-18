@@ -1,13 +1,13 @@
 <template>
   <div class="va-body-container">
-    <ExcelImporter :before-import="beforeImport" :on-success="onSuccess" enable-drag-drop />
+    <excel-importer :before-import="beforeImport" :on-success="onSuccess" enable-drag-drop />
     <br />
-    <ElTable
+    <el-table
       :empty-text="$t('excelImport.emptyHint')" :data="tableData"
       highlight-current-row size="mini" tooltip-effect="light" style="width: 100%;"
     >
-      <ElTableColumn v-for="item of tableHeader" :key="item" :prop="item" :label="item" show-overflow-tooltip />
-    </ElTable>
+      <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" show-overflow-tooltip />
+    </el-table>
   </div>
 </template>
 

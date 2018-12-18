@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <Ckeditor :editor="editor" />
+    <ckeditor :editor="editor" />
   </div>
 </template>
 

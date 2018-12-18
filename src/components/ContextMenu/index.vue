@@ -1,5 +1,5 @@
 <template>
-  <Transition name="el-zoom-in-top">
+  <transition name="el-zoom-in-top">
     <ul v-show="visible" ref="contextMenus" :style="axis" class="va-context-menu">
       <li
         v-for="item in options"
@@ -11,7 +11,7 @@
         {{ item.name }}
       </li>
     </ul>
-  </Transition>
+  </transition>
 </template>
 
 <script>

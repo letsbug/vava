@@ -1,38 +1,38 @@
 <template>
   <div class="va-body-container">
-    <ElTable
+    <el-table
       v-loading="loading" :data="list" tooltip-effect="theme" fit
       highlight-current-row row-key="id" empty-text="Sorry! This category have nothing data."
     >
-      <ElTableColumn label="ID" prop="id" width="40" align="right" />
-      <ElTableColumn label="TITLE" prop="title" show-overflow-tooltip />
-      <ElTableColumn label="CREATE" prop="display" width="110">
+      <el-table-column label="ID" prop="id" width="40" align="right" />
+      <el-table-column label="TITLE" prop="title" show-overflow-tooltip />
+      <el-table-column label="CREATE" prop="display" width="110">
         <template slot-scope="scope">
           {{ scope.row.display | dateAgo }}
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="AUTHOR" prop="author" width="96" show-overflow-tooltip />
-      <ElTableColumn label="LEVEL" prop="level" width="60" align="center" />
-      <ElTableColumn label="STATUS" prop="status" width="100" align="center">
+      </el-table-column>
+      <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip />
+      <el-table-column label="LEVEL" prop="level" width="60" align="center" />
+      <el-table-column label="STATUS" prop="status" width="100" align="center">
         <template slot-scope="scope">
-          <ElTag :type="scope.row.status | articleStatus" size="small">
+          <el-tag :type="scope.row.status | articleStatus" size="small">
             {{ scope.row.status }}
-          </ElTag>
+          </el-tag>
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="PV" prop="pv" width="66">
+      </el-table-column>
+      <el-table-column label="PV" prop="pv" width="66">
         <template slot-scope="scope">
           {{ scope.row.pv | pageview }}
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="DRAG" width="66" align="center">
+      </el-table-column>
+      <el-table-column label="DRAG" width="66" align="center">
         <template>
           <span class="handle-drag">
-            <VaIcon icon="action-drag" />
+            <va-icon icon="action-drag" />
           </span>
         </template>
-      </ElTableColumn>
-    </ElTable>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 

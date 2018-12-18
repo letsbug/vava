@@ -1,17 +1,17 @@
 <template>
-  <ElDropdown trigger="click" @command="pickLang">
+  <el-dropdown trigger="click" @command="pickLang">
     <span class="lang-picker">
-      <VaIcon icon="action-translate" />
+      <va-icon icon="action-translate" />
     </span>
-    <ElDropdownMenu slot="dropdown">
-      <ElDropdownItem :disabled="language === 'zh'" command="zh">
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item :disabled="language === 'zh'" command="zh">
         中文
-      </ElDropdownItem>
-      <ElDropdownItem :disabled="language === 'en'" command="en">
+      </el-dropdown-item>
+      <el-dropdown-item :disabled="language === 'en'" command="en">
         English
-      </ElDropdownItem>
-    </ElDropdownMenu>
-  </ElDropdown>
+      </el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
 </template>
 
 <script>

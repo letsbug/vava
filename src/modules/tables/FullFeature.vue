@@ -1,50 +1,50 @@
 <template>
   <div class="va-body-container">
-    <ElForm ref="formFilter" :model="filterData" class="filter-and-actions" inline>
-      <ElFormItem>
-        <ElInput v-model="filterData.title" placeholder="Title" clearable />
-      </ElFormItem>
-      <ElFormItem>
-        <ElSelect v-model="filterData.status" value="" placeholder="Status" style="width: 120px;">
-          <ElOption v-for="(st, i) in statusMap" :key="st" :label="st" :value="i === 0 ? null : st" />
-        </ElSelect>
-      </ElFormItem>
-      <ElFormItem>
-        <ElSelect v-model="filterData.level" value="" placeholder="Level" style="width: 80px;">
-          <ElOption v-for="(lv, i) in levelMap" :key="lv" :label="lv" :value="i === 0 ? null : lv" />
-        </ElSelect>
-      </ElFormItem>
-      <ElFormItem>
-        <ElButton type="primary" icon="el-icon-search" @click="getList">
+    <el-form ref="formFilter" :model="filterData" class="filter-and-actions" inline>
+      <el-form-item>
+        <el-input v-model="filterData.title" placeholder="Title" clearable />
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="filterData.status" value="" placeholder="Status" style="width: 120px;">
+          <el-option v-for="(st, i) in statusMap" :key="st" :label="st" :value="i === 0 ? null : st" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="filterData.level" value="" placeholder="Level" style="width: 80px;">
+          <el-option v-for="(lv, i) in levelMap" :key="lv" :label="lv" :value="i === 0 ? null : lv" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-search" @click="getList">
           Search
-        </ElButton>
-      </ElFormItem>
-      <ElFormItem>
-        <ElButtonGroup style="vertical-align: top;">
-          <ElButton type="primary" icon="el-icon-plus" @click="handleEdit()">
+        </el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button-group style="vertical-align: top;">
+          <el-button type="primary" icon="el-icon-plus" @click="handleEdit()">
             Add
-          </ElButton>
-          <ElButton
+          </el-button>
+          <el-button
             :disabled="!selected || selected.length < 1"
             type="primary"
             icon="el-icon-check"
             @click="handleBatchUpdate(true)"
           >
             Audit
-          </ElButton>
-          <ElButton
+          </el-button>
+          <el-button
             :disabled="!selected || selected.length < 1"
             type="primary"
             icon="el-icon-delete"
             @click="handleBatchUpdate(false)"
           >
             Delete
-          </ElButton>
-        </ElButtonGroup>
-      </ElFormItem>
-    </ElForm>
+          </el-button>
+        </el-button-group>
+      </el-form-item>
+    </el-form>
 
-    <ElTable
+    <el-table
       v-loading="loading"
       :data="list"
       :default-sort="{prop: 'id', order: 'ascending'}"
@@ -54,39 +54,39 @@
       empty-text="Sorry! This category have nothing data."
       @selection-change="handleSelectionChange"
     >
-      <ElTableColumn type="selection" width="38" />
-      <ElTableColumn label="ID" prop="id" width="38" align="right" />
-      <ElTableColumn label="TITLE" prop="title" show-overflow-tooltip sortable />
-      <ElTableColumn label="CREATE" prop="display" width="114" sortable>
+      <el-table-column type="selection" width="38" />
+      <el-table-column label="ID" prop="id" width="38" align="right" />
+      <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable />
+      <el-table-column label="CREATE" prop="display" width="114" sortable>
         <template slot-scope="scope">
           {{ scope.row.display | dateAgo }}
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable />
-      <ElTableColumn label="AUDITOR" prop="auditor" width="110" show-overflow-tooltip sortable />
-      <ElTableColumn label="LEVEL" prop="level" width="90" align="center" sortable />
-      <ElTableColumn label="STATUS" prop="status" width="100" align="center" sortable>
+      </el-table-column>
+      <el-table-column label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable />
+      <el-table-column label="AUDITOR" prop="auditor" width="110" show-overflow-tooltip sortable />
+      <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable />
+      <el-table-column label="STATUS" prop="status" width="100" align="center" sortable>
         <template slot-scope="scope">
-          <ElTag :type="scope.row.status | articleStatus" size="small">
+          <el-tag :type="scope.row.status | articleStatus" size="small">
             {{ scope.row.status }}
-          </ElTag>
+          </el-tag>
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="PV" prop="pv" width="66" sortable>
+      </el-table-column>
+      <el-table-column label="PV" prop="pv" width="66" sortable>
         <template slot-scope="scope">
           {{ scope.row.pv | pageview }}
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="ACTIONS" width="164" class-name="has-actions actions-small">
+      </el-table-column>
+      <el-table-column label="ACTIONS" width="164" class-name="has-actions actions-small">
         <template slot-scope="scope">
-          <ElButton type="primary" size="small" icon="el-icon-check" @click="handleBatchUpdate(true, scope.row)" />
-          <ElButton type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)" />
-          <ElButton type="primary" size="small" icon="el-icon-delete" @click="handleBatchUpdate(false, scope.row)" />
+          <el-button type="primary" size="small" icon="el-icon-check" @click="handleBatchUpdate(true, scope.row)" />
+          <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)" />
+          <el-button type="primary" size="small" icon="el-icon-delete" @click="handleBatchUpdate(false, scope.row)" />
         </template>
-      </ElTableColumn>
-    </ElTable>
+      </el-table-column>
+    </el-table>
 
-    <ElPagination
+    <el-pagination
       v-if="list && list.length > 0"
       :page-sizes="[10, 30, 50]"
       :current-page="pages.page"
@@ -99,42 +99,42 @@
       @current-change="handlePageChange"
     />
 
-    <ElDialog :visible.sync="dialogVisible" :title="`Article ${editForm.isEdit ? 'Edit' : 'Add'}`" width="50%">
-      <ElForm :model="editForm" label-width="80px" style="margin-right: 60px">
-        <ElFormItem label="Title" prop="title">
-          <ElInput v-model="editForm.title" placeholder="Article title" />
-        </ElFormItem>
-        <ElFormItem label="Summery" prop="summery">
-          <ElInput v-model="editForm.summery" placeholder="Article summery" />
-        </ElFormItem>
-        <ElFormItem label="Content" prop="content">
-          <ElInput v-model="editForm.content" placeholder="Article content" />
-        </ElFormItem>
-        <ElFormItem label="Level" prop="level">
-          <ElSelect v-model="editForm.level" value placeholder="Article level">
+    <el-dialog :visible.sync="dialogVisible" :title="`Article ${editForm.isEdit ? 'Edit' : 'Add'}`" width="50%">
+      <el-form :model="editForm" label-width="80px" style="margin-right: 60px">
+        <el-form-item label="Title" prop="title">
+          <el-input v-model="editForm.title" placeholder="Article title" />
+        </el-form-item>
+        <el-form-item label="Summery" prop="summery">
+          <el-input v-model="editForm.summery" placeholder="Article summery" />
+        </el-form-item>
+        <el-form-item label="Content" prop="content">
+          <el-input v-model="editForm.content" placeholder="Article content" />
+        </el-form-item>
+        <el-form-item label="Level" prop="level">
+          <el-select v-model="editForm.level" value placeholder="Article level">
             <template v-for="(lv, i) in levelMap">
-              <ElOption v-if="i !== 0" :key="lv" :label="lv" :value="lv" />
+              <el-option v-if="i !== 0" :key="lv" :label="lv" :value="lv" />
             </template>
-          </ElSelect>
-        </ElFormItem>
-        <ElFormItem label="Auditor" prop="auditor">
-          <ElAutocomplete
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Auditor" prop="auditor">
+          <el-autocomplete
             v-model="editForm.auditor"
             :debounce="0"
             :fetch-suggestions="inputQuerySearch"
             placeholder="Article auditor"
           />
-        </ElFormItem>
-      </ElForm>
+        </el-form-item>
+      </el-form>
       <div slot="footer">
-        <ElButton plain @click="dialogVisible = false">
+        <el-button plain @click="dialogVisible = false">
           Cancel
-        </ElButton>
-        <ElButton type="primary">
+        </el-button>
+        <el-button type="primary">
           Submit
-        </ElButton>
+        </el-button>
       </div>
-    </ElDialog>
+    </el-dialog>
   </div>
 </template>
 

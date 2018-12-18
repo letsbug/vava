@@ -1,13 +1,13 @@
 <template>
   <div class="va-body-container">
     <h5>Direct use</h5>
-    <ElInput v-model="url" readonly disabled style="width: 400px;" />
-    <ElButton
+    <el-input v-model="url" readonly disabled style="width: 400px;" />
+    <el-button
       :type="timing ? 'success' : 'primary'" :icon="timing ? 'el-icon-check' : 'el-icon-document'" :disabled="timing"
       class="copy-handler" @click="clipboard(url, $event, onSuccess)"
     >
       {{ timing ? 'Copied' : 'Copy' }}
-    </ElButton>
+    </el-button>
   </div>
 </template>
 

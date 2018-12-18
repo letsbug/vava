@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <ElTable
+    <el-table
       v-loading="loading"
       :data="list"
       :default-sort="{prop: 'display', order: 'descending'}"
@@ -9,30 +9,30 @@
       highlight-current-row
       empty-text="Sorry! This category have nothing data."
     >
-      <ElTableColumn label="ID" prop="id" width="60" align="right" sortable />
-      <ElTableColumn label="TITLE" prop="title" show-overflow-tooltip sortable />
-      <ElTableColumn label="CREATE" prop="display" width="110" sortable>
+      <el-table-column label="ID" prop="id" width="60" align="right" sortable />
+      <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable />
+      <el-table-column label="CREATE" prop="display" width="110" sortable>
         <template slot-scope="scope">
           {{ scope.row.display | dateAgo }}
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable />
-      <ElTableColumn label="LEVEL" prop="level" width="90" align="center" sortable />
-      <ElTableColumn label="STATUS" prop="status" width="100" align="center" sortable>
+      </el-table-column>
+      <el-table-column label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable />
+      <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable />
+      <el-table-column label="STATUS" prop="status" width="100" align="center" sortable>
         <template slot-scope="scope">
-          <ElTag :type="scope.row.status | articleStatus" size="small">
+          <el-tag :type="scope.row.status | articleStatus" size="small">
             {{ scope.row.status }}
-          </ElTag>
+          </el-tag>
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="PV" prop="pv" width="66" sortable>
+      </el-table-column>
+      <el-table-column label="PV" prop="pv" width="66" sortable>
         <template slot-scope="scope">
           {{ scope.row.pv | pageview }}
         </template>
-      </ElTableColumn>
-    </ElTable>
+      </el-table-column>
+    </el-table>
 
-    <ElPagination
+    <el-pagination
       v-if="list && list.length > 0"
       :page-sizes="[10, 30, 50]"
       :current-page="pages.page"

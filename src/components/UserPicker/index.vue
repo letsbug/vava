@@ -1,5 +1,5 @@
 <template>
-  <ElDialog
+  <el-dialog
     :title="title || $t('login.list')" :visible.sync="dialogVisible"
     custom-class="user-simulate-dialog" top="10vh"
     append-to-body center
@@ -8,8 +8,8 @@
     <h5 style="margin-top: 0; text-align: center; font-weight: normal">
       {{ $t('login.listHint') }}
     </h5>
-    <ElRow :gutter="15">
-      <ElCol v-for="(_user, index) in list" :key="index" :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+    <el-row :gutter="15">
+      <el-col v-for="(_user, index) in list" :key="index" :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
         <div :class="{ 'checked': index === checkedIndex }" class="user-list" @click="handleChoose(_user, index)">
           <img :src="_user.avatar" alt="" class="avatar" />
           <h5 class="username">
@@ -24,9 +24,9 @@
             <i class="el-icon-check"></i>
           </span>
         </div>
-      </ElCol>
-    </ElRow>
-  </ElDialog>
+      </el-col>
+    </el-row>
+  </el-dialog>
 </template>
 
 <script>

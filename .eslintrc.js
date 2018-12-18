@@ -36,7 +36,8 @@ module.exports = {
       "singleline": "never",
       "multiline": "always"
     }],
-    "vue/no-v-html": "never",
+    "vue/no-v-html": "off",
+    "vue/component-name-in-template-casing": ["error", "kebab-case"],
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
       'before': true,

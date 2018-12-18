@@ -8,7 +8,7 @@
         </span>
       </span>
     </div>
-    <VaSideMenu :routes="routes_permission" />
+    <va-side-menu :routes="routes_permission" />
   </div>
 </template>
 

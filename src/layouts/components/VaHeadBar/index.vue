@@ -4,21 +4,21 @@
     <div class="va-head-nav clear-fix">
       <!-- sidebar expander -->
       <a class="va-nav-item" @click.stop="toggleSidebar">
-        <VaIcon :icon="sidebarOpend ? 'action-collapse' : 'action-expand'" />
+        <va-icon :icon="sidebarOpend ? 'action-collapse' : 'action-expand'" />
       </a>
 
       <!-- refresh button -->
-      <RouterRefresh v-if="isMobile" />
+      <router-refresh v-if="isMobile" />
 
       <!-- breadcrumb in desktop -->
-      <Breadcrumb v-if="!isMobile" />
+      <breadcrumb v-if="!isMobile" />
     </div>
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
       <!-- global search -->
       <a v-if="!isMobile" class="va-nav-item nav-search">
-        <VaIcon icon="action-search" />
+        <va-icon icon="action-search" />
         <!-- TODO Add mobile layout to here -->
         <!-- TODO Add the history search drop-down list to here to autocomplete -->
         <input
@@ -30,29 +30,29 @@
 
       <template v-if="!isMobile">
         <!-- refresh button -->
-        <RouterRefresh />
+        <router-refresh />
         <!-- full screen action -->
-        <ScreenFull />
+        <screen-full />
         <!-- theme selector -->
-        <ThemePicker />
+        <theme-picker />
       </template>
 
-      <LanguagePicker class="va-nav-item" />
+      <language-picker class="va-nav-item" />
 
       <!-- user notifications -->
-      <ElTooltip :content="notificationTips" effect="dark" placement="bottom">
-        <RouterLink class="va-nav-item" to="/notification">
-          <ElBadge :hidden="!notificationHasUnread" is-dot>
-            <VaIcon icon="mark-notice" />
-          </ElBadge>
-        </RouterLink>
-      </ElTooltip>
+      <el-tooltip :content="notificationTips" effect="dark" placement="bottom">
+        <router-link class="va-nav-item" to="/notification">
+          <el-badge :hidden="!notificationHasUnread" is-dot>
+            <va-icon icon="mark-notice" />
+          </el-badge>
+        </router-link>
+      </el-tooltip>
 
       <!-- user actions -->
-      <UserActions />
+      <user-actions />
 
       <a class="va-nav-item hidden-sm-and-up">
-        <VaIcon icon="mark-more" />
+        <va-icon icon="mark-more" />
       </a>
     </div>
   </div>

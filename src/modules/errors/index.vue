@@ -10,11 +10,11 @@
       <a href="/" class="linker" @click.prevent.stop="$router.go(-1)">
         {{ $t('errors.actionBack') }}
       </a>
-      <RouterLink class="linker" to="/">
+      <router-link class="linker" to="/">
         {{ $t('errors.actionHome') }}
-      </RouterLink>
+      </router-link>
     </p>
-    <VaCopyright />
+    <va-copyright />
   </div>
 </template>
 

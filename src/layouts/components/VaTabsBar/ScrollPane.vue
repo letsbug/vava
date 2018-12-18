@@ -1,7 +1,7 @@
 <template>
-  <ElScrollbar ref="scrollPane" class="va-scroll-container" @wheel.prevent.native="handleScroll">
+  <el-scrollbar ref="scrollPane" class="va-scroll-container" @wheel.prevent.native="handleScroll">
     <slot />
-  </ElScrollbar>
+  </el-scrollbar>
 </template>
 
 <script>

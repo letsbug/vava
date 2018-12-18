@@ -1,68 +1,68 @@
 <template>
   <div class="va-body-container">
-    <ElTable
+    <el-table
       v-loading="loading" :data="list" tooltip-effect="theme" fit
       highlight-current-row row-key="id" empty-text="Sorry! This category have nothing data."
     >
-      <ElTableColumn label="ID" prop="id" width="36" align="right" />
-      <ElTableColumn label="TITLE" prop="title" show-overflow-tooltip class-name="has-actions actions-small">
+      <el-table-column label="ID" prop="id" width="36" align="right" />
+      <el-table-column label="TITLE" prop="title" show-overflow-tooltip class-name="has-actions actions-small">
         <template slot-scope="scope">
-          <TransitionGroup name="transform-fade">
+          <transition-group name="transform-fade">
             <span v-if="scope.row.editing" key="edit" class="inline-edit-form">
-              <ElInput v-model="scope.row.title" size="small" />
-              <ElButton
+              <el-input v-model="scope.row.title" size="small" />
+              <el-button
                 :disabled="scope.row.submitting" icon="el-icon-close" type="danger" plain
                 size="small" @click="handleCancel(scope.row)"
               >
                 Cancel
-              </ElButton>
+              </el-button>
             </span>
             <span v-else key="cancel" style="line-height: 27px;">
               {{ scope.row.title }}
             </span>
-          </TransitionGroup>
+          </transition-group>
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="CREATE" prop="display" width="110">
+      </el-table-column>
+      <el-table-column label="CREATE" prop="display" width="110">
         <template slot-scope="scope">
           {{ scope.row.display | dateAgo }}
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="LEVEL" prop="level" width="60" align="center" />
-      <ElTableColumn
+      </el-table-column>
+      <el-table-column label="LEVEL" prop="level" width="60" align="center" />
+      <el-table-column
         label="STATUS" prop="status" width="100" align="center"
         class-name="has-actions actions-small table-status"
       >
         <template slot-scope="scope">
-          <ElTag :type="scope.row.status | articleStatus" size="small">
+          <el-tag :type="scope.row.status | articleStatus" size="small">
             {{ scope.row.status }}
-          </ElTag>
+          </el-tag>
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="AUTHOR" prop="author" width="96" show-overflow-tooltip />
-      <ElTableColumn label="AUDITOR" prop="auditor" width="96" show-overflow-tooltip />
-      <ElTableColumn label="PV" prop="pv" width="60">
+      </el-table-column>
+      <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip />
+      <el-table-column label="AUDITOR" prop="auditor" width="96" show-overflow-tooltip />
+      <el-table-column label="PV" prop="pv" width="60">
         <template slot-scope="scope">
           {{ scope.row.pv | pageview }}
         </template>
-      </ElTableColumn>
-      <ElTableColumn label="ACTIONS" width="90" align="center" class-name="has-actions table-actions actions-small">
+      </el-table-column>
+      <el-table-column label="ACTIONS" width="90" align="center" class-name="has-actions table-actions actions-small">
         <template slot-scope="scope">
-          <ElButton
+          <el-button
             v-if="scope.row.editing" :loading="scope.row.submitting"
             icon="el-icon-check" type="success" plain size="small"
             @click="handleEdit(scope.row)"
           >
             OK
-          </ElButton>
-          <ElButton v-else icon="el-icon-edit" type="primary" plain size="small" @click="scope.row.editing = true">
+          </el-button>
+          <el-button v-else icon="el-icon-edit" type="primary" plain size="small" @click="scope.row.editing = true">
             Edit
-          </ElButton>
+          </el-button>
         </template>
-      </ElTableColumn>
-    </ElTable>
+      </el-table-column>
+    </el-table>
 
-    <ElPagination
+    <el-pagination
       v-if="list && list.length > 0"
       :page-sizes="[10, 30, 50]"
       :current-page="pages.page"

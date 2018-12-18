@@ -1,11 +1,11 @@
 <template>
   <div :class="background" class="va-body-wrapper">
-    <Transition name="transform-fade" mode="out-in">
-      <RouterView v-if="isMobile" />
-      <KeepAlive v-else :include="cachedRoutes">
-        <RouterView :key="key" />
-      </KeepAlive>
-    </Transition>
+    <transition name="transform-fade" mode="out-in">
+      <router-view v-if="isMobile" />
+      <keep-alive v-else :include="cachedRoutes">
+        <router-view :key="key" />
+      </keep-alive>
+    </transition>
   </div>
 </template>
 

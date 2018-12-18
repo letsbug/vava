@@ -7,16 +7,16 @@
       <div class="attrs">
         <div class="username">
           {{ user.username }}
-          <ElTooltip :content="$t('header.switchUser')">
-            <VaIcon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true" />
-          </ElTooltip>
+          <el-tooltip :content="$t('header.switchUser')">
+            <va-icon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true" />
+          </el-tooltip>
         </div>
         <div class="text-muted">
           {{ $t('permissions.yours', { roles }) }}
         </div>
       </div>
     </div>
-    <UserPicker :visible.sync="userPickerVisible" @on-change="onChooseUser" />
+    <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser" />
 
     <br />
     <h2 v-html="$t('permissions.title', { role: allowRoles })"></h2>

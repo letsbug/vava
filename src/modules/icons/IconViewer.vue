@@ -5,16 +5,16 @@
     </h4>
     <pre v-highlight><code class="html" v-html="$t('icons.content')"></code></pre>
     <h4 class="va-body-title" v-html="$t('icons.list')"></h4>
-    <ElRow>
-      <ElCol v-for="icon of icons" :key="icon" :xl="3" :lg="4" :md="6" :sm="6" :xs="8">
+    <el-row>
+      <el-col v-for="icon of icons" :key="icon" :xl="3" :lg="4" :md="6" :sm="6" :xs="8">
         <div class="grid-content" @click="handleClipboard(generateIconCode(icon), $event)">
           <div class="icon-item">
-            <VaIcon :icon="icon" />
+            <va-icon :icon="icon" />
             <span>{{ icon }}</span>
           </div>
         </div>
-      </ElCol>
-    </ElRow>
+      </el-col>
+    </el-row>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <GithubCorner />
+    <github-corner />
     <div class="content-homepage">
       <h2 class="title">
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
