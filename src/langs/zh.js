@@ -1,4 +1,12 @@
 export default {
+  roles: {
+    title: '角色',
+    admin: '系统管理员',
+    assigner: '授权管理员',
+    auditor: '审核员',
+    editor: '编辑员',
+    visitor: '访客'
+  },
   login: {
     title: 'VAVA 系统登录',
     username: '用户名',
@@ -13,6 +21,8 @@ export default {
     home: '首页',
     dashboard: '仪表盘',
     report: '报表',
+    components: '组件',
+    richEditor: '富文本编辑器',
     table: '表格',
     inlineEdit: '行内编辑',
     sortable: '排序',
@@ -23,9 +33,7 @@ export default {
     excelExport: '导出',
     excelImport: '导入',
     clipboard: '粘贴板',
-    permission: '权限管理',
-    permissionPage: '页面权限',
-    permissionDirective: '指令权限',
+    permission: '权限测试',
     settings: '配置',
     externalLink: '外部链接',
     others: '其它',
@@ -89,9 +97,12 @@ export default {
     actionBack: '返回',
     type400: '瞎JB点，这下爽了撒！该！！！',
     type401: '你未经授权！这个请求需要身份验证！',
-    type403: '你没有权限！想要吗？我不给你！',
+    type403: '你没有这个页面的访问权限！想要吗？我不会给你的！！！',
     type404: '哎呀！！！这里什么都没有！',
     type500: '服务器不想理你，还丢给了你这个错误代码 ...'
+  },
+  homepage: {
+    welcome: '欢迎回来，亲爱的 '
   },
   notification: {
     title: '通知中心',
@@ -99,6 +110,10 @@ export default {
     markAll: '标记所有为已读',
     confirm: '确定将所有未读消息标记为已读吗？',
     button: '确定'
+  },
+  permissions: {
+    yours: '你的角色：{roles}',
+    title: '这个页面只有 <span class="text-red">{role}</span> 能访问。'
   },
   icons: {
     usage: '使用方法',

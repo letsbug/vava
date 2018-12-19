@@ -1,9 +1,9 @@
 <template>
   <div :class="background" class="va-body-wrapper">
     <transition name="transform-fade" mode="out-in">
-      <router-view v-if="isMobile"/>
+      <router-view v-if="isMobile" />
       <keep-alive v-else :include="cachedRoutes">
-        <router-view :key="key"/>
+        <router-view :key="key" />
       </keep-alive>
     </transition>
   </div>

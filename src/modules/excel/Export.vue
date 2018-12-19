@@ -2,17 +2,17 @@
   <div class="va-body-container">
     <el-form :model="exportOpts" inline size="medium">
       <el-form-item :label="$t('excelExport.filename')">
-        <el-input v-model="exportOpts.filename" :placeholder="filenameDefault" prefix-icon="el-icon-document" clearable/>
+        <el-input v-model="exportOpts.filename" :placeholder="filenameDefault" prefix-icon="el-icon-document" clearable />
       </el-form-item>
       <el-form-item :label="$t('excelExport.fileType')">
         <el-select v-model="exportOpts.type" value style="width: 100px;">
-          <el-option label="xlsx" value="xlsx"/>
-          <el-option label="cvx" value="cvx"/>
-          <el-option label="txt" value="txt"/>
+          <el-option label="xlsx" value="xlsx" />
+          <el-option label="cvx" value="cvx" />
+          <el-option label="txt" value="txt" />
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('excelExport.autoWidth')">
-        <el-switch v-model="exportOpts.cellAutoWidth"/>
+        <el-switch v-model="exportOpts.cellAutoWidth" />
       </el-form-item>
       <el-form-item :label="$t('excelExport.execute')">
         <el-button-group style="vertical-align: top;">
@@ -29,16 +29,16 @@
 
     <!-- table list -->
     <el-table v-loading="loading" :data="list" tooltip-effect="light">
-      <el-table-column prop="name" label="name" width="120" show-overflow-tooltip/>
-      <el-table-column prop="card" label="ID Card" show-overflow-tooltip/>
-      <el-table-column prop="city" label="city" width="70" show-overflow-tooltip/>
-      <el-table-column prop="postcode" label="zip" width="70"/>
-      <el-table-column prop="tel" label="tel" width="110"/>
-      <el-table-column prop="mobile" label="mobile" width="105"/>
-      <el-table-column prop="fax" label="fax" width="110"/>
-      <el-table-column prop="email" label="email" show-overflow-tooltip/>
-      <el-table-column prop="qq" label="QQ" width="110"/>
-      <el-table-column prop="company" label="company" show-overflow-tooltip/>
+      <el-table-column prop="name" label="name" width="120" show-overflow-tooltip />
+      <el-table-column prop="card" label="ID Card" show-overflow-tooltip />
+      <el-table-column prop="city" label="city" width="70" show-overflow-tooltip />
+      <el-table-column prop="postcode" label="zip" width="70" />
+      <el-table-column prop="tel" label="tel" width="110" />
+      <el-table-column prop="mobile" label="mobile" width="105" />
+      <el-table-column prop="fax" label="fax" width="110" />
+      <el-table-column prop="email" label="email" show-overflow-tooltip />
+      <el-table-column prop="qq" label="QQ" width="110" />
+      <el-table-column prop="company" label="company" show-overflow-tooltip />
     </el-table>
 
     <el-pagination

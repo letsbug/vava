@@ -1,14 +1,20 @@
 <template>
   <div class="va-error-wrapper">
-    <img :src="flag" alt=""/>
-    <br/>
-    <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
+    <img :src="flag" alt="" />
+    <br />
+    <h4 style="margin: 0">
+      Oops! {{ code }} !!!
+    </h4>
     <h5>{{ $t(`errors.type${code}`) }}</h5>
     <p>
-      <a href="/" class="linker" @click.prevent.stop="$router.go(-1)">{{ $t('errors.actionBack') }}</a>
-      <router-link class="linker" to="/">{{ $t('errors.actionHome') }}</router-link>
+      <a href="/" class="linker" @click.prevent.stop="$router.go(-1)">
+        {{ $t('errors.actionBack') }}
+      </a>
+      <router-link class="linker" to="/">
+        {{ $t('errors.actionHome') }}
+      </router-link>
     </p>
-    <va-copyright/>
+    <va-copyright />
   </div>
 </template>
 

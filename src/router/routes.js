@@ -2,6 +2,8 @@ import Layout from '@/layouts'
 
 // modules
 import Dashboard from './modules/dashboards'
+import Permissions from './modules/permissions'
+import Components from './modules/components'
 import Tables from './modules/tables'
 import Excels from './modules/excels'
 
@@ -67,39 +69,7 @@ export const constantRouteMap = [
 ]
 
 export const asyncRouteMap = [
-  {
-    path: '/permission',
-    component: Layout,
-    meta: {
-      title: 'permission',
-      icon: 'mark-vip',
-      roles: ['admin', 'assigner', 'auditor']
-    },
-    redirect: '/permission/page',
-    alwaysShow: true,
-    children: [
-      {
-        path: 'page',
-        name: 'PermissionPage',
-        meta: {
-          title: 'permissionPage',
-          icon: 'action-clipboard',
-          roles: ['admin']
-        },
-        component: () => import('@/modules/permission/Page')
-      },
-      {
-        path: 'directive',
-        name: 'PermissionDirective',
-        meta: {
-          title: 'permissionDirective',
-          icon: 'mark-terminal',
-          roles: ['assigner', 'auditor']
-        },
-        component: () => import('@/modules/permission/Directive')
-      }
-    ]
-  },
+  Permissions,
 
   {
     path: '/report',
@@ -112,6 +82,8 @@ export const asyncRouteMap = [
       component: () => import('@/modules/report/Report')
     }]
   },
+
+  Components,
 
   Tables,
 

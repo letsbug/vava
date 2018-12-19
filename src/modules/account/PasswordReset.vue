@@ -2,8 +2,10 @@
   <div class="container-login--password">
     <div class="form-login--password">
       <div class="form-logo">
-        <img :src="logo" class="brand" alt="Vava"/>
-        <h2 class="title">Reset your password</h2>
+        <img :src="logo" class="brand" alt="Vava" />
+        <h2 class="title">
+          Reset your password
+        </h2>
       </div>
 
       <!-- Send & verify email or mobile phone security code -->
@@ -42,7 +44,7 @@
         <p><small>Password must be a combination of Numbers and letters, and between 8 and 16 characters.</small></p>
         <el-form-item prop="password">
           <el-input
-            :type="pwdType.password ? 'password' : 'text'" v-model="form.password" size="large" name="password"
+            v-model="form.password" :type="pwdType.password ? 'password' : 'text'" size="large" name="password"
             placeholder="Password"
           >
             <va-icon
@@ -53,7 +55,7 @@
         </el-form-item>
         <el-form-item prop="confirm">
           <el-input
-            :type="pwdType.confirm ? 'password' : 'text'" v-model="form.confirm" size="large" name="password"
+            v-model="form.confirm" :type="pwdType.confirm ? 'password' : 'text'" size="large" name="password"
             placeholder="Confirm"
           >
             <va-icon
@@ -70,7 +72,7 @@
       </el-form>
     </div>
 
-    <copyright/>
+    <copyright />
   </div>
 </template>
 

@@ -7,7 +7,9 @@
         :class="{ 'disabled': item.disabled, 'divided': item.divided }"
         class="va-context-menu-item"
         @click="handleClick(item)"
-      >{{ item.name }}</li>
+      >
+        {{ item.name }}
+      </li>
     </ul>
   </transition>
 </template>
@@ -28,7 +30,6 @@ export default {
   },
   watch: {
     visible(v) {
-      console.log(v)
       if (v) document.body.addEventListener('click', this.close)
       else document.body.removeEventListener('click', this.close)
     }

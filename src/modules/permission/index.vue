@@ -2,22 +2,24 @@
   <div class="va-body-container">
     <div class="user-info">
       <div class="avatar">
-        <img :src="user.avatar" alt=""/>
+        <img :src="user.avatar" alt="" />
       </div>
       <div class="attrs">
         <div class="username">
           {{ user.username }}
-          <el-tooltip content="change current user">
-            <va-icon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true"/>
+          <el-tooltip :content="$t('header.switchUser')">
+            <va-icon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true" />
           </el-tooltip>
         </div>
-        <div class="text-muted">Your roles: {{ user.roles }}</div>
+        <div class="text-muted">
+          {{ $t('permissions.yours', { roles }) }}
+        </div>
       </div>
     </div>
-    <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser"/>
+    <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser" />
 
-    <br/>
-    <h1>This page is accessible only to admin and assigner</h1>
+    <br />
+    <h2 v-html="$t('permissions.title', { role: allowRoles })"></h2>
   </div>
 </template>
 
@@ -25,7 +27,7 @@
 import UserPicker from '@/components/UserPicker'
 
 export default {
-  name: 'Page',
+  name: 'Admin',
   components: { UserPicker },
   data() {
     return {
@@ -35,12 +37,26 @@ export default {
   computed: {
     user() {
       return this.$store.state.user
+    },
+    roles() {
+      const roles = [...this.user.roles]
+      return roles.map(v => this.$t(`roles.${v}`)).join('、')
+    },
+    allowRoles() {
+      const role = [...this.$route.meta.roles]
+      return role.map(v => this.$t(`roles.${v}`)).join(' & ')
     }
   },
   methods: {
     onChooseUser(user) {
-      // TODO change user or user roles.
-      console.log(user)
+      this.$store.dispatch('user_switch', user.token).then(() => {
+        this.userPickerVisible = false
+        this.$nextTick(() => {
+          this.$router.replace({
+            path: '/redirect' + this.$route.fullPath
+          })
+        })
+      })
     }
   }
 }

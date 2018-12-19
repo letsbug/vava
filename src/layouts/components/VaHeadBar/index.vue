@@ -2,25 +2,23 @@
   <div class="va-head-bar clear-fix">
     <!-- left navs -->
     <div class="va-head-nav clear-fix">
-
       <!-- sidebar expander -->
       <a class="va-nav-item" @click.stop="toggleSidebar">
-        <va-icon :icon="sidebarOpend ? 'action-collapse' : 'action-expand'"/>
+        <va-icon :icon="sidebarOpend ? 'action-collapse' : 'action-expand'" />
       </a>
 
       <!-- refresh button -->
-      <router-refresh v-if="isMobile"/>
+      <router-refresh v-if="isMobile" />
 
       <!-- breadcrumb in desktop -->
-      <breadcrumb v-if="!isMobile"/>
+      <breadcrumb v-if="!isMobile" />
     </div>
 
     <!-- right navs -->
     <div class="va-head-nav nav-right clear-fix">
-
       <!-- global search -->
       <a v-if="!isMobile" class="va-nav-item nav-search">
-        <va-icon icon="action-search"/>
+        <va-icon icon="action-search" />
         <!-- TODO Add mobile layout to here -->
         <!-- TODO Add the history search drop-down list to here to autocomplete -->
         <input
@@ -32,29 +30,29 @@
 
       <template v-if="!isMobile">
         <!-- refresh button -->
-        <router-refresh/>
+        <router-refresh />
         <!-- full screen action -->
-        <screen-full/>
+        <screen-full />
         <!-- theme selector -->
-        <theme-picker/>
+        <theme-picker />
       </template>
 
-      <language-picker class="va-nav-item"/>
+      <language-picker class="va-nav-item" />
 
       <!-- user notifications -->
       <el-tooltip :content="notificationTips" effect="dark" placement="bottom">
         <router-link class="va-nav-item" to="/notification">
           <el-badge :hidden="!notificationHasUnread" is-dot>
-            <va-icon icon="mark-notice"/>
+            <va-icon icon="mark-notice" />
           </el-badge>
         </router-link>
       </el-tooltip>
 
       <!-- user actions -->
-      <user-actions/>
+      <user-actions />
 
       <a class="va-nav-item hidden-sm-and-up">
-        <va-icon icon="mark-more"/>
+        <va-icon icon="mark-more" />
       </a>
     </div>
   </div>

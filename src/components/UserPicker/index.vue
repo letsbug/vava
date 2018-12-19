@@ -5,14 +5,24 @@
     append-to-body center
     @closed="handleClose"
   >
-    <h5 style="margin-top: 0; text-align: center; font-weight: normal" v-html="$t('login.listHint')"></h5>
+    <h5 style="margin-top: 0; text-align: center; font-weight: normal">
+      {{ $t('login.listHint') }}
+    </h5>
     <el-row :gutter="15">
-      <el-col v-for="(user, index) in list" :xs="12" :sm="12" :md="8" :lg="8" :xl="6" :key="index">
-        <div :class="{ 'checked': index === checkedIndex }" class="user-list" @click="handleChoose(user, index)">
-          <img :src="user.avatar" alt="" class="avatar"/>
-          <h5 class="username">{{ user.username }}</h5>
-          <span class="text-muted"><span class="hidden-xs-only">role: </span>{{ user.roles[0] }}</span>
-          <span class="checked-flag"><i class="el-icon-check"></i></span>
+      <el-col v-for="(_user, index) in list" :key="index" :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
+        <div :class="{ 'checked': index === checkedIndex }" class="user-list" @click="handleChoose(_user, index)">
+          <img :src="_user.avatar" alt="" class="avatar" />
+          <h5 class="username">
+            {{ _user.username }}
+          </h5>
+          <span class="text-muted">
+            <span class="hidden-xs-only">
+              {{ $t('roles.title') }}:
+            </span>{{ $t(`roles.${_user.roles[0]}`) }}
+          </span>
+          <span class="checked-flag">
+            <i class="el-icon-check"></i>
+          </span>
         </div>
       </el-col>
     </el-row>

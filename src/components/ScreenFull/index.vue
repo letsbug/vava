@@ -1,6 +1,6 @@
 <template>
   <a class="va-nav-item" @click="handleScreenToggle">
-    <va-icon :icon="isFullScreen ? 'action-screen-small' : 'action-screen-full'" class="handle-screen-full"/>
+    <va-icon :icon="isFullScreen ? 'action-screen-small' : 'action-screen-full'" class="handle-screen-full" />
   </a>
 </template>
 

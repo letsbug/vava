@@ -1,6 +1,6 @@
 <template>
   <el-scrollbar ref="scrollPane" class="va-scroll-container" @wheel.prevent.native="handleScroll">
-    <slot/>
+    <slot />
   </el-scrollbar>
 </template>
 

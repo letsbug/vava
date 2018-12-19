@@ -1,4 +1,12 @@
 export default {
+  roles: {
+    title: 'role',
+    admin: 'admin',
+    assigner: 'assigner',
+    auditor: 'auditor',
+    editor: 'editor',
+    visitor: 'visitor'
+  },
   login: {
     title: 'Sign in to VAVA',
     username: 'username',
@@ -7,12 +15,14 @@ export default {
     rememberDefault: 'Cookie are stored for 10 minutes by default',
     login: 'Sign in',
     list: 'About accounts?',
-    listHint: 'Simulate with mock.js, <strong>Pick any one to log in</strong>!'
+    listHint: 'Simulate with mock.js, Pick any one to log in!'
   },
   router: {
     home: 'Home',
     dashboard: 'Dashboard',
     reports: 'Reports',
+    components: 'Components',
+    richEditor: 'Rich Editor',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',
@@ -24,8 +34,6 @@ export default {
     excelImport: 'Import Excel',
     clipboard: 'Clipboard',
     permission: 'Permission',
-    permissionPage: 'Page',
-    permissionDirective: 'Directive',
     settings: 'Settings',
     externalLink: 'External Link',
     others: 'Others',
@@ -89,9 +97,12 @@ export default {
     actionBack: 'BACK',
     type400: 'Please don\'t mess around here, something will happen ...',
     type401: 'Unauthorized! This requests require authentication.',
-    type403: 'You don\'t have access to this page, do you want it? I won\'t give it to you !!!',
+    type403: 'You do not have access to this page! Want it? I won\'t give it to you!!!',
     type404: 'The page you want to see may have moved ...',
     type500: 'The server doesn\'t want to talk to you and throws you an error code ...'
+  },
+  homepage: {
+    welcome: 'Welcome back, dear '
   },
   notification: {
     title: 'notification',
@@ -99,6 +110,10 @@ export default {
     markAll: 'mark all as read',
     confirm: 'You will mark all unread notifications as read.',
     button: 'Mark All'
+  },
+  permissions: {
+    yours: 'Your roles: {roles}',
+    title: 'This page is accessible only to <span class="text-red">{role}</span>.'
   },
   icons: {
     usage: 'Usage',

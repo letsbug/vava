@@ -1,7 +1,9 @@
 import Account from '@/services/account'
 import { Token } from '@/tools'
 
-const TOKEN_EXPIRE = 1 / 24 / 6 // By default, it is stored in the cookie for 10 minutes.
+const TOKEN_EXPIRE = process.env.NODE_ENV === 'development'
+  ? 1 / 24 // for dev
+  : 1 / 24 / 6 // By default, it is stored in the cookie for 10 minutes.
 
 const user = {
   state: {
@@ -91,21 +93,17 @@ const user = {
       Token.remove()
       resolve()
     }),
+    // Remove all user info, and refresh current router, and add the target user info in router helper.
     user_switch: ({ commit, dispatch }, token) => new Promise(resolve => {
       commit('USER_SET_TOKEN', token)
       Token.set(token, TOKEN_EXPIRE)
-      // Account.info(token).then(res => {
-      //   console.log(res.data)
-      //   const data = res.data
       commit('USER_SET_ROLES', [])
       commit('USER_SET_NAME', '')
       commit('USER_SET_CODE', '')
       commit('USER_SET_STATUS', '')
       commit('USER_SET_AVATAR', '')
       commit('USER_SET_INTRO', '')
-      //   dispatch('perm_generate_routes', data)
       resolve()
-      // })
     })
   }
 }

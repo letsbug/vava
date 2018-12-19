@@ -7,8 +7,8 @@ const getters = {
   token: state => state.user.token,
   roles: state => state.user.roles,
   // User permission routes
-  routes_permission: state => state.permission.routes,
   // routes_addons: state => state.permission.addons,
+  routes_permission: state => state.permission.routes,
   // Tabs control (history and cached routes in tab-bar)
   tabs_history: state => state.tabs.history,
   tabs_cached: state => state.tabs.cached,

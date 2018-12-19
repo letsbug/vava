@@ -5,7 +5,9 @@
         <span v-if="!route.redirect || index === routes.length - 1" class="no-redirect">
           {{ generateTitle(route.meta.title) }}
         </span>
-        <router-link v-else :to="route.redirect || route.path">{{ generateTitle(route.meta.title) }}</router-link>
+        <router-link v-else :to="route.redirect || route.path">
+          {{ generateTitle(route.meta.title) }}
+        </router-link>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>

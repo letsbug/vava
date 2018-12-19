@@ -35,8 +35,6 @@ Vue.use(Element, {
   i18n: (path, option) => i18n.t(path, option)
 })
 Vue.use(Meta)
-Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
-Vue.use(vga, { id: 'UA-106135225-2' })
 
 // register global filters.
 Object.keys(filters).forEach(key => {
@@ -47,6 +45,9 @@ Object.keys(filters).forEach(key => {
 // Object.keys(Directives).forEach(key => {
 //   Vue.directive(key, Directives[key])
 // })
+
+Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
+Vue.use(vga, { id: 'UA-106135225-2' })
 
 /* eslint-disable no-new */
 new Vue({

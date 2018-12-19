@@ -17,15 +17,19 @@
       ref="notifications" :show-header="false" :data="notifications.list" size="medium"
       highlight-current-row show-overflow-tooltip style="width: 100%;"
     >
-      <el-table-column type="index" label="#" width="40"/>
+      <el-table-column type="index" label="#" width="40" />
       <el-table-column prop="from" lable="from" width="80">
         <template slot-scope="scope">
-          <el-tag size="mini">{{ scope.row.from }}</el-tag>
+          <el-tag size="mini">
+            {{ scope.row.from }}
+          </el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="title" label="title" show-overflow-tooltip>
         <template slot-scope="scope">
-          <a :class="transUnreadClass(scope.row)" @click="handleShowDetail(scope.row)">{{ scope.row.title }}</a>
+          <a :class="transUnreadClass(scope.row)" @click="handleShowDetail(scope.row)">
+            {{ scope.row.title }}
+          </a>
         </template>
       </el-table-column>
       <el-table-column width="160" label="date">
@@ -35,7 +39,9 @@
       </el-table-column>
       <el-table-column width="120" label="date">
         <template slot-scope="scope">
-          <span :class="transUnreadClass(scope.row)">{{ scope.row.date | dateAgo }}</span>
+          <span :class="transUnreadClass(scope.row)">
+            {{ scope.row.date | dateAgo }}
+          </span>
         </template>
       </el-table-column>
       <el-table-column label="options" width="70" align="right">

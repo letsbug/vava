@@ -122,6 +122,11 @@ const webpackConfig = merge(baseWebpackConfig, {
           priority: 20,
           test: /[\\/]node_modules[\\/]element-ui[\\/]/
         },
+        ckeditor: {
+          name: 'chunk-ckeditor',
+          priority: 20,
+          test: /[\\/]node_modules[\\/]@ckeditor[\\/]/
+        },
         xlsx: {
           name: 'chunk-xlsx',
           priority: 20,
@@ -137,7 +142,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     runtimeChunk: 'single',
     minimizer: [
       new UglifyJsPlugin({
-        // mangle: {},
         sourceMap: config.build.productionSourceMap,
         cache: true,
         parallel: true
