@@ -15,29 +15,29 @@ module.exports = {
   // add your custom rules here
   rules: {
     // About vue settings
-    "vue/max-attributes-per-line": [2, {
-      "singleline": 10,
-      "multiline": {
-        "max": 4,
-        "allowFirstLine": false
+    'vue/max-attributes-per-line': [2, {
+      'singleline': 10,
+      'multiline': {
+        'max': 4,
+        'allowFirstLine': false
       }
     }],
-    "vue/name-property-casing": ["error", "PascalCase"],
-    "vue/html-self-closing": ["error", {
-      "html": {
-        "void": "always",
-        "normal": "any",
-        "component": "always"
+    'vue/name-property-casing': ['error', 'PascalCase'],
+    'vue/html-self-closing': ['error', {
+      'html': {
+        'void': 'always',
+        'normal': 'any',
+        'component': 'always'
       },
-      "svg": "any",
-      "math": "always"
+      'svg': 'any',
+      'math': 'always'
     }],
-    "vue/html-closing-bracket-newline": ["error", {
-      "singleline": "never",
-      "multiline": "always"
+    'vue/html-closing-bracket-newline': ['error', {
+      'singleline': 'never',
+      'multiline': 'always'
     }],
-    "vue/no-v-html": "off",
-    "vue/component-name-in-template-casing": ["error", "kebab-case"],
+    'vue/no-v-html': 'off',
+    'vue/component-name-in-template-casing': ['error', 'kebab-case'],
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
       'before': true,
