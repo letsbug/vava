@@ -58,7 +58,6 @@ import ContextMenu from '@/components/ContextMenu'
 import { generateTitle } from '@/tools/i18n'
 
 export default {
-  name: 'VaTabsBar',
   components: { ScrollPane, Breadcrumb, ContextMenu },
   data() {
     return {

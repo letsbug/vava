@@ -4,12 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'VaCopyright'
-}
-</script>
-
 <style lang="scss" scoped>
 @import "../../styles/variables";
 

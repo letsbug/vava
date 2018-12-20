@@ -90,13 +90,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../static'),
-        to: config.build.assetsSubDirectory,
-        ignore: ['.*']
-      }
-    ])
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../static'),
+      to: config.build.assetsSubDirectory,
+      ignore: ['.*']
+    }])
   ],
   optimization: {
     splitChunks: {
@@ -121,11 +119,6 @@ const webpackConfig = merge(baseWebpackConfig, {
           name: 'chunk-elementUI',
           priority: 20,
           test: /[\\/]node_modules[\\/]element-ui[\\/]/
-        },
-        ckeditor: {
-          name: 'chunk-ckeditor',
-          priority: 20,
-          test: /[\\/]node_modules[\\/]@ckeditor[\\/]/
         },
         xlsx: {
           name: 'chunk-xlsx',

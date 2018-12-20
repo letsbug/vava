@@ -16,7 +16,6 @@
 <script>
 import { generateTitle } from '@/tools/i18n'
 export default {
-  name: 'Breadcrumb',
   data() {
     return { routes: [] }
   },

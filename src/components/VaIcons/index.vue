@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'VaIcon',
   props: {
     icon: { type: String, required: true }
   }

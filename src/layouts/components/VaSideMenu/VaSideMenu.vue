@@ -22,7 +22,6 @@ import NavItem from './NavItem'
 import { generateTitle } from '@/tools/i18n'
 
 export default {
-  name: 'VaSideMenu',
   components: { NavItem },
   props: {
     routes: { type: Array, required: true }

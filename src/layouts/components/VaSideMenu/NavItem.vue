@@ -47,7 +47,6 @@ import ElCollapseTransition from 'element-ui/lib/transitions/collapse-transition
 import { generateTitle } from '@/tools/i18n'
 
 export default {
-  name: 'NavItem',
   components: { ElCollapseTransition },
   props: {
     route: {

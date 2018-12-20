@@ -17,7 +17,6 @@ import VaSideMenu from './VaSideMenu'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'VaSideBar',
   components: { VaSideMenu },
   computed: {
     ...mapGetters(['routes_permission'])

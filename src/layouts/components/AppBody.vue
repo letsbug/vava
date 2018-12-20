@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  name: 'AppBody',
   computed: {
     isMobile() { return this.$store.getters.device === 'mobile' },
     cachedRoutes() { return this.$store.getters.tabs_cached },

@@ -18,7 +18,6 @@ const { body } = document
 const WIDTH = 768
 
 export default {
-  name: 'Layout',
   components: { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
   computed: {
     sidebarOpened() { return this.$store.state.application.sidebar.opened },

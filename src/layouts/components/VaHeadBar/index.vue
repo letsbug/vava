@@ -67,7 +67,6 @@ import ThemePicker from './ThemePicker'
 import UserActions from './UserActions'
 
 export default {
-  name: 'VaHeadBar',
   components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions },
   data() {
     return {
