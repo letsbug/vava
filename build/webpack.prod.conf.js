@@ -137,7 +137,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       new UglifyJsPlugin({
         sourceMap: config.build.productionSourceMap,
         cache: true,
-        parallel: true
+        parallel: true,
+        exclude: /[\\/]node_modules[\\/]@ckeditor[\\/]/
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
