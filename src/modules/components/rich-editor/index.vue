@@ -1,13 +1,12 @@
 <template>
   <div class="va-body-container">
     CKEditor，TinyMCE，Quill，medium-editor，slatejs，选肥的选瘦的。。。富文本就是个天坑。。。
-    <ckeditor :editor="editor" />
+    <i-tinymce />
   </div>
 </template>
 
 <script>
-import VCkeditor from '@ckeditor/ckeditor5-vue'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import ITinymce from '@/components/ITinymce'
 
 export default {
   name: 'RichEditor',
@@ -15,11 +14,10 @@ export default {
     title: 'Rich editor demo'
   },
   components: {
-    ckeditor: VCkeditor.component
+    ITinymce
   },
   data() {
     return {
-      editor: ClassicEditor
     }
   }
 }
