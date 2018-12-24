@@ -1,6 +1,5 @@
 <template>
   <div class="va-body-container">
-    CKEditor，TinyMCE，Quill，medium-editor，slatejs，选肥的选瘦的。。。富文本就是个天坑。。。
     <i-tinymce />
   </div>
 </template>
