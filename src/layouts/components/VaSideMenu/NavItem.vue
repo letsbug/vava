@@ -1,29 +1,61 @@
 <template>
   <div :class="{ 'expanded': visible && (route.children.length > 1 || route.alwaysShow) }" class="va-side-nav">
     <template v-if="route.children.length > 1 || route.alwaysShow">
-      <a
-        :data-path="route.path"
-        :class="{ 'active': current === route.path }" class="nav-title expander"
-        @click="visible = !visible"
-      >
-        <va-icon :icon="route.meta.icon" />
-        <span class="item-name">
-          {{ generateTitle(route.meta.title) }}
-        </span>
-        <i class="el-icon-arrow-right expander-icon"></i>
-      </a>
-      <el-collapse-transition>
-        <ul v-show="visible" class="nav-dropdown">
-          <li v-for="child in route.children" :key="child.path">
-            <router-link :to="route.path + '/' + child.path" class="nav-item">
-              <va-icon v-if="child.meta.icon" :icon="child.meta.icon" />
-              <span class="item-name">
-                {{ generateTitle(child.meta.title) }}
-              </span>
-            </router-link>
-          </li>
-        </ul>
-      </el-collapse-transition>
+      <template v-if="sidebarOpened">
+        <a
+          :data-path="route.path"
+          :class="{ 'active': current === route.path }" class="nav-title expander"
+          @click="sidebarOpened && (visible = !visible)"
+        >
+          <va-icon :icon="route.meta.icon" />
+          <span class="item-name">
+            {{ generateTitle(route.meta.title) }}
+          </span>
+          <i class="el-icon-arrow-right expander-icon"></i>
+        </a>
+        <el-collapse-transition>
+          <ul v-show="visible" class="nav-dropdown">
+            <li v-for="child in route.children" :key="child.path">
+              <router-link :to="route.path + '/' + child.path" class="nav-item">
+                <va-icon v-if="child.meta.icon" :icon="child.meta.icon" />
+                <span class="item-name">
+                  {{ generateTitle(child.meta.title) }}
+                </span>
+              </router-link>
+            </li>
+          </ul>
+        </el-collapse-transition>
+      </template>
+      <template v-else>
+        <el-popover
+          placement="right-start"
+          width="210"
+          trigger="hover"
+        >
+          <ul class="nav-dropdown">
+            <li v-for="child in route.children" :key="child.path">
+              <router-link :to="route.path + '/' + child.path" class="nav-item">
+                <va-icon v-if="child.meta.icon" :icon="child.meta.icon" />
+                <span class="item-name">
+                  {{ generateTitle(child.meta.title) }}
+                </span>
+              </router-link>
+            </li>
+          </ul>
+          <a
+            slot="reference"
+            :data-path="route.path" :class="{ 'active': current === route.path }"
+            class="nav-title expander"
+            @click="sidebarOpened && (visible = !visible)"
+          >
+            <va-icon :icon="route.meta.icon" />
+            <span class="item-name">
+              {{ generateTitle(route.meta.title) }}
+            </span>
+            <i class="el-icon-arrow-right expander-icon"></i>
+          </a>
+        </el-popover>
+      </template>
     </template>
     <template v-else>
       <a v-if="isExternal(route.children[0].path)" :href="route.children[0].path" target="_blank" class="nav-title">
@@ -62,6 +94,9 @@ export default {
   computed: {
     current() {
       return this.$route.matched[0].path
+    },
+    sidebarOpened() {
+      return this.$store.state.application.sidebar.opened
     }
   },
   mounted() {

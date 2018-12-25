@@ -76,6 +76,10 @@
     }
 
     .va-side-nav {
+      &.expanded {
+        background-color: transparent;
+      }
+
       .item-name, .expander-icon {
         display: none;
       }

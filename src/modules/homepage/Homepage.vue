@@ -23,7 +23,8 @@ export default {
       return this.$store.getters.user
     },
     roleImage() {
-      return require(`@/assets/images/roles/${this.user.roles[0]}.gif`)
+      const role = this.user.roles[0]
+      return role ? require(`@/assets/images/roles/${role}.gif`) : null
     }
   }
 }
@@ -58,6 +59,7 @@ export default {
 
     img {
       display: inline-block;
+      max-width: 100%;
       max-height: 100%;
     }
   }

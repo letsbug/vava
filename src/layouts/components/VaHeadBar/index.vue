@@ -50,10 +50,6 @@
 
       <!-- user actions -->
       <user-actions />
-
-      <a class="va-nav-item hidden-sm-and-up">
-        <va-icon icon="mark-more" />
-      </a>
     </div>
   </div>
 </template>
