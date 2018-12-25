@@ -28,3 +28,20 @@
 .transition-breadcrumb-leave-active {
   position: absolute;
 }
+
+
+//
+// Sidebar submenus when sidebar is closed.
+
+.transition-fade-in-bottom-enter-active {
+  transition: all $transition-duration cubic-bezier(.55, 0, .1, 1);
+}
+
+.transition-fade-in-bottom-enter,
+.transition-fade-in-bottom-leave-active {
+  opacity: 0;
+}
+
+.transition-fade-in-bottom-enter {
+  transform: translateY($spacer-base);
+}
