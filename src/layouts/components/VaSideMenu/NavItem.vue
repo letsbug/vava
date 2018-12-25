@@ -98,13 +98,21 @@ export default {
       return this.$store.state.application.sidebar.opened
     }
   },
+  watch: {
+    sidebarOpened(val) {
+      if (this.isCurrent()) this.visible = val
+    }
+  },
   mounted() {
-    this.visible = this.current === this.route.path
+    this.visible = this.isCurrent()
   },
   methods: {
     generateTitle,
     isExternal(link) {
       return /^(https?:|mailto:|tel:|tencent:)/.test(link)
+    },
+    isCurrent() {
+      return this.current === this.route.path
     }
   }
 }
