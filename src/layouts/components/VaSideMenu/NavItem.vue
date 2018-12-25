@@ -28,9 +28,7 @@
       </template>
       <template v-else>
         <el-popover
-          placement="right-start"
-          width="210"
-          trigger="hover"
+          placement="right-start" width="210" trigger="hover" popper-class="side-menu-collapse-drops"
         >
           <ul class="nav-dropdown">
             <li v-for="child in route.children" :key="child.path">
