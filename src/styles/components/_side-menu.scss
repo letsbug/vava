@@ -14,11 +14,6 @@
     transform: translateY(-42%);
   }
 
-  .item-name {
-    text-transform: capitalize;
-    font-size: 1rem;
-  }
-
   .expander-icon {
     font-size: 12px;
     position: absolute;
@@ -55,8 +50,22 @@
 .side-menu-collapse-drops {
   background-color: $sidebar-bg-color;
   border: 0 none;
-  margin-left: -3px !important;
+  margin-left: -2px !important;
+  margin-top: 3px;
   padding: $spacer-sm 0;
+
+  .nav-item {
+    padding: 0 $sidebar-nav-link-padding-x;
+    font-size: $sidebar-nav-icon-size;
+
+    &:hover:not(.active) {
+      background-color: $sidebar-nav-expanded-bg;
+    }
+
+    &.active {
+      cursor: default;
+    }
+  }
 }
 
 .va-side-nav, .side-menu-collapse-drops {
@@ -90,15 +99,8 @@
     }
   }
 
-  .nav-item {
-    padding: 0 $sidebar-nav-link-padding-x;
-
-    &:hover {
-      background-color: $sidebar-nav-expanded-bg;
-    }
-
-    &.active {
-      cursor: default;
-    }
+  .item-name {
+    text-transform: capitalize;
+    font-size: 1rem;
   }
 }
