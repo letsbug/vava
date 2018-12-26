@@ -1,7 +1,11 @@
 <p align="center">
   <img src="./static/images/logo.png"/>
   <br />
+</p>
+<p align="center">
   <img src="./static/images/title.png"/>
+</p>
+<p align="center">
   <img src="./static/images/subtitle.png"/>
 </p>
 
