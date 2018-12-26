@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'RouterRefresh',
   data() {
     return {
       doing: false

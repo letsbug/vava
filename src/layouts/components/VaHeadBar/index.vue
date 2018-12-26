@@ -50,10 +50,6 @@
 
       <!-- user actions -->
       <user-actions />
-
-      <a class="va-nav-item hidden-sm-and-up">
-        <va-icon icon="mark-more" />
-      </a>
     </div>
   </div>
 </template>
@@ -67,7 +63,6 @@ import ThemePicker from './ThemePicker'
 import UserActions from './UserActions'
 
 export default {
-  name: 'VaHeadBar',
   components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions },
   data() {
     return {

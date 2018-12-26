@@ -33,7 +33,6 @@
 import Service from '@/services/account'
 
 export default {
-  name: 'UserPicker',
   props: {
     visible: {
       type: Boolean,

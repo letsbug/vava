@@ -62,7 +62,11 @@ router.beforeEach((to, from, next) => {
       next()
     }
     if (store.getters.user.token) {
-      Message.error('Your login has expired. Please login again.')
+      Message({
+        type: 'error',
+        message: 'Your login has expired. Please login again.',
+        duration: 0
+      })
     }
   }
 })

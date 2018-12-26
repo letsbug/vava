@@ -28,7 +28,7 @@ $color-theme-pink:      $color-pink !default;
 $color-theme-green:     $color-green !default;
 $color-theme-blue:      $color-cyan !default;
 
-$color-theme:           $color-theme-blue;
+$color-theme:           $color-theme-green;
 $color-line:            $color-gray-100 !default;
 
 $color-text-primary:    $color-gray-800;
@@ -104,6 +104,8 @@ $z-index-footer:            100!default;
 $z-index-editors:           135!default;
 
 $z-index-contextmenu:       145!default;
+
+$z-index-rich-text:         160!default;
 
 
 // Shadows

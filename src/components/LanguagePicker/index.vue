@@ -32,8 +32,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "~@/styles/_variables";
+
 .lang-picker {
   cursor: pointer;
+  transition: $transition-color;
+
+  &:hover {
+    color: $color-theme;
+  }
 }
 </style>

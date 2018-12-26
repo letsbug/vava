@@ -50,19 +50,19 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing'
-        ? 'index.html'
-        : config.build.index,
+      filename: config.build.index,
       template: 'index.html',
       inject: true,
       favicon: path.resolve(__dirname, '../favicon.ico'),
-      title: 'Vava',
       meta: meta,
+      templateParameters: {
+        TITLE: 'Vava',
+        BASE_URL: config.build.assetsPublicPath + config.build.assetsSubDirectory
+      },
       minify: {
         removeComments: true,
         collapseWhitespace: true,
         removeAttributeQuotes: true
-        // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       }
     }),
@@ -90,13 +90,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../static'),
-        to: config.build.assetsSubDirectory,
-        ignore: ['.*']
-      }
-    ])
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../static'),
+      to: config.build.assetsSubDirectory,
+      ignore: ['.*']
+    }])
   ],
   optimization: {
     splitChunks: {
@@ -121,11 +119,6 @@ const webpackConfig = merge(baseWebpackConfig, {
           name: 'chunk-elementUI',
           priority: 20,
           test: /[\\/]node_modules[\\/]element-ui[\\/]/
-        },
-        ckeditor: {
-          name: 'chunk-ckeditor',
-          priority: 20,
-          test: /[\\/]node_modules[\\/]@ckeditor[\\/]/
         },
         xlsx: {
           name: 'chunk-xlsx',

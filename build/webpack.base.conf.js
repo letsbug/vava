@@ -51,8 +51,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader?cacheDirectory',
         include: [
-          resolve('src'),
-          resolve('node_modules/webpack-dev-server/client')
+          resolve('src')
         ]
       },
       {

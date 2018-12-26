@@ -2,13 +2,12 @@
 <html lang>
 <head>
   <meta charset="utf-8">
+  <title><%= TITLE %></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-  <% Object.keys(htmlWebpackPlugin.options.meta).forEach(key => { %>
-  <meta name="<%= key %>" content="<%= htmlWebpackPlugin.options.meta[key] %>">
-  <% }) %>
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <!-- metas will be auto injected -->
 </head>
 <body>
+  <script src="<%= BASE_URL %>/tinymce/tinymce.min.js"></script>
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>

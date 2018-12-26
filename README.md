@@ -1,5 +1,9 @@
-<p align="center"><img src="./static/images/logo.png"/></p>
-<h1 align="center">VAVA - vue admin template</h1>
+<p align="center">
+  <img src="./static/images/logo.png"/>
+  <br />
+  <img src="./static/images/title.png"/>
+  <img src="./static/images/subtitle.png"/>
+</p>
 
 <p align="center">
   <a href="https://github.com/vuejs/vue">

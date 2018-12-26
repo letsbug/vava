@@ -9,7 +9,6 @@
 import VaCopyright from '@/components/Copyright'
 
 export default {
-  name: 'VaFootBar',
   components: { VaCopyright }
 }
 </script>

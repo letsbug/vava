@@ -29,10 +29,6 @@
 import UserPicker from '@/components/UserPicker'
 
 export default {
-  name: 'UserActions',
-  metaInfo: {
-    title: 'UserActions'
-  },
   components: { UserPicker },
   data() {
     return {
