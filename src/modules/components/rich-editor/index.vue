@@ -1,12 +1,12 @@
 <template>
   <div class="va-body-container">
-    <i-tinymce :height="900" />
-    <br />
+    <i-tinymce v-model="content" />
   </div>
 </template>
 
 <script>
 import ITinymce from '@/components/ITinymce'
+import { content } from '@/components/ITinymce/plugins'
 
 export default {
   name: 'RichEditor',
@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      content: content
     }
   }
 }

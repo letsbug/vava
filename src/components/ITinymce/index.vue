@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import plugins from './plugins'
+import { plugins, toolbar } from './plugins'
 
 export default {
   props: {
@@ -17,21 +17,10 @@ export default {
       type: String,
       default: ''
     },
-    toolbar: {
-      type: Array,
-      required: false,
-      default() {
-        return []
-      }
-    },
-    menubar: {
-      type: String,
-      default: 'file edit insert view format table'
-    },
     height: {
       type: Number,
       required: false,
-      default: 360
+      default: 400
     },
     fixedToolbarContainer: {
       type: String,
@@ -41,10 +30,15 @@ export default {
   },
   data() {
     return {
-      languages: {
-        en: 'en',
-        zh: 'zh_CN'
-      }
+      languages: { en: 'en', zh: 'zh_CN' },
+      menubar: 'file edit insert view format table help',
+      toolbar: '',
+      imageTools: {
+        image_caption: true,
+        image_advtab: true,
+        imagetools_cors_hosts: ['www.tinymce.com']
+      },
+      hasChange: false
     }
   },
   computed: {
@@ -67,20 +61,44 @@ export default {
   mounted() {
     this.init()
   },
+  activated() {
+    this.init()
+  },
+  deactivated() {
+    this.destroy()
+  },
+  beforeDestroy() {
+    console.log('will destroy this page')
+  },
   destroyed() {
     this.destroy()
   },
   methods: {
     init() {
-      window.tinymce.init({
+      const init_instance_callback = editor => {
+        if (this.value) {
+          editor.setContent(this.value)
+        }
+        editor.on('NodeChange Change KeyUp SetContent', () => {
+          this.hasChange = true
+          this.$emit('input', editor.getContent())
+        })
+      }
+      const defaultOptions = {
         language: this.language,
         selector: `#${this.id}`,
+        plugins,
         menubar: this.menubar,
+        toolbar,
         branding: false,
         fixed_toolbar_container: this.fixedToolbarContainer,
-        plugins,
-        height: this.height
-      })
+        height: this.height,
+        end_container_on_empty_block: true,
+        default_link_target: '_blank',
+        nonbreaking_force_tab: true,
+        init_instance_callback
+      }
+      window.tinymce.init(Object.assign({}, defaultOptions, this.imageTools))
     },
     destroy() {
       const tiny = window.tinymce.get(this.id)
@@ -96,6 +114,8 @@ export default {
 $tiny-border-color:   $color-gray-300;
 
 .tinymce-wrapper /deep/ {
+  height: 100%;
+
   .mce-tinymce {
     box-sizing: border-box;
     box-shadow: $shadow-sm-vr;
