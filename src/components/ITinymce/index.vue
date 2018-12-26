@@ -69,6 +69,7 @@ export default {
   },
   beforeDestroy() {
     console.log('will destroy this page')
+    // TODO 提醒用户是否离开
   },
   destroyed() {
     this.destroy()
