@@ -39,29 +39,23 @@ export default {
 }
 
 .content-homepage {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   height: 100%;
-  padding-top: 100px;
-  padding-bottom: $spacer-base;
-  position: relative;
+  padding: $spacer-xxl 0;
 
   .title {
     width: 100%;
-    margin: 0;
+    margin: 0 0 $spacer-xxl*2;
     font-weight: 400;
     flex: 0.1;
-    padding-top: $spacer-lg;
-    position: absolute;
-    top: 0;
   }
 
-  .role-image {
-    height: 100%;
-
-    img {
-      display: inline-block;
-      max-width: 100%;
-      max-height: 100%;
-    }
+  .role-image img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 </style>

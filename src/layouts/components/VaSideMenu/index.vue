@@ -2,9 +2,11 @@
   <div class="va-side-wrapper">
     <div class="va-side-brand">
       <span class="brand-name">
-        <strong>Va</strong>
+        <span class="brand-logo">
+          <img src="/static/images/logo.png" alt=""/>
+        </span>
         <span class="subname">
-          va
+          <img src="/static/images/title.png" alt="" />
         </span>
       </span>
     </div>
