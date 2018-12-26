@@ -8,7 +8,6 @@
 <p align="center">
   <img src="./static/images/subtitle.png"/>
 </p>
-<br />
 
 ##
 <p align="center">
