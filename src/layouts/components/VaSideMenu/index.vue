@@ -3,10 +3,10 @@
     <div class="va-side-brand">
       <span class="brand-name">
         <span class="brand-logo">
-          <img src="/static/images/logo.png" alt=""/>
+          <img :src="'./static/images/logo.png'" alt="" />
         </span>
         <span class="subname">
-          <img src="/static/images/title.png" alt="" />
+          <img :src="'./static/images/title.png'" alt="" />
         </span>
       </span>
     </div>
