@@ -1,6 +1,7 @@
 <template>
   <div class="va-body-container">
-    <i-tinymce />
+    <i-tinymce :height="900" />
+    <br />
   </div>
 </template>
 

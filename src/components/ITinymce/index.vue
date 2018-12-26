@@ -32,6 +32,11 @@ export default {
       type: Number,
       required: false,
       default: 360
+    },
+    fixedToolbarContainer: {
+      type: String,
+      default: undefined,
+      required: false
     }
   },
   data() {
@@ -53,6 +58,12 @@ export default {
       this.$nextTick(() => this.init())
     }
   },
+  created() {
+    if (!this.fixedToolbarContainer) return
+    if (this.fixedToolbarContainer.indexOf('#') !== 0) {
+      throw new Error('The parameter \'fixedToolbarContainer\' must be a dom id')
+    }
+  },
   mounted() {
     this.init()
   },
@@ -65,7 +76,10 @@ export default {
         language: this.language,
         selector: `#${this.id}`,
         menubar: this.menubar,
-        plugins
+        branding: false,
+        fixed_toolbar_container: this.fixedToolbarContainer,
+        plugins,
+        height: this.height
       })
     },
     destroy() {
@@ -84,6 +98,11 @@ $tiny-border-color:   $color-gray-300;
 .tinymce-wrapper /deep/ {
   .mce-tinymce {
     box-sizing: border-box;
+    box-shadow: $shadow-sm-vr;
+
+    &.mce-fullscreen {
+      z-index: $z-index-rich-text;
+    }
   }
 
   .mce-panel {
