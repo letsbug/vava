@@ -1,7 +1,7 @@
 <template>
   <div class="va-body-container">
     <pre v-highlight><code class="html" v-html="$t('richText.intro')"></code></pre>
-    <br>
+    <br />
     <i-tinymce v-model="content" />
   </div>
 </template>
