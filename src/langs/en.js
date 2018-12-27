@@ -117,9 +117,11 @@ export default {
     title: 'This page is accessible only to <span class="text-red">{role}</span>.'
   },
   richText: {
-    intro: 'Rich text as the background of the most core, the most basic, but also annoying features, is really a headache!' +
-      ' After nearly a week of experimenting with common rich text, I decided to use ' +
-      '<a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>. Here are the actual results:'
+    intro: 'Rich text as the background of the most core, the most basic, but also annoying features, ' +
+      'is really a headache! After nearly a week of experimenting with some familiar rich text, I decided to use ' +
+      '<a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>. ' +
+      'Because there is no background, can not achieve the function of image upload, ' +
+      'so the picture here can only add existing links. Here are the actual results:'
   },
   icons: {
     usage: 'Usage',

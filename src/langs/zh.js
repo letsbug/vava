@@ -117,8 +117,9 @@ export default {
     title: '这个页面只有 <span class="text-red">{role}</span> 能访问。'
   },
   richText: {
-    intro: '富文本作为后台最核心的，最基本的，同时又是坑最多功能，真的是叫人头疼！折腾了近一周的时间，常见的富文本基本都试了一下，最终还是决定使用 ' +
-      '<a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>。以下为实际效果：'
+    intro: '富文本作为后台最核心的，最基本的，同时又是坑最多功能，真的是叫人头疼！折腾了近一周的时间，常见的富文本基本都试了一下，' +
+      '最终还是决定使用 <a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a> ' +
+      '实现富文本编辑功能。因为没有后台，无法实现图片上传的功能，所以这里的图片仅能添加已有链接。以下为实际效果：'
   },
   icons: {
     usage: '使用方法',
