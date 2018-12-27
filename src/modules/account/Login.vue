@@ -94,6 +94,7 @@ export default {
         this.loading = true
         this.$store.dispatch('user_login', this.form).then(res => {
           this.loading = false
+          this.$message.closeAll()
           this.$router.push(this.$route.query['redirect'] || '/')
         }).catch(() => { this.loading = false })
         return true
