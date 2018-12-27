@@ -116,6 +116,10 @@ export default {
     yours: '你的角色：{roles}',
     title: '这个页面只有 <span class="text-red">{role}</span> 能访问。'
   },
+  richText: {
+    intro: '富文本作为后台最核心的，最基本的，同时又是坑最多功能，真的是叫人头疼！折腾了近一周的时间，常见的富文本基本都试了一下，最终还是决定使用 ' +
+      '<a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>。以下为实际效果：'
+  },
   icons: {
     usage: '使用方法',
     content: '使用 <strong>va-icon</strong> 组件来使用内置图标, 例如： &lt;va-icon icon="dashboard"/&gt;.',

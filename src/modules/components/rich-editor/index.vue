@@ -1,9 +1,7 @@
 <template>
   <div class="va-body-container">
-    <pre v-highlight><code class="html">
-      富文本作为后台最核心的，最基本的，同时又是坑最多功能，真的是叫人头疼！折腾了近一周的时间，常见的富文本基本都试了一下，最终还是决定使用
-      <a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>。以下为实际效果：
-    </code></pre>
+    <pre v-highlight><code class="html" v-html="$t('richText.intro')"></code></pre>
+    <br>
     <i-tinymce v-model="content" />
   </div>
 </template>

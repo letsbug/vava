@@ -116,6 +116,11 @@ export default {
     yours: 'Your roles: {roles}',
     title: 'This page is accessible only to <span class="text-red">{role}</span>.'
   },
+  richText: {
+    intro: 'Rich text as the background of the most core, the most basic, but also annoying features, is really a headache!' +
+      ' After nearly a week of experimenting with common rich text, I decided to use ' +
+      '<a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>. Here are the actual results:'
+  },
   icons: {
     usage: 'Usage',
     content: 'Just use <strong>va-icon</strong> component to use icons, Like &lt;va-icon icon="dashboard"/&gt;.',
