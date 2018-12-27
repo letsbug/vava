@@ -1,15 +1,15 @@
 <p align="center">
-  <img src="./static/images/logo.png"/>
-</p>
-<br />
-<p align="center">
-  <img src="./static/images/title.png"/>
+  <img src="https://github.com/letsbug/vava/raw/master/static/images/logo.png"/>
 </p>
 <p align="center">
-  <img src="./static/images/subtitle.png"/>
+  <img src="https://github.com/letsbug/vava/raw/master/static/images/title.png"/>
+</p>
+<p align="center">
+  <img src="https://github.com/letsbug/vava/raw/master/static/images/subtitle.png"/>
 </p>
 
-##
+---
+
 <p align="center">
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.5.17-brightgreen.svg" alt="vue">
@@ -28,24 +28,38 @@
   </a>
 </p>
 
+## Introduction
 
-> A magical management-side framework built on vue & element-ui & vava-mini.
+[vava](https://github.com/letsbug/vava) is a fantastic management background. Is my personal experience based on my own accumulation, the creation of a management background integration solution. It is based on [vue](https://github.com/vuejs/vue) and [element-ui](https://github.com/ElemeFE/element). And it keeps updating and stronger. [Preview](https://letsbug.github.io/vava/).
 
-## Build Setup
+***
+<p><img src="https://github.com/letsbug/vava/raw/master/static/images/homepage-preview.png" alt="Homepage preview"></p>
 
-``` bash
+## Browser Support
+All modern browsers, and Internet Explorer 10+.
+
+## Get started
+
+```
+# clone project
+git clone https://github.com/letsbug/vava.git
+
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# run local service to preview
 npm run dev
+```
 
+## Build Setup
+
+```
 # build for production with minification
 npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-
-# run all tests
-npm test
 ```
+
+## Lisence
+[MIT](https://github.com/letsbug/vava/blob/master/LICENSE)
