@@ -2,7 +2,7 @@
   <div class="container-login--password">
     <el-form ref="loginForm" :model="form" :rules="rules" class="form-login--password" aria-autocomplete="list">
       <div class="form-logo">
-        <img :src="logo" alt="VAVA" class="brand" />
+        <img :src="'./static/images/logo.png'" alt="VAVA" class="brand" />
         <h2 class="title">
           {{ $t('login.title') }}<language-picker class="float-r" />
         </h2>
@@ -63,7 +63,6 @@ export default {
   components: { LanguagePicker, UserPicker, Copyright },
   data() {
     return {
-      logo: require('@/assets/images/logo.png'),
       form: { username: '', password: '', remember: false },
       rules: {
         username: [{ validator: this.validUsername, trigger: 'blur' }],

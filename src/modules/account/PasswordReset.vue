@@ -2,7 +2,7 @@
   <div class="container-login--password">
     <div class="form-login--password">
       <div class="form-logo">
-        <img :src="logo" class="brand" alt="Vava" />
+        <img :src="'./static/images/logo.png'" class="brand" alt="Vava" />
         <h2 class="title">
           Reset your password
         </h2>
@@ -87,7 +87,6 @@ export default {
   components: { Copyright },
   data() {
     return {
-      logo: require('@/assets/images/logo.png'),
       step: 1,
       form: {
         username: 'Example@email.com',
