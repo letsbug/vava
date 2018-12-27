@@ -1,5 +1,8 @@
 code {
-  font-family: Consolas, Courier, monospace;
+  padding: $spacer-lg $spacer-xl !important;
+  font-family: Consolas, Courier, "Microsoft YaHei", monospace, serif !important;
+  line-height: 1.5;
+  border-left: solid 5px $color-gray-400;
 
   strong {
     color: $color-red;
@@ -12,6 +15,7 @@ pre {
   min-height: auto;
   max-height: none;
   padding: 0;
+  white-space: normal;
 }
 
 blockquote {
