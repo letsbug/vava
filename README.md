@@ -7,7 +7,6 @@
 <p align="center">
   <img src="https://github.com/letsbug/vava/raw/master/static/images/subtitle.png"/>
 </p>
-
 ---
 
 <p align="center">
@@ -30,7 +29,7 @@
 
 ## Introduction
 
-[vava](https://github.com/letsbug/vava) is a fantastic management background. Is my personal experience based on my own accumulation, the creation of a management background integration solution. It is based on [vue](https://github.com/vuejs/vue) and [element-ui](https://github.com/ElemeFE/element). And it keeps updating and stronger. [Preview](https://letsbug.github.io/vava/).
+[vava](https://github.com/letsbug/vava) is a fantastic management background. Is my personal experience based on my own accumulation, the creation of a management background integration solution. It is based on [vue](https://github.com/vuejs/vue) and [element-ui](https://github.com/ElemeFE/element). And it keeps updating and stronger. Click to [preview](https://letsbug.github.io/vava/).
 
 ***
 <p><img src="https://github.com/letsbug/vava/raw/master/static/images/homepage-preview.png" alt="Homepage preview"></p>
