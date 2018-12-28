@@ -6,7 +6,7 @@
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
       </h2>
       <div ref="roleImage" class="role-image">
-        <embed :src="randomImage" />
+        <home-figure :name="figure" />
       </div>
     </div>
   </div>
@@ -14,17 +14,19 @@
 
 <script>
 import GithubCorner from '@/components/GithubCorner'
+import HomeFigure from './components/Figure'
+import '@/assets/figures'
 
 export default {
   name: 'Homepage',
-  components: { GithubCorner },
+  components: { GithubCorner, HomeFigure },
   computed: {
     user() {
       return this.$store.getters.user
     },
-    randomImage() {
-      const random = Math.floor(Math.random() * 7 + 1)
-      return `./static/images/figures/figure_${this.user.token}_0${random}.svg`
+    figure() {
+      // const random = Math.floor(Math.random() * 7 + 1)
+      return `${this.user.token}_03`
     }
   }
 }
@@ -47,17 +49,14 @@ export default {
 
   .title {
     width: 100%;
-    margin: 0 0 $spacer-xxl*2;
+    margin: 0 0 $spacer-xxl;
     font-weight: 400;
-    flex: 0.1;
+    flex: 1;
   }
 
-  .role-image, embed {
-    max-width: 100%;
-    max-height: 100%;
-  }
-  embed {
-    display: inline-block;
+  .role-image {
+    color: $color-theme;
+    flex: 9;
   }
 }
 </style>

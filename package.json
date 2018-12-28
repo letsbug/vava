@@ -18,7 +18,8 @@
   "author": "Letsbug <724939933@qq.com> <xman724939995@gmail.com> (https://github.com/letsbug/vava)",
   "license": "MIT",
   "scripts": {
-    "svgo": "svgo -f src/assets/icons --config=./svgo.yml",
+    "svgo": "svgo -f src/assets/icons --config=./src/assets/icons/svgo.yml",
+    "svg_figure": "svgo -f src/assets/figures --config=./src/assets/figures/svgo.yml",
     "dev": "cross-env BABEL_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "cross-env NODE_ENV=production env_config=prod node build/build.js",
     "start": "npm run dev",
