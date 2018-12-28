@@ -5,8 +5,8 @@
       <h2 class="title">
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
       </h2>
-      <div class="role-image">
-        <img :src="roleImage" alt="" />
+      <div ref="roleImage" class="role-image">
+        <embed :src="randomImage" />
       </div>
     </div>
   </div>
@@ -22,9 +22,9 @@ export default {
     user() {
       return this.$store.getters.user
     },
-    roleImage() {
-      const role = this.user.roles[0]
-      return role ? require(`@/assets/images/roles/${role}.gif`) : null
+    randomImage() {
+      const random = Math.floor(Math.random() * 7 + 1)
+      return `./static/images/figures/figure_${this.user.token}_0${random}.svg`
     }
   }
 }
@@ -52,10 +52,13 @@ export default {
     flex: 0.1;
   }
 
-  .role-image img {
-    display: inline-block;
+  .role-image, embed {
     max-width: 100%;
     max-height: 100%;
+  }
+
+  embed {
+    display: inline-block;
   }
 }
 </style>
