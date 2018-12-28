@@ -25,8 +25,9 @@ export default {
       return this.$store.getters.user
     },
     figure() {
+      console.log(this.user)
       const random = Math.floor(Math.random() * 4 + 1)
-      return `${this.user.token}_0${random}`
+      return `${this.user.roles[0]}_0${random}`
     }
   }
 }
