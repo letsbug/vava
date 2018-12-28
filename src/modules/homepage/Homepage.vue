@@ -56,7 +56,6 @@ export default {
     max-width: 100%;
     max-height: 100%;
   }
-
   embed {
     display: inline-block;
   }
