@@ -1,31 +1,130 @@
 <template>
-  <el-dropdown :show-timeout="100" trigger="click" style="float: left;" @command="chooseTheme">
-    <a class="va-nav-item hidden-xs-only">
+  <el-popover placement="top-end" width="270" trigger="click" transition="el-zoom-in-top">
+    <template>
+      <div class="theme-input">
+        <h6>{{ $t('theme.themeStyle') }}</h6>
+        <el-radio-group v-model="styles.style" class="text-center">
+          <el-radio v-for="sty in stylePresets" :key="sty" :label="sty">{{ $t(`theme.styles.${sty}`) }}</el-radio>
+        </el-radio-group>
+      </div>
+      <div class="theme-input">
+        <h6>{{ $t('theme.themeColor') }}</h6>
+        <div class="text-center" style="height: 20px;">
+          <span
+            v-for="pre in colorPresets" :key="pre" class="color-picker" :style="`background-color:${pre}`"
+            @click="chooseColor(pre)"
+          >
+            <i v-if="pre === styles.color" class="el-icon-check"></i>
+          </span>
+          <el-color-picker v-model="styles.color" size="mini" @change="onColorChange" />
+        </div>
+      </div>
+      <hr />
+      <div class="theme-input" style="text-align: right">
+        <el-button size="mini">{{ $t('theme.actions.default') }}</el-button>
+        <el-button size="mini" type="primary" @click="handleSubmit">{{ $t('theme.actions.confirm') }}</el-button>
+      </div>
+    </template>
+    <a slot="reference" class="va-nav-item hidden-xs-only">
       <va-icon icon="thing-shirt" />
     </a>
-    <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="default">
-        {{ $t('theme.default') }}
-      </el-dropdown-item>
-      <el-dropdown-item command="light">
-        {{ $t('theme.light') }}
-      </el-dropdown-item>
-      <el-dropdown-item command="dark">
-        {{ $t('theme.dark') }}
-      </el-dropdown-item>
-    </el-dropdown-menu>
-  </el-dropdown>
+  </el-popover>
 </template>
 
 <script>
 export default {
   data() {
-    return {}
+    return {
+      styles: {},
+      stylePresets: [
+        'default',
+        'light',
+        'dark'
+      ],
+      colorPresets: [
+        '#dc3545',
+        '#fe613c',
+        '#ffc107',
+        '#4ec1fa',
+        '#28a745',
+        '#007bff',
+        '#2f54eb',
+        '#6f42c1'
+      ]
+    }
+  },
+  computed: {
+    theme() {
+      return this.$store.getters.theme
+    }
+  },
+  mounted() {
+    this.styles = { ...this.theme }
+    console.log(this.styles)
   },
   methods: {
-    chooseTheme(tar) {
-      console.log('choose theme: ' + tar)
+    chooseColor(val) {
+      this.styles.color = val
+    },
+    onColorChange(val) {
+      if (!val) this.styles.color = this.colorPresets[4]
+    },
+    handleSubmit() {
+      this.$store.dispatch('app_theme_set', this.styles)
     }
   }
 }
 </script>
+
+<style scoped lang="scss">
+@import "~@/styles/_variables";
+
+$color-picker-size: 20px;
+
+hr {
+  margin: $spacer-base 0;
+  border-width: 0;
+  border-style: none;
+  border-top: solid $border-default-width $color-gray-300;
+}
+h6 {
+  margin-top: 0;
+  margin-bottom: $spacer-base;
+}
+.theme-input + .theme-input {
+  margin-top: $spacer-lg;
+}
+.color-picker {
+  display: inline-block;
+  width: $color-picker-size;
+  height: $color-picker-size;
+  border-radius: $radius-base;
+  text-align: center;
+  line-height: $color-picker-size;
+  color: $color-white;
+  vertical-align: top;
+  cursor: pointer;
+
+  & + .color-picker {
+    margin-left: 7px;
+  }
+}
+/deep/ {
+  .el-radio {
+    font-weight: normal;
+  }
+  .el-color-picker {
+    margin-left: 3px;
+  }
+  .el-color-picker__color, .el-color-picker__trigger {
+  }
+  .el-color-picker__trigger {
+    width: $color-picker-size;
+    height: $color-picker-size;
+    padding: 0;
+    border-radius: $radius-base;
+    border: 0 none;
+    overflow: hidden;
+  }
+}
+</style>

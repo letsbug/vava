@@ -70,9 +70,17 @@ export default {
     }
   },
   theme: {
-    default: 'default',
-    light: 'Light',
-    dark: 'Dark'
+    themeStyle: 'Theme style',
+    themeColor: 'Theme color',
+    styles: {
+      default: 'Default',
+      light: 'Light',
+      dark: 'Dark'
+    },
+    actions: {
+      default: 'Default',
+      confirm: 'Ok'
+    }
   },
   // About forms validates
   validate: {

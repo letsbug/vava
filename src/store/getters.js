@@ -2,6 +2,7 @@ const getters = {
   // Application global attributes
   device: state => state.application.device,
   language: state => state.application.language,
+  theme: state => state.application.theme,
   // Information about the currently logged in user.
   user: state => state.user,
   token: state => state.user.token,

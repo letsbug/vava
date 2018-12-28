@@ -6,6 +6,10 @@ const application = {
     device: 'desktop',
     sidebar: {
       opened: !+Cookie.get('sidebar_status')
+    },
+    theme: {
+      style: Cookie.get('theme_style') || 'default',
+      color: Cookie.get('theme_color') || '#28a745'
     }
   },
   mutations: {
@@ -27,6 +31,14 @@ const application = {
     APP_LANGUAGE_SET: (state, lang) => {
       state.language = lang
       Cookie.set('language', lang)
+    },
+    APP_THEME_STYLE_SET: (state, style) => {
+      state.theme.style = style
+      Cookie.set('theme_style', style)
+    },
+    APP_THEME_COLOR_SET: (state, color) => {
+      state.theme.color = color
+      Cookie.set('theme_color', color)
     }
   },
   actions: {
@@ -44,6 +56,16 @@ const application = {
     },
     app_language_set: ({ commit }, lang) => {
       commit('APP_LANGUAGE_SET', lang)
+    },
+    app_theme_style_set: ({ commit }, style) => {
+      commit('APP_THEME_STYLE_SET', style)
+    },
+    app_theme_color_set: ({ commit }, color) => {
+      commit('APP_THEME_COLOR_SET', color)
+    },
+    app_theme_set: ({ commit }, theme) => {
+      commit('APP_THEME_STYLE_SET', theme.style)
+      commit('APP_THEME_COLOR_SET', theme.color)
     }
   }
 }

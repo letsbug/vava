@@ -70,9 +70,17 @@ export default {
     }
   },
   theme: {
-    default: '默认主题',
-    light: '亮色主题',
-    dark: '暗色主题'
+    themeStyle: '主题风格',
+    themeColor: '主题颜色',
+    styles: {
+      default: '默认',
+      light: '明亮',
+      dark: '暗黑'
+    },
+    actions: {
+      default: '恢复默认',
+      confirm: '确定'
+    }
   },
   // About forms validates
   validate: {
