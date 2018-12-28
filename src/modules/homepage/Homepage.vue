@@ -25,8 +25,8 @@ export default {
       return this.$store.getters.user
     },
     figure() {
-      // const random = Math.floor(Math.random() * 7 + 1)
-      return `${this.user.token}_03`
+      const random = Math.floor(Math.random() * 4 + 1)
+      return `${this.user.token}_0${random}`
     }
   }
 }
