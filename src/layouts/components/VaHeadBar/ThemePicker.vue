@@ -12,16 +12,16 @@
         <div class="text-center" style="height: 20px;">
           <span
             v-for="pre in colorPresets" :key="pre" class="color-picker" :style="`background-color:${pre}`"
-            @click="chooseColor(pre)"
+            @click="styles.color = pre"
           >
             <i v-if="pre === styles.color" class="el-icon-check"></i>
           </span>
-          <el-color-picker v-model="styles.color" size="mini" @change="onColorChange" />
+          <el-color-picker v-model="styles.color" size="mini" @change="changeColor" />
         </div>
       </div>
       <hr />
       <div class="theme-input" style="text-align: right">
-        <el-button size="mini">{{ $t('theme.actions.default') }}</el-button>
+        <el-button size="mini" @click="restoreDefault">{{ $t('theme.actions.default') }}</el-button>
         <el-button size="mini" type="primary" @click="handleSubmit">{{ $t('theme.actions.confirm') }}</el-button>
       </div>
     </template>
@@ -35,6 +35,7 @@
 export default {
   data() {
     return {
+      normal: { style: 'default', color: '#28a745' },
       styles: {},
       stylePresets: [
         'default',
@@ -55,22 +56,27 @@ export default {
   },
   computed: {
     theme() {
+      console.log(this.$store.getters.theme)
       return this.$store.getters.theme
+    }
+  },
+  watch: {
+    theme(val) {
+      this.styles = { ...val }
     }
   },
   mounted() {
     this.styles = { ...this.theme }
-    console.log(this.styles)
   },
   methods: {
-    chooseColor(val) {
-      this.styles.color = val
-    },
-    onColorChange(val) {
+    changeColor(val) {
       if (!val) this.styles.color = this.colorPresets[4]
     },
     handleSubmit() {
       this.$store.dispatch('app_theme_set', this.styles)
+    },
+    restoreDefault() {
+      this.$store.dispatch('app_theme_set', this.normal)
     }
   }
 }
