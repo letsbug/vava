@@ -59,5 +59,5 @@ npm run build
 npm run build --report
 ```
 
-## Lisence
+## License
 [MIT](https://github.com/letsbug/vava/blob/master/LICENSE)

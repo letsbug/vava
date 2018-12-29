@@ -56,17 +56,12 @@ export default {
   },
   computed: {
     theme() {
-      console.log(this.$store.getters.theme)
       return this.$store.getters.theme
-    }
-  },
-  watch: {
-    theme(val) {
-      this.styles = { ...val }
     }
   },
   mounted() {
     this.styles = { ...this.theme }
+    this.setAllCSS()
   },
   methods: {
     changeColor(val) {
@@ -74,9 +69,24 @@ export default {
     },
     handleSubmit() {
       this.$store.dispatch('app_theme_set', this.styles)
+      this.setAllCSS()
+      this.handleHideThemePicker()
     },
     restoreDefault() {
+      this.styles = { ...this.normal }
       this.$store.dispatch('app_theme_set', this.normal)
+      this.setAllCSS()
+      this.handleHideThemePicker()
+    },
+    handleHideThemePicker() {
+      document.documentElement.click()
+    },
+    setAllCSS() {
+      const reg = new RegExp('#28a745', 'g')
+      const originals = document.head.querySelectorAll('style')
+      originals.forEach(stl => {
+        stl.innerHTML = stl.innerHTML.replace(reg, this.styles.color)
+      })
     }
   }
 }
