@@ -15,9 +15,10 @@ import Meta from 'vue-meta'
 
 import i18n from '@/langs'
 
-import '@/assets/icons' // load system svg icons by symbol.
 import '@/router/helper' // router helper, user permission control.
 import '@/simulates' // mock simulate
+import '@/assets/icons' // load system svg icons by symbol.
+import '@/assets/svgs'
 
 import * as filters from '@/filters'
 

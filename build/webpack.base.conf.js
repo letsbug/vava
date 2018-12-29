@@ -59,7 +59,7 @@ module.exports = {
         loader: 'svg-sprite-loader',
         include: [
           resolve('src/assets/icons'),
-          resolve('src/assets/figures')
+          resolve('src/assets/svgs')
         ],
         options: {
           symbolId: 'icon-[name]'
@@ -70,7 +70,7 @@ module.exports = {
         loader: 'url-loader',
         exclude: [
           resolve('src/assets/icons'),
-          resolve('src/assets/figures')
+          resolve('src/assets/svgs')
         ],
         options: {
           limit: 10000,

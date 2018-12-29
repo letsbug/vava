@@ -1,5 +1,5 @@
 <template>
-  <svg class="homepage-figure" aria-hidden="true">
+  <svg class="va-svg-image" aria-hidden="true">
     <use :xlink:href="`#icon-${name}`"></use>
   </svg>
 </template>
@@ -13,10 +13,10 @@ export default {
 </script>
 
 <style scoped>
-  .homepage-figure {
-    display: block;
-    width: 100%;
-    height: 100%;
+  .va-svg-image {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
     fill: currentColor;
     overflow: hidden;
   }

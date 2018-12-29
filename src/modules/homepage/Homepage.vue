@@ -6,7 +6,7 @@
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
       </h2>
       <div ref="roleImage" class="role-image">
-        <home-figure :name="figure" />
+        <va-svgs :name="figure" />
       </div>
     </div>
   </div>
@@ -14,18 +14,15 @@
 
 <script>
 import GithubCorner from '@/components/GithubCorner'
-import HomeFigure from './components/Figure'
-import '@/assets/figures'
 
 export default {
   name: 'Homepage',
-  components: { GithubCorner, HomeFigure },
+  components: { GithubCorner },
   computed: {
     user() {
       return this.$store.getters.user
     },
     figure() {
-      console.log(this.user)
       const random = Math.floor(Math.random() * 7 + 1)
       return `${this.user.roles[0]}_0${random}`
       // return `${this.user.roles[0]}_05`
@@ -60,5 +57,10 @@ export default {
     color: $color-theme;
     flex: 9;
   }
+}
+
+/deep/ .va-svg-image {
+  width: 100%;
+  height: 100%;
 }
 </style>

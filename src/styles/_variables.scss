@@ -18,13 +18,13 @@ $sidebar-bg-color:                $color-gray-900 !default;
 $sidebar-color:                   $color-gray-600 !default;
 $sidebar-color-focus:             $color-white !default;
 $sidebar-color-active:            $color-actives !default;
-$sidebar-color-brand:             $color-gray-500 !default;
+$sidebar-color-brand:             $color-theme !default;
 
-$sidebar-brand-padding-x:         $spacer-sm;
-$sidebar-brand-padding-y:         $spacer-xxs;
+$sidebar-brand-logo-size:         40px;
+$sidebar-brand-title-height:      36px;
 $sidebar-brand-height:            100px;
-$sidebar-brand-line-height:       $sidebar-brand-height - ($sidebar-brand-padding-y * 2);
-$sidebar-brand-font-size:         $font-size-h2;
+$sidebar-brand-padding-x:         $spacer-sm;
+$sidebar-brand-padding-y:         ($sidebar-brand-height - $sidebar-brand-logo-size) / 2;
 
 $sidebar-nav-expanded-bg:         $color-gray-1000 !default;
 $sidebar-nav-icon-size:           $font-size-h4;

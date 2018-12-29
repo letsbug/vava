@@ -1,6 +1,3 @@
-$brand-logo-size:   40px;
-$brand-name-height: 36px;
-
 .va-side-wrapper {
   height: 100%;
   padding-top: $sidebar-brand-height;
@@ -35,9 +32,7 @@ $brand-name-height: 36px;
 
 .va-side-brand {
   height: $sidebar-brand-height;
-  line-height: $sidebar-brand-line-height;
   padding: $sidebar-brand-padding-y $sidebar-brand-padding-x;
-  font-size: $sidebar-brand-font-size;
   color: $sidebar-color-brand;
   text-align: center;
   overflow: hidden;
@@ -48,23 +43,16 @@ $brand-name-height: 36px;
   right: 0;
   transition: $transition-padding, $transition-height;
 
-  .brand-name {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
+  .brand-logo {
+    width: $sidebar-brand-logo-size;
+    height: $sidebar-brand-logo-size;
+  }
 
-    .brand-logo, .subname {
-      vertical-align: top;
-    }
-
-    .brand-logo img {
-      width: $brand-logo-size;
-      height: $brand-logo-size;
-    }
-
-    .subname img {
-      height: $brand-name-height;
-    }
+  .brand-title {
+    width: 103px;
+    height: $sidebar-brand-title-height;
+    margin-left: $spacer-base;
+    vertical-align: 2px;
   }
 }
 
@@ -80,10 +68,6 @@ $brand-name-height: 36px;
   }
 
   .va-app-wrapper.sidebar-collapse {
-
-    .va-side-brand .subname {
-      display: none;
-    }
 
     .va-side-nav {
       &.expanded {
