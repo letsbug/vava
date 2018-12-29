@@ -26,8 +26,8 @@ export default {
     },
     figure() {
       console.log(this.user)
-      const random = Math.floor(Math.random() * 4 + 1)
-      return `${this.user.roles[0]}_0${random}`
+      // const random = Math.floor(Math.random() * 7 + 1)
+      return `${this.user.roles[0]}_07`
     }
   }
 }
