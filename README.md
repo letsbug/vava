@@ -38,7 +38,7 @@ All modern browsers, and Internet Explorer 10+.
 
 ## Get started
 
-```
+```bash
 # clone project
 git clone https://github.com/letsbug/vava.git
 
@@ -51,7 +51,7 @@ npm run dev
 
 ## Build Setup
 
-```
+```bash
 # build for production with minification
 npm run build
 
