@@ -6,8 +6,7 @@
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
       </h2>
       <div ref="roleImage" class="role-image">
-        <!-- TODO BUG：任何弹窗、浮层的显示隐藏事件都会使得svg被放大 -->
-        <va-svgs :name="figure" />
+        <va-svgs :name="figure" class="figure-image" />
       </div>
     </div>
   </div>
@@ -60,7 +59,8 @@ export default {
   }
 }
 
-/deep/ .va-svg-image {
+.figure-image {
+  display: block;
   width: 100%;
   height: 100%;
 }
