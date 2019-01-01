@@ -62,7 +62,7 @@ export default {
     &:hover {
       border-color: $color-theme;
       color: $color-theme;
-      box-shadow: 0 $shadow-lg-offset $shadow-lg-distance $shadow-lg-size rgba($color-theme, 0.2);
+      box-shadow: 0 $shadow-lg-offset $shadow-lg-distance $shadow-lg-size rgba($color-black, 0.05);
       transform: translate3d(0, -3px, 0);
     }
 

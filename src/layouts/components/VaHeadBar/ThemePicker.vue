@@ -37,6 +37,7 @@ export default {
     return {
       normal: { style: 'default', color: '#28a745' },
       styles: {},
+      origin: {},
       stylePresets: [
         'default',
         'light',
@@ -51,7 +52,8 @@ export default {
         '#007bff',
         '#2f54eb',
         '#6f42c1'
-      ]
+      ],
+      primaryList: []
     }
   },
   computed: {
@@ -59,7 +61,16 @@ export default {
       return this.$store.getters.theme
     }
   },
+  watch: {
+    theme: {
+      handler: function() {
+        this.setAllCSS()
+      },
+      deep: true
+    }
+  },
   mounted() {
+    this.origin = { ...this.normal }
     this.styles = { ...this.theme }
     this.setAllCSS()
   },
@@ -68,23 +79,24 @@ export default {
       if (!val) this.styles.color = this.colorPresets[4]
     },
     handleSubmit() {
+      this.origin = { ...this.theme }
       this.$store.dispatch('app_theme_set', this.styles)
-      this.setAllCSS()
       this.handleHideThemePicker()
     },
     restoreDefault() {
+      this.origin = { ...this.theme }
       this.styles = { ...this.normal }
       this.$store.dispatch('app_theme_set', this.normal)
-      this.setAllCSS()
       this.handleHideThemePicker()
     },
     handleHideThemePicker() {
       document.documentElement.click()
     },
     setAllCSS() {
-      const reg = new RegExp('#28a745', 'g')
-      const originals = document.head.querySelectorAll('style')
-      originals.forEach(stl => {
+      const current = this.origin.color
+      const reg = new RegExp(current + '', 'ig')
+      const origins = document.head.querySelectorAll('style')
+      origins.forEach(stl => {
         stl.innerHTML = stl.innerHTML.replace(reg, this.styles.color)
       })
     }
