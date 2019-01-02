@@ -37,7 +37,7 @@
         <theme-picker />
       </template>
 
-      <language-picker class="va-nav-item" />
+      <language-picker />
 
       <!-- user notifications -->
       <el-tooltip :content="notificationTips" effect="dark" placement="bottom">

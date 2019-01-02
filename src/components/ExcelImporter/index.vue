@@ -1,23 +1,22 @@
 <template>
   <div class="excel-importer">
     <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile" />
-    <div
-      v-if="enableDragDrop" :class="working ? 'working' : ''" class="file-drop"
+    <a
+      v-if="enableDragDrop" :class="{ 'disabled': working }" class="file-drop-box"
       @click="!working && $refs['excelImportInput'].click()"
       @drop.prevent.stop="!working && handleDrop($event)"
       @dragover.prevent.stop="onDragOver"
       @dragenter.prevent.stop="onDragOver"
     >
-      <div><va-icon icon="action-import" /></div>
+      <div class="text-muted"><va-icon icon="action-import" /></div>
       <template v-if="file">
-        {{ $t('excelImport.selected') }}
-        "{{ file.name }}"
+        <span class="text-muted">{{ $t('excelImport.selected') }} "{{ file.name }}"</span>
         <span class="text-primary browse-hint">
           {{ $t('excelImport.change') }}
         </span>
       </template>
       <template v-else>
-        {{ $t('excelImport.drag') }}
+        <span class="text-muted">{{ $t('excelImport.drag') }}</span>
         <span class="text-primary browse-hint">
           {{ $t('excelImport.browse') }}
         </span>
@@ -25,7 +24,7 @@
       <span class="working-flag">
         <i class="el-icon-loading"></i>
       </span>
-    </div>
+    </a>
     <div v-else class="text-center">
       <el-button :loading="working" plain @click="!working && $refs['excelImportInput'].click()">
         <template v-if="file">
@@ -162,24 +161,11 @@ $file-drop-height:  90px;
   display: none;
 }
 
-.file-drop {
+.file-drop-box {
   width: $file-drop-width;
   height: $file-drop-height;
-  overflow: hidden;
-  margin: 0 auto;
   padding: $spacer-base;
-  border: dashed $border-default-width $border-color-dark;
-  border-radius: $radius-lg;
   font-size: $font-size-lg;
-  color: $color-text-secondary;
-  text-align: center;
-  cursor: pointer;
-  transition: $transition-border;
-  position: relative;
-
-  &:not(.working):hover {
-    border-color: $color-theme;
-  }
 
   .va-icon {
     width: $font-size-h2;
@@ -207,13 +193,9 @@ $file-drop-height:  90px;
     transition: $transition-opacity;
   }
 
-  &.working {
-    cursor: not-allowed;
-
-    .working-flag {
-      visibility: visible;
-      opacity: .9;
-    }
+  &.disabled .working-flag {
+    visibility: visible;
+    opacity: .9;
   }
 }
 </style>

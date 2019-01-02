@@ -1,6 +1,6 @@
 <template>
-  <a class="va-nav-item" @click="handleRefresh">
-    <va-icon :class="doing ? 'doing' : ''" icon="action-refresh" class="handle-refresh" />
+  <a :class="{ 'active': doing }" class="va-nav-item handle-refresh" @click="handleRefresh">
+    <va-icon icon="action-refresh" />
   </a>
 </template>
 
@@ -37,11 +37,7 @@ export default {
 <style scoped lang="scss">
 @import "~@/styles/_variables";
 
-.handle-refresh {
-
-  &.doing {
-    color: $color-theme;
-    animation: ani-rotate .8s ease-out infinite;
-  }
+.handle-refresh.active .va-icon {
+  animation: ani-rotate .8s ease-out infinite;
 }
 </style>

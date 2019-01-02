@@ -1,8 +1,8 @@
 <template>
-  <el-dropdown trigger="click" @command="pickLang">
-    <span class="lang-picker">
+  <el-dropdown trigger="click" style="float:left;" @command="pickLang">
+    <a class="va-nav-item va-lang-picker">
       <va-icon icon="action-translate" />
-    </span>
+    </a>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item :disabled="language === 'zh'" command="zh">
         中文
@@ -31,16 +31,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import "~@/styles/_variables";
-
-.lang-picker {
-  cursor: pointer;
-  transition: $transition-color;
-
-  &:hover {
-    color: $color-theme;
-  }
-}
-</style>

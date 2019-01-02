@@ -40,7 +40,7 @@
 
     > svg {
       fill: $color-theme;
-      color: $color-white;
+      color: $color-gray-100;
       position: absolute;
       top: 0;
       border: 0;
@@ -51,6 +51,6 @@
 
   @media (max-width: 500px) {
     .github-corner:hover .octo-arm {animation: none}
-    .github-corner .octo-arm {animation: octocat-wave 560ms ease-in-out}
+    .github-corner .octo-arm {animation: octocat-wave 560ms infinite ease-in-out}
   }
 </style>

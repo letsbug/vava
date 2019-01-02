@@ -76,3 +76,27 @@ a {
 .va-svg-image {
   transition: $transition-color;
 }
+
+
+//
+// Drops
+.file-drop-box {
+  display: block;
+  overflow: hidden;
+  margin: 0 auto;
+  border: dashed $border-default-width $border-color-dark;
+  border-radius: $radius-lg;
+  text-align: center;
+  cursor: pointer;
+  transition: $transition-border;
+  position: relative;
+
+  &:not(.disabled):hover {
+    border-color: $color-theme;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
