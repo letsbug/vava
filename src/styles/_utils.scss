@@ -4,6 +4,8 @@
 .text-primary { color: $color-theme; }
 .text-muted { color: $color-gray-500; }
 .text-red { color: $color-red; }
+.text-green { color: $color-green; }
+.text-blue { color: $color-blue; }
 
 
 //
@@ -30,3 +32,47 @@
 .float-l { float: left; }
 .float-r { float: right; }
 .clear-fix:after { content: ''; display: block; clear: both; }
+
+
+//
+// Links
+a {
+  color: $color-link-default;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline:none;
+
+  &:hover {
+    color: $color-actives;
+  }
+
+  &.linker {
+    color: $color-link-highlight;
+    font-weight: 500;
+
+    &:hover {
+      color: darken($color-link-highlight, 10%);
+    }
+  }
+
+  &.link-theme {
+    color: $color-theme;
+
+    &:hover {
+      color: darken($color-theme, 10%);
+    }
+  }
+
+  &.disabled {
+    opacity: .75;
+    cursor: not-allowed;
+  }
+}
+
+
+//
+// SVG images
+.va-svg-image {
+  transition: $transition-color;
+}

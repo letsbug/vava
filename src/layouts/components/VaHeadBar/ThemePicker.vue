@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { generateColors } from '@/tools/color'
+
 export default {
   data() {
     return {
@@ -53,7 +55,19 @@ export default {
         '#2f54eb',
         '#6f42c1'
       ],
-      primaryList: []
+      primaries: {
+        'shade-1': '#24963e',
+        'primary': '#28a745',
+        'light-1': '#3db058',
+        'light-2': '#53b96a',
+        'light-3': '#69c17d',
+        'light-4': '#7eca8f',
+        'light-5': '#94d3a2',
+        'light-6': '#a9dcb5',
+        'light-7': '#bfe5c7',
+        'light-8': '#d4edda',
+        'light-9': '#eaf6ec'
+      }
     }
   },
   computed: {
@@ -68,6 +82,9 @@ export default {
       },
       deep: true
     }
+  },
+  created() {
+    generateColors('#28a745')
   },
   mounted() {
     this.origin = { ...this.normal }
@@ -93,12 +110,16 @@ export default {
       document.documentElement.click()
     },
     setAllCSS() {
-      const current = this.origin.color
-      const reg = new RegExp(current + '', 'ig')
+      const newPrimaries = generateColors(this.styles.color)
+      console.log(newPrimaries)
       const origins = document.head.querySelectorAll('style')
       origins.forEach(stl => {
-        stl.innerHTML = stl.innerHTML.replace(reg, this.styles.color)
+        Object.keys(this.primaries).forEach(key => {
+          const reg = new RegExp(this.primaries[key], 'ig')
+          stl.innerHTML = stl.innerHTML.replace(reg, newPrimaries[key])
+        })
       })
+      this.primaries = { ...newPrimaries }
     }
   }
 }
