@@ -27,6 +27,6 @@ export function generateColors(primary) {
     const value = formula[key].replace(/primary/g, primary)
     colors[key] = rgb2Hex(color.convert(value))
   })
-  colors['themeColor'] = primary
+  colors['themePrimary'] = primary
   return colors
 }

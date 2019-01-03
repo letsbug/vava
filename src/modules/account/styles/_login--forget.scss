@@ -26,6 +26,7 @@ $login-form-icon-color:   $color-gray-600;
 
     .brand {
       width: $login-form-logo-size;
+      height: $login-form-logo-size;
     }
 
     .title {
@@ -38,14 +39,6 @@ $login-form-icon-color:   $color-gray-600;
       height: $login-form-icon-size;
       vertical-align: -6px;
       fill: $login-form-icon-color;
-    }
-
-    .forget-link {
-      color: $color-link-default;
-
-      &:hover {
-        color: $color-theme;
-      }
     }
 
     .btn-login {

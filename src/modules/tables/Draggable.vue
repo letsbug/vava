@@ -6,14 +6,14 @@
     >
       <el-table-column label="ID" prop="id" width="40" align="right" />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip />
-      <el-table-column label="CREATE" prop="display" width="110">
+      <el-table-column label="CREATE" prop="display" width="116">
         <template slot-scope="scope">
           {{ scope.row.display | dateAgo }}
         </template>
       </el-table-column>
       <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip />
       <el-table-column label="LEVEL" prop="level" width="60" align="center" />
-      <el-table-column label="STATUS" prop="status" width="100" align="center">
+      <el-table-column label="STATUS" prop="status" width="100" align="center" class-name="has-actions actions-small">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | articleStatus" size="small">
             {{ scope.row.status }}
@@ -27,9 +27,9 @@
       </el-table-column>
       <el-table-column label="DRAG" width="66" align="center">
         <template>
-          <span class="handle-drag">
+          <a class="handle-drag">
             <va-icon icon="action-drag" />
-          </span>
+          </a>
         </template>
       </el-table-column>
     </el-table>

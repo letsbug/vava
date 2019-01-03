@@ -22,6 +22,8 @@ import '@/assets/svgs'
 
 import * as filters from '@/filters'
 
+import '@/themes'
+
 // Inject global directives, or local calls, as needed.
 // import * as Directives from '@/directives'
 

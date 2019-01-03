@@ -23,7 +23,7 @@
           </transition-group>
         </template>
       </el-table-column>
-      <el-table-column label="CREATE" prop="display" width="110">
+      <el-table-column label="CREATE" prop="display" width="116">
         <template slot-scope="scope">
           {{ scope.row.display | dateAgo }}
         </template>

@@ -2,7 +2,7 @@
   <div class="container-login--password">
     <el-form ref="loginForm" :model="form" :rules="rules" class="form-login--password" aria-autocomplete="list">
       <div class="form-logo">
-        <img :src="'./static/images/logo.png'" alt="VAVA" class="brand" />
+        <va-svgs name="logo" class="brand text-primary" />
         <h2 class="title">
           {{ $t('login.title') }}<language-picker class="float-r" class-name="h2" />
         </h2>
@@ -32,7 +32,7 @@
           <el-checkbox v-model="form.remember" :label="$t('login.remember')" class="checkbox-green" name="remember" />
         </el-tooltip>
         <!--<router-link class="forget-link float-r" to="/password">Forgot password?</router-link>-->
-        <a class="forget-link float-r" @click="userPickerVisible = true">
+        <a class="float-r" @click="userPickerVisible = true">
           {{ $t('login.list') }}
         </a>
       </el-form-item>
@@ -87,6 +87,7 @@ export default {
       this.form.username = user.username
       this.form.password = 'a1234567'
       this.userPickerVisible = false
+      this.$refs['loginForm'].validate()
     },
     handleLogin() {
       this.$refs['loginForm'].validate(v => {

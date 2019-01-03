@@ -274,7 +274,7 @@ class Build {
       e.preventDefault()
       _this.toX = (e.touches[0].clientX - _this.canvas.width / 2) * -0.8
       _this.toY = (e.touches[0].clientY - _this.canvas.height / 2) * 0.8
-    })
+    }, { passive: true })
     window.addEventListener('resize', function(e) {
       e.preventDefault()
       _this.canvas.width = w = window.innerWidth
