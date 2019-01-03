@@ -59,7 +59,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 import RouterRefresh from '@/components/RouterRefresh'
 import ScreenFull from '@/components/ScreenFull'
 import LanguagePicker from '@/components/LanguagePicker'
-import ThemePicker from './ThemePicker'
+import ThemePicker from '@/components/ThemePicker'
 import UserActions from './UserActions'
 
 export default {
