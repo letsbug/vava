@@ -1,6 +1,6 @@
 import { xhr } from '@/services/xhr'
 import { generateColors } from '@/tools/color'
-import Cookie from 'js-cookie'
+import store from '@/store'
 
 function getTemplate(data) {
   const colorMap = {
@@ -14,7 +14,8 @@ function getTemplate(data) {
     '#a9dcb5': 'light-6',
     '#bfe5c7': 'light-7',
     '#d4edda': 'light-8',
-    '#eaf6ec': 'light-9'
+    '#eaf6ec': 'light-9',
+    '40,167,69': 'themeOpacityPrimary'
   }
   Object.keys(colorMap).forEach(key => {
     const value = colorMap[key]
@@ -28,10 +29,7 @@ function getTemplate(data) {
 
 class Theme {
   constructor() {
-    this.styles = {
-      style: Cookie.get('theme_style'),
-      color: Cookie.get('theme_color')
-    }
+    this.styles = { ...store.getters.theme }
     this.normal = {
       style: 'default',
       color: '#28a745'
@@ -55,9 +53,13 @@ class Theme {
     }
 
     Object.keys(newPrimaries).forEach(key => {
-      cssText = cssText.replace(new RegExp(key, 'g'), newPrimaries[key])
+      const reg = new RegExp(key, 'g')
+      console.log(reg, newPrimaries[key])
+      cssText = cssText.replace(reg, newPrimaries[key])
     })
+
     styleTag.innerHTML = cssText
+    store.dispatch('app_theme_set', styles)
   }
   get() {
     return this.styles

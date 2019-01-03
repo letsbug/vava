@@ -12,7 +12,7 @@ const formula = {
   'light-9': 'color(primary tint(90%))'
 }
 
-function rgb2Hex(rgb) {
+export function rgb2Hex(rgb) {
   rgb = rgb.split(',')
   const r = parseInt(rgb[0].split('(')[1])
   const g = parseInt(rgb[1])
@@ -20,13 +20,20 @@ function rgb2Hex(rgb) {
   return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
+export function hex2Rgb(hex, onlyNum) {
+  const prefix = onlyNum ? '' : 'rgb('
+  const suffix = onlyNum ? '' : ')'
+  return prefix + parseInt('0x' + hex.slice(1, 3)) + ',' + parseInt('0x' + hex.slice(3, 5)) + ',' + parseInt('0x' + hex.slice(5, 7)) + suffix
+}
+
 export function generateColors(primary) {
   const colors = {}
 
   Object.keys(formula).forEach(key => {
     const value = formula[key].replace(/primary/g, primary)
-    colors[key] = rgb2Hex(color.convert(value))
+    colors[key] = color.convert(value)
   })
-  colors['themePrimary'] = primary
+  colors['themePrimary'] = hex2Rgb(primary)
+  colors['themeOpacityPrimary'] = hex2Rgb(primary, true)
   return colors
 }
