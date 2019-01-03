@@ -1,6 +1,6 @@
 <template>
-  <el-dropdown trigger="click" style="float:left;" @command="pickLang">
-    <a class="va-nav-item va-lang-picker">
+  <el-dropdown trigger="click" @command="pickLang">
+    <a :class="className ? className : null" class="va-lang-picker">
       <va-icon icon="action-translate" />
     </a>
     <el-dropdown-menu slot="dropdown">
@@ -15,9 +15,10 @@
 </template>
 
 <script>
-// import Cookie from 'js-cookie'
-
 export default {
+  props: {
+    className: { type: String, default: null, required: false }
+  },
   computed: {
     language() {
       return this.$store.getters.language

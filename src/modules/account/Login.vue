@@ -4,7 +4,7 @@
       <div class="form-logo">
         <img :src="'./static/images/logo.png'" alt="VAVA" class="brand" />
         <h2 class="title">
-          {{ $t('login.title') }}<language-picker class="float-r" />
+          {{ $t('login.title') }}<language-picker class="float-r" class-name="h2" />
         </h2>
       </div>
       <el-form-item prop="username">
@@ -92,7 +92,7 @@ export default {
       this.$refs['loginForm'].validate(v => {
         if (!v) return false
         this.loading = true
-        this.$store.dispatch('user_login', this.form).then(res => {
+        this.$store.dispatch('user_login', this.form).then(() => {
           this.loading = false
           this.$message.closeAll()
           this.$router.push(this.$route.query['redirect'] || '/')
