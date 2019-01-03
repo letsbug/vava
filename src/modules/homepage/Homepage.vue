@@ -25,11 +25,9 @@ export default {
     }
   },
   mounted() {
-    const el = this.$refs['roleImage']
-    console.log(el)
     const random = Math.floor(Math.random() * 7 + 1)
-    xhr(`./static/images/svgs/${this.user.roles[0]}_0${random}.svg`).then(({ data }) => {
-      el.innerHTML = data
+    xhr(`./static/svgs/${this.user.roles[0]}_0${random}.svg`).then(({ data }) => {
+      this.$refs['roleImage'].innerHTML = data
     })
   }
 }
