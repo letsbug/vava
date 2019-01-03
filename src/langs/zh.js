@@ -122,7 +122,7 @@ export default {
   },
   permissions: {
     yours: '你的角色：{roles}',
-    title: '这个页面只有 <span class="text-red">{role}</span> 能访问。'
+    title: '这个页面只有 <span class="text-error">{role}</span> 能访问。'
   },
   richText: {
     intro: '富文本作为后台最核心的，最基本的，同时又是坑最多功能，真的是叫人头疼！折腾了近一周的时间，常见的富文本基本都试了一下，' +

@@ -8,7 +8,7 @@
     <el-row>
       <el-col v-for="icon of icons" :key="icon" :xl="3" :lg="4" :md="6" :sm="6" :xs="8">
         <div class="grid-content" @click="handleClipboard(generateIconCode(icon), $event)">
-          <div class="icon-item">
+          <div class="va-panels has-interaction icon-item">
             <va-icon :icon="icon" />
             <span>{{ icon }}</span>
           </div>
@@ -53,16 +53,9 @@ export default {
     font-size: $font-size-h1;
     text-align: center;
     padding: $spacer-lg 0;
-    border: solid $border-default-width transparent;
-    border-radius: $radius-base;
-    cursor: pointer;
-
-    transition: $transition-border, $transition-transform, $transition-color;
 
     &:hover {
-      border-color: $color-theme;
-      color: $color-theme;
-      box-shadow: 0 $shadow-lg-offset $shadow-lg-distance $shadow-lg-size rgba($color-black, 0.05);
+      box-shadow: 0 $shadow-lg-offset $shadow-lg-distance $shadow-lg-size rgba($color-black, 0.08);
       transform: translate3d(0, -3px, 0);
     }
 

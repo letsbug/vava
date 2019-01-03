@@ -32,21 +32,8 @@
     40%, 80% {transform: rotate(10deg)}
   }
 
-  .github-corner {
-
-    &:hover .octo-arm {
-      animation: octocat-wave 560ms ease-in-out
-    }
-
-    > svg {
-      fill: $color-theme;
-      color: $color-gray-100;
-      position: absolute;
-      top: 0;
-      border: 0;
-      right: 0;
-      z-index: 2;
-    }
+  .github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
   }
 
   @media (max-width: 500px) {

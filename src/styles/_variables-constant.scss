@@ -40,6 +40,20 @@ $color-actives:         $color-theme;
 
 $color-overlay:         rgba($color-black, .3) !default;
 
+$color-maps: ();
+$color-maps: map_merge(
+  (
+    "primary": $color-theme,
+    "secondary": $color-text-primary,
+    "muted": $color-gray-500,
+    "info": $color-cyan,
+    "success": $color-green,
+    "warning": $color-yellow,
+    "error": $color-red,
+  ),
+  $color-maps
+);
+
 
 // System Fonts
 $font-family-base:    Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif !default;
@@ -162,11 +176,11 @@ $transition-transform:        transform $transition-duration $transition-timing-
 // Placement directions
 $placement-directions: ();
 $placement-directions: map_merge(
-    (
-      "top":    "top",
-      "right":  "right",
-      "bottom": "bottom",
-      "left":   "left"
-    ),
-    $placement-directions
+  (
+    "top":    "top",
+    "right":  "right",
+    "bottom": "bottom",
+    "left":   "left"
+  ),
+  $placement-directions
 );

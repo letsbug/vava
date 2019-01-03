@@ -1,11 +1,11 @@
 //
-// Text Colors
+// Colors
 
-.text-primary { color: $color-theme; }
-.text-muted { color: $color-gray-500; }
-.text-red { color: $color-red; }
-.text-green { color: $color-green; }
-.text-blue { color: $color-blue; }
+@each $key, $value in $color-maps {
+  .text-#{$key} { color: $value; }
+  .border-#{$key} { border: solid $border-default-width $value; }
+  .bg-#{$key} { background-color: $value }
+}
 
 
 //

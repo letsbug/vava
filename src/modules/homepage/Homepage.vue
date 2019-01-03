@@ -5,7 +5,7 @@
       <h2 class="title">
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
       </h2>
-      <div ref="roleImage" class="role-image">
+      <div ref="roleImage" class="role-image text-primary">
         <va-svgs :name="figure" class="figure-image" />
       </div>
     </div>
@@ -54,7 +54,6 @@ export default {
   }
 
   .role-image {
-    color: $color-theme;
     flex: 9;
   }
 }

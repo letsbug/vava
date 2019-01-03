@@ -1,0 +1,19 @@
+.va-panels {
+  display: block;
+  padding: $spacer-base;
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+  border-radius: $radius-base;
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: $transition-all;
+
+  &.has-interaction {
+    &:hover, &.checked {
+      border-color: $color-theme;
+      color: $color-theme;
+    }
+  }
+}

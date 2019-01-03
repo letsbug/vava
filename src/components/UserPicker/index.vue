@@ -10,17 +10,21 @@
     </h5>
     <el-row :gutter="15">
       <el-col v-for="(_user, index) in list" :key="index" :xs="12" :sm="12" :md="8" :lg="8" :xl="6">
-        <div :class="{ 'checked': index === checkedIndex }" class="user-list" @click="handleChoose(_user, index)">
+        <div
+          :class="{ 'checked': index === checkedIndex }" class="va-panels has-interaction user-list"
+          @click="handleChoose(_user, index)"
+        >
           <img :src="_user.avatar" alt="" class="avatar" />
           <h5 class="username">
             {{ _user.username }}
           </h5>
-          <span class="text-muted">
+          <span class="text-muted user-attrs">
             <span class="hidden-xs-only">
               {{ $t('roles.title') }}:
-            </span>{{ $t(`roles.${_user.roles[0]}`) }}
+            </span>
+            {{ $t(`roles.${_user.roles[0]}`) }}
           </span>
-          <span class="checked-flag">
+          <span class="checked-flag text-primary">
             <i class="el-icon-check"></i>
           </span>
         </div>
@@ -89,12 +93,8 @@ $list-padding:  $spacer-xs;
   height: $avatar-size + $list-padding * 2;
   padding: $list-padding $list-padding $list-padding ($avatar-size + $spacer-sm + $list-padding);
   margin-bottom: 15px;
-  overflow: hidden;
-  cursor: pointer;
   position: relative;
-  border-radius: $radius-base;
-  border: $border-default;
-  transition: $transition-border;
+  border-color: $border-color;
 
   .avatar {
     display: block;
@@ -114,17 +114,12 @@ $list-padding:  $spacer-xs;
 
   .checked-flag {
     padding: 6px 8px;
-    color: $color-theme;
     font-size: $font-size-h4;
     position: absolute;
     top: 0;
     right: 0;
     opacity: 0;
     transform: $transition-opacity;
-  }
-
-  &:hover, &.checked {
-    border-color: $color-theme;
   }
 
   &.checked .checked-flag {

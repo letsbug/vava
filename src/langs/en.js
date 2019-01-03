@@ -122,7 +122,7 @@ export default {
   },
   permissions: {
     yours: 'Your roles: {roles}',
-    title: 'This page is accessible only to <span class="text-red">{role}</span>.'
+    title: 'This page is accessible only to <span class="text-error">{role}</span>.'
   },
   richText: {
     intro: 'Rich text as the background of the most core, the most basic, but also annoying features, ' +
