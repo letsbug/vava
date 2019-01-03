@@ -2,7 +2,7 @@
   <el-popover placement="top-end" width="270" trigger="click" transition="el-zoom-in-top">
     <template>
       <div class="theme-input">
-        <h6>{{ $t('theme.themeStyle') }}</h6>
+        <h6>{{ $t('theme.themeStyle') }} <span class="text-muted">&nbsp;&nbsp;coding...</span></h6>
         <el-radio-group v-model="styles.style" class="text-center">
           <el-radio v-for="sty in stylePresets" :key="sty" :label="sty">{{ $t(`theme.styles.${sty}`) }}</el-radio>
         </el-radio-group>
@@ -16,7 +16,7 @@
           >
             <i v-if="pre === styles.color" class="el-icon-check"></i>
           </span>
-          <el-color-picker v-model="styles.color" size="mini" @change="changeColor" />
+          <el-color-picker v-model="styles.color" size="mini" @change="onColorPickerChange" />
         </div>
       </div>
       <hr />
@@ -37,37 +37,25 @@ import { generateColors } from '@/tools/color'
 export default {
   data() {
     return {
+      template: '',
+      colorMap: {
+        '#24963e': 'shade-1',
+        '#28a745': 'themeColor',
+        '#3db058': 'light-1',
+        '#53b96a': 'light-2',
+        '#69c17d': 'light-3',
+        '#7eca8f': 'light-4',
+        '#94d3a2': 'light-5',
+        '#a9dcb5': 'light-6',
+        '#bfe5c7': 'light-7',
+        '#d4edda': 'light-8',
+        '#eaf6ec': 'light-9'
+      },
+      stylePresets: ['default', 'light', 'dark'],
+      colorPresets: ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'],
       normal: { style: 'default', color: '#28a745' },
       styles: {},
-      origin: {},
-      stylePresets: [
-        'default',
-        'light',
-        'dark'
-      ],
-      colorPresets: [
-        '#dc3545',
-        '#fe613c',
-        '#ffc107',
-        '#4ec1fa',
-        '#28a745',
-        '#007bff',
-        '#2f54eb',
-        '#6f42c1'
-      ],
-      primaries: {
-        'shade-1': '#24963e',
-        'primary': '#28a745',
-        'light-1': '#3db058',
-        'light-2': '#53b96a',
-        'light-3': '#69c17d',
-        'light-4': '#7eca8f',
-        'light-5': '#94d3a2',
-        'light-6': '#a9dcb5',
-        'light-7': '#bfe5c7',
-        'light-8': '#d4edda',
-        'light-9': '#eaf6ec'
-      }
+      isFirstLoad: true
     }
   },
   computed: {
@@ -77,22 +65,52 @@ export default {
   },
   watch: {
     theme: {
-      handler: function() {
-        this.setAllCSS()
+      handler() {
+        this.setAllColors()
       },
       deep: true
     }
   },
   created() {
-    generateColors('#28a745')
-  },
-  mounted() {
-    this.origin = { ...this.normal }
     this.styles = { ...this.theme }
-    this.setAllCSS()
+    this.getThemeTemplate()
   },
   methods: {
-    changeColor(val) {
+    requestFile(url) {
+      return new Promise((resolve, reject) => {
+        const client = new XMLHttpRequest()
+        client.onreadystatechange = () => {
+          if (client.readyState !== 4) return
+
+          if (client.status === 200) {
+            const urlArr = client.responseURL.split('/')
+            resolve({
+              data: client.response,
+              url: urlArr[urlArr.length - 1]
+            })
+          } else reject(new Error(client.statusText))
+        }
+        client.open('GET', url)
+        client.send()
+      })
+    },
+    getThemeTemplate() {
+      this.requestFile('./static/css/theme-template.css').then(({ data }) => {
+        Object.keys(this.colorMap).forEach(key => {
+          const value = this.colorMap[key]
+          data = data.replace(new RegExp(key, 'ig'), value)
+        })
+        this.template = data.replace(/@font-face{[^}]+}/g, '')
+          .replace(/\[class\*=" el-icon-"],\[class\^=el-icon-]{[^}]+}/g, '')
+          .replace(/\.el-icon[^}]+}/g, '')
+        if (this.isFirstLoad) {
+          if (this.theme.style !== this.normal.style || this.theme.color !== this.normal.color) {
+            this.setAllColors()
+          }
+        }
+      })
+    },
+    onColorPickerChange(val) {
       if (!val) this.styles.color = this.colorPresets[4]
     },
     handleSubmit() {
@@ -109,17 +127,22 @@ export default {
     handleHideThemePicker() {
       document.documentElement.click()
     },
-    setAllCSS() {
+    setAllColors() {
       const newPrimaries = generateColors(this.styles.color)
-      console.log(newPrimaries)
-      const origins = document.head.querySelectorAll('style')
-      origins.forEach(stl => {
-        Object.keys(this.primaries).forEach(key => {
-          const reg = new RegExp(this.primaries[key], 'ig')
-          stl.innerHTML = stl.innerHTML.replace(reg, newPrimaries[key])
-        })
+      let styleTag = document.getElementById('appThemeChalk')
+      let cssText = this.template
+
+      if (!styleTag) {
+        styleTag = document.createElement('style')
+        styleTag.id = 'appThemeChalk'
+        document.head.appendChild(styleTag)
+      }
+
+      Object.keys(newPrimaries).forEach(key => {
+        cssText = cssText.replace(new RegExp(key, 'g'), newPrimaries[key])
       })
-      this.primaries = { ...newPrimaries }
+      styleTag.innerHTML = cssText
+      console.log(cssText)
     }
   }
 }
@@ -166,13 +189,14 @@ h6 {
     margin-left: 3px;
   }
   .el-color-picker__color, .el-color-picker__trigger {
+    border: 0 none !important;
   }
   .el-color-picker__trigger {
-    width: $color-picker-size;
-    height: $color-picker-size;
-    padding: 0;
-    border-radius: $radius-base;
-    border: 0 none;
+    width: $color-picker-size !important;
+    height: $color-picker-size !important;
+    padding: 0 !important;;
+    border-radius: $radius-base !important;
+    border: 0 none !important;
     overflow: hidden;
   }
 }
