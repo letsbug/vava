@@ -1,0 +1,26 @@
+.content-homepage {
+  height: 100%;
+  padding-top: $spacer-xxl * 3;
+  padding-bottom: $spacer-xxl;
+  position: relative;
+
+  .title {
+    width: 100%;
+    margin: $spacer-base 0 0;
+    font-weight: 400;
+    position: absolute;
+    top: 0;
+  }
+
+  .role-image {
+    height: 100%;
+
+    svg {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      fill: currentColor;
+      overflow: hidden;
+    }
+  }
+}

@@ -35,7 +35,7 @@
 export default {
   data() {
     return {
-      themeTool: window.theme,
+      themeTool: null,
       stylePresets: ['default', 'light', 'dark'],
       colorPresets: ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'],
       normal: { style: 'default', color: '#28a745' },
@@ -43,6 +43,7 @@ export default {
     }
   },
   created() {
+    this.themeTool = window.theme
     this.styles = this.themeTool.get()
   },
   methods: {

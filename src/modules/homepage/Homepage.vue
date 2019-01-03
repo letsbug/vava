@@ -1,12 +1,12 @@
 <template>
   <div class="va-body-container">
     <github-corner />
-    <div class="content-homepage">
+    <div class="content-homepage text-center">
       <h2 class="title">
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
       </h2>
       <div ref="roleImage" class="role-image text-primary">
-        <va-svgs :name="figure" class="figure-image" />
+        <!-- The role image will be inserted here -->
       </div>
     </div>
   </div>
@@ -14,6 +14,7 @@
 
 <script>
 import GithubCorner from '@/components/GithubCorner'
+import { xhr } from '@/services/xhr'
 
 export default {
   name: 'Homepage',
@@ -21,46 +22,15 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user
-    },
-    figure() {
-      const random = Math.floor(Math.random() * 7 + 1)
-      return `${this.user.roles[0]}_0${random}`
-      // return `${this.user.roles[0]}_05`
     }
+  },
+  mounted() {
+    const el = this.$refs['roleImage']
+    console.log(el)
+    const random = Math.floor(Math.random() * 7 + 1)
+    xhr(`./static/images/svgs/${this.user.roles[0]}_0${random}.svg`).then(({ data }) => {
+      el.innerHTML = data
+    })
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import "~@/styles/_variables";
-
-.va-body-container {
-  text-align: center;
-  overflow: hidden;
-}
-
-.content-homepage {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  height: 100%;
-  padding: $spacer-xxl 0;
-
-  .title {
-    width: 100%;
-    margin: 0 0 $spacer-xxl;
-    font-weight: 400;
-    flex: 1;
-  }
-
-  .role-image {
-    flex: 9;
-  }
-}
-
-.figure-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-</style>

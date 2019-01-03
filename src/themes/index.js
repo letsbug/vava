@@ -54,7 +54,6 @@ class Theme {
 
     Object.keys(newPrimaries).forEach(key => {
       const reg = new RegExp(key, 'g')
-      console.log(reg, newPrimaries[key])
       cssText = cssText.replace(reg, newPrimaries[key])
     })
 

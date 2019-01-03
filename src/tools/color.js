@@ -23,7 +23,10 @@ export function rgb2Hex(rgb) {
 export function hex2Rgb(hex, onlyNum) {
   const prefix = onlyNum ? '' : 'rgb('
   const suffix = onlyNum ? '' : ')'
-  return prefix + parseInt('0x' + hex.slice(1, 3)) + ',' + parseInt('0x' + hex.slice(3, 5)) + ',' + parseInt('0x' + hex.slice(5, 7)) + suffix
+  return prefix +
+    parseInt('0x' + hex.slice(1, 3)) + ',' +
+    parseInt('0x' + hex.slice(3, 5)) + ',' +
+    parseInt('0x' + hex.slice(5, 7)) + suffix
 }
 
 export function generateColors(primary) {
