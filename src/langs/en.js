@@ -23,7 +23,7 @@ export default {
     reports: 'Reports',
     components: 'Components',
     richText: 'Rich Text',
-    countUp: 'Count Up',
+    countTo: 'Count Up',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',
@@ -130,6 +130,14 @@ export default {
       '<a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>. ' +
       'Because there is no background, can not achieve the function of image upload, ' +
       'so the picture here can only add existing links. Here are the actual results:'
+  },
+  countTo: {
+    intro: 'Build based on <a class="link-theme" target="_blank" href="https://github.com/PanJiaChen/vue-countTo">vue-count-to</a>.',
+    params: 'Params: ',
+    methods: 'Methods: ',
+    start: 'Start',
+    pauseResume: 'Pause/Resume',
+    reset: 'Reset'
   },
   icons: {
     usage: 'Usage',

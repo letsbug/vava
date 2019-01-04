@@ -1,6 +1,8 @@
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 // reboot element ui system colors.
+$--color-black:           $color-black;
+
 $--color-primary:         $color-theme;
 $--color-danger:          $color-red;
 $--color-success:         $color-green;
@@ -9,15 +11,15 @@ $--color-info:            $color-text-secondary;
 $--color-text-primary:    $color-text-primary;
 $--color-text-secondary:  $color-text-secondary;
 
-$--color-primary-light-1: mix($color-white, $--color-primary, 10%); /* 53a8ff */
-$--color-primary-light-2: mix($color-white, $--color-primary, 20%); /* 66b1ff */
-$--color-primary-light-3: mix($color-white, $--color-primary, 30%); /* 79bbff */
-$--color-primary-light-4: mix($color-white, $--color-primary, 40%); /* 8cc5ff */
-$--color-primary-light-5: mix($color-white, $--color-primary, 50%); /* a0cfff */
-$--color-primary-light-6: mix($color-white, $--color-primary, 60%); /* b3d8ff */
-$--color-primary-light-7: mix($color-white, $--color-primary, 70%); /* c6e2ff */
-$--color-primary-light-8: mix($color-white, $--color-primary, 80%); /* d9ecff */
-$--color-primary-light-9: mix($color-white, $--color-primary, 90%); /* ecf5ff */
+$--color-primary-light-1: mix($color-white, $--color-primary, 10%); /* 3db058 */
+$--color-primary-light-2: mix($color-white, $--color-primary, 20%); /* 53b96a */
+$--color-primary-light-3: mix($color-white, $--color-primary, 30%); /* 69c17d */
+$--color-primary-light-4: mix($color-white, $--color-primary, 40%); /* 7eca8f */
+$--color-primary-light-5: mix($color-white, $--color-primary, 50%); /* 94d3a2 */
+$--color-primary-light-6: mix($color-white, $--color-primary, 60%); /* a9dcb5 */
+$--color-primary-light-7: mix($color-white, $--color-primary, 70%); /* bfe5c7 */
+$--color-primary-light-8: mix($color-white, $--color-primary, 80%); /* d4edda */
+$--color-primary-light-9: mix($color-white, $--color-primary, 90%); /* eaf6ec */
 
 /* Scrollbar
 --------------------------*/

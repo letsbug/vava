@@ -23,7 +23,7 @@ export default {
     report: '报表',
     components: '组件',
     richText: '富文本编辑器',
-    countUp: '数字计数器',
+    countTo: '数字计数器',
     table: '表格',
     inlineEdit: '行内编辑',
     sortable: '排序',
@@ -128,6 +128,14 @@ export default {
     intro: '富文本作为后台最核心的，最基本的，同时又是坑最多功能，真的是叫人头疼！折腾了近一周的时间，常见的富文本基本都试了一下，' +
       '最终还是决定使用 <a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a> ' +
       '实现富文本编辑功能。因为没有后台，无法实现图片上传的功能，所以这里的图片仅能添加已有链接。以下为实际效果：'
+  },
+  countTo: {
+    intro: '此功能基于 <a class="link-theme" target="_blank" href="https://github.com/PanJiaChen/vue-countTo">vue-count-to</a> 构建.',
+    params: '参数: ',
+    methods: '方法: ',
+    start: '开始',
+    pauseResume: '暂停/恢复',
+    reset: '重置'
   },
   icons: {
     usage: '使用方法',

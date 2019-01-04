@@ -20,13 +20,13 @@ export default {
       component: () => import('@/modules/components/rich-editor')
     },
     {
-      path: 'count-up',
-      name: 'CountUp',
+      path: 'count-to',
+      name: 'CountTo',
       meta: {
-        title: 'countUp',
+        title: 'countTo',
         icon: 'action-count'
       },
-      component: () => import('@/modules/components/count-up')
+      component: () => import('@/modules/components/count-to')
     }
   ]
 }

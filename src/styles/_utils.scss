@@ -52,7 +52,7 @@ a {
     font-weight: 500;
 
     &:hover {
-      color: darken($color-link-highlight, 10%);
+      color: mix($color-black, $color-link-highlight, 10%);
     }
   }
 
@@ -60,7 +60,7 @@ a {
     color: $color-theme;
 
     &:hover {
-      color: darken($color-theme, 10%);
+      color: mix($color-black, $color-theme, 10%);
     }
   }
 
@@ -98,5 +98,32 @@ a {
   &.disabled {
     cursor: not-allowed;
     pointer-events: none;
+  }
+}
+
+//
+// dl dt dd
+$dl-horizontal-dt-width:  68px;
+
+dl.dl-horizontal {
+  position: relative;
+
+  dt {
+    width: $dl-horizontal-dt-width;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  dd {
+    margin-left: $dl-horizontal-dt-width + $spacer-base;
+
+    & + dd {
+      margin-top: $spacer-base;
+    }
   }
 }
