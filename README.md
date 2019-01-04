@@ -7,6 +7,7 @@
 <p align="center">
   <img src="https://github.com/letsbug/vava/raw/master/static/images/subtitle.png"/>
 </p>
+<hr />
 ***
 <p align="center">
   <a href="https://github.com/vuejs/vue">
