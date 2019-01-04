@@ -23,7 +23,7 @@ export default {
     reports: 'Reports',
     components: 'Components',
     richText: 'Rich Text',
-    countTo: 'Count Up',
+    countTo: 'Count To',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',
