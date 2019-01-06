@@ -100,10 +100,12 @@ export default {
         init_instance_callback
       }
       window.tinymce.init(Object.assign({}, defaultOptions, this.imageTools))
+      this.$emit('on-inited')
     },
     destroy() {
       const tiny = window.tinymce.get(this.id)
-      tiny.destroy()
+      console.log('exec destroy method: ', this.id, tiny)
+      if (tiny) tiny.destroy()
     }
   }
 }

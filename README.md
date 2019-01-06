@@ -7,8 +7,9 @@
 <p align="center">
   <img src="https://github.com/letsbug/vava/raw/master/static/images/subtitle.png"/>
 </p>
+
 <hr />
-***
+
 <p align="center">
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.5.17-brightgreen.svg" alt="vue">
@@ -60,5 +61,14 @@ npm run build
 npm run build --report
 ```
 
+## Built With
+* [VUE](https://vuejs.org/) - The web framework used
+* [ElementUI](http://element.eleme.io) - The UI component library
+
 ## License
-[MIT](https://github.com/letsbug/vava/blob/master/LICENSE)
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/letsbug/vava/blob/master/LICENSE) file for details
+
+## Acknowledgments
+* This project refers to [@PanJiaChen](https://github.com/PanJiaChen)'s [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+* Inspired by [Ant Design](https://preview.pro.ant.design/dashboard/analysis)
+* Design materials were collected from [unDraw](https://undraw.co/) and [iconfont](https://www.iconfont.cn/)
