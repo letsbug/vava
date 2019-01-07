@@ -29,20 +29,21 @@ function getTemplate(data) {
 
 class Theme {
   constructor() {
-    this.styles = { ...store.getters.theme }
+    this.themes = { ...store.getters.theme }
     this.normal = {
-      style: 'default',
+      style: 'normally',
       color: '#28a745'
     }
     xhr('./static/css/theme-template.css').then(({ data }) => {
       this.template = getTemplate(data)
-      if (this.styles.style !== this.normal.style || this.styles.color !== this.normal.color) {
-        this.set(this.styles)
+      if (this.themes.style !== this.normal.style || this.themes.color !== this.normal.color) {
+        this.set(this.themes)
       }
+      this.style(this.themes.style)
     })
   }
-  set(styles) {
-    const newPrimaries = generateColors(styles.color)
+  color(color) {
+    const newPrimaries = generateColors(color)
     let styleTag = document.getElementById('appThemeChalk')
     let cssText = this.template
 
@@ -58,10 +59,19 @@ class Theme {
     })
 
     styleTag.innerHTML = cssText
-    store.dispatch('app_theme_set', styles)
+  }
+  style(style) {
+    const body = document.body
+    if (Array.from(body.classList).includes(style)) return
+    body.className = `theme-${style}`
+  }
+  set(themes) {
+    this.color(themes.color)
+    this.style(themes.style)
+    store.dispatch('app_theme_set', themes)
   }
   get() {
-    return this.styles
+    return this.themes
   }
 }
 

@@ -8,7 +8,7 @@ const application = {
       opened: !+Cookie.get('sidebar_status')
     },
     theme: {
-      style: Cookie.get('theme_style') || 'default',
+      style: Cookie.get('theme_style') || 'normally',
       color: Cookie.get('theme_color') || '#28a745'
     }
   },

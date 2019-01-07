@@ -1,8 +1,7 @@
 .va-side-wrapper {
   height: 100%;
   padding-top: $sidebar-brand-height;
-  background-color: $sidebar-bg-color;
-  color: $sidebar-color;
+  border-right: solid $border-default-width transparent;
 
   position: absolute;
   z-index: $z-index-sidebar;
@@ -33,7 +32,7 @@
 .va-side-brand {
   height: $sidebar-brand-height;
   padding: $sidebar-brand-padding-y $sidebar-brand-padding-x;
-  color: $sidebar-color-brand;
+  color: $color-theme;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;

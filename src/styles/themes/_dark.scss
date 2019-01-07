@@ -1,0 +1,31 @@
+body.theme-dark {
+  .va-side-wrapper {
+    background-color: $theme-dark-bg;
+  }
+  .va-side-nav {
+    a {
+      color: $theme-dark-color;
+    }
+
+    &.expanded {
+      background-color: $theme-dark-bg-focus;
+
+      .nav-title.active {
+        color: $theme-dark-color-focus;
+      }
+    }
+  }
+
+  .side-menu-collapse-drops {
+    background-color: $theme-dark-bg;
+
+    .nav-item:hover:not(.active) {
+      background-color: $theme-dark-bg-focus;
+      color: $theme-dark-color-focus;
+    }
+
+    .popper__arrow:after {
+      border-right-color: $theme-dark-bg !important;
+    }
+  }
+}

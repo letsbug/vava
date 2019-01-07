@@ -73,7 +73,7 @@ export default {
     themeStyle: 'Theme style',
     themeColor: 'Theme color',
     styles: {
-      default: 'Default',
+      normally: 'Normally',
       light: 'Light',
       dark: 'Dark'
     },
