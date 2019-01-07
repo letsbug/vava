@@ -33,7 +33,7 @@ const application = {
       Cookie.set('language', lang)
     },
     APP_THEME_STYLE_SET: (state, style) => {
-      if (!['default', 'light', 'dark'].includes(style)) return
+      if (!['normally', 'light'].includes(style)) return
       state.theme.style = style
       Cookie.set('theme_style', style)
     },

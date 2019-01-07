@@ -50,8 +50,8 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    // The user is not logged in or login has expired
     // redirected to the login page.
+    // The user is not logged in.
     if (whitelist.indexOf(to.path) === -1) {
       next({
         path: '/login',
@@ -61,7 +61,9 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
+    // The user login has expired.
     if (store.getters.user.token) {
+      store.dispatch('user_logout')
       Message({
         type: 'error',
         message: 'Your login has expired. Please login again.',

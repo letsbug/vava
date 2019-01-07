@@ -34,7 +34,7 @@ class Theme {
       style: 'normally',
       color: '#28a745'
     }
-    xhr('./static/css/theme-template.css').then(({ data }) => {
+    xhr('./static/css/theme-template.min.css').then(({ data }) => {
       this.template = getTemplate(data)
       if (this.themes.style !== this.normal.style || this.themes.color !== this.normal.color) {
         this.set(this.themes)

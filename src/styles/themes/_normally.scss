@@ -9,11 +9,11 @@ body.theme-normally {
 
     &.expanded {
       background-color: $theme-dark-bg-focus;
-
-      .nav-title.active {
-        color: $theme-dark-color-focus;
-      }
     }
+  }
+
+  .va-app-wrapper.sidebar-expanded .va-side-wrapper .va-side-nav.expanded .nav-title.active {
+    color: $theme-dark-color-focus;
   }
 
   .side-menu-collapse-drops {

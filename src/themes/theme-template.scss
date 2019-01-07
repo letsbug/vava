@@ -1,0 +1,89 @@
+/**
+ * Theme template source code.
+ * (主题模版源码。)
+ * This template file needs to be downloaded dynamically when performing the theme switch method.
+ * (在执行主题切换方法时，需要动态下载此模板文件。)
+ * The compiled file is placed under the directory "/static/css/theme-template.css".
+ * (编译后的css文件放在 "/static/css/theme-template.css" 目录下。)
+ * Most of the code was extracted from ElementUI's official source code, with some unnecessary cuts.
+ * (代码大多数都提取自ElementUI官方源码，并且做了一些不必要的删减。)
+ */
+
+@import "../styles/variables";
+// Reboot element imports
+@import "../styles/variables-element";
+
+
+//
+// All of the ElementUI.
+// Rewrote the official structure of the ElementUI,
+// Because it causes most components to be compiled multiple times,
+// and resulting in a large compiled css file.
+// (重新改写了官方的架构方式，因为官方的架构方式在这里会使大部分组件被多次重复编译，最终导致编译后文件过于累赘过于庞大。)
+
+// commons
+@import "mixins/mixins";
+@import "common/var";
+@import "common/popup";
+@import "common/transition";
+
+// components, utilities, forms, and so on.
+// TODO 以下组件有待删除非主题切换必须的官方代码。
+@import "./pagination.scss";
+@import "./dialog.scss";
+@import "./autocomplete.scss";
+@import "./dropdown.scss";
+@import "./input.scss";
+@import "./input-number.scss";
+@import "./radio.scss";
+@import "./radio-group.scss";
+@import "./radio-button.scss";
+@import "./checkbox.scss";
+@import "./switch.scss";
+@import "./select.scss";
+@import "./button.scss";
+@import "./table.scss";
+@import "./table-column.scss";
+@import "./date-time-picker.scss";
+@import "./popover.scss";
+@import "./tooltip.scss";
+@import "./message-box.scss";
+@import "./breadcrumb.scss";
+@import "./form.scss";
+@import "./tabs.scss";
+@import "./tag.scss";
+@import "./tree.scss";
+@import "./alert.scss";
+@import "./notification.scss";
+@import "./slider.scss";
+@import "./loading.scss";
+@import "./row.scss";
+@import "./col.scss";
+@import "./upload.scss";
+@import "./progress.scss";
+@import "./spinner.scss";
+@import "./message.scss";
+@import "./badge.scss";
+@import "./card.scss";
+@import "./rate.scss";
+@import "./steps.scss";
+@import "./step.scss";
+@import "./carousel.scss";
+@import "./scrollbar.scss";
+@import "./carousel-item.scss";
+@import "./collapse.scss";
+@import "./cascader.scss";
+@import "./color-picker.scss";
+@import "./transfer.scss";
+@import "./container.scss";
+@import "./header.scss";
+@import "./aside.scss";
+@import "./main.scss";
+@import "./footer.scss";
+
+
+//
+// System cores
+@import "../styles/utils";
+@import "../styles/layouts";
+@import "../styles/components";

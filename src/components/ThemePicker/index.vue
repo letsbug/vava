@@ -36,9 +36,9 @@ export default {
   data() {
     return {
       themeTool: null,
-      stylePresets: ['normally', 'light', 'dark'],
+      stylePresets: ['normally', 'light'],
       colorPresets: ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'],
-      normal: { style: 'default', color: '#28a745' },
+      normal: { style: 'normally', color: '#28a745' },
       styles: {}
     }
   },

@@ -1,0 +1,5 @@
+@include b(footer) {
+  padding: $--footer-padding;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}

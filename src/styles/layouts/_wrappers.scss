@@ -27,6 +27,7 @@
 .va-body-container {
   height: 100%;
   padding: $body-wrapper-padding;
+  box-shadow: inset $shadow-sm-hr;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;

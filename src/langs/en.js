@@ -74,8 +74,7 @@ export default {
     themeColor: 'Theme color',
     styles: {
       normally: 'Normally',
-      light: 'Light',
-      dark: 'Dark'
+      light: 'Light'
     },
     actions: {
       default: 'Default',
