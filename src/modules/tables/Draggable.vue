@@ -26,10 +26,9 @@
         </template>
       </el-table-column>
       <el-table-column label="DRAG" width="66" align="center">
-        <template>
-          <a class="handle-drag">
-            <va-icon icon="action-drag" />
-          </a>
+        <!-- eslint-disable-next-line -->
+        <template slot-scope="scope">
+          <va-icon icon="action-drag" class="handle-drag" />
         </template>
       </el-table-column>
     </el-table>
@@ -52,7 +51,7 @@ export default {
         handle: '.handle-drag',
         ghostClass: 'sortable-ghost',
         animation: 70,
-        setData(dataTransfer) {
+        setData: dataTransfer => {
           // to avoid Firefox bug
           // Detail see : https://github.com/RubaXa/Sortable/issues/1012
           dataTransfer.setData('Text', '')
