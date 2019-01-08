@@ -1,6 +1,3 @@
-@import "mixins/mixins";
-@import "common/var";
-
 @include b(select-group) {
   $gap: 20px;
 

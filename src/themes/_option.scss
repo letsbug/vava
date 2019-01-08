@@ -1,6 +1,3 @@
-@import "mixins/mixins";
-@import "common/var";
-
 @include b(select-dropdown) {
   @include e(item) {
     font-size: $--select-font-size;
