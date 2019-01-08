@@ -1,0 +1,80 @@
+/**
+ * Theme template source code.
+ * (主题模版源码。)
+ * This template file needs to be downloaded dynamically when performing the theme switch method.
+ * (在执行主题切换方法时，需要动态下载此模板文件。)
+ * The compiled file is placed under the directory "/static/css/theme-template.css".
+ * (编译后的css文件放在 "/static/css/theme-template.css" 目录下。)
+ * Most of the code was extracted from ElementUI's official source code, with some unnecessary cuts.
+ * (代码大多数都提取自ElementUI官方源码，并且做了一些不必要的删减。)
+ */
+
+@import "../styles/variables";
+// Reboot element imports
+@import "../styles/variables-element";
+
+
+//
+// All of the ElementUI.
+// Rewrote the official structure of the ElementUI,
+// Because it causes most components to be compiled multiple times,
+// and resulting in a large compiled css file.
+// (重新改写了官方的架构方式，因为官方的架构方式在这里会使大部分组件被多次重复编译，最终导致编译后文件过于累赘过于庞大。)
+
+// commons
+@import "mixins/mixins";
+@import "common/var";
+@import "common/popup";
+@import "common/transition";
+
+// components, utilities, forms, and so on.
+// TODO 以下组件有待删除非主题切换必须的官方代码。
+@import "./pagination";
+@import "./dialog";
+@import "./autocomplete";
+@import "./dropdown";
+@import "./input";
+@import "./input-number";
+@import "./radio";
+@import "./radio-button";
+@import "./option";
+@import "./option-group";
+@import "./checkbox";
+@import "./switch";
+@import "./select";
+@import "./select-dropdown";
+@import "./button";
+@import "./table";
+@import "./table-column";
+@import "./date-time-picker";
+@import "./tooltip";
+@import "./message-box";
+@import "./breadcrumb";
+@import "./form";
+@import "./tabs";
+@import "./tag";
+@import "./tree";
+@import "./alert";
+@import "./notification";
+@import "./slider";
+@import "./loading";
+@import "./upload";
+@import "./progress";
+@import "./spinner";
+@import "./message";
+@import "./card";
+@import "./rate";
+@import "./step";
+@import "./carousel";
+@import "./carousel-item";
+@import "./collapse";
+@import "./cascader";
+@import "./color-picker";
+@import "./transfer";
+
+
+//
+// System cores
+@import "../styles/utils";
+@import "../styles/layouts";
+@import "../styles/components";

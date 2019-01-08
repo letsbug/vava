@@ -77,6 +77,9 @@ export default {
       this.checkedIndex = index
       this.$emit('on-change', user)
     },
+    handleClear() {
+      this.checkedIndex = -1
+    },
     handleClose() {
       this.$emit('update:visible', false)
     }

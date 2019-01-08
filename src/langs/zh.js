@@ -73,9 +73,8 @@ export default {
     themeStyle: '主题风格',
     themeColor: '主题颜色',
     styles: {
-      default: '默认',
-      light: '明亮',
-      dark: '暗黑'
+      normally: '正常',
+      light: '明亮'
     },
     actions: {
       default: '恢复默认',

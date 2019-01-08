@@ -24,21 +24,32 @@ $color-teal:          #20c997 !default;
 $color-cyan:          #4ec1fa !default;
 
 // Theme colors
-$color-theme-pink:      $color-pink !default;
-$color-theme-green:     $color-green !default;
-$color-theme-blue:      $color-cyan !default;
+$color-text-primary:        $color-gray-800;
+$color-text-secondary:      $color-gray-500;
+$color-link-default:        $color-gray-600;
+$color-link-highlight:      $color-blue;
+$color-line:                $color-gray-100;
 
-$color-theme:           $color-theme-green;
-$color-line:            $color-gray-100 !default;
+// actives
+$color-theme:               $color-green;
+$color-actives:             $color-theme;
 
-$color-text-primary:    $color-gray-800;
-$color-text-secondary:  $color-gray-500;
-$color-link-default:    $color-gray-600;
-$color-link-highlight:  $color-blue;
+// dark
+$theme-dark-bg:             $color-gray-900;
+$theme-dark-bg-focus:       rgba($color-black, .3);
+$theme-dark-color:          $color-white;
+$theme-dark-color-focus:    $color-white;
+$theme-dark-color-active:   $color-actives;
 
-$color-actives:         $color-theme;
+// light
+$theme-light-bg:            $color-white;
+$theme-light-bg-focus:      rgba($color-black, .05);
+$theme-light-color:         $color-text-primary;
+$theme-light-color-focus:   $color-text-primary;
+$theme-light-color-active:  $color-actives;
 
-$color-overlay:         rgba($color-black, .3) !default;
+// Others colors
+$color-overlay:             rgba($color-black, .3);
 
 $color-maps: ();
 $color-maps: map_merge(
@@ -92,7 +103,7 @@ $device-xl:           1200px !default;
 // Lines, Borders
 $border-default-width:      1px !default;
 $border-color:              $color-line !default;
-$border-color-dark:         $color-gray-400 !default;
+$border-color-dark:         $color-gray-300 !default;
 $border-color-active:       $color-theme !default;
 $border-default:            solid $border-default-width $border-color !default;
 $border-actived:            solid $border-default-width $border-color-active !default;

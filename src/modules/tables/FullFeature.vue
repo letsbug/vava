@@ -80,7 +80,7 @@
           {{ scope.row.pv | pageview }}
         </template>
       </el-table-column>
-      <el-table-column label="ACTIONS" width="164" class-name="has-actions actions-small">
+      <el-table-column label="ACTIONS" width="165" class-name="has-actions actions-small">
         <template slot-scope="scope">
           <el-button type="primary" size="small" icon="el-icon-check" @click="handleBatchUpdate(true, scope.row)" />
           <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)" />

@@ -14,11 +14,6 @@ $scrollbar-thumb-radius-size:     3px;
 // About sidebar
 $sidebar-width-collapse:          60px;
 $sidebar-width-expanded:          210px;
-$sidebar-bg-color:                $color-gray-900 !default;
-$sidebar-color:                   $color-gray-600 !default;
-$sidebar-color-focus:             $color-white !default;
-$sidebar-color-active:            $color-actives !default;
-$sidebar-color-brand:             $color-theme !default;
 
 $sidebar-brand-logo-size:         40px;
 $sidebar-brand-title-height:      36px;
@@ -26,13 +21,11 @@ $sidebar-brand-height:            100px;
 $sidebar-brand-padding-x:         $spacer-sm;
 $sidebar-brand-padding-y:         ($sidebar-brand-height - $sidebar-brand-logo-size) / 2;
 
-$sidebar-nav-expanded-bg:         $color-gray-1000 !default;
 $sidebar-nav-icon-size:           $font-size-h4;
 
-$sidebar-nav-link-height:            50px;
-$sidebar-nav-link-line-height:       $sidebar-nav-link-height;
+$sidebar-nav-link-height:             50px;
+$sidebar-nav-link-line-height:        $sidebar-nav-link-height;
 $sidebar-nav-link-border-left-width:  3px;
-$sidebar-nav-link-border-color:       $color-theme;
 $sidebar-nav-link-padding-x:          $spacer-lg;
 
 //

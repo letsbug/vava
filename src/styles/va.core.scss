@@ -2,6 +2,7 @@
 
 
 // Reboot element imports
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
 @import "variables-element";
 @import "~element-ui/packages/theme-chalk/src/index";
 
@@ -13,6 +14,8 @@
 @import "components";
 
 @import "code";
+
+@import "themes";
 
 @import "transitions";
 @import "animations";

@@ -1,0 +1,32 @@
+body.theme-light {
+  .va-side-wrapper {
+    background-color: $theme-light-bg;
+    border-right-color: $border-color-dark;
+  }
+  .va-side-nav {
+    a {
+      color: $theme-light-color;
+    }
+
+    &.expanded {
+      background-color: $theme-light-bg-focus;
+    }
+  }
+
+  .va-app-wrapper.sidebar-expanded .va-side-wrapper .va-side-nav.expanded .nav-title.active {
+    color: $theme-light-color-focus;
+  }
+
+  .side-menu-collapse-drops {
+    background-color: $theme-light-bg;
+
+    .nav-item:hover:not(.active) {
+      background-color: $theme-light-bg-focus;
+      color: $theme-light-color-focus;
+    }
+
+    .popper__arrow:after {
+      border-right-color: $theme-light-bg !important;
+    }
+  }
+}
