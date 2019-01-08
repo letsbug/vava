@@ -1,9 +1,9 @@
 <template>
-  <el-popover placement="top-end" width="276" trigger="click" transition="el-zoom-in-top">
+  <el-popover placement="top-end" width="264" trigger="click" transition="el-zoom-in-top">
     <template>
       <div class="theme-input">
-        <h6>{{ $t('theme.themeStyle') }} <span class="text-muted">&nbsp;&nbsp;coding...</span></h6>
-        <el-radio-group v-model="styles.style" disabled class="text-center">
+        <h6>{{ $t('theme.themeStyle') }}</h6>
+        <el-radio-group v-model="styles.style" class="text-center">
           <el-radio v-for="sty in stylePresets" :key="sty" :label="sty">{{ $t(`theme.styles.${sty}`) }}</el-radio>
         </el-radio-group>
       </div>
@@ -96,7 +96,7 @@ h6 {
   cursor: pointer;
 
   & + .color-picker {
-    margin-left: 9px;
+    margin-left: 7px;
   }
 }
 /deep/ {

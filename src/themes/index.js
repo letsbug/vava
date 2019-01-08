@@ -36,10 +36,11 @@ class Theme {
     }
     xhr('./static/css/theme-template.min.css').then(({ data }) => {
       this.template = getTemplate(data)
-      if (this.themes.style !== this.normal.style || this.themes.color !== this.normal.color) {
-        this.set(this.themes)
-      }
-      this.style(this.themes.style)
+      // if (this.themes.style !== this.normal.style || this.themes.color !== this.normal.color) {
+      //   this.set(this.themes)
+      // }
+      // this.style(this.themes.style)
+      this.set(this.themes)
     })
   }
   color(color) {
