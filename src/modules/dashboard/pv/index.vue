@@ -1,12 +1,14 @@
 <template>
   <div class="va-body-container">
-    <h1>Dashboard Visits</h1>
+    <h1>Page views</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Visitor',
-  metaInfo: {}
+  name: 'PageViews',
+  metaInfo: {
+    title: 'Page Views'
+  }
 }
 </script>

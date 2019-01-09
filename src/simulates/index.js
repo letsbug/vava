@@ -5,7 +5,7 @@ import Notification from './notification'
 import Contacts from './contacts'
 import Article from './article'
 
-if (process.env.NODE_ENV === 'development') Mock.setup({ timeout: '400-1000' })
+if (process.env.NODE_ENV === 'development') Mock.setup({ timeout: '400-2000' })
 
 // 修复在使用 MockJS 情况下，设置 withCredentials = true，且未被拦截的跨域请求丢失 Cookies 的问题
 // https://github.com/nuysoft/Mock/issues/300

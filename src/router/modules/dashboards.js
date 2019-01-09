@@ -11,10 +11,10 @@ const dashboards = {
   },
   children: [
     {
-      path: 'visitor',
-      name: 'Visitor',
-      meta: { title: 'visitor', icon: 'thing-footprint', nobg: true },
-      component: () => import('@/modules/dashboard/Visitor')
+      path: 'pv',
+      name: 'pageViews',
+      meta: { title: 'pv', icon: 'thing-footprint', nobg: true },
+      component: () => import('@/modules/dashboard/pv')
     },
     {
       path: 'users',
