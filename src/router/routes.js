@@ -52,8 +52,6 @@ export const constantRouteMap = [
     }]
   },
 
-  Dashboard,
-
   {
     path: '/search/:keyword',
     component: Layout,
@@ -69,6 +67,9 @@ export const constantRouteMap = [
 ]
 
 export const asyncRouteMap = [
+
+  Dashboard,
+
   Permissions,
 
   {

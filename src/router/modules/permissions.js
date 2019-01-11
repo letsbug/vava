@@ -2,13 +2,14 @@ import Layout from '@/layouts'
 
 export default {
   path: '/permission',
+  redirect: '/permission/page',
   component: Layout,
+  name: 'Permission',
   meta: {
     title: 'permission',
     icon: 'mark-vip',
-    roles: ['admin', 'assigner', 'auditor', 'editor']
+    roles: ['admin', 'assigner', 'auditor', 'editor', 'visitor']
   },
-  redirect: '/permission/page',
   alwaysShow: true,
   children: [
     {
