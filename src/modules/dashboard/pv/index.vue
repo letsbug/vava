@@ -9,6 +9,9 @@ export default {
   name: 'PageViews',
   metaInfo: {
     title: 'Page Views'
+  },
+  data() {
+    return {}
   }
 }
 </script>
