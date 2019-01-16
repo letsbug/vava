@@ -20,7 +20,6 @@ export default {
   router: {
     home: 'Home',
     dashboard: 'Dashboard',
-    pv: 'Page Views',
     reports: 'Reports',
     components: 'Components',
     richText: 'Rich Text',

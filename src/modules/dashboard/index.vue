@@ -1,15 +1,19 @@
 <template>
   <div class="va-body-container">
     <h1>Page views</h1>
+    <panel-group />
   </div>
 </template>
 
 <script>
+import PanelGroup from './components/PanelGroup'
+
 export default {
-  name: 'PageViews',
+  name: 'Dashboard',
   metaInfo: {
-    title: 'Page Views'
+    title: 'Dashboard'
   },
+  components: { PanelGroup },
   data() {
     return {}
   }

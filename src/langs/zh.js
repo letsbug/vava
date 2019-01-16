@@ -20,7 +20,6 @@ export default {
   router: {
     home: '首页',
     dashboard: '仪表盘',
-    pv: '浏览量',
     report: '报表',
     components: '组件',
     richText: '富文本编辑器',
