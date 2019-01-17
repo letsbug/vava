@@ -95,7 +95,11 @@ export const asyncRouteMap = [
     children: [{
       path: '',
       name: 'VaIcons',
-      meta: { title: 'iconViewer', icon: 'file-folder' },
+      meta: {
+        title: 'iconViewer',
+        icon: 'file-folder',
+        nocache: true
+      },
       component: () => import('@/modules/icons/IconViewer')
     }]
   },

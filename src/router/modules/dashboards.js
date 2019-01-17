@@ -7,17 +7,16 @@ export default {
   meta: {
     roles: ['admin']
   },
-  children: [
-    {
-      path: '',
-      name: 'Dashboard',
-      meta: {
-        title: 'dashboard',
-        icon: 'chart-dashboard',
-        roles: ['admin'],
-        nobg: true
-      },
-      component: () => import('@/modules/dashboard')
-    }
-  ]
+  children: [{
+    path: '',
+    name: 'Dashboard',
+    meta: {
+      title: 'dashboard',
+      icon: 'chart-dashboard',
+      roles: ['admin'],
+      nobg: true,
+      nocache: true
+    },
+    component: () => import('@/modules/dashboard')
+  }]
 }
