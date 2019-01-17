@@ -25,7 +25,7 @@ $color-cyan:          #4ec1fa !default;
 
 // Theme colors
 $color-text-primary:        $color-gray-800;
-$color-text-secondary:      $color-gray-500;
+$color-text-secondary:      $color-gray-600;
 $color-link-default:        $color-gray-600;
 $color-link-highlight:      $color-blue;
 $color-line:                $color-gray-100;
@@ -55,7 +55,7 @@ $color-maps: ();
 $color-maps: map_merge(
   (
     "primary": $color-theme,
-    "secondary": $color-text-primary,
+    "secondary": $color-text-secondary,
     "muted": $color-gray-500,
     "info": $color-cyan,
     "success": $color-green,

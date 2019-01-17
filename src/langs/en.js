@@ -112,6 +112,14 @@ export default {
   homepage: {
     welcome: 'Welcome back, dear '
   },
+  dashboard: {
+    tips: '30-day trend',
+    average: 'Average: ',
+    sales: 'Sales',
+    order: 'Order',
+    pv: 'PV',
+    uv: 'UV'
+  },
   notification: {
     title: 'notification',
     mark: 'mark as read',

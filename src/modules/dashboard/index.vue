@@ -1,6 +1,5 @@
 <template>
   <div class="va-body-container">
-    <h1>Page views</h1>
     <panel-group />
   </div>
 </template>

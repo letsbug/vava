@@ -112,6 +112,14 @@ export default {
   homepage: {
     welcome: '欢迎回来，亲爱的 '
   },
+  dashboard: {
+    tips: '近一月趋势',
+    average: '日均：',
+    sales: '销售额',
+    order: '订单数',
+    pv: '浏览量',
+    uv: '访客数'
+  },
   notification: {
     title: '通知中心',
     mark: '标记为已读',
