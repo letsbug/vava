@@ -32,7 +32,7 @@ export default {
     },
     flag() {
       const random = Math.floor(Math.random() * 4 + 1)
-      return require(`@/assets/flags/errors/err-${random}.gif`)
+      return `./static/images/errors/err-${random}.gif`
     }
   }
 }
