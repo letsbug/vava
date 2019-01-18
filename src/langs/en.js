@@ -113,6 +113,15 @@ export default {
     welcome: 'Welcome back, dear '
   },
   dashboard: {
+    filters: {
+      31: 'Last month',
+      61: 'Last 2 months',
+      92: 'Last 3 months',
+      183: 'half a year',
+      365: 'in a year',
+      pv: 'Page Views',
+      sales: 'Sales'
+    },
     tips: '30-day trend',
     average: 'Average: ',
     sales: 'Sales',

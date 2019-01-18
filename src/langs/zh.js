@@ -113,6 +113,15 @@ export default {
     welcome: '欢迎回来，亲爱的 '
   },
   dashboard: {
+    filters: {
+      31: '近一个月',
+      61: '近二个月',
+      92: '近三个月',
+      183: '半年内',
+      365: '一年内',
+      pv: '访问量',
+      sales: '销售额'
+    },
     tips: '近一月趋势',
     average: '日均：',
     sales: '销售额',
