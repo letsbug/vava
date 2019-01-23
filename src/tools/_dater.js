@@ -4,7 +4,7 @@
  * @param fmt {string|undefined} like 'yyyy.MM.dd hh:mm:ss'
  * @returns {string|null|undefined}
  */
-export const dateFormat = (date, fmt) => {
+export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
   if (!date) return null
 
   // Convert the millisecond Date to Date
@@ -12,8 +12,6 @@ export const dateFormat = (date, fmt) => {
     if (('' + date).length === 10) date = +date * 1000
     date = new Date(+date)
   }
-
-  if (!fmt) fmt = 'yyyy.MM.dd'
 
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))

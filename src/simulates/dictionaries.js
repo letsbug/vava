@@ -1,16 +1,15 @@
-export default {
-  'Afghanistan': '阿富汗',
-  'Argentina': '阿根廷',
+// Data dictionaries
+
+const countries = {
+  // 'Argentina': '阿根廷',
   'Australia': '澳大利亚',
-  'Austria': '奥地利',
   'Bangladesh': '孟加拉',
-  'Belgium': '比利时',
   'Brazil': '巴西',
   'Belarus': '白俄罗斯',
   'Canada': '加拿大',
   'Switzerland': '瑞士',
   'China': '中国',
-  'Colombia': '哥伦比亚',
+  // 'Colombia': '哥伦比亚',
   'Germany': '德国',
   'Egypt': '埃及',
   'Spain': '西班牙',
@@ -23,7 +22,7 @@ export default {
   'Netherlands': '荷兰',
   'Norway': '挪威',
   'Philippines': '菲律宾',
-  'Russian': '俄罗斯',
+  // 'Russian': '俄罗斯',
   'Singapore': '新加坡',
   'Somalia': '索马里',
   'Turkey': '土耳其',
@@ -32,4 +31,8 @@ export default {
   'United States': '美国',
   'Korea': '韩国',
   'Mongolia': '蒙古'
+}
+
+export default {
+  countries
 }

@@ -120,12 +120,12 @@ export default {
       183: '半年内',
       365: '一年内',
       pv: '访问量',
-      sales: '销售额'
+      sales: '营业额'
     },
     tips: '近一月趋势',
     average: '日均：',
     sales: '销售额',
-    order: '订单数',
+    order: '成交量',
     pv: '浏览量',
     uv: '访客数'
   },

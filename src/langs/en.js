@@ -125,7 +125,7 @@ export default {
     tips: '30-day trend',
     average: 'Average: ',
     sales: 'Sales',
-    order: 'Order',
+    order: 'VOL',
     pv: 'PV',
     uv: 'UV'
   },
