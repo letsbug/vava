@@ -47,3 +47,4 @@ Mock.mock(/\/articles\/batch/, 'post', Article.batch)
 
 // About Statistics
 Mock.mock(/\/statistics\/pv/, 'post', Statistics.pv)
+Mock.mock(/\/statistics\/sales/, 'post', Statistics.sales)
