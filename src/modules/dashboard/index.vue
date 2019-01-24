@@ -5,10 +5,10 @@
       <span>{{ $t('router.dashboard') }}</span>
       <small class="text-muted">&nbsp;Coding...</small>
       <span class="float-r dashboard-filters">
-        <el-select v-model="filterMap.profile">
-          <el-option v-for="pf in profilePreset" :key="pf" :label="$t(`dashboard.filters.${pf}`)" :value="pf" />
+        <el-select placeholder="Your Profile" value="">
+          <el-option v-for="pf in profilePreset" :key="pf" :label="$t(`dashboard.filters.${pf}`)" :value="pf" disabled />
         </el-select>
-        <el-select v-model="filterMap.dayCount">
+        <el-select v-model="dateRange">
           <el-option v-for="range in datePreset" :key="range" :label="$t(`dashboard.filters.${range}`)" :value="range" />
         </el-select>
       </span>
@@ -30,12 +30,9 @@ export default {
   components: { PanelGroup },
   data() {
     return {
+      dateRange: 31,
       datePreset: [31, 61, 92, 183, 365],
       profilePreset: ['pv', 'sales'],
-      filterMap: {
-        dayCount: 31,
-        profile: 'pv'
-      },
       category: []
     }
   },
@@ -50,10 +47,10 @@ export default {
         background: 'rgba(255, 255, 255, .5)'
       })
       Statistics.pv().then(res => {
-        res.forEach(v => {
+        console.log(res)
+        res.data.forEach(v => {
           this.category.push(v.date)
         })
-        console.log(this.category)
         this.loadingInstance.close()
       })
     }

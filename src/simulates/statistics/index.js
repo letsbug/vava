@@ -3,12 +3,10 @@
 //
 
 import { Dater } from '@/tools'
-import { generatePV } from './pv'
-import { generateSales } from './sales'
+import { generatePV, generateAreas, generateGender } from './pv'
 
 const count = 365 * 2 // 2 years
 const pv = []
-const sales = []
 
 const oneDay = 24 * 3600 * 1000
 let now = new Date()
@@ -19,7 +17,6 @@ for (let i = 0; i < count; i++) {
   const _date = Dater.format(now, 'yyyy-MM-dd')
 
   pv.push(generatePV(_date))
-  sales.push(generateSales(_date))
 }
 
 function isInRange(start, end, curr) {
@@ -35,16 +32,27 @@ export default {
       start = Dater.format(new Date() - oneDay * 30, 'yyyy-MM-dd')
     }
 
-    return pv.filter(v => isInRange(start, end, v.date))
-  },
+    let totalPV = 0
+    let totalUV = 0
+    let cvr = 0
+    const data = pv.filter(v => {
+      const _is = isInRange(start, end, v.date)
+      if (_is) {
+        totalPV += v.pv
+        totalUV += v.uv
+        cvr += v.cvr
+      }
+      return _is
+    })
 
-  sales(config) {
-    let { start, end } = JSON.parse(config.body)
-    if (!start || !end) {
-      end = Dater.format(new Date(), 'yyyy-MM-dd')
-      start = Dater.format(new Date() - oneDay * 30, 'yyyy-MM-dd')
-    }
+    const _days = (new Date(end) - new Date(start)) / oneDay
+    const averagePV = Math.floor(totalPV / _days)
+    const averageUV = Math.floor(totalUV / _days)
+    cvr = +(cvr / _days).toFixed(4)
+    const areas = generateAreas(totalPV)
+    const totalArea = Object.keys(areas).filter(k => areas[k] > 0).length
+    const gender = generateGender(totalUV)
 
-    return sales.filter(v => isInRange(start, end, v.date))
+    return { data, totalPV, totalUV, averagePV, averageUV, cvr, areas, totalArea, gender }
   }
 }
