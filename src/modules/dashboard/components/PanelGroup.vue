@@ -69,13 +69,15 @@ import PanelChart from './PanelChart'
 export default {
   name: 'PanelGroup',
   components: { PanelChart, ICountTo },
+  props: {
+    category: { type: Array, required: true }
+  },
   data() {
     return {
       dayCount: 31,
       animation: {
         duration: 1500
       },
-      category: [],
       dataSales: {
         count: 0,
         average: 0,
@@ -104,22 +106,12 @@ export default {
     }
   },
   created() {
-    this.generateDate()
     this.generateData('dataSales')
     this.generateData('dataOrder')
     this.generateData('dataPV')
     this.generateData('dataUV')
   },
   methods: {
-    generateDate() {
-      const oneDay = 24 * 3600 * 1000
-      let date = new Date()
-
-      for (let i = 0; i < this.dayCount; i++) {
-        const now = new Date(date -= oneDay)
-        this.category.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-'))
-      }
-    },
     generateData(type) {
       const data = [Math.round(Math.random() * 2048)]
       let count = 0

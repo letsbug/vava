@@ -1,4 +1,4 @@
-import Dictionaries from '../dictionaries'
+import Dictionaries from '@/simulates/dictionaries'
 
 function generateUV(pv) {
   const min = 500

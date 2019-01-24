@@ -33,6 +33,28 @@ const countries = {
   'Mongolia': '蒙古'
 }
 
+const products = [
+  'HUAWEI Mate 20',
+  'HUAWEI P20',
+  'HUAWEI nova 4',
+  'HUAWEI 麦芒7',
+  '荣耀 Magic2',
+  '荣耀 V20',
+  '荣耀 10青春版',
+  '荣耀 8X'
+]
+
+const price = [
+  [18, 24],
+  [25, 34],
+  [35, 44],
+  [45, 54],
+  [55, 64],
+  'unknown'
+]
+
 export default {
-  countries
+  countries,
+  products,
+  price
 }
