@@ -13,14 +13,23 @@
         </el-select>
       </span>
     </h1>
-    <panel-group :category="category" />
+    <panel-group
+      ref="panelGroup"
+      :category="category"
+      :pv="pv"
+      :uv="uv"
+      :cvr="cvr"
+      :countries="countries"
+    />
   </div>
 </template>
 
 <script>
-import { Loading } from 'element-ui'
-import PanelGroup from './components/PanelGroup'
 import Statistics from '@/services/statistics'
+import { Loading } from 'element-ui'
+
+import PanelGroup from './components/PanelGroup'
+// import PanelOverview from './components/PanelOverview'
 
 export default {
   name: 'Dashboard',
@@ -33,7 +42,11 @@ export default {
       dateRange: 31,
       datePreset: [31, 61, 92, 183, 365],
       profilePreset: ['pv', 'sales'],
-      category: []
+      category: [],
+      pv: { total: 0, data: [] },
+      uv: { total: 0, data: [] },
+      cvr: { average: 0, data: [] },
+      countries: 0
     }
   },
   mounted() {
@@ -47,11 +60,21 @@ export default {
         background: 'rgba(255, 255, 255, .5)'
       })
       Statistics.pv().then(res => {
-        console.log(res)
+        this.loadingInstance.close()
+
+        this.pv.total = res.totalPV
+        this.uv.total = res.totalUV
+        this.cvr.average = res.averageCVR
+        this.countries = res.totalArea
+
         res.data.forEach(v => {
           this.category.push(v.date)
+          this.pv.data.push(v.pv)
+          this.uv.data.push(v.uv)
+          this.cvr.data.push(v.cvr)
         })
-        this.loadingInstance.close()
+
+        this.$refs['panelGroup'].drawCharts()
       })
     }
   }

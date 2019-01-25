@@ -34,13 +34,13 @@ export default {
 
     let totalPV = 0
     let totalUV = 0
-    let cvr = 0
+    let averageCVR = 0
     const data = pv.filter(v => {
       const _is = isInRange(start, end, v.date)
       if (_is) {
         totalPV += v.pv
         totalUV += v.uv
-        cvr += v.cvr
+        averageCVR += v.cvr
       }
       return _is
     })
@@ -48,11 +48,11 @@ export default {
     const _days = (new Date(end) - new Date(start)) / oneDay
     const averagePV = Math.floor(totalPV / _days)
     const averageUV = Math.floor(totalUV / _days)
-    cvr = +(cvr / _days).toFixed(4)
+    averageCVR = +(averageCVR / _days).toFixed(4)
     const areas = generateAreas(totalPV)
     const totalArea = Object.keys(areas).filter(k => areas[k] > 0).length
     const gender = generateGender(totalUV)
 
-    return { data, totalPV, totalUV, averagePV, averageUV, cvr, areas, totalArea, gender }
+    return { data, totalPV, totalUV, averagePV, averageUV, averageCVR, areas, totalArea, gender }
   }
 }

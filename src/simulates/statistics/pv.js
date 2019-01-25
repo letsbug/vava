@@ -1,3 +1,5 @@
+// 生成浏览量相关的数据
+
 import Dictionaries from '@/simulates/dictionaries'
 
 /**

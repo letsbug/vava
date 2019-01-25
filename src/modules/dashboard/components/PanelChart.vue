@@ -44,15 +44,7 @@ export default {
     if (!typesMap.includes(this.type)) throw new Error('The \'type\' props must be in ' + typesMap)
   },
   mounted() {
-    this.init()
-    this.resizeHandler = () => {
-      if (this.chart) this.chart.resize()
-    }
-
-    window.addEventListener('resize', this.resizeHandler)
-
-    this.sidebar = document.querySelector('.va-side-wrapper')
-    this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler)
+    this.draw()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler)
@@ -101,7 +93,7 @@ export default {
         },
         series: [{
           data: this.data,
-          type: this.type,
+          type: 'line',
           sampling: 'average',
           showSymbol: false,
           smooth: true,
@@ -110,6 +102,17 @@ export default {
           }
         }]
       })
+    },
+    draw() {
+      this.init()
+      this.resizeHandler = () => {
+        if (this.chart) this.chart.resize()
+      }
+
+      window.addEventListener('resize', this.resizeHandler)
+
+      this.sidebar = document.querySelector('.va-side-wrapper')
+      this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler)
     }
   }
 }
@@ -118,11 +121,9 @@ export default {
 <style scoped lang="scss">
 @import "~@/styles/_variables";
 
-$chart-height:    46px;
+$chart-height:    48px;
 
 .panel-card-chart {
-  margin-left: -7px;
-  margin-right: -7px;
   height: $chart-height;
   overflow: hidden;
 }

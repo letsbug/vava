@@ -28,7 +28,7 @@ $color-text-primary:        $color-gray-800;
 $color-text-secondary:      $color-gray-600;
 $color-link-default:        $color-gray-600;
 $color-link-highlight:      $color-blue;
-$color-line:                $color-gray-100;
+$color-line:                $color-gray-200;
 
 // actives
 $color-theme:               $color-green;
@@ -103,7 +103,6 @@ $device-xl:           1200px !default;
 // Lines, Borders
 $border-default-width:      1px !default;
 $border-color:              $color-line !default;
-$border-color-dark:         $color-gray-300 !default;
 $border-color-active:       $color-theme !default;
 $border-default:            solid $border-default-width $border-color !default;
 $border-actived:            solid $border-default-width $border-color-active !default;
@@ -134,7 +133,7 @@ $z-index-rich-text:         160!default;
 
 
 // Shadows
-$shadow-color-base:         rgba(0, 0, 0, .1) !default;
+$shadow-color-base:         $color-gray-200 !default;
 
 $shadow-sm-offset:          1px!default;
 $shadow-sm-distance:        2px!default;
@@ -149,8 +148,7 @@ $shadow-lg-distance:        12px!default;
 $shadow-lg-size:            0!default;
 
 // vertical shadows
-$shadow-base-vr:            0 $shadow-base-offset $shadow-base-distance $shadow-base-size $shadow-color-base;
-$shadow-base-vr-inverse:    0 (-$shadow-base-offset) $shadow-base-distance $shadow-base-size $shadow-color-base;
+$shadow-base:               0 0 $shadow-sm-distance $shadow-color-base;
 
 $shadow-sm-vr:              0 $shadow-sm-offset $shadow-sm-distance $shadow-sm-size $shadow-color-base;
 $shadow-sm-vr-inverse:      0 (-$shadow-sm-offset) $shadow-sm-distance $shadow-sm-size $shadow-color-base;

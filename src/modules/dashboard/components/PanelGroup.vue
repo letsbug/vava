@@ -9,9 +9,8 @@
             <va-icon icon="mark-states-question" class="mark-question" />
           </el-tooltip>
         </h6>
-        <i-count-to :start-val="0" :end-val="dataSales.count" :duration="animation.duration" prefix="$ " class="panel-card-text" />
-        <panel-chart :category="category" :data="dataSales.data" type="line" :title="$t('dashboard.sales')" />
-        <div class="panel-card-additional">{{ $t('dashboard.average') + dataSales.average }}</div>
+        <i-count-to :start-val="0" :end-val="pv.total" :duration="animation.duration" class="panel-card-text" />
+        <panel-chart ref="chartPV" :category="category" :data="pv.data" type="line" />
       </div>
     </el-col>
 
@@ -24,9 +23,8 @@
             <va-icon icon="mark-states-question" class="mark-question" />
           </el-tooltip>
         </h6>
-        <i-count-to :start-val="0" :end-val="dataOrder.count" :duration="animation.duration" class="panel-card-text" />
-        <panel-chart :category="category" :data="dataOrder.data" type="bar" :title="$t('dashboard.order')" />
-        <div class="panel-card-additional">{{ $t('dashboard.average') + dataOrder.average }}</div>
+        <i-count-to :start-val="0" :end-val="uv.total" :duration="animation.duration" class="panel-card-text" />
+        <panel-chart ref="chartUV" :category="category" :data="uv.data" type="line" />
       </div>
     </el-col>
 
@@ -39,9 +37,8 @@
             <va-icon icon="mark-states-question" class="mark-question" />
           </el-tooltip>
         </h6>
-        <i-count-to :start-val="0" :end-val="dataPV.count" :duration="animation.duration" class="panel-card-text" />
-        <panel-chart :category="category" :data="dataPV.data" type="line" :title="$t('dashboard.pv')" />
-        <div class="panel-card-additional">{{ $t('dashboard.average') + dataPV.average }}</div>
+        <i-count-to :start-val="0" :end-val="cvr.average" :duration="animation.duration" class="panel-card-text" />
+        <panel-chart ref="chartCVR" :category="category" :data="cvr.data" type="line" />
       </div>
     </el-col>
 
@@ -54,9 +51,8 @@
             <va-icon icon="mark-states-question" class="mark-question" />
           </el-tooltip>
         </h6>
-        <i-count-to :start-val="0" :end-val="dataUV.count" :duration="animation.duration" class="panel-card-text" />
-        <panel-chart :category="category" :data="dataUV.data" type="bar" :title="$t('dashboard.uv')" />
-        <div class="panel-card-additional">{{ $t('dashboard.average') + dataUV.average }}</div>
+        <i-count-to :start-val="0" :end-val="countries" :duration="animation.duration" class="panel-card-text" />
+        <div class="panel-card-additional">{{ $t('dashboard.average') + countries }}</div>
       </div>
     </el-col>
   </el-row>
@@ -67,63 +63,27 @@ import ICountTo from 'vue-count-to'
 import PanelChart from './PanelChart'
 
 export default {
-  name: 'PanelGroup',
   components: { PanelChart, ICountTo },
   props: {
-    category: { type: Array, required: true }
+    category: { type: Array, required: true },
+    pv: { type: Object, required: true },
+    uv: { type: Object, required: true },
+    cvr: { type: Object, required: true },
+    countries: { type: Number, required: true }
   },
   data() {
     return {
       dayCount: 31,
       animation: {
         duration: 1500
-      },
-      dataSales: {
-        count: 0,
-        average: 0,
-        data: []
-      },
-      dataOrder: {
-        count: 0,
-        average: 0,
-        data: []
-      },
-      dataPV: {
-        count: 0,
-        average: 0,
-        data: []
-      },
-      dataUV: {
-        count: 0,
-        average: 0,
-        data: []
       }
     }
-  },
-  computed: {
-    themeColor() {
-      return this.$store.getters.theme.color
-    }
-  },
-  created() {
-    this.generateData('dataSales')
-    this.generateData('dataOrder')
-    this.generateData('dataPV')
-    this.generateData('dataUV')
   },
   methods: {
-    generateData(type) {
-      const data = [Math.round(Math.random() * 2048)]
-      let count = 0
-
-      for (let i = 0; i < this.dayCount; i++) {
-        const _data = Math.abs(Math.round((Math.random() - 0.5) * 800 + data[i]))
-        count += _data
-        data.push(_data)
-      }
-      this[type].count = count
-      this[type].average = Math.round(count / this.dayCount)
-      this[type].data = data
+    drawCharts() {
+      this.$refs['chartPV'].draw()
+      this.$refs['chartUV'].draw()
+      this.$refs['chartCVR'].draw()
     }
   }
 }

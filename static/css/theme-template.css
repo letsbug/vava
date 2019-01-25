@@ -10613,7 +10613,7 @@ a.disabled {
   display: block;
   overflow: hidden;
   margin: 0 auto;
-  border: dashed 1px #dee2e6;
+  border: dashed 1px #e6edf1;
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
@@ -10740,7 +10740,7 @@ dl.dl-horizontal dd + dd {
   height: 45px;
   line-height: 44px;
   background-color: #ffffff;
-  border-bottom: solid 1px #f6f7fb;
+  border-bottom: solid 1px #e6edf1;
   position: absolute;
   top: 0;
   left: 0;
@@ -10858,7 +10858,7 @@ dl.dl-horizontal dd + dd {
   left: 0;
   right: 0;
   z-index: 100;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px 0 #e6edf1;
 }
 
 .va-tabs-bar.mobile {
@@ -10940,7 +10940,7 @@ dl.dl-horizontal dd + dd {
 }
 
 .va-tabs-item.active {
-  background-color: #f6f7fb;
+  background-color: #e6edf1;
   color: #28a745;
 }
 
@@ -10974,7 +10974,7 @@ dl.dl-horizontal dd + dd {
   left: 0;
   right: 0;
   z-index: 100;
-  box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -1px 2px 0 #e6edf1;
 }
 
 .va-foot-bar .va-copyright {
@@ -11009,7 +11009,7 @@ dl.dl-horizontal dd + dd {
 .va-body-container {
   height: 100%;
   padding: 15px;
-  box-shadow: inset 1px 0 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: inset 1px 0 2px 0 #e6edf1;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -11018,7 +11018,7 @@ dl.dl-horizontal dd + dd {
 .va-body-container .va-body-title {
   font-size: 18px;
   position: relative;
-  border-bottom: solid 1px #f6f7fb;
+  border-bottom: solid 1px #e6edf1;
   padding-bottom: 15px;
   margin-bottom: 15px;
 }
@@ -11303,7 +11303,7 @@ dl.dl-horizontal dd + dd {
   background-color: #ffffff;
   border-radius: 4px;
   font-size: 1rem;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px 0 #e6edf1;
   position: absolute;
   z-index: 145;
 }
@@ -11341,7 +11341,7 @@ dl.dl-horizontal dd + dd {
   top: -9px;
   right: 0;
   left: 0;
-  border-bottom: solid 1px #f6f7fb;
+  border-bottom: solid 1px #e6edf1;
 }
 
 .mce-content-body figure.image {
