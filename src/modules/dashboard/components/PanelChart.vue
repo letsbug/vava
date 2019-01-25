@@ -119,12 +119,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
-
 $chart-height:    48px;
 
 .panel-card-chart {
   height: $chart-height;
+  margin: 0 -7px;
   overflow: hidden;
 }
 </style>

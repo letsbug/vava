@@ -92,7 +92,10 @@ export default {
 <style scoped lang="scss">
 @import "~@/styles/_variables";
 
+$panel-height: 150px;
+
 .panel-card {
+  height: $panel-height;
   padding: $spacer-lg;
   background-color: $color-white;
   border-radius: $radius-base;
