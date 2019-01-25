@@ -122,12 +122,11 @@ export default {
       pv: 'Page Views',
       sales: 'Sales'
     },
-    tips: '30-day trend',
     average: 'Average: ',
-    sales: 'Sales',
-    order: 'VOL',
-    pv: 'PV',
-    uv: 'UV'
+    pv: 'page views',
+    uv: 'unique visitor',
+    cvr: 'conversion rate',
+    countries: 'countries'
   },
   notification: {
     title: 'notification',

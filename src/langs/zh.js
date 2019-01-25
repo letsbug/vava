@@ -119,15 +119,13 @@ export default {
       92: '近三个月',
       183: '半年内',
       365: '一年内',
-      pv: '访问量',
-      sales: '营业额'
+      pv: '访问量'
     },
-    tips: '近一月趋势',
     average: '日均：',
-    sales: '销售额',
-    order: '成交量',
     pv: '浏览量',
-    uv: '访客数'
+    uv: '访客数',
+    cvr: '转化率',
+    countries: '按国家'
   },
   notification: {
     title: '通知中心',
