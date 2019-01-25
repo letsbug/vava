@@ -4,7 +4,6 @@
 
 <script>
 import echarts from 'echarts'
-require('echarts/theme/shine')
 import { tooltip } from '../charts/options'
 
 export default {
@@ -58,7 +57,7 @@ export default {
       return `${this.themeColor}30`
     },
     init() {
-      this.chart = echarts.init(this.$el, 'shine')
+      this.chart = echarts.init(this.$el)
 
       const _tooltip = {
         trigger: 'axis',
@@ -75,9 +74,9 @@ export default {
         color: [this.themeColor],
         tooltip: Object.assign({}, _tooltip, tooltip),
         grid: {
-          top: 16,
+          top: 12,
           right: 7,
-          bottom: 0,
+          bottom: 7,
           left: 7
         },
         xAxis: {
@@ -119,11 +118,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$chart-height:    48px;
-
 .panel-card-chart {
-  height: $chart-height;
-  margin: 0 -7px;
+  height: 49px;
+  margin-left: -7px;
+  margin-right: -7px;
   overflow: hidden;
+  position: relative;
+  bottom: -7px;
 }
 </style>
