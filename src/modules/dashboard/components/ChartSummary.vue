@@ -11,7 +11,7 @@
       :prefix="prefix" :suffix="suffix" :decimals="decimals"
       :duration="animateDuration" :class="totalSpanClass" class="panel-card-total"
     />
-    <div v-if="needChart && data" ref="chartEl" class="panel-card-chart"></div>
+    <div v-if="!isMobile && data" ref="chartEl" class="panel-card-chart"></div>
   </div>
 </template>
 
@@ -37,16 +37,16 @@ export default {
     }
   },
   computed: {
-    needChart() {
-      return document.body.getBoundingClientRect().width >= 992
+    isMobile() {
+      return this.$store.getters.device === 'mobile'
     },
     themeColor() {
       return this.$store.getters.theme.color
     },
     totalSpanClass() {
       return {
-        'text-primary': !this.data,
-        'null-data': !this.data
+        'text-primary': !this.data && !this.isMobile,
+        'null-data': !this.data && !this.isMobile
       }
     }
   },
@@ -64,14 +64,16 @@ export default {
     }
   },
   mounted() {
-    this.draw()
+    !this.isMobile && this.draw()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler)
     this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
 
-    this.chart.dispose()
-    this.chart = null
+    if (this.chart) {
+      this.chart.dispose()
+      this.chart = null
+    }
   },
   methods: {
     areaColor() {

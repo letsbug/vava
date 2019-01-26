@@ -89,8 +89,7 @@ export default {
       return this.$store.getters.device === 'mobile'
     },
     panelGutter() {
-      console.log(document.body.getBoundingClientRect().width)
-      return document.body.getBoundingClientRect().width >= 992 ? 15 : 0
+      return this.isMobile ? 0 : 15
     }
   },
   mounted() {
@@ -123,7 +122,7 @@ export default {
           this.cvr.data.push(+(v.cvr * 100).toFixed(2))
         })
 
-        this.drawCharts()
+        !this.isMobile && this.drawCharts()
       })
     }
   }
