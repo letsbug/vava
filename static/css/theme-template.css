@@ -10712,7 +10712,7 @@ dl.dl-horizontal dd + dd {
   position: relative;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .va-side-backdrop {
     display: none;
   }
@@ -10724,7 +10724,7 @@ dl.dl-horizontal dd + dd {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .va-app-wrapper.sidebar-expanded .va-side-backdrop {
     visibility: visible;
     opacity: 1;
@@ -11034,7 +11034,7 @@ dl.dl-horizontal dd + dd {
   margin-left: 15px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .va-app-wrapper.sidebar-expanded .va-main-wrapper {
     margin-left: 210px;
   }
@@ -11050,7 +11050,7 @@ dl.dl-horizontal dd + dd {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   .va-app-wrapper .va-side-wrapper {
     width: 210px;
   }

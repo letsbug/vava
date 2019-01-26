@@ -14,7 +14,7 @@
 <script>
 import { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody } from './components'
 
-const WIDTH = 768
+const WIDTH = 992
 
 export default {
   components: { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
