@@ -89,7 +89,8 @@ export default {
       return this.$store.getters.device === 'mobile'
     },
     panelGutter() {
-      return this.isMobile ? 0 : 15
+      console.log(document.body.getBoundingClientRect().width)
+      return document.body.getBoundingClientRect().width >= 992 ? 15 : 0
     }
   },
   mounted() {

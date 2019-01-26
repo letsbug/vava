@@ -14,7 +14,6 @@
 <script>
 import { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody } from './components'
 
-const { body } = document
 const WIDTH = 768
 
 export default {
@@ -37,7 +36,7 @@ export default {
   },
   methods: {
     isMobile() {
-      return body.getBoundingClientRect().width <= WIDTH
+      return document.body.getBoundingClientRect().width <= WIDTH
     },
     resizeHandler() {
       const isMobile = this.isMobile()

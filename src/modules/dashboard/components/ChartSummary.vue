@@ -11,15 +11,13 @@
       :prefix="prefix" :suffix="suffix" :decimals="decimals"
       :duration="animateDuration" :class="totalSpanClass" class="panel-card-total"
     />
-    <div v-if="data" ref="chartEl" class="panel-card-chart"></div>
-    <!--<div class="panel-card-additional">{{ $t('dashboard.average') + countries }}</div>-->
+    <div v-if="needChart && data" ref="chartEl" class="panel-card-chart"></div>
   </div>
 </template>
 
 <script>
 import ICountTo from 'vue-count-to'
 import echarts from 'echarts'
-import { tooltip } from '../charts/options'
 
 export default {
   components: { ICountTo },
@@ -39,8 +37,8 @@ export default {
     }
   },
   computed: {
-    width() {
-      return this.$refs['chartEl'].getBoundingClientRect().width
+    needChart() {
+      return document.body.getBoundingClientRect().width >= 992
     },
     themeColor() {
       return this.$store.getters.theme.color
@@ -82,21 +80,13 @@ export default {
     init() {
       this.chart = echarts.init(this.$refs['chartEl'])
 
-      const _tooltip = {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'none'
-        },
-        // 跟随不遮挡鼠标，始终在可视区域内
-        position: (pt, params, dom, rect, size) => ((pt[0] + size.contentSize[0]) < this.width)
-          ? [pt[0] + 7, 10]
-          : [pt[0] - size.contentSize[0] - 7, 10],
-        formatter: `{b}: {c}${this.dataType === 'percent' ? '%' : ''}`
-      }
-
       this.chart.setOption({
-        color: [this.themeColor],
-        tooltip: Object.assign({}, tooltip, _tooltip),
+        color: [
+          this.themeColor
+        ],
+        tooltip: {
+          show: false
+        },
         grid: {
           top: 12,
           right: 7,
@@ -135,7 +125,6 @@ export default {
       }
 
       window.addEventListener('resize', this.resizeHandler)
-
       this.sidebar = document.querySelector('.va-side-wrapper')
       this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler)
     }
@@ -147,7 +136,6 @@ export default {
 @import "~@/styles/_variables";
 
 .panel-card {
-  height: 100%;
   padding: $spacer-lg;
   margin-bottom: $spacer-base;
   background-color: $color-white;
@@ -173,15 +161,6 @@ export default {
     text-align: center;
     font-size: $font-size-h1 * 1.5;
   }
-}
-
-.panel-card-additional {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  position: absolute;
-  left: $spacer-lg;
-  bottom: $spacer-lg;
 }
 
 .panel-card-chart {

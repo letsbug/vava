@@ -38,10 +38,16 @@ export default {
 .va-side-scroller {
   height: 100%;
 
-  /deep/ .va-side-scroller--wrapper {
-    height: 100%;
-    overflow-x: hidden;
-    padding-bottom: $spacer-xxl;
+  /deep/ {
+    .va-side-scroller--wrapper {
+      height: 100%;
+      overflow-x: hidden;
+      padding-bottom: $spacer-xxl;
+    }
+
+    .el-scrollbar__bar.is-horizontal {
+      display: none;
+    }
   }
 }
 </style>
