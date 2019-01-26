@@ -46,7 +46,8 @@ export default {
     totalSpanClass() {
       return {
         'text-primary': !this.data && !this.isMobile,
-        'null-data': !this.data && !this.isMobile
+        'null-data': !this.data && !this.isMobile,
+        'text-center': this.isMobile
       }
     }
   },
@@ -153,11 +154,11 @@ export default {
 }
 
 .panel-card-total {
+  display: block;
   font-size: $font-size-h1;
   margin: 0;
 
   &.null-data {
-    display: block;
     height: 78px;
     line-height: 78px;
     text-align: center;
