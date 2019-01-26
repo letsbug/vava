@@ -140,11 +140,9 @@ export default {
     title: 'This page is accessible only to <span class="text-error">{role}</span>.'
   },
   richText: {
-    intro: 'Rich text as the background of the most core, the most basic, but also annoying features, ' +
-      'is really a headache! After nearly a week of experimenting with some familiar rich text, I decided to use ' +
-      '<a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>. ' +
-      'Because there is no background, can not achieve the function of image upload, ' +
-      'so the picture here can only add existing links. Here are the actual results:'
+    intro: 'Rich text as the background of the most core, the most basic, but also annoying features, is really a headache! After nearly a week of experimenting with some familiar rich text, ' +
+      'I decided to use <a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>. ' +
+      'Because there is no background, can not achieve the function of image upload, so the picture here can only add existing links. Here are the actual results:'
   },
   countTo: {
     intro: 'Build based on <a class="link-theme" target="_blank" href="https://github.com/PanJiaChen/vue-countTo">vue-count-to</a>.',

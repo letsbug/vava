@@ -53,6 +53,6 @@ export default {
     const totalArea = Object.keys(areas).filter(k => areas[k] > 0).length
     const gender = generateGender(totalUV)
 
-    return { data, totalPV, totalUV, averagePV, averageUV, averageCVR, areas, totalArea, gender }
+    return { totalPV, totalUV, totalArea, averagePV, averageUV, averageCVR, areas, gender, data }
   }
 }

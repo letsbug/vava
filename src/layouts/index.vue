@@ -42,7 +42,7 @@ export default {
     resizeHandler() {
       const isMobile = this.isMobile()
       this.$store.dispatch('app_device_toggle', isMobile ? 'mobile' : 'desktop')
-      if (isMobile) this.$store.dispatch('app_sidebar_close')
+      if (isMobile && this.sidebarOpened) this.$store.dispatch('app_sidebar_close')
     },
     toggleDevice() {
       this.device = this.device === 'desktop' ? 'mobile' : 'desktop'

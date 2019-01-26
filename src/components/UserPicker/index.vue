@@ -18,12 +18,12 @@
           <h5 class="username">
             {{ _user.username }}
           </h5>
-          <span class="text-muted user-attrs">
+          <div class="text-muted user-attrs text-ellipsis">
             <span class="hidden-xs-only">
               {{ $t('roles.title') }}:
             </span>
             {{ $t(`roles.${_user.roles[0]}`) }}
-          </span>
+          </div>
           <span class="checked-flag text-primary">
             <i class="el-icon-check"></i>
           </span>

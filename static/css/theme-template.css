@@ -10861,10 +10861,6 @@ dl.dl-horizontal dd + dd {
   box-shadow: 0 1px 2px 0 #e6edf1;
 }
 
-.va-tabs-bar.mobile {
-  padding: 0 15px;
-}
-
 .va-tabs-bar .tabs-scroll-pane {
   height: 36px;
 }
@@ -10905,9 +10901,10 @@ dl.dl-horizontal dd + dd {
   font-size: 1rem;
   text-transform: capitalize;
   text-align: center;
-  color: #6a6d71;
+  color: #343a40;
+  opacity: .6;
   position: relative;
-  transition: color 0.28s ease-in-out, background 0.28s ease-in-out;
+  transition: color 0.28s ease-in-out, background 0.28s ease-in-out, opacity 0.28s ease-in-out;
 }
 
 .va-tabs-item:first-child {
@@ -10937,10 +10934,12 @@ dl.dl-horizontal dd + dd {
 
 .va-tabs-item:hover {
   color: #343a40;
+  opacity: 1;
 }
 
 .va-tabs-item.active {
-  background-color: #e6edf1;
+  background-color: #f6f7fb;
+  opacity: 1;
   color: #28a745;
 }
 
@@ -11069,6 +11068,9 @@ dl.dl-horizontal dd + dd {
   }
   .va-app-wrapper.sidebar-collapse .va-main-wrapper {
     transform: translate3d(0, 0, 0);
+  }
+  .va-tabs-bar {
+    padding: 0 15px;
   }
 }
 
