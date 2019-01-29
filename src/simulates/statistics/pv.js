@@ -33,10 +33,17 @@ export function generateGender(uv) {
 export function generateAreas(pv) {
   const areas = {}
   const keys = Object.keys(Dictionaries.countries)
-  let max = pv - (keys.length * 10)
-  keys.forEach(k => {
-    areas[k] = Math.floor(Math.random() * max)
-    max = max - areas[k]
+
+  let max = pv / keys.length
+
+  keys.forEach((k, i) => {
+    if (i + 1 === keys.length) areas[k] = pv
+    else {
+      const val = Math.floor(Math.random() * max)
+      areas[k] = val
+      pv -= val
+      max = pv / (keys.length - i - 1)
+    }
   })
   return areas
 }

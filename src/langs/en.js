@@ -123,9 +123,9 @@ export default {
       sales: 'Sales'
     },
     average: 'Average: ',
-    pv: 'page views',
-    uv: 'unique visitor',
-    cvr: 'conversion rate',
+    pv: 'pv',
+    uv: 'uv',
+    cvr: 'cvr',
     countries: 'countries'
   },
   notification: {

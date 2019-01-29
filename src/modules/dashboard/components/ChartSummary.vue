@@ -1,6 +1,6 @@
 <template>
-  <div class="panel-card">
-    <h6 class="panel-card-title text-secondary">
+  <div class="va-panel panel-card">
+    <h6 v-if="!isMobile" class="panel-card-title text-secondary">
       <span>{{ title }}</span>
       <a class="handle-tab-detail">
         <i class="el-icon-arrow-right float-r handle-tab-detail"></i>
@@ -11,6 +11,7 @@
       :prefix="prefix" :suffix="suffix" :decimals="decimals"
       :duration="animateDuration" :class="totalSpanClass" class="panel-card-total"
     />
+    <h6 v-if="isMobile" class="panel-card-title is-mobile text-secondary">{{ title }}</h6>
     <div v-if="!isMobile && data" ref="chartEl" class="panel-card-chart"></div>
   </div>
 </template>
@@ -64,9 +65,9 @@ export default {
       })
     }
   },
-  mounted() {
-    !this.isMobile && this.draw()
-  },
+  // mounted() {
+  //   !this.isMobile && this.draw()
+  // },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler)
     this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
@@ -81,7 +82,7 @@ export default {
       return `${this.themeColor}30`
     },
     init() {
-      this.chart = echarts.init(this.$refs['chartEl'])
+      if (!this.chart) this.chart = echarts.init(this.$refs['chartEl'])
 
       this.chart.setOption({
         color: [
@@ -140,10 +141,6 @@ export default {
 
 .panel-card {
   padding: $spacer-lg;
-  margin-bottom: $spacer-base;
-  background-color: $color-white;
-  border-radius: $radius-base;
-  box-shadow: $shadow-base;
   position: relative;
 }
 
@@ -151,12 +148,18 @@ export default {
   margin-top: 0;
   margin-bottom: $spacer-sm;
   text-transform: uppercase;
+
+  &.is-mobile {
+    margin-top: $spacer-sm;
+    margin-bottom: 0;
+  }
 }
 
 .panel-card-total {
   display: block;
   font-size: $font-size-h1;
   margin: 0;
+  white-space: nowrap;
 
   &.null-data {
     height: 78px;
@@ -174,5 +177,38 @@ export default {
   overflow: hidden;
   position: relative;
   bottom: -7px;
+}
+
+@media screen and (max-width: $device-lg) {
+  .panel-card {
+    padding: $spacer-base $spacer-lg;
+    text-align: center;
+    border-radius: initial;
+    box-shadow: none;
+    position: relative;
+
+    &:before {
+      display: block;
+      width: 0;
+      border-left: $border-default;
+      position: absolute;
+      top: $spacer-base;
+      bottom: $spacer-base;
+      left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: $device-sm) {
+  .panel-card {
+    padding: $spacer-sm $spacer-lg;
+
+    & + .panel-card:before {
+      top: $spacer-sm;
+      bottom: $spacer-sm;
+    }
+  }
+  .panel-card-title { font-size: 12px; }
+  .panel-card-total { font-size: $font-size-h3 }
 }
 </style>

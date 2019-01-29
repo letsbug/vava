@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <h1 class="dashboard-title">
+    <h1 v-if="!isMobile" class="dashboard-title">
       <va-icon icon="chart-dashboard" class="text-primary" />
       <span>{{ $t('router.dashboard') }}</span>
       <small class="text-muted">&nbsp;Coding...</small>
@@ -15,48 +15,24 @@
     </h1>
 
     <!-- panel group on pc -->
-    <el-row :gutter="panelGutter">
-      <el-col :xs="12" :sm="6" :lg="6">
-        <chart-summary
-          ref="panelPV"
-          :title="$t('dashboard.pv')"
-          :category="category"
-          :data="pv.data"
-          :total="pv.total"
-        />
-      </el-col>
-      <el-col :xs="12" :sm="6" :lg="6">
-        <chart-summary
-          ref="panelUV"
-          :title="$t('dashboard.uv')"
-          :category="category"
-          :data="uv.data"
-          :total="uv.total"
-        />
-      </el-col>
-      <el-col :xs="12" :sm="6" :lg="6">
-        <chart-summary
-          ref="panelCVR"
-          :title="$t('dashboard.cvr')"
-          data-type="percent"
-          :category="category"
-          :data="cvr.data"
-          :total="cvr.total"
-          suffix="%"
-          :decimals="2"
-        />
-      </el-col>
-      <el-col :xs="12" :sm="6" :lg="6">
-        <chart-summary
-          ref="panelCountry"
-          :title="$t('dashboard.countries')"
-          :category="category"
-          :total="countries"
-        />
-      </el-col>
+    <el-row :gutter="panelGutter" class="panel-groups">
+      <template v-for="key in Object.keys(data)">
+        <el-col :key="key" :xs="8" :sm="6" :lg="6">
+          <chart-summary
+            ref="panel_chart"
+            :title="$t(`dashboard.${key}`)"
+            :category="category"
+            :total="data[key].total"
+            :data="key !== 'countries' ? data[key].data : undefined"
+            :data-type="data[key].dataType"
+            :suffix="data[key].suffix"
+            :decimals="data[key].decimals"
+          />
+        </el-col>
+      </template>
     </el-row>
 
-    <!-- panel group on mobile -->
+    <chart-detail ref="panelDetail" :chart-data="data.countries.data" />
   </div>
 </template>
 
@@ -65,23 +41,26 @@ import Statistics from '@/services/statistics'
 import { Loading } from 'element-ui'
 
 import ChartSummary from './components/ChartSummary'
+import ChartDetail from './components/ChartDetail'
 
 export default {
   name: 'Dashboard',
   metaInfo: {
     title: 'Dashboard'
   },
-  components: { ChartSummary },
+  components: { ChartSummary, ChartDetail },
   data() {
     return {
       dateRange: 31,
       datePreset: [31, 61, 92, 183, 365],
       profilePreset: ['pv', 'sales'],
       category: [],
-      pv: { total: 0, data: [] },
-      uv: { total: 0, data: [] },
-      cvr: { total: 0, data: [] },
-      countries: 0
+      data: {
+        pv: { total: 0, data: [] },
+        uv: { total: 0, data: [] },
+        cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
+        countries: { total: 0, data: [], top5: [] }
+      }
     }
   },
   computed: {
@@ -97,10 +76,12 @@ export default {
   },
   methods: {
     drawCharts() {
-      this.$refs['panelPV'].draw()
-      this.$refs['panelUV'].draw()
-      this.$refs['panelCVR'].draw()
+      this.$refs['panel_chart'].forEach(cop => {
+        cop.draw()
+      })
+      this.$refs['panelDetail'].draw()
     },
+    getTop5() {},
     requestPv() {
       this.loadingInstance = Loading.service({
         lock: true,
@@ -108,18 +89,23 @@ export default {
         background: 'rgba(255, 255, 255, .5)'
       })
       Statistics.pv().then(res => {
+        console.log(res.areas)
         this.loadingInstance.close()
 
-        this.pv.total = res.totalPV
-        this.uv.total = res.totalUV
-        this.cvr.total = res.averageCVR
-        this.countries = res.totalArea
+        this.data.pv.total = res.totalPV
+        this.data.uv.total = res.totalUV
+        this.data.cvr.total = res.averageCVR
+        this.data.countries.total = res.totalArea
 
         res.data.forEach(v => {
           this.category.push(v.date)
-          this.pv.data.push(v.pv)
-          this.uv.data.push(v.uv)
-          this.cvr.data.push(+(v.cvr * 100).toFixed(2))
+          this.data.pv.data.push(v.pv)
+          this.data.uv.data.push(v.uv)
+          this.data.cvr.data.push(+(v.cvr * 100).toFixed(2))
+        })
+
+        Object.keys(res.areas).forEach(v => {
+          if (res.areas[v] > 0) this.data.countries.data.push({ name: v, value: res.areas[v] })
         })
 
         !this.isMobile && this.drawCharts()
@@ -132,14 +118,27 @@ export default {
 <style scoped lang="scss">
 @import "~@/styles/_variables";
 
-.dashboard-title {
-  margin-top: 7px;
-}
+.dashboard-title { margin-top: 7px; }
 
 .dashboard-filters {
-  .el-input, .el-select {
-    vertical-align: top;
-    width: 140px;
+  .el-input, .el-select { vertical-align: top; width: 140px; }
+}
+
+.panel-groups { margin-bottom: $spacer-base; }
+
+@media screen and (max-width: $device-lg) {
+  .panel-groups {
+    background-color: $color-white;
+    border-radius: $radius-base;
+    box-shadow: $shadow-base;
+  }
+
+  /deep/ {
+    .el-col + .el-col {
+      .panel-card:before {
+        content: '';
+      }
+    }
   }
 }
 </style>
