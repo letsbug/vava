@@ -42,10 +42,14 @@ export default {
 
       this.chart.setOption({
         grid: {
+          top: 76,
+          right: 60,
+          bottom: 10,
           left: 100
         },
         title: {
           text: 'TOP5 COUNTRIES FOR PV',
+          top: 36,
           textStyle: { color: '#6a6d71', align: 'center', fontSize: 14 }
         },
         tooltip: {

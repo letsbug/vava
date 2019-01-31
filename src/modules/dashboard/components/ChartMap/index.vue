@@ -1,10 +1,10 @@
 <template>
   <div class="va-panel panel-detail">
     <el-row :gutter="15">
-      <el-col :span="16">
+      <el-col :md="14" :lg="15" :xl="17">
         <chart-map ref="chartMap" :chart-data="chartData" />
       </el-col>
-      <el-col :span="8">
+      <el-col :md="10" :lg="9" :xl="7">
         <chart-top ref="chartBar" :chart-data="chartData" />
       </el-col>
     </el-row>
