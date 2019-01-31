@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartEl" class="va-panel panel-detail"></div>
+  <div ref="chartMapEl" class="chart-wrapper"></div>
 </template>
 
 <script>
@@ -10,9 +10,6 @@ import Color from 'css-color-function'
 export default {
   props: {
     chartData: { type: Array, required: true }
-  },
-  data() {
-    return {}
   },
   computed: {
     colorEnd() {
@@ -32,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    if (this.chart) this.draw()
+    if (this.chart && this.chartData && this.chartData.length > 0) this.draw()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler)
@@ -49,18 +46,17 @@ export default {
     },
     init() {
       const _this = this
-      if (!_this.chart) _this.chart = echarts.init(_this.$refs['chartEl'])
+      if (!_this.chart) _this.chart = echarts.init(_this.$refs['chartMapEl'])
 
       const colorStart = this.colorStart()
       const colorEnd = this.colorEnd
 
-      console.log(colorStart, colorEnd)
-
       _this.chart.setOption({
         backgroundColor: '#fff',
+        grid: { top: 0, right: 0, bottom: 0, left: 0 },
         tooltip: {
           trigger: 'item',
-          formatter: '{b}: {c}',
+          formatter: params => params.data ? `${params.name}: ${params.value}` : undefined,
           textStyle: {
             fontSize: 12
           },
@@ -71,7 +67,7 @@ export default {
         visualMap: {
           left: 'right',
           min: 0,
-          max: 60000,
+          max: this.chartData[this.chartData.length - 1].value,
           inRange: {
             color: [colorStart, colorEnd]
           },
@@ -83,12 +79,11 @@ export default {
           type: 'map',
           map: 'world',
           itemStyle: {
-            normal: {
-              areaColor: '#e9ebf0',
-              borderColor: '#e9ebf0'
-            }
+            areaColor: '#e9ebf0',
+            borderColor: '#e9ebf0'
           },
-          data: _this.chartData
+          data: _this.chartData,
+          zoom: 1.06
         }]
       })
     },
@@ -107,11 +102,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import "~@/styles/_variables";
-
-.panel-detail {
-  height: 400px;
-}
-</style>

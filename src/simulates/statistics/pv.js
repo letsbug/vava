@@ -39,7 +39,7 @@ export function generateAreas(pv) {
   keys.forEach((k, i) => {
     if (i + 1 === keys.length) areas[k] = pv
     else {
-      const val = Math.floor(Math.random() * max)
+      const val = Math.floor(Math.random() * (max / 2) + (max / 2))
       areas[k] = val
       pv -= val
       max = pv / (keys.length - i - 1)

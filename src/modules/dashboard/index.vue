@@ -32,7 +32,7 @@
       </template>
     </el-row>
 
-    <chart-detail ref="panelDetail" :chart-data="data.countries.data" />
+    <chart-map ref="panelDetail" :chart-data="data.countries.data" />
   </div>
 </template>
 
@@ -41,14 +41,14 @@ import Statistics from '@/services/statistics'
 import { Loading } from 'element-ui'
 
 import ChartSummary from './components/ChartSummary'
-import ChartDetail from './components/ChartDetail'
+import ChartMap from './components/ChartMap'
 
 export default {
   name: 'Dashboard',
   metaInfo: {
     title: 'Dashboard'
   },
-  components: { ChartSummary, ChartDetail },
+  components: { ChartSummary, ChartMap },
   data() {
     return {
       dateRange: 31,
@@ -81,7 +81,6 @@ export default {
       })
       this.$refs['panelDetail'].draw()
     },
-    getTop5() {},
     requestPv() {
       this.loadingInstance = Loading.service({
         lock: true,
@@ -89,7 +88,6 @@ export default {
         background: 'rgba(255, 255, 255, .5)'
       })
       Statistics.pv().then(res => {
-        console.log(res.areas)
         this.loadingInstance.close()
 
         this.data.pv.total = res.totalPV
