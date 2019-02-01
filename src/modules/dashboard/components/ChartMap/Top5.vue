@@ -24,11 +24,18 @@ export default {
       })
     }
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler)
+    this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
+
+    if (this.chart) {
+      this.chart.dispose()
+      this.chart = null
+    }
+  },
   methods: {
     calcDataRange() {
-      console.log('-------------------------------------------------------')
       const _data = [...this.chartData].sort((a, b) => b.value - a.value)
-      console.log(_data)
       return _data.slice(0, 5)
     },
     init() {

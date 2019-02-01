@@ -1,8 +1,8 @@
 <template>
-  <div class="va-panel panel-card">
-    <h6 v-if="!isMobile" class="panel-card-title text-secondary">
+  <div class="va-panel panel-card" :class="{ 'active': active, 'border-primary': active }">
+    <h6 v-if="!isMobile" class="panel-card-title" :class="active ? 'text-primary' : 'text-secondary'">
       <span>{{ title }}</span>
-      <a class="handle-tab-detail">
+      <a class="handle-tab-detail" :class="{ 'text-primary': active }">
         <i class="el-icon-arrow-right float-r handle-tab-detail"></i>
       </a>
     </h6>
@@ -30,7 +30,8 @@ export default {
     dataType: { type: String, required: false, default: 'normal' },
     prefix: { type: String, required: false, default: '' },
     suffix: { type: String, required: false, default: '' },
-    decimals: { type: Number, required: false, default: 0 }
+    decimals: { type: Number, required: false, default: 0 },
+    active: { type: Boolean, required: false, default: false }
   },
   data() {
     return {
@@ -65,9 +66,6 @@ export default {
       })
     }
   },
-  // mounted() {
-  //   !this.isMobile && this.draw()
-  // },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler)
     this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
@@ -141,7 +139,22 @@ export default {
 
 .panel-card {
   padding: $spacer-lg;
+  border: solid 1px transparent;
   position: relative;
+  cursor: pointer;
+  transition: $transition-all;
+
+  &:hover {
+    box-shadow: $shadow-lg-vr;
+  }
+
+  &.active .handle-tab-detail {
+    transform: rotate(90deg);
+  }
+
+  .handle-tab-detail {
+    transition: $transition-transform;
+  }
 }
 
 .panel-card-title {

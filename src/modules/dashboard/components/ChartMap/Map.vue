@@ -28,9 +28,6 @@ export default {
       })
     }
   },
-  mounted() {
-    if (this.chart && this.chartData && this.chartData.length > 0) this.draw()
-  },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler)
     this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)

@@ -16,7 +16,7 @@
 
     <!-- panel group on pc -->
     <el-row :gutter="panelGutter" class="panel-groups">
-      <template v-for="key in Object.keys(data)">
+      <template v-for="(key, i) in Object.keys(data)">
         <el-col :key="key" :xs="8" :sm="6" :lg="6">
           <chart-summary
             ref="panel_chart"
@@ -27,6 +27,8 @@
             :data-type="data[key].dataType"
             :suffix="data[key].suffix"
             :decimals="data[key].decimals"
+            :active="i === activeIndex"
+            @click.native="activeIndex = i"
           />
         </el-col>
       </template>
@@ -60,7 +62,8 @@ export default {
         uv: { total: 0, data: [] },
         cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
         countries: { total: 0, data: [], top5: [] }
-      }
+      },
+      activeIndex: 3
     }
   },
   computed: {

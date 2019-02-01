@@ -2,9 +2,9 @@
 // Colors
 
 @each $key, $value in $color-maps {
-  .text-#{$key} { color: $value; }
-  .border-#{$key} { border: solid $border-default-width $value; }
-  .bg-#{$key} { background-color: $value }
+  .text-#{$key} { color: $value !important; }
+  .border-#{$key} { border: solid $border-default-width $value !important; }
+  .bg-#{$key} { background-color: $value !important; }
 }
 
 
