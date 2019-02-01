@@ -1,52 +1,34 @@
 <template>
-  <div ref="chartMapEl" class="chart-wrapper"></div>
+  <div ref="chartMapEl" class="chart-detail-wrapper"></div>
 </template>
 
 <script>
+import mixins from './mixins'
 import echarts from 'echarts'
 import 'echarts/map/js/world'
 import Color from 'css-color-function'
 
 export default {
-  props: {
-    chartData: { type: Array, required: true }
-  },
-  computed: {
-    colorEnd() {
-      return this.$store.getters.theme.color
-    }
-  },
+  mixins: [mixins],
   watch: {
-    colorEnd() {
+    themeColor() {
       if (!this.chart) return
       this.chart.setOption({
         visualMap: {
           inRange: {
-            color: [this.colorStart(), this.colorEnd]
+            color: [this.colorStart(), this.themeColor]
           }
         }
       })
     }
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler)
-    this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
-
-    if (this.chart) {
-      this.chart.dispose()
-      this.chart = null
-    }
-  },
   methods: {
     colorStart() {
-      return Color.convert(`color(${this.colorEnd} tint(90%))`)
+      return Color.convert(`color(${this.themeColor} tint(90%))`)
     },
     init() {
       const _this = this
       if (!_this.chart) _this.chart = echarts.init(_this.$refs['chartMapEl'])
-
-      const colorStart = this.colorStart()
-      const colorEnd = this.colorEnd
 
       _this.chart.setOption({
         backgroundColor: '#fff',
@@ -66,7 +48,7 @@ export default {
           min: 0,
           max: this.chartData[this.chartData.length - 1].value,
           inRange: {
-            color: [colorStart, colorEnd]
+            color: [this.colorStart(), this.themeColor]
           },
           text: ['High', 'Low'], // 文本，默认为数值文本
           calculable: false,
@@ -83,18 +65,6 @@ export default {
           zoom: 1.06
         }]
       })
-    },
-    draw() {
-      if (!this.chartData) return
-
-      this.init()
-      this.resizeHandler = () => {
-        if (this.chart) this.chart.resize()
-      }
-
-      window.addEventListener('resize', this.resizeHandler)
-      this.sidebar = document.querySelector('.va-side-wrapper')
-      this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler)
     }
   }
 }

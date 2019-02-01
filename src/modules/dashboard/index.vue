@@ -23,7 +23,7 @@
             :title="$t(`dashboard.${key}`)"
             :category="category"
             :total="data[key].total"
-            :data="key !== 'countries' ? data[key].data : undefined"
+            :chart-data="key !== 'countries' ? data[key].data : undefined"
             :data-type="data[key].dataType"
             :suffix="data[key].suffix"
             :decimals="data[key].decimals"
@@ -34,7 +34,18 @@
       </template>
     </el-row>
 
-    <chart-map ref="panelDetail" :chart-data="data.countries.data" />
+    <div class="va-panel">
+      <el-row v-if="activeIndex === 3" :gutter="15">
+        <el-col :md="14" :lg="15" :xl="17">
+          <chart-map ref="chartMap" :chart-data="data.countries.data" />
+        </el-col>
+        <el-col :md="10" :lg="9" :xl="7">
+          <chart-top5 ref="chartTop5" :chart-data="data.countries.data" />
+        </el-col>
+      </el-row>
+
+      <chart-line v-else ref="chartLine" :chart-data="data.pv.data" :category="category" />
+    </div>
   </div>
 </template>
 
@@ -44,13 +55,15 @@ import { Loading } from 'element-ui'
 
 import ChartSummary from './components/ChartSummary'
 import ChartMap from './components/ChartMap'
+import ChartTop5 from './components/ChartTop5'
+import ChartLine from './components/ChartLine'
 
 export default {
   name: 'Dashboard',
   metaInfo: {
     title: 'Dashboard'
   },
-  components: { ChartSummary, ChartMap },
+  components: { ChartSummary, ChartLine, ChartMap, ChartTop5 },
   data() {
     return {
       dateRange: 31,
@@ -63,7 +76,7 @@ export default {
         cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
         countries: { total: 0, data: [], top5: [] }
       },
-      activeIndex: 3
+      activeIndex: 0
     }
   },
   computed: {
@@ -82,7 +95,10 @@ export default {
       this.$refs['panel_chart'].forEach(cop => {
         cop.draw()
       })
-      this.$refs['panelDetail'].draw()
+      if (this.activeIndex === 3) {
+        this.$refs['chartMap'].draw()
+        this.$refs['chartTop5'].draw()
+      } else this.$refs['chartLine'].draw()
     },
     requestPv() {
       this.loadingInstance = Loading.service({
@@ -126,6 +142,10 @@ export default {
 }
 
 .panel-groups { margin-bottom: $spacer-base; }
+
+/deep/ .chart-detail-wrapper {
+  height: 400px;
+}
 
 @media screen and (max-width: $device-lg) {
   .panel-groups {

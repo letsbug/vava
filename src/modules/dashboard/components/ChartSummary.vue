@@ -12,21 +12,24 @@
       :duration="animateDuration" :class="totalSpanClass" class="panel-card-total"
     />
     <h6 v-if="isMobile" class="panel-card-title is-mobile text-secondary">{{ title }}</h6>
-    <div v-if="!isMobile && data" ref="chartEl" class="panel-card-chart"></div>
+    <div v-if="!isMobile && chartData" ref="chartEl" class="panel-card-chart"></div>
   </div>
 </template>
 
 <script>
+import mixins from './mixins'
 import ICountTo from 'vue-count-to'
 import echarts from 'echarts'
 
 export default {
   components: { ICountTo },
+  mixins: [mixins],
   props: {
     title: { type: String, required: true },
     category: { type: Array, required: true },
     total: { type: Number, required: false, default: undefined },
-    data: { type: Array, required: false, default: null },
+    // Overwrite mixins
+    chartData: { type: Array, required: false, default: null },
     dataType: { type: String, required: false, default: 'normal' },
     prefix: { type: String, required: false, default: '' },
     suffix: { type: String, required: false, default: '' },
@@ -39,16 +42,10 @@ export default {
     }
   },
   computed: {
-    isMobile() {
-      return this.$store.getters.device === 'mobile'
-    },
-    themeColor() {
-      return this.$store.getters.theme.color
-    },
     totalSpanClass() {
       return {
-        'text-primary': !this.data && !this.isMobile,
-        'null-data': !this.data && !this.isMobile,
+        'text-primary': !this.chartData && !this.isMobile,
+        'null-data': !this.chartData && !this.isMobile,
         'text-center': this.isMobile
       }
     }
@@ -66,20 +63,12 @@ export default {
       })
     }
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler)
-    this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
-
-    if (this.chart) {
-      this.chart.dispose()
-      this.chart = null
-    }
-  },
   methods: {
     areaColor() {
       return `${this.themeColor}30`
     },
     init() {
+      if (this.isMobile) return
       if (!this.chart) this.chart = echarts.init(this.$refs['chartEl'])
 
       this.chart.setOption({
@@ -107,7 +96,7 @@ export default {
           show: false
         },
         series: [{
-          data: this.data,
+          data: this.chartData,
           type: 'line',
           sampling: 'average',
           showSymbol: false,
@@ -117,18 +106,6 @@ export default {
           }
         }]
       })
-    },
-    draw() {
-      if (!this.data) return
-
-      this.init()
-      this.resizeHandler = () => {
-        if (this.chart) this.chart.resize()
-      }
-
-      window.addEventListener('resize', this.resizeHandler)
-      this.sidebar = document.querySelector('.va-side-wrapper')
-      this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler)
     }
   }
 }

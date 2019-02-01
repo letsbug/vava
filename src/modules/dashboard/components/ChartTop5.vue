@@ -1,19 +1,13 @@
 <template>
-  <div ref="chartBarEl" class="chart-wrapper"></div>
+  <div ref="chartBarEl" class="chart-detail-wrapper"></div>
 </template>
 
 <script>
+import mixins from './mixins'
 import echarts from 'echarts'
 
 export default {
-  props: {
-    chartData: { type: Array, required: true }
-  },
-  computed: {
-    themeColor() {
-      return this.$store.getters.theme.color
-    }
-  },
+  mixins: [mixins],
   watch: {
     themeColor() {
       if (!this.chart) return
@@ -22,15 +16,6 @@ export default {
           itemStyle: { color: this.themeColor }
         }]
       })
-    }
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler)
-    this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
-
-    if (this.chart) {
-      this.chart.dispose()
-      this.chart = null
     }
   },
   methods: {
@@ -44,8 +29,6 @@ export default {
       const _chartData = this.calcDataRange()
       const category = _chartData.map(v => v.name)
       const data = _chartData.map(v => v.value)
-
-      console.log(category, data)
 
       this.chart.setOption({
         grid: {
@@ -81,18 +64,6 @@ export default {
           data
         }]
       })
-    },
-    draw() {
-      if (!this.chartData) return
-
-      this.init()
-      this.resizeHandler = () => {
-        if (this.chart) this.chart.resize()
-      }
-
-      window.addEventListener('resize', this.resizeHandler)
-      this.sidebar = document.querySelector('.va-side-wrapper')
-      this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler)
     }
   }
 }
