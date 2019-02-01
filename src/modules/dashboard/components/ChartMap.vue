@@ -15,9 +15,7 @@ export default {
       if (!this.chart) return
       this.chart.setOption({
         visualMap: {
-          inRange: {
-            color: [this.colorStart(), this.themeColor]
-          }
+          inRange: { color: [this.colorStart(), this.themeColor] }
         }
       })
     }
@@ -33,23 +31,15 @@ export default {
       _this.chart.setOption({
         backgroundColor: '#fff',
         grid: { top: 0, right: 0, bottom: 0, left: 0 },
-        tooltip: {
+        tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
-          formatter: params => params.data ? `${params.name}: ${params.value}` : undefined,
-          textStyle: {
-            fontSize: 12
-          },
-          padding: [5, 8],
-          extraCssText: 'background-color: rgba(0, 0, 0, .75);' +
-            'box-shadow: 0 0px 6px rgba(0, 0, 0, .25);'
-        },
+          formatter: params => params.data ? `${params.name}: ${params.value}` : undefined
+        }),
         visualMap: {
           left: 'right',
           min: 0,
           max: this.chartData[this.chartData.length - 1].value,
-          inRange: {
-            color: [this.colorStart(), this.themeColor]
-          },
+          inRange: { color: [this.colorStart(), this.themeColor] },
           text: ['High', 'Low'], // 文本，默认为数值文本
           calculable: false,
           show: false
@@ -57,10 +47,7 @@ export default {
         series: [{
           type: 'map',
           map: 'world',
-          itemStyle: {
-            areaColor: '#e9ebf0',
-            borderColor: '#e9ebf0'
-          },
+          itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' },
           data: _this.chartData,
           zoom: 1.06
         }]

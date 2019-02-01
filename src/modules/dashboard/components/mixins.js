@@ -2,6 +2,16 @@ export default {
   props: {
     chartData: { type: Array, required: true }
   },
+  data() {
+    return {
+      tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, .86)',
+        extraCssText: 'box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);',
+        padding: [7, 12],
+        textStyle: { color: '#343a40', fontSize: 12 }
+      }
+    }
+  },
   computed: {
     isMobile() {
       return this.$store.getters.device === 'mobile'

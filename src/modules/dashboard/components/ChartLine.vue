@@ -9,7 +9,8 @@ import echarts from 'echarts'
 export default {
   mixins: [mixins],
   props: {
-    category: { type: Array, required: true }
+    category: { type: Array, required: true },
+    dataType: { type: String, required: false, default: '' }
   },
   methods: {
     areaColor() {
@@ -19,15 +20,36 @@ export default {
       if (!this.chart) this.chart = echarts.init(this.$el)
 
       this.chart.setOption({
-        color: [
-          this.themeColor
-        ],
+        color: [this.themeColor],
+        grid: {
+          top: 40,
+          right: 40,
+          bottom: 40,
+          left: 60
+        },
+        tooltip: Object.assign({}, this.tooltip, {
+          trigger: 'axis',
+          formatter: params => `${params[0].name}<br />${params[0].marker}` +
+            `${params[0].value}${(this.dataType === 'percent' ? ' %' : '')}`
+        }),
         xAxis: {
           type: 'category',
-          data: this.category
+          axisLine: { show: false },
+          axisTick: { show: false },
+          boundaryGap: false,
+          data: this.category,
+          inverse: true
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          axisLine: { show: false },
+          axisTick: { show: false },
+          splitLine: {
+            lineStyle: { color: '#e6edf1' }
+          }
+        },
+        axisPointer: {
+          lineStyle: { color: '#ced4da' }
         },
         series: [{
           data: this.chartData,
@@ -35,9 +57,7 @@ export default {
           sampling: 'average',
           showSymbol: false,
           smooth: true,
-          areaStyle: {
-            color: this.areaColor()
-          }
+          areaStyle: { color: this.areaColor() }
         }]
       })
     }

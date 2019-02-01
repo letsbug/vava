@@ -88,7 +88,8 @@ export default {
           type: 'category',
           boundaryGap: false,
           data: this.category,
-          show: false
+          show: false,
+          inverse: true
         },
         yAxis: {
           type: 'value',
@@ -101,9 +102,7 @@ export default {
           sampling: 'average',
           showSymbol: false,
           smooth: true,
-          areaStyle: {
-            color: this.areaColor()
-          }
+          areaStyle: { color: this.areaColor() }
         }]
       })
     }

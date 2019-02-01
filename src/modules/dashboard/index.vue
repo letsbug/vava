@@ -37,14 +37,17 @@
     <div class="va-panel">
       <el-row v-if="activeIndex === 3" :gutter="15">
         <el-col :md="14" :lg="15" :xl="17">
-          <chart-map ref="chartMap" :chart-data="data.countries.data" />
+          <chart-map ref="chartMap" :chart-data="detailData" />
         </el-col>
         <el-col :md="10" :lg="9" :xl="7">
-          <chart-top5 ref="chartTop5" :chart-data="data.countries.data" />
+          <chart-top5 ref="chartTop5" :chart-data="detailData" />
         </el-col>
       </el-row>
 
-      <chart-line v-else ref="chartLine" :chart-data="data.pv.data" :category="category" />
+      <chart-line
+        v-else ref="chartLine" :chart-data="detailData" :category="category"
+        :data-type="activeIndex === 2 ? 'percent' : ''"
+      />
     </div>
   </div>
 </template>
@@ -76,7 +79,8 @@ export default {
         cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
         countries: { total: 0, data: [], top5: [] }
       },
-      activeIndex: 0
+      activeIndex: 0,
+      detailData: []
     }
   },
   computed: {
@@ -90,15 +94,17 @@ export default {
   mounted() {
     this.requestPv()
   },
+  updated() {
+    this.checkDetails(this.activeIndex)
+  },
   methods: {
     drawCharts() {
-      this.$refs['panel_chart'].forEach(cop => {
-        cop.draw()
-      })
       if (this.activeIndex === 3) {
         this.$refs['chartMap'].draw()
         this.$refs['chartTop5'].draw()
-      } else this.$refs['chartLine'].draw()
+      } else {
+        this.$refs['chartLine'].draw()
+      }
     },
     requestPv() {
       this.loadingInstance = Loading.service({
@@ -125,8 +131,18 @@ export default {
           if (res.areas[v] > 0) this.data.countries.data.push({ name: v, value: res.areas[v] })
         })
 
-        !this.isMobile && this.drawCharts()
+        if (!this.isMobile) {
+          this.$refs['panel_chart'].forEach(cop => {
+            cop.draw()
+          })
+        }
+        this.drawCharts()
       })
+    },
+    checkDetails(index) {
+      this.activeIndex = index
+      this.detailData = this.data[Object.keys(this.data)[index]].data
+      this.drawCharts()
     }
   }
 }
