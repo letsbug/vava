@@ -17,7 +17,7 @@
     <!-- panel group on pc -->
     <el-row :gutter="panelGutter" class="panel-groups">
       <template v-for="(key, i) in Object.keys(data)">
-        <el-col :key="key" :xs="8" :sm="6" :lg="6">
+        <el-col :key="key" :xs="6" :sm="6" :lg="6">
           <chart-summary
             ref="panel_chart"
             :title="$t(`dashboard.${key}`)"
@@ -37,16 +37,17 @@
     <div class="va-panel">
       <el-row v-if="activeIndex === 3" :gutter="15">
         <el-col :md="14" :lg="15" :xl="17">
-          <chart-map ref="chartMap" :chart-data="detailData" />
+          <chart-map ref="chartMap" :chart-data="detailData" :style="chartHeight" />
         </el-col>
         <el-col :md="10" :lg="9" :xl="7">
-          <chart-top5 ref="chartTop5" :chart-data="detailData" />
+          <chart-top5 ref="chartTop5" :chart-data="detailData" :style="chartHeight" />
         </el-col>
       </el-row>
 
       <chart-line
         v-else ref="chartLine" :chart-data="detailData" :category="category"
         :data-type="activeIndex === 2 ? 'percent' : ''"
+        :style="chartHeight"
       />
     </div>
   </div>
@@ -89,6 +90,9 @@ export default {
     },
     panelGutter() {
       return this.isMobile ? 0 : 15
+    },
+    chartHeight() {
+      return 'height: ' + document.body.getBoundingClientRect().width < 576 ? '300px' : '400px' + ';'
     }
   },
   mounted() {
@@ -157,7 +161,7 @@ export default {
   .el-input, .el-select { vertical-align: top; width: 140px; }
 }
 
-.panel-groups { margin-bottom: $spacer-base; }
+.panel-groups { margin-bottom: $spacer-base; overflow: hidden; }
 
 /deep/ .chart-detail-wrapper {
   height: 400px;

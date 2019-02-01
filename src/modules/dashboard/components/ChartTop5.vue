@@ -31,12 +31,7 @@ export default {
       const data = _chartData.map(v => v.value)
 
       this.chart.setOption({
-        grid: {
-          top: 76,
-          right: 60,
-          bottom: 10,
-          left: 100
-        },
+        grid: Object.assign({}, this.grid, { top: 76, right: 60, bottom: 10, left: 100 }),
         title: {
           text: 'TOP5 COUNTRIES FOR PV',
           top: 36,

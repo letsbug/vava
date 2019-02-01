@@ -1,5 +1,5 @@
 <template>
-  <div class="va-panel panel-card" :class="{ 'active': active, 'border-primary': active }">
+  <div class="va-panel panel-card" :class="{ 'border-primary': active && !isMobile, 'text-primary': active && isMobile }">
     <h6 v-if="!isMobile" class="panel-card-title" :class="active ? 'text-primary' : 'text-secondary'">
       <span>{{ title }}</span>
       <a class="handle-tab-detail" :class="{ 'text-primary': active }">
@@ -11,7 +11,7 @@
       :prefix="prefix" :suffix="suffix" :decimals="decimals"
       :duration="animateDuration" :class="totalSpanClass" class="panel-card-total"
     />
-    <h6 v-if="isMobile" class="panel-card-title is-mobile text-secondary">{{ title }}</h6>
+    <h6 v-if="isMobile" class="panel-card-title is-mobile" :class="active ? 'text-primary' : 'text-secondary'">{{ title }}</h6>
     <div v-if="!isMobile && chartData" ref="chartEl" class="panel-card-chart"></div>
   </div>
 </template>
@@ -115,22 +115,9 @@ export default {
 
 .panel-card {
   padding: $spacer-lg;
-  border: solid 1px transparent;
   position: relative;
   cursor: pointer;
   transition: $transition-all;
-
-  &:hover {
-    box-shadow: $shadow-lg-vr;
-  }
-
-  &.active .handle-tab-detail {
-    transform: rotate(90deg);
-  }
-
-  .handle-tab-detail {
-    transition: $transition-transform;
-  }
 }
 
 .panel-card-title {
@@ -168,6 +155,24 @@ export default {
   bottom: -7px;
 }
 
+@media screen and (min-width: $device-lg) {
+  .panel-card {
+    border: solid 1px transparent;
+
+    &:hover {
+      box-shadow: $shadow-lg-vr;
+    }
+
+    .handle-tab-detail {
+      transition: $transition-transform;
+    }
+
+    &.active .handle-tab-detail {
+      transform: rotate(90deg);
+    }
+  }
+}
+
 @media screen and (max-width: $device-lg) {
   .panel-card {
     padding: $spacer-base $spacer-lg;
@@ -186,6 +191,7 @@ export default {
       left: 0;
     }
   }
+  .panel-card-total { font-size: $font-size-h2 }
 }
 
 @media screen and (max-width: $device-sm) {

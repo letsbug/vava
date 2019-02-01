@@ -21,12 +21,7 @@ export default {
 
       this.chart.setOption({
         color: [this.themeColor],
-        grid: {
-          top: 40,
-          right: 40,
-          bottom: 40,
-          left: 60
-        },
+        grid: Object.assign({}, this.grid, { top: 40, right: 40, bottom: 40, left: 60 }),
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'axis',
           formatter: params => `${params[0].name}<br />${params[0].marker}` +

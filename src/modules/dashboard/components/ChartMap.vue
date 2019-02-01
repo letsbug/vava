@@ -30,7 +30,7 @@ export default {
 
       _this.chart.setOption({
         backgroundColor: '#fff',
-        grid: { top: 0, right: 0, bottom: 0, left: 0 },
+        grid: Object.assign({}, this.grid, { top: 0, right: 0, bottom: 0, left: 0 }),
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
           formatter: params => params.data ? `${params.name}: ${params.value}` : undefined
