@@ -35,19 +35,20 @@
     </el-row>
 
     <div class="va-panel">
-      <el-row v-if="activeIndex === 3" :gutter="15">
+      <!--<el-row v-if="activeIndex === 3" :gutter="15">
         <el-col :md="14" :lg="15" :xl="17">
-          <chart-map ref="chartMap" :chart-data="detailData" :style="chartHeight" />
+          <chart-map ref="chartMap" :chart-data="detailData" />
         </el-col>
         <el-col :md="10" :lg="9" :xl="7">
-          <chart-top5 ref="chartTop5" :chart-data="detailData" :style="chartHeight" />
+          <chart-top5 ref="chartTop5" :chart-data="detailData" />
         </el-col>
-      </el-row>
+      </el-row>-->
+
+      <chart-map v-if="activeIndex === 3" ref="chartMap" :chart-data="detailData" />
 
       <chart-line
         v-else ref="chartLine" :chart-data="detailData" :category="category"
         :data-type="activeIndex === 2 ? 'percent' : ''"
-        :style="chartHeight"
       />
     </div>
   </div>
@@ -59,7 +60,6 @@ import { Loading } from 'element-ui'
 
 import ChartSummary from './components/ChartSummary'
 import ChartMap from './components/ChartMap'
-import ChartTop5 from './components/ChartTop5'
 import ChartLine from './components/ChartLine'
 
 export default {
@@ -67,7 +67,7 @@ export default {
   metaInfo: {
     title: 'Dashboard'
   },
-  components: { ChartSummary, ChartLine, ChartMap, ChartTop5 },
+  components: { ChartSummary, ChartLine, ChartMap },
   data() {
     return {
       dateRange: 31,
@@ -80,7 +80,7 @@ export default {
         cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
         countries: { total: 0, data: [], top5: [] }
       },
-      activeIndex: 0,
+      activeIndex: 3,
       detailData: []
     }
   },
@@ -90,9 +90,6 @@ export default {
     },
     panelGutter() {
       return this.isMobile ? 0 : 15
-    },
-    chartHeight() {
-      return 'height: ' + document.body.getBoundingClientRect().width < 576 ? '300px' : '400px' + ';'
     }
   },
   mounted() {
@@ -105,7 +102,7 @@ export default {
     drawCharts() {
       if (this.activeIndex === 3) {
         this.$refs['chartMap'].draw()
-        this.$refs['chartTop5'].draw()
+        // this.$refs['chartTop5'].draw()
       } else {
         this.$refs['chartLine'].draw()
       }
@@ -179,6 +176,10 @@ export default {
       .panel-card:before {
         content: '';
       }
+    }
+
+    .chart-detail-wrapper {
+      height: 46vw;
     }
   }
 }

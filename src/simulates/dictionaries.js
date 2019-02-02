@@ -6,10 +6,11 @@ const countries = {
   'Bangladesh': '孟加拉',
   'Brazil': '巴西',
   // 'Belarus': '白俄罗斯',
-  'Canada': '加拿大',
+  // 'Canada': '加拿大',
   // 'Switzerland': '瑞士',
   // 'Colombia': '哥伦比亚',
   'Germany': '德国',
+  'Greenland': '格陵兰',
   // 'Egypt': '埃及',
   'Spain': '西班牙',
   // 'Finland': '芬兰',
@@ -29,7 +30,7 @@ const countries = {
   'United Kingdom': '英国',
   'United States': '美国',
   'Korea': '韩国',
-  'Mongolia': '蒙古',
+  // 'Mongolia': '蒙古',
   'China': '中国'
 }
 

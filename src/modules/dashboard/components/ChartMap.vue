@@ -24,13 +24,18 @@ export default {
     colorStart() {
       return Color.convert(`color(${this.themeColor} tint(90%))`)
     },
+    calcBarData() {
+      return this.chartData.map(v => v.value).sort((a, b) => b - a).slice(0, 5)
+    },
     init() {
-      const _this = this
-      if (!_this.chart) _this.chart = echarts.init(_this.$refs['chartMapEl'])
+      if (!this.chart) this.chart = echarts.init(this.$refs['chartMapEl'])
 
-      _this.chart.setOption({
+      this.chart.setOption({
         backgroundColor: '#fff',
-        grid: Object.assign({}, this.grid, { top: 0, right: 0, bottom: 0, left: 0 }),
+        grid: Object.assign({}, this.grid, {
+          top: 0, right: 0, bottom: 0, left: this.isMobile ? 0 : '62%',
+          shadowColor: 'rgba(0, 0, 0, 0.5)', shadowBlur: 10
+        }),
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
           formatter: params => params.data ? `${params.name}: ${params.value}` : undefined
@@ -44,13 +49,25 @@ export default {
           calculable: false,
           show: false
         },
-        series: [{
-          type: 'map',
-          map: 'world',
-          itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' },
-          data: _this.chartData,
-          zoom: 1.06
-        }]
+        series: [
+          {
+            type: 'map',
+            map: 'world',
+            itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' },
+            data: this.chartData,
+            top: 0,
+            right: this.isMobile ? 0 : '38%',
+            bottom: 0,
+            left: 0
+          },
+          {
+            type: 'bar',
+            barWidth: 8,
+            label: { show: true, position: 'right', color: '#343a40' },
+            itemStyle: { barBorderRadius: 4, color: this.themeColor },
+            data: this.calcBarData()
+          }
+        ]
       })
     }
   }

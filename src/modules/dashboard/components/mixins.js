@@ -9,9 +9,6 @@ export default {
         extraCssText: 'box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);',
         padding: [7, 12],
         textStyle: { color: '#343a40', fontSize: 12 }
-      },
-      grid: {
-        height: 370
       }
     }
   },
@@ -21,6 +18,9 @@ export default {
     },
     themeColor() {
       return this.$store.getters.theme.color
+    },
+    chartHeight() {
+      return document.body.getBoundingClientRect().width * 0.513
     }
   },
   mounted() {
