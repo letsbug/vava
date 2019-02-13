@@ -45,7 +45,7 @@ export default {
         },
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
-          formatter: params => params.data ? `${params.name}: ${params.value}` : undefined
+          formatter: params => params.data ? `${params.name}<br />${params.marker}${params.value}` : undefined
         }),
         visualMap: {
           left: 'right',
