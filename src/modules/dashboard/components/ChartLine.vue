@@ -16,12 +16,10 @@ export default {
     areaColor() {
       return `${this.themeColor}30`
     },
-    init() {
-      if (!this.chart) this.chart = echarts.init(this.$el)
-
-      this.chart.setOption({
+    optionsLine() {
+      return {
         color: [this.themeColor],
-        grid: Object.assign({}, this.grid, { top: 40, right: 40, bottom: 40, left: 60 }),
+        grid: { top: 40, right: 40, bottom: 40, left: 60 },
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'axis',
           formatter: params => `${params[0].name}<br />${params[0].marker}` +
@@ -54,7 +52,12 @@ export default {
           smooth: true,
           areaStyle: { color: this.areaColor() }
         }]
-      })
+      }
+    },
+    init() {
+      if (!this.chart) this.chart = echarts.init(this.$el)
+
+      this.chart.setOption(this.optionsLine())
     }
   }
 }

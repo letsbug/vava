@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     draw() {
-      if (!this.chartData) return
+      if (!this.chartData || this.chartData.length < 1) return
 
       this.init()
       this.resizeHandler = () => {

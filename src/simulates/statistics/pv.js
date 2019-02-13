@@ -31,20 +31,24 @@ export function generateGender(uv) {
  * @param pv
  */
 export function generateAreas(pv) {
-  const areas = {}
+  const areas = []
   const keys = Object.keys(Dictionaries.countries)
 
   let max = pv / keys.length
 
-  keys.forEach((k, i) => {
-    if (i + 1 === keys.length) areas[k] = pv
-    else {
-      const val = Math.floor(Math.random() * (max / 2) + (max / 2))
-      areas[k] = val
-      pv -= val
+  keys.forEach((name, i) => {
+    if (i + 1 !== keys.length) {
+      const value = Math.floor(Math.random() * (max / 2) + (max / 2))
+      areas.push({ name, value })
+      pv -= value
       max = pv / (keys.length - i - 1)
+    } else {
+      areas.push({ name, value: pv })
     }
   })
+
+  areas.sort((a, b) => b.value - a.value)
+
   return areas
 }
 

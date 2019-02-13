@@ -80,7 +80,7 @@ export default {
         cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
         countries: { total: 0, data: [], top5: [] }
       },
-      activeIndex: 3,
+      activeIndex: 0,
       detailData: []
     }
   },
@@ -96,16 +96,19 @@ export default {
     this.requestPv()
   },
   updated() {
-    this.checkDetails(this.activeIndex)
+    this.checkDetails()
   },
   methods: {
     drawCharts() {
       if (this.activeIndex === 3) {
         this.$refs['chartMap'].draw()
-        // this.$refs['chartTop5'].draw()
       } else {
         this.$refs['chartLine'].draw()
       }
+    },
+    checkDetails() {
+      this.detailData = this.data[Object.keys(this.data)[this.activeIndex]].data
+      this.drawCharts()
     },
     requestPv() {
       this.loadingInstance = Loading.service({
@@ -128,22 +131,14 @@ export default {
           this.data.cvr.data.push(+(v.cvr * 100).toFixed(2))
         })
 
-        Object.keys(res.areas).forEach(v => {
-          if (res.areas[v] > 0) this.data.countries.data.push({ name: v, value: res.areas[v] })
-        })
+        this.data.countries.data = res.areas
 
         if (!this.isMobile) {
           this.$refs['panel_chart'].forEach(cop => {
             cop.draw()
           })
         }
-        this.drawCharts()
       })
-    },
-    checkDetails(index) {
-      this.activeIndex = index
-      this.detailData = this.data[Object.keys(this.data)[index]].data
-      this.drawCharts()
     }
   }
 }

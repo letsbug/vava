@@ -69,6 +69,7 @@ export default {
     },
     init() {
       if (this.isMobile) return
+
       if (!this.chart) this.chart = echarts.init(this.$refs['chartEl'])
 
       this.chart.setOption({
