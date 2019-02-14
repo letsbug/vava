@@ -89,6 +89,9 @@ export default {
             color: '#6a6d71'
           }
         },
+        axisPointer: {
+          lineStyle: { color: '#ced4da' }
+        },
         dataset: {
           dimensions: ['section', 'male', 'female', 'unknown'],
           source: this.chartData
