@@ -3,7 +3,6 @@
     <h1 v-if="!isMobile" class="dashboard-title">
       <va-icon icon="chart-dashboard" class="text-primary" />
       <span>{{ $t('router.dashboard') }}</span>
-      <small class="text-muted">&nbsp;Coding...</small>
       <span class="float-r dashboard-filters">
         <el-select placeholder="Your Profile" value="">
           <el-option v-for="pf in profilePreset" :key="pf" :label="$t(`dashboard.filters.${pf}`)" :value="pf" disabled />
