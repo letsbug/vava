@@ -120,6 +120,11 @@ const webpackConfig = merge(baseWebpackConfig, {
           priority: 20,
           test: /[\\/]node_modules[\\/]element-ui[\\/]/
         },
+        echarts: {
+          name: 'chunk-echarts',
+          priority: 20,
+          test: /[\\/]node_modules[\\/]echarts[\\/]/
+        },
         xlsx: {
           name: 'chunk-xlsx',
           priority: 20,
