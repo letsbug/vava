@@ -35,6 +35,7 @@ export default {
           itemStyle: { color: this.themeColor }
         }]
       } : {
+        color: [this.themeColor],
         series: [{
           areaStyle: { color: this.areaColor() }
         }]
@@ -88,12 +89,14 @@ export default {
       }
     },
     optionsMap() {
+      const category = this.chartData.map(v => v.name).slice(0, 5)
+
       return {
         title: {
           text: 'TOP5 COUNTRIES FOR PV',
           textStyle: { color: '#6a6d71', fontSize: 14 },
           left: '65.6%',
-          top: 15
+          top: 20
         },
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
@@ -118,7 +121,7 @@ export default {
           left: 30
         },
         grid: [
-          { top: 66, right: 60, bottom: 10, left: '66%', z: 99 }
+          { top: 66, right: 60, bottom: 6, left: '66%', z: 99 }
         ],
         xAxis: {
           type: 'value',
@@ -132,9 +135,10 @@ export default {
             fontSize: 13,
             inside: true,
             margin: 0,
-            padding: [0, 0, 50, 0]
+            verticalAlign: 'bottom',
+            padding: [0, 0, 16, 0]
           },
-          data: this.chartData.map(v => v.name).slice(0, 5),
+          data: category,
           inverse: true
         },
         series: [
