@@ -55,7 +55,7 @@
 
 //
 // In desktop
-@media screen and (min-width: $device-md) {
+@media screen and (min-width: $device-lg) {
   .va-app-wrapper {
     &.sidebar-expanded {
       .va-main-wrapper {
@@ -83,7 +83,7 @@
 
 //
 // In mobile
-@media screen and (max-width: $device-md - 1px) {
+@media screen and (max-width: $device-lg - 1px) {
   .va-app-wrapper {
     .va-side-wrapper {
       width: $sidebar-width-expanded;
@@ -109,5 +109,9 @@
         transform: translate3d(0, 0, 0);
       }
     }
+  }
+
+  .va-tabs-bar {
+    padding: 0 $spacer-base;
   }
 }

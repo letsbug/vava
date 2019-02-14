@@ -21,13 +21,13 @@ import '@/assets/icons' // load system svg icons by symbol.
 import '@/assets/svgs'
 
 import * as filters from '@/filters'
-
-import '@/themes'
-
 // Inject global directives, or local calls, as needed.
 // import * as Directives from '@/directives'
 
+import '@/themes'
+
 // Baidu & Google analytics. According to the need to enable.
+// To use google analytics', perform npm install --save vue-analytics installation
 import hmt from 'vue-ba'
 // import vga from 'vue-analytics'
 

@@ -6,11 +6,12 @@
   border-color: transparent;
   border-radius: $radius-base;
   overflow: hidden;
-  cursor: pointer;
 
   transition: $transition-all;
 
   &.has-interaction {
+    cursor: pointer;
+
     &:hover, &.checked {
       border-color: $color-theme;
       color: $color-theme;

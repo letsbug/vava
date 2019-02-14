@@ -15,10 +15,6 @@ $tabs-icon-btn-width:   44px;
   box-shadow: $shadow-sm-vr;
   @extend .clear-fix;
 
-  &.mobile {
-    padding: 0 $spacer-base;
-  }
-
   .tabs-scroll-pane {
     height: $tabs-height;
   }
@@ -60,9 +56,10 @@ $tabs-icon-btn-width:   44px;
   font-size: 1rem;
   text-transform: capitalize;
   text-align: center;
-  color: $color-text-secondary;
+  color: $color-text-primary;
+  opacity: .6;
   position: relative;
-  transition: $transition-color, $transition-background;
+  transition: $transition-color, $transition-background, $transition-opacity;
 
   &:first-child {
     border-left: solid $color-gray-100 1px;
@@ -91,10 +88,12 @@ $tabs-icon-btn-width:   44px;
 
   &:hover {
     color: $color-text-primary;
+    opacity: 1;
   }
 
   &.active {
-    background-color: $border-color;
+    background-color: $color-gray-100;
+    opacity: 1;
     color: $color-theme;
 
     &:before {

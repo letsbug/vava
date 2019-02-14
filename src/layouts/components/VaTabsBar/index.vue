@@ -1,5 +1,5 @@
 <template>
-  <div :class="isMobile ? 'mobile' : ''" class="va-tabs-bar">
+  <div class="va-tabs-bar">
     <!-- breadcrumb -->
     <breadcrumb v-if="isMobile" />
 

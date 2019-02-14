@@ -61,7 +61,7 @@
   position: relative;
 }
 
-@media screen and (min-width: $device-md) {
+@media screen and (min-width: $device-lg) {
   .va-side-backdrop {
     display: none;
   }
@@ -81,7 +81,7 @@
 }
 
 
-@media screen and (max-width: $device-md) {
+@media screen and (max-width: $device-lg) {
   .va-app-wrapper {
     &.sidebar-expanded .va-side-backdrop {
       visibility: visible;

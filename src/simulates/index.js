@@ -4,6 +4,7 @@ import Account from './account'
 import Notification from './notification'
 import Contacts from './contacts'
 import Article from './article'
+import Statistics from './statistics'
 
 if (process.env.NODE_ENV === 'development') Mock.setup({ timeout: '400-2000' })
 
@@ -43,3 +44,7 @@ Mock.mock(/\/articles\/detail/, 'get', Article.detail)
 Mock.mock(/\/articles\/create/, 'post', Article.create)
 Mock.mock(/\/articles\/update/, 'post', Article.update)
 Mock.mock(/\/articles\/batch/, 'post', Article.batch)
+
+// About Statistics
+Mock.mock(/\/statistics\/pv/, 'post', Statistics.pv)
+Mock.mock(/\/statistics\/sales/, 'post', Statistics.sales)

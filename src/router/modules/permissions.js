@@ -2,7 +2,7 @@ import Layout from '@/layouts'
 
 export default {
   path: '/permission',
-  redirect: '/permission/page',
+  redirect: '/permission/visitor',
   component: Layout,
   name: 'Permission',
   meta: {

@@ -122,12 +122,11 @@ export default {
       pv: '访问量',
       sales: '销售额'
     },
-    tips: '近一月趋势',
     average: '日均：',
-    sales: '销售额',
-    order: '订单数',
     pv: '浏览量',
-    uv: '访客数'
+    uv: '访客数',
+    cvr: '转化率',
+    countries: '国家总数'
   },
   notification: {
     title: '通知中心',
