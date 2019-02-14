@@ -3,7 +3,7 @@
 //
 
 import { Dater } from '@/tools'
-import { generatePV, generateAreas, generateGender } from './pv'
+import { generatePV, generateAreas, generateAges, generateTraffics } from './pv'
 
 const count = 365 * 2 // 2 years
 const pv = []
@@ -51,8 +51,9 @@ export default {
     averageCVR = +(averageCVR / _days).toFixed(4)
     const areas = generateAreas(totalPV)
     const totalArea = Object.keys(areas).filter(k => areas[k] > 0).length
-    const gender = generateGender(totalUV)
+    const ages = generateAges(totalUV)
+    const traffics = generateTraffics(totalPV)
 
-    return { totalPV, totalUV, totalArea, averagePV, averageUV, averageCVR, areas, gender, data }
+    return { totalPV, totalUV, totalArea, averagePV, averageUV, averageCVR, areas, ages, data, traffics }
   }
 }

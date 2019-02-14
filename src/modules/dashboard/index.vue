@@ -14,7 +14,7 @@
       </span>
     </h1>
 
-    <!-- panel group on pc -->
+    <!-- panel groups -->
     <el-row :gutter="panelGutter" class="panel-groups">
       <template v-for="(key, i) in Object.keys(data)">
         <el-col :key="key" :xs="6" :sm="6" :lg="6">
@@ -34,6 +34,7 @@
       </template>
     </el-row>
 
+    <!-- details -->
     <chart-details
       ref="chartDetails"
       :chart-data="detailData"
@@ -41,6 +42,15 @@
       :is-percent="activeIndex === 2"
       :is-chart-map="activeIndex === 3"
     />
+
+    <el-row :gutter="15" style="margin-top: 15px;">
+      <el-col :md="24" :lg="16" style="margin-bottom: 15px;">
+        <chart-ages ref="chartAges" :chart-data="attach.ages" />
+      </el-col>
+      <el-col :md="24" :lg="8" style="margin-bottom: 15px;">
+        <traffic-analysis :total-pv="data.pv.total" :sources="attach.sources" :interviews="attach.interviews" />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -50,13 +60,15 @@ import { Loading } from 'element-ui'
 
 import ChartTabs from './components/ChartTabs'
 import ChartDetails from './components/ChartDetails'
+import ChartAges from './components/ChartAges'
+import TrafficAnalysis from './components/TrafficAnalysis'
 
 export default {
   name: 'Dashboard',
   metaInfo: {
     title: 'Dashboard'
   },
-  components: { ChartTabs, ChartDetails },
+  components: { ChartTabs, ChartDetails, ChartAges, TrafficAnalysis },
   data() {
     return {
       dateRange: 31,
@@ -70,7 +82,12 @@ export default {
         countries: { total: 0, data: [], top5: [] }
       },
       activeIndex: 0,
-      detailData: []
+      detailData: [],
+      attach: {
+        ages: [],
+        sources: [],
+        interviews: []
+      }
     }
   },
   computed: {
@@ -86,6 +103,7 @@ export default {
   },
   updated() {
     this.checkDetails()
+    this.$refs['chartAges'].draw()
   },
   methods: {
     checkDetails() {
@@ -101,6 +119,8 @@ export default {
       Statistics.pv().then(res => {
         this.loadingInstance.close()
 
+        console.log(res)
+
         this.data.pv.total = res.totalPV
         this.data.uv.total = res.totalUV
         this.data.cvr.total = res.averageCVR
@@ -114,6 +134,9 @@ export default {
         })
 
         this.data.countries.data = res.areas
+        this.attach.ages = res.ages
+        this.attach.sources = res.traffics.source
+        this.attach.interviews = res.traffics.interview
 
         if (!this.isMobile) {
           this.$refs['panel_chart'].forEach(cop => {
@@ -163,7 +186,7 @@ export default {
     }
 
     .chart-detail-wrapper {
-      height: 46vw;
+      height: 60vw;
     }
   }
 }

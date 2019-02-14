@@ -34,16 +34,36 @@ const countries = {
   'China': '中国'
 }
 
-const price = [
-  [18, 24],
-  [25, 34],
-  [35, 44],
-  [45, 54],
-  [55, 64],
+const ages = [
+  '18 - 24',
+  '25 - 34',
+  '35 - 44',
+  '45 - 54',
+  '55 - 64',
   'unknown'
+]
+
+const originSite = [
+  'google.com',
+  'bing.com',
+  'yahoo.com',
+  'sogou.com',
+  'github.com',
+  'gitee.com'
+]
+
+const pages = [
+  '/home',
+  '/dashboard',
+  '/permission',
+  '/table',
+  '/excel',
+  '/icons'
 ]
 
 export default {
   countries,
-  price
+  ages,
+  originSite,
+  pages
 }

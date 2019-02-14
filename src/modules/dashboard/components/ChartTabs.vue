@@ -179,7 +179,7 @@ export default {
     padding: $spacer-base $spacer-lg;
     text-align: center;
     border-radius: initial;
-    box-shadow: none;
+    box-shadow: none !important;
     position: relative;
 
     &:before {
@@ -197,7 +197,7 @@ export default {
 
 @media screen and (max-width: $device-sm) {
   .panel-card {
-    padding: $spacer-sm $spacer-lg;
+    padding: $spacer-sm $spacer-xxs;
 
     & + .panel-card:before {
       top: $spacer-sm;

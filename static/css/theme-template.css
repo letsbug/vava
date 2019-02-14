@@ -11388,8 +11388,11 @@ dl.dl-horizontal dd + dd {
   border-color: transparent;
   border-radius: 4px;
   overflow: hidden;
-  cursor: pointer;
   transition: all 0.28s ease-in-out;
+}
+
+.va-panels.has-interaction {
+  cursor: pointer;
 }
 
 .va-panels.has-interaction:hover, .va-panels.has-interaction.checked {

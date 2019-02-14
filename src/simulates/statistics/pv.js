@@ -15,7 +15,7 @@ function generateUV(pv) {
 }
 
 /**
- * 生成按性别区分的统计
+ * 生成按性别划分的统计
  * @param uv
  * @returns {{female: number, male: number, unknown: number}}
  */
@@ -24,6 +24,27 @@ export function generateGender(uv) {
   const female = Math.floor(Math.random() * (uv - male))
   const unknown = uv - male - female
   return { male, female, unknown }
+}
+
+/**
+ * 生成按年龄段划分的统计
+ * @param uv
+ * @returns {Array}
+ */
+export function generateAges(uv) {
+  const ages = []
+  const average = uv / Dictionaries.ages.length / 2
+  Dictionaries.ages.forEach((section, i) => {
+    let total = 0
+    if (i + 1 === Dictionaries.ages.length) {
+      total = uv
+    } else {
+      total = Math.floor(Math.random() * average + average)
+      uv = uv - total
+    }
+    ages.push(Object.assign({ section }, generateGender(total), { total }))
+  })
+  return ages
 }
 
 /**
@@ -63,4 +84,25 @@ export function generatePV(date) {
   const cvr = +(Math.random() * 0.5 + 0.4).toFixed(4)
 
   return { date, pv, uv, cvr }
+}
+
+/**
+ * 生成受访页面，来源网站的TOP10列表
+ * @param pv
+ */
+export function generateTraffics(pv) {
+  const source = []
+  const interview = []
+  const average = pv / Dictionaries.originSite.length / 2
+
+  Dictionaries.originSite.forEach((url, i) => {
+    source.push({
+      url, pv: Math.floor(Math.random() * average + average)
+    })
+    interview.push({
+      url: Dictionaries.pages[i], pv: Math.floor(Math.random() * average + average)
+    })
+  })
+
+  return { source, interview }
 }

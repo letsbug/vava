@@ -54,7 +54,7 @@ export default {
     optionsLine() {
       return {
         color: [this.themeColor],
-        grid: { top: 40, right: 40, bottom: 40, left: 60 },
+        grid: this.isMobile ? { top: 10, right: 10, bottom: 20, left: 40 } : { top: 40, right: 40, bottom: 40, left: 60 },
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'axis',
           formatter: params => `${params[0].name}<br />${params[0].marker}${params[0].value}${(this.isPercent ? '%' : '')}`
@@ -65,7 +65,10 @@ export default {
           axisTick: { show: false },
           boundaryGap: false,
           data: this.category,
-          inverse: true
+          inverse: true,
+          axisLabel: {
+            color: '#6a6d71'
+          }
         },
         yAxis: {
           type: 'value',
@@ -73,6 +76,9 @@ export default {
           axisTick: { show: false },
           splitLine: {
             lineStyle: { color: '#e6edf1' }
+          },
+          axisLabel: {
+            color: '#6a6d71'
           }
         },
         axisPointer: {
