@@ -2,7 +2,7 @@ import Layout from '@/layouts'
 
 const tables = {
   path: '/tables',
-  redirect: '/tables/dynamic',
+  redirect: '/tables/table-full-feature',
   component: Layout,
   name: 'Tables',
   meta: {

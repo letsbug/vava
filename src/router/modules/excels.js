@@ -2,6 +2,7 @@ import Layout from '@/layouts'
 
 export default {
   path: '/excel',
+  redirect: '/excel/export',
   component: Layout,
   name: 'Excel',
   meta: {
