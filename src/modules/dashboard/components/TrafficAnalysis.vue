@@ -21,7 +21,7 @@
       <el-table-column prop="url" label="URL" show-overflow-tooltip>
         <template slot-scope="scope">
           <template v-if="actives === 0">
-            <a class="link-theme" target="_blank" :href="scope.row.url">{{ scope.row.url }}</a>
+            <a class="link-theme" target="_blank" :href="`https://${scope.row.url}`">{{ scope.row.url }}</a>
           </template>
           <template v-else>
             <router-link class="link-theme" :to="scope.row.url">{{ scope.row.url }}</router-link>
