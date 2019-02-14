@@ -10653,14 +10653,6 @@ dl.dl-horizontal dd + dd {
   margin-top: 15px;
 }
 
-.va-panel {
-  display: block;
-  padding: 15px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 0 2px #e6edf1;
-}
-
 .va-side-wrapper {
   height: 100%;
   padding-top: 100px;

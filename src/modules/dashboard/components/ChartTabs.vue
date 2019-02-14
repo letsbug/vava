@@ -1,5 +1,5 @@
 <template>
-  <div class="va-panel panel-card" :class="{ 'border-primary': active && !isMobile, 'text-primary': active && isMobile }">
+  <div class="va-panels panel-card" :class="{ 'border-primary': active && !isMobile, 'text-primary': active && isMobile }">
     <h6 v-if="!isMobile" class="panel-card-title" :class="active ? 'text-primary' : 'text-secondary'">
       <span>{{ title }}</span>
       <a class="handle-tab-detail" :class="{ 'text-primary': active }">

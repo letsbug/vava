@@ -18,7 +18,7 @@
     <el-row :gutter="panelGutter" class="panel-groups">
       <template v-for="(key, i) in Object.keys(data)">
         <el-col :key="key" :xs="6" :sm="6" :lg="6">
-          <chart-summary
+          <chart-tabs
             ref="panel_chart"
             :title="$t(`dashboard.${key}`)"
             :category="category"
@@ -34,23 +34,13 @@
       </template>
     </el-row>
 
-    <div class="va-panel">
-      <!--<el-row v-if="activeIndex === 3" :gutter="15">
-        <el-col :md="14" :lg="15" :xl="17">
-          <chart-map ref="chartMap" :chart-data="detailData" />
-        </el-col>
-        <el-col :md="10" :lg="9" :xl="7">
-          <chart-top5 ref="chartTop5" :chart-data="detailData" />
-        </el-col>
-      </el-row>-->
-
-      <chart-map v-if="activeIndex === 3" ref="chartMap" :chart-data="detailData" />
-
-      <chart-line
-        v-else ref="chartLine" :chart-data="detailData" :category="category"
-        :data-type="activeIndex === 2 ? 'percent' : ''"
-      />
-    </div>
+    <chart-details
+      ref="chartDetails"
+      :chart-data="detailData"
+      :category="category"
+      :is-percent="activeIndex === 2"
+      :is-chart-map="activeIndex === 3"
+    />
   </div>
 </template>
 
@@ -58,16 +48,15 @@
 import Statistics from '@/services/statistics'
 import { Loading } from 'element-ui'
 
-import ChartSummary from './components/ChartSummary'
-import ChartMap from './components/ChartMap'
-import ChartLine from './components/ChartLine'
+import ChartTabs from './components/ChartTabs'
+import ChartDetails from './components/ChartDetails'
 
 export default {
   name: 'Dashboard',
   metaInfo: {
     title: 'Dashboard'
   },
-  components: { ChartSummary, ChartLine, ChartMap },
+  components: { ChartTabs, ChartDetails },
   data() {
     return {
       dateRange: 31,
@@ -99,16 +88,9 @@ export default {
     this.checkDetails()
   },
   methods: {
-    drawCharts() {
-      if (this.activeIndex === 3) {
-        this.$refs['chartMap'].draw()
-      } else {
-        this.$refs['chartLine'].draw()
-      }
-    },
     checkDetails() {
       this.detailData = this.data[Object.keys(this.data)[this.activeIndex]].data
-      this.drawCharts()
+      this.$refs['chartDetails'].draw()
     },
     requestPv() {
       this.loadingInstance = Loading.service({
@@ -128,7 +110,7 @@ export default {
           this.category.push(v.date)
           this.data.pv.data.push(v.pv)
           this.data.uv.data.push(v.uv)
-          this.data.cvr.data.push(+(v.cvr * 100).toFixed(2))
+          this.data.cvr.data.push((v.cvr * 100).toFixed(2))
         })
 
         this.data.countries.data = res.areas
@@ -155,8 +137,15 @@ export default {
 
 .panel-groups { margin-bottom: $spacer-base; overflow: hidden; }
 
-/deep/ .chart-detail-wrapper {
-  height: 400px;
+/deep/ {
+  .va-panels {
+    background-color: $color-white;
+    box-shadow: $shadow-base;
+  }
+
+  .chart-detail-wrapper {
+    height: 400px;
+  }
 }
 
 @media screen and (max-width: $device-lg) {

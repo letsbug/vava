@@ -18,9 +18,6 @@ export default {
     },
     themeColor() {
       return this.$store.getters.theme.color
-    },
-    chartHeight() {
-      return document.body.getBoundingClientRect().width * 0.513
     }
   },
   mounted() {
