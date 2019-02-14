@@ -119,8 +119,6 @@ export default {
       Statistics.pv().then(res => {
         this.loadingInstance.close()
 
-        console.log(res)
-
         this.data.pv.total = res.totalPV
         this.data.uv.total = res.totalUV
         this.data.cvr.total = res.averageCVR
