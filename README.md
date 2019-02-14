@@ -34,6 +34,7 @@
 
 ***
 <p><img src="https://github.com/letsbug/vava/raw/master/static/images/homepage-preview.png" alt="Homepage preview"></p>
+<p><img src="https://github.com/letsbug/vava/raw/master/static/images/dashboard-preview.png" alt="Dashboard preview"></p>
 
 ## Browser Support
 All modern browsers. IE is a thing of the past!
