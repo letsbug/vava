@@ -10977,7 +10977,7 @@ dl.dl-horizontal dd + dd {
 }
 
 .va-foot-bar .va-copyright {
-  float: right;
+  display: inline;
 }
 
 .va-app-wrapper {
