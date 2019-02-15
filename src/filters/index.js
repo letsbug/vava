@@ -6,6 +6,7 @@ function getCapitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+// 首字母大写
 export function capitalize(str, firstWordOnly) {
   const words = str.split(' ')
   if (firstWordOnly) {

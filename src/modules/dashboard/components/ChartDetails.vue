@@ -56,9 +56,13 @@ export default {
       return Color.convert(`color(${this.themeColor} tint(90%))`)
     },
     optionsLine() {
+      const grid = this.isMobile
+        ? { top: 10, right: 0, bottom: 20, left: 0 }
+        : { top: 40, right: 40, bottom: 40, left: 60 }
+
       return {
         color: [this.themeColor],
-        grid: this.isMobile ? { top: 10, right: 10, bottom: 20, left: 40 } : { top: 40, right: 40, bottom: 40, left: 60 },
+        grid,
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'axis',
           formatter: params => `${params[0].name}<br />${params[0].marker}${params[0].value}${(this.isPercent ? '%' : '')}`
@@ -101,20 +105,26 @@ export default {
     optionsMap() {
       const category = this.chartData.map(v => v.name).slice(0, 5)
 
-      const geo = {
-        map: 'world',
-        itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' }
-      }
-
-      const title = {
+      const title = Object.assign({
         text: 'TOP5 COUNTRIES FOR PV',
         textStyle: { color: '#6a6d71', fontSize: 14 }
-      }
+      }, this.isMobile
+        ? { top: '45%', left: 'center' }
+        : { left: '65.6%', top: 20 }
+      )
+      const geo = Object.assign({
+        map: 'world',
+        itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' }
+      }, this.isMobile
+        ? { top: 0, right: 0, bottom: '60%', left: 0 }
+        : { top: 30, right: '40%', bottom: 30, left: 30 }
+      )
+      const grid = this.isMobile
+        ? { top: '56%', right: 0, bottom: 0, left: 0 }
+        : { top: 66, right: 60, bottom: 6, left: '66%', z: 99 }
 
       return {
-        title: Object.assign({}, title, this.isMobile
-          ? { top: '45%', left: 'center' }
-          : { left: '65.6%', top: 20 }),
+        title,
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
           formatter: params => params.data ? `${params.marker}${params.name}: ${params.value}` : undefined
@@ -129,12 +139,8 @@ export default {
           calculable: false,
           show: false
         },
-        geo: Object.assign({}, geo, this.isMobile
-          ? { top: 0, right: 0, bottom: '60%', left: 0 }
-          : { top: 30, right: '40%', bottom: 30, left: 30 }),
-        grid: this.isMobile
-          ? { top: '56%', right: 0, bottom: 0, left: 0 }
-          : { top: 66, right: 60, bottom: 6, left: '66%', z: 99 },
+        geo,
+        grid,
         xAxis: {
           type: 'value',
           show: false

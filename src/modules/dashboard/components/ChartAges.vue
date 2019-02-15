@@ -37,6 +37,16 @@ export default {
     init() {
       if (!this.chart) this.chart = echarts.init(this.$el)
 
+      const grid = this.isMobile
+        ? { top: 70, right: 0, bottom: 20, left: 0 }
+        : { top: 60, right: 0, bottom: 20, left: 50 }
+      const legend = Object.assign(
+        { itemGap: 20, data: ['male', 'female', 'unknown'] },
+        this.isMobile
+          ? { top: 30, right: 'auto', left: 0 }
+          : { top: 0, right: 0, left: 'auto' }
+      )
+
       this.chart.setOption({
         title: {
           text: 'AGE & GENDER DISTRIBUTION',
@@ -45,12 +55,7 @@ export default {
             fontSize: 14
           }
         },
-        grid: {
-          top: this.isMobile ? 70 : 60,
-          right: 0,
-          bottom: 20,
-          left: this.isMobile ? 0 : 50
-        },
+        grid,
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'axis'
         }),
@@ -59,13 +64,7 @@ export default {
           this.calcColors('#d90378'),
           this.calcColors('#6a6d71')
         ],
-        legend: {
-          top: this.isMobile ? 30 : 0,
-          left: this.isMobile ? 0 : 'auto',
-          right: this.isMobile ? 'auto' : 0,
-          data: ['male', 'female', 'unknown'],
-          itemGap: 20
-        },
+        legend,
         xAxis: {
           type: 'category',
           axisTick: { show: false },
