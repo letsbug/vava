@@ -1,5 +1,9 @@
 <template>
-  <div class="va-panels chart-detail-wrapper"></div>
+  <div
+    :class="{ 'x2': isMobile && isChartMap }"
+    class="va-panels chart-detail-wrapper"
+    style="transition: none;"
+  ></div>
 </template>
 
 <script>
@@ -97,13 +101,20 @@ export default {
     optionsMap() {
       const category = this.chartData.map(v => v.name).slice(0, 5)
 
+      const geo = {
+        map: 'world',
+        itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' }
+      }
+
+      const title = {
+        text: 'TOP5 COUNTRIES FOR PV',
+        textStyle: { color: '#6a6d71', fontSize: 14 }
+      }
+
       return {
-        title: {
-          text: 'TOP5 COUNTRIES FOR PV',
-          textStyle: { color: '#6a6d71', fontSize: 14 },
-          left: '65.6%',
-          top: 20
-        },
+        title: Object.assign({}, title, this.isMobile
+          ? { top: '45%', left: 'center' }
+          : { left: '65.6%', top: 20 }),
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
           formatter: params => params.data ? `${params.marker}${params.name}: ${params.value}` : undefined
@@ -118,17 +129,12 @@ export default {
           calculable: false,
           show: false
         },
-        geo: {
-          map: 'world',
-          itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' },
-          top: 30,
-          right: this.isMobile ? 0 : '40%',
-          bottom: 30,
-          left: 30
-        },
-        grid: [
-          { top: 66, right: 60, bottom: 6, left: '66%', z: 99 }
-        ],
+        geo: Object.assign({}, geo, this.isMobile
+          ? { top: 0, right: 0, bottom: '60%', left: 0 }
+          : { top: 30, right: '40%', bottom: 30, left: 30 }),
+        grid: this.isMobile
+          ? { top: '56%', right: 0, bottom: 0, left: 0 }
+          : { top: 66, right: 60, bottom: 6, left: '66%', z: 99 },
         xAxis: {
           type: 'value',
           show: false
@@ -169,6 +175,7 @@ export default {
 
       if (this.chartTypeChanged) {
         this.chart.clear()
+        this.chart.resize()
         this.chartTypeChanged = false
       }
 

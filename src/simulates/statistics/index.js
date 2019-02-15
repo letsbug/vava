@@ -50,10 +50,9 @@ export default {
     const averageUV = Math.floor(totalUV / _days)
     averageCVR = +(averageCVR / _days).toFixed(4)
     const areas = generateAreas(totalPV)
-    const totalArea = Object.keys(areas).filter(k => areas[k] > 0).length
     const ages = generateAges(totalUV)
     const traffics = generateTraffics(totalPV)
 
-    return { totalPV, totalUV, totalArea, averagePV, averageUV, averageCVR, areas, ages, data, traffics }
+    return { totalPV, totalUV, averagePV, averageUV, averageCVR, areas, ages, data, traffics }
   }
 }

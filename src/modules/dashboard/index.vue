@@ -78,7 +78,7 @@ export default {
         pv: { total: 0, data: [] },
         uv: { total: 0, data: [] },
         cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
-        countries: { total: 0, data: [], top5: [] }
+        countries: { total: 0, data: [] }
       },
       activeIndex: 0,
       detailData: [],
@@ -121,7 +121,7 @@ export default {
         this.data.pv.total = res.totalPV
         this.data.uv.total = res.totalUV
         this.data.cvr.total = res.averageCVR
-        this.data.countries.total = res.totalArea
+        this.data.countries.total = res.areas.length
 
         res.data.forEach(v => {
           this.category.push(v.date)
@@ -184,6 +184,10 @@ export default {
 
     .chart-detail-wrapper {
       height: 60vw;
+
+      &.x2 {
+        height: 120vw;
+      }
     }
   }
 }
