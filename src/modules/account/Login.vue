@@ -94,7 +94,8 @@ export default {
         if (!v) return false
         this.loading = true
         this.$store.dispatch('user_login', this.form).then(() => {
-          this.loading = false
+          // 登录成功之后，还需要加载很多路由，除非遇到异常，否则可以不取消按钮的loading状态
+          // this.loading = false
           this.$message.closeAll()
           this.$router.push(this.$route.query['redirect'] || '/')
         }).catch(() => { this.loading = false })
