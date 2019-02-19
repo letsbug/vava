@@ -3,7 +3,7 @@
     <!-- left navs -->
     <div class="va-head-nav clear-fix">
       <!-- sidebar expander -->
-      <a class="va-nav-item" @click.stop="toggleSidebar">
+      <a id="hamburger" class="va-nav-item" @click.stop="toggleSidebar">
         <va-icon :icon="sidebarOpend ? 'action-collapse' : 'action-expand'" />
       </a>
 

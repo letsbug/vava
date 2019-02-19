@@ -19,8 +19,9 @@ export default {
   },
   router: {
     home: 'Home',
+    guide: 'Guide',
     dashboard: 'Dashboard',
-    reports: 'Reports',
+    cache: 'Router Cache',
     components: 'Components',
     richText: 'Rich Text',
     countTo: 'Count To',
@@ -30,6 +31,7 @@ export default {
     draggable: 'Draggable',
     fullFeature: 'FullFeature',
     iconViewer: 'Icon Viewer',
+    exception: 'Exception Pages',
     excel: 'Excel',
     excelExport: 'Export Excel',
     excelImport: 'Import Excel',
@@ -112,6 +114,10 @@ export default {
   homepage: {
     welcome: 'Welcome back, dear '
   },
+  guide: {
+    hint: 'It can give novice users some basic operating guidelines, based on the <a class="link-theme" href="https://www.npmjs.com/package/driver.js" target="_blank">driver.js</a> implementation.',
+    start: 'Try It'
+  },
   dashboard: {
     filters: {
       31: 'Last month',
@@ -127,6 +133,9 @@ export default {
     uv: 'uv',
     cvr: 'cvr',
     countries: 'countries'
+  },
+  cache: {
+    hint: 'Test route cache in desktop, input something, and jump to others route and back.'
   },
   notification: {
     title: 'notification',
@@ -156,6 +165,12 @@ export default {
     usage: 'Usage',
     content: 'Just use <strong>va-icon</strong> component to use icons, Like &lt;va-icon icon="dashboard"/&gt;.',
     list: 'Icons<small class="text-muted hidden-sm-and-down">Click them to copy HTML.</small>'
+  },
+  exception: {
+    404: 'Trigger 404 error',
+    403: 'Trigger 403 error',
+    401: 'Trigger 401 error',
+    500: 'Trigger 500 error'
   },
   excelExport: {
     filename: 'Filename',

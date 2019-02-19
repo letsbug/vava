@@ -32,7 +32,7 @@
 
       <!-- Tabs options -->
       <el-dropdown class="tabs-more" trigger="click" @command="onOptionCommand">
-        <a class="va-tabs-item">
+        <a id="tabsRightOptions" class="va-tabs-item">
           <i class="el-icon-arrow-down"></i>
         </a>
         <el-dropdown-menu slot="dropdown">

@@ -25,7 +25,7 @@
         <el-button size="mini" type="primary" @click="handleSubmit">{{ $t('theme.actions.confirm') }}</el-button>
       </div>
     </template>
-    <a slot="reference" class="va-nav-item hidden-xs-only">
+    <a id="themePicker" slot="reference" class="va-nav-item hidden-xs-only">
       <va-icon icon="thing-shirt" />
     </a>
   </el-popover>

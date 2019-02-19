@@ -7,7 +7,7 @@
     </h4>
     <h5>{{ $t(`errors.type${code}`) }}</h5>
     <p>
-      <a href="/" class="linker" @click.prevent.stop="$router.go(-1)">
+      <a v-if="!noGoBack" href="/" class="linker" @click.prevent.stop="$router.go(-1)">
         {{ $t('errors.actionBack') }}
       </a>
       <router-link class="linker" to="/">
@@ -33,6 +33,9 @@ export default {
     flag() {
       const random = Math.floor(Math.random() * 4 + 1)
       return `./static/images/errors/err-${random}.gif`
+    },
+    noGoBack() {
+      return this.$route.query['noGoBack']
     }
   }
 }

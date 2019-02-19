@@ -68,19 +68,31 @@ export const constantRouteMap = [
 
 export const asyncRouteMap = [
 
+  {
+    path: '/guide',
+    component: Layout,
+    redirect: '/guide/',
+    children: [{
+      path: '',
+      name: 'Guide',
+      meta: { title: 'guide', icon: 'action-guide' },
+      component: () => import('@/modules/guide')
+    }]
+  },
+
   Dashboard,
 
   Permissions,
 
   {
-    path: '/report',
+    path: '/cache',
     component: Layout,
-    redirect: '/report/',
+    redirect: '/cache/',
     children: [{
       path: '',
-      name: 'Report',
-      meta: { title: 'report', icon: 'chart-bar', nobg: true },
-      component: () => import('@/modules/report/Report')
+      name: 'Cache',
+      meta: { title: 'cache', icon: 'chart-bar' },
+      component: () => import('@/modules/cache')
     }]
   },
 
@@ -101,6 +113,18 @@ export const asyncRouteMap = [
         nocache: true
       },
       component: () => import('@/modules/icons/IconViewer')
+    }]
+  },
+
+  {
+    path: '/exception',
+    component: Layout,
+    redirect: '/exception',
+    children: [{
+      path: '',
+      name: 'Exception',
+      meta: { title: 'exception', icon: 'mark-exception' },
+      component: () => import('@/modules/exception')
     }]
   },
 

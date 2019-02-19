@@ -19,8 +19,9 @@ export default {
   },
   router: {
     home: '首页',
+    guide: '新手指引',
     dashboard: '仪表盘',
-    report: '报表',
+    cache: '路由缓存',
     components: '组件',
     richText: '富文本编辑器',
     countTo: '数字计数器',
@@ -30,6 +31,7 @@ export default {
     draggable: '拖拽排序',
     fullFeature: '综合使用',
     iconViewer: '图标',
+    exception: '异常页面',
     excel: 'Excel',
     excelExport: '导出',
     excelImport: '导入',
@@ -112,6 +114,10 @@ export default {
   homepage: {
     welcome: '欢迎回来，亲爱的 '
   },
+  guide: {
+    hint: '可以给新手用户一些基本的操作指引，基于<a class="link-theme" href="https://www.npmjs.com/package/driver.js" target="_blank">driver.js</a>实现。',
+    start: '试试效果'
+  },
   dashboard: {
     filters: {
       31: '近一个月',
@@ -127,6 +133,9 @@ export default {
     uv: '访客数',
     cvr: '转化率',
     countries: '国家总数'
+  },
+  cache: {
+    hint: '此页面用于测试页面缓存功能，方法：在输入框随便输入一些东西，然后切换路由再切换回来。'
   },
   notification: {
     title: '通知中心',
@@ -156,6 +165,12 @@ export default {
     usage: '使用方法',
     content: '使用 <strong>va-icon</strong> 组件来使用内置图标, 例如： &lt;va-icon icon="dashboard"/&gt;.',
     list: '图标列表<small class="text-muted hidden-sm-and-down">点击任意一个直接复制代码.</small>'
+  },
+  exception: {
+    404: '触发404',
+    403: '触发403',
+    401: '触发401',
+    500: '触发500'
   },
   excelExport: {
     filename: '文件名',
