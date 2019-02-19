@@ -81,6 +81,7 @@ export default {
   },
   destroyed() {
     document.body.removeChild(this.backdrop)
+    this.loading = false
   },
   methods: {
     fillLoginForm(user) {
@@ -95,6 +96,7 @@ export default {
         this.loading = true
         this.$store.dispatch('user_login', this.form).then(() => {
           // 登录成功之后，还需要加载很多路由，除非遇到异常，否则可以不取消按钮的loading状态
+          // loading状态可以放到 "destroyed" 生命周期里面改变。
           // this.loading = false
           this.$message.closeAll()
           this.$router.push(this.$route.query['redirect'] || '/')
