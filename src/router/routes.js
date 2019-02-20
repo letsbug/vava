@@ -8,15 +8,15 @@ import Tables from './modules/tables'
 import Excels from './modules/excels'
 
 /**
- * @param nocache {boolean} - Whether the tag needs to cache the route to avoid repeating the rendered DOM
- *                            when switching routes frequently (true - not allow)
  * @param hidden {boolean} - Marks whether the route is visible and displayed when the template is rendered.
  * @param alwaysShow: {boolean} - Always show the root menu in side-menu, whatever its child routes length
  * @param meta {Object}
- *        title - side-menu & tab-bar display name
- *        icon -  side-menu display icon.
- *        notab - Do not add in tabs-bar.
- *        nobg - remove AppBody component's background, must use in secondary route.
+ *        title {string} - side-menu & tab-bar display name.
+ *        icon {string} -  side-menu display icon name.
+ *        notab {boolean} - Mark whether this route is not shown in the system TAB bar (true - not show).
+ *        nobg {boolean} - Whether to remove the background color of the route page (true - remove).
+ *        nocache {boolean} - Mark whether route is allowed to be cached (true - not allow).
+*         roles {Array} - Role permission list for route.
  * @type {VueRouter[]}
  */
 export const constantRouteMap = [
@@ -123,7 +123,7 @@ export const asyncRouteMap = [
     children: [{
       path: '',
       name: 'Exception',
-      meta: { title: 'exception', icon: 'mark-exception' },
+      meta: { title: 'exception', icon: 'mark-exception', nocache: true },
       component: () => import('@/modules/exception')
     }]
   },
