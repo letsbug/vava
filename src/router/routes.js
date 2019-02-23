@@ -41,6 +41,19 @@ export const constantRouteMap = [
   { path: '/error', component: () => import('@/modules/errors'), hidden: true },
 
   {
+    path: '/search/:keyword',
+    component: Layout,
+    redirect: '/search/',
+    children: [{
+      path: '',
+      name: 'GlobalSearch',
+      meta: { title: 'search', icon: 'action-search', notab: true },
+      component: () => import('@/modules/search/GlobalSearch')
+    }],
+    hidden: true
+  },
+
+  {
     path: '',
     component: Layout,
     redirect: 'home',
@@ -53,20 +66,16 @@ export const constantRouteMap = [
   },
 
   {
-    path: '/search/:keyword',
+    path: '/about',
     component: Layout,
-    redirect: '/search/',
+    redirect: '/about/',
     children: [{
       path: '',
-      name: 'GlobalSearch',
-      meta: { title: 'search', icon: 'action-search', notab: true },
-      component: () => import('@/modules/search/GlobalSearch')
-    }],
-    hidden: true
-  }
-]
-
-export const asyncRouteMap = [
+      name: 'About',
+      meta: { title: 'about', icon: 'mark-states-info', nocache: true },
+      component: () => import('@/modules/about')
+    }]
+  },
 
   {
     path: '/guide',
@@ -78,7 +87,10 @@ export const asyncRouteMap = [
       meta: { title: 'guide', icon: 'action-guide' },
       component: () => import('@/modules/guide')
     }]
-  },
+  }
+]
+
+export const asyncRouteMap = [
 
   Dashboard,
 

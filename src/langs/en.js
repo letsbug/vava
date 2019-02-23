@@ -19,6 +19,7 @@ export default {
   },
   router: {
     home: 'Home',
+    about: 'About VAVA',
     guide: 'Guide',
     dashboard: 'Dashboard',
     cache: 'Router Cache',
@@ -113,6 +114,9 @@ export default {
   },
   homepage: {
     welcome: 'Welcome back, dear '
+  },
+  about: {
+    intro: '<p class="paragraph-indent">VAVA is a back-end integration solution based on \'vue.js\' and \'element-ui\'. it is detached from my own project and remains iterative and optimized. It uses the latest front-end technology stack. Built-in authority verification, dynamic routing, theme switch and other background basic functions.</p>'
   },
   guide: {
     hint: 'It can give novice users some basic operating guidelines, based on the <a class="link-theme" href="https://www.npmjs.com/package/driver.js" target="_blank">driver.js</a> implementation.',

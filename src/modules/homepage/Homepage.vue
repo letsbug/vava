@@ -2,9 +2,9 @@
   <div class="va-body-container">
     <github-corner />
     <div class="content-homepage text-center">
-      <h2 class="title">
+      <h1 class="title">
         {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
-      </h2>
+      </h1>
       <div ref="roleImage" class="role-image text-primary">
         <!-- The role image will be inserted here -->
       </div>

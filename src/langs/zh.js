@@ -19,6 +19,7 @@ export default {
   },
   router: {
     home: '首页',
+    about: '关于VAVA',
     guide: '新手指引',
     dashboard: '仪表盘',
     cache: '路由缓存',
@@ -113,6 +114,9 @@ export default {
   },
   homepage: {
     welcome: '欢迎回来，亲爱的 '
+  },
+  about: {
+    intro: '<p class="paragraph-indent">vava 是一个基于vue.js和element-ui构建的，从我自己项目中剥离出来，并一直保持迭代和优化的一个后台集成解决方案。它使用了时下最新的前端技术栈，内置了权限验证、动态路由、主题切换等后台基本功能。</p>'
   },
   guide: {
     hint: '可以给新手用户一些基本的操作指引，基于<a class="link-theme" href="https://www.npmjs.com/package/driver.js" target="_blank">driver.js</a>实现。',
