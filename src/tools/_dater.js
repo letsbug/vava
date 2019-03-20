@@ -8,7 +8,7 @@ export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
   if (!date) return 'Null'
 
   // Convert the millisecond Date to Date
-  if (Object.prototype.toString().call(date) !== '[object Date]') {
+  if (Object.prototype.toString.call(date) !== '[object Date]') {
     try {
       date = new Date(+date)
     } catch (e) {

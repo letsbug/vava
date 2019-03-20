@@ -10538,6 +10538,14 @@
   background-color: #dc3545 !important;
 }
 
+.paragraph {
+  line-height: 2;
+}
+
+.paragraph-indent {
+  text-indent: 2em;
+}
+
 .text-left {
   text-align: left;
 }
