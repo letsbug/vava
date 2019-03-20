@@ -5,12 +5,15 @@
  * @returns {string|null|undefined}
  */
 export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
-  if (!date) return null
+  if (!date) return 'Null'
 
   // Convert the millisecond Date to Date
-  if (typeof date !== 'object') {
-    if (('' + date).length === 10) date = +date * 1000
-    date = new Date(+date)
+  if (Object.prototype.toString().call(date) !== '[object Date]') {
+    try {
+      date = new Date(+date)
+    } catch (e) {
+      return 'Wrong date format'
+    }
   }
 
   if (/(y+)/.test(fmt)) {

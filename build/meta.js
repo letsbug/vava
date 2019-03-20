@@ -5,6 +5,15 @@
  */
 
 module.exports = {
+
+  /*
+   * 强制浏览器渲染模式
+   */
+  'X-UA-Compatible': {
+    'http-equiv': 'X-UA-Compatible',
+    'content': 'IE=edge, chrome=1'
+  },
+
   /*
    * 可以让布局在移动浏览器上显示的更好。
    * @param width viewport 宽度
@@ -35,6 +44,15 @@ module.exports = {
   'format-detection': 'telephone=no',
 
   /*
+   * 浏览器内容安全政策（白名单控制）
+   * config rules: https://content-security-policy.com/
+   */
+  'Content-Security-Policy': {
+    'http-equiv': 'Content-Security-Policy',
+    'content': `default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:;`
+  },
+
+  /*
    * 定义网页搜索引擎索引方式
    * @param follow 跟踪链接并分析目标网页。这是默认行为，并且可忽略。
    * @param index 将网页编入索引。这是默认行为，并且可忽略。
@@ -52,7 +70,9 @@ module.exports = {
 
   'description': 'A minimal admin template based on vue@2.5.2 and element-ui@2.4.5.',
 
+  //
   // 关于移动端SEO优化
+  //
 
   // IOS
 
