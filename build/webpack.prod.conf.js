@@ -52,13 +52,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
-      inject: true,
-      favicon: path.resolve(__dirname, '../favicon.ico'),
-      meta: meta,
       templateParameters: {
         TITLE: 'Vava',
         BASE_URL: config.build.assetsPublicPath + config.build.assetsSubDirectory
       },
+      meta: meta,
+      favicon: path.resolve(__dirname, '../favicon.ico'),
+      inject: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,

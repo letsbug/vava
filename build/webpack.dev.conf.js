@@ -68,13 +68,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
-      inject: true,
-      favicon: path.resolve(__dirname, '../favicon.ico'),
-      meta: meta,
       templateParameters: {
         TITLE: 'Vava',
         BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory
-      }
+      },
+      meta: meta,
+      favicon: path.resolve(__dirname, '../favicon.ico'),
+      inject: true
     }),
     // copy custom static assets
     new CopyWebpackPlugin([{
