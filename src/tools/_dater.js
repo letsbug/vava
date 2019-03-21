@@ -7,10 +7,9 @@
 export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
   if (!date) return 'Null'
 
-  // Convert the millisecond Date to Date
   if (Object.prototype.toString.call(date) !== '[object Date]') {
     try {
-      date = new Date(+date)
+      date = new Date(date)
     } catch (e) {
       return 'Wrong date format'
     }
@@ -36,13 +35,14 @@ export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
 }
 
 export const dateAgo = date => {
-  if (!date) return null
+  if (!date) return 'Null'
 
-  if (typeof date === 'string') date = new Date(date)
-
-  if (typeof date !== 'object') {
-    if (('' + date).length === 10) date = +date * 1000
-    date = new Date(+date)
+  if (Object.prototype.toString.call(date) !== '[object Date]') {
+    try {
+      date = new Date(date)
+    } catch (e) {
+      return 'Wrong date convert'
+    }
   }
 
   const diff = (new Date() - date) / 1000
