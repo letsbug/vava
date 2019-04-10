@@ -1,6 +1,6 @@
 <template>
   <transition name="el-zoom-in-top">
-    <ul v-show="visible" ref="contextMenus" :style="axis" class="va-context-menu">
+    <ul v-show="visible" ref="contextMenus" :style="axis" class="va-context-menu" @click.stop>
       <li
         v-for="item in options"
         :key="item.name"
@@ -19,6 +19,10 @@ export default {
   props: {
     options: {
       type: Array,
+      required: true
+    },
+    target: {
+      type: Object,
       required: true
     }
   },
@@ -51,7 +55,7 @@ export default {
   methods: {
     handleClick(data) {
       if (data.disabled) return
-      if (data.callback && typeof data.callback === 'function') data.callback()
+      if (data.callback && typeof data.callback === 'function') data.callback(this.target)
       this.close()
     },
     open($event) {
@@ -61,16 +65,7 @@ export default {
       }
       this.visible = true
     },
-    close($e) {
-      if ($e) {
-        const cl = $e.target.classList
-        let targetIsMenu = false
-        cl.forEach(v => {
-          if (/^va-context-menu/.test(v)) targetIsMenu = true
-        })
-        if (targetIsMenu) return
-      }
-
+    close() {
       this.visible = false
       setTimeout(() => {
         this.axis = {}

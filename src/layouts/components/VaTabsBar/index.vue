@@ -15,7 +15,7 @@
           <router-link
             v-if="!route.notab" ref="tabs"
             :key="route.path" :to="route.path" class="va-tabs-item"
-            @contextmenu.prevent.native="handleOpenContextMenu"
+            @contextmenu.prevent.native="openContextMenu($event, route)"
           >
             <span class="tabs-item-name">
               {{ generateTitle(route.title) }}
@@ -28,25 +28,7 @@
       </scroll-pane>
 
       <!-- Closeable tabs context menu -->
-      <context-menu ref="tabsContext" :options="tabsOptions" class="tabs-context-menu" />
-
-      <!-- Tabs options -->
-      <el-dropdown class="tabs-more" trigger="click" @command="onOptionCommand">
-        <a id="tabsRightOptions" class="va-tabs-item">
-          <i class="el-icon-arrow-down"></i>
-        </a>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item :command="close" :disabled="history.length < 1">
-            {{ $t('tabBar.close') }}
-          </el-dropdown-item>
-          <el-dropdown-item :command="closeOthers" :disabled="history.length < 2">
-            {{ $t('tabBar.closeOthers') }}
-          </el-dropdown-item>
-          <el-dropdown-item :command="closeAll" :disabled="history.length < 2">
-            {{ $t('tabBar.closeAll') }}
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <context-menu ref="tabsContext" :options="tabsOptions" :target="selectedTab" class="tabs-context-menu" />
     </template>
   </div>
 </template>
@@ -65,7 +47,8 @@ export default {
         { name: this.$t('tabBar.close'), callback: this.close },
         { name: this.$t('tabBar.closeOthers'), callback: this.closeOthers },
         { name: this.$t('tabBar.closeAll'), callback: this.closeAll }
-      ]
+      ],
+      selectedTab: {}
     }
   },
   computed: {
@@ -76,12 +59,12 @@ export default {
     $route() {
       this.add()
       this.scrollToCurrentTab()
-      this.handleReCalcContextStatus()
+      this.reCalcContextStatus()
     }
   },
   mounted() {
     this.add()
-    this.handleReCalcContextStatus()
+    this.reCalcContextStatus()
   },
   methods: {
     isActive(route) {
@@ -106,16 +89,16 @@ export default {
       if (meta.notab || !name || path === '/home') return
       this.$store.dispatch('tabs_add', this.$route)
     },
-    close() {
-      const target = { name: this.$route.name, path: this.$route.path, title: this.$route.meta.title }
+    close(target) {
+      if (!target) throw new Error('Unknown target tabs which you want to close.')
       this.$store.dispatch('tabs_del', target).then(routes => {
         if (!this.isActive(target)) return
         const latest = routes.splice(-1)[0]
         this.$router.push({ path: latest ? latest.path : '/home' })
       })
     },
-    closeOthers() {
-      const target = { name: this.$route.name, path: this.$route.path, title: this.$route.meta.title }
+    closeOthers(target) {
+      if (!target) throw new Error('Unknown target tabs which you want to not close.')
       this.$router.push(target)
       this.$store.dispatch('tabs_del_others', target)
     },
@@ -124,17 +107,15 @@ export default {
         this.$router.push('/')
       })
     },
-    handleReCalcContextStatus() {
+    reCalcContextStatus() {
       const tabsLength = this.history.length
       this.$set(this.tabsOptions[0], 'disabled', tabsLength < 1)
       this.$set(this.tabsOptions[1], 'disabled', tabsLength < 2)
       this.$set(this.tabsOptions[2], 'disabled', tabsLength < 2)
     },
-    handleOpenContextMenu($e) {
+    openContextMenu($e, tar) {
       this.$refs['tabsContext'].open($e)
-    },
-    onOptionCommand(tar) {
-      tar()
+      this.selectedTab = tar
     },
     generateTitle
   }
