@@ -10538,6 +10538,14 @@
   background-color: #dc3545 !important;
 }
 
+.paragraph {
+  line-height: 2;
+}
+
+.paragraph-indent {
+  text-indent: 2em;
+}
+
 .text-left {
   text-align: left;
 }
@@ -10851,7 +10859,6 @@ dl.dl-horizontal dd + dd {
   line-height: 36px;
   background-color: #ffffff;
   padding-left: 44px;
-  padding-right: 44px;
   font-size: 0;
   position: absolute;
   top: 45px;
