@@ -7,17 +7,16 @@
 export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
   if (!date) return 'Null'
 
-  // Convert the millisecond Date to Date
   if (Object.prototype.toString.call(date) !== '[object Date]') {
     try {
-      date = new Date(+date)
+      date = new Date(date)
     } catch (e) {
       return 'Wrong date format'
     }
   }
 
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+    fmt = fmt.replace(RegExp.$1, date.getFullYear().toString().substr(4 - RegExp.$1.length))
   }
   const o = {
     'M+': date.getMonth() + 1,
@@ -26,23 +25,26 @@ export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
     'm+': date.getMinutes(),
     's+': date.getSeconds()
   }
-  for (const k in o) {
+  Object.keys(o).forEach(k => {
     if (new RegExp(`(${k})`).test(fmt)) {
       const str = o[k] + ''
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : ('00' + str).substr(str.length))
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1)
+        ? str
+        : `00${str}`.substr(str.length))
     }
-  }
+  })
   return fmt
 }
 
 export const dateAgo = date => {
-  if (!date) return null
+  if (!date) return 'Null'
 
-  if (typeof date === 'string') date = new Date(date)
-
-  if (typeof date !== 'object') {
-    if (('' + date).length === 10) date = +date * 1000
-    date = new Date(+date)
+  if (Object.prototype.toString.call(date) !== '[object Date]') {
+    try {
+      date = new Date(date)
+    } catch (e) {
+      return 'Wrong date convert'
+    }
   }
 
   const diff = (new Date() - date) / 1000
