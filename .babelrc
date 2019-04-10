@@ -9,13 +9,7 @@
   ],
   "plugins": [
     "@vue/babel-plugin-transform-vue-jsx",
-    "@babel/transform-runtime"
-  ],
-  "env": {
-    "development":{
-      "plugins": [
-        "@babel/syntax-dynamic-import"
-      ]
-    }
-  }
+    "@babel/transform-runtime",
+    "@babel/plugin-syntax-dynamic-import"
+  ]
 }
