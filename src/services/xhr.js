@@ -1,5 +1,5 @@
 // XMLHttpRequest
-export function xhr(url, async) {
+export function xhr(url, async = true) {
   return new Promise((resolve, reject) => {
     const client = new XMLHttpRequest()
     client.onreadystatechange = () => {
