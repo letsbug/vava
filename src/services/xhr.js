@@ -1,5 +1,5 @@
 // XMLHttpRequest
-export function xhr(url) {
+export function xhr(url, async) {
   return new Promise((resolve, reject) => {
     const client = new XMLHttpRequest()
     client.onreadystatechange = () => {
@@ -13,7 +13,7 @@ export function xhr(url) {
         })
       } else reject(new Error(client.statusText))
     }
-    client.open('GET', url)
+    client.open('GET', url, async)
     client.send()
   })
 }
