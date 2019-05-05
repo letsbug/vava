@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import Copyright from '@/components/Copyright'
+import { Copyright } from '@/components'
 import { Regulars } from '@/tools'
 import { validCaptcha, validPassword } from '@/tools/validators'
 

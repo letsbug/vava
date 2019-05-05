@@ -1,11 +1,7 @@
 import Layout from '@/layouts'
 
 // modules
-import Dashboard from './modules/dashboards'
-import Permissions from './modules/permissions'
-import Components from './modules/components'
-import Tables from './modules/tables'
-import Excels from './modules/excels'
+import { Dashboard, Permissions, Components, Tables, Excels } from './modules'
 
 /**
  * @param hidden {boolean} - Marks whether the route is visible and displayed when the template is rendered.

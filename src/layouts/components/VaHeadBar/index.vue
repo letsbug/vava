@@ -55,11 +55,9 @@
 </template>
 
 <script>
-import Breadcrumb from '@/components/Breadcrumb'
-import RouterRefresh from '@/components/RouterRefresh'
-import ScreenFull from '@/components/ScreenFull'
-import LanguagePicker from '@/components/LanguagePicker'
-import ThemePicker from '@/components/ThemePicker'
+import {
+  Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker
+} from '@/components'
 import UserActions from './UserActions'
 
 export default {

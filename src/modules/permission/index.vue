@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import UserPicker from '@/components/UserPicker'
+import { UserPicker } from '@/components'
 
 export default {
   name: 'Admin',

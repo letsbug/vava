@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import GithubCorner from '@/components/GithubCorner'
+import { GithubCorner } from '@/components'
 import { xhr } from '@/services/xhr'
 
 export default {

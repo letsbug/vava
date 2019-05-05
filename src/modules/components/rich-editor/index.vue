@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ITinymce from '@/components/ITinymce'
+import { ITinymce } from '@/components'
 import { content } from '@/components/ITinymce/plugins'
 import { Highlight } from '@/directives'
 

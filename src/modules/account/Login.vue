@@ -52,9 +52,7 @@
 </template>
 
 <script>
-import LanguagePicker from '@/components/LanguagePicker'
-import UserPicker from '@/components/UserPicker'
-import Copyright from '@/components/Copyright'
+import { LanguagePicker, UserPicker, Copyright } from '@/components'
 import { validUsername, validPassword } from '@/tools/validators'
 
 export default {

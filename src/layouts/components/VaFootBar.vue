@@ -1,6 +1,6 @@
 <template>
   <div class="va-foot-bar">
-    <va-copyright />
+    <copyright />
     <div class="float-r">
       <a aria-label="View source on GitHub" href="https://github.com/letsbug/vava" target="_blank">
         <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" style="display: inline-block; vertical-align: -5px;">
@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import VaCopyright from '@/components/Copyright'
+import { Copyright } from '@/components'
 
 export default {
-  components: { VaCopyright }
+  components: { Copyright }
 }
 </script>

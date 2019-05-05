@@ -54,13 +54,10 @@
 </template>
 
 <script>
-import Statistics from '@/services/statistics'
+import { ChartTabs, ChartDetails, ChartAges, TrafficAnalysis } from './components'
 import { Loading } from 'element-ui'
 
-import ChartTabs from './components/ChartTabs'
-import ChartDetails from './components/ChartDetails'
-import ChartAges from './components/ChartAges'
-import TrafficAnalysis from './components/TrafficAnalysis'
+import Statistics from '@/services/statistics'
 
 export default {
   name: 'Dashboard',

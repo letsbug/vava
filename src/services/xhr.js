@@ -1,4 +1,9 @@
-// XMLHttpRequest
+/**
+ * XMLHttpRequest
+ * @param url
+ * @param async
+ * @returns {Promise<any>}
+ */
 export function xhr(url, async = true) {
   return new Promise((resolve, reject) => {
     const client = new XMLHttpRequest()

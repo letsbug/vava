@@ -14,15 +14,15 @@
         {{ $t('errors.actionHome') }}
       </router-link>
     </p>
-    <va-copyright />
+    <copyright />
   </div>
 </template>
 
 <script>
-import VaCopyright from '@/components/Copyright'
+import { Copyright } from '@/components'
 export default {
   name: 'Error',
-  components: { VaCopyright },
+  components: { Copyright },
   metaInfo: {
     title: 'Oops! got an error!'
   },

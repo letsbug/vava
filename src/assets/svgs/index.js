@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VaSvgs from '@/components/VaSvgs'
+import { VaSvgs } from '@/components'
 
 // Register as a global component
 Vue.component('VaSvgs', VaSvgs)

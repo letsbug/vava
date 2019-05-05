@@ -1,0 +1,5 @@
+export { default as Dashboard } from './dashboards'
+export { default as Permissions } from './permissions'
+export { default as Components } from './components'
+export { default as Tables } from './tables'
+export { default as Excels } from './excels'

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ExcelImporter from '@/components/ExcelImporter'
+import { ExcelImporter } from '@/components'
 
 export default {
   name: 'Import',
