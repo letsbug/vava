@@ -32,8 +32,7 @@ const permission = {
     }
   },
   actions: {
-    perm_generate_routes: ({ commit }, data) => new Promise(resolve => {
-      const { roles } = data
+    perm_generate_routes: ({ commit }, roles) => new Promise(resolve => {
       const accessRoutes = roles.includes('admin')
         ? asyncRouteMap
         : filterAsyncRoutes(asyncRouteMap, roles)

@@ -15,7 +15,7 @@ function hasPermission(roles, permissionRoles) {
   return roles.some(role => ~permissionRoles.indexOf(role))
 }
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   NProgress.start()
   if (Token.get()) {
     // When the user has already logged in.
@@ -23,29 +23,30 @@ router.beforeEach((to, from, next) => {
       next('/')
       NProgress.done()
     } else {
-      if (store.getters.roles.length === 0) {
-        store.dispatch('user_info').then(res => {
-          const roles = res.data.roles
-          store.dispatch('perm_generate_routes', { roles }).then(() => {
-            // Remove this line when you need to change permissions dynamically,
-            // and import all routes when the vue route is initialized
-            // router.addRoutes(store.getters.routes_addons)
+      const { roles } = store.getters
 
-            // replace: true so the navigation will not leave a history record
-            // hack方法 确保addRoutes已完成,
-            next({ ...to, replace: true })
-          })
-        }).catch(err => {
-          store.dispatch('user_exit').then(() => {
-            Message.error(err.message || 'Verification failed, please login again.')
-            next('/')
-          })
-        })
-      } else {
+      if (roles && roles.length > 0) {
         if (hasPermission(store.getters.roles, to.meta.roles)) {
           next()
         } else {
           next({ path: '/error', replace: true, query: { code: 403, noGoBack: true }})
+        }
+      } else {
+        try {
+          const { roles } = await store.dispatch('user_info')
+          await store.dispatch('perm_generate_routes', roles)
+          // Remove this line when you need to change permissions dynamically,
+          // and import all routes when the vue route is initialized
+          // router.addRoutes(store.getters.routes_addons)
+
+          // replace: true so the navigation will not leave a history record
+          next({ ...to, replace: true })
+        } catch (e) {
+          await store.dispatch('user_exit')
+
+          Message.error(e || 'Verification failed, please login again.')
+          next('/')
+          NProgress.done()
         }
       }
     }
@@ -53,17 +54,14 @@ router.beforeEach((to, from, next) => {
     // redirected to the login page.
     // The user is not logged in.
     if (whitelist.indexOf(to.path) === -1) {
-      next({
-        path: '/login',
-        query: { redirect: to.path }
-      })
+      next(`/login?redirect=${to.path}`)
       NProgress.done()
     } else {
       next()
     }
     // The user login has expired.
     if (store.getters.user.token) {
-      store.dispatch('user_logout')
+      await store.dispatch('user_logout')
       Message({
         type: 'error',
         message: 'Your login has expired. Please login again.',

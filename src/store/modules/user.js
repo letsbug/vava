@@ -53,21 +53,21 @@ const user = {
     }),
     user_info: ({ commit, state }) => new Promise((resolve, reject) => {
       Account.info(state.token).then(res => {
-        if (!res.data) reject(new Error('Got a error when get user info.'))
+        const { data } = res
+        if (!data) reject(new Error('Valid failed, please Login again.'))
 
-        const data = res.data
-        if (data.roles && data.roles.length > 0) {
-          commit('USER_SET_ROLES', data.roles)
-        } else {
-          reject(new Error('Got a error when get user info: roles must be a non-null array!'))
+        const { roles, username, code, status, avatar, intro } = data
+        if (!roles || data.roles.length < 1) {
+          reject(new Error('roles must be a non-null array!'))
         }
 
-        commit('USER_SET_NAME', data.username)
-        commit('USER_SET_CODE', data.code)
-        commit('USER_SET_STATUS', data.status)
-        commit('USER_SET_AVATAR', data.avatar)
-        commit('USER_SET_INTRO', data.intro)
-        resolve(res)
+        commit('USER_SET_ROLES', roles)
+        commit('USER_SET_NAME', username)
+        commit('USER_SET_CODE', code)
+        commit('USER_SET_STATUS', status)
+        commit('USER_SET_AVATAR', avatar)
+        commit('USER_SET_INTRO', intro)
+        resolve(data)
       }).catch(err => {
         reject(err)
       })
