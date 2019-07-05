@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://github.com/letsbug/vava/raw/master/static/images/logo.png"/>
+  <img src="https://github.com/letsbug/vava/raw/master/public/static/images/logo.png"/>
 </p>
 <p align="center">
-  <img src="https://github.com/letsbug/vava/raw/master/static/images/title.png"/>
+  <img src="https://github.com/letsbug/vava/raw/master/public/static/images/title.png"/>
 </p>
 <p align="center">
-  <img src="https://github.com/letsbug/vava/raw/master/static/images/subtitle.png"/>
+  <img src="https://github.com/letsbug/vava/raw/master/public/static/images/subtitle.png"/>
 </p>
 
 <hr />
@@ -33,8 +33,8 @@
 [vava](https://github.com/letsbug/vava) is a fantastic management background. Is my personal experience based on my own accumulation, the creation of a management background integration solution. It is based on [vue](https://github.com/vuejs/vue) and [element-ui](https://github.com/ElemeFE/element). And it keeps updating and stronger. Click to [preview](https://letsbug.github.io/vava/).
 
 ***
-<p><img src="https://github.com/letsbug/vava/raw/master/static/images/homepage-preview.png" alt="Homepage preview"></p>
-<p><img src="https://github.com/letsbug/vava/raw/master/static/images/dashboard-preview.png" alt="Dashboard preview"></p>
+<p><img src="https://github.com/letsbug/vava/raw/master/public/static/images/homepage-preview.png" alt="Homepage preview"></p>
+<p><img src="https://github.com/letsbug/vava/raw/master/public/static/images/dashboard-preview.png" alt="Dashboard preview"></p>
 
 ## Browser Support
 All modern browsers. IE is a thing of the past!
