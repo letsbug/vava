@@ -26,6 +26,7 @@ export default {
     clipboard,
     onSuccess() {
       this.timing = true
+
       setTimeout(() => {
         this.timing = false
       }, 3000)

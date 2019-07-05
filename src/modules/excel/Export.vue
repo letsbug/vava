@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import Contacts from '@/services/contacts'
+import Contacts from '@/apis/contacts'
 import { Dater } from '@/tools'
 
 export default {

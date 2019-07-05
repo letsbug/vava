@@ -1,4 +1,4 @@
-import { xhr } from '@/services/xhr'
+import { xhr } from '@/apis/xhr'
 import { generateColors } from '@/tools/color'
 import store from '@/store'
 

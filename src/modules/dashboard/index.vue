@@ -57,7 +57,7 @@
 import { ChartTabs, ChartDetails, ChartAges, TrafficAnalysis } from './components'
 import { Loading } from 'element-ui'
 
-import Statistics from '@/services/statistics'
+import Statistics from '@/apis/statistics'
 
 export default {
   name: 'Dashboard',

@@ -166,12 +166,10 @@ export const asyncRouteMap = [
   {
     path: 'externals',
     component: Layout,
-    children: [
-      {
-        path: 'https://google.com',
-        meta: { title: 'externalLink', icon: 'thing-clip' }
-      }
-    ]
+    children: [{
+      path: 'https://google.com',
+      meta: { title: 'externalLink', icon: 'thing-clip' }
+    }]
   },
 
   // The path not found in the router list will be forced a redirect to the 404 page

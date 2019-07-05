@@ -3,7 +3,7 @@ export { dateFormat, dateAgo } from '@/tools/_dater'
 
 // About character string
 function getCapitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1)
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 }
 
 // 首字母大写
@@ -32,8 +32,8 @@ export function articleStatus(status) {
   return statusMap[status]
 }
 
-// About page views
-export function pageview(pv) {
-  return pv > 20000 ? '2w+' : pv > 9999 ? '9999+' : pv
+// Number short
+export function numberShort(number) {
+  return number >= 1000000 ? `${Math.floor(number / 1000000)}m`
+    : number >= 1000 ? `${Math.floor(number / 1000)}k` : number
 }
-

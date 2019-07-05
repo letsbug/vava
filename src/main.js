@@ -11,14 +11,14 @@ import '@/styles/va.core.scss' // System global css
 import App from './App'
 import store from './store'
 import router from './router'
+import '@/router/helper' // router helper, user permission control.
+
 import Meta from 'vue-meta'
 
-import i18n from '@/langs'
+import i18n from '@/i18n'
 
-import '@/router/helper' // router helper, user permission control.
-import '@/simulates' // mock simulate
-import '@/assets/icons' // load system svg icons by symbol.
-import '@/assets/svgs'
+import '../mock' // mock simulate
+import '@/icons' // load system svg icons by symbol.
 
 import * as filters from '@/filters'
 // Inject global directives, or local calls, as needed.
@@ -30,8 +30,6 @@ import '@/themes'
 // To use google analytics', perform npm install --save vue-analytics installation
 import hmt from 'vue-ba'
 // import vga from 'vue-analytics'
-
-Vue.config.productionTip = false
 
 Vue.use(Element, {
   size: 'medium',
@@ -49,15 +47,17 @@ Object.keys(filters).forEach(key => {
 //   Vue.directive(key, Directives[key])
 // })
 
-Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
-// Vue.use(vga, { id: 'UA-106135225-2' })
+if (process.env.NODE_ENV === 'production') {
+  Vue.use(hmt, { siteId: '9e73d1f3aef423e62a00c7575a9c0f08', debug: process.env.NODE_ENV !== 'prod' })
+  // Vue.use(vga, { id: 'UA-106135225-2' })
+}
+
+Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   store,
   i18n,
-  components: { App },
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')

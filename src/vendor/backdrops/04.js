@@ -81,6 +81,7 @@ Star.prototype.draw = function() {
 }
 
 for (let i = 0; i < maxStars; i++) {
+  // eslint-disable-next-line
   new Star()
 }
 

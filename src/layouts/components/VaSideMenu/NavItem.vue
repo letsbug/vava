@@ -75,7 +75,7 @@
 
 <script>
 import ElCollapseTransition from 'element-ui/lib/transitions/collapse-transition'
-import { generateTitle } from '@/tools/i18n'
+import { generateTitle } from '@/i18n'
 
 export default {
   components: { ElCollapseTransition },

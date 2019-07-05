@@ -86,7 +86,7 @@ window.addEventListener('resize', function() {
   ctx.fillRect(0, 0, w, h)
 })
 
-!(function anim() {
+function anim() {
   window.requestAnimationFrame(anim)
 
   ctx.globalCompositeOperation = 'source-over'
@@ -104,4 +104,6 @@ window.addEventListener('resize', function() {
   particles.map(function(particle) {
     particle.step()
   })
-})()
+}
+
+anim()

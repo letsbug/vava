@@ -1,5 +1,3 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
   parserOptions: {
@@ -11,10 +9,9 @@ module.exports = {
     node: true,
     es6: true
   },
-  extends: ['eslint:recommended', 'plugin:vue/recommended'],
-  // add your custom rules here
+  extends: ['plugin:vue/recommended', '@vue/standard'],
   rules: {
-    // About vue settings
+    // vue settings
     'vue/max-attributes-per-line': [2, {
       'singleline': 10,
       'multiline': {
@@ -205,7 +202,7 @@ module.exports = {
     'prefer-const': 2,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'object-curly-spacing': [2, 'always', {
-      objectsInObjects: false
+      objectsInObjects: true
     }],
     'array-bracket-spacing': [2, 'never']
   }

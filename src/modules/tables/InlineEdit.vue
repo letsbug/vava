@@ -43,7 +43,7 @@
       <el-table-column label="AUDITOR" prop="auditor" width="96" show-overflow-tooltip />
       <el-table-column label="PV" prop="pv" width="60">
         <template slot-scope="scope">
-          {{ scope.row.pv | pageview }}
+          {{ scope.row.pv | numberShort }}
         </template>
       </el-table-column>
       <el-table-column label="ACTIONS" width="90" align="center" class-name="has-actions table-actions actions-small">
@@ -79,7 +79,7 @@
 
 <script>
 import mixins from './mixins'
-import Service from '@/services/articles'
+import Service from '@/apis/articles'
 
 export default {
   name: 'InlineEdit',

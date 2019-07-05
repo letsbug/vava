@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import Service from '@/services/account'
+import Service from '@/apis/account'
 
 export default {
   props: {

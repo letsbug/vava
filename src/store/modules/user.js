@@ -1,4 +1,4 @@
-import Account from '@/services/account'
+import Account from '@/apis/account'
 import { Token } from '@/tools'
 
 const TOKEN_EXPIRE = process.env.NODE_ENV === 'development'

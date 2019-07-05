@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { generateTitle } from '@/tools/i18n'
+import { generateTitle } from '@/i18n'
 export default {
   data() {
     return { routes: [] }

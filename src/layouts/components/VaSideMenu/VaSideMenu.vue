@@ -19,7 +19,7 @@
 
 <script>
 import NavItem from './NavItem'
-import { generateTitle } from '@/tools/i18n'
+import { generateTitle } from '@/i18n'
 
 export default {
   components: { NavItem },

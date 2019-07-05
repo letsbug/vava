@@ -10,7 +10,7 @@
 import { Highlight } from '@/directives'
 import Driver from 'driver.js'
 import 'driver.js/dist/driver.min.css'
-import steps from '@/tools/guideSteps'
+import steps from './guideSteps'
 
 export default {
   name: 'Guide',

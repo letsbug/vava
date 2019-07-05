@@ -1,4 +1,4 @@
-import Notification from '@/services/notification'
+import Notification from '@/apis/notification'
 
 const notification = {
   state: {

@@ -7,15 +7,13 @@ export default (text, event, callback) => {
   })
   clipboard.on('success', () => {
     Message.success('Copy successfully')
-    if (callback && typeof callback === 'function') callback()
-    clipboard.off('error')
-    clipboard.off('success')
+    if (callback && typeof callback === 'function') {
+      callback()
+    }
     clipboard.destroy()
   })
   clipboard.on('error', () => {
     Message.error('Copy failed')
-    clipboard.off('error')
-    clipboard.off('success')
     clipboard.destroy()
   })
   clipboard.onClick(event)

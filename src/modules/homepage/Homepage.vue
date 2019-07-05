@@ -14,7 +14,7 @@
 
 <script>
 import { GithubCorner } from '@/components'
-import { xhr } from '@/services/xhr'
+import { xhr } from '@/apis/xhr'
 
 export default {
   name: 'Homepage',

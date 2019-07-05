@@ -77,7 +77,7 @@
       </el-table-column>
       <el-table-column label="PV" prop="pv" width="66" sortable>
         <template slot-scope="scope">
-          {{ scope.row.pv | pageview }}
+          {{ scope.row.pv | numberShort }}
         </template>
       </el-table-column>
       <el-table-column label="ACTIONS" width="165" class-name="has-actions actions-small">
@@ -143,7 +143,7 @@
 
 <script>
 import mixins from './mixins'
-import Service from '@/services/articles'
+import Service from '@/apis/articles'
 
 export default {
   name: 'FullFeature',

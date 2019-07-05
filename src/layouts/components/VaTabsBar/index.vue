@@ -36,7 +36,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import { Breadcrumb, ContextMenu } from '@/components'
-import { generateTitle } from '@/tools/i18n'
+import { generateTitle } from '@/i18n'
 
 export default {
   components: { ScrollPane, Breadcrumb, ContextMenu },

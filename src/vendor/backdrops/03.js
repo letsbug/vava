@@ -160,11 +160,13 @@ function onresize() {
 
 window.addEventListener('resize', onresize)
 
-!(function() {
+function start() {
   canvas = document.getElementById('appBackDrop')
   ctx = canvas.getContext('2d')
   size = 30
   lines = []
   reset()
   loop()
-})()
+}
+
+start()

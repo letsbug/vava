@@ -29,7 +29,7 @@ router.beforeEach(async(to, from, next) => {
         if (hasPermission(store.getters.roles, to.meta.roles)) {
           next()
         } else {
-          next({ path: '/error', replace: true, query: { code: 403, noGoBack: true }})
+          next({ path: '/error', replace: true, query: { code: 403, noGoBack: true } })
         }
       } else {
         try {

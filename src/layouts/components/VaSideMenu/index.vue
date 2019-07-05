@@ -1,19 +1,17 @@
 <template>
   <div class="va-side-wrapper">
-    <div class="va-side-brand">
-      <va-svgs name="logo" class="brand-logo" />
-      <va-svgs name="title" class="brand-title" />
-    </div>
+    <brand class="va-side-brand" has-title has-link />
     <va-side-menu :routes="routes_permission" />
   </div>
 </template>
 
 <script>
+import { Brand } from '@/components'
 import VaSideMenu from './VaSideMenu'
 import { mapGetters } from 'vuex'
 
 export default {
-  components: { VaSideMenu },
+  components: { Brand, VaSideMenu },
   computed: {
     ...mapGetters(['routes_permission'])
   }

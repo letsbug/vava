@@ -2,7 +2,7 @@
   <div class="container-login--password">
     <el-form ref="loginForm" :model="form" :rules="rules" class="form-login--password" aria-autocomplete="list">
       <div class="form-logo">
-        <va-svgs name="logo" class="brand text-primary" />
+        <brand class="brand text-primary" />
         <h2 class="title">
           {{ $t('login.title') }}<language-picker class="float-r" class-name="h2" />
         </h2>
@@ -52,13 +52,13 @@
 </template>
 
 <script>
-import { LanguagePicker, UserPicker, Copyright } from '@/components'
+import { Brand, LanguagePicker, UserPicker, Copyright } from '@/components'
 import { validUsername, validPassword } from '@/tools/validators'
 
 export default {
   name: 'Login',
   metaInfo: { title: 'Sign in to Vava' },
-  components: { LanguagePicker, UserPicker, Copyright },
+  components: { Brand, LanguagePicker, UserPicker, Copyright },
   data() {
     return {
       form: { username: '', password: '', remember: false },

@@ -1,4 +1,4 @@
-import Service from '@/services/articles'
+import Service from '@/apis/articles'
 
 export default {
   data() {

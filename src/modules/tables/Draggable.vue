@@ -22,7 +22,7 @@
       </el-table-column>
       <el-table-column label="PV" prop="pv" width="66">
         <template slot-scope="scope">
-          {{ scope.row.pv | pageview }}
+          {{ scope.row.pv | numberShort }}
         </template>
       </el-table-column>
       <el-table-column label="DRAG" width="66" align="center">
@@ -37,7 +37,7 @@
 
 <script>
 import mixins from './mixins'
-import Service from '@/services/articles'
+import Service from '@/apis/articles'
 import Sortable from 'sortablejs'
 
 export default {
