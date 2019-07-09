@@ -39,7 +39,7 @@ module.exports = {
     // 非开发环境开启gzip压缩打包
     const compressPlugin = new CompressionWebpackPlugin({
       algorithm: 'gzip',
-      test: new RegExp(`\\.(${['js', 'css'].join('|')})$`),
+      test: new RegExp('\\.(js|css)$'),
       threshold: 10240,
       minRatio: 0.8
     })
@@ -103,17 +103,32 @@ module.exports = {
               priority: 10,
               chunks: 'initial' // only package third parties that are initially dependent
             },
+            commons: {
+              name: 'chunk-commons',
+              test: resolve('src/components'), // can customize your rules
+              minChunks: 2, //  minimum common number
+              priority: 5,
+              reuseExistingChunk: true
+            },
             element: {
               name: 'chunk-element', // split elementUI into a single package
               priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
               test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
             },
-            commons: {
-              name: 'chunk-commons',
-              test: resolve('src/components'), // can customize your rules
-              minChunks: 3, //  minimum common number
-              priority: 5,
-              reuseExistingChunk: true
+            echarts: {
+              name: 'chunk-echarts',
+              priority: 20,
+              test: /[\\/]node_modules[\\/]echarts[\\/]/
+            },
+            xlsx: {
+              name: 'chunk-xlsx',
+              priority: 20,
+              test: /[\\/]node_modules[\\/]xlsx[\\/]/
+            },
+            highlight: {
+              name: 'chunk-highlight',
+              priority: 20,
+              test: /[\\/]node_modules[\\/]highlight.js[\\/]/
             }
           }
         })
