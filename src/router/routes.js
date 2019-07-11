@@ -86,8 +86,6 @@ const modules = routeFiles.keys()
   .map(path => routeFiles(path).default)
   .sort((a, b) => a.sort > b.sort ? 1 : -1)
 
-console.log(modules)
-
 modules.push(errorRoute)
 
 export const asyncRouteMap = modules

@@ -2,12 +2,14 @@
   <div class="va-body-container">
     <pre v-highlight><code class="html" v-html="$t('richText.intro')"></code></pre>
     <br />
-    <i-tinymce v-model="content" @on-inited="onTinyInited" />
+    <!--<i-tinymce v-model="content" @on-inited="onTinyInited" />-->
+    <tinymce-editor />
   </div>
 </template>
 
 <script>
-import { ITinymce } from '@/components'
+import Editor from '@tinymce/tinymce-vue'
+// import { ITinymce } from '@/components'
 import { content } from '@/components/ITinymce/plugins'
 import { Highlight } from '@/directives'
 
@@ -20,7 +22,7 @@ export default {
     Highlight
   },
   components: {
-    ITinymce
+    TinymceEditor: Editor
   },
   data() {
     return {
@@ -28,14 +30,14 @@ export default {
     }
   },
   created() {
-    this.loading = this.$loading({ lock: true })
+    // this.loading = this.$loading({ lock: true })
   },
   methods: {
-    onTinyInited() {
-      setTimeout(() => {
-        this.loading.close()
-      }, 300)
-    }
+    // onTinyInited() {
+    //   setTimeout(() => {
+    //     this.loading.close()
+    //   }, 300)
+    // }
   }
 }
 </script>
