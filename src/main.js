@@ -12,24 +12,25 @@ import App from './App'
 import store from './store'
 import router from './router'
 import '@/router/helper' // router helper, user permission control.
-
+import i18n from '@/i18n'
 import Meta from 'vue-meta'
 
-import i18n from '@/i18n'
-
-import '../mock' // mock simulate
 import '@/icons' // load system svg icons by symbol.
+import '@/themes'
 
 import * as filters from '@/filters'
 // Inject global directives, or local calls, as needed.
 // import * as Directives from '@/directives'
 
-import '@/themes'
-
 // Baidu & Google analytics. According to the need to enable.
 // To use google analytics', perform npm install --save vue-analytics installation
 import hmt from 'vue-ba'
 // import vga from 'vue-analytics'
+
+import { mockXHR } from '../mock'
+if (process.env.NODE_ENV === 'production') {
+  mockXHR()
+}
 
 Vue.use(Element, {
   size: 'medium',
@@ -56,8 +57,9 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
+  el: '#app',
   router,
   store,
   i18n,
   render: h => h(App)
-}).$mount('#app')
+})

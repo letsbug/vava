@@ -1,4 +1,6 @@
 import Mock from 'mockjs'
+import { parseURL } from '../src/tools/urls'
+
 import Roles from './roles'
 import Account from './account'
 import Notification from './notification'
@@ -6,45 +8,71 @@ import Contacts from './contacts'
 import Article from './article'
 import Statistics from './statistics'
 
-if (process.env.NODE_ENV === 'development') Mock.setup({ timeout: '400-2000' })
+const mocks = [
+  ...Roles,
+  ...Account,
+  ...Notification,
+  ...Contacts,
+  ...Article,
+  ...Statistics
+]
 
-// 修复在使用 MockJS 情况下，设置 withCredentials = true，且未被拦截的跨域请求丢失 Cookies 的问题
-// https://github.com/nuysoft/Mock/issues/300
-Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
-Mock.XHR.prototype.send = function() {
-  if (this.custom.xhr) {
-    this.custom.xhr.withCredentials = this.withCredentials || false
+// 用于前台模拟
+// 它会重新定义XMLHttpRequest，
+// 这将导致许多第三方库失效(比如进度事件)。
+export function mockXHR() {
+  // 修复在使用 MockJS 情况下，设置 withCredentials = true，且未被拦截的跨域请求丢失 Cookies 的问题
+  // https://github.com/nuysoft/Mock/issues/300
+  Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
+  Mock.XHR.prototype.send = function() {
+    if (this.custom.xhr) {
+      this.custom.xhr.withCredentials = this.withCredentials || false
+
+      if (this.responseType) {
+        this.custom.xhr.responseType = this.responseType
+      }
+    }
+    this.proxy_send(...arguments)
   }
-  this.proxy_send(...arguments)
+
+  // if (process.env.NODE_ENV === 'development') {
+  //   Mock.setup({ timeout: '400-4000' })
+  // }
+
+  function XHR2ExpressReqWrap(respond) {
+    return function(options) {
+      let result = null
+      if (respond instanceof Function) {
+        const { body, type, url } = options
+        // https://expressjs.com/en/4x/api.html#req
+        result = respond({
+          method: type,
+          body: JSON.parse(body),
+          query: parseURL(url)
+        })
+      } else {
+        result = respond
+      }
+      return Mock.mock(result)
+    }
+  }
+
+  for (const i of mocks) {
+    Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
+  }
 }
 
-// Roles permissions
-Mock.mock(/\/roles\/list/, 'post', Roles)
+// for mock server
+const responseFake = (url, type, respond) => {
+  return {
+    url: new RegExp(`/mock${url}`),
+    type: type || 'get',
+    response(req, res) {
+      res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+    }
+  }
+}
 
-// About account apis
-Mock.mock(/\/account\/login/, 'post', Account.login)
-Mock.mock(/\/account\/logout/, 'post', Account.logout)
-Mock.mock(/\/account\/info/, 'get', Account.info)
-Mock.mock(/\/account\/update/, 'get', Account.update)
-Mock.mock(/\/account\/list/, 'get', Account.list)
-Mock.mock(/\/account\/auditors/, 'post', Account.auditors)
-
-// About notifications
-Mock.mock(/\/notification\/list/, 'post', Notification.list)
-Mock.mock(/\/notification\/read/, 'post', Notification.read)
-Mock.mock(/\/notification\/allread/, 'post', Notification.readall)
-
-// About contacts
-Mock.mock(/\/contacts\/list/, 'post', Contacts.list)
-Mock.mock(/\/contacts\/all/, 'post', Contacts.all)
-
-// About articles
-Mock.mock(/\/articles\/list/, 'post', Article.list)
-Mock.mock(/\/articles\/detail/, 'get', Article.detail)
-Mock.mock(/\/articles\/create/, 'post', Article.create)
-Mock.mock(/\/articles\/update/, 'post', Article.update)
-Mock.mock(/\/articles\/batch/, 'post', Article.batch)
-
-// About Statistics
-Mock.mock(/\/statistics\/pv/, 'post', Statistics.pv)
-Mock.mock(/\/statistics\/sales/, 'post', Statistics.sales)
+export default mocks.map(route => {
+  return responseFake(route.url, route.type, route.response)
+})

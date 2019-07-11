@@ -1,4 +1,4 @@
-const parse = url => {
+export function parseURL(url) {
   const search = url.split('?')[1]
   return search
     ? JSON.parse('{"' + decodeURIComponent(search)
@@ -6,8 +6,4 @@ const parse = url => {
       .replace(/&/g, '","')
       .replace(/=/g, '":"') + '"}')
     : {}
-}
-
-export default {
-  parse
 }

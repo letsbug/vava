@@ -19,19 +19,6 @@ export function capitalize(str, firstWordOnly) {
   return words.join(' ')
 }
 
-// About Articles status
-export function articleStatus(status) {
-  const statusMap = {
-    draft: 'info',
-    committed: 'warning',
-    failing: 'danger',
-    auditing: 'primary',
-    audited: 'success',
-    deleted: 'info'
-  }
-  return statusMap[status]
-}
-
 // Number short
 export function numberShort(number) {
   return number >= 1000000 ? `${Math.floor(number / 1000000)}m`

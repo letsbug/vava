@@ -4,6 +4,7 @@ const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const metas = require('./build/metas')
 const settings = require('./src/settings')
+const mockServer = require('./mock/mock-server')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -31,7 +32,7 @@ module.exports = {
         }
       }
     },
-    after: () => { require('./mock/mock-server.js') }
+    after: mockServer
   },
   configureWebpack(config) {
     // console.log(config)
@@ -93,8 +94,16 @@ module.exports = {
     // package sets
     config.when(
       process.env.NODE_ENV !== 'development',
-      (conf) => {
-        conf.optimization.splitChunks({
+      (config) => {
+        config
+          .plugin('ScriptExtHtmlWebpackPlugin')
+          .after('html')
+          .use('script-ext-html-webpack-plugin', [{
+            // `runtime` must same as runtimeChunk name. default is `runtime`
+            inline: /runtime\..*\.js$/
+          }])
+          .end()
+        config.optimization.splitChunks({
           chunks: 'all',
           cacheGroups: {
             libs: {
@@ -132,7 +141,7 @@ module.exports = {
             }
           }
         })
-        conf.optimization.runtimeChunk('single')
+        config.optimization.runtimeChunk('single')
       }
     )
   }

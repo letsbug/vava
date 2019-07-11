@@ -66,7 +66,7 @@ export default {
   },
   mounted() {
     Service.list().then(res => {
-      this.list = res
+      this.list = res.data
       this.list.forEach((v, i) => {
         if (v.token === this.user.token) this.checkedIndex = i
       })

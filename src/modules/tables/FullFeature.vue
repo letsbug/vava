@@ -55,7 +55,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="38" />
-      <el-table-column label="ID" prop="id" width="38" align="right" />
+      <el-table-column label="ID" prop="id" width="46" align="right" />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable />
       <el-table-column label="CREATE" prop="display" width="116" sortable>
         <template slot-scope="scope">
@@ -165,7 +165,7 @@ export default {
   },
   mounted() {
     Service.auditors().then(res => {
-      this.auditors = res.map(v => {
+      this.auditors = res.data.map(v => {
         this.$set(v, 'value', v.username)
         return v
       })
@@ -175,7 +175,8 @@ export default {
     getList() {
       this.loading = true
       Service.list(Object.assign({}, this.pages, this.filterData)).then(res => {
-        this.list = res.list.map(v => {
+        if (!res.success) return
+        this.list = res.data.map(v => {
           this.$set(v, 'editing', false)
           this.$set(v, 'submitting', false)
           this.$set(v, 'originalTitle', v.title)

@@ -28,19 +28,18 @@ const notification = {
   actions: {
     notification_list: ({ commit }) => {
       Notification.list().then(res => {
-        if (!res.data) return
-        commit('NOTIFICATION_LIST', res.data)
+        commit('NOTIFICATION_LIST', res.data.data)
       }).catch(err => console.log(err))
     },
     notification_read: ({ commit }, ids) => {
       Notification.read(ids).then(res => {
-        if (!res.data || res.data !== 'success') return
+        if (!res.data || !res.data.success) return
         commit('NOTIFICATION_READ', ids)
       }).catch(err => console.log(err))
     },
     notification_read_all: ({ commit }) => {
       Notification.readall().then(res => {
-        if (res.data === 'success') commit('NOTIFICATION_READ_ALL')
+        if (res.data.success) commit('NOTIFICATION_READ_ALL')
       }).catch(err => console.log(err))
     }
   }

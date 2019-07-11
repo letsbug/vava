@@ -42,10 +42,11 @@ const user = {
   actions: {
     user_login: ({ commit, state }, userInfo) => new Promise((resolve, reject) => {
       Account.login(userInfo.username.trim(), userInfo.password).then(res => {
-        commit('USER_SET_TOKEN', res.data.token)
+        const { token } = res.data.data
+        commit('USER_SET_TOKEN', token)
 
         const expire = userInfo.remember ? state.expire : TOKEN_EXPIRE
-        Token.set(res.data.token, expire)
+        Token.set(token, expire)
         resolve()
       }).catch(err => {
         reject(err)
@@ -53,7 +54,7 @@ const user = {
     }),
     user_info: ({ commit, state }) => new Promise((resolve, reject) => {
       Account.info(state.token).then(res => {
-        const { data } = res
+        const { data } = res.data
         if (!data) reject(new Error('Valid failed, please Login again.'))
 
         const { roles, username, code, status, avatar, intro } = data

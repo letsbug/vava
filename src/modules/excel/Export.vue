@@ -94,7 +94,7 @@ export default {
       Contacts.list(this.pages).then(res => {
         this.loading = false
         this.pages = res.pages
-        this.list = res.list
+        this.list = res.data
       })
     },
     formatJson(props, json) {

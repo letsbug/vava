@@ -1,8 +1,8 @@
 import Mock from 'mockjs'
-import { Urls } from '@/tools'
-import Account from './account'
-import ArticleVo from '@/vo/ArticleVo'
-import BaseVo from '@/vo/BaseVo'
+import { parseURL } from '../src/tools/urls'
+import { editors, auditors } from './account'
+import ArticleVo from '../src/vo/ArticleVo'
+import BaseVo from '../src/vo/BaseVo'
 
 const list = []
 const total = 100
@@ -12,8 +12,8 @@ const contents = cn => cn ? Mock.Random.cparagraph() : Mock.Random.paragraph()
 const random = cn => Mock.mock({
   id: '@increment',
   timestamp: +Mock.Random.date('T'),
-  'author|1': Account.editors().map(v => v.username),
-  'auditor|1': Account.auditors().map(v => v.username),
+  'author|1': editors().map(v => v.username),
+  'auditor|1': auditors().map(v => v.username),
   title: cn ? '@ctitle(5, 20)' : '@title(5, 20)',
   summery: cn ? '@cparagraph(1, 2)' : '@paragraph(1, 2)',
   content: '<p>' + contents(cn) + '</p>',
@@ -28,70 +28,112 @@ for (let i = 0; i < total; i++) {
   list.push(new ArticleVo(random(false)))
 }
 
-export default {
-  list: config => {
-    const params = JSON.parse(config.body)
+export default [
+  {
+    url: '/articles/list',
+    type: 'post',
+    response: config => {
+      const { title, level, status, page, size } = config.body
 
-    const title = params.title || null
-    const level = params.level || null
-    const status = params.status || null
-
-    const _list = list.filter(v => {
-      let is = true
-      if (title) is = v.title.indexOf(title) > -1
-      if (level) is = v.level === level
-      if (status) is = v.status === status
-      return is
-    })
-
-    const { page, size } = params
-    const vo = new BaseVo({ page, size, total: _list.length })
-
-    const min = (vo.page - 1) * vo.size
-    const max = vo.page * vo.size
-
-    return {
-      pages: vo,
-      list: _list.filter((v, i) => (i >= min && i < max))
-    }
-  },
-  detail: config => {
-    const { id } = Urls.parse(config.url)
-    return list.filter(v => v.id === id)
-  },
-  create: () => 'success',
-  update: config => {
-    const params = JSON.parse(config.body)
-    if (!params.id) return { success: false, message: 'The params \'id\' is not defined.' }
-    let modified = false
-    for (const i in list) {
-      if (list[i].id === params.id) {
-        Object.keys(params).forEach(key => {
-          list[i][key] = params[key]
+      const _list = (!title && !level && !status)
+        ? [...list]
+        : list.filter(v => {
+          let is = true
+          if (title) is = v.title.includes(title)
+          if (level) is = v.level === level
+          if (status) is = v.status === status
+          return is
         })
-        modified = true
-        break
+      const total = _list.length
+
+      const vo = new BaseVo({ page, size, total })
+
+      const min = (vo.page - 1) * vo.size
+      const max = vo.page * vo.size
+
+      return {
+        status: 2000,
+        success: true,
+        message: 'success',
+        pages: vo,
+        data: _list.filter((v, i) => (i >= min && i < max))
       }
     }
-    return {
-      success: modified,
-      message: modified ? 'success' : 'failed'
+  },
+  {
+    url: '/articles/detail',
+    type: 'get',
+    response: config => {
+      const { id } = parseURL(config.url)
+      return {
+        status: 2000,
+        data: list.filter(v => v.id === id)
+      }
     }
   },
-  batch: config => {
-    const lst = JSON.parse(config.body)
-    list.forEach((v, i) => {
-      lst.forEach(p => {
-        if (v.id === p.id) {
-          Object.keys(p).forEach(key => {
-            list[i][key] = p[key]
-          })
+  {
+    url: '/articles/create',
+    type: 'post',
+    response: () => {
+      return {
+        status: 2000,
+        success: true,
+        message: 'success'
+      }
+    }
+  },
+  {
+    url: '/articles/update',
+    type: 'post',
+    response: config => {
+      const params = config.body
+      if (!params.id) {
+        return {
+          status: 5001,
+          success: false,
+          message: 'The params \'id\' is not defined.'
         }
+      }
+
+      let modified = false
+      for (const i in list) {
+        if (list[i].id === params.id) {
+          Object.keys(params).forEach(key => {
+            list[i][key] = params[key]
+          })
+          modified = true
+          break
+        }
+      }
+
+      const status = modified ? 2000 : 5003
+
+      return {
+        status,
+        success: modified,
+        message: modified ? 'success' : 'update failed'
+      }
+    }
+  },
+  {
+    url: '/articles/batch',
+    type: 'post',
+    response: config => {
+      const lst = config.body
+      list.forEach((v, i) => {
+        lst.forEach(p => {
+          if (v.id === p.id) {
+            Object.keys(p).forEach(key => {
+              list[i][key] = p[key]
+            })
+          }
+        })
       })
-    })
-    return {
-      success: true,
-      message: 'success'
+      return {
+        status: 2000,
+        success: true,
+        message: 'success'
+      }
     }
   }
-}
+]

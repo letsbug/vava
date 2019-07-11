@@ -2,6 +2,7 @@
   "name": "vava",
   "version": "3.6.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,7 +11,7 @@
     "test:unit": "vue-cli-service test:unit",
     "css-template": "node-sass --output-style expanded src/themes/theme-template.scss static/css/theme-template.css && npm run css-minify",
     "css-minify": "cleancss --level 1 --format breaksWith=lf --output static/css/theme-template.min.css static/css/theme-template.css",
-    "svgo": "svgo -f src/icons --config=./src/icons/svgo.yml",
+    "svgo": "svgo -f src/icons/svgs --config=./src/icons/svgo.yml",
     "svg_imgs": "svgo -f static/svgs --config=./static/svgs/svgo.yml"
   },
   "dependencies": {
@@ -20,7 +21,7 @@
     "css-color-function": "^1.3.3",
     "driver.js": "^0.9.7",
     "echarts": "^4.2.1",
-    "element-ui": "^2.10.1",
+    "element-ui": "2.7.0",
     "file-saver": "^2.0.2",
     "highlight.js": "^9.15.8",
     "js-cookie": "^2.2.0",
@@ -39,6 +40,8 @@
     "xlsx": "^0.14.3"
   },
   "devDependencies": {
+    "@babel/core": "7.0.0",
+    "@babel/register": "7.0.0",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-e2e-cypress": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
@@ -47,7 +50,10 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.1",
+    "body-parser": "^1.19.0",
     "chai": "^4.1.2",
+    "chalk": "^2.4.2",
+    "chokidar": "^3.0.2",
     "clean-css-cli": "^4.3.0",
     "compression-webpack-plugin": "^3.0.0",
     "eslint": "^5.16.0",

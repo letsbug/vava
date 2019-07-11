@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import NotificationVo from '@/vo/notification'
+import NotificationVo from '../src/vo/notification'
 
 const notifications = []
 
@@ -17,28 +17,52 @@ for (let i = 0; i < 10; i++) {
   notifications.push(new NotificationVo(random()))
 }
 
-export default {
-  list: () => {
-    notifications.push(new NotificationVo(random('year')))
-    notifications.push(new NotificationVo(random('month')))
-    notifications.push(new NotificationVo(random('week')))
-    notifications.push(new NotificationVo(random('day')))
-    notifications.push(new NotificationVo(random('hour')))
-    notifications.push(new NotificationVo(random('minute')))
-    notifications.push(new NotificationVo(random('second')))
-    return notifications.sort((a, b) => (a.date < b.date ? 1 : -1))
+export default [
+  {
+    url: '/notification/list',
+    type: 'post',
+    response: () => {
+      const date = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
+      date.forEach(d => {
+        notifications.push(new NotificationVo(random(d)))
+      })
+
+      return {
+        status: 2000,
+        success: true,
+        message: 'success',
+        data: notifications.sort((a, b) => (a.date < b.date ? 1 : -1))
+      }
+    }
   },
-  read: config => {
-    const { ids } = JSON.parse(config.body)
-    notifications.forEach((value, index) => {
-      if (~ids.indexOf(value.id + '')) notifications[index].unread = false
-    })
-    return 'success'
+  {
+    url: '/notification/read',
+    type: 'post',
+    response: config => {
+      const { ids } = config.body
+      notifications.forEach((value, index) => {
+        if (~ids.indexOf(value.id + '')) notifications[index].unread = false
+      })
+      return {
+        status: 2000,
+        success: true,
+        message: 'success'
+      }
+    }
   },
-  readall: () => {
-    notifications.forEach((v, i) => {
-      notifications[i]['unread'] = false
-    })
-    return 'success'
+  {
+    url: '/notification/allread',
+    type: 'post',
+    response: () => {
+      notifications.forEach((v, i) => {
+        notifications[i]['unread'] = false
+      })
+
+      return {
+        status: 2000,
+        success: true,
+        message: 'success'
+      }
+    }
   }
-}
+]

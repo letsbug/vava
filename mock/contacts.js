@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
-import ContactsVo from '@/vo/ContactsVo'
-import BaseVo from '@/vo/BaseVo'
+import ContactsVo from '../src/vo/ContactsVo'
+import BaseVo from '../src/vo/BaseVo'
 
 let list = []
 const total = 100
@@ -25,16 +25,37 @@ for (let i = 0; i < total; i++) {
 }
 list = list.sort((a, b) => a.name > b.name ? 1 : -1)
 
-export default {
-  list: config => {
-    const { page, size } = JSON.parse(config.body)
-    const vo = new BaseVo({ page, size, total })
-    const min = (vo.page - 1) * vo.size
-    const max = vo.page * vo.size
-    return {
-      pages: vo,
-      list: list.filter((v, i) => (i >= min && i < max))
+export default [
+  {
+    url: '/contacts/list',
+    type: 'post',
+    response: config => {
+      const { page, size } = config.body
+      const vo = new BaseVo({ page, size, total })
+      const min = (vo.page - 1) * vo.size
+      const max = vo.page * vo.size
+
+      const data = list.filter((v, i) => (i >= min && i < max))
+
+      return {
+        status: 2000,
+        success: true,
+        message: 'success',
+        pages: vo,
+        data
+      }
     }
   },
-  all: () => list
-}
+  {
+    url: '/contacts/all',
+    type: 'post',
+    response: () => {
+      return {
+        status: 2000,
+        success: true,
+        message: 'success',
+        data: []
+      }
+    }
+  }
+]
