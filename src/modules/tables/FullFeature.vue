@@ -82,7 +82,10 @@
       </el-table-column>
       <el-table-column label="ACTIONS" width="165" class-name="has-actions actions-small">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" icon="el-icon-check" @click="handleBatchUpdate(true, scope.row)" />
+          <el-button
+            type="primary" size="small" icon="el-icon-check" :disabled="scope.row.status === 'audited'"
+            @click="handleBatchUpdate(true, scope.row)"
+          />
           <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)" />
           <el-button type="primary" size="small" icon="el-icon-delete" @click="handleBatchUpdate(false, scope.row)" />
         </template>

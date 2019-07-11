@@ -3,7 +3,7 @@
     <pre v-highlight><code class="html" v-html="$t('richText.intro')"></code></pre>
     <br />
     <!--<i-tinymce v-model="content" @on-inited="onTinyInited" />-->
-    <tinymce-editor />
+    <tinymce-editor v-model="content" />
   </div>
 </template>
 
