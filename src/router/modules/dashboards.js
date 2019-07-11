@@ -7,6 +7,7 @@ export default {
   meta: {
     roles: ['admin']
   },
+  sort: 0,
   children: [{
     path: '',
     name: 'Dashboard',

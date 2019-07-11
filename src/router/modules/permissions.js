@@ -10,6 +10,7 @@ export default {
     icon: 'mark-vip',
     roles: ['admin', 'assigner', 'auditor', 'editor', 'visitor']
   },
+  sort: 1,
   alwaysShow: true,
   children: [
     {
