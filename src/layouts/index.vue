@@ -13,25 +13,40 @@
 
 <script>
 import { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody } from './components'
+import { mapState } from 'vuex'
 
 const WIDTH = 992
 
 export default {
   components: { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
   computed: {
-    sidebarOpened() { return this.$store.state.application.sidebar.opened },
-    sidebarStatus() { return 'sidebar-' + (this.sidebarOpened ? 'expanded' : 'collapse') },
-    device() { return this.$store.state.application.device }
+    ...mapState({
+      sidebarOpened: state => state.application.sidebar.opened,
+      device: state => state.application.device
+    }),
+    sidebarStatus() {
+      const status = this.sidebarOpened ? 'expanded' : 'collapse'
+      return `sidebar-${status}`
+    }
   },
   watch: {
-    $route: 'sidebarCloseInMobile'
+    $route() {
+      // In mobile devices, auto close the sidebar when route jump.
+      if (this.isMobile() && this.sidebarOpened) {
+        this.closeSidebar()
+      }
+    }
   },
   beforeMount() {
     window.addEventListener('resize', this.resizeHandler)
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler)
+  },
   mounted() {
     if (this.isMobile()) {
       this.$store.dispatch('app_device_toggle', 'mobile')
+      this.closeSidebar()
     }
   },
   methods: {
@@ -39,19 +54,19 @@ export default {
       return document.body.getBoundingClientRect().width <= WIDTH
     },
     resizeHandler() {
+      if (document.hidden) {
+        return
+      }
+
       const isMobile = this.isMobile()
+
       this.$store.dispatch('app_device_toggle', isMobile ? 'mobile' : 'desktop')
-      if (isMobile && this.sidebarOpened) this.$store.dispatch('app_sidebar_close')
-    },
-    toggleDevice() {
-      this.device = this.device === 'desktop' ? 'mobile' : 'desktop'
+      if (isMobile && this.sidebarOpened) {
+        this.closeSidebar()
+      }
     },
     closeSidebar() {
       this.$store.dispatch('app_sidebar_close')
-    },
-    sidebarCloseInMobile() {
-      // In mobile devices, auto close the sidebar when route jump.
-      if (this.isMobile() && this.sidebarOpened) this.closeSidebar()
     }
   }
 }
