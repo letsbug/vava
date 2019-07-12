@@ -54,24 +54,32 @@ export default {
     handleUserSwitch() {
       this.userPickerVisible = true
     },
-    onChooseUser(user) {
-      this.$store.dispatch('user_switch', user.token).then(() => {
-        this.userPickerVisible = false
-        this.$nextTick(() => {
-          this.$router.replace({
-            path: '/redirect' + this.$route.fullPath
-          })
+    async onChooseUser(user) {
+      await this.$store.dispatch('user_switch', user.token)
+
+      this.userPickerVisible = false
+      this.$nextTick(() => {
+        this.$router.replace({
+          path: '/redirect' + this.$route.fullPath
         })
       })
     },
-    handleLogout() {
-      this.$confirm(this.$t('header.logout.confirm'), this.$t('options.confirm.title'), {
-        type: 'warning',
-        confirmButtonText: this.$t('header.logout.button'),
-        callback: action => {
-          if (action === 'confirm') this.$store.dispatch('user_logout').then(() => { location.reload() })
+    async handleLogout() {
+      try {
+        const action = await this.$confirm(this.$t('header.logout.confirm'), this.$t('options.confirm.title'), {
+          type: 'warning',
+          confirmButtonText: this.$t('header.logout.button')
+        })
+
+        if (action !== 'confirm') {
+          return false
         }
-      })
+
+        await this.$store.dispatch('user_logout')
+        location.reload()
+      } catch (e) {
+        console.log('sign out', e)
+      }
     }
   }
 }

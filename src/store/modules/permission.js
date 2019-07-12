@@ -1,4 +1,4 @@
-import { constantRouteMap, asyncRouteMap } from '@/router/routes'
+import { constantRoutes, asyncRoutes } from '@/router/routes'
 
 function hasPermission(roles, route) {
   return (route.meta && route.meta.roles)
@@ -22,22 +22,22 @@ function filterAsyncRoutes(asyncRouteMap, roles) {
 
 const permission = {
   state: {
-    routes: constantRouteMap,
+    routes: constantRoutes,
     addons: []
   },
   mutations: {
     PERM_SET_ROUTES: (state, routes) => {
       state.addons = routes
-      state.routes = constantRouteMap.concat(routes)
+      state.routes = constantRoutes.concat(routes)
     }
   },
   actions: {
     perm_generate_routes: ({ commit }, roles) => new Promise(resolve => {
       const accessRoutes = roles.includes('admin')
-        ? asyncRouteMap
-        : filterAsyncRoutes(asyncRouteMap, roles)
+        ? asyncRoutes
+        : filterAsyncRoutes(asyncRoutes, roles)
       commit('PERM_SET_ROUTES', accessRoutes)
-      resolve()
+      resolve(accessRoutes)
     })
   }
 }

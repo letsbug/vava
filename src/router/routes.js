@@ -12,7 +12,7 @@ import Layout from '@/layouts'
  *  roles {Array}         Role permission list for route.
  * }
  */
-export const constantRouteMap = [
+export const constantRoutes = [
   {
     path: '/redirect',
     component: Layout,
@@ -88,4 +88,4 @@ const modules = routeFiles.keys()
 
 modules.push(errorRoute)
 
-export const asyncRouteMap = modules
+export const asyncRoutes = modules

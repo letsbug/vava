@@ -5,13 +5,17 @@ const tabs = {
   },
   mutations: {
     TABS_ADD: (state, route) => {
-      if (state.history.some(v => v.path === route.path)) return
-      state.history.push({
-        name: route.name,
-        path: route.path,
+      if (state.history.some(v => v.path === route.path)) {
+        return
+      }
+
+      state.history.push(Object.assign({}, route, {
         title: route.meta.title || 'no-name'
-      })
-      if (!route.meta.nocache) state.cached.push(route.name)
+      }))
+
+      if (!route.meta.nocache) {
+        state.cached.push(route.name)
+      }
     },
     TABS_DEL: (state, route) => {
       for (const [i, v] of state.history.entries()) {

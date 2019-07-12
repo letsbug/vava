@@ -1,16 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-import { constantRouteMap, asyncRouteMap } from '@/router/routes'
+import { constantRoutes } from '@/router/routes'
 
 Vue.use(Router)
 
 const createRouter = () => new Router({
   linkExactActiveClass: 'active',
-
-  // Fully import only when permissions need to be changed dynamically.
-  routes: constantRouteMap.concat(asyncRouteMap)
-  // routes: constantRouteMap
+  scrollBehavior: (to, from, savedPosition) => savedPosition || ({ y: 0 }),
+  routes: constantRoutes
 })
 
 const router = createRouter()

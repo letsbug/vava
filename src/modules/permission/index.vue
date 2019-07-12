@@ -48,13 +48,13 @@ export default {
     }
   },
   methods: {
-    onChooseUser(user) {
-      this.$store.dispatch('user_switch', user.token).then(() => {
-        this.userPickerVisible = false
-        this.$nextTick(() => {
-          this.$router.replace({
-            path: '/redirect' + this.$route.fullPath
-          })
+    async onChooseUser(user) {
+      await this.$store.dispatch('user_switch', user.token)
+
+      this.userPickerVisible = false
+      this.$nextTick(() => {
+        this.$router.replace({
+          path: '/redirect' + this.$route.fullPath
         })
       })
     }

@@ -1,5 +1,6 @@
 import Account from '@/apis/account'
 import { Token } from '@/tools'
+import { resetRouter } from '@/router'
 
 const TOKEN_EXPIRE = process.env.NODE_ENV === 'development'
   ? 1 / 24 // for dev
@@ -73,6 +74,7 @@ const user = {
         reject(err)
       })
     }),
+
     user_logout: ({ commit, state }) => new Promise((resolve, reject) => {
       Account.logout(state.token).then(res => {
         commit('USER_SET_TOKEN', '')
@@ -83,17 +85,21 @@ const user = {
         commit('USER_SET_AVATAR', '')
         commit('USER_SET_INTRO', '')
         Token.remove()
+        resetRouter()
         resolve()
       }).catch(err => {
         reject(err)
       })
     }),
+
     // Only remove the token on the client.
-    user_exit: ({ commit, state }) => new Promise((resolve, reject) => {
+    user_token_clear: ({ commit, state }) => new Promise((resolve) => {
       commit('USER_SET_TOKEN', '')
+      commit('USER_SET_ROLES', [])
       Token.remove()
       resolve()
     }),
+
     // Remove all user info, and refresh current router, and add the target user info in router helper.
     user_switch: ({ commit, dispatch }, token) => new Promise(resolve => {
       commit('USER_SET_TOKEN', token)
@@ -104,6 +110,9 @@ const user = {
       commit('USER_SET_STATUS', '')
       commit('USER_SET_AVATAR', '')
       commit('USER_SET_INTRO', '')
+      resetRouter()
+
+      dispatch('tabs_empty')
       resolve()
     })
   }
