@@ -10,10 +10,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   computed: {
-    isMobile() { return this.$store.getters.device === 'mobile' },
-    cachedRoutes() { return this.$store.getters.tabs_cached },
+    ...mapState({
+      isMobile: state => state.application.device === 'mobile',
+      cachedRoutes: state => state.tabs.cached
+    }),
     key() { return this.$route.name },
     background() { return this.$route.meta['nobg'] ? 'no-bg' : '' }
   }

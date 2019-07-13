@@ -36,6 +36,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import { Breadcrumb, ContextMenu } from '@/components'
+import { mapState } from 'vuex'
 import { generateTitle } from '@/i18n'
 
 export default {
@@ -51,8 +52,10 @@ export default {
     }
   },
   computed: {
-    history() { return this.$store.getters.tabs_history },
-    isMobile() { return this.$store.getters.device === 'mobile' }
+    ...mapState({
+      history: state => state.tabs.history,
+      isMobile: state => state.application.device === 'mobile'
+    })
   },
   watch: {
     $route() {

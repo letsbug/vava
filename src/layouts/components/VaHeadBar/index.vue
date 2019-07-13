@@ -4,7 +4,7 @@
     <div class="va-head-nav clear-fix">
       <!-- sidebar expander -->
       <a id="hamburger" class="va-nav-item" @click.stop="toggleSidebar">
-        <va-icon :icon="sidebarOpend ? 'action-collapse' : 'action-expand'" />
+        <va-icon :icon="sidebarOpened ? 'action-collapse' : 'action-expand'" />
       </a>
 
       <!-- refresh button -->
@@ -59,6 +59,7 @@ import {
   Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker
 } from '@/components'
 import UserActions from './UserActions'
+import { mapState } from 'vuex'
 
 export default {
   components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions },
@@ -68,12 +69,10 @@ export default {
     }
   },
   computed: {
-    isMobile() {
-      return this.$store.getters.device === 'mobile'
-    },
-    sidebarOpend() {
-      return this.$store.state.application.sidebar.opened
-    },
+    ...mapState({
+      isMobile: state => state.device === 'mobile',
+      sidebarOpened: state => state.application.sidebar.opened
+    }),
     currRouteIsSearch() {
       return /^\/search/.test(this.$route.path) ? 'active' : ''
     },

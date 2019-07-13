@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Notification',
   metaInfo: {
@@ -69,7 +70,7 @@ export default {
     }
   },
   computed: {
-    notifications() { return this.$store.getters.notifications }
+    ...mapGetters(['notifications'])
   },
   methods: {
     transUnreadClass: row => row.unread ? 'unread' : '',
