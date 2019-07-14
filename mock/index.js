@@ -35,9 +35,9 @@ export function mockXHR() {
     this.proxy_send(...arguments)
   }
 
-  // if (process.env.NODE_ENV === 'development') {
-  //   Mock.setup({ timeout: '400-4000' })
-  // }
+  if (process.env.NODE_ENV === 'development') {
+    Mock.setup({ timeout: '400-4000' })
+  }
 
   function XHR2ExpressReqWrap(respond) {
     return function(options) {
