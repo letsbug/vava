@@ -1,5 +1,6 @@
 import Mock from 'mockjs'
 import NotificationVo from '../src/vo/notification'
+import { generateResponse } from './response'
 
 const notifications = []
 
@@ -27,12 +28,7 @@ export default [
         notifications.push(new NotificationVo(random(d)))
       })
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data: notifications.sort((a, b) => (a.date < b.date ? 1 : -1))
-      }
+      return generateResponse(2000, notifications.sort((a, b) => (a.date < b.date ? 1 : -1)))
     }
   },
   {
@@ -43,11 +39,7 @@ export default [
       notifications.forEach((value, index) => {
         if (~ids.indexOf(value.id + '')) notifications[index].unread = false
       })
-      return {
-        status: 2000,
-        success: true,
-        message: 'success'
-      }
+      return generateResponse(2000)
     }
   },
   {
@@ -58,11 +50,7 @@ export default [
         notifications[i]['unread'] = false
       })
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success'
-      }
+      return generateResponse(2000)
     }
   }
 ]

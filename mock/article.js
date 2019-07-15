@@ -3,6 +3,7 @@ import { parseURL } from '../src/tools/urls'
 import { editors, auditors } from './account'
 import ArticleVo from '../src/vo/ArticleVo'
 import BaseVo from '../src/vo/BaseVo'
+import { generateResponse } from './response'
 
 const list = []
 const total = 100
@@ -51,13 +52,7 @@ export default [
       const min = (vo.page - 1) * vo.size
       const max = vo.page * vo.size
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        pages: vo,
-        data: _list.filter((v, i) => (i >= min && i < max))
-      }
+      return generateResponse(2000, _list.filter((v, i) => (i >= min && i < max)), vo)
     }
   },
   {
@@ -65,21 +60,15 @@ export default [
     type: 'get',
     response: config => {
       const { id } = parseURL(config.url)
-      return {
-        status: 2000,
-        data: list.filter(v => v.id === id)
-      }
+
+      return generateResponse(2000, list.filter(v => v.id === id))
     }
   },
   {
     url: '/articles/create',
     type: 'post',
     response: () => {
-      return {
-        status: 2000,
-        success: true,
-        message: 'success'
-      }
+      return generateResponse(2000)
     }
   },
   {
@@ -88,11 +77,7 @@ export default [
     response: config => {
       const params = config.body
       if (!params.id) {
-        return {
-          status: 5001,
-          success: false,
-          message: 'The params \'id\' is not defined.'
-        }
+        return generateResponse(5001)
       }
 
       let modified = false
@@ -106,13 +91,9 @@ export default [
         }
       }
 
-      const status = modified ? 2000 : 5003
+      const status = modified ? 2000 : 5000
 
-      return {
-        status,
-        success: modified,
-        message: modified ? 'success' : 'update failed'
-      }
+      return generateResponse(status)
     }
   },
   {
@@ -129,11 +110,7 @@ export default [
           }
         })
       })
-      return {
-        status: 2000,
-        success: true,
-        message: 'success'
-      }
+      return generateResponse(2000)
     }
   }
 ]

@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 import { roles } from './roles'
 import { parseURL } from '../src/tools/urls'
+import { generateResponse } from './response'
 
 const userList = []
 const Preset = ['Charles', 'Linda', 'Nancy', 'Karen', 'Jennifer']
@@ -63,19 +64,10 @@ export default [
       const user = userList.find(v => v.username === username ? v : null)
 
       if (!user) {
-        return {
-          status: 5001,
-          success: false,
-          message: 'Account and password are incorrect.'
-        }
+        return generateResponse(4000)
       }
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data: { token: user.token }
-      }
+      return generateResponse(2000, user.token)
     }
   },
   {
@@ -86,19 +78,10 @@ export default [
       const user = userList.find(v => v.token === token ? v : null)
 
       if (!user) {
-        return {
-          status: 5002,
-          success: false,
-          message: 'Login failed, unable to get user details.'
-        }
+        return generateResponse(4001)
       }
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data: user
-      }
+      return generateResponse(2000, user)
     }
   },
   {
@@ -107,58 +90,37 @@ export default [
     response: config => {
       const data = JSON.parse(config.body)
       console.log('user update parameters: ', data)
-      return {
-        status: 2000,
-        success: true,
-        message: 'success'
-      }
+      return generateResponse()
     }
   },
   {
     url: '/account/logout',
     type: 'post',
     response: () => {
-      return {
-        status: 2000,
-        success: true,
-        message: 'success'
-      }
+      return generateResponse()
     }
   },
   {
     url: '/account/list',
     type: 'get',
     response: () => {
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data: userList
-      }
+      return generateResponse(2000, userList)
     }
   },
   {
     url: '/account/auditors',
     type: 'post',
     response: () => {
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data: auditors()
-      }
+      const data = auditors()
+      return generateResponse(2000, data)
     }
   },
   {
     url: '/account/editors',
     type: 'post',
     response: () => {
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data: editors()
-      }
+      const data = editors()
+      return generateResponse(2000, data)
     }
   }
 ]

@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 import ContactsVo from '../src/vo/ContactsVo'
 import BaseVo from '../src/vo/BaseVo'
+import { generateResponse } from './response'
 
 let list = []
 const total = 100
@@ -37,25 +38,14 @@ export default [
 
       const data = list.filter((v, i) => (i >= min && i < max))
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        pages: vo,
-        data
-      }
+      return generateResponse(2000, data, vo)
     }
   },
   {
     url: '/contacts/all',
     type: 'post',
     response: () => {
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data: []
-      }
+      return generateResponse(2000, [])
     }
   }
 ]
