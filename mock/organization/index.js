@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+import { generateResponse } from '../response'
 
 const Random = Mock.Random
 
@@ -7,49 +8,16 @@ const organizations = []
 const groupName = Random.cword(2)
 
 function generateRank(orgId) {
-  const cw = {
-    id: Random.increment(),
-    parentId: 0,
-    orgId,
-    name: '财务部'
-  }
+  const names = ['财务部', '人事行政部', '销售中心', '技术中心', '产品组', 'UI组', '开发组']
+  const ranks = []
 
-  const rs = {
-    id: Random.increment(),
-    parentId: 0,
-    orgId,
-    name: '人事行政部'
-  }
+  names.forEach((name, i) => {
+    const id = Random.increment()
+    const parentId = i > 3 ? ranks[3].id : 0
+    ranks.push({ id, parentId, orgId, name })
+  })
 
-  const js = {
-    id: Random.increment(),
-    parentId: 0,
-    orgId,
-    name: '技术中心'
-  }
-
-  const cp = {
-    id: Random.increment(),
-    parentId: js.id,
-    orgId,
-    name: '产品组'
-  }
-
-  const ui = {
-    id: Random.increment(),
-    parentId: js.id,
-    orgId,
-    name: 'UI组'
-  }
-
-  const dev = {
-    id: Random.increment(),
-    parentId: js.id,
-    orgId,
-    name: '开发组'
-  }
-
-  return [cw, rs, js, cp, ui, dev]
+  return ranks
 }
 
 function generateCompany(parentId) {
@@ -85,23 +53,45 @@ export default [
     path: '/organization/list',
     type: 'post',
     response: config => {
-      const params = config.body
-      console.log(params)
-      return orgs
+      let { parentId } = config.body
+      if (!parentId) {
+        parentId = 0
+      }
+      const data = orgs.filter(org => org.id === parentId)
+      return generateResponse(2000, data)
     }
   },
   {
     path: '/organization/update',
     type: 'post',
     response: config => {
-      console.log(config)
+      const { id, parentId, datas } = config.body
+      if (!id || !parentId) {
+        return generateResponse(5001)
+      }
+
+      orgs.forEach(v => {
+        if (v.id === id && v.parentId === parentId) {
+          Object.keys(v).forEach(key => {
+            if (datas[key]) v[key] = datas[key]
+          })
+        }
+      })
+
+      return generateResponse(2000)
     }
   },
   {
     path: '/organization/add',
     type: 'post',
     response: config => {
-      console.log(config)
+      const { parentId, datas } = config.body
+      if (!parentId) {
+        return generateResponse(5001)
+      }
+
+      console.log(datas)
+      return generateResponse(2000)
     }
   },
   {
@@ -124,12 +114,7 @@ export default [
         return org.id === orgId
       }).rank
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        data
-      }
+      return generateResponse(2000, data)
     }
   }
 ]
