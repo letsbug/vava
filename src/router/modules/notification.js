@@ -4,7 +4,7 @@ export default {
   path: '/notification',
   component: Layout,
   redirect: '/notification/',
-  sort: 9,
+  sort: 10,
   children: [{
     path: '',
     name: 'Notification',

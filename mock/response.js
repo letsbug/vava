@@ -23,6 +23,16 @@ const statusList = {
     status: 5001,
     success: false,
     message: 'Missing the necessary fields.'
+  },
+  5002: {
+    status: 5002,
+    success: false,
+    message: 'The data you want to add already exists.'
+  },
+  5003: {
+    status: 5003,
+    success: false,
+    message: 'The data you want to modify does not exist.'
   }
 }
 

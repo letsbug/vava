@@ -4,7 +4,7 @@ export default {
   path: '/clipboard',
   component: Layout,
   redirect: '/clipboard/',
-  sort: 8,
+  sort: 9,
   children: [{
     path: '',
     name: 'Clipboard',

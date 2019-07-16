@@ -4,6 +4,7 @@
 
 import Dater from '../../src/tools/_dater'
 import { generatePV, generateAreas, generateAges, generateTraffics } from './pv'
+import { generateResponse } from '../response'
 
 const count = 365 * 2 // 2 years
 const pv = []
@@ -56,20 +57,10 @@ export default [
       const ages = generateAges(totalUV)
       const traffics = generateTraffics(totalPV)
 
-      return {
-        status: 2000,
-        success: true,
-        message: 'success',
-        totalPV,
-        totalUV,
-        averagePV,
-        averageUV,
-        averageCVR,
-        areas,
-        ages,
-        data,
-        traffics
-      }
+      return Object.assign(
+        generateResponse(2000, data),
+        { totalPV, totalUV, averagePV, averageUV, averageCVR, areas, ages, data, traffics }
+      )
     }
   }
 ]

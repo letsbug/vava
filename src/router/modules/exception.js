@@ -4,7 +4,7 @@ export default {
   path: '/exception',
   component: Layout,
   redirect: '/exception',
-  sort: 6,
+  sort: 7,
   children: [{
     path: '',
     name: 'Exception',

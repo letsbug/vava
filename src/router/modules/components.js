@@ -8,7 +8,7 @@ export default {
     title: 'components',
     icon: 'thing-component'
   },
-  sort: 3,
+  sort: 4,
   alwaysShow: true,
   children: [
     {

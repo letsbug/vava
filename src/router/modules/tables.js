@@ -9,7 +9,7 @@ const tables = {
     title: 'table',
     icon: 'chart-table'
   },
-  sort: 4,
+  sort: 5,
   children: [
     {
       path: 'table-inline-edit',

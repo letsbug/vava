@@ -9,7 +9,7 @@ export default {
     title: 'excel',
     icon: 'file-excel'
   },
-  sort: 7,
+  sort: 8,
   children: [
     {
       path: 'export',

@@ -4,7 +4,7 @@ export default {
   path: '/icons',
   component: Layout,
   redirect: '/icons/',
-  sort: 5,
+  sort: 6,
   children: [{
     path: '',
     name: 'VaIcons',

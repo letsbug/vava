@@ -43,7 +43,7 @@ const user = {
   actions: {
     user_login: ({ commit, state }, userInfo) => new Promise((resolve, reject) => {
       Account.login(userInfo.username.trim(), userInfo.password).then(res => {
-        const { token } = res.data.data
+        const token = res.data.data
         commit('USER_SET_TOKEN', token)
 
         const expire = userInfo.remember ? state.expire : TOKEN_EXPIRE

@@ -4,7 +4,7 @@ export default {
   path: '/cache',
   component: Layout,
   redirect: '/cache/',
-  sort: 2,
+  sort: 3,
   children: [{
     path: '',
     name: 'Cache',
