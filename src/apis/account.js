@@ -15,7 +15,7 @@ const info = token => {
 }
 
 const list = () => {
-  return Service.get('/account/list').then(res => res.data)
+  return Service.get('/account/list')
 }
 
 export default {

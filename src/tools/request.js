@@ -21,7 +21,12 @@ Service.interceptors.request.use(
 
 // response interceptor
 Service.interceptors.response.use(
-  res => res,
+  res => {
+    const { data } = res
+    // TODO HTTP请求异常处理（非后端自定义异常）
+
+    return data
+  },
   err => {
     Message.error(err.message)
     return Promise.reject(err)
