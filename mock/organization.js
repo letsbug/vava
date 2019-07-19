@@ -10,12 +10,12 @@ export const ranks = []
 
 function generateRank(orgId, count) {
   const prefixs = ['部', '中心', '组']
+  const topCount = 50
 
   const id = Random.increment()
   const name = Random.cword(2, 4) + prefixs[Math.floor(Math.random() * prefixs.length)]
-  // const parentId = count > 50 ? 0 : ranks[Math.floor(Math.random() * 50)].id
-  const parentId = 0
-  ranks.push({ id, parentId, orgId, name })
+  const parentId = count < topCount ? 0 : ranks[Math.floor(Math.random() * topCount)].id
+  return { id, parentId, orgId, name }
 }
 
 function generateCompany(parentId) {
@@ -41,7 +41,7 @@ for (let i = 0; i < 10; i++) {
   orgs.push(company)
 }
 
-for (let i = 0; i < 150; i++) {
+for (let i = 0; i < 200; i++) {
   const orgId = orgs[Math.floor(Math.random() * orgs.length)].id
   const rank = generateRank(orgId, i)
   ranks.push(rank)
