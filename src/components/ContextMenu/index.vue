@@ -23,7 +23,7 @@ export default {
     },
     target: {
       type: Object,
-      required: true
+      default: () => null
     }
   },
   data() {

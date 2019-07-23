@@ -66,7 +66,7 @@ export default [
     type: 'post',
     response: config => {
       const { id, parentId, datas } = config.body
-      if (!id || !parentId) {
+      if (!~id || !~parentId) {
         return generateResponse(5001)
       }
 
@@ -78,6 +78,8 @@ export default [
         }
       })
 
+      console.log(orgs)
+
       return generateResponse(2000)
     }
   },
@@ -86,20 +88,20 @@ export default [
     type: 'post',
     response: config => {
       const { parentId, datas } = config.body
-      if (!parentId) {
+      if (!~parentId) {
         return generateResponse(5001)
       }
 
-      const { name, short } = datas
-      if (orgs.find(v => v.name === name || v.short === short)) {
+      const exist = orgs.find(v => v.name === datas.name)
+      if (exist) {
         return generateResponse(5002)
       }
 
       const id = Random.increment()
-      const rank = generateRank(id)
-      orgs.push(Object.assign({}, datas, { id, rank, parentId }))
+      const data = Object.assign({}, datas, { id, parentId })
+      orgs.push(data)
 
-      return generateResponse(2000)
+      return generateResponse(2000, data)
     }
   },
   {
@@ -129,7 +131,6 @@ export default [
       const pId = parentId || 0
 
       const data = ranks.filter(v => v.orgId === orgId && v.parentId === pId)
-      // console.log(orgId, parentId, data)
 
       return generateResponse(2000, data)
     }
@@ -163,8 +164,17 @@ export default [
         return generateResponse(5001)
       }
 
-      ranks.push({ orgId, parentId, id: Random.increment(), name })
-      return generateResponse(2000)
+      const exist = ranks.find(v => v.orgId === orgId && v.parentId === parentId && v.name === name)
+
+      if (exist) {
+        return generateResponse(5002)
+      }
+
+      const id = Random.increment()
+      const data = { orgId, parentId, id, name }
+      ranks.push(data)
+
+      return generateResponse(2000, data)
     }
   },
   {
