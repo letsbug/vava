@@ -52,7 +52,6 @@ function generateRanks(parentId, orgId, _name) {
   const id = Random.increment(1000)
   const prefix = prefixs[Math.floor(Math.random() * 3)]
   const name = _name || Random.cword(2, 4) + prefix
-  // console.log('generate rank ===>>> id: ', id, ', parentId: ', parentId, ', orgId: ', orgId)
 
   return Mock.mock({
     id,
@@ -75,33 +74,21 @@ function randomGetParentId() {
   return ranks[index].id
 }
 
-function generateDatas() {
-  if (orgs.length > 0) {
-    return
-  }
+const group = generateCompany(0, '重庆市', '集团科技股份')
+orgs.push(group)
 
-  const group = generateCompany(0, '重庆市', '集团科技股份')
-  orgs.push(group)
+for (let i = 0; i < 10; i++) {
+  const data = i < 5
+    ? generateCompany(group.id, '重庆市', '科技')
+    : generateCompany(0, Random.city(), '科技')
+  orgs.push(data)
+}
 
-  for (let i = 0; i < 5; i++) {
-    orgs.push(generateCompany(group.id, '重庆市', '科技'))
-  }
+for (let i = 0; i < 54; i++) {
+  const orgId = randomGetOrgId(i)
+  const parentId = i < topCount ? 0 : randomGetParentId()
 
-  for (let i = 0; i < 5; i++) {
-    const city = Random.city()
-    orgs.push(generateCompany(0, city, '科技'))
-  }
-
-  if (ranks.length > 0) {
-    return
-  }
-
-  for (let i = 0; i < 54; i++) {
-    const orgId = randomGetOrgId(i)
-    const parentId = i < topCount ? 0 : randomGetParentId()
-
-    ranks.push(generateRanks(parentId, orgId))
-  }
+  ranks.push(generateRanks(parentId, orgId))
 }
 
 export default [
@@ -110,8 +97,6 @@ export default [
     url: '/organization/list',
     type: 'post',
     response: config => {
-      generateDatas()
-
       let { parentId } = config.body
       if (typeof parentId !== 'number') {
         parentId = 0
@@ -124,8 +109,6 @@ export default [
     url: '/organization/update',
     type: 'post',
     response: config => {
-      generateDatas()
-
       const { id, parentId, datas } = config.body
       if (!~id || !~parentId) {
         return generateResponse(5001)
@@ -186,8 +169,6 @@ export default [
     url: '/department/list',
     type: 'post',
     response: config => {
-      generateDatas()
-
       const { orgId, parentId } = config.body
       const pId = parentId || 0
 
@@ -200,8 +181,6 @@ export default [
     url: '/department/update',
     type: 'post',
     response: config => {
-      generateDatas()
-
       const { id, orgId, name } = config.body
 
       if (!id || !orgId) {
@@ -221,8 +200,6 @@ export default [
     url: '/department/add',
     type: 'post',
     response: config => {
-      generateDatas()
-
       const { orgId, parentId, name } = config.body
 
       if (!orgId || !parentId) {
