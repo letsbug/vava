@@ -12,17 +12,23 @@ const pv = []
 const oneDay = 24 * 3600 * 1000
 let now = new Date()
 
-for (let i = 0; i < count; i++) {
-  if (i > 0) now -= oneDay
-
-  const _date = Dater.format(now, 'yyyy-MM-dd')
-
-  pv.push(generatePV(_date))
-}
-
 function isInRange(start, end, curr) {
   curr = new Date(curr)
   return curr >= new Date(start) && curr <= new Date(end)
+}
+
+function generateDatas() {
+  if (pv.length > 0) {
+    return
+  }
+
+  for (let i = 0; i < count; i++) {
+    if (i > 0) now -= oneDay
+
+    const _date = Dater.format(now, 'yyyy-MM-dd')
+
+    pv.push(generatePV(_date))
+  }
 }
 
 export default [
@@ -30,6 +36,8 @@ export default [
     url: '/statistics/pv',
     type: 'post',
     response: config => {
+      generateDatas()
+
       let { start, end } = config.body
       if (!start || !end) {
         end = Dater.format(new Date(), 'yyyy-MM-dd')

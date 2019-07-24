@@ -61,18 +61,21 @@ export default {
   },
   watch: {
     visible(v) {
+      if (this.list.length === 0) {
+        this.loadList()
+      }
       this.dialogVisible = v
     }
   },
-  mounted() {
-    Service.list().then(res => {
-      this.list = res.data
+  methods: {
+    async loadList() {
+      const { data } = await Service.list()
+
+      this.list = data
       this.list.forEach((v, i) => {
         if (v.token === this.user.token) this.checkedIndex = i
       })
-    })
-  },
-  methods: {
+    },
     handleChoose(user, index) {
       this.checkedIndex = index
       this.$emit('on-change', user)

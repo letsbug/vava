@@ -21,16 +21,25 @@ const random = cn => Mock.mock({
   company: '@city@cword(3, 8)有限责任公司'
 })
 
-for (let i = 0; i < total; i++) {
-  list.push(new ContactsVo(random(false)))
+function generateDatas() {
+  if (list.length > 0) {
+    return
+  }
+
+  for (let i = 0; i < total; i++) {
+    list.push(new ContactsVo(random(false)))
+  }
+  list = list.sort((a, b) => a.name > b.name ? 1 : -1)
 }
-list = list.sort((a, b) => a.name > b.name ? 1 : -1)
 
 export default [
   {
     url: '/contacts/list',
     type: 'post',
     response: config => {
+      if (list.length < 1) {
+        generateDatas()
+      }
       const { page, size } = config.body
       const vo = new BaseVo({ page, size, total })
       const min = (vo.page - 1) * vo.size
@@ -45,6 +54,7 @@ export default [
     url: '/contacts/all',
     type: 'post',
     response: () => {
+      generateDatas()
       return generateResponse(2000, [])
     }
   }

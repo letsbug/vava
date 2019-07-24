@@ -14,8 +14,19 @@ const random = now => Mock.mock({
   deleted: false
 })
 
-for (let i = 0; i < 10; i++) {
-  notifications.push(new NotificationVo(random()))
+function generateDatas() {
+  if (notifications.length > 0) {
+    return
+  }
+
+  for (let i = 0; i < 10; i++) {
+    notifications.push(new NotificationVo(random()))
+  }
+
+  const date = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
+  date.forEach(d => {
+    notifications.push(new NotificationVo(random(d)))
+  })
 }
 
 export default [
@@ -23,10 +34,7 @@ export default [
     url: '/notification/list',
     type: 'post',
     response: () => {
-      const date = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
-      date.forEach(d => {
-        notifications.push(new NotificationVo(random(d)))
-      })
+      generateDatas()
 
       return generateResponse(2000, notifications.sort((a, b) => (a.date < b.date ? 1 : -1)))
     }
@@ -35,6 +43,8 @@ export default [
     url: '/notification/read',
     type: 'post',
     response: config => {
+      generateDatas()
+
       const { ids } = config.body
       notifications.forEach((value, index) => {
         if (~ids.indexOf(value.id + '')) notifications[index].unread = false
@@ -46,6 +56,8 @@ export default [
     url: '/notification/allread',
     type: 'post',
     response: () => {
+      generateDatas()
+
       notifications.forEach((v, i) => {
         notifications[i]['unread'] = false
       })

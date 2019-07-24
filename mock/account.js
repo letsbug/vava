@@ -19,39 +19,49 @@ const randomAvatar = () => {
   return path
 }
 
-roles.forEach((v, i) => {
-  const token = roles[i]
-  const rd = Mock.mock({
-    roles: generateRole(i),
-    token: token,
-    code: '@id',
-    username: token,
-    intro: 'I\'m a ' + token,
-    avatar: randomAvatar(),
-    status: 1
-  })
-  userList.push(rd)
-})
+function generateDatas() {
+  if (userList.length > 0) {
+    return
+  }
 
-Preset.forEach((v, i) => {
-  const rd = Mock.mock({
-    roles: generateRole(i),
-    token: v,
-    code: '@id',
-    username: v,
-    intro: 'My name is ' + v,
-    avatar: randomAvatar,
-    status: 1
-  })
-  userList.push(rd)
-})
+  console.log('mock & generate accounts...')
 
-userList.sort((a, b) => a.roles.length > b.roles.length ? -1 : 1)
+  roles.forEach((v, i) => {
+    const token = roles[i]
+    const rd = Mock.mock({
+      roles: generateRole(i),
+      token: token,
+      code: '@id',
+      username: token,
+      intro: 'I\'m a ' + token,
+      avatar: randomAvatar(),
+      status: 1
+    })
+    userList.push(rd)
+  })
+
+  Preset.forEach((v, i) => {
+    const rd = Mock.mock({
+      roles: generateRole(i),
+      token: v,
+      code: '@id',
+      username: v,
+      intro: 'My name is ' + v,
+      avatar: randomAvatar,
+      status: 1
+    })
+    userList.push(rd)
+  })
+
+  userList.sort((a, b) => a.roles.length > b.roles.length ? -1 : 1)
+}
 
 export function editors() {
+  generateDatas()
   return userList.filter(v => v.roles[0] === 'editor')
 }
 export function auditors() {
+  generateDatas()
   return userList.filter(v => v.roles[0] === 'auditor')
 }
 
@@ -60,6 +70,8 @@ export default [
     url: '/account/login',
     type: 'post',
     response: config => {
+      generateDatas()
+
       const { username } = config.body
       const user = userList.find(v => v.username === username ? v : null)
 
@@ -74,6 +86,8 @@ export default [
     url: '/account/info',
     type: 'get',
     response: config => {
+      generateDatas()
+
       const { token } = parseURL(config.url)
       const user = userList.find(v => v.token === token ? v : null)
 
@@ -88,6 +102,8 @@ export default [
     url: '/account/update',
     type: 'get',
     response: config => {
+      generateDatas()
+
       const data = JSON.parse(config.body)
       console.log('user update parameters: ', data)
       return generateResponse()
@@ -97,6 +113,8 @@ export default [
     url: '/account/logout',
     type: 'post',
     response: () => {
+      generateDatas()
+
       return generateResponse()
     }
   },
@@ -104,6 +122,7 @@ export default [
     url: '/account/list',
     type: 'get',
     response: () => {
+      generateDatas()
       return generateResponse(2000, userList)
     }
   },

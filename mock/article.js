@@ -25,8 +25,10 @@ const random = cn => Mock.mock({
   'origin|1': ['@platform-a', '@platform-b', '@platform-c', '@platform-d']
 })
 
-for (let i = 0; i < total; i++) {
-  list.push(new ArticleVo(random(false)))
+function generateDatas() {
+  for (let i = 0; i < total; i++) {
+    list.push(new ArticleVo(random(false)))
+  }
 }
 
 export default [
@@ -34,6 +36,10 @@ export default [
     url: '/articles/list',
     type: 'post',
     response: config => {
+      if (list.length < 1) {
+        generateDatas()
+      }
+
       const { title, level, status, page, size } = config.body
 
       const _list = (!title && !level && !status)

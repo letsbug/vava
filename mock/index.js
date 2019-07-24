@@ -2,7 +2,6 @@ import Mock from 'mockjs'
 import { parseURL } from '../src/tools/urls'
 
 import Orgs from './orgs'
-import Ranks from './ranks'
 import Roles from './roles'
 import Account from './account'
 import Notification from './notification'
@@ -11,9 +10,7 @@ import Article from './article'
 import Statistics from './statistics'
 
 const mocks = [
-  // ...Organization,
   ...Orgs,
-  ...Ranks,
   ...Roles,
   ...Account,
   ...Notification,

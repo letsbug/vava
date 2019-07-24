@@ -21,8 +21,12 @@ const properties = [
   '事业单位', '非营利组织', '创业公司'
 ]
 
+const prefixs = ['部', '组', '中心']
+
 const Random = Mock.Random
 export const orgs = []
+export const ranks = []
+const topCount = 30
 
 function generateCompany(parentId = 0, city, prefix) {
   const id = Random.increment(100)
@@ -44,23 +48,70 @@ function generateCompany(parentId = 0, city, prefix) {
   })
 }
 
-const group = generateCompany(0, '重庆市', '集团科技股份')
-orgs.push(group)
+function generateRanks(parentId, orgId, _name) {
+  const id = Random.increment(1000)
+  const prefix = prefixs[Math.floor(Math.random() * 3)]
+  const name = _name || Random.cword(2, 4) + prefix
+  // console.log('generate rank ===>>> id: ', id, ', parentId: ', parentId, ', orgId: ', orgId)
 
-for (let i = 0; i < 5; i++) {
-  orgs.push(generateCompany(group.id, '重庆市', '科技'))
+  return Mock.mock({
+    id,
+    parentId,
+    orgId,
+    name,
+    introduction: '@cparagraph(3)',
+    creatime: new Date(),
+    updatime: new Date()
+  })
 }
 
-for (let i = 0; i < 5; i++) {
-  const city = Random.city()
-  orgs.push(generateCompany(0, city, '科技'))
+function randomGetOrgId(index) {
+  const _orgs = orgs.filter((v, i) => i < 6)
+  return _orgs[index % _orgs.length].id
+}
+
+function randomGetParentId() {
+  const index = Math.floor(Math.random() * topCount)
+  return ranks[index].id
+}
+
+function generateDatas() {
+  if (orgs.length > 0) {
+    return
+  }
+
+  const group = generateCompany(0, '重庆市', '集团科技股份')
+  orgs.push(group)
+
+  for (let i = 0; i < 5; i++) {
+    orgs.push(generateCompany(group.id, '重庆市', '科技'))
+  }
+
+  for (let i = 0; i < 5; i++) {
+    const city = Random.city()
+    orgs.push(generateCompany(0, city, '科技'))
+  }
+
+  if (ranks.length > 0) {
+    return
+  }
+
+  for (let i = 0; i < 54; i++) {
+    const orgId = randomGetOrgId(i)
+    const parentId = i < topCount ? 0 : randomGetParentId()
+
+    ranks.push(generateRanks(parentId, orgId))
+  }
 }
 
 export default [
+  // 组织架构相关
   {
     url: '/organization/list',
     type: 'post',
     response: config => {
+      generateDatas()
+
       let { parentId } = config.body
       if (typeof parentId !== 'number') {
         parentId = 0
@@ -73,6 +124,8 @@ export default [
     url: '/organization/update',
     type: 'post',
     response: config => {
+      generateDatas()
+
       const { id, parentId, datas } = config.body
       if (!~id || !~parentId) {
         return generateResponse(5001)
@@ -125,6 +178,85 @@ export default [
       })
 
       generateResponse(success ? 2000 : 5003)
+    }
+  },
+
+  // 部门相关
+  {
+    url: '/department/list',
+    type: 'post',
+    response: config => {
+      generateDatas()
+
+      const { orgId, parentId } = config.body
+      const pId = parentId || 0
+
+      const data = ranks.filter(v => v.orgId === orgId && v.parentId === pId)
+
+      return generateResponse(2000, data)
+    }
+  },
+  {
+    url: '/department/update',
+    type: 'post',
+    response: config => {
+      generateDatas()
+
+      const { id, orgId, name } = config.body
+
+      if (!id || !orgId) {
+        return generateResponse(5001)
+      }
+
+      ranks.forEach(v => {
+        if (v.id === id && orgId === v.orgId) {
+          v.name = name
+        }
+      })
+
+      return generateResponse(2000)
+    }
+  },
+  {
+    url: '/department/add',
+    type: 'post',
+    response: config => {
+      generateDatas()
+
+      const { orgId, parentId, name } = config.body
+
+      if (!orgId || !parentId) {
+        return generateResponse(5001)
+      }
+
+      const exist = ranks.find(v => v.orgId === orgId && v.parentId === parentId && v.name === name)
+
+      if (exist) {
+        return generateResponse(5002)
+      }
+
+      const data = generateRanks(parentId, orgId, name)
+      ranks.push(data)
+
+      return generateResponse(2000, data)
+    }
+  },
+  {
+    url: '/department/delete',
+    type: 'post',
+    response: config => {
+      const { orgId, parentId, id } = config.body
+      if (!orgId || !parentId || !id) {
+        return generateResponse(5001)
+      }
+
+      ranks.forEach((v, i) => {
+        if (v.id === id && v.id === parentId) {
+          ranks.splice(i, 1)
+        }
+      })
+
+      return generateResponse(2000)
     }
   }
 ]
