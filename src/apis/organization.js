@@ -6,7 +6,6 @@ const orgs = (parentId = null) => {
 
 const orgUpdate = (parentId, name, id) => {
   const datas = { name }
-  console.log({ id, parentId, datas })
   return Service.post('/organization/update', { id, parentId, datas })
 }
 
@@ -27,7 +26,7 @@ const rankUpdate = (parentId, name, id, orgId) => {
   return Service.post('/department/update', { id, orgId, name })
 }
 
-const rankAdd = (parentId, name, orgId) => {
+const rankAdd = (parentId, name, id, orgId) => {
   return Service.post('/department/add', { orgId, parentId, name })
 }
 
