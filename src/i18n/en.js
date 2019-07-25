@@ -1,11 +1,11 @@
 export default {
   roles: {
     title: 'role',
-    admin: 'admin',
-    assigner: 'assigner',
-    auditor: 'auditor',
-    editor: 'editor',
-    visitor: 'visitor'
+    SuperAdmin: 'Super Admin',
+    Assigner: 'Assigner',
+    Auditor: 'Auditor',
+    Editor: 'Editor',
+    Visitor: 'Visitor'
   },
   login: {
     title: 'Sign in to VAVA',

@@ -177,7 +177,11 @@ export default {
   methods: {
     getList() {
       this.loading = true
-      Service.list(Object.assign({}, this.pages, this.filterData)).then(res => {
+      const { page, size } = this.pages
+      const { title, level, status } = this.filterData
+      const params = { page, size, title, level, status }
+
+      Service.list(params).then(res => {
         if (!res.success) return
         this.list = res.data.map(v => {
           this.$set(v, 'editing', false)

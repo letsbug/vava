@@ -25,7 +25,7 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
-          const { roles } = await store.dispatch('user_info')
+          const roles = await store.dispatch('user_info')
 
           // generate accessible routes through roles
           const accessRoutes = await store.dispatch('perm_generate_routes', roles)

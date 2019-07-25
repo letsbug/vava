@@ -8,27 +8,28 @@ const TOKEN_EXPIRE = process.env.NODE_ENV === 'development'
 
 const user = {
   state: {
-    code: '',
+    id: '',
     username: '',
+    name: '',
+    nick: '',
     avatar: '',
     introduction: '',
     roles: [],
-    status: '',
     token: Token.get(),
     expire: 7
   },
   mutations: {
-    USER_SET_CODE: (state, code) => {
-      state.code = code
-    },
-    USER_SET_STATUS: (state, status) => {
-      state.status = status
-    },
     USER_SET_TOKEN: (state, token) => {
       state.token = token
     },
+    USER_SET_ACCOUNT: (state, username) => {
+      state.username = username
+    },
     USER_SET_NAME: (state, name) => {
-      state.username = name
+      state.name = name
+    },
+    USER_SET_NICK: (state, nick) => {
+      state.nick = nick
     },
     USER_SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
@@ -58,18 +59,18 @@ const user = {
         const { data } = res
         if (!data) reject(new Error('Valid failed, please Login again.'))
 
-        const { roles, username, code, status, avatar, intro } = data
-        if (!roles || data.roles.length < 1) {
+        const { roles, username, name, nickname, avatar, introduction } = data
+        if (!roles) {
           reject(new Error('roles must be a non-null array!'))
         }
 
         commit('USER_SET_ROLES', roles)
-        commit('USER_SET_NAME', username)
-        commit('USER_SET_CODE', code)
-        commit('USER_SET_STATUS', status)
+        commit('USER_SET_ACCOUNT', username)
+        commit('USER_SET_NAME', name)
+        commit('USER_SET_NICK', nickname)
         commit('USER_SET_AVATAR', avatar)
-        commit('USER_SET_INTRO', intro)
-        resolve(data)
+        commit('USER_SET_INTRO', introduction)
+        resolve(roles)
       }).catch(err => {
         reject(err)
       })
@@ -79,11 +80,10 @@ const user = {
       Account.logout(state.token).then(() => {
         commit('USER_SET_TOKEN', '')
         commit('USER_SET_ROLES', [])
+        commit('USER_SET_ACCOUNT', '')
         commit('USER_SET_NAME', '')
-        commit('USER_SET_CODE', '')
-        commit('USER_SET_STATUS', '')
+        commit('USER_SET_NICK', '')
         commit('USER_SET_AVATAR', '')
-        commit('USER_SET_INTRO', '')
         Token.remove()
         resetRouter()
         resolve()

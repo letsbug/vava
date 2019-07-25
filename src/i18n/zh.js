@@ -1,11 +1,11 @@
 export default {
   roles: {
     title: '角色',
-    admin: '系统管理员',
-    assigner: '授权管理员',
-    auditor: '审核员',
-    editor: '编辑员',
-    visitor: '访客'
+    SuperAdmin: '系统管理员',
+    Assigner: '授权管理员',
+    Auditor: '审核员',
+    Editor: '编辑员',
+    Visitor: '访客'
   },
   login: {
     title: 'VAVA 系统登录',

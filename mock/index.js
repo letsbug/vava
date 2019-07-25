@@ -3,7 +3,8 @@ import { parseURL } from '../src/tools/urls'
 
 import Orgs from './orgs'
 import Roles from './roles'
-import Account from './account'
+// import Account from './account'
+import Users from './users'
 import Notification from './notification'
 import Contacts from './contacts'
 import Article from './article'
@@ -12,7 +13,8 @@ import Statistics from './statistics'
 const mocks = [
   ...Orgs,
   ...Roles,
-  ...Account,
+  // ...Account,
+  ...Users,
   ...Notification,
   ...Contacts,
   ...Article,

@@ -8,7 +8,7 @@ export default {
   meta: {
     title: 'permission',
     icon: 'mark-vip',
-    roles: ['admin', 'assigner', 'auditor', 'editor', 'visitor']
+    roles: ['SuperAdmin', 'Assigner', 'Auditor', 'Editor', 'Visitor']
   },
   sort: 2,
   alwaysShow: true,
@@ -18,7 +18,7 @@ export default {
       name: 'PermissionAdmin',
       meta: {
         title: 'Admin & Assigner',
-        roles: ['admin', 'assigner']
+        roles: ['SuperAdmin', 'Assigner']
       },
       component: () => import('@/modules/permission')
     },
@@ -27,7 +27,7 @@ export default {
       name: 'PermissionAuditor',
       meta: {
         title: 'Auditor',
-        roles: ['auditor'] // admin always has all permissions
+        roles: ['Auditor'] // admin always has all permissions
       },
       component: () => import('@/modules/permission')
     },
@@ -36,7 +36,7 @@ export default {
       name: 'PermissionEditor',
       meta: {
         title: 'Editor',
-        roles: ['editor'] // admin always has all permissions
+        roles: ['Editor'] // admin always has all permissions
       },
       component: () => import('@/modules/permission')
     },
@@ -45,7 +45,7 @@ export default {
       name: 'PermissionVisitor',
       meta: {
         title: 'Visitor',
-        roles: ['visitor'] // admin always has all permissions
+        roles: ['Visitor'] // admin always has all permissions
       },
       component: () => import('@/modules/permission')
     }

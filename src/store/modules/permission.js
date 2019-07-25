@@ -33,7 +33,7 @@ const permission = {
   },
   actions: {
     perm_generate_routes: ({ commit }, roles) => new Promise(resolve => {
-      const accessRoutes = roles.includes('admin')
+      const accessRoutes = roles.includes('SuperAdmin')
         ? asyncRoutes
         : filterAsyncRoutes(asyncRoutes, roles)
       commit('PERM_SET_ROUTES', accessRoutes)

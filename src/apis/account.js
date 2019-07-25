@@ -14,6 +14,10 @@ const info = token => {
   return Service.get('/account/info', { params: data })
 }
 
+const mocks = () => {
+  return Service.get('/account/mocks')
+}
+
 const list = () => {
   return Service.get('/account/list')
 }
@@ -22,5 +26,6 @@ export default {
   login,
   logout,
   info,
+  mocks,
   list
 }

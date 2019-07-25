@@ -41,8 +41,8 @@ function generateCompany(parentId = 0, city, prefix) {
     updatime: new Date(),
     address: '@county(true)',
     email: '@email',
-    phone: `023-${Random.string('@string("number", 8)')}`,
-    fax: `023-${Random.string('@string("number", 8)')}-${Random.string('@string("number", 3)')}`,
+    phone: `023-${Random.string('number', 8)}`,
+    fax: `023-${Random.string('number', 8)}-${Random.string('number', 3)}`,
     'industry|1': industries,
     'property|1': properties
   })
