@@ -1,20 +1,26 @@
 import Mock from 'mockjs'
 import { parseURL } from '../src/tools/urls'
-import { editors, auditors } from './account'
+import { userList } from './users'
 import ArticleVo from '../src/vo/ArticleVo'
 import BaseVo from '../src/vo/BaseVo'
 import { generateResponse } from './response'
 
 const list = []
 const total = 100
+const _userList = userList.map(v => v.nickname)
+const hasAuditUsers = userList.filter(v => {
+  return !v.roles.includes('Editor') && !v.roles.includes('Visitor') && !v.roles.includes('UserManager')
+}).map(v => v.nickname)
+
+console.log(hasAuditUsers)
 
 const contents = cn => cn ? Mock.Random.cparagraph() : Mock.Random.paragraph()
 
 const random = cn => Mock.mock({
   id: '@increment',
   timestamp: +Mock.Random.date('T'),
-  'author|1': editors().map(v => v.username),
-  'auditor|1': auditors().map(v => v.username),
+  'author|1': _userList,
+  'auditor|1': hasAuditUsers,
   title: cn ? '@ctitle(5, 20)' : '@title(5, 20)',
   summery: cn ? '@cparagraph(1, 2)' : '@paragraph(1, 2)',
   content: '<p>' + contents(cn) + '</p>',

@@ -2,7 +2,9 @@ export default {
   roles: {
     title: '角色',
     SuperAdmin: '系统管理员',
-    Assigner: '授权管理员',
+    AccessManager: '授权管理员',
+    UserManager: '用户管理员',
+    ProManager: '项目管理员',
     Auditor: '审核员',
     Editor: '编辑员',
     Visitor: '访客'

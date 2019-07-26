@@ -9,8 +9,9 @@ import { parseURL } from '../src/tools/urls'
 import { generateResponse } from './response'
 
 const Random = Mock.Random
-const userList = []
+export const userList = []
 const avatars = Random.range(1, 21)
+const accounts = ['Charles', 'Linda', 'Nancy', 'Karen', 'Jennifer', 'Brian', 'Deborah', 'Dorothy', 'Steven', 'Anthony']
 const posts = ['总经理', '人事经理', '开发组长', '项目经理', '产品经理', '设计主管', '架构师', '财务经理']
 const roles = ['SuperAdmin', 'AccessManager', 'UserManager', 'ProManager', 'Auditor', 'Editor', 'Visitor']
 
@@ -22,24 +23,25 @@ function randomAvatar() {
   return path
 }
 
-function generateUser() {
-  const now = Date.now()
-  const birthday = Random.date()
+function generateUser(username) {
+  const now = new Date()
+  const birthday = new Date(Random.date())
   const age = (now - birthday) / 1000 / 60 / 60 / 24 / 365
   const { role } = Mock.mock({
     'role|+1': roles
   })
+  const last = Random.last()
 
   return Mock.mock({
     id: '@increment(10)',
-    username: '@first',
-    name: '@name',
+    username,
+    name: `${username} ${last}`,
     'sex|1': [0, 1], // 0: female, 1: male
-    nickname: '@first',
+    nickname: username,
     avatar: randomAvatar(),
     roles: [role],
     'post|+1': posts,
-    token: '@guid',
+    token: username,
     introduction: '@cparagraph(2)',
     phone: `1${Random.string('number', 10)}`,
     address: '@city(true)',
@@ -56,9 +58,9 @@ function generateUser() {
   })
 }
 
-for (let i = 0; i < 10; i++) {
-  userList.push(generateUser())
-}
+accounts.forEach(v => {
+  userList.push(generateUser(v))
+})
 
 export default [
   {

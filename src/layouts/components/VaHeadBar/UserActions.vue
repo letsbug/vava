@@ -5,7 +5,7 @@
     </a>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item :command="handleUserInfo">
-        Signed in as <strong>{{ user.username }}</strong>
+        Signed in as <strong>{{ user.nick }}</strong>
       </el-dropdown-item>
       <el-dropdown-item :command="handleUserInfo" divided>
         {{ $t('header.profile') }}
@@ -27,6 +27,7 @@
 
 <script>
 import { UserPicker } from '@/components'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { UserPicker },
@@ -36,9 +37,7 @@ export default {
     }
   },
   computed: {
-    user() {
-      return this.$store.state.user
-    }
+    ...mapGetters(['user'])
   },
   methods: {
     userDropdown(target) {

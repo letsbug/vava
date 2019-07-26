@@ -2,7 +2,9 @@ export default {
   roles: {
     title: 'role',
     SuperAdmin: 'Super Admin',
-    Assigner: 'Assigner',
+    AccessManager: 'Access Manager',
+    UserManager: 'User Manager',
+    ProManager: 'Project Manager',
     Auditor: 'Auditor',
     Editor: 'Editor',
     Visitor: 'Visitor'

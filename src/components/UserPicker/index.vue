@@ -6,7 +6,7 @@
     @closed="handleClose"
   >
     <el-table :data="list">
-      <el-table-column type="index" width="40" />
+      <el-table-column type="index" width="36" />
       <el-table-column property="username" label="Username" />
       <el-table-column label="Password">************</el-table-column>
       <el-table-column property="roles" label="Roles" />
@@ -56,11 +56,7 @@ export default {
   methods: {
     async loadList() {
       const { data } = await Service.mocks()
-
       this.list = data
-      // this.list.forEach((v, i) => {
-      //   if (v.token === this.user.token) this.checkedIndex = i
-      // })
     },
     handleChoose(user) {
       this.$emit('on-change', user)

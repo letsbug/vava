@@ -55,7 +55,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="38" />
-      <el-table-column label="ID" prop="id" width="46" align="right" />
+      <el-table-column type="index" width="36" align="center" />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable />
       <el-table-column label="CREATE" prop="display" width="116" sortable>
         <template slot-scope="scope">

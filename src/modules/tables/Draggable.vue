@@ -4,7 +4,7 @@
       v-loading="loading" :data="list" tooltip-effect="theme" fit
       highlight-current-row row-key="id" empty-text="Sorry! This category have nothing data."
     >
-      <el-table-column label="ID" prop="id" width="46" align="right" />
+      <el-table-column type="index" width="36" align="right" />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip />
       <el-table-column label="CREATE" prop="display" width="116">
         <template slot-scope="scope">

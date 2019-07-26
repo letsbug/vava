@@ -18,31 +18,33 @@ router.beforeEach(async(to, from, next) => {
       // When the user has already logged in.
       next('/')
       NProgress.done()
-    } else {
-      const { roles } = store.getters
+      return
+    }
 
-      if (roles && roles.length > 0) {
-        next()
-      } else {
-        try {
-          const roles = await store.dispatch('user_info')
+    const { roles } = store.getters
 
-          // generate accessible routes through roles
-          const accessRoutes = await store.dispatch('perm_generate_routes', roles)
-          // dynamically add accessible routes
-          router.addRoutes(accessRoutes)
+    if (roles && roles.length > 0) {
+      next()
+      return
+    }
 
-          // replace: true so the navigation will not leave a history record
-          next({ ...to, replace: true })
-        } catch (e) {
-          // re-login
-          await store.dispatch('user_token_clear')
+    try {
+      const roles = await store.dispatch('user_info')
 
-          Message.error(e || 'Verification failed, please login again.')
-          next(`/login?redirect=${to.path}`)
-          NProgress.done()
-        }
-      }
+      // generate accessible routes through roles
+      const accessRoutes = await store.dispatch('perm_generate_routes', roles)
+      // dynamically add accessible routes
+      router.addRoutes(accessRoutes)
+
+      // replace: true so the navigation will not leave a history record
+      next({ ...to, replace: true })
+    } catch (e) {
+      // re-login
+      await store.dispatch('user_token_clear')
+
+      Message.error(e || 'Verification failed, please login again.')
+      next(`/login?redirect=${to.path}`)
+      NProgress.done()
     }
   } else {
     // redirected to the login page.

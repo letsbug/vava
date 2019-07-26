@@ -9,7 +9,7 @@
       highlight-current-row
       empty-text="Sorry! This category have nothing data."
     >
-      <el-table-column label="ID" prop="id" width="60" align="right" sortable />
+      <el-table-column type="index" width="36" align="right" sortable />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable />
       <el-table-column label="CREATE" prop="display" width="116" sortable>
         <template slot-scope="scope">

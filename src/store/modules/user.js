@@ -11,8 +11,14 @@ const user = {
     id: '',
     username: '',
     name: '',
+    sex: '',
     nick: '',
     avatar: '',
+    phone: '',
+    birthday: '',
+    age: '',
+    height: '',
+    weight: '',
     introduction: '',
     roles: [],
     token: Token.get(),
@@ -28,11 +34,29 @@ const user = {
     USER_SET_NAME: (state, name) => {
       state.name = name
     },
+    USER_SET_SEX: (state, sex) => {
+      state.sex = sex
+    },
     USER_SET_NICK: (state, nick) => {
       state.nick = nick
     },
     USER_SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
+    },
+    USER_SET_PHONE: (state, phone) => {
+      state.phone = phone
+    },
+    USER_SET_BIRTHDAY: (state, birthday) => {
+      state.birthday = birthday
+    },
+    USER_SET_AGE: (state, age) => {
+      state.age = age
+    },
+    USER_SET_HEIGHT: (state, height) => {
+      state.height = height
+    },
+    USER_SET_WEIGHT: (state, weight) => {
+      state.weight = weight
     },
     USER_SET_INTRO: (state, intro) => {
       state.introduction = intro
@@ -57,19 +81,34 @@ const user = {
     user_info: ({ commit, state }) => new Promise((resolve, reject) => {
       Account.info(state.token).then(res => {
         const { data } = res
-        if (!data) reject(new Error('Valid failed, please Login again.'))
+        if (!data) {
+          reject(new Error('Valid failed, please Login again.'))
+        }
 
-        const { roles, username, name, nickname, avatar, introduction } = data
+        const { roles } = data
+
         if (!roles) {
           reject(new Error('roles must be a non-null array!'))
         }
 
         commit('USER_SET_ROLES', roles)
+
+        const {
+          username, name, sex, nickname, avatar, introduction, phone, birthday, age, height, weight
+        } = data
+
         commit('USER_SET_ACCOUNT', username)
         commit('USER_SET_NAME', name)
+        commit('USER_SET_SEX', sex)
         commit('USER_SET_NICK', nickname)
         commit('USER_SET_AVATAR', avatar)
+        commit('USER_SET_PHONE', phone)
+        commit('USER_SET_BIRTHDAY', birthday)
+        commit('USER_SET_AGE', age)
+        commit('USER_SET_HEIGHT', height)
+        commit('USER_SET_WEIGHT', weight)
         commit('USER_SET_INTRO', introduction)
+
         resolve(roles)
       }).catch(err => {
         reject(err)
@@ -80,10 +119,7 @@ const user = {
       Account.logout(state.token).then(() => {
         commit('USER_SET_TOKEN', '')
         commit('USER_SET_ROLES', [])
-        commit('USER_SET_ACCOUNT', '')
-        commit('USER_SET_NAME', '')
-        commit('USER_SET_NICK', '')
-        commit('USER_SET_AVATAR', '')
+
         Token.remove()
         resetRouter()
         resolve()
@@ -93,9 +129,10 @@ const user = {
     }),
 
     // Only remove the token on the client.
-    user_token_clear: ({ commit, state }) => new Promise((resolve) => {
+    user_token_clear: ({ commit }) => new Promise((resolve) => {
       commit('USER_SET_TOKEN', '')
       commit('USER_SET_ROLES', [])
+
       Token.remove()
       resolve()
     }),
@@ -105,13 +142,9 @@ const user = {
       commit('USER_SET_TOKEN', token)
       Token.set(token, TOKEN_EXPIRE)
       commit('USER_SET_ROLES', [])
-      commit('USER_SET_NAME', '')
-      commit('USER_SET_CODE', '')
-      commit('USER_SET_STATUS', '')
-      commit('USER_SET_AVATAR', '')
-      commit('USER_SET_INTRO', '')
-      resetRouter()
+      commit('USER_SET_ACCOUNT', '')
 
+      resetRouter()
       dispatch('tabs_empty')
       resolve()
     })

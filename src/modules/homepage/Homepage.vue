@@ -3,7 +3,7 @@
     <github-corner />
     <div class="content-homepage text-center">
       <h1 class="title">
-        {{ $t('homepage.welcome') }}<strong>{{ user.username | capitalize }}</strong> !
+        {{ $t('homepage.welcome') }}<strong>{{ user.nick | capitalize }}</strong> !
       </h1>
       <div ref="roleImage" class="role-image text-primary">
         <!-- The role image will be inserted here -->
@@ -15,18 +15,18 @@
 <script>
 import { GithubCorner } from '@/components'
 import { xhr } from '@/apis/xhr'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Homepage',
   components: { GithubCorner },
   computed: {
-    user() {
-      return this.$store.getters.user
-    }
+    ...mapGetters(['user'])
   },
   mounted() {
-    const random = Math.floor(Math.random() * 7 + 1)
-    xhr(`./static/svgs/${this.user.roles[0]}_0${random}.svg`).then(({ data }) => {
+    const { sex, roles } = this.user
+    // console.log(this.user)
+    xhr(`./static/svgs/${roles[0]}_${sex}.svg`).then(({ data }) => {
       this.$refs['roleImage'].innerHTML = data
     })
   }
