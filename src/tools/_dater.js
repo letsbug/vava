@@ -7,12 +7,15 @@
 export const dateFormat = (date, fmt = 'yyyy.MM.dd') => {
   if (!date) return 'Null'
 
-  if (Object.prototype.toString.call(date) !== '[object Date]') {
-    try {
-      date = new Date(date)
-    } catch (e) {
-      return 'Wrong date format'
-    }
+  if (typeof date === 'string') {
+    // If the date param format is 'yyyy-MM-dd', With '-' intervals. It's not work in IOS12.
+    date = date.replace(/-/g, '/')
+  }
+
+  try {
+    date = new Date(date)
+  } catch (e) {
+    return 'Wrong date format'
   }
 
   if (/(y+)/.test(fmt)) {

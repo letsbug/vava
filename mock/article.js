@@ -12,8 +12,6 @@ const hasAuditUsers = userList.filter(v => {
   return !v.roles.includes('Editor') && !v.roles.includes('Visitor') && !v.roles.includes('UserManager')
 }).map(v => v.nickname)
 
-console.log(hasAuditUsers)
-
 const contents = cn => cn ? Mock.Random.cparagraph() : Mock.Random.paragraph()
 
 const random = cn => Mock.mock({
