@@ -17,7 +17,7 @@ export default {
     rememberDefault: 'Cookie默认保存10分钟',
     login: '登 录',
     list: '还没账户？',
-    listHint: '基于 "mock.js" 模拟的数据， 随便选一个去登录吧！'
+    listHint: '随便选一个去登录吧！'
   },
   router: {
     home: '首页',

@@ -7,9 +7,9 @@
   >
     <el-table :data="list">
       <el-table-column type="index" width="36" />
-      <el-table-column property="username" label="Username" />
-      <el-table-column label="Password">************</el-table-column>
-      <el-table-column property="roles" label="Roles" />
+      <el-table-column property="username" label="Username" width="90" show-overflow-tooltip />
+      <el-table-column label="Password" width="90" show-overflow-tooltip>**********</el-table-column>
+      <el-table-column property="roles" label="Roles" show-overflow-tooltip />
       <el-table-column label="option" width="70">
         <template slot-scope="scope">
           <a class="linker" @click="handleChoose(scope.row)">Choose</a>
