@@ -12,7 +12,7 @@
     "css-template": "node-sass --output-style expanded src/themes/theme-template.scss static/css/theme-template.css && npm run css-minify",
     "css-minify": "cleancss --level 1 --format breaksWith=lf --output static/css/theme-template.min.css static/css/theme-template.css",
     "svgo": "svgo -f src/icons/svgs --config=./src/icons/svgo.yml",
-    "svg_imgs": "svgo -f static/svgs --config=./static/svgs/svgo.yml"
+    "svg_imgs": "svgo -f public/static/svgs --config=./public/static/svgs/svgo.yml"
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^2.1.0",

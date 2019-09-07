@@ -7,10 +7,10 @@
   >
     <el-table :data="list">
       <el-table-column type="index" width="36" />
-      <el-table-column property="username" label="Username" width="90" show-overflow-tooltip />
-      <el-table-column label="Password" width="90" show-overflow-tooltip>**********</el-table-column>
-      <el-table-column property="roles" label="Roles" show-overflow-tooltip />
-      <el-table-column label="option" width="70">
+      <el-table-column property="username" label="Username" min-width="110" show-overflow-tooltip />
+      <el-table-column label="Password" min-width="110" show-overflow-tooltip>**********</el-table-column>
+      <el-table-column property="roles" label="Roles" min-width="110" show-overflow-tooltip />
+      <el-table-column label="option" width="80">
         <template slot-scope="scope">
           <a class="linker" @click="handleChoose(scope.row)">Choose</a>
         </template>
