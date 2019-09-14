@@ -28,6 +28,15 @@ export default {
         icon: 'thing-editor-tinymce'
       },
       component: () => import('@/modules/components/rich-editor')
+    },
+    {
+      path: 'painted-face',
+      name: 'PaintedFace',
+      meta: {
+        title: 'paintedFace',
+        icon: 'action-history'
+      },
+      component: () => import('@/modules/components/painted-face')
     }
   ]
 }

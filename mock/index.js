@@ -6,6 +6,7 @@ import Users from './users'
 import Notification from './notification'
 import Contacts from './contacts'
 import Article from './article'
+import PaintedFace from './painted-face'
 import Statistics from './statistics'
 
 const mocks = [
@@ -14,6 +15,7 @@ const mocks = [
   ...Notification,
   ...Contacts,
   ...Article,
+  ...PaintedFace,
   ...Statistics
 ]
 
