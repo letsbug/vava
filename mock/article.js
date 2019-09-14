@@ -1,5 +1,4 @@
 import Mock from 'mockjs'
-import { parseURL } from '../src/tools/urls'
 import { userList } from './users'
 import ArticleVo from '../src/vo/ArticleVo'
 import BaseVo from '../src/vo/BaseVo'
@@ -69,7 +68,7 @@ export default [
     url: '/articles/detail',
     type: 'get',
     response: config => {
-      const { id } = parseURL(config.url)
+      const { id } = config.query
 
       return generateResponse(2000, list.filter(v => v.id === id))
     }

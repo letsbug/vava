@@ -30,6 +30,7 @@ export default {
     components: 'Components',
     richText: 'Rich Text',
     countTo: 'Count To',
+    paintedFace: 'Painted Face',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',

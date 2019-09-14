@@ -30,6 +30,7 @@ export default {
     components: '组件',
     richText: '富文本编辑器',
     countTo: '数字计数器',
+    paintedFace: '大花脸',
     table: '表格',
     inlineEdit: '行内编辑',
     sortable: '排序',

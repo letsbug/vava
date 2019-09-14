@@ -5,7 +5,6 @@
  */
 
 import Mock from 'mockjs'
-import { parseURL } from '../src/tools/urls'
 import { generateResponse } from './response'
 
 const Random = Mock.Random
@@ -17,7 +16,7 @@ const roles = ['SuperAdmin', 'AccessManager', 'UserManager', 'ProManager', 'Audi
 
 function randomAvatar() {
   const index = Math.floor(Math.random() * avatars.length)
-  const path = `/static/images/avatars/${avatars[index]}.gif`
+  const path = `./static/images/avatars/${avatars[index]}.gif`
 
   avatars.splice(index, 1)
   return path
@@ -81,7 +80,7 @@ export default [
     url: '/account/info',
     type: 'get',
     response: config => {
-      const { token } = parseURL(config.url)
+      const { token } = config.query
       const account = userList.find(v => v.token === token ? v : null)
 
       if (!account) {
