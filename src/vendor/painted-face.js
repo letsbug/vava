@@ -287,13 +287,25 @@ class StringIndex {
 }
 
 class PaintedFace {
-  constructor(_fields = {}) {
+  /**
+   * 大花脸：文档比对工具、历史操作痕迹查找
+   *
+   * {
+   *  @param content {String} The index name of the body field name
+   *  @param version {String} The index name of the versoin field name
+   *  @param mtime {String} The index name of the update time field name
+   *  @param user {String} The index name of the author field name
+   * }
+   *
+   * @param initialVersion {Number} Initial version number of the word
+   */
+  constructor({ content = 'content', version = 'version', mtime = 'mtime', user = 'user', initialVersion = 1 }) {
     // 元数据字段名索引
-    fields.content = _fields.content || 'content'
-    fields.version = _fields.version || 'version'
-    fields.mtime = _fields.mtime || 'mtime'
-    fields.user = _fields.user || 'user'
-    fields.initialVersion = _fields.initialVersion || 0
+    fields.content = content
+    fields.version = version
+    fields.mtime = mtime
+    fields.user = user
+    fields.initialVersion = initialVersion
 
     // 在找到一个多长的匹配串时，则认为两个版本的的位置相匹配
     this.minMatchLength = 30
@@ -306,6 +318,12 @@ class PaintedFace {
     this.rightIndex = null
   }
 
+  /**
+   * 执行比对
+   *
+   * @param versions {Array} 版本历史列表
+   * @returns {Array<Object>} 执行比对后的操作痕迹列表
+   */
   execute(versions) {
     let compareResult; let mergeResult
 

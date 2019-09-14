@@ -6,3 +6,18 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes ani-bounce--hover {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  25% {
+    transform: scale3d(0.8, 0.8, 0.8);
+  }
+  80% {
+    transform: scale3d(1.6, 1.6, 1.6);
+  }
+  100% {
+    transform: scale3d(1.4, 1.4, 1.4);
+  }
+}

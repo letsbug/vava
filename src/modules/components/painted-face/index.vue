@@ -11,7 +11,7 @@
         :mtime="cr.mtime"
         :type="cr.type === '+' ? 'add' : cr.type === '-' ? 'sub' : ''"
         :version="cr.version"
-        :last-version="cr.lv + 1"
+        :last-version="cr.lv"
         :fragment="cr.fragment"
         :color="colorMap[cr.version]"
       />
@@ -28,8 +28,8 @@
           placement="top"
           @click.native="selected = selected === i ? -1 : i"
         >
-          <div>版本: {{ ht.version + 1 }}</div>
-          <div>操作人: {{ ht.user }}</div>
+          <div>By: <strong>{{ ht.user }}</strong></div>
+          <div>Version: {{ ht.version + 1 }}</div>
         </el-timeline-item>
       </el-timeline>
     </el-col>
@@ -50,8 +50,8 @@ export default {
       history: [],
       compareResult: '',
       colorMap: {
-        '-1': '#eeeeee',
-        0: '#dc0020',
+        '-1': '#e4e7ed',
+        0: '#343a40',
         1: '#dc4371',
         2: '#dc9599',
         3: '#dc4ab1',
@@ -79,6 +79,7 @@ export default {
   },
   async mounted() {
     this.history = await histories()
+
     this.compare()
   },
   methods: {
@@ -92,7 +93,8 @@ export default {
         ? this.history
         : this.history.filter(v => (v.version === selected || v.version === selected - 1))
 
-      this.compareResult = new PaintedFace({ content: 'word', initialVersion: 0 }).execute(history)
+      const paintedFace = new PaintedFace({ content: 'word', initialVersion: 0 })
+      this.compareResult = paintedFace.execute(history)
     },
     dateFormat
   }
@@ -111,6 +113,9 @@ export default {
   overflow-y: auto;
 }
 /deep/ {
+  .el-timeline {
+    padding-top: $spacer-xxs;
+  }
   .el-timeline-item {
     cursor: pointer;
 
@@ -126,10 +131,17 @@ export default {
         color: $color-text-primary;
       }
     }
+
+    &:hover {
+      .el-timeline-item__node {
+        transform: scale3d(1.4, 1.4, 1.4);
+        animation: ani-bounce--hover $transition-duration;
+      }
+    }
   }
 
   .el-timeline-item__node {
-    transition: background-color, $transition-duration;
+    transition: all, $transition-duration;
   }
 }
 </style>
