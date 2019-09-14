@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c9745"],{"58e1":function(n,e,t){"use strict";t.r(e);var a=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div")},c=[],i={name:"Join",metaInfo:{title:"Join Vava"}},l=i,o=t("2877"),u=Object(o["a"])(l,a,c,!1,null,null,null);e["default"]=u.exports}}]);

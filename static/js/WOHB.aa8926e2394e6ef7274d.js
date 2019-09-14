@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["WOHB"],{WOHB:function(n,e,t){"use strict";t.r(e);var a={name:"Join",metaInfo:{title:"Join Vava"}},i=t("KHd+"),l=Object(i.a)(a,function(){var n=this.$createElement;return(this._self._c||n)("div")},[],!1,null,null,null);e.default=l.exports}}]);
