@@ -30,6 +30,15 @@ export default {
       component: () => import('@/modules/components/rich-editor')
     },
     {
+      path: 'ck-editor',
+      name: 'CKEditor',
+      meta: {
+        title: 'ckEditor',
+        icon: 'thing-editor-tinymce'
+      },
+      component: () => import('@/modules/components/ckeditor')
+    },
+    {
       path: 'painted-face',
       name: 'PaintedFace',
       meta: {
