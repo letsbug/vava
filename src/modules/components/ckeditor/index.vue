@@ -1,12 +1,13 @@
 <template>
   <div class="va-body-container">
-    <ckeditor v-model="content" :editor="type" />
+    <ckeditor v-model="content" :editor="type" :config="config" />
   </div>
 </template>
 
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn'
 
 export default {
   name: 'Index',
@@ -14,6 +15,12 @@ export default {
   data() {
     return {
       type: ClassicEditor,
+      config: {
+        toolbar: {
+          items: ['heading', '|', 'alignment', 'bold', 'italic', 'link']
+        },
+        language: 'zh-cn'
+      },
       content: `据台媒报道，基隆拥恒文创园区27日举行铜像揭幕，公布“台湾英雄”为温家宝。策展人林坤明说，虽然政治理念不同，但温家宝任内帮台湾创造很多就业机会，要给对方称赞。朝鲜已于今年2月24日发声明，将青瓦台列为第一波打击对象
 铜像温家宝手提1双鞋子寓意“和谐”，题字“维持两岸和平，扩大经贸交流”、“开放陆客观光，对台政策友善”。策展人九井广告总经理林坤明表示，不一样的声音，这是台湾最可贵的地方。
 很多软件中，都会遇到设定颜色值的问题，十六进就是在软件中设定颜色值的代码。人的眼睛看到的颜色有两种： ⒈ 一种是发光体发gggg出的颜色，比如计算机显示器屏幕显示的颜色； ⒉ 另一种是物体本身不发光，而是反射的光产生的颜色.
