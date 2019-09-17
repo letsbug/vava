@@ -1,20 +1,8 @@
 <template>
   <el-row :gutter="15" class="va-body-container painted-face-demo">
     <el-col :span="18">
-      <template v-if="selected === 0">
-        {{ history[selected].word }}
-      </template>
-      <flag
-        v-for="(cr, i) in compareResult"
-        v-else :key="i"
-        :user="cr.user"
-        :mtime="cr.mtime"
-        :type="cr.type === '+' ? 'add' : cr.type === '-' ? 'sub' : ''"
-        :version="cr.version"
-        :last-version="cr.lv"
-        :fragment="cr.fragment"
-        :color="colorMap[cr.version]"
-      />
+      <div v-if="selected === 0" class="compare-content" v-html="history[selected].word"></div>
+      <div v-else class="compare-content" v-html="compareResult"></div>
     </el-col>
     <el-col :span="6">
       <el-timeline>
@@ -37,14 +25,12 @@
 </template>
 
 <script>
-import Flag from './flag'
 import { histories } from '@/apis/paintedFace'
 import PaintedFace from '@/vendor/painted-face'
 import { dateFormat } from '@/tools/_dater'
 
 export default {
   name: 'PaintedFace',
-  components: { Flag },
   data() {
     return {
       history: [],
@@ -83,6 +69,25 @@ export default {
     this.compare()
   },
   methods: {
+    generator(raw) {
+      const { fragment } = raw
+      let { type } = raw
+      type = type === '+' ? 'add' : type === '-' ? 'sub' : ''
+
+      if (type !== 'add' && type !== 'sub') {
+        return fragment
+      }
+
+      const { mtime, user, version, lv } = raw
+      let result = '<span class="version-marker"'
+      result += `oper-type="${type}" oper-time="${mtime}" oper-user="${user}" version="${version}" last-version="${lv}" style="`
+      result += type === 'add'
+        ? `background-color: ${this.colorMap[raw.version]}`
+        : `text-decoration: line-through`
+      result += `;">${raw.fragment}</span>`
+
+      return result
+    },
     compare() {
       const selected = this.selected
       if (selected === 0) {
@@ -91,10 +96,17 @@ export default {
 
       const history = selected === -1
         ? this.history
-        : this.history.filter(v => (v.version === selected || v.version === selected - 1))
+        : this.history.filter(v => (+v.version === selected || +v.version === selected - 1))
 
       const paintedFace = new PaintedFace({ content: 'word', initialVersion: 0 })
-      this.compareResult = paintedFace.execute(history)
+      const compareResult = paintedFace.execute(history)
+      let result = ''
+
+      compareResult.forEach(str => {
+        result += this.generator(str)
+      })
+
+      this.compareResult = result
     },
     dateFormat
   }
@@ -143,5 +155,9 @@ export default {
   .el-timeline-item__node {
     transition: all, $transition-duration;
   }
+}
+
+[oper-type=sub] {
+  text-decoration: line-through;
 }
 </style>
