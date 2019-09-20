@@ -16,9 +16,6 @@ export default {
     return {
       type: ClassicEditor,
       config: {
-        toolbar: {
-          items: ['heading', '|', 'alignment', 'bold', 'italic', 'link']
-        },
         language: 'zh-cn'
       },
       content: `据台媒报道，基隆拥恒文创园区27日举行铜像揭幕，公布“台湾英雄”为温家宝。策展人林坤明说，虽然政治理念不同，但温家宝任内帮台湾创造很多就业机会，要给对方称赞。朝鲜已于今年2月24日发声明，将青瓦台列为第一波打击对象

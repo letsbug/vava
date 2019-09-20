@@ -1,6 +1,10 @@
 <template>
   <el-row :gutter="15" class="va-body-container painted-face-demo">
     <el-col :span="18">
+      <h5 class="va-body-title">
+        {{ $t('router.paintedFace') }}
+        <small class="text-muted">{{ subtitle }}</small>
+      </h5>
       <div v-if="selected === 0" class="compare-content" v-html="history[selected].word"></div>
       <div v-else class="compare-content" v-html="compareResult"></div>
     </el-col>
@@ -56,6 +60,13 @@ export default {
         16: '#fe6c08'
       },
       selected: -1
+    }
+  },
+  computed: {
+    subtitle() {
+      return this.$i18n.locale === 'en'
+        ? 'Rich text document history version comparison tool'
+        : '富文本文档历史版本比对工具'
     }
   },
   watch: {
