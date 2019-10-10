@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import { Highlight } from '@/directives'
-import icons from './requires'
-import { clipboard } from '@/tools'
+import { Highlight } from '@/directives';
+import icons from './requires';
+import { clipboard } from '@/tools';
 
 export default {
   name: 'IconViewer',
@@ -30,21 +30,21 @@ export default {
   },
   directives: { Highlight },
   data() {
-    return { icons }
+    return { icons };
   },
   methods: {
     generateIconCode(name) {
-      return `<va-icon icon="${name}"/>`
+      return `<va-icon icon="${name}"/>`;
     },
     handleClipboard(code, e) {
-      clipboard(code, e)
+      clipboard(code, e);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .grid-content {
   padding: $spacer-xs $spacer-sm;

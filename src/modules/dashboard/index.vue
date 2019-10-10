@@ -5,10 +5,21 @@
       <span>{{ $t('router.dashboard') }}</span>
       <span class="float-r dashboard-filters">
         <el-select placeholder="Your Profile" value="">
-          <el-option v-for="pf in profilePreset" :key="pf" :label="$t(`dashboard.filters.${pf}`)" :value="pf" disabled />
+          <el-option
+            v-for="pf in profilePreset"
+            :key="pf"
+            :label="$t(`dashboard.filters.${pf}`)"
+            :value="pf"
+            disabled
+          />
         </el-select>
         <el-select v-model="dateRange">
-          <el-option v-for="range in datePreset" :key="range" :label="$t(`dashboard.filters.${range}`)" :value="range" />
+          <el-option
+            v-for="range in datePreset"
+            :key="range"
+            :label="$t(`dashboard.filters.${range}`)"
+            :value="range"
+          />
         </el-select>
       </span>
     </h1>
@@ -54,10 +65,10 @@
 </template>
 
 <script>
-import { ChartTabs, ChartDetails, ChartAges, TrafficAnalysis } from './components'
-import { Loading } from 'element-ui'
+import { ChartTabs, ChartDetails, ChartAges, TrafficAnalysis } from './components';
+import { Loading } from 'element-ui';
 
-import Statistics from '@/apis/statistics'
+import Statistics from '@/apis/statistics';
 
 export default {
   name: 'Dashboard',
@@ -74,7 +85,13 @@ export default {
       data: {
         pv: { total: 0, data: [] },
         uv: { total: 0, data: [] },
-        cvr: { total: 0, data: [], dataType: 'percent', suffix: ' %', decimals: 2 },
+        cvr: {
+          total: 0,
+          data: [],
+          dataType: 'percent',
+          suffix: ' %',
+          decimals: 2
+        },
         countries: { total: 0, data: [] }
       },
       activeIndex: 0,
@@ -84,77 +101,86 @@ export default {
         sources: [],
         interviews: []
       }
-    }
+    };
   },
   computed: {
     isMobile() {
-      return this.$store.getters.device === 'mobile'
+      return this.$store.getters.device === 'mobile';
     },
     panelGutter() {
-      return this.isMobile ? 0 : 15
+      return this.isMobile ? 0 : 15;
     }
   },
   mounted() {
-    this.requestPv()
+    this.requestPv();
   },
   updated() {
-    this.checkDetails()
-    this.$refs['chartAges'].draw()
+    this.checkDetails();
+    this.$refs['chartAges'].draw();
   },
   methods: {
     checkDetails() {
-      this.detailData = this.data[Object.keys(this.data)[this.activeIndex]].data
-      this.$refs['chartDetails'].draw()
+      this.detailData = this.data[Object.keys(this.data)[this.activeIndex]].data;
+      this.$refs['chartDetails'].draw();
     },
     requestPv() {
       this.loadingInstance = Loading.service({
         lock: true,
         text: 'loading...',
         background: 'rgba(255, 255, 255, .5)'
-      })
+      });
       Statistics.pv().then(res => {
-        this.loadingInstance.close()
+        this.loadingInstance.close();
 
-        if (!res.success) return
+        if (!res.success) return;
 
-        this.data.pv.total = res.totalPV
-        this.data.uv.total = res.totalUV
-        this.data.cvr.total = res.averageCVR
-        this.data.countries.total = res.areas.length
+        this.data.pv.total = res.totalPV;
+        this.data.uv.total = res.totalUV;
+        this.data.cvr.total = res.averageCVR;
+        this.data.countries.total = res.areas.length;
 
         res.data.forEach(v => {
-          this.category.push(v.date)
-          this.data.pv.data.push(v.pv)
-          this.data.uv.data.push(v.uv)
-          this.data.cvr.data.push((v.cvr * 100).toFixed(2))
-        })
+          this.category.push(v.date);
+          this.data.pv.data.push(v.pv);
+          this.data.uv.data.push(v.uv);
+          this.data.cvr.data.push((v.cvr * 100).toFixed(2));
+        });
 
-        this.data.countries.data = res.areas
-        this.attach.ages = res.ages
-        this.attach.sources = res.traffics.source
-        this.attach.interviews = res.traffics.interview
+        this.data.countries.data = res.areas;
+        this.attach.ages = res.ages;
+        this.attach.sources = res.traffics.source;
+        this.attach.interviews = res.traffics.interview;
 
         if (!this.isMobile) {
           this.$refs['panel_chart'].forEach(cop => {
-            cop.draw()
-          })
+            cop.draw();
+          });
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
-.dashboard-title { margin-top: 7px; }
-
-.dashboard-filters {
-  .el-input, .el-select { vertical-align: top; width: 140px; }
+.dashboard-title {
+  margin-top: 7px;
 }
 
-.panel-groups { margin-bottom: $spacer-base; overflow: hidden; }
+.dashboard-filters {
+  .el-input,
+  .el-select {
+    vertical-align: top;
+    width: 140px;
+  }
+}
+
+.panel-groups {
+  margin-bottom: $spacer-base;
+  overflow: hidden;
+}
 
 /deep/ {
   .va-panels {

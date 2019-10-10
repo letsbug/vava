@@ -22,9 +22,15 @@
         <!-- TODO Add mobile layout to here -->
         <!-- TODO Add the history search drop-down list to here to autocomplete -->
         <input
-          ref="globalSearch" v-model="search.keyword" :class="currRouteIsSearch" :placeholder="$t('header.search')"
-          title class="nav-search-inner" autocomplete="on"
-          @click="handleSearch" @keyup.enter="handleSearch"
+          ref="globalSearch"
+          v-model="search.keyword"
+          :class="currRouteIsSearch"
+          :placeholder="$t('header.search')"
+          title
+          class="nav-search-inner"
+          autocomplete="on"
+          @click="handleSearch"
+          @keyup.enter="handleSearch"
         />
       </a>
 
@@ -54,55 +60,60 @@
   </div>
 </template>
 
-<script>
-import {
-  Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker
-} from '@/components'
-import UserActions from './UserActions'
-import { mapState } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker } from '@/components';
+import UserActions from './UserActions.vue';
+import { IStoreSystem } from '@/store/modules/system';
+import { IStoreNotification } from '@/store/modules/notification';
 
-export default {
-  components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions },
-  data() {
-    return {
-      search: { old: '', keyword: '' }
-    }
-  },
-  computed: {
-    ...mapState({
-      isMobile: state => state.device === 'mobile',
-      sidebarOpened: state => state.application.sidebar.opened
-    }),
-    currRouteIsSearch() {
-      return /^\/search/.test(this.$route.path) ? 'active' : ''
-    },
-    notificationHasUnread() {
-      return this.$store.state.notification.hasUnread
-    },
-    notificationTips() {
-      return this.$t(`header.notification${this.notificationHasUnread ? 'Has' : 'No'}`)
-    }
-  },
-  created() {
-    this.$store.dispatch('notification_list')
-  },
-  methods: {
-    toggleSidebar() {
-      this.$store.dispatch('app_sidebar_toggle')
-    },
-    handleSearch() {
-      const old = this.search.old
-      const key = this.search.keyword
-      if (!key || (key === old)) return
-      this.search.old = key
-      this.$router.push(`/search/${key}`)
-    }
+@Component({
+  name: 'VaHeadBar',
+  components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions }
+})
+export default class extends Vue {
+  private search = { old: '', keyword: '' };
+
+  get isMobile() {
+    return IStoreSystem.device === 0;
+  }
+
+  get sidebarOpened() {
+    return IStoreSystem.sidebar.opened;
+  }
+
+  get currRouteIsSearch() {
+    return /^\/search/.test(this.$route.path) ? 'active' : '';
+  }
+
+  get notificationHasUnread() {
+    return IStoreNotification.unread > 0;
+  }
+
+  get notificationTips() {
+    return this.$t(`header.notification${this.notificationHasUnread ? 'Has' : 'No'}`);
+  }
+
+  mounted() {
+    IStoreNotification.GetNotifications();
+  }
+
+  toggleSidebar() {
+    IStoreSystem.ToggleSidebar();
+  }
+
+  handleSearch() {
+    const old = this.search.old;
+    const key = this.search.keyword;
+    if (!key || key === old) return;
+    this.search.old = key;
+    this.$router.push(`/search/${key}`);
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .va-head-nav .el-breadcrumb {
   float: left;

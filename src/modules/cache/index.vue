@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { Highlight } from '@/directives'
+import { Highlight } from '@/directives';
 export default {
   name: 'Cache',
   metaInfo: {
@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       input: ''
-    }
+    };
   }
-}
+};
 </script>

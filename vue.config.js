@@ -1,17 +1,17 @@
-'use strict'
+'use strict';
 
-const path = require('path')
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const metas = require('./build/metas')
-const settings = require('./src/settings')
-const mockServer = require('./mock/mock-server')
+const path = require('path');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const metas = require('./build/metas');
+const settings = require('./build/settings');
+// const mockServer = require('./mock/mock-server');
 
 function resolve(dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, dir);
 }
 
-const name = settings.title || 'VAVA'
-const port = 9090
+const name = settings.title;
+const port = 9090;
 
 module.exports = {
   publicPath: './',
@@ -31,8 +31,8 @@ module.exports = {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       }
-    },
-    after: mockServer
+    } /*,
+    after: mockServer*/
   },
   configureWebpack(config) {
     // console.log(config)
@@ -43,29 +43,30 @@ module.exports = {
       test: new RegExp('\\.(js|css)$'),
       threshold: 10240,
       minRatio: 0.8
-    })
+    });
     if (process.env.VUE_APP_FLAG !== 'dev') {
-      config.plugins.push(compressPlugin)
+      config.plugins.push(compressPlugin);
     }
   },
   chainWebpack(config) {
-    config.plugin('html').tap(args => {
-      const arg = args[0]
-      arg.meta = metas
-      arg.templateParameters = {
-        TITLE: name,
-        BASE_URL: './'
-      }
-      return args
-    })
+    config.plugins.delete('preload');
+    config.plugins.delete('prefetch');
 
-    config.output.filename('[name].[hash].js').end()
+    config.set('name', name);
+
+    config.plugin('html').tap(args => {
+      const arg = args[0];
+      arg.meta = metas;
+      return args;
+    });
+
+    config.output.filename('[name].[hash].js').end();
 
     // svg loader
     config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))
-      .end()
+      .end();
     config.module
       .rule('icons')
       .test(/\.svg$/)
@@ -76,65 +77,62 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-      .end()
+      .end();
 
     config.module
       .rule('vue')
       .use('vue-loader')
       .loader('vue-loader')
       .tap(options => {
-        options.compilerOptions.preserveWhitespace = true
-        return options
+        options.compilerOptions.preserveWhitespace = true;
+        return options;
       })
-      .end()
+      .end();
 
     // https://webpack.js.org/configuration/devtool/#development
     // config.when(process.env.NODE_ENV === 'development', config => config.devtool('cheap-source-map'))
 
     // package sets
-    config.when(
-      process.env.NODE_ENV !== 'development',
-      config => {
-        config.optimization.splitChunks({
-          chunks: 'all',
-          cacheGroups: {
-            libs: {
-              name: 'chunk-libs',
-              test: /[\\/]node_modules[\\/]/,
-              priority: 10,
-              chunks: 'initial' // only package third parties that are initially dependent
-            },
-            commons: {
-              name: 'chunk-commons',
-              test: resolve('src/components'), // can customize your rules
-              minChunks: 2, //  minimum common number
-              priority: 5,
-              reuseExistingChunk: true
-            },
-            element: {
-              name: 'chunk-element', // split elementUI into a single package
-              priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-              test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
-            },
-            echarts: {
-              name: 'chunk-echarts',
-              priority: 20,
-              test: /[\\/]node_modules[\\/]echarts[\\/]/
-            },
-            xlsx: {
-              name: 'chunk-xlsx',
-              priority: 20,
-              test: /[\\/]node_modules[\\/]xlsx[\\/]/
-            },
-            highlight: {
-              name: 'chunk-highlight',
-              priority: 20,
-              test: /[\\/]node_modules[\\/]highlight.js[\\/]/
-            }
+    config.when(process.env.NODE_ENV !== 'development', config => {
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'chunk-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial' // only package third parties that are initially dependent
+          },
+          commons: {
+            name: 'chunk-commons',
+            test: resolve('src/components'), // can customize your rules
+            minChunks: 2, //  minimum common number
+            priority: 5,
+            reuseExistingChunk: true
+          },
+          element: {
+            name: 'chunk-element', // split elementUI into a single package
+            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+          },
+          echarts: {
+            name: 'chunk-echarts',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]echarts[\\/]/
+          },
+          xlsx: {
+            name: 'chunk-xlsx',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]xlsx[\\/]/
+          },
+          highlight: {
+            name: 'chunk-highlight',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]highlight.js[\\/]/
           }
-        })
-        config.optimization.runtimeChunk('single')
-      }
-    )
+        }
+      });
+      config.optimization.runtimeChunk('single');
+    });
   }
-}
+};

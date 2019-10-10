@@ -47,7 +47,7 @@
     <el-table
       v-loading="loading"
       :data="list"
-      :default-sort="{prop: 'id', order: 'ascending'}"
+      :default-sort="{ prop: 'id', order: 'ascending' }"
       fit
       tooltip-effect="theme"
       highlight-current-row
@@ -66,8 +66,12 @@
       <el-table-column label="AUDITOR" prop="auditor" width="110" show-overflow-tooltip sortable />
       <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable />
       <el-table-column
-        label="STATUS" prop="status" width="100" align="center"
-        sortable class-name="has-actions actions-small"
+        label="STATUS"
+        prop="status"
+        width="100"
+        align="center"
+        sortable
+        class-name="has-actions actions-small"
       >
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | articleStatus" size="small">
@@ -83,7 +87,10 @@
       <el-table-column label="ACTIONS" width="165" class-name="has-actions actions-small">
         <template slot-scope="scope">
           <el-button
-            type="primary" size="small" icon="el-icon-check" :disabled="scope.row.status === 'audited'"
+            type="primary"
+            size="small"
+            icon="el-icon-check"
+            :disabled="scope.row.status === 'audited'"
             @click="handleBatchUpdate(true, scope.row)"
           />
           <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)" />
@@ -145,8 +152,8 @@
 </template>
 
 <script>
-import mixins from './mixins'
-import Service from '@/apis/articles'
+import mixins from './mixins';
+import Service from '@/apis/articles';
 
 export default {
   name: 'FullFeature',
@@ -161,40 +168,40 @@ export default {
       dialogVisible: false,
       auditors: [],
       editForm: null
-    }
+    };
   },
   created() {
-    this.rebuildEditData()
+    this.rebuildEditData();
   },
   mounted() {
     Service.auditors().then(res => {
       this.auditors = res.data.map(v => {
-        this.$set(v, 'value', v.username)
-        return v
-      })
-    })
+        this.$set(v, 'value', v.username);
+        return v;
+      });
+    });
   },
   methods: {
     getList() {
-      this.loading = true
-      const { page, size } = this.pages
-      const { title, level, status } = this.filterData
-      const params = { page, size, title, level, status }
+      this.loading = true;
+      const { page, size } = this.pages;
+      const { title, level, status } = this.filterData;
+      const params = { page, size, title, level, status };
 
       Service.list(params).then(res => {
-        if (!res.success) return
+        if (!res.success) return;
         this.list = res.data.map(v => {
-          this.$set(v, 'editing', false)
-          this.$set(v, 'submitting', false)
-          this.$set(v, 'originalTitle', v.title)
-          return v
-        })
-        this.pages = res.pages
-        this.loading = false
-      })
+          this.$set(v, 'editing', false);
+          this.$set(v, 'submitting', false);
+          this.$set(v, 'originalTitle', v.title);
+          return v;
+        });
+        this.pages = res.pages;
+        this.loading = false;
+      });
     },
     handleSelectionChange(val) {
-      this.selected = val
+      this.selected = val;
     },
     rebuildEditData() {
       this.editForm = {
@@ -205,31 +212,31 @@ export default {
         content: '',
         level: '',
         auditor: ''
-      }
+      };
     },
     handleEdit(rowData) {
-      this.dialogVisible = true
-      if (rowData) this.editForm = Object.assign({}, rowData)
-      else this.rebuildEditData()
+      this.dialogVisible = true;
+      if (rowData) this.editForm = Object.assign({}, rowData);
+      else this.rebuildEditData();
     },
     inputQueryFilter(queryString) {
       return restaurant => {
-        return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-      }
+        return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
+      };
     },
     inputQuerySearch(str, callback) {
-      const res = str ? this.auditors.filter(this.inputQueryFilter(str)) : this.auditors
-      callback(res)
+      const res = str ? this.auditors.filter(this.inputQueryFilter(str)) : this.auditors;
+      callback(res);
     },
     handleBatchUpdate(isAudit, rowData) {
-      const status = { status: isAudit ? 'audited' : 'deleted' }
-      let lst = []
+      const status = { status: isAudit ? 'audited' : 'deleted' };
+      let lst = [];
       if (rowData) {
-        lst = [Object.assign({}, rowData, status)]
+        lst = [Object.assign({}, rowData, status)];
       } else {
         this.selected.forEach(v => {
-          lst.push(Object.assign({}, v, status))
-        })
+          lst.push(Object.assign({}, v, status));
+        });
       }
       const options = {
         type: isAudit ? 'info' : 'warning',
@@ -242,27 +249,30 @@ export default {
                 center: true,
                 type: res.success ? 'success' : 'error',
                 message: `${isAudit ? 'Audit' : 'Delete'} executed ${res.success ? 'successfully' : 'failed'}.`
-              })
+              });
               if (res.success) {
-                if (rowData) rowData.status = status.status
-                else this.selected.forEach((v, i) => { this.selected[i].status = status.status })
+                if (rowData) rowData.status = status.status;
+                else
+                  this.selected.forEach((v, i) => {
+                    this.selected[i].status = status.status;
+                  });
               }
-            })
+            });
           }
         }
-      }
+      };
       this.$confirm(
         `Are you sure you want to ${isAudit ? 'audit' : 'delete'} ${lst.length > 1 ? 'these' : 'this'} data?`,
         'Are you sure?',
         options
-      )
+      );
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .filter-and-actions {
   // margin-bottom: $spacer-base;

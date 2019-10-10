@@ -13,14 +13,16 @@
         <el-timeline-item
           v-for="(ht, i) in history"
           :key="i"
-          :color="selected > -1 ? i === selected ? colorMap[ht.version] : colorMap[-1] : colorMap[ht.version]"
-          :icon="selected === i ? 'el-icon-check': null"
+          :color="selected > -1 ? (i === selected ? colorMap[ht.version] : colorMap[-1]) : colorMap[ht.version]"
+          :icon="selected === i ? 'el-icon-check' : null"
           :timestamp="dateFormat(ht.mtime, 'yyyy.MM.dd hh:mm:ss')"
-          :class="{ 'checked': selected === i || selected === -1 }"
+          :class="{ checked: selected === i || selected === -1 }"
           placement="top"
           @click.native="selected = selected === i ? -1 : i"
         >
-          <div>By: <strong>{{ ht.user }}</strong></div>
+          <div>
+            By: <strong>{{ ht.user }}</strong>
+          </div>
           <div>Version: {{ ht.version + 1 }}</div>
         </el-timeline-item>
       </el-timeline>
@@ -29,9 +31,9 @@
 </template>
 
 <script>
-import { histories } from '@/apis/paintedFace'
-import PaintedFace from '@/vendor/painted-face'
-import { dateFormat } from '@/tools/_dater'
+import { histories } from '@/apis/paintedFace';
+import PaintedFace from '@/vendor/painted-face';
+import { dateFormat } from '@/tools/_dater';
 
 export default {
   name: 'PaintedFace',
@@ -60,72 +62,74 @@ export default {
         16: '#fe6c08'
       },
       selected: -1
-    }
+    };
   },
   computed: {
     subtitle() {
       return this.$i18n.locale === 'en'
         ? 'Rich text document history version comparison tool'
-        : '富文本文档历史版本比对工具'
+        : '富文本文档历史版本比对工具';
     }
   },
   watch: {
     selected() {
-      this.compare()
+      this.compare();
     }
   },
   async mounted() {
-    this.history = await histories()
+    this.history = await histories();
 
-    this.compare()
+    this.compare();
   },
   methods: {
     generator(raw) {
-      const { fragment } = raw
-      let { type } = raw
-      type = type === '+' ? 'add' : type === '-' ? 'sub' : ''
+      const { fragment } = raw;
+      let { type } = raw;
+      type = type === '+' ? 'add' : type === '-' ? 'sub' : '';
 
       if (type !== 'add' && type !== 'sub') {
-        return fragment
+        return fragment;
       }
 
-      const { mtime, user, version, lv } = raw
-      let result = '<span class="version-marker"'
-      result += `oper-type="${type}" oper-time="${mtime}" oper-user="${user}" version="${version}" last-version="${lv}" style="`
-      result += type === 'add'
-        ? `background-color: ${this.colorMap[raw.version]}`
-        : `text-decoration: line-through`
-      result += `;">${raw.fragment}</span>`
+      const { mtime, user, version, lv } = raw;
+      let result = '<span class="version-marker"';
+      result += `oper-type="${type}" oper-time="${mtime}" oper-user="${user}" version="${version}" last-version="${lv}" style="`;
+      result += type === 'add' ? `background-color: ${this.colorMap[raw.version]}` : `text-decoration: line-through`;
+      result += `;">${raw.fragment}</span>`;
 
-      return result
+      return result;
     },
     compare() {
-      const selected = this.selected
+      const selected = this.selected;
       if (selected === 0) {
-        return
+        return;
       }
 
-      const history = selected === -1
-        ? this.history
-        : this.history.filter(v => (+v.version === selected || +v.version === selected - 1))
+      const history =
+        selected === -1
+          ? this.history
+          : this.history.filter(v => +v.version === selected || +v.version === selected - 1);
 
-      const paintedFace = new PaintedFace({ content: 'word', initialVersion: 0 })
-      const compareResult = paintedFace.execute(history)
-      let result = ''
+      const paintedFace = new PaintedFace({
+        content: 'word',
+        initialVersion: 0
+      });
+      const compareResult = paintedFace.execute(history);
+      let result = '';
 
       compareResult.forEach(str => {
-        result += this.generator(str)
-      })
+        result += this.generator(str);
+      });
 
-      this.compareResult = result
+      this.compareResult = result;
     },
     dateFormat
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .painted-face-demo {
   height: 100%;
@@ -168,7 +172,7 @@ export default {
   }
 }
 
-[oper-type=sub] {
+[oper-type='sub'] {
   text-decoration: line-through;
 }
 </style>

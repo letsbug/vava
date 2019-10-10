@@ -9,7 +9,8 @@
 
     <div class="va-side-nav fixed-bottom">
       <router-link class="nav-title" to="/error/403">
-        <va-icon icon="action-settings" /> <span class="item-name">
+        <va-icon icon="action-settings" />
+        <span class="item-name">
           {{ generateTitle('settings') }}
         </span>
       </router-link>
@@ -17,23 +18,22 @@
   </div>
 </template>
 
-<script>
-import NavItem from './NavItem'
-import { generateTitle } from '@/i18n'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { IStoreRoutes } from '@/store/modules/routes';
+import { generateTitle } from '@/i18n';
+import NavItem from './NavItem.vue';
 
-export default {
-  components: { NavItem },
-  props: {
-    routes: { type: Array, required: true }
-  },
-  methods: {
-    generateTitle
+@Component({ name: 'VaSideMenu', components: { NavItem } })
+export default class extends Vue {
+  get routes() {
+    return IStoreRoutes.routes;
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .va-side-scroller {
   height: 100%;

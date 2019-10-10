@@ -1,31 +1,45 @@
 <template>
-  <a id="screenFull" class="va-nav-item" @click="handleScreenToggle">
+  <a id="screenFull" class="va-nav-item" @click="toggle">
     <va-icon :icon="isFullScreen ? 'action-screen-small' : 'action-screen-full'" class="handle-screen-full" />
   </a>
 </template>
 
-<script>
-import ScreenFull from 'screenfull'
-export default {
-  data() {
-    return {
-      isFullScreen: ScreenFull.isFullscreen
-    }
-  },
+<script lang="ts">
+import screenfull from 'screenfull';
+import { Component, Vue } from 'vue-property-decorator';
+
+const sf = screenfull;
+
+@Component({ name: 'ScreenFull' })
+export default class extends Vue {
+  private isFullScreen: boolean = false;
+
+  get supported() {
+    const s = sf && sf.isEnabled;
+    if (!s)
+      this.$message({
+        type: 'warning',
+        message: 'Your browser can not work'
+      });
+    return s;
+  }
+
   mounted() {
-    ScreenFull.onchange(() => {
-      this.isFullScreen = ScreenFull.isFullscreen
-    })
-  },
-  methods: {
-    browserSupported() {
-      const supported = ScreenFull.enabled
-      if (!supported) this.$message({ type: 'warning', message: 'Your browser can not work' })
-      return supported
-    },
-    handleScreenToggle() {
-      if (this.browserSupported()) ScreenFull.toggle()
+    if (this.supported) {
+      sf.on('change', this.change);
     }
+  }
+
+  beforeDestory() {}
+
+  private change() {
+    if (this.supported) {
+      this.isFullScreen = sf.isFullscreen;
+    }
+  }
+
+  private toggle() {
+    if (this.supported) sf.toggle();
   }
 }
 </script>

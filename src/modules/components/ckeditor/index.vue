@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import CKEditor from '@ckeditor/ckeditor5-vue'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn'
+import CKEditor from '@ckeditor/ckeditor5-vue';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn';
 
 export default {
   name: 'Index',
@@ -24,7 +24,7 @@ export default {
 林坤明说，温家宝曾说他最大心愿就是到台湾日月潭，爬都要爬到台湾，北京拓尔思信息技术ss份有限公司今天不是在日月潭立碑，是eee在基隆台湾头为他立碑，只要是对台湾有爱、有贡献就是台湾英雄。
 林坤明说，选择温家宝，着重在和谐过该工具查询相应的颜色对应的代码。... 在线调色板 网页常用色彩 ，“这才是我们最需要”，温家宝在任内帮台湾创造很多就业机会tttt，带来很多外汇，虽然可能政治理念不同，但“我们要称赞对手”，只要对台湾好，台湾人都会感恩。
 至于是否担心引发争议，林坤明表示aaa，民众应该思考，“一个人对你这pppp么好，开放这么多，为什么不认为是对你好，要感恩”，而台湾人最懂得感恩。(本文来源：自由时报、中央社)`
-    }
+    };
   }
-}
+};
 </script>

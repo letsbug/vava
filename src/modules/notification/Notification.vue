@@ -14,8 +14,13 @@
 
     <!-- notification list -->
     <el-table
-      ref="notifications" :show-header="false" :data="notifications.list" size="medium"
-      highlight-current-row show-overflow-tooltip style="width: 100%;"
+      ref="notifications"
+      :show-header="false"
+      :data="notifications.list"
+      size="medium"
+      highlight-current-row
+      show-overflow-tooltip
+      style="width: 100%;"
     >
       <el-table-column type="index" label="#" width="40" />
       <el-table-column prop="from" lable="from" width="80">
@@ -58,7 +63,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 export default {
   name: 'Notification',
   metaInfo: {
@@ -67,33 +72,35 @@ export default {
   data() {
     return {
       multipleSelection: []
-    }
+    };
   },
   computed: {
     ...mapGetters(['notifications'])
   },
   methods: {
-    transUnreadClass: row => row.unread ? 'unread' : '',
+    transUnreadClass: row => (row.unread ? 'unread' : ''),
     handleShowDetail(row) {
       this.$alert(row.title, 'notification', {
         confirmButtonText: 'Ok',
-        callback: () => { this.handleMarkRead(row) }
-      })
+        callback: () => {
+          this.handleMarkRead(row);
+        }
+      });
     },
     handleMarkRead(row) {
-      if (row && row.unread) this.$store.dispatch('notification_read', [row.id])
+      if (row && row.unread) this.$store.dispatch('notification_read', [row.id]);
     },
     handleMarkAllRead() {
       const options = {
         confirmButtonText: this.$t('notification.button'),
         callback: action => {
-          if (action === 'confirm') this.$store.dispatch('notification_read_all')
+          if (action === 'confirm') this.$store.dispatch('notification_read_all');
         }
-      }
-      this.$confirm(this.$t('notification.confirm'), this.$t('options.confirm.title'), options)
+      };
+      this.$confirm(this.$t('notification.confirm'), this.$t('options.confirm.title'), options);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

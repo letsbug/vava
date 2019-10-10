@@ -10,40 +10,40 @@ export default {
         padding: [7, 12],
         textStyle: { color: '#343a40', fontSize: 12 }
       }
-    }
+    };
   },
   computed: {
     isMobile() {
-      return this.$store.getters.device === 'mobile'
+      return this.$store.getters.device === 'mobile';
     },
     themeColor() {
-      return this.$store.getters.theme.color
+      return this.$store.getters.theme.color;
     }
   },
   mounted() {
-    if (this.chartData && this.chartData.length > 0) this.draw()
+    if (this.chartData && this.chartData.length > 0) this.draw();
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler)
-    this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler)
+    window.removeEventListener('resize', this.resizeHandler);
+    this.sidebar && this.sidebar.removeEventListener('transitionend', this.resizeHandler);
 
     if (this.chart) {
-      this.chart.dispose()
-      this.chart = null
+      this.chart.dispose();
+      this.chart = null;
     }
   },
   methods: {
     draw() {
-      if (!this.chartData || this.chartData.length < 1) return
+      if (!this.chartData || this.chartData.length < 1) return;
 
-      this.init()
+      this.init();
       this.resizeHandler = () => {
-        if (this.chart) this.chart.resize()
-      }
+        if (this.chart) this.chart.resize();
+      };
 
-      window.addEventListener('resize', this.resizeHandler)
-      this.sidebar = document.querySelector('.va-side-wrapper')
-      this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler)
+      window.addEventListener('resize', this.resizeHandler);
+      this.sidebar = document.querySelector('.va-side-wrapper');
+      this.sidebar && this.sidebar.addEventListener('transitionend', this.resizeHandler);
     }
   }
-}
+};

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { UserPicker } from '@/components'
+import { UserPicker } from '@/components';
 
 export default {
   name: 'Admin',
@@ -32,39 +32,39 @@ export default {
   data() {
     return {
       userPickerVisible: false
-    }
+    };
   },
   computed: {
     user() {
-      return this.$store.state.user
+      return this.$store.state.user;
     },
     roles() {
-      const roles = [...this.user.roles]
-      return roles.map(v => this.$t(`roles.${v}`)).join('、')
+      const roles = [...this.user.roles];
+      return roles.map(v => this.$t(`roles.${v}`)).join('、');
     },
     allowRoles() {
-      const role = [...this.$route.meta.roles]
-      return role.map(v => this.$t(`roles.${v}`)).join(' & ')
+      const role = [...this.$route.meta.roles];
+      return role.map(v => this.$t(`roles.${v}`)).join(' & ');
     }
   },
   methods: {
     async onChooseUser(user) {
-      await this.$store.dispatch('user_switch', user.token)
+      await this.$store.dispatch('user_switch', user.token);
 
-      this.userPickerVisible = false
+      this.userPickerVisible = false;
       this.$nextTick(() => {
         this.$router.replace({
           path: '/redirect' + this.$route.fullPath
-        })
-      })
+        });
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
-$avatar-size:     68px;
+@import '~@/styles/_variables';
+$avatar-size: 68px;
 
 .user-info {
   display: flex;

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { Highlight } from '@/directives'
+import { Highlight } from '@/directives';
 
 export default {
   name: 'About',
@@ -32,7 +32,17 @@ export default {
         { name: 'Login / Logout' },
         { name: 'Permission Authentication', children: ['Page permission'] },
         { name: 'Exceptions', children: ['500', '404', '403', '...'] },
-        { name: 'Global Features', children: ['Sidebar & Responsive', 'I18n', 'Themes switch', 'Router history tabs', 'Svg sprite', 'Screen full'] },
+        {
+          name: 'Global Features',
+          children: [
+            'Sidebar & Responsive',
+            'I18n',
+            'Themes switch',
+            'Router history tabs',
+            'Svg sprite',
+            'Screen full'
+          ]
+        },
         { name: 'Editor', children: ['Rich text editor'] },
         { name: 'Excel', children: ['Export', 'Import'] },
         { name: 'Table' },
@@ -40,9 +50,9 @@ export default {
         { name: 'Guide for novice users' },
         { name: 'Clipboard' }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

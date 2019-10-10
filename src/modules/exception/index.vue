@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       handlers: [401, 403, 404, 500]
-    }
+    };
   },
   methods: {
     trigger(code) {
@@ -30,14 +30,14 @@ export default {
         path: '/error',
         replace: true,
         query: { code: code }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 @media screen and (max-width: $device-md) {
   .exception-trigger {
     width: 100%;

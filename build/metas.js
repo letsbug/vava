@@ -1,8 +1,4 @@
-/**
- * meta
- * @author: ggboom.
- * @date: 2018-09-15 17:13
- */
+const Settings = require('./settings')
 
 module.exports = {
 
@@ -68,7 +64,7 @@ module.exports = {
 
   'keywords': 'vue, vue-cli, admin, manage, template, mini, vue-admin, admin-template, vue-admin-template, vava, vava-admin, vava-minimal',
 
-  'description': 'A minimal admin template based on vue@2.5.2 and element-ui@2.4.5.',
+  'description': 'A minimal admin template based on vue and element-ui.',
 
   //
   // 关于移动端SEO优化
@@ -79,7 +75,7 @@ module.exports = {
   /*
    * 添加到主屏后的标题（iOS 6 新增）
    */
-  'apple-mobile-web-app-title': 'vava-mini',
+  'apple-mobile-web-app-title': Settings.title,
 
   /*
    * 是否启用 WebApp 全屏模式 (yes/no)
@@ -98,5 +94,5 @@ module.exports = {
 
   // Android
 
-  'theme-color': '#d90378'
+  'theme-color': Settings.theme.color
 }

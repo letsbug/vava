@@ -11,7 +11,10 @@
         <h6>{{ $t('theme.themeColor') }}</h6>
         <div class="text-center" style="height: 20px;">
           <span
-            v-for="pre in colorPresets" :key="pre" class="color-picker" :style="`background-color:${pre}`"
+            v-for="pre in colorPresets"
+            :key="pre"
+            class="color-picker"
+            :style="`background-color:${pre}`"
             @click="styles.color = pre"
           >
             <i v-if="pre === styles.color" class="el-icon-check"></i>
@@ -40,34 +43,34 @@ export default {
       colorPresets: ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'],
       normal: { style: 'normally', color: '#28a745' },
       styles: {}
-    }
+    };
   },
   created() {
-    this.themeTool = window.theme
-    this.styles = this.themeTool.get()
+    this.themeTool = window.theme;
+    this.styles = this.themeTool.get();
   },
   methods: {
     onColorPickerChange(val) {
-      if (!val) this.styles.color = this.colorPresets[4]
+      if (!val) this.styles.color = this.colorPresets[4];
     },
     handleSubmit() {
-      this.handleHideThemePicker()
-      this.themeTool.set(this.styles)
+      this.handleHideThemePicker();
+      this.themeTool.set(this.styles);
     },
     restoreDefault() {
-      this.styles = { ...this.normal }
-      this.handleHideThemePicker()
-      this.themeTool.set(this.styles)
+      this.styles = { ...this.normal };
+      this.handleHideThemePicker();
+      this.themeTool.set(this.styles);
     },
     handleHideThemePicker() {
-      document.documentElement.click()
+      document.documentElement.click();
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 $color-picker-size: 20px;
 
@@ -106,13 +109,14 @@ h6 {
   .el-color-picker {
     margin-left: 3px;
   }
-  .el-color-picker__color, .el-color-picker__trigger {
+  .el-color-picker__color,
+  .el-color-picker__trigger {
     border: 0 none !important;
   }
   .el-color-picker__trigger {
     width: $color-picker-size !important;
     height: $color-picker-size !important;
-    padding: 0 !important;;
+    padding: 0 !important;
     border-radius: $radius-base !important;
     border: 0 none !important;
     overflow: hidden;

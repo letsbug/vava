@@ -4,69 +4,72 @@
     <div class="va-main-wrapper">
       <va-head-bar />
       <va-tabs-bar />
-      <app-body />
+      <va-main />
       <va-foot-bar />
     </div>
-    <div class="va-side-backdrop" @click.prevent="closeSidebar"></div>
+    <div class="va-side-backdrop" @click.prevent="IStoreSystem.CloseSidebar()"></div>
   </div>
 </template>
 
-<script>
-import { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody } from './components'
-import { mapState } from 'vuex'
+<script lang="ts">
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import VaSideMenu from './components/VaSideMenu/index.vue';
+import VaHeadBar from './components/VaHeadBar/index.vue';
+import VaTabsBar from './components/VaTabsBar/index.vue';
+import VaFootBar from './components/VaFootBar/index.vue';
+import VaMain from './components/VaMain/index.vue';
+import { DeviceType, IStoreSystem } from '@/store/modules/system';
+import { RouteConfig } from 'vue-router';
 
-const WIDTH = 992
+const WIDTH = 992;
 
-export default {
-  components: { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, AppBody },
-  computed: {
-    ...mapState({
-      sidebarOpened: state => state.application.sidebar.opened,
-      device: state => state.application.device
-    }),
-    sidebarStatus() {
-      const status = this.sidebarOpened ? 'expanded' : 'collapse'
-      return `sidebar-${status}`
+@Component({ name: 'Layout', components: { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, VaMain } })
+export default class extends Vue {
+  get sidebarOpened() {
+    return IStoreSystem.sidebar.opened;
+  }
+
+  get sidebarStatus() {
+    return `sidebar-${this.sidebarOpened ? 'expanded' : 'collapse'}`;
+  }
+
+  get device() {
+    return IStoreSystem.device;
+  }
+
+  @Watch('$route', { immediate: true })
+  private onRouteChange() {
+    if (this.isMobile() && this.sidebarOpened) {
+      IStoreSystem.CloseSidebar();
     }
-  },
-  watch: {
-    $route() {
-      // In mobile devices, auto close the sidebar when route jump.
-      if (this.isMobile() && this.sidebarOpened) {
-        this.closeSidebar()
-      }
-    }
-  },
-  beforeMount() {
-    window.addEventListener('resize', this.resizeHandler)
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler)
-  },
+  }
+
   mounted() {
     if (this.isMobile()) {
-      this.$store.dispatch('app_device_toggle', 'mobile')
-      this.closeSidebar()
+      IStoreSystem.ToggleDevice(DeviceType.Mobile);
+      IStoreSystem.CloseSidebar();
     }
-  },
-  methods: {
-    isMobile() {
-      return document.body.getBoundingClientRect().width <= WIDTH
-    },
-    resizeHandler() {
-      if (document.hidden) {
-        return
-      }
+    window.addEventListener('resize', this.resizeHandler);
+  }
 
-      const isMobile = this.isMobile()
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
+  }
 
-      this.$store.dispatch('app_device_toggle', isMobile ? 'mobile' : 'desktop')
-      if (isMobile && this.sidebarOpened) {
-        this.closeSidebar()
-      }
-    },
-    closeSidebar() {
-      this.$store.dispatch('app_sidebar_close')
+  isMobile() {
+    return document.body.getBoundingClientRect().width <= WIDTH;
+  }
+
+  resizeHandler() {
+    if (document.hidden) {
+      return;
+    }
+
+    const isMobile = this.isMobile();
+
+    IStoreSystem.ToggleDevice(isMobile ? DeviceType.Mobile : DeviceType.Desktop);
+    if (isMobile && this.sidebarOpened) {
+      IStoreSystem.CloseSidebar();
     }
   }
 }

@@ -1,4 +1,4 @@
-import Service from '@/apis/articles'
+import Service from '@/apis/articles';
 
 export default {
   data() {
@@ -6,7 +6,7 @@ export default {
       pages: { page: 1, size: 10, total: 0 },
       list: [],
       loading: false
-    }
+    };
   },
   filters: {
     articleStatus(status) {
@@ -17,36 +17,36 @@ export default {
         auditing: 'primary',
         audited: 'success',
         deleted: 'info'
-      }
-      return statusMap[status]
+      };
+      return statusMap[status];
     }
   },
   methods: {
     getList() {
-      this.loading = true
+      this.loading = true;
       Service.list(this.pages).then(res => {
-        if (!res.success) return
+        if (!res.success) return;
 
         this.list = res.data.map(v => {
-          this.$set(v, 'editing', false)
-          this.$set(v, 'submitting', false)
-          this.$set(v, 'originalTitle', v.title)
-          return v
-        })
-        this.pages = res.pages
-        this.loading = false
-      })
+          this.$set(v, 'editing', false);
+          this.$set(v, 'submitting', false);
+          this.$set(v, 'originalTitle', v.title);
+          return v;
+        });
+        this.pages = res.pages;
+        this.loading = false;
+      });
     },
     handlePageChange(val) {
-      this.pages.page = val
-      this.getList()
+      this.pages.page = val;
+      this.getList();
     },
     handleSizeChange(val) {
-      this.pages.size = val
-      this.getList()
+      this.pages.size = val;
+      this.getList();
     }
   },
   mounted() {
-    this.getList()
+    this.getList();
   }
-}
+};

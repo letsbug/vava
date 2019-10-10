@@ -1,8 +1,11 @@
 <template>
   <el-dialog
-    :title="$t('login.listHint')" :visible.sync="dialogVisible"
-    custom-class="user-simulate-dialog" top="10vh"
-    append-to-body center
+    :title="$t('login.listHint')"
+    :visible.sync="dialogVisible"
+    custom-class="user-simulate-dialog"
+    top="10vh"
+    append-to-body
+    center
     @closed="handleClose"
   >
     <el-table :data="list">
@@ -20,7 +23,7 @@
 </template>
 
 <script>
-import Service from '@/apis/account'
+import Service from '@/apis/account';
 
 export default {
   props: {
@@ -38,38 +41,38 @@ export default {
       dialogVisible: false,
       list: []
       // checkedIndex: -1
-    }
+    };
   },
   computed: {
     user() {
-      return this.$store.state.user
+      return this.$store.state.user;
     }
   },
   watch: {
     visible(v) {
       if (this.list.length === 0) {
-        this.loadList()
+        this.loadList();
       }
-      this.dialogVisible = v
+      this.dialogVisible = v;
     }
   },
   methods: {
     async loadList() {
-      const { data } = await Service.mocks()
-      this.list = data
+      const { data } = await Service.mocks();
+      this.list = data;
     },
     handleChoose(user) {
-      this.$emit('on-change', user)
+      this.$emit('on-change', user);
     },
     handleClose() {
-      this.$emit('update:visible', false)
+      this.$emit('update:visible', false);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 @media screen and (max-width: $device-md) {
   /deep/ .user-simulate-dialog {

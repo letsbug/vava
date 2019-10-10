@@ -1,10 +1,11 @@
 <template>
-  <div :class="{ 'expanded': visible && (route.children.length > 1 || route.alwaysShow) }" class="va-side-nav">
-    <template v-if="route.children.length > 1 || route.alwaysShow">
+  <div :class="{ expanded: visible && (route.children.length > 1 || route.meta.alwaysShow) }" class="va-side-nav">
+    <template v-if="route.children.length > 1 || route.meta.alwaysShow">
       <template v-if="sidebarOpened">
         <a
           :data-path="route.path"
-          :class="{ 'active': current === route.path }" class="nav-title expander"
+          :class="{ active: current === route.path }"
+          class="nav-title expander"
           @click="sidebarOpened && (visible = !visible)"
         >
           <va-icon :icon="route.meta.icon" />
@@ -28,7 +29,10 @@
       </template>
       <template v-else>
         <el-popover
-          placement="right-start" width="210" trigger="hover" popper-class="side-menu-collapse-drops"
+          placement="right-start"
+          width="210"
+          trigger="hover"
+          popper-class="side-menu-collapse-drops"
           transition="transition-fade-in-bottom"
         >
           <ul class="nav-dropdown">
@@ -43,7 +47,8 @@
           </ul>
           <a
             slot="reference"
-            :data-path="route.path" :class="{ 'active': current === route.path }"
+            :data-path="route.path"
+            :class="{ active: current === route.path }"
             class="nav-title expander"
             @click="sidebarOpened && (visible = !visible)"
           >
@@ -73,47 +78,41 @@
   </div>
 </template>
 
-<script>
-import ElCollapseTransition from 'element-ui/lib/transitions/collapse-transition'
-import { generateTitle } from '@/i18n'
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { RouteConfig } from 'vue-router';
+import { IStoreSystem } from '@/store/modules/system';
+import { generateTitle } from '@/i18n';
+import ElCollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 
-export default {
-  components: { ElCollapseTransition },
-  props: {
-    route: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-      visible: false
-    }
-  },
-  computed: {
-    current() {
-      return this.$route.matched[0].path
-    },
-    sidebarOpened() {
-      return this.$store.state.application.sidebar.opened
-    }
-  },
-  watch: {
-    sidebarOpened(val) {
-      if (this.isCurrent()) this.visible = val
-    }
-  },
+@Component({ name: 'NavItem', components: { ElCollapseTransition } })
+export default class extends Vue {
+  private visible: boolean = false;
+
+  @Prop({ required: true })
+  private route!: RouteConfig;
+
+  get current() {
+    return this.$route.matched[0].path;
+  }
+  get sidebarOpened() {
+    return IStoreSystem.sidebar.opened;
+  }
+
+  @Watch('sidebarOpened')
+  onSidebarStatusChange(val: boolean) {
+    if (this.isCurrent()) this.visible = val;
+  }
   mounted() {
-    this.visible = this.isCurrent()
-  },
-  methods: {
-    generateTitle,
-    isExternal(link) {
-      return /^(https?:|mailto:|tel:|tencent:)/.test(link)
-    },
-    isCurrent() {
-      return this.current === this.route.path
-    }
+    this.visible = this.isCurrent();
+  }
+
+  isExternal(link: string) {
+    return /^(https?:|mailto:|tel:|tencent:)/.test(link);
+  }
+
+  isCurrent() {
+    return this.current === this.route.path;
   }
 }
 </script>

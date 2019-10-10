@@ -1,19 +1,15 @@
 <template>
   <div class="va-side-wrapper">
     <brand class="va-side-brand" has-title has-link />
-    <va-side-menu :routes="routes_permission" />
+    <va-side-menu />
   </div>
 </template>
 
-<script>
-import { Brand } from '@/components'
-import VaSideMenu from './VaSideMenu'
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { Brand } from '@/components';
+import VaSideMenu from './VaSideMenu.vue';
 
-export default {
-  components: { Brand, VaSideMenu },
-  computed: {
-    ...mapGetters(['routes_permission'])
-  }
-}
+@Component({ name: 'VaSideBar', components: { Brand, VaSideMenu } })
+export default class extends Vue {}
 </script>

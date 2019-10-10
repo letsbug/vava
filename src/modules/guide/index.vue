@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import { Highlight } from '@/directives'
-import Driver from 'driver.js'
-import 'driver.js/dist/driver.min.css'
-import steps from './guideSteps'
+import { Highlight } from '@/directives';
+import Driver from 'driver.js';
+import 'driver.js/dist/driver.min.css';
+import steps from './guideSteps';
 
 export default {
   name: 'Guide',
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       driver: null
-    }
+    };
   },
   mounted() {
     this.driver = new Driver({
@@ -29,13 +29,13 @@ export default {
       padding: 5,
       allowClose: false,
       overlayClickNext: true
-    })
+    });
   },
   methods: {
     start() {
-      this.driver.defineSteps(steps)
-      this.driver.start()
+      this.driver.defineSteps(steps);
+      this.driver.start();
     }
   }
-}
+};
 </script>

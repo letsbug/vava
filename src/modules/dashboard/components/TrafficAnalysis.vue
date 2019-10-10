@@ -4,7 +4,7 @@
       <span
         v-for="(tab, i) in tabs"
         :key="i"
-        :class="{ 'active': i === actives }"
+        :class="{ active: i === actives }"
         class="traffic-tab-item"
         @click="actives = i"
       >
@@ -47,18 +47,18 @@ export default {
     return {
       tabs: ['TOP6 SOURCE', 'TOP6 INTERVIEW'],
       actives: 0
-    }
+    };
   },
   methods: {
     calcRatio(val, total) {
-      return ((val / total) * 100).toFixed(2) + '%'
+      return ((val / total) * 100).toFixed(2) + '%';
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .traffic-tab {
   color: $color-gray-500;

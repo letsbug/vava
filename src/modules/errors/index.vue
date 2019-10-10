@@ -2,9 +2,7 @@
   <div class="va-error-wrapper">
     <img :src="flag" alt="" />
     <br />
-    <h4 style="margin: 0">
-      Oops! {{ code }} !!!
-    </h4>
+    <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
     <h5>{{ $t(`errors.type${code}`) }}</h5>
     <p>
       <a v-if="!noGoBack" href="/" class="linker" @click.prevent.stop="$router.go(-1)">
@@ -19,7 +17,7 @@
 </template>
 
 <script>
-import { Copyright } from '@/components'
+import { Copyright } from '@/components';
 export default {
   name: 'Error',
   components: { Copyright },
@@ -28,21 +26,21 @@ export default {
   },
   computed: {
     code() {
-      return this.$route.query['code'] || 404
+      return this.$route.query['code'] || 404;
     },
     flag() {
-      const random = Math.floor(Math.random() * 4 + 1)
-      return `./static/images/errors/err-${random}.gif`
+      const random = Math.floor(Math.random() * 4 + 1);
+      return `./static/images/errors/err-${random}.gif`;
     },
     noGoBack() {
-      return this.$route.query['noGoBack']
+      return this.$route.query['noGoBack'];
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 .va-error-wrapper {
   display: flex;
   height: 100%;

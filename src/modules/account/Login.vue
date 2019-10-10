@@ -3,26 +3,33 @@
     <el-form ref="loginForm" :model="form" :rules="rules" class="form-login--password" aria-autocomplete="list">
       <div class="form-logo">
         <brand class="brand text-primary" />
-        <h2 class="title">
-          {{ $t('login.title') }}<language-picker class="float-r" class-name="h2" />
-        </h2>
+        <h2 class="title">{{ $t('login.title') }}<language-picker class="float-r" class-name="h2" /></h2>
       </div>
       <el-form-item prop="username">
         <el-input
-          v-model="form.username" :placeholder="$t('login.username')" type="text" size="large"
-          name="username" @keyup.enter.native="handleLogin"
+          v-model="form.username"
+          :placeholder="$t('login.username')"
+          type="text"
+          size="large"
+          name="username"
+          @keyup.enter.native="handleLogin"
         >
           <va-icon slot="prefix" icon="people-user" />
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input
-          v-model="form.password" :placeholder="$t('login.password')" :type="password ? 'password' : 'text'"
-          size="large" name="password" @keyup.enter.native="handleLogin"
+          v-model="form.password"
+          :placeholder="$t('login.password')"
+          :type="password ? 'password' : 'text'"
+          size="large"
+          name="password"
+          @keyup.enter.native="handleLogin"
         >
           <va-icon slot="prefix" icon="mark-lock" />
           <va-icon
-            slot="suffix" :icon="password ? 'mark-eye-close' : 'mark-eye-open'"
+            slot="suffix"
+            :icon="password ? 'mark-eye-close' : 'mark-eye-open'"
             @click.native="password = !password"
           />
         </el-input>
@@ -52,8 +59,8 @@
 </template>
 
 <script>
-import { Brand, LanguagePicker, UserPicker, Copyright } from '@/components'
-import { validUsername, validPassword } from '@/tools/validators'
+import { Brand, LanguagePicker, UserPicker, Copyright } from '@/components';
+import { validUsername, validPassword } from '@/tools/validators';
 
 export default {
   name: 'Login',
@@ -70,44 +77,49 @@ export default {
       password: true,
       expires: 7,
       userPickerVisible: false
-    }
+    };
   },
   mounted() {
-    this.backdrop = this.$refs['appBackDrop']
-    document.body.insertBefore(this.backdrop, document.getElementById('app'))
-    import(`@/vendor/backdrops/0${Math.floor(Math.random() * 5) + 1}`)
+    this.backdrop = this.$refs['appBackDrop'];
+    document.body.insertBefore(this.backdrop, document.getElementById('app'));
+    import(`@/vendor/backdrops/0${Math.floor(Math.random() * 5) + 1}`);
   },
   destroyed() {
-    document.body.removeChild(this.backdrop)
-    this.loading = false
+    document.body.removeChild(this.backdrop);
+    this.loading = false;
   },
   methods: {
     fillLoginForm(user) {
-      this.form.username = user.username
-      this.form.password = 'a1234567'
-      this.userPickerVisible = false
-      this.$refs['loginForm'].validate()
+      this.form.username = user.username;
+      this.form.password = 'a1234567';
+      this.userPickerVisible = false;
+      this.$refs['loginForm'].validate();
     },
     handleLogin() {
       this.$refs['loginForm'].validate(v => {
-        if (!v) return false
-        this.loading = true
-        this.$store.dispatch('user_login', this.form).then(() => {
-          // this.loading = false
-          this.$message.closeAll()
-          this.$router.push(this.$route.query['redirect'] || '/')
-        }).catch(() => { this.loading = false })
-        return true
-      })
+        if (!v) return false;
+        this.loading = true;
+        this.$store
+          .dispatch('user_login', this.form)
+          .then(() => {
+            // this.loading = false
+            this.$message.closeAll();
+            this.$router.push(this.$route.query['redirect'] || '/');
+          })
+          .catch(() => {
+            this.loading = false;
+          });
+        return true;
+      });
     },
     validUsername,
     validPassword
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "./styles/login--forget";
+@import './styles/login--forget';
 
 .form-tips {
   p:first-child {

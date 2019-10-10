@@ -14,21 +14,21 @@
   </el-dropdown>
 </template>
 
-<script>
-export default {
-  props: {
-    className: { type: String, default: null, required: false }
-  },
-  computed: {
-    language() {
-      return this.$store.getters.language
-    }
-  },
-  methods: {
-    pickLang(target) {
-      this.$i18n.locale = target
-      this.$store.dispatch('app_language_set', target)
-    }
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'LanguagePicker' })
+export default class extends Vue {
+  @Prop({ default: null })
+  private className!: string;
+
+  get language() {
+    return this.$store.getters.language;
+  }
+
+  private pickLang(target: string) {
+    this.$i18n.locale = target;
+    this.$store.dispatch('app_language_set', target);
   }
 }
 </script>

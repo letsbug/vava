@@ -13,34 +13,37 @@
   </el-breadcrumb>
 </template>
 
-<script>
-import { generateTitle } from '@/i18n'
-export default {
-  data() {
-    return { routes: [] }
-  },
-  watch: {
-    $route: 'breadcrumbList'
-  },
-  mounted() {
-    this.breadcrumbList()
-  },
-  methods: {
-    breadcrumbList() {
-      let routes = this.$route.matched.filter(v => v.name)
-      const first = routes[0]
-      if (first && first.name.trim().toLowerCase() !== 'homepage') {
-        routes = [{ path: '/home', meta: { title: 'home' }, redirect: '/home' }].concat(routes)
-      }
-      this.routes = routes
-    },
-    generateTitle
+<script lang="ts">
+import { Component, Watch, Vue } from 'vue-property-decorator';
+import { generateTitle } from '@/i18n';
+import { Route, RouteRecord } from 'vue-router';
+
+@Component({ name: 'Breadcrumb' })
+export default class extends Vue {
+  private routes: RouteRecord[] = [];
+
+  @Watch('$route', { immediate: true })
+  private onRouteChange(route: Route) {
+    let routes = route.matched.filter(v => v.name);
+    const first: RouteRecord = routes[0];
+    if (!this.isHomePage(first)) {
+      routes = [{ path: '/home', meta: { title: 'home' }, redirect: '/home' } as RouteRecord].concat(routes);
+    }
+    this.routes = routes;
+  }
+
+  private isHomePage(route: RouteRecord) {
+    const name = route && route.name;
+    if (!name) {
+      return false;
+    }
+    return name.trim().toLowerCase() === 'homepage';
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .va-breadcrumb {
   a {
@@ -48,7 +51,7 @@ export default {
   }
 
   .no-redirect {
-    color: $color-gray-500!important;
+    color: $color-gray-500 !important;
   }
 }
 </style>

@@ -8,5 +8,5 @@ export default {
   metaInfo: {
     title: 'Join Vava'
   }
-}
+};
 </script>

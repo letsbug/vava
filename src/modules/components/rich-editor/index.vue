@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import Editor from '@tinymce/tinymce-vue'
+import Editor from '@tinymce/tinymce-vue';
 // import { ITinymce } from '@/components'
-import { content } from '@/components/ITinymce/plugins'
-import { Highlight } from '@/directives'
+import { content } from '@/components/ITinymce/plugins';
+import { Highlight } from '@/directives';
 
 export default {
   name: 'RichEditor',
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       content: content
-    }
+    };
   },
   created() {
     // this.loading = this.$loading({ lock: true })
@@ -39,5 +39,5 @@ export default {
     //   }, 300)
     // }
   }
-}
+};
 </script>

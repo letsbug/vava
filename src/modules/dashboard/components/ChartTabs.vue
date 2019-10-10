@@ -1,5 +1,11 @@
 <template>
-  <div class="va-panels panel-card" :class="{ 'border-primary': active && !isMobile, 'text-primary': active && isMobile }">
+  <div
+    class="va-panels panel-card"
+    :class="{
+      'border-primary': active && !isMobile,
+      'text-primary': active && isMobile
+    }"
+  >
     <h6 v-if="!isMobile" class="panel-card-title" :class="active ? 'text-primary' : 'text-secondary'">
       <span>{{ title }}</span>
       <a class="handle-tab-detail" :class="{ 'text-primary': active }">
@@ -7,19 +13,26 @@
       </a>
     </h6>
     <i-count-to
-      :start-val="0" :end-val="dataType === 'percent' ? total * 100 : total"
-      :prefix="prefix" :suffix="suffix" :decimals="decimals"
-      :duration="animateDuration" :class="totalSpanClass" class="panel-card-total"
+      :start-val="0"
+      :end-val="dataType === 'percent' ? total * 100 : total"
+      :prefix="prefix"
+      :suffix="suffix"
+      :decimals="decimals"
+      :duration="animateDuration"
+      :class="totalSpanClass"
+      class="panel-card-total"
     />
-    <h6 v-if="isMobile" class="panel-card-title is-mobile" :class="active ? 'text-primary' : 'text-secondary'">{{ title }}</h6>
+    <h6 v-if="isMobile" class="panel-card-title is-mobile" :class="active ? 'text-primary' : 'text-secondary'">
+      {{ title }}
+    </h6>
     <div v-if="!isMobile && chartData" ref="chartEl" class="panel-card-chart"></div>
   </div>
 </template>
 
 <script>
-import mixins from './mixins'
-import ICountTo from 'vue-count-to'
-import echarts from 'echarts'
+import mixins from './mixins';
+import ICountTo from 'vue-count-to';
+import echarts from 'echarts';
 
 export default {
   components: { ICountTo },
@@ -39,7 +52,7 @@ export default {
   data() {
     return {
       animateDuration: 1500
-    }
+    };
   },
   computed: {
     totalSpanClass() {
@@ -47,35 +60,35 @@ export default {
         'text-primary': !this.chartData && !this.isMobile,
         'null-data': !this.chartData && !this.isMobile,
         'text-center': this.isMobile
-      }
+      };
     }
   },
   watch: {
     themeColor() {
-      if (!this.chart) return
+      if (!this.chart) return;
       this.chart.setOption({
         color: this.themeColor,
-        series: [{
-          areaStyle: {
-            color: this.areaColor()
+        series: [
+          {
+            areaStyle: {
+              color: this.areaColor()
+            }
           }
-        }]
-      })
+        ]
+      });
     }
   },
   methods: {
     areaColor() {
-      return `${this.themeColor}30`
+      return `${this.themeColor}30`;
     },
     init() {
-      if (this.isMobile) return
+      if (this.isMobile) return;
 
-      if (!this.chart) this.chart = echarts.init(this.$refs['chartEl'])
+      if (!this.chart) this.chart = echarts.init(this.$refs['chartEl']);
 
       this.chart.setOption({
-        color: [
-          this.themeColor
-        ],
+        color: [this.themeColor],
         tooltip: {
           show: false
         },
@@ -97,22 +110,24 @@ export default {
           boundaryGap: false,
           show: false
         },
-        series: [{
-          data: this.chartData,
-          type: 'line',
-          sampling: 'average',
-          showSymbol: false,
-          smooth: true,
-          areaStyle: { color: this.areaColor() }
-        }]
-      })
+        series: [
+          {
+            data: this.chartData,
+            type: 'line',
+            sampling: 'average',
+            showSymbol: false,
+            smooth: true,
+            areaStyle: { color: this.areaColor() }
+          }
+        ]
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .panel-card {
   padding: $spacer-lg;
@@ -192,7 +207,9 @@ export default {
       left: 0;
     }
   }
-  .panel-card-total { font-size: $font-size-h2 }
+  .panel-card-total {
+    font-size: $font-size-h2;
+  }
 }
 
 @media screen and (max-width: $device-sm) {
@@ -204,7 +221,11 @@ export default {
       bottom: $spacer-sm;
     }
   }
-  .panel-card-title { font-size: 12px; }
-  .panel-card-total { font-size: $font-size-h3 }
+  .panel-card-title {
+    font-size: 12px;
+  }
+  .panel-card-total {
+    font-size: $font-size-h3;
+  }
 }
 </style>

@@ -1,8 +1,13 @@
 <template>
   <div class="va-body-container">
     <el-table
-      v-loading="loading" :data="list" tooltip-effect="theme" fit
-      highlight-current-row row-key="id" empty-text="Sorry! This category have nothing data."
+      v-loading="loading"
+      :data="list"
+      tooltip-effect="theme"
+      fit
+      highlight-current-row
+      row-key="id"
+      empty-text="Sorry! This category have nothing data."
     >
       <el-table-column type="index" width="36" align="right" />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip class-name="has-actions actions-small">
@@ -11,8 +16,12 @@
             <span v-if="scope.row.editing" key="edit" class="inline-edit-form">
               <el-input v-model="scope.row.title" size="small" />
               <el-button
-                :disabled="scope.row.submitting" icon="el-icon-close" type="danger" plain
-                size="small" @click="handleCancel(scope.row)"
+                :disabled="scope.row.submitting"
+                icon="el-icon-close"
+                type="danger"
+                plain
+                size="small"
+                @click="handleCancel(scope.row)"
               >
                 Cancel
               </el-button>
@@ -30,7 +39,10 @@
       </el-table-column>
       <el-table-column label="LEVEL" prop="level" width="60" align="center" />
       <el-table-column
-        label="STATUS" prop="status" width="100" align="center"
+        label="STATUS"
+        prop="status"
+        width="100"
+        align="center"
         class-name="has-actions actions-small table-status"
       >
         <template slot-scope="scope">
@@ -49,8 +61,12 @@
       <el-table-column label="ACTIONS" width="90" align="center" class-name="has-actions table-actions actions-small">
         <template slot-scope="scope">
           <el-button
-            v-if="scope.row.editing" :loading="scope.row.submitting"
-            icon="el-icon-check" type="success" plain size="small"
+            v-if="scope.row.editing"
+            :loading="scope.row.submitting"
+            icon="el-icon-check"
+            type="success"
+            plain
+            size="small"
             @click="handleEdit(scope.row)"
           >
             OK
@@ -78,8 +94,8 @@
 </template>
 
 <script>
-import mixins from './mixins'
-import Service from '@/apis/articles'
+import mixins from './mixins';
+import Service from '@/apis/articles';
 
 export default {
   name: 'InlineEdit',
@@ -87,24 +103,24 @@ export default {
   mixins: [mixins],
   methods: {
     handleEdit(row) {
-      row.submitting = true
-      row.originalTitle = row.title
+      row.submitting = true;
+      row.originalTitle = row.title;
       Service.update({ id: row.id, title: row.title }).then(res => {
-        if (res.success) row.editing = false
+        if (res.success) row.editing = false;
         this.$message({
           type: res.success ? 'success' : 'error',
           message: res.success ? 'Modify successfully' : res.message,
           center: true
-        })
-        row.submitting = false
-      })
+        });
+        row.submitting = false;
+      });
     },
     handleCancel(row) {
-      row.title = row.originalTitle
-      row.editing = false
+      row.title = row.originalTitle;
+      row.editing = false;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

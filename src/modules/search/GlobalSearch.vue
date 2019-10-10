@@ -1,8 +1,6 @@
 <template>
   <div class="va-body-container">
-    <h4 v-if="keyword" class="va-body-title lowercase">
-      "{{ keyword }}" search results
-    </h4>
+    <h4 v-if="keyword" class="va-body-title lowercase">"{{ keyword }}" search results</h4>
     <div v-else class="text-center">
       <br />
       <br />
@@ -19,10 +17,12 @@ export default {
   metaInfo() {
     return {
       title: `Search for "${this.keyword}"`
-    }
+    };
   },
   computed: {
-    keyword() { return this.$route.params['keyword'] }
+    keyword() {
+      return this.$route.params['keyword'];
+    }
   }
-}
+};
 </script>

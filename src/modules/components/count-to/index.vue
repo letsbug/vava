@@ -20,7 +20,8 @@
       <dt>{{ $t('countTo.params') }}</dt>
       <dd>
         <span class="form-params">
-          <el-input v-model="params.start" type="number" size="small" style="width: 70px;" /> Start
+          <el-input v-model="params.start" type="number" size="small" style="width: 70px;" />
+          Start
         </span>
         <span class="form-params">
           <el-button type="text" size="small" @click="handleSwap">
@@ -28,13 +29,16 @@
           </el-button>
         </span>
         <span class="form-params">
-          <el-input v-model="params.end" type="number" size="small" style="width: 70px;" /> End
+          <el-input v-model="params.end" type="number" size="small" style="width: 70px;" />
+          End
         </span>
         <span class="form-params">
-          <el-input v-model="params.decimals" type="number" size="small" style="width: 70px;" /> Decimals
+          <el-input v-model="params.decimals" type="number" size="small" style="width: 70px;" />
+          Decimals
         </span>
         <span class="form-params">
-          <el-input v-model="params.duration" type="number" size="small" style="width: 70px;" /> Duration
+          <el-input v-model="params.duration" type="number" size="small" style="width: 70px;" />
+          Duration
         </span>
       </dd>
       <dd>
@@ -42,13 +46,16 @@
           <el-checkbox v-model="params.easing">Use easing</el-checkbox>
         </span>
         <span class="form-params">
-          <el-input v-model="params.separator" size="small" style="width: 70px;" /> Separator
+          <el-input v-model="params.separator" size="small" style="width: 70px;" />
+          Separator
         </span>
         <span class="form-params">
-          <el-input v-model="params.prefix" size="small" style="width: 70px;" /> Prefix
+          <el-input v-model="params.prefix" size="small" style="width: 70px;" />
+          Prefix
         </span>
         <span class="form-params">
-          <el-input v-model="params.suffix" size="small" style="width: 70px;" /> Suffix
+          <el-input v-model="params.suffix" size="small" style="width: 70px;" />
+          Suffix
         </span>
       </dd>
     </dl>
@@ -77,8 +84,8 @@
 </template>
 
 <script>
-import { Highlight } from '@/directives'
-import ICountTo from 'vue-count-to'
+import { Highlight } from '@/directives';
+import ICountTo from 'vue-count-to';
 
 export default {
   name: 'CountTo',
@@ -105,35 +112,35 @@ export default {
         easing: true
       },
       paramsOrigin: {}
-    }
+    };
   },
   created() {
-    this.paramsOrigin = { ...this.params }
+    this.paramsOrigin = { ...this.params };
   },
   methods: {
     handleSwap() {
-      const _temp = this.params.end
-      this.params.end = this.params.start
-      this.params.start = _temp
+      const _temp = this.params.end;
+      this.params.end = this.params.start;
+      this.params.start = _temp;
     },
     handleStart() {
-      this.$refs['countToViewer'].reset()
+      this.$refs['countToViewer'].reset();
       this.$refs['countToViewer'].start(function() {
-        console.log('Clicked start button')
-      })
+        console.log('Clicked start button');
+      });
     },
     handlePauseResume() {
-      this.$refs['countToViewer'].pauseResume()
+      this.$refs['countToViewer'].pauseResume();
     },
     handleReset() {
-      this.$refs['countToViewer'].reset()
+      this.$refs['countToViewer'].reset();
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 .va-count-up {
   font-size: 11vw;

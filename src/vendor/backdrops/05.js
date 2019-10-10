@@ -1,7 +1,7 @@
-const canvas = document.getElementById('appBackDrop')
-let w = canvas.width = window.innerWidth
-let h = canvas.height = window.innerHeight
-const ctx = canvas.getContext('2d')
+const canvas = document.getElementById('appBackDrop');
+let w = (canvas.width = window.innerWidth);
+let h = (canvas.height = window.innerHeight);
+const ctx = canvas.getContext('2d');
 const opts = {
   baseBaseSize: 15,
   addedBaseSize: 5,
@@ -19,91 +19,91 @@ const opts = {
   fullColor: 0.5,
   stopColor: 0.6,
   timeToColorChange: 3
-}
-const particles = []
-let tick = 0
+};
+const particles = [];
+let tick = 0;
 
 function Particle() {
-  this.reset()
+  this.reset();
 }
 
 Particle.prototype.reset = function() {
-  this.x = Math.pow(Math.random(), 1 / 4)
-  this.y = h / 2
-  const color = opts.templateParticleColor.replace('hue', this.x * 360 * 2 + tick * opts.timeToColorChange)
-  this.baseSize = (Math.random() + this.x) / 2 * (opts.baseBaseSize + opts.addedBaseSize * Math.random())
-  this.gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.baseSize / 2)
-  this.gradient.addColorStop(opts.startColor, color.replace('alp', 0))
-  this.gradient.addColorStop(opts.fullColor, color.replace('alp', 1))
-  this.gradient.addColorStop(opts.stopColor, color.replace('alp', 1))
-  this.gradient.addColorStop(1, color.replace('alp', 0))
+  this.x = Math.pow(Math.random(), 1 / 4);
+  this.y = h / 2;
+  const color = opts.templateParticleColor.replace('hue', this.x * 360 * 2 + tick * opts.timeToColorChange);
+  this.baseSize = ((Math.random() + this.x) / 2) * (opts.baseBaseSize + opts.addedBaseSize * Math.random());
+  this.gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.baseSize / 2);
+  this.gradient.addColorStop(opts.startColor, color.replace('alp', 0));
+  this.gradient.addColorStop(opts.fullColor, color.replace('alp', 1));
+  this.gradient.addColorStop(opts.stopColor, color.replace('alp', 1));
+  this.gradient.addColorStop(1, color.replace('alp', 0));
 
-  this.vx = -(1 + Math.random() / 10 - this.x) * (opts.baseVel + Math.random() * opts.addedVel)
-  this.vy = Math.pow(this.x, 4) * (opts.baseVel + Math.random() * opts.addedVel) * (Math.random() < 0.5 ? -1 : 1)
+  this.vx = -(1 + Math.random() / 10 - this.x) * (opts.baseVel + Math.random() * opts.addedVel);
+  this.vy = Math.pow(this.x, 4) * (opts.baseVel + Math.random() * opts.addedVel) * (Math.random() < 0.5 ? -1 : 1);
 
-  this.x *= w / 2
+  this.x *= w / 2;
   if (Math.random() < 0.5) {
-    this.x = w - this.x
-    this.vx *= -1
+    this.x = w - this.x;
+    this.vx *= -1;
   }
 
-  this.time = opts.baseTime + opts.addedTime * Math.random()
-  this.tick = this.time + opts.overTime
-}
+  this.time = opts.baseTime + opts.addedTime * Math.random();
+  this.tick = this.time + opts.overTime;
+};
 
 Particle.prototype.step = function() {
-  let size
+  let size;
   if (this.tick <= this.time) {
-    this.x += this.vx *= opts.sliding
-    this.y += this.vy *= opts.sliding
-    size = Math.pow(this.tick / this.time, 1 / 2)
+    this.x += this.vx *= opts.sliding;
+    this.y += this.vy *= opts.sliding;
+    size = Math.pow(this.tick / this.time, 1 / 2);
   } else {
-    size = 1 - ((this.tick - this.time) / opts.overTime) + 0.000001
+    size = 1 - (this.tick - this.time) / opts.overTime + 0.000001;
   }
 
-  --this.tick
+  --this.tick;
 
-  ctx.translate(this.x, this.y)
-  ctx.scale(size, size)
-  ctx.fillStyle = this.gradient
-  ctx.fillRect(-this.baseSize / 2, -this.baseSize / 2, this.baseSize, this.baseSize)
-  ctx.scale(1 / size, 1 / size)
-  ctx.translate(-this.x, -this.y)
+  ctx.translate(this.x, this.y);
+  ctx.scale(size, size);
+  ctx.fillStyle = this.gradient;
+  ctx.fillRect(-this.baseSize / 2, -this.baseSize / 2, this.baseSize, this.baseSize);
+  ctx.scale(1 / size, 1 / size);
+  ctx.translate(-this.x, -this.y);
 
   if (this.tick <= 0) {
-    this.reset()
+    this.reset();
   }
-}
+};
 
-ctx.fillStyle = '#fff'
-ctx.fillRect(0, 0, w, h)
+ctx.fillStyle = '#fff';
+ctx.fillRect(0, 0, w, h);
 
 window.addEventListener('resize', function() {
-  canvas.width = w = window.innerWidth
-  canvas.height = h = window.innerHeight
+  canvas.width = w = window.innerWidth;
+  canvas.height = h = window.innerHeight;
 
-  ctx.fillStyle = '#fff'
-  ctx.fillRect(0, 0, w, h)
-})
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, w, h);
+});
 
 function anim() {
-  window.requestAnimationFrame(anim)
+  window.requestAnimationFrame(anim);
 
-  ctx.globalCompositeOperation = 'source-over'
-  ctx.fillStyle = opts.repaintAlpha
-  ctx.fillRect(0, 0, w, h)
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = opts.repaintAlpha;
+  ctx.fillRect(0, 0, w, h);
 
-  ctx.globalCompositeOperation = 'lighter'
+  ctx.globalCompositeOperation = 'lighter';
 
-  ++tick
+  ++tick;
 
   if (particles.length < opts.particles && Math.random() < opts.particleChance) {
-    particles.push(new Particle())
+    particles.push(new Particle());
   }
 
   particles.map(function(particle) {
-    particle.step()
-  })
+    particle.step();
+  });
 }
 
-anim()
+anim();

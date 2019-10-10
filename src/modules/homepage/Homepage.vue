@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import { GithubCorner } from '@/components'
-import { xhr } from '@/apis/xhr'
-import { mapGetters } from 'vuex'
+import { GithubCorner } from '@/components';
+import { xhr } from '@/apis/xhr';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Homepage',
@@ -24,11 +24,11 @@ export default {
     ...mapGetters(['user'])
   },
   mounted() {
-    const { sex, roles } = this.user
+    const { sex, roles } = this.user;
     // console.log(this.user)
     xhr(`./static/svgs/${roles[0]}_${sex}.svg`).then(({ data }) => {
-      this.$refs['roleImage'].innerHTML = data
-    })
+      this.$refs['roleImage'].innerHTML = data;
+    });
   }
-}
+};
 </script>

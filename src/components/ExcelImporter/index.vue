@@ -2,7 +2,9 @@
   <div class="excel-importer">
     <input ref="excelImportInput" class="excel-import-input" type="file" accept=".xlsx, .xls" @change="onInputFile" />
     <a
-      v-if="enableDragDrop" :class="{ 'disabled': working }" class="file-drop-box"
+      v-if="enableDragDrop"
+      :class="{ disabled: working }"
+      class="file-drop-box"
       @click="!working && $refs['excelImportInput'].click()"
       @drop.prevent.stop="!working && handleDrop($event)"
       @dragover.prevent.stop="onDragOver"
@@ -39,7 +41,7 @@
 </template>
 
 <script>
-import XLSX from 'xlsx'
+import XLSX from 'xlsx';
 
 export default {
   props: {
@@ -56,106 +58,107 @@ export default {
         header: null,
         results: null
       }
-    }
+    };
   },
   methods: {
     isExcel(file) {
-      return /\.(xlsx|xls|csv)$/.test(file.name)
+      return /\.(xlsx|xls|csv)$/.test(file.name);
     },
     getHeaderRow(sheet) {
-      const headers = []
-      const range = XLSX.utils.decode_range(sheet['!ref'])
-      const R = range.s.r
-      let C
+      const headers = [];
+      const range = XLSX.utils.decode_range(sheet['!ref']);
+      const R = range.s.r;
+      let C;
       /* start in the first row */
-      for (C = range.s.c; C <= range.e.c; ++C) { /* walk every column in the range */
-        const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]
+      for (C = range.s.c; C <= range.e.c; ++C) {
+        /* walk every column in the range */
+        const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })];
         /* find the cell in the first row */
-        let hdr = 'UNKNOWN ' + C // <-- replace with your desired default
-        if (cell && cell.t) hdr = XLSX.utils.format_cell(cell)
-        headers.push(hdr)
+        let hdr = 'UNKNOWN ' + C; // <-- replace with your desired default
+        if (cell && cell.t) hdr = XLSX.utils.format_cell(cell);
+        headers.push(hdr);
       }
-      return headers
+      return headers;
     },
     generateData({ header, results }) {
-      this.excelData.header = header
-      this.excelData.results = results
-      this.onSuccess && this.onSuccess(this.excelData)
+      this.excelData.header = header;
+      this.excelData.results = results;
+      this.onSuccess && this.onSuccess(this.excelData);
     },
     fixData(data) {
-      const w = 10240
-      let o = ''
-      let l = 0
+      const w = 10240;
+      let o = '';
+      let l = 0;
       for (; l < data.byteLength / w; ++l) {
-        o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)))
+        o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
       }
-      o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)))
-      return o
+      o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+      return o;
     },
     readerData(rawFile) {
       return new Promise(resolve => {
-        const reader = new FileReader()
+        const reader = new FileReader();
         reader.onload = e => {
-          const data = e.target['result']
-          const fixedData = this.fixData(data)
-          const workbook = XLSX.read(btoa(fixedData), { type: 'base64' })
-          const firstSheetName = workbook.SheetNames[0]
-          const worksheet = workbook.Sheets[firstSheetName]
-          const header = this.getHeaderRow(worksheet)
-          const results = XLSX.utils.sheet_to_json(worksheet)
-          this.generateData({ header, results })
+          const data = e.target['result'];
+          const fixedData = this.fixData(data);
+          const workbook = XLSX.read(btoa(fixedData), { type: 'base64' });
+          const firstSheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[firstSheetName];
+          const header = this.getHeaderRow(worksheet);
+          const results = XLSX.utils.sheet_to_json(worksheet);
+          this.generateData({ header, results });
           setTimeout(() => {
-            this.working = false
-          }, 400)
-          resolve()
-        }
-        reader.readAsArrayBuffer(rawFile)
-      })
+            this.working = false;
+          }, 400);
+          resolve();
+        };
+        reader.readAsArrayBuffer(rawFile);
+      });
     },
     import(rawFile) {
-      this.working = true
-      this.file = rawFile
-      this.$refs['excelImportInput'].value = null // fix can't select the same excel
+      this.working = true;
+      this.file = rawFile;
+      this.$refs['excelImportInput'].value = null; // fix can't select the same excel
 
       if (!this.beforeImport) {
-        this.readerData(rawFile)
-        return
+        this.readerData(rawFile);
+        return;
       }
-      const before = this.beforeImport(rawFile)
-      if (!before) this.working = false
-      before && this.readerData(rawFile)
+      const before = this.beforeImport(rawFile);
+      if (!before) this.working = false;
+      before && this.readerData(rawFile);
     },
     onDragOver(e) {
-      e.dataTransfer.dropEffect = 'copy'
+      e.dataTransfer.dropEffect = 'copy';
     },
     handleDrop(e) {
-      const files = e.dataTransfer.files
+      const files = e.dataTransfer.files;
       if (files.length !== 1) {
-        this.$message.error(this.$t('excelImport.errorExcess'))
-        return
+        this.$message.error(this.$t('excelImport.errorExcess'));
+        return;
       }
 
-      const file = files[0]
+      const file = files[0];
       if (!this.isExcel(file)) {
-        this.$message.error(this.$t('excelImport.errorTypes'))
-        return
+        this.$message.error(this.$t('excelImport.errorTypes'));
+        return;
       }
 
-      this.import(file)
+      this.import(file);
     },
     onInputFile(e) {
-      const file = e.target.files[0]
-      file && this.import(file)
+      const file = e.target.files[0];
+      file && this.import(file);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/variables";
+@import '../../styles/variables';
 
-$file-drop-width:   100%;
-$file-drop-height:  90px;
+$file-drop-width: 100%;
+$file-drop-height: 90px;
 
 .excel-import-input {
   display: none;
@@ -195,7 +198,7 @@ $file-drop-height:  90px;
 
   &.disabled .working-flag {
     visibility: visible;
-    opacity: .9;
+    opacity: 0.9;
   }
 }
 </style>

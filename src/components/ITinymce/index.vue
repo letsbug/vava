@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import { plugins, toolbar } from './plugins'
+import { plugins, toolbar } from './plugins';
 
 export default {
   props: {
     id: {
       type: String,
-      default: `app-tiny-${+new Date() + (Math.floor(Math.random() * 1000))}`
+      default: `app-tiny-${+new Date() + Math.floor(Math.random() * 1000)}`
     },
     value: {
       type: String,
@@ -39,52 +39,52 @@ export default {
         imagetools_cors_hosts: ['www.tinymce.com']
       },
       hasChange: false
-    }
+    };
   },
   computed: {
     language() {
-      return this.languages[this.$store.getters.language]
+      return this.languages[this.$store.getters.language];
     }
   },
   watch: {
     language() {
-      this.destroy()
-      this.$nextTick(() => this.init())
+      this.destroy();
+      this.$nextTick(() => this.init());
     }
   },
   created() {
-    if (!this.fixedToolbarContainer) return
+    if (!this.fixedToolbarContainer) return;
     if (this.fixedToolbarContainer.indexOf('#') !== 0) {
-      throw new Error('The parameter \'fixedToolbarContainer\' must be a dom id')
+      throw new Error("The parameter 'fixedToolbarContainer' must be a dom id");
     }
   },
   mounted() {
-    this.init()
+    this.init();
   },
   activated() {
-    this.init()
+    this.init();
   },
   deactivated() {
-    this.destroy()
+    this.destroy();
   },
   beforeDestroy() {
-    console.log('will destroy this page')
+    console.log('will destroy this page');
     // TODO 提醒用户是否离开
   },
   destroyed() {
-    this.destroy()
+    this.destroy();
   },
   methods: {
     init() {
       const init_instance_callback = editor => {
         if (this.value) {
-          editor.setContent(this.value)
+          editor.setContent(this.value);
         }
         editor.on('NodeChange Change KeyUp SetContent', () => {
-          this.hasChange = true
-          this.$emit('input', editor.getContent())
-        })
-      }
+          this.hasChange = true;
+          this.$emit('input', editor.getContent());
+        });
+      };
       const defaultOptions = {
         language: this.language,
         selector: `#${this.id}`,
@@ -98,23 +98,23 @@ export default {
         default_link_target: '_blank',
         nonbreaking_force_tab: true,
         init_instance_callback
-      }
-      window.tinymce.init(Object.assign({}, defaultOptions, this.imageTools))
-      this.$emit('on-inited')
+      };
+      window.tinymce.init(Object.assign({}, defaultOptions, this.imageTools));
+      this.$emit('on-inited');
     },
     destroy() {
-      const tiny = window.tinymce.get(this.id)
-      console.log('exec destroy method: ', this.id, tiny)
-      if (tiny) tiny.destroy()
+      const tiny = window.tinymce.get(this.id);
+      console.log('exec destroy method: ', this.id, tiny);
+      if (tiny) tiny.destroy();
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
-$tiny-border-color:   $color-gray-300;
+$tiny-border-color: $color-gray-300;
 
 .tinymce-wrapper /deep/ {
   height: 100%;

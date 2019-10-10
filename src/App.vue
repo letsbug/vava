@@ -4,11 +4,9 @@
   </div>
 </template>
 
-<script>
-import { meta } from './meta'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 
-export default {
-  name: 'App',
-  metaInfo: meta
-}
+@Component({ name: 'App' })
+export default class extends Vue {}
 </script>

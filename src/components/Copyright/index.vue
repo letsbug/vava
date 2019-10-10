@@ -5,10 +5,10 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../styles/variables";
+@import '../../styles/variables';
 
-$copyright-height:              $foot-line-height;
-$copyright-color:               $color-gray-600;
+$copyright-height: $foot-line-height;
+$copyright-color: $color-gray-600;
 
 .va-copyright {
   height: $copyright-height;

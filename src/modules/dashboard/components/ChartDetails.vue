@@ -1,16 +1,12 @@
 <template>
-  <div
-    :class="{ 'x2': isMobile && isChartMap }"
-    class="va-panels chart-detail-wrapper"
-    style="transition: none;"
-  ></div>
+  <div :class="{ x2: isMobile && isChartMap }" class="va-panels chart-detail-wrapper" style="transition: none;"></div>
 </template>
 
 <script>
-import mixins from './mixins'
-import echarts from 'echarts'
-import 'echarts/map/js/world'
-import Color from 'css-color-function'
+import mixins from './mixins';
+import echarts from 'echarts';
+import 'echarts/map/js/world';
+import Color from 'css-color-function';
 
 export default {
   mixins: [mixins],
@@ -22,50 +18,58 @@ export default {
   data() {
     return {
       chartTypeChanged: false
-    }
+    };
   },
   watch: {
     isChartMap() {
-      this.chartTypeChanged = true
+      this.chartTypeChanged = true;
     },
     themeColor() {
-      if (!this.chart) return
+      if (!this.chart) return;
 
-      const options = this.isChartMap ? {
-        visualMap: {
-          inRange: { color: [this.colorStart(), this.themeColor] }
-        },
-        series: [{}, {
-          itemStyle: { color: this.themeColor }
-        }]
-      } : {
-        color: [this.themeColor],
-        series: [{
-          areaStyle: { color: this.areaColor() }
-        }]
-      }
+      const options = this.isChartMap
+        ? {
+            visualMap: {
+              inRange: { color: [this.colorStart(), this.themeColor] }
+            },
+            series: [
+              {},
+              {
+                itemStyle: { color: this.themeColor }
+              }
+            ]
+          }
+        : {
+            color: [this.themeColor],
+            series: [
+              {
+                areaStyle: { color: this.areaColor() }
+              }
+            ]
+          };
 
-      this.chart.setOption(options)
+      this.chart.setOption(options);
     }
   },
   methods: {
     areaColor() {
-      return `${this.themeColor}30`
+      return `${this.themeColor}30`;
     },
     colorStart() {
-      return Color.convert(`color(${this.themeColor} tint(90%))`)
+      return Color.convert(`color(${this.themeColor} tint(90%))`);
     },
     optionsLine() {
       const grid = this.isMobile
         ? { top: 10, right: 0, bottom: 20, left: 0 }
-        : { top: 40, right: 40, bottom: 40, left: 60 }
+        : { top: 40, right: 40, bottom: 40, left: 60 };
 
       return {
         color: [this.themeColor],
         grid,
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'axis',
-          formatter: params => `${params[0].name}<br />${params[0].marker}${params[0].value}${(this.isPercent ? '%' : '')}`
+          formatter: params =>
+            `${params[0].name}<br />${params[0].marker}${params[0].value}${this.isPercent ? '%' : ''}`
         }),
         xAxis: {
           type: 'category',
@@ -92,42 +96,44 @@ export default {
         axisPointer: {
           lineStyle: { color: '#ced4da' }
         },
-        series: [{
-          data: this.chartData,
-          type: 'line',
-          sampling: 'average',
-          showSymbol: false,
-          smooth: true,
-          areaStyle: { color: this.areaColor() }
-        }]
-      }
+        series: [
+          {
+            data: this.chartData,
+            type: 'line',
+            sampling: 'average',
+            showSymbol: false,
+            smooth: true,
+            areaStyle: { color: this.areaColor() }
+          }
+        ]
+      };
     },
     optionsMap() {
-      const category = this.chartData.map(v => v.name).slice(0, 5)
+      const category = this.chartData.map(v => v.name).slice(0, 5);
 
-      const title = Object.assign({
-        text: 'TOP5 COUNTRIES FOR PV',
-        textStyle: { color: '#6a6d71', fontSize: 14 }
-      }, this.isMobile
-        ? { top: '45%', left: 'center' }
-        : { left: '65.6%', top: 20 }
-      )
-      const geo = Object.assign({
-        map: 'world',
-        itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' }
-      }, this.isMobile
-        ? { top: 0, right: 0, bottom: '60%', left: 0 }
-        : { top: 30, right: '40%', bottom: 30, left: 30 }
-      )
+      const title = Object.assign(
+        {
+          text: 'TOP5 COUNTRIES FOR PV',
+          textStyle: { color: '#6a6d71', fontSize: 14 }
+        },
+        this.isMobile ? { top: '45%', left: 'center' } : { left: '65.6%', top: 20 }
+      );
+      const geo = Object.assign(
+        {
+          map: 'world',
+          itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' }
+        },
+        this.isMobile ? { top: 0, right: 0, bottom: '60%', left: 0 } : { top: 30, right: '40%', bottom: 30, left: 30 }
+      );
       const grid = this.isMobile
         ? { top: '56%', right: 0, bottom: 0, left: 0 }
-        : { top: 66, right: 60, bottom: 6, left: '66%', z: 99 }
+        : { top: 66, right: 60, bottom: 6, left: '66%', z: 99 };
 
       return {
         title,
         tooltip: Object.assign({}, this.tooltip, {
           trigger: 'item',
-          formatter: params => params.data ? `${params.marker}${params.name}: ${params.value}` : undefined
+          formatter: params => (params.data ? `${params.marker}${params.name}: ${params.value}` : undefined)
         }),
         visualMap: {
           left: 'right',
@@ -174,19 +180,19 @@ export default {
             silent: true
           }
         ]
-      }
+      };
     },
     init() {
-      if (!this.chart) this.chart = echarts.init(this.$el)
+      if (!this.chart) this.chart = echarts.init(this.$el);
 
       if (this.chartTypeChanged) {
-        this.chart.clear()
-        this.chart.resize()
-        this.chartTypeChanged = false
+        this.chart.clear();
+        this.chart.resize();
+        this.chartTypeChanged = false;
       }
 
-      this.chart.setOption(this.isChartMap ? this.optionsMap() : this.optionsLine())
+      this.chart.setOption(this.isChartMap ? this.optionsMap() : this.optionsLine());
     }
   }
-}
+};
 </script>

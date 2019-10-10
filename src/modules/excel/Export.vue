@@ -2,7 +2,12 @@
   <div class="va-body-container">
     <el-form :model="exportOpts" inline size="medium">
       <el-form-item :label="$t('excelExport.filename')">
-        <el-input v-model="exportOpts.filename" :placeholder="filenameDefault" prefix-icon="el-icon-document" clearable />
+        <el-input
+          v-model="exportOpts.filename"
+          :placeholder="filenameDefault"
+          prefix-icon="el-icon-document"
+          clearable
+        />
       </el-form-item>
       <el-form-item :label="$t('excelExport.fileType')">
         <el-select v-model="exportOpts.type" value style="width: 100px;">
@@ -56,8 +61,8 @@
 </template>
 
 <script>
-import Contacts from '@/apis/contacts'
-import { Dater } from '@/tools'
+import Contacts from '@/apis/contacts';
+import { Dater } from '@/tools';
 
 export default {
   name: 'Export',
@@ -75,36 +80,37 @@ export default {
       list: null,
       loading: false,
       pages: { page: 1, size: 10, total: 0 }
-    }
+    };
   },
   created() {
-    this.getContacts()
+    this.getContacts();
   },
   methods: {
     handlePageChange(val) {
-      this.pages.page = val
-      this.getContacts()
+      this.pages.page = val;
+      this.getContacts();
     },
     handleSizeChange(val) {
-      this.pages.size = val
-      this.getContacts()
+      this.pages.size = val;
+      this.getContacts();
     },
     getContacts() {
-      this.loading = true
+      this.loading = true;
       Contacts.list(this.pages).then(res => {
-        this.loading = false
-        this.pages = res.pages
-        this.list = res.data
-      })
+        this.loading = false;
+        this.pages = res.pages;
+        this.list = res.data;
+      });
     },
     formatJson(props, json) {
-      return json.map(v => props.map(k => v[k]))
+      return json.map(v => props.map(k => v[k]));
     },
     handleExport(data) {
-      this.exportOpts.exporting = true
-      const _data = this.formatJson(this.exportOpts.exportProps, data)
+      this.exportOpts.exporting = true;
+      const _data = this.formatJson(this.exportOpts.exportProps, data);
 
-      setTimeout(() => { // Simulated elapsed time
+      setTimeout(() => {
+        // Simulated elapsed time
         import('@/vendor/ExportToExcel').then(Excel => {
           Excel.handleExport({
             header: this.exportOpts.tHeader,
@@ -112,23 +118,23 @@ export default {
             filename: this.exportOpts.filename || this.filenameDefault,
             autoWidth: this.exportOpts.cellAutoWidth,
             type: this.exportOpts.type
-          })
-          this.exportOpts.exporting = false
-        })
-      }, 500)
+          });
+          this.exportOpts.exporting = false;
+        });
+      }, 500);
     },
     handleExportAll() {
-      this.exportOpts.exporting = true
+      this.exportOpts.exporting = true;
       Contacts.all().then(res => {
-        this.handleExport(res)
-      })
+        this.handleExport(res);
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/_variables";
+@import '~@/styles/_variables';
 
 /deep/.el-form--inline .el-form-item {
   margin-right: 0;
@@ -138,7 +144,7 @@ export default {
   }
 
   .el-switch {
-    vertical-align: text-top
+    vertical-align: text-top;
   }
 
   .export-handler-loading {

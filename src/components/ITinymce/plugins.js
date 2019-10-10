@@ -1,7 +1,8 @@
-export const plugins = 'advlist anchor code codesample colorpicker charmap contextmenu' +
+export const plugins =
+  'advlist anchor code codesample colorpicker charmap contextmenu' +
   ' emoticons fullscreen hr image imagetools insertdatetime link lists media nonbreaking pagebreak paste' +
   ' preview searchreplace spellchecker tabfocus table textcolor textpattern toc visualblocks' +
-  ' visualchars wordcount help'
+  ' visualchars wordcount help';
 
 export const toolbar =
   'searchreplace | ' +
@@ -13,7 +14,7 @@ export const toolbar =
   'link image anchor emoticons | ' +
   'outdent indent removeformat | ' +
   'preview code | ' +
-  'fullscreen'
+  'fullscreen';
 
 export const content = `
 <p><img style="float: right;" src="https://www.tiny.cloud/images/glyph-tinymce@2x.png" alt="TinyMCE" height="150px" /></p>
@@ -29,4 +30,4 @@ export const content = `
 <p>These are just the start. TinyMCE is incredibly flexible, and with hundreds of APIs there's likely a solution for your editor project. If you haven't experienced Tiny Cloud, get started today. You'll even get a free trial of our premium plugins &ndash; no credit card required.</p>
 <h3>Tiny Drive now available</h3>
 <p>We're excited to announce <strong>Tiny Drive</strong>. File and asset management for TinyMCE, in the cloud, made super easy. Learn more at <a href="drive/">tiny.cloud/drive</a>, where you'll find a working demo and setup instructions.</p>
-`
+`;

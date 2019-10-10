@@ -57,6 +57,6 @@ const steps = [
       position: 'left'
     }
   }
-]
+];
 
-export default steps
+export default steps;

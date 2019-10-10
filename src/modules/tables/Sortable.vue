@@ -3,7 +3,7 @@
     <el-table
       v-loading="loading"
       :data="list"
-      :default-sort="{prop: 'display', order: 'descending'}"
+      :default-sort="{ prop: 'display', order: 'descending' }"
       tooltip-effect="theme"
       fit
       highlight-current-row
@@ -19,8 +19,12 @@
       <el-table-column label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable />
       <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable />
       <el-table-column
-        label="STATUS" prop="status" width="100" align="center"
-        sortable class-name="has-actions actions-small"
+        label="STATUS"
+        prop="status"
+        width="100"
+        align="center"
+        sortable
+        class-name="has-actions actions-small"
       >
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | articleStatus" size="small">
@@ -51,11 +55,11 @@
 </template>
 
 <script>
-import mixins from './mixins'
+import mixins from './mixins';
 
 export default {
   name: 'Sortable',
   metaInfo: { title: 'Sortable table' },
   mixins: [mixins]
-}
+};
 </script>
