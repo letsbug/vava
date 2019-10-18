@@ -1,10 +1,10 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators';
 import { apiNotificationList, apiNotificationRead, apiNotificationReadAll } from '@/apis/notification';
-import { ITypesNotification } from '@/apis/types';
+import { ITypeNotification } from '@/types';
 import store from '@/store';
 
 export interface IStateNotification {
-  list: ITypesNotification[];
+  list: ITypeNotification[];
   unread: number;
 }
 
@@ -14,7 +14,7 @@ class Notification extends VuexModule implements IStateNotification {
   // States
   //
 
-  public list: ITypesNotification[] = [];
+  public list: ITypeNotification[] = [];
   public unread: number = this.list.filter(v => v.isUnread).length;
 
   //
@@ -22,12 +22,12 @@ class Notification extends VuexModule implements IStateNotification {
   //
 
   @Mutation
-  private SET_LIST(list: ITypesNotification[]) {
+  private SET_LIST(list: ITypeNotification[]) {
     this.list = list;
   }
 
   @Mutation
-  private READ(notification: ITypesNotification) {
+  private READ(notification: ITypeNotification) {
     for (let n of this.list) {
       if (n.id === notification.id) {
         n.isUnread = false;
@@ -53,7 +53,7 @@ class Notification extends VuexModule implements IStateNotification {
   }
 
   @Action
-  public Read(notification: ITypesNotification) {
+  public Read(notification: ITypeNotification) {
     this.READ(notification);
   }
 

@@ -1,73 +1,85 @@
-const chokidar = require('chokidar');
-const bodyParser = require('body-parser');
-const chalk = require('chalk');
-const path = require('path');
+import express from 'express';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import morgan from 'morgan';
+import cors from 'cors';
+import http from 'http';
+import path from 'path';
+import yaml from 'yamljs';
+import * as apis from './apis';
+import { accessTokenAuth } from './security';
 
-const mockDir = path.join(process.cwd(), 'mock');
+const app = express();
+const port = 9091;
+const { connector, summarise } = require('swagger-routes-express');
 
-function registerRoutes(app) {
-  let mockLastIndex;
-  const { default: mocks } = require('./index');
+// Compression
+app.use(compression());
+// Logger
+app.use(morgan('dev'));
+// Enable CORS
+app.use(cors());
+// POST, PUT, DELETE body parser
+app.use(bodyParser.json({ limit: '20mb' }));
+app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
+// No cache
+app.use((req, res, next) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Pragma', 'no-cache');
+  res.header('Expires', '-1');
+  next();
+});
 
-  for (const mock of mocks) {
-    app[mock.type](mock.url, mock.response);
-    mockLastIndex = app._router.stack.length;
+// Read and swagger config file
+const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger.yml'));
+// Create mock functions based on swaggerConfig
+const options = {
+  security: {
+    AccessTokenAuth: accessTokenAuth
   }
-  const mockRoutesLength = Object.keys(mocks).length;
-  return {
-    mockRoutesLength: mockRoutesLength,
-    mockStartIndex: mockLastIndex - mockRoutesLength
-  };
-}
-
-function unregisterRoutes() {
-  Object.keys(require.cache).forEach(i => {
-    if (i.includes(mockDir)) {
-      delete require.cache[require.resolve(i)];
-    }
-  });
-}
-
-module.exports = (app: any) => {
-  // es6 polyfill
-  require('@babel/register');
-
-  // parse app.body
-  // https://expressjs.com/en/4x/api.html#req.body
-  app.use(bodyParser.json());
-  app.use(
-    bodyParser.urlencoded({
-      extended: true
-    })
-  );
-
-  const mockRoutes = registerRoutes(app);
-  let mockRoutesLength = mockRoutes.mockRoutesLength;
-  let mockStartIndex = mockRoutes.mockStartIndex;
-
-  // watch files, hot reload mock server
-  chokidar
-    .watch(mockDir, {
-      ignored: /mock-server/,
-      ignoreInitial: true
-    })
-    .on('all', (event, path) => {
-      if (event === 'change' || event === 'add') {
-        try {
-          // remove mock routes stack
-          app._router.stack.splice(mockStartIndex, mockRoutesLength);
-
-          // clear routes cache
-          unregisterRoutes();
-
-          const mockRoutes = registerRoutes(app);
-          mockRoutesLength = mockRoutes.mockRoutesLength;
-          mockStartIndex = mockRoutes.mockStartIndex;
-
-          console.log(chalk.magentaBright(`\n > Mock Server hot reload success! changed  ${path}`));
-        } catch (error) {
-          console.log(chalk.redBright(error));
-        }
-      }
-    });
 };
+
+const connectSwagger = connector(apis, apiDefinition, options);
+connectSwagger(app);
+
+// Print swagger router api summary
+const apiSummary = summarise(apiDefinition);
+console.log(apiSummary);
+
+// Catch 404 error
+app.use((req, res) => {
+  const err = new Error('Not Found');
+  res.status(404).json({
+    message: err.message,
+    error: err
+  });
+});
+
+// Create HTTP server.
+const server = http.createServer(app);
+
+// Listen on provided port, on all network interfaces.
+server.listen(port);
+server.on('error', onError);
+console.log('Mock server started on port ' + port + '!');
+
+// Event listener for HTTP server "error" event.
+function onError(error: any) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error('Express ERROR (app) : %s requires elevated privileges', bind);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error('Express ERROR (app) : %s is already in use', bind);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}

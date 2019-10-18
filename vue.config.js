@@ -4,35 +4,34 @@ const path = require('path');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const metas = require('./build/metas');
 const settings = require('./build/settings');
-// const mockServer = require('./mock/mock-server');
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
 const name = settings.title;
-const port = 9090;
+const devServerPort = 9090;
+const mockServerPort = 9091;
 
 module.exports = {
   publicPath: './',
   outputDir: 'dist',
-  assetsDir: 'static',
+  assetsDir: 'assets',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port,
+    port: devServerPort,
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
-        target: `http://127.0.0.1:${port}/mock`,
+        target: `http://127.0.0.1:${mockServerPort}/mock`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       }
-    } /*,
-    after: mockServer*/
+    }
   },
   configureWebpack(config) {
     // console.log(config)

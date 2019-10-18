@@ -7,6 +7,8 @@ export const statusMap: { [key: string]: string } = {
   400: '请求非法，请联系系统管理员！',
   401: '您的登录已过期，请重新登录！',
   403: '拒绝访问，您没有相应权限！',
+  430: '登录失败，未知用户名！',
+  431: '登录失败，密码错误！',
   500: '服务器异常，请稍后再试！',
   502: '服务器内部错误，请联系系统管理员！'
 };
@@ -55,7 +57,7 @@ const Request = Axios.create({
 Request.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     if (IStoreUser.token) {
-      config.headers['X-Token'] = getUserToken();
+      config.headers['X-Access-Token'] = getUserToken();
     }
     return config;
   },

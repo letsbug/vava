@@ -1,43 +1,57 @@
-const statusList: { [key: string]: any } = {
-  2000: {
-    status: 2000,
+import { Response } from 'express';
+
+export interface IResponseType {
+  status: number;
+  success: boolean;
+  message: string;
+  data?: any;
+  page?: any;
+}
+
+export interface IResponseStatus {
+  STATUS_SUCCESS: IResponseType;
+  STATUS_WRONG_USER: IResponseType;
+  STATUS_TOKEN_INVALID: IResponseType;
+  STATUS_UNKNOWN_ERROR: IResponseType;
+  STATUS_WRONG_PARAMS: IResponseType;
+  STATUS_EXISTS: IResponseType;
+  STATUS_NOT_FIND: IResponseType;
+}
+
+export const IResponses: IResponseStatus = {
+  STATUS_SUCCESS: {
+    status: 200,
     success: true,
     message: 'Success'
   },
-  4000: {
-    status: 4000,
+  STATUS_WRONG_USER: {
+    status: 400,
     success: false,
     message: 'Account and password are incorrect.'
   },
-  4001: {
-    status: 4001,
+  STATUS_TOKEN_INVALID: {
+    status: 401,
     success: false,
-    message: 'Login failed, unable to get user details.'
+    message: 'Invalid Access Token.'
   },
-  5000: {
-    status: 5000,
+  STATUS_UNKNOWN_ERROR: {
+    status: 500,
     success: false,
     message: 'Unknown error on server.'
   },
-  5001: {
-    status: 5001,
+  STATUS_WRONG_PARAMS: {
+    status: 501,
     success: false,
     message: 'Missing the necessary fields.'
   },
-  5002: {
-    status: 5002,
+  STATUS_EXISTS: {
+    status: 502,
     success: false,
     message: 'The data you want to add already exists.'
   },
-  5003: {
-    status: 5003,
+  STATUS_NOT_FIND: {
+    status: 503,
     success: false,
     message: 'The data you want to modify does not exist.'
   }
 };
-
-export function generateResponse(status = 2000, data = null, pages = null) {
-  const obj = statusList[status];
-
-  return data ? Object.assign({}, obj, { data, pages }) : obj;
-}
