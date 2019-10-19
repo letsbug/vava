@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  description: Mock API for vue-typescript-admin-template.
+  description: Mock API for vava.
   version: 1.0.0
   title: Mock API
   contact:
@@ -9,16 +9,16 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
 servers:
-  - url: /mock-api/v1
+  - url: /mock-api
 tags:
+  - name: users
+    description: Users related api.
   - name: articles
     description: Articles data related api.
   - name: roles
     description: Roles related api.
   - name: transactions
     description: Transactions data related api.
-  - name: users
-    description: Users related api.
 paths:
   /articles:
     get:
@@ -782,9 +782,9 @@ components:
           items:
             type: string
             enum:
-              - a-platform
-              - b-platform
-              - c-platform
+              - platform-a
+              - platform-b
+              - platform-b
           uniqueItems: true
         disableComment:
           type: boolean
@@ -798,10 +798,10 @@ components:
             - 3
         author:
           type: string
-          example: Chong Guo
+          example: San Zhang
         reviewer:
           type: string
-          example: Chong Guo
+          example: San Zhang
         type:
           type: string
           enum:
@@ -845,7 +845,7 @@ components:
           $ref: '#/components/schemas/Timestamp'
         username:
           type: string
-          example: Chong Guo
+          example: San Zhang
         price:
           type: number
           format: double
@@ -886,16 +886,16 @@ components:
           format: int64
         username:
           type: string
-          example: Armour
+          example: John
         password:
           type: string
-          example: 12345678
+          example: a12345678
         name:
           type: string
-          example: Chong Guo
+          example: San Zhang
         email:
           type: string
-          example: armourcy@gmail.com
+          example: example@gmail.com
         phone:
           type: string
           example: 18888888888
@@ -921,5 +921,5 @@ components:
         example: 1559605283
       - type: string
         format: date-time
-        example: 2017-07-21T17:32:28Z
+        example: 2019-10-19T17:32:28Z
     AnyValue: {}

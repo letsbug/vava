@@ -1,7 +1,7 @@
 import faker from 'faker';
 import { Response, Request } from 'express';
 import { IResponses } from '../response';
-import { ITypeNotification } from '../../src/types';
+import { ITypeNotification } from '@/apis/types';
 
 const notifications: ITypeNotification[] = [];
 const total = 40;

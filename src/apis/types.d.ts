@@ -33,6 +33,17 @@ export interface ITypeUser {
   intro?: string;
 }
 
+export interface ITypeChartData {
+  key: string;
+  value: number | string;
+}
+
+export interface ITypeStatistics {
+  pv: any;
+  uv: any;
+  cvr: any;
+}
+
 export interface ITypeNotification {
   id: string | number;
   title: string;

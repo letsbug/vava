@@ -1,6 +1,6 @@
-import Service from '@/utils/request';
+import Request from '@/utils/request';
 
-export const pv = (start: string | number, end?: string | number) => {
+export const getPaveViews = (start?: string | number, end?: string | number) => {
   const params = { start, end };
-  return Service.post('/statistics/pv', params);
+  return Request.post('/statistics/pv', params);
 };

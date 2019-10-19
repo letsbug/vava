@@ -1,11 +1,9 @@
 import faker from 'faker';
 import { Request, Response } from 'express';
 import { IResponses } from '../response';
-import { ITypePaintedFace } from '../../src/types';
-import { userList } from './users';
+import { ITypePaintedFace } from '@/apis/types';
 
-const editor = userList.find(v => v.roles.includes('Editor'))!.nickname;
-
+const editor = 'Tom';
 const now = new Date();
 now.setDate(now.getDate() - 1);
 

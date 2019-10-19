@@ -57,18 +57,12 @@ app.use((req, res) => {
 
 // Create HTTP server.
 const server = http.createServer(app);
-
-// Listen on provided port, on all network interfaces.
-server.listen(port);
-server.on('error', onError);
-console.log('Mock server started on port ' + port + '!');
-
 // Event listener for HTTP server "error" event.
 function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  const bind = 'Port ' + port;
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
@@ -83,3 +77,8 @@ function onError(error: any) {
       throw error;
   }
 }
+
+// Listen on provided port, on all network interfaces.
+server.listen(port);
+server.on('error', onError);
+console.log('Mock server started on port ' + port + '!');

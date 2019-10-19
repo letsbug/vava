@@ -1,6 +1,6 @@
 // 生成浏览量相关的数据
 
-import Dictionaries from '../dictionaries';
+import Dictionaries from './dictionaries';
 
 /**
  * 生成 uv 基础数据

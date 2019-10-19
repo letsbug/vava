@@ -1,7 +1,7 @@
 import faker from 'faker';
-import { Response, Request } from 'express';
+import { Request, Response } from 'express';
 import { IResponses } from '../response';
-import { ITypeUser, ITypeSex } from '../../src/types';
+import { ITypeUser } from '@/apis/types';
 
 export const userList: ITypeUser[] = [];
 const count = 20;
@@ -12,7 +12,6 @@ function generateUser(index: number) {
   const phone = faker.phone.phoneNumber();
   const nickname = faker.name.findName();
   const avatar = index < roles.length ? `./assets/img/avatars/${index}.gif` : undefined;
-  const sex = faker.random.arrayElement([0, 1]);
 
   return {
     id: index,
@@ -25,7 +24,7 @@ function generateUser(index: number) {
     email: faker.internet.email(),
     qq: faker.random.number({ min: 100000000, max: 20000000000 }),
     avatar,
-    sex: sex === 0 ? ITypeSex.female : ITypeSex.male, // 0: female, 1: male
+    sex: faker.random.arrayElement([0, 1]), // 0: female, 1: male
     intro: faker.lorem.sentence(6, 10)
   };
 }

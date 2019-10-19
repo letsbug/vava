@@ -14,7 +14,12 @@
     "types": [
       "node",
       "webpack-env"
-    ]
+    ],
+    "paths": {
+      "@/*": [
+        "../src/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",

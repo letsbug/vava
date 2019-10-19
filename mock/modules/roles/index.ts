@@ -1,4 +1,4 @@
-export const roles = ['admin', 'assigner', 'auditor', 'editor', 'visitor'];
+export const index = ['admin', 'assigner', 'auditor', 'editor', 'visitor'];
 
 export default [
   {
@@ -9,7 +9,7 @@ export default [
         status: 2000,
         success: true,
         message: 'success',
-        data: roles
+        data: index
       };
     }
   }

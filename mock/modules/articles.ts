@@ -1,19 +1,18 @@
 import faker from 'faker';
 import { Request, Response } from 'express';
 import { IResponses } from '../response';
-import { ITypeArticle } from '../../src/types';
-import { userList } from './users';
+import { ITypeArticle } from '@/apis/types';
 
 const articles: ITypeArticle[] = [];
 const total = 103;
-const editor = userList.find(v => v.roles.includes('Editor'));
-const auditor = userList.find(v => v.roles.includes('Auditor'));
+const editor = 'Tom';
+const auditor = 'John';
 
 const random = (index: number) => ({
-  id: '@increment',
+  id: index,
   timestamp: faker.date.past().getTime(),
-  author: editor!.nickname!,
-  auditor: auditor!.username,
+  author: editor,
+  auditor: auditor,
   title: faker.lorem.sentence(6, 10),
   summery: faker.lorem.sentences(2),
   content: '<p>' + faker.lorem.paragraphs(5) + '</p>',
@@ -27,7 +26,9 @@ for (let i = 0; i < total; i++) {
 }
 
 export const getArticles = (req: Request, res: Response) => {
-  const { title, page, limit } = req.query;
+  let { title, page, limit } = req.query;
+  page = page || 1;
+  limit = limit || 20;
 
   let list = articles.filter(v => {
     return !(title && !v.title.includes(title));

@@ -68,7 +68,7 @@
 import { ChartTabs, ChartDetails, ChartAges, TrafficAnalysis } from './components';
 import { Loading } from 'element-ui';
 
-import Statistics from '@/apis/statistics';
+import { getPaveViews } from '@/apis/statistics';
 
 export default {
   name: 'Dashboard',
@@ -129,7 +129,7 @@ export default {
         text: 'loading...',
         background: 'rgba(255, 255, 255, .5)'
       });
-      Statistics.pv().then(res => {
+      getPaveViews().then(res => {
         this.loadingInstance.close();
 
         if (!res.success) return;

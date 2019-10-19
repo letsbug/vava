@@ -1,5 +1,3 @@
-import { Response } from 'express';
-
 export interface IResponseType {
   status: number;
   success: boolean;
