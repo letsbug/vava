@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
+  title: Mock API
   description: Mock API for vava.
   version: 1.0.0
-  title: Mock API
   contact:
-    email: armourcy@email.com
+    email: xman724939995@email.com
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -17,8 +17,12 @@ tags:
     description: Articles data related api.
   - name: roles
     description: Roles related api.
-  - name: transactions
-    description: Transactions data related api.
+  - name: notification
+    description: Notifications data related api.
+  - name: statistics
+    description: Statistics data related api.
+  - name: painted-face
+    description: Painted face data related api.
 paths:
   /articles:
     get:
@@ -94,7 +98,7 @@ paths:
       description: Create a new article.
       operationId: createArticle
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: article
           in: query
@@ -128,7 +132,7 @@ paths:
       description: Get article detail by ID.
       operationId: getArticle
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: id
           in: path
@@ -164,7 +168,7 @@ paths:
       description: Update article deatail by ID.
       operationId: updateArticle
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: id
           in: path
@@ -206,7 +210,7 @@ paths:
       description: Delete article by ID.
       operationId: deleteArticle
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: id
           in: path
@@ -236,7 +240,7 @@ paths:
         - articles
       summary: Get Pageviews Data
       description: Return a list of pageviews for each platforms.
-      operationId: getPageviews
+      operationId: getPageViews
       responses:
         200:
           description: OK
@@ -255,13 +259,13 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Pageviews'
-  /transactions:
+  /notifications:
     get:
       tags:
-        - transactions
-      summary: Get Transaction List
-      description: Return a list of transaction.
-      operationId: getTransactions
+        - notifications
+      summary: Get Notifications List
+      description: Return a list of notification.
+      operationId: getNotifications
       responses:
         200:
           description: OK
@@ -282,7 +286,85 @@ paths:
                       items:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Transaction'
+                          $ref: '#/components/schemas/Notifications'
+    put:
+      tags:
+        - notifications
+      summary: Read all notifications
+      description: Mark all notifications as readed
+      operationId: notificationReadAll
+      response:
+        200:
+          descriptions: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      message:
+                        type: string
+                        example: success
+  /notifications/{id}:
+    get:
+      tags:
+        - notifications
+      summary: Get notification detail
+      description: Get notification details by ID
+      operationId: getNotification
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Article id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Article'
+  /notifications/count:
+    get:
+      tags:
+        - notifications
+      summary: Get notifications unread total
+      description: Return a number of unread total
+      operationId: getNotificationsUnreadCount
+      response:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: integer
+                    format: int32
   /roles:
     get:
       tags:
@@ -318,7 +400,7 @@ paths:
       description: Create a new role.
       operationId: createRole
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: role
           in: query
@@ -353,7 +435,7 @@ paths:
       description: Update role deatail by ID.
       operationId: updateRole
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: id
           in: path
@@ -395,7 +477,7 @@ paths:
       description: Delete role by ID.
       operationId: deleteRole
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: id
           in: path
@@ -450,7 +532,7 @@ paths:
       description: Return a list of users
       operationId: getUsers
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: name
           in: query
@@ -578,7 +660,7 @@ paths:
       description: Get user by user name.
       operationId: getUserByName
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: username
           in: path
@@ -615,7 +697,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: updateUser
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: username
           in: path
@@ -658,7 +740,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       parameters:
         - name: username
           in: path
@@ -691,7 +773,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: getUserInfo
       security:
-        - AccessTokenAuth: []
+        - AuthAccessToken: []
       responses:
         200:
           description: OK
@@ -712,7 +794,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   securitySchemes:
-    AccessTokenAuth:
+    AuthAccessToken:
       type: apiKey
       in: header
       name: X-Access-Token

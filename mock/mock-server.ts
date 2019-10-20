@@ -7,7 +7,7 @@ import http from 'http';
 import path from 'path';
 import yaml from 'yamljs';
 import * as apis from './apis';
-import { accessTokenAuth } from './security';
+import { authAccessToken } from './security';
 
 const app = express();
 const port = 9091;
@@ -35,7 +35,7 @@ const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger.yml'));
 // Create mock functions based on swaggerConfig
 const options = {
   security: {
-    AccessTokenAuth: accessTokenAuth
+    AuthAccessToken: authAccessToken
   }
 };
 
