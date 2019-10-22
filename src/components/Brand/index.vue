@@ -37,20 +37,3 @@ export default class extends Vue {
   private hasLink!: boolean;
 }
 </script>
-
-<style scoped lang="scss">
-.app-brand {
-  display: inline-block;
-
-  .brand-logo,
-  .brand-title {
-    display: inline-block;
-  }
-
-  svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-  }
-}
-</style>

@@ -1,7 +1,7 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators';
 import { apiLogin, apiLogout, apiUserInfo } from '@/apis/account';
 import { getUserToken, removeUserToken, setUserToken } from '@/utils/cookies';
-import { SexType, ITypeUser } from '@/apis/types';
+import { ITypeSex, ITypeUser } from '@/apis/types';
 import { resetRouter } from '@/router';
 import store from '@/store';
 
@@ -18,7 +18,7 @@ class User extends VuexModule implements IStateUser {
   // States
   //
 
-  public id: string = '';
+  public id: string | number = '';
   public username: string = '';
   public password: string = '';
   public token?: string = '';
@@ -27,7 +27,7 @@ class User extends VuexModule implements IStateUser {
   public nickname?: string = '';
   public phone?: string = '';
   public avatar?: string = '';
-  public sex: SexType = SexType.male;
+  public sex: ITypeSex = ITypeSex.male;
   public age?: number = 0;
   public birthday?: Date | string | number = '';
   public height?: number = 0;

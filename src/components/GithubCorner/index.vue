@@ -23,6 +23,13 @@
   </a>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'GithubCorner' })
+export default class extends Vue {}
+</script>
+
 <style scoped lang="scss">
 @import '~@/styles/_variables';
 

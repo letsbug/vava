@@ -41,17 +41,3 @@ export default class extends Vue {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import '../../styles/variables';
-
-.va-breadcrumb {
-  a {
-    font-weight: normal;
-  }
-
-  .no-redirect {
-    color: $color-gray-500 !important;
-  }
-}
-</style>

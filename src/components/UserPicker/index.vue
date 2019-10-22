@@ -22,53 +22,40 @@
   </el-dialog>
 </template>
 
-<script>
-import Service from '@/apis/account';
+<script lang="ts">
+import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+import { IStateUser } from '@/store/modules/user';
+import { apiUserMocks } from '@/apis/account';
 
-export default {
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: null
+@Component({ name: 'UserPicker' })
+export default class extends Vue {
+  @Prop() visible: boolean = false;
+  @Prop() title: string | null = null;
+
+  dialogVisible: boolean = false;
+  list: any[] = [];
+
+  @Watch('visible')
+  onVisibleChange(v: boolean) {
+    if (this.list.length === 0) {
+      this.loadList();
     }
-  },
-  data() {
-    return {
-      dialogVisible: false,
-      list: []
-      // checkedIndex: -1
-    };
-  },
-  computed: {
-    user() {
-      return this.$store.state.user;
-    }
-  },
-  watch: {
-    visible(v) {
-      if (this.list.length === 0) {
-        this.loadList();
-      }
-      this.dialogVisible = v;
-    }
-  },
-  methods: {
-    async loadList() {
-      const { data } = await Service.mocks();
-      this.list = data;
-    },
-    handleChoose(user) {
-      this.$emit('on-change', user);
-    },
-    handleClose() {
-      this.$emit('update:visible', false);
-    }
+    this.dialogVisible = v;
   }
-};
+
+  async loadList() {
+    const { data } = await apiUserMocks();
+    this.list = data;
+  }
+
+  handleChoose(user: IStateUser) {
+    this.$emit('on-change', user);
+  }
+
+  handleClose() {
+    this.$emit('update:visible', false);
+  }
+}
 </script>
 
 <style scoped lang="scss">

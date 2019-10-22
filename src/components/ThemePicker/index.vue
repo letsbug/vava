@@ -34,39 +34,44 @@
   </el-popover>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      themeTool: null,
-      stylePresets: ['normally', 'light'],
-      colorPresets: ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'],
-      normal: { style: 'normally', color: '#28a745' },
-      styles: {}
-    };
-  },
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'ThemePicker' })
+export default class extends Vue {
+  themeTool: any = null;
+  stylePresets: string[] = ['normally', 'light'];
+  colorPresets: string[] = ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'];
+  normal = { style: 'normally', color: '#28a745' };
+  styles = {
+    color: '',
+    style: ''
+  };
+
   created() {
     this.themeTool = window.theme;
     this.styles = this.themeTool.get();
-  },
-  methods: {
-    onColorPickerChange(val) {
-      if (!val) this.styles.color = this.colorPresets[4];
-    },
-    handleSubmit() {
-      this.handleHideThemePicker();
-      this.themeTool.set(this.styles);
-    },
-    restoreDefault() {
-      this.styles = { ...this.normal };
-      this.handleHideThemePicker();
-      this.themeTool.set(this.styles);
-    },
-    handleHideThemePicker() {
-      document.documentElement.click();
-    }
   }
-};
+
+  onColorPickerChange(val: any) {
+    if (!val) this.styles.color = this.colorPresets[4];
+  }
+
+  handleSubmit() {
+    this.handleHideThemePicker();
+    this.themeTool.set(this.styles);
+  }
+
+  restoreDefault() {
+    this.styles = { ...this.normal };
+    this.handleHideThemePicker();
+    this.themeTool.set(this.styles);
+  }
+
+  handleHideThemePicker() {
+    document.documentElement.click();
+  }
+}
 </script>
 
 <style scoped lang="scss">

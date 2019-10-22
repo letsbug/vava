@@ -30,102 +30,97 @@
   </el-row>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Watch, Vue } from 'vue-property-decorator';
 import { histories } from '@/apis/paintedFace';
-import PaintedFace from '@/vendor/painted-face';
-import { dateFormat } from '@/tools/_dater';
+import IPaintedFace from '@/vendor/painted-face';
+import { parseDate } from '@/utils/datetime';
 
-export default {
-  name: 'PaintedFace',
-  data() {
-    return {
-      history: [],
-      compareResult: '',
-      colorMap: {
-        '-1': '#e4e7ed',
-        0: '#343a40',
-        1: '#dc4371',
-        2: '#dc9599',
-        3: '#dc4ab1',
-        4: '#bf6bdc',
-        5: '#b9a3fe',
-        6: '#8596fe',
-        7: '#489dfe',
-        8: '#1ecafe',
-        9: '#0cfecf',
-        10: '#07fe7c',
-        11: '#a0fe52',
-        12: '#ecfeb5',
-        13: '#fee439',
-        14: '#feb280',
-        15: '#fe7e46',
-        16: '#fe6c08'
-      },
-      selected: -1
-    };
-  },
-  computed: {
-    subtitle() {
-      return this.$i18n.locale === 'en'
-        ? 'Rich text document history version comparison tool'
-        : '富文本文档历史版本比对工具';
-    }
-  },
-  watch: {
-    selected() {
-      this.compare();
-    }
-  },
+@Component({ name: 'PaintedFace' })
+export default class extends Vue {
+  history: any[] = [];
+  compareResult: string = '';
+  colorMap: { [key: string]: string } = {
+    '-1': '#e4e7ed',
+    0: '#343a40',
+    1: '#dc4371',
+    2: '#dc9599',
+    3: '#dc4ab1',
+    4: '#bf6bdc',
+    5: '#b9a3fe',
+    6: '#8596fe',
+    7: '#489dfe',
+    8: '#1ecafe',
+    9: '#0cfecf',
+    10: '#07fe7c',
+    11: '#a0fe52',
+    12: '#ecfeb5',
+    13: '#fee439',
+    14: '#feb280',
+    15: '#fe7e46',
+    16: '#fe6c08'
+  };
+  selected: number = -1;
+
+  get subtitle() {
+    return this.$i18n.locale === 'en'
+      ? 'Rich text document history version comparison tool'
+      : '富文本文档历史版本比对工具';
+  }
+
+  @Watch('selected')
+  onSelectedChange() {
+    this.compare();
+  }
   async mounted() {
-    this.history = await histories();
+    this.history = (await histories()) as any;
 
     this.compare();
-  },
-  methods: {
-    generator(raw) {
-      const { fragment } = raw;
-      let { type } = raw;
-      type = type === '+' ? 'add' : type === '-' ? 'sub' : '';
-
-      if (type !== 'add' && type !== 'sub') {
-        return fragment;
-      }
-
-      const { mtime, user, version, lv } = raw;
-      let result = '<span class="version-marker"';
-      result += `oper-type="${type}" oper-time="${mtime}" oper-user="${user}" version="${version}" last-version="${lv}" style="`;
-      result += type === 'add' ? `background-color: ${this.colorMap[raw.version]}` : `text-decoration: line-through`;
-      result += `;">${raw.fragment}</span>`;
-
-      return result;
-    },
-    compare() {
-      const selected = this.selected;
-      if (selected === 0) {
-        return;
-      }
-
-      const history =
-        selected === -1
-          ? this.history
-          : this.history.filter(v => +v.version === selected || +v.version === selected - 1);
-
-      const paintedFace = new PaintedFace({
-        content: 'word',
-        initialVersion: 0
-      });
-      const compareResult = paintedFace.execute(history);
-      let result = '';
-
-      compareResult.forEach(str => {
-        result += this.generator(str);
-      });
-
-      this.compareResult = result;
-    },
-    dateFormat
   }
-};
+
+  generator(raw: any) {
+    const { fragment } = raw;
+    let { type } = raw;
+    type = type === '+' ? 'add' : type === '-' ? 'sub' : '';
+
+    if (type !== 'add' && type !== 'sub') {
+      return fragment;
+    }
+
+    const { mtime, user, version, lv } = raw;
+    let result = '<span class="version-marker"';
+    result += `oper-type="${type}" oper-time="${mtime}" oper-user="${user}" version="${version}" last-version="${lv}" style="`;
+    result += type === 'add' ? `background-color: ${this.colorMap[raw.version]}` : `text-decoration: line-through`;
+    result += `;">${raw.fragment}</span>`;
+
+    return result;
+  }
+
+  compare() {
+    const selected = this.selected;
+    if (selected === 0) {
+      return;
+    }
+
+    const history =
+      selected === -1 ? this.history : this.history.filter(v => +v.version === selected || +v.version === selected - 1);
+
+    const paintedFace = new IPaintedFace({
+      content: 'word',
+      initialVersion: 0
+    });
+    const compareResult = paintedFace.execute(history);
+    let result = '';
+
+    compareResult.forEach((str: any) => {
+      result += this.generator(str);
+    });
+
+    this.compareResult = result;
+  }
+
+  dateFormat = parseDate;
+}
 </script>
 
 <style scoped lang="scss">

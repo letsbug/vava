@@ -4,14 +4,9 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import '../../styles/variables';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 
-$copyright-height: $foot-line-height;
-$copyright-color: $color-gray-600;
-
-.va-copyright {
-  height: $copyright-height;
-  color: $copyright-color;
-}
-</style>
+@Component({ name: 'VaCopyright' })
+export default class extends Vue {}
+</script>

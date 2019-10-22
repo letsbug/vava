@@ -2,7 +2,7 @@
 
 const fields = {};
 
-const mergeRangeImpl = {
+const mergeRangeTypes = {
   '==': function(mergeResult, mergeIndex, compareResult, compareIndex) {
     const mergeRange = mergeResult[mergeIndex];
     const compareRange = compareResult.ranges[compareIndex];
@@ -287,7 +287,7 @@ class StringIndex {
   }
 }
 
-class PaintedFace {
+class IPaintedFace {
   /**
    * 大花脸：文档比对工具、历史操作痕迹查找
    *
@@ -471,7 +471,7 @@ class PaintedFace {
     }
 
     const method = mergeResult[mergeIndex].type + compareRange.type;
-    mergeRangeImpl[method].call(this, mergeResult, mergeIndex, compareResult, compareIndex);
+    mergeRangeTypes[method].call(this, mergeResult, mergeIndex, compareResult, compareIndex);
   }
 
   merge(mergeResult, compareResult) {
@@ -719,4 +719,4 @@ class PaintedFace {
   }
 }
 
-export default PaintedFace;
+export default IPaintedFace;
