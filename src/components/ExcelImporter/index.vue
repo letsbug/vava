@@ -40,118 +40,112 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import XLSX from 'xlsx';
+import { Input } from 'element-ui';
 
-export default {
-  props: {
-    // Allow import by drag and drop one file
-    enableDragDrop: { type: Boolean, default: false },
-    beforeImport: { type: Function, default: null },
-    onSuccess: { type: Function, default: null }
-  },
-  data() {
-    return {
-      working: false,
-      file: null,
-      excelData: {
-        header: null,
-        results: null
-      }
+@Component({ name: 'ExcelImporter' })
+export default class extends Vue {
+  // Allow import by drag and drop one file
+  @Prop() enableDragDrop: boolean = false;
+  @Prop() beforeImport: Function | null = null;
+  @Prop() onSuccess: Function | null = null;
+
+  working: boolean = false;
+  file: File | null = null;
+  excelData: { [key: string]: any } = {
+    header: null,
+    results: null
+  };
+
+  isExcel(file: File) {
+    return /\.(xlsx|xls|csv)$/.test(file.name);
+  }
+
+  getHeaderRow(sheet: { [key: string]: any }) {
+    const headers = [];
+    const range = XLSX.utils.decode_range(sheet['!ref']);
+    const R = range.s.r;
+    let C;
+    /* start in the first row */
+    for (C = range.s.c; C <= range.e.c; ++C) {
+      /* walk every column in the range */
+      const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })];
+      /* find the cell in the first row */
+      let hdr = 'UNKNOWN ' + C; // <-- replace with your desired default
+      if (cell && cell.t) hdr = XLSX.utils.format_cell(cell);
+      headers.push(hdr);
+    }
+    return headers;
+  }
+
+  generateData(header: any, results: any) {
+    this.excelData.header = header;
+    this.excelData.results = results;
+    this.onSuccess && this.onSuccess(this.excelData);
+  }
+
+  readerData(rawFile: File) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const data = (e.target as FileReader).result;
+      const workbook = XLSX.read(data, { type: 'array' });
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+      const header = this.getHeaderRow(worksheet);
+      const results = XLSX.utils.sheet_to_json(worksheet);
+      this.generateData(header, results);
+      this.working = false;
     };
-  },
-  methods: {
-    isExcel(file) {
-      return /\.(xlsx|xls|csv)$/.test(file.name);
-    },
-    getHeaderRow(sheet) {
-      const headers = [];
-      const range = XLSX.utils.decode_range(sheet['!ref']);
-      const R = range.s.r;
-      let C;
-      /* start in the first row */
-      for (C = range.s.c; C <= range.e.c; ++C) {
-        /* walk every column in the range */
-        const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })];
-        /* find the cell in the first row */
-        let hdr = 'UNKNOWN ' + C; // <-- replace with your desired default
-        if (cell && cell.t) hdr = XLSX.utils.format_cell(cell);
-        headers.push(hdr);
-      }
-      return headers;
-    },
-    generateData({ header, results }) {
-      this.excelData.header = header;
-      this.excelData.results = results;
-      this.onSuccess && this.onSuccess(this.excelData);
-    },
-    fixData(data) {
-      const w = 10240;
-      let o = '';
-      let l = 0;
-      for (; l < data.byteLength / w; ++l) {
-        o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
-      }
-      o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
-      return o;
-    },
-    readerData(rawFile) {
-      return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const data = e.target['result'];
-          const fixedData = this.fixData(data);
-          const workbook = XLSX.read(btoa(fixedData), { type: 'base64' });
-          const firstSheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[firstSheetName];
-          const header = this.getHeaderRow(worksheet);
-          const results = XLSX.utils.sheet_to_json(worksheet);
-          this.generateData({ header, results });
-          setTimeout(() => {
-            this.working = false;
-          }, 400);
-          resolve();
-        };
-        reader.readAsArrayBuffer(rawFile);
-      });
-    },
-    import(rawFile) {
-      this.working = true;
-      this.file = rawFile;
-      this.$refs['excelImportInput'].value = null; // fix can't select the same excel
+    reader.readAsArrayBuffer(rawFile);
+  }
 
-      if (!this.beforeImport) {
-        this.readerData(rawFile);
-        return;
-      }
-      const before = this.beforeImport(rawFile);
-      if (!before) this.working = false;
-      before && this.readerData(rawFile);
-    },
-    onDragOver(e) {
+  import(rawFile: File) {
+    this.working = true;
+    this.file = rawFile;
+    (this.$refs['excelImportInput'] as HTMLInputElement).value = ''; // fix can't select the same excel
+
+    if (!this.beforeImport) {
+      this.readerData(rawFile);
+      return;
+    }
+    const before = this.beforeImport(rawFile);
+    if (!before) this.working = false;
+    before && this.readerData(rawFile);
+  }
+
+  onDragOver(e: DragEvent) {
+    if (e.dataTransfer) {
       e.dataTransfer.dropEffect = 'copy';
-    },
-    handleDrop(e) {
-      const files = e.dataTransfer.files;
-      if (files.length !== 1) {
-        this.$message.error(this.$t('excelImport.errorExcess'));
-        return;
-      }
-
-      const file = files[0];
-      if (!this.isExcel(file)) {
-        this.$message.error(this.$t('excelImport.errorTypes'));
-        return;
-      }
-
-      this.import(file);
-    },
-    onInputFile(e) {
-      const file = e.target.files[0];
-      file && this.import(file);
     }
   }
-};
+
+  handleDrop(e: DragEvent) {
+    if (!e.dataTransfer) {
+      return;
+    }
+
+    const files = e.dataTransfer.files;
+    if (files.length !== 1) {
+      this.$message.error(this.$t('excelImport.errorExcess').toString());
+      return;
+    }
+
+    const file = files[0];
+    if (!this.isExcel(file)) {
+      this.$message.error(this.$t('excelImport.errorTypes').toString());
+      return;
+    }
+
+    this.import(file);
+  }
+
+  private onInputFile(e: MouseEvent) {
+    const files = (e.target as HTMLInputElement).files;
+    files && this.import(files[0]);
+  }
+}
 </script>
 
 <style scoped lang="scss">

@@ -19,11 +19,11 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
 @Component({ name: 'ContextMenu' })
 export default class extends Vue {
-  private visible: boolean = false;
-  private axis: any = {};
+  visible: boolean = false;
+  axis: any = {};
 
   @Prop({ required: true })
-  private options!: any[];
+  options!: any[];
 
   @Prop({ default: null })
   private target!: any;

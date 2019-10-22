@@ -6,3 +6,5 @@ declare module '*.vue' {
 declare module 'element-ui/lib/locale/lang/*';
 
 declare module 'highlight.js';
+
+declare module '@/vendor/painted-face';
