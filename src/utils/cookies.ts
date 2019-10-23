@@ -17,7 +17,7 @@ export const setUiSize = (size: string) => Cookies.set(UiSizeKey, size);
 
 export const getThemes = () => {
   const _: string | undefined = Cookies.get(ThemeKey);
-  return _ ? JSON.parse(_) : { type: 'normally', color: '#28a745' };
+  return _ ? JSON.parse(_) : {};
 };
 export const setThemes = (type: string, color: string) => Cookies.set(ThemeKey, JSON.stringify({ type, color }));
 

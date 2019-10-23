@@ -17,42 +17,30 @@
   </div>
 </template>
 
-<script>
-import { Highlight } from '@/directives';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 
-export default {
-  name: 'About',
-  metaInfo: {
-    title: 'About VAVA'
-  },
-  directives: { Highlight },
-  data() {
-    return {
-      features: [
-        { name: 'Login / Logout' },
-        { name: 'Permission Authentication', children: ['Page permission'] },
-        { name: 'Exceptions', children: ['500', '404', '403', '...'] },
-        {
-          name: 'Global Features',
-          children: [
-            'Sidebar & Responsive',
-            'I18n',
-            'Themes switch',
-            'Router history tabs',
-            'Svg sprite',
-            'Screen full'
-          ]
-        },
-        { name: 'Editor', children: ['Rich text editor'] },
-        { name: 'Excel', children: ['Export', 'Import'] },
-        { name: 'Table' },
-        { name: 'Dashboard' },
-        { name: 'Guide for novice users' },
-        { name: 'Clipboard' }
-      ]
-    };
-  }
-};
+@Component({ name: 'About' })
+export default class extends Vue {
+  // metaInfo: {
+  //   title: 'About VAVA'
+  // },
+  features: any[] = [
+    { name: 'Login / Logout' },
+    { name: 'Permission Authentication', children: ['Page permission'] },
+    { name: 'Exceptions', children: ['500', '404', '403', '...'] },
+    {
+      name: 'Global Features',
+      children: ['Sidebar & Responsive', 'I18n', 'Themes switch', 'Router history tabs', 'Svg sprite', 'Screen full']
+    },
+    { name: 'Editor', children: ['Rich text editor'] },
+    { name: 'Excel', children: ['Export', 'Import'] },
+    { name: 'Table' },
+    { name: 'Dashboard' },
+    { name: 'Guide for novice users' },
+    { name: 'Clipboard' }
+  ];
+}
 </script>
 
 <style scoped lang="scss">

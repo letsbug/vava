@@ -16,6 +16,11 @@ export enum DeviceType {
   Desktop
 }
 
+export interface IStateTheme {
+  type: string;
+  color: string;
+}
+
 export interface IStateSystem {
   device: DeviceType;
   size: string;
@@ -24,10 +29,7 @@ export interface IStateSystem {
     withoutAnimation: boolean;
   };
   language: string;
-  theme: {
-    type: string;
-    color: string;
-  };
+  theme: IStateTheme;
 }
 
 @Module({ dynamic: true, store, name: 'system' })
@@ -130,7 +132,8 @@ class System extends VuexModule implements IStateSystem {
   }
 
   @Action
-  public SetThemes(type: string, color: string) {
+  public SetThemes(themes: IStateTheme) {
+    const { type, color } = themes;
     this.SET_THEME(type, color);
   }
 }

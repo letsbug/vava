@@ -58,64 +58,65 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import { Brand, LanguagePicker, UserPicker, Copyright } from '@/components';
-import { validUsername, validPassword } from '@/tools/validators';
+import { validAccount, validPassword } from '@/utils/validators';
+import { Form } from 'element-ui';
+import { IStateUser } from '@/store/modules/user';
 
-export default {
-  name: 'Login',
-  metaInfo: { title: 'Sign in to Vava' },
-  components: { Brand, LanguagePicker, UserPicker, Copyright },
-  data() {
-    return {
-      form: { username: '', password: '', remember: false },
-      rules: {
-        username: [{ validator: this.validUsername, trigger: 'blur' }],
-        password: [{ validator: this.validPassword, trigger: 'blur' }]
-      },
-      loading: false,
-      password: true,
-      expires: 7,
-      userPickerVisible: false
-    };
-  },
+@Component({ name: 'Login', components: { Brand, LanguagePicker, UserPicker, Copyright } })
+export default class extends Vue {
+  // metaInfo: { title: 'Sign in to Vava' }
+  backdrop: HTMLElement | undefined;
+
+  form = { username: '', password: '', remember: false };
+  rules = {
+    username: [{ validator: validAccount, trigger: 'blur' }],
+    password: [{ validator: validPassword, trigger: 'blur' }]
+  };
+  loading = false;
+  password = true;
+  expires = 7;
+  userPickerVisible = false;
+
   mounted() {
-    this.backdrop = this.$refs['appBackDrop'];
+    this.backdrop = this.$refs['appBackDrop'] as HTMLElement;
     document.body.insertBefore(this.backdrop, document.getElementById('app'));
     import(`@/vendor/backdrops/0${Math.floor(Math.random() * 5) + 1}`);
-  },
-  destroyed() {
-    document.body.removeChild(this.backdrop);
-    this.loading = false;
-  },
-  methods: {
-    fillLoginForm(user) {
-      this.form.username = user.username;
-      this.form.password = 'a1234567';
-      this.userPickerVisible = false;
-      this.$refs['loginForm'].validate();
-    },
-    handleLogin() {
-      this.$refs['loginForm'].validate(v => {
-        if (!v) return false;
-        this.loading = true;
-        this.$store
-          .dispatch('user_login', this.form)
-          .then(() => {
-            // this.loading = false
-            this.$message.closeAll();
-            this.$router.push(this.$route.query['redirect'] || '/');
-          })
-          .catch(() => {
-            this.loading = false;
-          });
-        return true;
-      });
-    },
-    validUsername,
-    validPassword
   }
-};
+
+  destroyed() {
+    if (this.backdrop) {
+      document.body.removeChild(this.backdrop);
+    }
+    this.loading = false;
+  }
+
+  fillLoginForm(user: IStateUser) {
+    this.form.username = user.username;
+    this.form.password = 'a1234567';
+    this.userPickerVisible = false;
+    (this.$refs['loginForm'] as Form).validate();
+  }
+  handleLogin() {
+    (this.$refs['loginForm'] as Form).validate(v => {
+      if (!v) return false;
+      this.loading = true;
+      this.$store
+        .dispatch('user_login', this.form)
+        .then(() => {
+          // this.loading = false
+          (this.$message as any).closeAll();
+          this.$router.push((this.$route.query['redirect'] || '/') + '');
+        })
+        .catch(() => {
+          this.loading = false;
+        });
+      return true;
+    });
+  }
+}
 </script>
 
 <style scoped lang="scss">

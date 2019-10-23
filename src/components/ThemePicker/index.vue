@@ -3,7 +3,7 @@
     <template>
       <div class="theme-input">
         <h6>{{ $t('theme.themeStyle') }}</h6>
-        <el-radio-group v-model="styles.style" class="text-center">
+        <el-radio-group v-model="styles.type" class="text-center">
           <el-radio v-for="sty in stylePresets" :key="sty" :label="sty">{{ $t(`theme.styles.${sty}`) }}</el-radio>
         </el-radio-group>
       </div>
@@ -36,22 +36,15 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { IStateTheme } from '@/store/modules/system';
+import Theme from '@/themes';
 
 @Component({ name: 'ThemePicker' })
 export default class extends Vue {
-  themeTool: any = null;
   stylePresets: string[] = ['normally', 'light'];
   colorPresets: string[] = ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'];
-  normal = { style: 'normally', color: '#28a745' };
-  styles = {
-    color: '',
-    style: ''
-  };
 
-  created() {
-    this.themeTool = window.theme;
-    this.styles = this.themeTool.get();
-  }
+  styles: IStateTheme = Theme.themes;
 
   onColorPickerChange(val: any) {
     if (!val) this.styles.color = this.colorPresets[4];
@@ -59,13 +52,13 @@ export default class extends Vue {
 
   handleSubmit() {
     this.handleHideThemePicker();
-    this.themeTool.set(this.styles);
+    Theme.set(this.styles);
   }
 
   restoreDefault() {
-    this.styles = { ...this.normal };
+    this.styles = Theme.normal;
     this.handleHideThemePicker();
-    this.themeTool.set(this.styles);
+    Theme.set(this.styles);
   }
 
   handleHideThemePicker() {

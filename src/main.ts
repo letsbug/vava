@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { DirectiveOptions } from 'vue';
 
 import 'normalize.css';
 import Element from 'element-ui';
@@ -12,11 +12,9 @@ import '@/router/helper'; // router helper, user permission control.
 import i18n from '@/i18n';
 
 import '@/icons'; // load system svg icons by symbol.
-import '@/themes';
 
 import * as filters from '@/filters';
-// Inject global directives, or local calls, as needed.
-// import * as Directives from '@/directives'
+import * as Directives from '@/directives';
 
 // Baidu & Google analytics. According to the need to enable.
 // To use google analytics', perform npm install --save vue-analytics installation
@@ -39,9 +37,9 @@ Object.keys(filters).forEach(key => {
 });
 
 // Inject global directives, or local calls, as needed.
-// Object.keys(Directives).forEach(key => {
-//   Vue.directive(key, Directives[key])
-// })
+Object.keys(Directives).forEach(key => {
+  Vue.directive(key, (Directives as { [key: string]: DirectiveOptions })[key]);
+});
 
 // if (process.env.NODE_ENV === "production") {
 //   Vue.use(hmt, {
