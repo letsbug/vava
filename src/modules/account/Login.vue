@@ -83,7 +83,7 @@ export default class extends Vue {
   mounted() {
     this.backdrop = this.$refs['appBackDrop'] as HTMLElement;
     document.body.insertBefore(this.backdrop, document.getElementById('app'));
-    import(`@/vendor/backdrops/0${Math.floor(Math.random() * 5) + 1}`);
+    require(`@/vendor/backdrops/0${Math.floor(Math.random() * 5) + 1}`);
   }
 
   destroyed() {
