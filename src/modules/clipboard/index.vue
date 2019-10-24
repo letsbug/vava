@@ -14,28 +14,23 @@
   </div>
 </template>
 
-<script>
-import { clipboard } from '@/tools';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { handleClipboard } from '@/utils/clipboard';
 
-export default {
-  name: 'Clipboard',
-  data() {
-    return {
-      url: 'https://github.com/letsbug/vava',
-      timing: false
-    };
-  },
-  methods: {
-    clipboard,
-    onSuccess() {
-      this.timing = true;
+@Component({ name: 'Clipboard' })
+export default class extends Vue {
+  url: string = 'https://github.com/letsbug/vava';
+  timing: boolean = false;
+  clipboard = handleClipboard;
+  onSuccess() {
+    this.timing = true;
 
-      setTimeout(() => {
-        this.timing = false;
-      }, 3000);
-    }
+    setTimeout(() => {
+      this.timing = false;
+    }, 3000);
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

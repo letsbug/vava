@@ -38,14 +38,14 @@ class System extends VuexModule implements IStateSystem {
   // States
   //
 
-  public language = getLanguage();
-  public device = DeviceType.Desktop;
+  public language: string = getLanguage();
+  public device: DeviceType = DeviceType.Desktop;
   public sidebar = {
     opened: getSidebarStatus() !== 'closed',
     withoutAnimation: false
   };
-  public size = getUiSize();
-  public theme = getThemes();
+  public size: string = getUiSize();
+  public theme: IStateTheme = getThemes();
 
   //
   // Mutatoins

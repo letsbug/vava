@@ -5,18 +5,15 @@
   </div>
 </template>
 
-<script>
-import { Highlight } from '@/directives';
-export default {
-  name: 'Cache',
-  metaInfo: {
-    title: 'Cache'
-  },
-  directives: { Highlight },
-  data() {
-    return {
-      input: ''
-    };
-  }
-};
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'Cache' })
+export default class extends Vue {
+  // metaInfo: {
+  //   title: 'Cache'
+  // }
+
+  input: string = '';
+}
 </script>
