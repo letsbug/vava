@@ -21,24 +21,24 @@ const components: RouteConfig = {
       },
       component: () => import('@/modules/components/count-to.vue')
     },
-    {
-      path: 'rich-editor',
-      name: 'RichEditor',
-      meta: {
-        title: 'richText',
-        icon: 'thing-editor-tinymce'
-      },
-      component: () => import('@/modules/components/rich-editor.vue')
-    },
-    {
-      path: 'ck-editor',
-      name: 'CKEditor',
-      meta: {
-        title: 'ckEditor',
-        icon: 'thing-editor-tinymce'
-      },
-      component: () => import('@/modules/components/ckeditor.vue')
-    },
+    // {
+    //   path: 'rich-editor',
+    //   name: 'RichEditor',
+    //   meta: {
+    //     title: 'richText',
+    //     icon: 'thing-editor-tinymce'
+    //   },
+    //   component: () => import('@/modules/components/rich-editor.vue')
+    // },
+    // {
+    //   path: 'ck-editor',
+    //   name: 'CKEditor',
+    //   meta: {
+    //     title: 'ckEditor',
+    //     icon: 'thing-editor-tinymce'
+    //   },
+    //   component: () => import('@/modules/components/ckeditor.vue')
+    // },
     {
       path: 'painted-face',
       name: 'PaintedFace',

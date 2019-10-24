@@ -83,60 +83,48 @@
   </div>
 </template>
 
-<script>
-import { Highlight } from '@/directives';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import ICountTo from 'vue-count-to';
 
-export default {
-  name: 'CountTo',
-  metaInfo: {
-    title: 'CountTo'
-  },
-  directives: {
-    Highlight
-  },
-  components: {
-    ICountTo
-  },
-  data() {
-    return {
-      params: {
-        start: 0,
-        end: 12580,
-        duration: 2000,
-        decimals: 2,
-        decimal: '.',
-        separator: ',',
-        prefix: '$',
-        suffix: '',
-        easing: true
-      },
-      paramsOrigin: {}
-    };
-  },
+@Component({ name: 'CountTo', components: { ICountTo } })
+export default class extends Vue {
+  // metaInfo: { title: 'CountTo' },
+  params = {
+    start: 0,
+    end: 12580,
+    duration: 2000,
+    decimals: 2,
+    decimal: '.',
+    separator: ',',
+    prefix: '$',
+    suffix: '',
+    easing: true
+  };
+  paramsOrigin = {};
+
   created() {
     this.paramsOrigin = { ...this.params };
-  },
-  methods: {
-    handleSwap() {
-      const _temp = this.params.end;
-      this.params.end = this.params.start;
-      this.params.start = _temp;
-    },
-    handleStart() {
-      this.$refs['countToViewer'].reset();
-      this.$refs['countToViewer'].start(function() {
-        console.log('Clicked start button');
-      });
-    },
-    handlePauseResume() {
-      this.$refs['countToViewer'].pauseResume();
-    },
-    handleReset() {
-      this.$refs['countToViewer'].reset();
-    }
   }
-};
+
+  handleSwap() {
+    const _temp = this.params.end;
+    this.params.end = this.params.start;
+    this.params.start = _temp;
+  }
+  handleStart() {
+    (this.$refs['countToViewer'] as any).reset();
+    (this.$refs['countToViewer'] as any).start(function() {
+      console.log('Clicked start button');
+    });
+  }
+  handlePauseResume() {
+    (this.$refs['countToViewer'] as any).pauseResume();
+  }
+  handleReset() {
+    (this.$refs['countToViewer'] as any).reset();
+  }
+}
 </script>
 
 <style scoped lang="scss">

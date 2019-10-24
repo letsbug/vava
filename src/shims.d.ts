@@ -9,4 +9,6 @@ declare module 'element-ui/lib/locale/lang/*';
 
 declare module 'highlight.js';
 
+declare module 'vue-count-to';
+
 declare module '@/vendor/painted-face';
