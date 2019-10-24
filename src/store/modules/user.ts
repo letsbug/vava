@@ -112,6 +112,9 @@ class User extends VuexModule implements IStateUser {
     resetRouter();
     this.ClearToken();
   }
+
+  @Action
+  public async SwitchUser(token: string) {}
 }
 
 export const IStoreUser = getModule(User);

@@ -93,34 +93,34 @@
   </div>
 </template>
 
-<script>
-import mixins from './mixins';
-import Service from '@/apis/articles';
+<script lang="ts">
+import { Component } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import TableDemoMixins from './mixins';
+import { apiUpdate } from '@/apis/articles';
 
-export default {
-  name: 'InlineEdit',
-  metaInfo: { title: 'Editable Table' },
-  mixins: [mixins],
-  methods: {
-    handleEdit(row) {
-      row.submitting = true;
-      row.originalTitle = row.title;
-      Service.update({ id: row.id, title: row.title }).then(res => {
-        if (res.success) row.editing = false;
-        this.$message({
-          type: res.success ? 'success' : 'error',
-          message: res.success ? 'Modify successfully' : res.message,
-          center: true
-        });
-        row.submitting = false;
+@Component({ name: 'InlineEdit' })
+export default class extends mixins(TableDemoMixins) {
+  // metaInfo: { title: 'Editable Table' },
+  handleEdit(row: any) {
+    row.submitting = true;
+    row.originalTitle = row.title;
+    apiUpdate({ id: row.id, title: row.title }).then((res: any) => {
+      if (res.success) row.editing = false;
+      this.$message({
+        type: res.success ? 'success' : 'error',
+        message: res.success ? 'Modify successfully' : res.message,
+        center: true
       });
-    },
-    handleCancel(row) {
-      row.title = row.originalTitle;
-      row.editing = false;
-    }
+      row.submitting = false;
+    });
   }
-};
+
+  handleCancel(row: any) {
+    row.title = row.originalTitle;
+    row.editing = false;
+  }
+}
 </script>
 
 <style scoped lang="scss">

@@ -18,6 +18,7 @@ export default class extends Vue {
   protected loading: boolean = false;
   protected page: number = 1;
   protected limit: number = 20;
+  protected total: number = 0;
   protected list: any[] = [];
 
   get keyword() {

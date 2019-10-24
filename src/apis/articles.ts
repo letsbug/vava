@@ -14,7 +14,7 @@ export const apiUpdate = (params: any) => {
   return Service.post('/articles/update', params);
 };
 
-export const apiUpdates = (lst: any) => {
+export const apiUpdates = (lst: any[]) => {
   return Service.post('/articles/batch', lst);
 };
 

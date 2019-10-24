@@ -40,46 +40,47 @@
   </div>
 </template>
 
-<script>
-import mixins from './mixins';
-import Service from '@/apis/articles';
-import Sortable from 'sortablejs';
+<script lang="ts">
+import { Component } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import TableDemoMixins from './mixins';
+import { apiList } from '@/apis/articles';
+import Sortable, { SortableEvent } from 'sortablejs';
 
-export default {
-  name: 'Draggable',
-  metaInfo: { title: 'Draggable Table' },
-  mixins: [mixins],
-  methods: {
-    sortSetup() {
-      const el = document.querySelectorAll('.el-table__body-wrapper > table > tbody')[0];
-      Sortable.create(el, {
-        handle: '.handle-drag',
-        ghostClass: 'sortable-ghost',
-        animation: 70,
-        setData: dataTransfer => {
-          // to avoid Firefox bug
-          // Detail see : https://github.com/RubaXa/Sortable/issues/1012
-          dataTransfer.setData('Text', '');
-        },
-        onEnd: evt => {
-          const targetRow = this.list.splice(evt.oldIndex, 1)[0];
-          this.list.splice(evt.newIndex, 0, targetRow);
-        }
-      });
-    },
-    getList() {
-      this.loading = true;
-      Service.list(this.pages).then(res => {
-        this.list = res.data;
-        this.pages = res.pages;
-        this.$nextTick(() => {
-          this.sortSetup();
-        });
-        this.loading = false;
-      });
-    }
+@Component({ name: 'Draggable' })
+export default class extends mixins(TableDemoMixins) {
+  // metaInfo: { title: 'Draggable Table' }
+
+  sortSetup() {
+    const el = document.querySelectorAll('.el-table__body-wrapper > table > tbody')[0];
+    Sortable.create(el as HTMLElement, {
+      handle: '.handle-drag',
+      ghostClass: 'sortable-ghost',
+      animation: 70,
+      setData: dataTransfer => {
+        // to avoid Firefox bug
+        // Detail see : https://github.com/RubaXa/Sortable/issues/1012
+        dataTransfer.setData('Text', '');
+      },
+      onEnd: (evt: SortableEvent) => {
+        const targetRow = this.list.splice(evt.oldIndex!, 1)[0];
+        this.list.splice(evt.newIndex!, 0, targetRow);
+      }
+    });
   }
-};
+
+  getList() {
+    this.loading = true;
+    apiList(this.page, this.limit).then((res: any) => {
+      this.list = res.data;
+      // this.pages = res.pages;
+      this.$nextTick(() => {
+        this.sortSetup();
+      });
+      this.loading = false;
+    });
+  }
+}
 </script>
 
 <style scoped lang="scss">

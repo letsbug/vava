@@ -54,12 +54,13 @@
   </div>
 </template>
 
-<script>
-import mixins from './mixins';
+<script lang="ts">
+import { Component } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import TableDemoMixins from './mixins';
 
-export default {
-  name: 'Sortable',
-  metaInfo: { title: 'Sortable table' },
-  mixins: [mixins]
-};
+@Component({ name: 'Sortable' })
+export default class extends mixins(TableDemoMixins) {
+  // metaInfo: { title: 'Sortable table' }
+}
 </script>

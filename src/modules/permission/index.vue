@@ -2,11 +2,11 @@
   <div class="va-body-container">
     <div class="user-info">
       <div class="avatar">
-        <img :src="user.avatar" alt="" />
+        <img :src="avatar" alt="" />
       </div>
       <div class="attrs">
         <div class="username">
-          {{ user.username }}
+          {{ username }}
           <el-tooltip :content="$t('header.switchUser')">
             <va-icon icon="action-refresh" class="handle-user-change" @click.native="userPickerVisible = true" />
           </el-tooltip>
@@ -23,43 +23,43 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import { UserPicker } from '@/components';
+import { IStoreUser, IStateUser } from '@/store/modules/user';
 
-export default {
-  name: 'Admin',
-  components: { UserPicker },
-  data() {
-    return {
-      userPickerVisible: false
-    };
-  },
-  computed: {
-    user() {
-      return this.$store.state.user;
-    },
-    roles() {
-      const roles = [...this.user.roles];
-      return roles.map(v => this.$t(`roles.${v}`)).join('、');
-    },
-    allowRoles() {
-      const role = [...this.$route.meta.roles];
-      return role.map(v => this.$t(`roles.${v}`)).join(' & ');
-    }
-  },
-  methods: {
-    async onChooseUser(user) {
-      await this.$store.dispatch('user_switch', user.token);
+@Component({ name: 'Admin', components: { UserPicker } })
+export default class extends Vue {
+  userPickerVisible: boolean = false;
 
-      this.userPickerVisible = false;
-      this.$nextTick(() => {
-        this.$router.replace({
-          path: '/redirect' + this.$route.fullPath
-        });
-      });
-    }
+  get avatar() {
+    return IStoreUser.avatar;
   }
-};
+
+  get username() {
+    return IStoreUser.username;
+  }
+
+  get roles() {
+    return IStoreUser.roles.map(v => this.$t(`roles.${v}`)).join('、');
+  }
+
+  get allowRoles() {
+    const role = [...this.$route.meta.roles];
+    return role.map(v => this.$t(`roles.${v}`)).join(' & ');
+  }
+
+  async onChooseUser(user: IStateUser) {
+    await IStoreUser.SwitchUser(user.token!);
+
+    this.userPickerVisible = false;
+    this.$nextTick(() => {
+      this.$router.replace({
+        path: '/redirect' + this.$route.fullPath
+      });
+    });
+  }
+}
 </script>
 
 <style scoped lang="scss">

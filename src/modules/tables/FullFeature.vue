@@ -102,9 +102,9 @@
     <el-pagination
       v-if="list && list.length > 0"
       :page-sizes="[10, 30, 50]"
-      :current-page="pages.page"
-      :page-size="pages.size"
-      :total="pages.total"
+      :current-page="page"
+      :page-size="limit"
+      :total="total"
       class="excel-pagination"
       background
       layout="total, sizes, prev, pager, next, jumper"
@@ -151,124 +151,123 @@
   </div>
 </template>
 
-<script>
-import mixins from './mixins';
-import Service from '@/apis/articles';
+<script lang="ts">
+import { Component } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import TableDemoMixins from './mixins';
+import { apiList, apiUpdates, apiAuditors } from '@/apis/articles';
+import { MessageType } from 'element-ui/types/message';
 
-export default {
-  name: 'FullFeature',
-  metaInfo: { title: 'Sortable table' },
-  mixins: [mixins],
-  data() {
-    return {
-      filterData: { title: '', status: '', level: '' },
-      statusMap: ['all', 'draft', 'committed', 'failing', 'auditing', 'audited', 'deleted'],
-      levelMap: ['all', 1, 2, 3, 4, 5],
-      selected: [],
-      dialogVisible: false,
-      auditors: [],
-      editForm: null
-    };
-  },
+@Component({ name: 'FullFeature' })
+export default class extends mixins(TableDemoMixins) {
+  // metaInfo: { title: 'Sortable table' }
+
+  filterData = { title: '', status: 0, level: 0 };
+  statusMap = ['all', 'draft', 'committed', 'failing', 'auditing', 'audited', 'deleted'];
+  levelMap = ['all', 1, 2, 3, 4, 5];
+  selected: any[] = [];
+  dialogVisible = false;
+  auditors = [];
+  editForm: any = null;
+
   created() {
     this.rebuildEditData();
-  },
+  }
+
   mounted() {
-    Service.auditors().then(res => {
-      this.auditors = res.data.map(v => {
+    apiAuditors().then(res => {
+      this.auditors = res.data.map((v: any) => {
         this.$set(v, 'value', v.username);
         return v;
       });
     });
-  },
-  methods: {
-    getList() {
-      this.loading = true;
-      const { page, size } = this.pages;
-      const { title, level, status } = this.filterData;
-      const params = { page, size, title, level, status };
-
-      Service.list(params).then(res => {
-        if (!res.success) return;
-        this.list = res.data.map(v => {
-          this.$set(v, 'editing', false);
-          this.$set(v, 'submitting', false);
-          this.$set(v, 'originalTitle', v.title);
-          return v;
-        });
-        this.pages = res.pages;
-        this.loading = false;
-      });
-    },
-    handleSelectionChange(val) {
-      this.selected = val;
-    },
-    rebuildEditData() {
-      this.editForm = {
-        isEdit: false,
-        author: this.$store.getters.user.username,
-        title: '',
-        summery: '',
-        content: '',
-        level: '',
-        auditor: ''
-      };
-    },
-    handleEdit(rowData) {
-      this.dialogVisible = true;
-      if (rowData) this.editForm = Object.assign({}, rowData);
-      else this.rebuildEditData();
-    },
-    inputQueryFilter(queryString) {
-      return restaurant => {
-        return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
-      };
-    },
-    inputQuerySearch(str, callback) {
-      const res = str ? this.auditors.filter(this.inputQueryFilter(str)) : this.auditors;
-      callback(res);
-    },
-    handleBatchUpdate(isAudit, rowData) {
-      const status = { status: isAudit ? 'audited' : 'deleted' };
-      let lst = [];
-      if (rowData) {
-        lst = [Object.assign({}, rowData, status)];
-      } else {
-        this.selected.forEach(v => {
-          lst.push(Object.assign({}, v, status));
-        });
-      }
-      const options = {
-        type: isAudit ? 'info' : 'warning',
-        confirmButtonText: 'Sure, Go Ahead',
-        cancelButtonText: 'Cancel',
-        callback: action => {
-          if (action === 'confirm') {
-            Service.updates(lst).then(res => {
-              this.$message({
-                center: true,
-                type: res.success ? 'success' : 'error',
-                message: `${isAudit ? 'Audit' : 'Delete'} executed ${res.success ? 'successfully' : 'failed'}.`
-              });
-              if (res.success) {
-                if (rowData) rowData.status = status.status;
-                else
-                  this.selected.forEach((v, i) => {
-                    this.selected[i].status = status.status;
-                  });
-              }
-            });
-          }
-        }
-      };
-      this.$confirm(
-        `Are you sure you want to ${isAudit ? 'audit' : 'delete'} ${lst.length > 1 ? 'these' : 'this'} data?`,
-        'Are you sure?',
-        options
-      );
-    }
   }
-};
+
+  getList() {
+    this.loading = true;
+    const { title, level, status } = this.filterData;
+
+    apiList(this.page, this.limit, title, level, status).then((res: any) => {
+      if (!res.success) return;
+      this.list = res.data.map((v: any) => {
+        this.$set(v, 'editing', false);
+        this.$set(v, 'submitting', false);
+        this.$set(v, 'originalTitle', v.title);
+        return v;
+      });
+      // this.pages = res.pages;
+      this.total = res.pages.total;
+      this.loading = false;
+    });
+  }
+  handleSelectionChange(val: any[]) {
+    this.selected = val;
+  }
+  rebuildEditData() {
+    this.editForm = {
+      isEdit: false,
+      author: this.$store.getters.user.username,
+      title: '',
+      summery: '',
+      content: '',
+      level: '',
+      auditor: ''
+    };
+  }
+  handleEdit(rowData: any) {
+    this.dialogVisible = true;
+    if (rowData) this.editForm = Object.assign({}, rowData);
+    else this.rebuildEditData();
+  }
+  inputQueryFilter(queryString: string) {
+    return (restaurant: any) => {
+      return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
+    };
+  }
+  inputQuerySearch(str: string, callback: Function) {
+    const res = str ? this.auditors.filter(this.inputQueryFilter(str)) : this.auditors;
+    callback(res);
+  }
+  handleBatchUpdate(isAudit: boolean, rowData: any) {
+    const status = { status: isAudit ? 'audited' : 'deleted' };
+    let lst: any[] = [];
+    if (rowData) {
+      lst = [Object.assign({}, rowData, status)];
+    } else {
+      this.selected.forEach(v => {
+        lst.push(Object.assign({}, v, status));
+      });
+    }
+    const options = {
+      type: (isAudit ? 'info' : 'warning') as MessageType,
+      confirmButtonText: 'Sure, Go Ahead',
+      cancelButtonText: 'Cancel',
+      callback: (action: string) => {
+        if (action === 'confirm') {
+          apiUpdates(lst).then((res: any) => {
+            this.$message({
+              center: true,
+              type: res.success ? 'success' : 'error',
+              message: `${isAudit ? 'Audit' : 'Delete'} executed ${res.success ? 'successfully' : 'failed'}.`
+            });
+            if (res.success) {
+              if (rowData) rowData.status = status.status;
+              else
+                this.selected.forEach((v, i) => {
+                  this.selected[i].status = status.status;
+                });
+            }
+          });
+        }
+      }
+    };
+    this.$confirm(
+      `Are you sure you want to ${isAudit ? 'audit' : 'delete'} ${lst.length > 1 ? 'these' : 'this'} data?`,
+      'Are you sure?',
+      options
+    );
+  }
+}
 </script>
 
 <style scoped lang="scss">
