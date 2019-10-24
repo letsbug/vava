@@ -10,6 +10,7 @@ import ECharts, { EChartOption } from 'echarts';
 import Color from 'css-color-function';
 import 'echarts/map/js/world';
 
+@Component({ name: 'ChartDetails' })
 export default class extends mixins(EChartsMixins) {
   @Prop({ required: true }) category!: Array<any>;
   @Prop({ required: true, default: false }) isPercent!: boolean;
@@ -188,7 +189,7 @@ export default class extends mixins(EChartsMixins) {
   }
 
   init() {
-    if (!this.chart) this.chart = echarts.init(this.$el as HTMLDivElement);
+    if (!this.chart) this.chart = ECharts.init(this.$el as HTMLDivElement);
 
     if (this.chartTypeChanged) {
       this.chart.clear();

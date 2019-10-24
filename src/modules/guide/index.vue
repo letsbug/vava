@@ -6,23 +6,17 @@
   </div>
 </template>
 
-<script>
-import { Highlight } from '@/directives';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import steps from './guideSteps';
 import Driver from 'driver.js';
 import 'driver.js/dist/driver.min.css';
-import steps from './guideSteps';
 
-export default {
-  name: 'Guide',
-  metaInfo: {
-    title: 'Guide'
-  },
-  directives: { Highlight },
-  data() {
-    return {
-      driver: null
-    };
-  },
+@Component({ name: 'Guide' })
+export default class extends Vue {
+  // metaInfo: { title: 'Guide' }
+  driver!: Driver;
+
   mounted() {
     this.driver = new Driver({
       opacity: 0.4,
@@ -30,12 +24,11 @@ export default {
       allowClose: false,
       overlayClickNext: true
     });
-  },
-  methods: {
-    start() {
-      this.driver.defineSteps(steps);
-      this.driver.start();
-    }
   }
-};
+
+  start() {
+    this.driver.defineSteps(steps);
+    this.driver.start();
+  }
+}
 </script>

@@ -6,34 +6,29 @@
       type="primary"
       plain
       class="exception-trigger"
-      @click="trigger(handler)"
+      @click="trigger(handler + '')"
     >
       {{ $t('exception.' + handler) }}
     </el-button>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Exception',
-  metaInfo: {
-    title: 'Exception'
-  },
-  data() {
-    return {
-      handlers: [401, 403, 404, 500]
-    };
-  },
-  methods: {
-    trigger(code) {
-      this.$router.push({
-        path: '/error',
-        replace: true,
-        query: { code: code }
-      });
-    }
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'Exception' })
+export default class extends Vue {
+  // metaInfo: { title: 'Exception' },
+  handlers: number[] = [401, 403, 404, 500];
+
+  trigger(code: string) {
+    this.$router.push({
+      path: '/error',
+      replace: true,
+      query: { code: code }
+    });
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

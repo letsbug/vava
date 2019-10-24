@@ -11,18 +11,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'GlobalSearch',
-  metaInfo() {
-    return {
-      title: `Search for "${this.keyword}"`
-    };
-  },
-  computed: {
-    keyword() {
-      return this.$route.params['keyword'];
-    }
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'GlobalSearch' })
+export default class extends Vue {
+  // metaInfo() {
+  //   return {
+  //     title: `Search for "${this.keyword}"`
+  //   };
+  // }
+
+  get keyword() {
+    return this.$route.params['keyword'];
   }
-};
+}
 </script>

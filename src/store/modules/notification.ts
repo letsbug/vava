@@ -1,6 +1,6 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators';
 import { apiNotificationList, apiNotificationRead, apiNotificationReadAll } from '@/apis/notification';
-import { ITypeNotification } from '@/types';
+import { ITypeNotification } from '@/apis/types';
 import store from '@/store';
 
 export interface IStateNotification {

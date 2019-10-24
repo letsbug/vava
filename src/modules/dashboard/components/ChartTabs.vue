@@ -29,101 +29,99 @@
   </div>
 </template>
 
-<script>
-import mixins from './mixins';
+<script lang="ts">
+import { Component, Prop, Watch } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import EChartsMixins from './mixins';
+import ECharts, { EChartOption } from 'echarts';
+import Color from 'css-color-function';
 import ICountTo from 'vue-count-to';
 import echarts from 'echarts';
 
-export default {
-  components: { ICountTo },
-  mixins: [mixins],
-  props: {
-    title: { type: String, required: true },
-    category: { type: Array, required: true },
-    total: { type: Number, required: false, default: undefined },
-    // Overwrite mixins
-    chartData: { type: Array, required: false, default: null },
-    dataType: { type: String, required: false, default: 'normal' },
-    prefix: { type: String, required: false, default: '' },
-    suffix: { type: String, required: false, default: '' },
-    decimals: { type: Number, required: false, default: 0 },
-    active: { type: Boolean, required: false, default: false }
-  },
-  data() {
+@Component({ name: 'ChartTabs', components: { ICountTo } })
+export default class extends mixins(EChartsMixins) {
+  @Prop({ required: true }) title!: string;
+  @Prop({ required: true }) category!: Array<any>;
+  @Prop({ default: null }) total!: number | null;
+  // Overwrite mixins
+  @Prop({ default: null }) chartData!: Array<any>;
+  @Prop({ default: 'normal' }) dataType!: string;
+  @Prop({ default: '' }) prefix!: string;
+  @Prop({ default: '' }) suffix!: string;
+  @Prop({ default: 0 }) decimals!: number;
+  @Prop({ default: false }) active!: boolean;
+
+  animateDuration: number = 1500;
+
+  get totalSpanClass() {
     return {
-      animateDuration: 1500
+      'text-primary': !this.chartData && !this.isMobile,
+      'null-data': !this.chartData && !this.isMobile,
+      'text-center': this.isMobile
     };
-  },
-  computed: {
-    totalSpanClass() {
-      return {
-        'text-primary': !this.chartData && !this.isMobile,
-        'null-data': !this.chartData && !this.isMobile,
-        'text-center': this.isMobile
-      };
-    }
-  },
-  watch: {
-    themeColor() {
-      if (!this.chart) return;
-      this.chart.setOption({
-        color: this.themeColor,
-        series: [
-          {
-            areaStyle: {
-              color: this.areaColor()
-            }
-          }
-        ]
-      });
-    }
-  },
-  methods: {
-    areaColor() {
-      return `${this.themeColor}30`;
-    },
-    init() {
-      if (this.isMobile) return;
-
-      if (!this.chart) this.chart = echarts.init(this.$refs['chartEl']);
-
-      this.chart.setOption({
-        color: [this.themeColor],
-        tooltip: {
-          show: false
-        },
-        grid: {
-          top: 12,
-          right: 7,
-          bottom: 7,
-          left: 7
-        },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: this.category,
-          show: false,
-          inverse: true
-        },
-        yAxis: {
-          type: 'value',
-          boundaryGap: false,
-          show: false
-        },
-        series: [
-          {
-            data: this.chartData,
-            type: 'line',
-            sampling: 'average',
-            showSymbol: false,
-            smooth: true,
-            areaStyle: { color: this.areaColor() }
-          }
-        ]
-      });
-    }
   }
-};
+
+  @Watch('themeColor')
+  onThemeColorChange() {
+    if (!this.chart) return;
+    const options = {
+      color: [this.themeColor],
+      series: [
+        {
+          areaStyle: {
+            color: this.areaColor()
+          }
+        }
+      ]
+    };
+    this.chart.setOption(options as EChartOption<EChartOption.SeriesLine>);
+  }
+
+  areaColor() {
+    return `${this.themeColor}30`;
+  }
+
+  init() {
+    if (this.isMobile) return;
+
+    if (!this.chart) this.chart = ECharts.init(this.$refs['chartEl'] as HTMLDivElement);
+
+    this.chart.setOption({
+      color: [this.themeColor],
+      tooltip: {
+        show: false
+      },
+      grid: {
+        top: 12,
+        right: 7,
+        bottom: 7,
+        left: 7
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: this.category,
+        show: false,
+        inverse: true
+      },
+      yAxis: {
+        type: 'value',
+        boundaryGap: false,
+        show: false
+      },
+      series: [
+        {
+          data: this.chartData,
+          type: 'line',
+          sampling: 'average',
+          showSymbol: false,
+          smooth: true,
+          areaStyle: { color: this.areaColor() }
+        }
+      ]
+    });
+  }
+}
 </script>
 
 <style scoped lang="scss">

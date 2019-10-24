@@ -36,25 +36,22 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    totalPv: { type: Number, required: true },
-    sources: { type: Array, required: true },
-    interviews: { type: Array, required: true }
-  },
-  data() {
-    return {
-      tabs: ['TOP6 SOURCE', 'TOP6 INTERVIEW'],
-      actives: 0
-    };
-  },
-  methods: {
-    calcRatio(val, total) {
-      return ((val / total) * 100).toFixed(2) + '%';
-    }
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'TrafficAnalysis' })
+export default class extends Vue {
+  @Prop({ required: true }) totalPv!: number;
+  @Prop({ required: true }) sources!: Array<any>;
+  @Prop({ required: true }) interviews!: Array<any>;
+
+  tabs: string[] = ['TOP6 SOURCE', 'TOP6 INTERVIEW'];
+  actives: number = 0;
+
+  calcRatio(val: number, total: number) {
+    return ((val / total) * 100).toFixed(2) + '%';
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

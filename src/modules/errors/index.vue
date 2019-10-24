@@ -5,38 +5,34 @@
     <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
     <h5>{{ $t(`errors.type${code}`) }}</h5>
     <p>
-      <a v-if="!noGoBack" href="/" class="linker" @click.prevent.stop="$router.go(-1)">
-        {{ $t('errors.actionBack') }}
-      </a>
-      <router-link class="linker" to="/">
-        {{ $t('errors.actionHome') }}
-      </router-link>
+      <a v-if="!noGoBack" href="/" class="linker" @click.prevent.stop="$router.go(-1)">{{ $t('errors.actionBack') }}</a>
+      <router-link class="linker" to="/">{{ $t('errors.actionHome') }}</router-link>
     </p>
     <copyright />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import { Copyright } from '@/components';
-export default {
-  name: 'Error',
-  components: { Copyright },
-  metaInfo: {
-    title: 'Oops! got an error!'
-  },
-  computed: {
-    code() {
-      return this.$route.query['code'] || 404;
-    },
-    flag() {
-      const random = Math.floor(Math.random() * 4 + 1);
-      return `./static/images/errors/err-${random}.gif`;
-    },
-    noGoBack() {
-      return this.$route.query['noGoBack'];
-    }
+
+@Component({ name: 'Error', components: { Copyright } })
+export default class extends Vue {
+  // metaInfo: { title: 'Oops! got an error!' },
+
+  get code() {
+    return this.$route.query['code'] || 404;
   }
-};
+
+  get flag() {
+    const random = Math.floor(Math.random() * 4 + 1);
+    return `./static/images/errors/err-${random}.gif`;
+  }
+
+  get noGoBack() {
+    return this.$route.query['noGoBack'];
+  }
+}
 </script>
 
 <style scoped lang="scss">
