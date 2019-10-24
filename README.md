@@ -70,6 +70,5 @@ npm run build --report
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/letsbug/vava/blob/master/LICENSE) file for details
 
 ## Acknowledgments
-* This project refers to [@PanJiaChen](https://github.com/PanJiaChen)'s [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 * Inspired by [Ant Design](https://preview.pro.ant.design/dashboard/analysis)
 * Design materials were collected from [unDraw](https://undraw.co/) and [iconfont](https://www.iconfont.cn/)
