@@ -63,7 +63,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Brand, LanguagePicker, UserPicker, Copyright } from '@/components';
 import { validAccount, validPassword } from '@/utils/validators';
 import { Form } from 'element-ui';
-import { IStateUser } from '@/store/modules/user';
+import { IStoreUser, IStateUser } from '@/store/modules/user';
 
 @Component({ name: 'Login', components: { Brand, LanguagePicker, UserPicker, Copyright } })
 export default class extends Vue {
@@ -95,24 +95,18 @@ export default class extends Vue {
 
   fillLoginForm(user: IStateUser) {
     this.form.username = user.username;
-    this.form.password = 'a1234567';
+    this.form.password = user.password;
     this.userPickerVisible = false;
     (this.$refs['loginForm'] as Form).validate();
   }
   handleLogin() {
-    (this.$refs['loginForm'] as Form).validate(v => {
+    (this.$refs['loginForm'] as Form).validate(async (v: boolean) => {
       if (!v) return false;
       this.loading = true;
-      this.$store
-        .dispatch('user_login', this.form)
-        .then(() => {
-          // this.loading = false
-          (this.$message as any).closeAll();
-          this.$router.push((this.$route.query['redirect'] || '/') + '');
-        })
-        .catch(() => {
-          this.loading = false;
-        });
+      await IStoreUser.Login(this.form);
+      (this.$message as any).closeAll();
+      this.$router.push((this.$route.query['redirect'] || '/') + '');
+      this.loading = false;
       return true;
     });
   }

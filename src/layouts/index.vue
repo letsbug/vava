@@ -16,8 +16,8 @@ import { Component, Vue, Watch } from 'vue-property-decorator';
 import VaSideMenu from './components/VaSideMenu/index.vue';
 import VaHeadBar from './components/VaHeadBar/index.vue';
 import VaTabsBar from './components/VaTabsBar/index.vue';
-import VaFootBar from './components/VaFootBar/index.vue';
-import VaMain from './components/VaMain/index.vue';
+import VaFootBar from './components/VaFootBar.vue';
+import VaMain from './components/VaMain.vue';
 import { DeviceType, IStoreSystem } from '@/store/modules/system';
 import { RouteConfig } from 'vue-router';
 

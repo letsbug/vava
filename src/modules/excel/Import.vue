@@ -15,43 +15,42 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { RouteConfig } from 'vue-router';
 import { ExcelImporter } from '@/components';
 
-export default {
-  name: 'Import',
-  components: { ExcelImporter },
-  data() {
-    return {
-      allowSizeMax: 1, // unit: MB
-      tableData: [],
-      tableHeader: []
-    };
-  },
-  methods: {
-    beforeImport(file) {
-      const allowSizeMax = this.allowSizeMax;
-      const isLtMax = file.size / 1024 / 1024 < allowSizeMax;
+@Component({ name: 'Import', components: { ExcelImporter } })
+export default class extends Vue {
+  allowSizeMax = 1; // unit: MB
+  tableData: any[] = [];
+  tableHeader: any[] = [];
 
-      if (!isLtMax) this.$message.warning(this.$t('excelImport.errorSize', { allowSizeMax }));
-
-      return isLtMax;
-    },
-    onSuccess({ results, header }) {
-      this.tableData = results;
-      this.tableHeader = header;
-    }
-  },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave(to: RouteConfig, _: RouteConfig, next: Function) {
     const tableData = this.tableData;
     if (tableData && tableData.length > 0) {
-      this.$confirm(this.$t('excelImport.exitHint'), this.$t('options.confirm.title'), {
+      this.$confirm(this.$t('excelImport.exitHint') as string, this.$t('options.confirm.title') as string, {
         type: 'warning',
-        callback: action => action === 'confirm' && next()
+        callback: (action: string) => action === 'confirm' && next()
       });
     } else next();
   }
-};
+
+  beforeImport(file: File) {
+    const allowSizeMax = this.allowSizeMax;
+    const isLtMax = file.size / 1024 / 1024 < allowSizeMax;
+
+    if (!isLtMax) this.$message.warning(this.$t('excelImport.errorSize', { allowSizeMax }) as string);
+
+    return isLtMax;
+  }
+
+  onSuccess(data: { results: any[]; header: any[] }) {
+    const { results, header } = data;
+    this.tableData = results;
+    this.tableHeader = header;
+  }
+}
 </script>
 
 <style scoped lang="scss">

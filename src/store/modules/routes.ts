@@ -1,12 +1,13 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators';
 import { constantRoutes, asyncRoutes } from '@/router/routes';
 import { RouteConfig } from 'vue-router';
+import { ITypeRoles } from '@/store/modules/user';
 import store from '@/store';
 
-const hasPermission = (roles: string[], route: RouteConfig) =>
+const hasPermission = (roles: ITypeRoles[], route: RouteConfig) =>
   route.meta && route.meta.roles ? roles.some(role => route.meta.roles.includes(role)) : true;
 
-const filterAsyncRoutes = (asyncRouteMap: RouteConfig[], roles: string[]) => {
+const filterAsyncRoutes = (asyncRouteMap: RouteConfig[], roles: ITypeRoles[]) => {
   const list: RouteConfig[] = [];
   asyncRouteMap.forEach(route => {
     const tmp = { ...route };
@@ -37,8 +38,8 @@ class Routes extends VuexModule implements IStateRoutes {
   }
 
   @Action
-  public GenerateRoutes(roles: string[]) {
-    const accessRoutes = roles.includes('systemAdmin') ? asyncRoutes : filterAsyncRoutes(asyncRoutes, roles);
+  public GenerateRoutes(roles: ITypeRoles[]) {
+    const accessRoutes = roles.includes(ITypeRoles.systemAdmin) ? asyncRoutes : filterAsyncRoutes(asyncRoutes, roles);
     this.SET_ROUTES(accessRoutes);
   }
 }

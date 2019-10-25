@@ -1,9 +1,9 @@
-import api from '@/utils/request';
+import Request from '@/utils/request';
 
-export const apiList = (pages: any) => {
-  return api.post('/contacts/list', pages);
+export const apiContactList = (pages: any) => {
+  return Request.post('/contacts/list', pages);
 };
 
-export const apiAll = () => {
-  return api.post('/contacts/all');
+export const apiContactAll = () => {
+  return Request.post('/contacts/all');
 };

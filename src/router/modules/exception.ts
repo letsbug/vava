@@ -11,7 +11,7 @@ const exceptions: RouteConfig = {
       path: '',
       name: 'Exception',
       meta: { title: 'exception', icon: 'mark-exception', nocache: true },
-      component: () => import('@/modules/exception.vue')
+      component: () => import('@/modules/exception/index.vue')
     }
   ]
 };

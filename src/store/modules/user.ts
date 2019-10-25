@@ -1,7 +1,6 @@
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators';
 import { apiLogin, apiLogout, apiUserInfo } from '@/apis/account';
 import { getUserToken, removeUserToken, setUserToken } from '@/utils/cookies';
-import { ITypeSex, ITypeUser } from '@/apis/types';
 import { resetRouter } from '@/router';
 import store from '@/store';
 
@@ -10,7 +9,42 @@ const TOKEN_EXPIRE =
     ? 1 / 24 // for dev
     : 1 / 24 / 6; // By default, it is stored in the cookie for 10 minutes.
 
-export interface IStateUser extends ITypeUser {}
+export enum ITypeSex {
+  female,
+  male
+}
+
+export enum ITypeRoles {
+  systemAdmin,
+  superAdmin,
+  accessManager,
+  userManager,
+  proManager,
+  auditor,
+  editor,
+  visitor
+}
+
+export interface IStateUser {
+  id: string | number;
+  username: string;
+  password: string;
+  token?: string;
+  expire?: number;
+  roles: ITypeRoles[];
+  nickname?: string;
+  phone?: string;
+  email?: string;
+  qq?: number;
+  company?: string;
+  avatar?: string;
+  sex: ITypeSex;
+  age?: number;
+  birthday?: Date | string | number;
+  height?: number;
+  weight?: number;
+  intro?: string;
+}
 
 @Module({ dynamic: true, store, name: 'user' })
 class User extends VuexModule implements IStateUser {
@@ -23,7 +57,7 @@ class User extends VuexModule implements IStateUser {
   public password: string = '';
   public token?: string = '';
   public expire: number = 7;
-  public roles: string[] = [];
+  public roles: ITypeRoles[] = [];
   public nickname?: string = '';
   public phone?: string = '';
   public avatar?: string = '';
@@ -44,7 +78,7 @@ class User extends VuexModule implements IStateUser {
   }
 
   @Mutation
-  private SET_ROLES(roles: string[]) {
+  private SET_ROLES(roles: ITypeRoles[]) {
     this.roles = roles;
   }
 
@@ -70,7 +104,8 @@ class User extends VuexModule implements IStateUser {
   //
 
   @Action
-  public async Login(username: string, password: string, remember?: boolean) {
+  public async Login(userInfo: { username: string; password: string; remember?: boolean }) {
+    let { username, password, remember } = userInfo;
     username = username.trim();
     const { data } = await apiLogin(username, password);
     setUserToken(data.accessToken, remember ? this.expire : 0);
@@ -82,7 +117,7 @@ class User extends VuexModule implements IStateUser {
     if (!this.token) {
       throw Error('GetUserInfo: can not get user information by unknown token.');
     }
-    const { data } = await apiUserInfo();
+    const { data } = (await apiUserInfo(this.username)) as any;
     if (!data) {
       throw Error('Token valid failed, please login again.');
     }
@@ -91,9 +126,9 @@ class User extends VuexModule implements IStateUser {
     if (!roles || roles.length < 1) {
       throw Error('Your account can not login.');
     }
-    this.SET_ROLES(roles);
+    this.SET_ROLES(roles as ITypeRoles[]);
 
-    this.SET_INFO(data);
+    this.SET_INFO(data as IStateUser);
   }
 
   @Action

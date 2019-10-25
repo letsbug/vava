@@ -2,21 +2,17 @@ import Request from '@/utils/request';
 
 export const apiLogin = (username: string, password: string) => {
   const data = { username, password };
-  return Request.post('/account/login', data);
+  return Request.post('/users/login', data);
 };
 
 export const apiLogout = () => {
-  return Request.post('/account/logout');
+  return Request.post('/users/logout');
 };
 
-export const apiUserInfo = () => {
-  return Request.get('/account/info');
+export const apiUserInfo = (username: string) => {
+  return Request.post('/users/info');
 };
 
 export const apiUserMocks = () => {
-  return Request.get('/account/mocks');
-};
-
-export const apiUserList = () => {
-  return Request.get('/account/list');
+  return Request.get('/users');
 };

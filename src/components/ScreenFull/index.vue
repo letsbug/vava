@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-import screenfull from 'screenfull';
+import screenfull, { Screenfull } from 'screenfull';
 import { Component, Vue } from 'vue-property-decorator';
 
-const sf = screenfull;
+const sf = screenfull as Screenfull;
 
 @Component({ name: 'ScreenFull' })
 export default class extends Vue {
-  private isFullScreen: boolean = false;
+  private isFullscreen: boolean = false;
 
   get supported() {
     const s = sf && sf.isEnabled;
@@ -30,11 +30,15 @@ export default class extends Vue {
     }
   }
 
-  beforeDestory() {}
+  beforeDestory() {
+    if (this.supported) {
+      sf.off('change', this.change);
+    }
+  }
 
   private change() {
     if (this.supported) {
-      this.isFullScreen = sf.isFullscreen;
+      this.isFullscreen = sf.isFullscreen;
     }
   }
 

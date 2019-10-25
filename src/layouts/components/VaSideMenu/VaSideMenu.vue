@@ -29,6 +29,8 @@ export default class extends Vue {
   get routes() {
     return IStoreRoutes.routes;
   }
+
+  generateTitle: Function = generateTitle;
 }
 </script>
 

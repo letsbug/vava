@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { UserPicker } from '@/components';
-import { IStoreUser } from '@/store/modules/user';
+import { IStoreUser, IStateUser } from '@/store/modules/user';
 
 @Component({ name: 'LayoutUserAction', components: { UserPicker } })
 export default class extends Vue {
@@ -51,7 +51,7 @@ export default class extends Vue {
   handleUserSwitch() {
     this.userPickerVisible = true;
   }
-  async onChooseUser(user) {
+  async onChooseUser(user: IStateUser) {
     await this.$store.dispatch('user_switch', user.token);
 
     this.userPickerVisible = false;
@@ -63,10 +63,14 @@ export default class extends Vue {
   }
   async handleLogout() {
     try {
-      const action = await this.$confirm(this.$t('header.logout.confirm'), this.$t('options.confirm.title'), {
-        type: 'warning',
-        confirmButtonText: this.$t('header.logout.button')
-      });
+      const action = await this.$confirm(
+        this.$t('header.logout.confirm') as string,
+        this.$t('options.confirm.title') as string,
+        {
+          type: 'warning',
+          confirmButtonText: this.$t('header.logout.button') as string
+        }
+      );
 
       if (action !== 'confirm') {
         return false;

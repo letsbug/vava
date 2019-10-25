@@ -60,77 +60,73 @@
   </div>
 </template>
 
-<script>
-import Contacts from '@/apis/contacts';
-import { Dater } from '@/tools';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { apiContactAll, apiContactList } from '@/apis/contacts';
+import { parseDate, parseTimeGap } from '@/utils/datetime';
+import { exportJson2Excel } from '@/vendor/export-excel';
 
-export default {
-  name: 'Export',
-  data() {
-    return {
-      filenameDefault: `xlsx-${Dater.format(new Date(), 'yyyy.MM.dd hh:mm')}`,
-      exportOpts: {
-        filename: '',
-        tHeader: ['NAME', 'ID CARD', 'CITY', 'ZIP', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY'],
-        exportProps: ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company'],
-        cellAutoWidth: false,
-        type: 'xlsx',
-        exporting: false
-      },
-      list: null,
-      loading: false,
-      pages: { page: 1, size: 10, total: 0 }
-    };
-  },
+@Component({ name: 'Export' })
+export default class extends Vue {
+  filenameDefault = `xlsx-${parseDate(new Date(), 'yyyy.MM.dd hh:mm')}`;
+  exportOpts = {
+    filename: '',
+    tHeader: ['NAME', 'ID CARD', 'CITY', 'ZIP', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY'],
+    exportProps: ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company'],
+    cellAutoWidth: false,
+    type: 'xlsx',
+    exporting: false
+  };
+  list = null;
+  loading = false;
+  pages = { page: 1, size: 10, total: 0 };
+
   created() {
     this.getContacts();
-  },
-  methods: {
-    handlePageChange(val) {
-      this.pages.page = val;
-      this.getContacts();
-    },
-    handleSizeChange(val) {
-      this.pages.size = val;
-      this.getContacts();
-    },
-    getContacts() {
-      this.loading = true;
-      Contacts.list(this.pages).then(res => {
-        this.loading = false;
-        this.pages = res.pages;
-        this.list = res.data;
-      });
-    },
-    formatJson(props, json) {
-      return json.map(v => props.map(k => v[k]));
-    },
-    handleExport(data) {
-      this.exportOpts.exporting = true;
-      const _data = this.formatJson(this.exportOpts.exportProps, data);
-
-      setTimeout(() => {
-        // Simulated elapsed time
-        import('@/vendor/ExportToExcel').then(Excel => {
-          Excel.handleExport({
-            header: this.exportOpts.tHeader,
-            data: _data,
-            filename: this.exportOpts.filename || this.filenameDefault,
-            autoWidth: this.exportOpts.cellAutoWidth,
-            type: this.exportOpts.type
-          });
-          this.exportOpts.exporting = false;
-        });
-      }, 500);
-    },
-    handleExportAll() {
-      this.exportOpts.exporting = true;
-      Contacts.all().then(res => {
-        this.handleExport(res);
-      });
-    }
   }
-};
+
+  handlePageChange(val: any) {
+    this.pages.page = val;
+    this.getContacts();
+  }
+
+  handleSizeChange(val: number) {
+    this.pages.size = val;
+    this.getContacts();
+  }
+
+  getContacts() {
+    this.loading = true;
+    apiContactList(this.pages).then((res: any) => {
+      this.loading = false;
+      this.pages = res.pages;
+      this.list = res.data;
+    });
+  }
+
+  formatJson(props: string[], json: any[]) {
+    return json.map((v: { [key: string]: any }) => props.map((k: string) => v[k]));
+  }
+
+  handleExport(data: any) {
+    this.exportOpts.exporting = true;
+    const tHeader = this.exportOpts.tHeader;
+    const filename = this.exportOpts.filename || this.filenameDefault;
+    const autoWidth = this.exportOpts.cellAutoWidth;
+    const bookType = this.exportOpts.type;
+    data = this.formatJson(this.exportOpts.exportProps, data);
+
+    exportJson2Excel(tHeader, data, filename, undefined, undefined, autoWidth, bookType);
+    this.exportOpts.exporting = false;
+  }
+
+  handleExportAll() {
+    this.exportOpts.exporting = true;
+    apiContactAll().then(res => {
+      this.handleExport(res);
+    });
+  }
+}
 </script>
 
 <style scoped lang="scss">

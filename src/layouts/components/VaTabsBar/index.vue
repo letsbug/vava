@@ -79,12 +79,12 @@ export default class extends Vue {
     return route.path === this.$route.path;
   }
   scrollToCurrentTab() {
-    const tabs: RouteRecord[] = this.$refs['tabs'];
+    const tabs = this.$refs['tabs'] as any[];
     if (tabs && tabs.length > 0) {
       this.$nextTick(() => {
         for (const tab of tabs) {
           if (tab.to === this.$route.path) {
-            this.$refs['scrollPane'].scrollTo(tab['$el']);
+            (this.$refs['scrollPane'] as HTMLElement).scrollTo(tab['$el']);
             break;
           }
         }
@@ -122,7 +122,7 @@ export default class extends Vue {
     this.$set(this.tabsOptions[2], 'disabled', tabsLength < 2);
   }
   openContextMenu($e: MouseEvent, tar: RouteConfig) {
-    this.$refs['tabsContext'].open($e);
+    (this.$refs['tabsContext'] as any).open($e);
     this.selectedTab = tar;
   }
 }

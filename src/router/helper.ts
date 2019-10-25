@@ -1,9 +1,10 @@
 import 'nprogress/nprogress.css';
 import router from '@/router';
 import NProgress from 'nprogress';
-import store from '@/store';
 import { getUserToken } from '@/utils/cookies';
 import { Message } from 'element-ui';
+import { IStoreUser } from '@/store/modules/user';
+import { IStoreRoutes } from '@/store/modules/routes';
 
 NProgress.configure({ showSpinner: false });
 
@@ -21,26 +22,26 @@ router.beforeEach(async (to, from, next) => {
       return;
     }
 
-    const { roles } = store.getters;
-
-    if (roles && roles.length > 0) {
+    if (IStoreUser.roles.length > 0) {
       next();
       return;
     }
 
     try {
-      const roles = await store.dispatch('user_info');
+      await IStoreUser.GetUserInfo();
+      const roles = IStoreUser.roles;
+      debugger;
 
       // generate accessible routes through roles
-      const accessRoutes = await store.dispatch('perm_generate_routes', roles);
+      IStoreRoutes.GenerateRoutes(roles);
       // dynamically add accessible routes
-      router.addRoutes(accessRoutes);
+      router.addRoutes(IStoreRoutes.permissive);
 
       // replace: true so the navigation will not leave a history record
       next({ ...to, replace: true });
     } catch (e) {
       // re-login
-      await store.dispatch('user_token_clear');
+      await IStoreUser.ClearToken();
 
       Message.error(e || 'Verification failed, please login again.');
       next(`/login?redirect=${to.path}`);
@@ -57,8 +58,8 @@ router.beforeEach(async (to, from, next) => {
     }
 
     // The user login has expired.
-    if (store.getters.user.token) {
-      await store.dispatch('user_logout');
+    if (IStoreUser.token) {
+      await IStoreUser.Logout();
       Message({
         type: 'error',
         message: 'Your login has expired. Please login again.',

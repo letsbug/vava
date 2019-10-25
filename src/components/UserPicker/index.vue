@@ -29,8 +29,8 @@ import { apiUserMocks } from '@/apis/account';
 
 @Component({ name: 'UserPicker' })
 export default class extends Vue {
-  @Prop() visible: boolean = false;
-  @Prop() title: string | null = null;
+  @Prop({ default: false }) visible!: boolean;
+  @Prop({ default: null }) title!: string | null;
 
   dialogVisible: boolean = false;
   list: any[] = [];

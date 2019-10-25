@@ -73,6 +73,8 @@ import { IStoreNotification } from '@/store/modules/notification';
 })
 export default class extends Vue {
   private search = { old: '', keyword: '' };
+  private page: number = 1;
+  private limit: number = 20;
 
   get isMobile() {
     return IStoreSystem.device === 0;
@@ -95,7 +97,7 @@ export default class extends Vue {
   }
 
   mounted() {
-    IStoreNotification.GetNotifications();
+    IStoreNotification.GetNotifications({ page: this.page, limit: this.limit });
   }
 
   toggleSidebar() {

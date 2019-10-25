@@ -1,25 +1,26 @@
 import faker from 'faker';
 import { Request, Response } from 'express';
 import { IResponses } from '../response';
-import { ITypeUser } from '@/apis/types';
+import { IStateUser } from '@/store/modules/user';
 
-export const userList: ITypeUser[] = [];
+export const userList: IStateUser[] = [];
 const count = 20;
-const roles = ['SuperAdmin', 'AccessManager', 'UserManager', 'ProManager', 'Auditor', 'Editor'];
+const roles: number[] = [0, 1, 2, 3, 4, 5, 6];
 const passwordPreset = 'a12345678';
 
 function generateUser(index: number) {
   const phone = faker.phone.phoneNumber();
-  const nickname = faker.name.findName();
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
   const avatar = index < roles.length ? `./assets/img/avatars/${index}.gif` : undefined;
 
   return {
     id: index,
-    username: phone,
+    username: firstName,
     password: passwordPreset,
-    token: 'Token-' + nickname,
-    roles: index < roles.length ? [roles[index]] : ['Visitor'],
-    nickname,
+    token: 'Token-' + firstName,
+    roles: index < roles.length ? [roles[index]] : [7],
+    nickname: firstName + ' ' + lastName,
     phone,
     email: faker.internet.email(),
     qq: faker.random.number({ min: 100000000, max: 20000000000 }),
@@ -59,15 +60,23 @@ export const logout = (req: Request, res: Response) => {
 
 export const getUsers = (req: Request, res: Response) => {
   let { phone, nickname } = req.query;
-  nickname = nickname.toLowerCase();
+  if (nickname) {
+    nickname = nickname.toLowerCase();
+  }
   const list = userList.filter(u => {
-    const nick = u.nickname;
-    return phone === u.phone && (nick ? nick.toLowerCase().includes(nickname) : false);
+    let is = true;
+    if (nickname) {
+      is = u.nickname!.toLowerCase().includes(nickname);
+    }
+    if (phone) {
+      is = phone === u.phone;
+    }
+    return is;
   });
 
   const _res = IResponses.STATUS_SUCCESS;
   _res.data = list;
-  return res.json(res);
+  return res.json(_res);
 };
 
 export const getMeInfo = (req: Request, res: Response) => {

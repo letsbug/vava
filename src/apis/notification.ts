@@ -1,14 +1,15 @@
-import Service from '@/utils/request';
+import Request from '@/utils/request';
 
-export const apiNotificationList = () => {
-  return Service.post('/notification/list');
+export const apiNotificationList = (page: number, limit: number) => {
+  const params = { page, limit };
+  return Request.get('/notifications', { params });
 };
 
 export const apiNotificationRead = (ids: string) => {
   const data = { ids };
-  return Service.post('/notification/read', data);
+  return Request.post('/notification/read', data);
 };
 
 export const apiNotificationReadAll = () => {
-  return Service.post('/notification/allread');
+  return Request.post('/notification/allread');
 };

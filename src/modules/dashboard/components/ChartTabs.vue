@@ -34,9 +34,7 @@ import { Component, Prop, Watch } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import EChartsMixins from './mixins';
 import ECharts, { EChartOption } from 'echarts';
-import Color from 'css-color-function';
 import ICountTo from 'vue-count-to';
-import echarts from 'echarts';
 
 @Component({ name: 'ChartTabs', components: { ICountTo } })
 export default class extends mixins(EChartsMixins) {

@@ -21,7 +21,7 @@ const permissions: RouteConfig = {
         title: 'Admin & Assigner',
         roles: ['SuperAdmin', 'Assigner']
       },
-      component: () => import('@/modules/permission.vue')
+      component: () => import('@/modules/permission/index.vue')
     },
     {
       path: 'auditor',
@@ -30,7 +30,7 @@ const permissions: RouteConfig = {
         title: 'Auditor',
         roles: ['Auditor'] // admin always has all permissions
       },
-      component: () => import('@/modules/permission.vue')
+      component: () => import('@/modules/permission/index.vue')
     },
     {
       path: 'editor',
@@ -39,7 +39,7 @@ const permissions: RouteConfig = {
         title: 'Editor',
         roles: ['Editor'] // admin always has all permissions
       },
-      component: () => import('@/modules/permission.vue')
+      component: () => import('@/modules/permission/index.vue')
     },
     {
       path: 'visitor',
@@ -48,7 +48,7 @@ const permissions: RouteConfig = {
         title: 'Visitor',
         roles: ['Visitor'] // admin always has all permissions
       },
-      component: () => import('@/modules/permission.vue')
+      component: () => import('@/modules/permission/index.vue')
     }
   ]
 };

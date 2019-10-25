@@ -266,6 +266,22 @@ paths:
       summary: Get Notifications List
       description: Return a list of notification.
       operationId: getNotifications
+      parameters:
+        - name: page
+          in: query
+          description: The wanted page number (one page).
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: limit
+          in: query
+          description: The maximum number of articles returned for one page.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
       responses:
         200:
           description: OK
@@ -531,8 +547,8 @@ paths:
       summary: Get users list
       description: Return a list of users
       operationId: getUsers
-      security:
-        - AuthAccessToken: []
+#      security:
+#        - AuthAccessToken: []
       parameters:
         - name: name
           in: query
@@ -771,7 +787,7 @@ paths:
         - users
       summary: Get current user info
       description: This can only be done by the logged in user.
-      operationId: getUserInfo
+      operationId: getMeInfo
       security:
         - AuthAccessToken: []
       responses:

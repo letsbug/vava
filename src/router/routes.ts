@@ -44,7 +44,7 @@ export const constantRoutes: RouteConfig[] = [
     meta: { hidden: true }
   },
 
-  { path: '/error', component: () => import('@/modules/errors.vue'), meta: { hidden: true } },
+  { path: '/error', component: () => import('@/modules/errors/index.vue'), meta: { hidden: true } },
 
   {
     path: '/search/:keyword',
@@ -83,7 +83,7 @@ export const constantRoutes: RouteConfig[] = [
         path: '',
         name: 'About',
         meta: { title: 'about', icon: 'mark-states-info', nocache: true },
-        component: () => import('@/modules/about.vue')
+        component: () => import('@/modules/about/index.vue')
       }
     ]
   },
@@ -97,7 +97,7 @@ export const constantRoutes: RouteConfig[] = [
         path: '',
         name: 'Guide',
         meta: { title: 'guide', icon: 'action-guide' },
-        component: () => import('@/modules/guide.vue')
+        component: () => import('@/modules/guide/index.vue')
       }
     ]
   }

@@ -14,7 +14,7 @@ export default class extends Vue {
   private replace(route: RouteConfig) {
     this.$nextTick(() => {
       this.$router.replace({
-        path: '/redirect' + route.fullPath
+        path: '/redirect' + route.path
       });
       this.doing = false;
     });

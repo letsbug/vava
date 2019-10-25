@@ -20,7 +20,7 @@ const dashboard: RouteConfig = {
         nobg: true,
         nocache: true
       },
-      component: () => import('@/modules/dashboard.vue')
+      component: () => import('@/modules/dashboard/index.vue')
     }
   ]
 };

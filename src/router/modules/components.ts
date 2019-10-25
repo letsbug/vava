@@ -19,7 +19,7 @@ const components: RouteConfig = {
         title: 'countTo',
         icon: 'action-count'
       },
-      component: () => import('@/modules/components/count-to.vue')
+      component: () => import('@/modules/components/count-to/index.vue')
     },
     // {
     //   path: 'rich-editor',
@@ -46,7 +46,7 @@ const components: RouteConfig = {
         title: 'paintedFace',
         icon: 'action-history'
       },
-      component: () => import('@/modules/components/painted-face.vue')
+      component: () => import('@/modules/components/painted-face/index.vue')
     }
   ]
 };
