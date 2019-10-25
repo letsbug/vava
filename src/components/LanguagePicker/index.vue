@@ -21,15 +21,15 @@ import { IStoreSystem } from '@/store/modules/system';
 @Component({ name: 'LanguagePicker' })
 export default class extends Vue {
   @Prop({ default: null })
-  private className!: string;
+  className!: string;
 
   get language() {
     return IStoreSystem.language;
   }
 
-  private pickLang(target: string) {
+  pickLang(target: string) {
     this.$i18n.locale = target;
-    this.$store.dispatch('app_language_set', target);
+    IStoreSystem.SetLanguage(target);
   }
 }
 </script>

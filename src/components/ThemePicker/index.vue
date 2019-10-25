@@ -54,6 +54,7 @@ export default class extends Vue {
   }
 
   onColorPickerChange(val: any) {
+    console.log(val);
     if (!val) this.styles.color = this.colorPresets[4];
   }
 

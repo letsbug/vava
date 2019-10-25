@@ -22,7 +22,7 @@ import { DeviceType } from '@/store/modules/system'
             @contextmenu.prevent.native="openContextMenu($event, route)"
           >
             <span class="tabs-item-name">
-              {{ generateTitle(route.title) }}
+              {{ generateTitle(route.meta.title) }}
             </span>
             <span class="tabs-item__close">
               <va-icon icon="action-close" @click.prevent.native="close(route)" />

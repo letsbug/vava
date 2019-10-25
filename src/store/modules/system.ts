@@ -91,20 +91,8 @@ class System extends VuexModule implements IStateSystem {
   }
 
   @Mutation
-  private async SET_THEME(type?: string, color?: string) {
-    if (!type) {
-      type = 'normally';
-    }
-    if (!['normally', 'light'].includes(type)) {
-      throw Error('SET_THEME: the parameter type must be "normally" or "light".');
-    }
-    if (!color) {
-      color = '#28a745';
-    }
-
+  private SET_THEME(type: string, color: string) {
     this.theme = { type, color };
-    await themeTool.set(this.theme);
-    setThemes(type, color);
   }
 
   //
@@ -144,12 +132,19 @@ class System extends VuexModule implements IStateSystem {
   @Action
   public SetThemes(themes: IStateTheme) {
     const { type, color } = themes;
-    this.SET_THEME(type, color);
+    themeTool.set(themes).then(() => {
+      setThemes(type, color);
+      this.SET_THEME(type, color);
+    });
   }
 
   @Action
   public SetThemeDefault() {
-    this.SET_THEME();
+    const normally: IStateTheme = {
+      type: 'normally',
+      color: '#28a745'
+    };
+    this.SetThemes(normally);
   }
 }
 

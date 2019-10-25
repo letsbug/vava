@@ -21,7 +21,7 @@ export const getThemes = () => {
 };
 export const setThemes = (type: string, color: string) => Cookies.set(ThemeKey, JSON.stringify({ type, color }));
 
-export const getUserToken = () => Cookies.get(UserTokenKey) || null;
+export const getUserToken = () => Cookies.get(UserTokenKey);
 export const setUserToken = (token?: string, expires?: number) =>
   token && Cookies.set(UserTokenKey, token, expires ? { expires } : {});
 export const removeUserToken = () => Cookies.remove(UserTokenKey);
