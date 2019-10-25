@@ -50,7 +50,7 @@ export default class extends Vue {
   }
 
   async onChooseUser(user: IStateUser) {
-    await IStoreUser.SwitchUser(user.token!);
+    await IStoreUser.SwitchUser(user);
 
     this.userPickerVisible = false;
     this.$nextTick(() => {

@@ -9,6 +9,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { RouteConfig } from 'vue-router';
 import { IStoreTabs } from '@/store/modules/tabs';
 
+@Component({ name: 'RouteRefresher' })
 export default class extends Vue {
   private doing: boolean = false;
 
@@ -21,7 +22,7 @@ export default class extends Vue {
     });
   }
 
-  private handleRefresh() {
+  handleRefresh() {
     if (this.doing) return;
     this.doing = true;
 

@@ -1,3 +1,4 @@
+import { ITypeRoles } from '@/store/modules/user'
 <template>
   <div class="va-body-container">
     <github-corner />
@@ -16,7 +17,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { GithubCorner } from '@/components';
 import { xhr } from '@/apis/xhr';
-import { IStoreUser } from '@/store/modules/user';
+import { IStoreUser, ITypeRoles } from '@/store/modules/user';
 
 @Component({ name: 'Homepage', components: { GithubCorner } })
 export default class extends Vue {
@@ -33,7 +34,11 @@ export default class extends Vue {
   }
 
   async mounted() {
-    const { data } = (await xhr(`./assets/svgs/${this.roles[0]}_${this.sex}.svg`)) as any;
+    let role = this.roles[0];
+    if (role === ITypeRoles.superAdmin) {
+      role = ITypeRoles.systemAdmin;
+    }
+    const { data } = (await xhr(`./assets/svgs/${role}_${this.sex}.svg`)) as any;
     (this.$refs['roleImage'] as HTMLDivElement).innerHTML = data;
   }
 }

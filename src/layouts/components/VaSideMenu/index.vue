@@ -1,6 +1,6 @@
 <template>
   <div class="va-side-wrapper">
-    <brand class="va-side-brand" has-title has-link />
+    <brand class="va-side-brand" :has-title="true" :has-link="true" />
     <va-side-menu />
   </div>
 </template>

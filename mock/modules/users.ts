@@ -12,7 +12,7 @@ function generateUser(index: number) {
   const phone = faker.phone.phoneNumber();
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
-  const avatar = index < roles.length ? `./assets/img/avatars/${index}.gif` : undefined;
+  const avatar = index < roles.length ? `./assets/img/avatars/${index + 1}.gif` : undefined;
 
   return {
     id: index,

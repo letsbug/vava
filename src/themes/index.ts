@@ -65,7 +65,6 @@ class Theme {
   }
 
   public async set(themes: IStateTheme) {
-    console.log(themes);
     await this.setColor(themes.color);
     this.setType(themes.type);
   }

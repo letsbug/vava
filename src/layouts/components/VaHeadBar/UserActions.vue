@@ -60,14 +60,14 @@ export default class extends Vue {
   }
 
   async onChooseUser(user: IStateUser) {
-    await IStoreUser.SwitchUser(user.token!);
-
-    this.userPickerVisible = false;
-    this.$nextTick(() => {
-      this.$router.replace({
-        path: '/redirect' + this.$route.fullPath
-      });
-    });
+    // TODO Wait for the perfect.
+    // await IStoreUser.SwitchUser(user.token!);
+    // this.userPickerVisible = false;
+    // this.$nextTick(() => {
+    //   this.$router.replace({
+    //     path: '/redirect' + this.$route.fullPath
+    //   });
+    // });
   }
 
   async handleLogout() {

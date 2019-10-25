@@ -9,8 +9,6 @@ declare module 'element-ui/lib/locale/lang/*';
 
 declare module 'element-ui/lib/transitions/collapse-transition';
 
-declare module 'highlight.js';
-
 declare module 'vue-count-to';
 
 declare module '@/vendor/painted-face';

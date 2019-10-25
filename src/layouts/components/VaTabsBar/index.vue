@@ -103,13 +103,15 @@ export default class extends Vue {
     IStoreTabs.Add(this.$route);
   }
 
-  close(target: RouteConfig) {
+  async close(target: RouteConfig) {
     if (!target) throw new Error('Unknown target tabs which you want to close.');
-    IStoreTabs.Remove(target);
-    if (!this.isActive(target)) return;
-    // TODO fix bugs there
-    // const latest = routes.splice(-1)[0];
-    // this.$router.push({ path: latest ? latest.path : '/home' });
+    await IStoreTabs.Remove(target);
+    if (!this.isActive(target)) {
+      return;
+    }
+    const routes = [...IStoreTabs.history];
+    const latest = routes.splice(-1)[0];
+    await this.$router.push({ path: latest ? latest.path : '/home' });
   }
 
   closeOthers(target: RouteConfig) {

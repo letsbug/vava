@@ -9,7 +9,7 @@
       <template v-if="sidebarOpened">
         <a
           :data-path="route.path"
-          :class="{ active: isCurrent }"
+          :class="{ active: current === route.path }"
           class="nav-title expander"
           @click="sidebarOpened && (visible = !visible)"
         >

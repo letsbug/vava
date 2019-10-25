@@ -38,10 +38,8 @@ export function hex2Rgb(hex: string, onlyNum?: boolean) {
 export function generateColors(primary: string) {
   const colors: { [key: string]: string } = {};
 
-  console.log(primary);
   Object.keys(formula).forEach(key => {
     const value = formula[key].replace(/primary/g, primary);
-    console.log(value);
     colors[key] = color.convert(value);
   });
   colors['themePrimary'] = hex2Rgb(primary);
