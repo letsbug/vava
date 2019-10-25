@@ -1,13 +1,8 @@
 import { xhr } from '@/apis/xhr';
 import { generateColors } from '@/utils/color';
-import { IStoreSystem, IStateTheme } from '@/store/modules/system';
+import { IStateTheme } from '@/store/modules/system';
 
 class Theme {
-  themes: IStateTheme = IStoreSystem.theme;
-  normal: IStateTheme = {
-    type: 'normally',
-    color: '#28a745'
-  };
   private template: string = '';
 
   private convertTemplate(data: string) {
@@ -37,8 +32,8 @@ class Theme {
   }
 
   private async loadTemplate() {
-    const { data } = (await xhr('./static/css/theme-template.min.css')) as any;
-    this.template = this.convertTemplate(data.data);
+    const { data } = (await xhr('./assets/css/theme-template.min.css')) as any;
+    this.template = this.convertTemplate(data);
   }
 
   private async setColor(color: string) {
@@ -72,10 +67,7 @@ class Theme {
   public async set(themes: IStateTheme) {
     await this.setColor(themes.color);
     this.setType(themes.type);
-    IStoreSystem.SetThemes(themes);
   }
 }
 
-const theme = new Theme();
-
-export default theme;
+export const themeTool = new Theme();

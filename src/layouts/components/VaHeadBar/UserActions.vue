@@ -1,11 +1,11 @@
 <template>
   <el-dropdown :show-timeout="100" trigger="click" style="float: left;" @command="userDropdown">
     <a class="va-nav-item spacer-xs link-user">
-      <img :src="user.avatar" alt="" class="avatar" />
+      <img :src="avatar" alt="" class="avatar" />
     </a>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item :command="handleUserInfo">
-        Signed in as <strong>{{ user.nickname }}</strong>
+        Signed in as <strong>{{ nickname }}</strong>
       </el-dropdown-item>
       <el-dropdown-item :command="handleUserInfo" divided>
         {{ $t('header.profile') }}
@@ -32,25 +32,33 @@ import { IStoreUser, IStateUser } from '@/store/modules/user';
 
 @Component({ name: 'LayoutUserAction', components: { UserPicker } })
 export default class extends Vue {
-  private userPickerVisible: boolean = false;
+  userPickerVisible: boolean = false;
 
-  get user() {
-    return IStoreUser;
+  get avatar() {
+    return IStoreUser.avatar;
+  }
+
+  get nickname() {
+    return IStoreUser.nickname;
   }
 
   userDropdown(target: Function) {
     target();
   }
+
   handleUserInfo() {
     // TODO build user information route
     console.log('clicked user info');
   }
+
   handleSettings() {
     // TODO build user settings route
   }
+
   handleUserSwitch() {
     this.userPickerVisible = true;
   }
+
   async onChooseUser(user: IStateUser) {
     await IStoreUser.SwitchUser(user.token!);
 
@@ -61,26 +69,15 @@ export default class extends Vue {
       });
     });
   }
+
   async handleLogout() {
-    try {
-      const action = await this.$confirm(
-        this.$t('header.logout.confirm') as string,
-        this.$t('options.confirm.title') as string,
-        {
-          type: 'warning',
-          confirmButtonText: this.$t('header.logout.button') as string
-        }
-      );
-
-      if (action !== 'confirm') {
-        return false;
-      }
-
+    const message = this.$t('header.logout.confirm') as string;
+    const title = this.$t('options.confirm.title') as string;
+    const confirmButtonText = this.$t('header.logout.button') as string;
+    this.$confirm(message, title, { type: 'warning', confirmButtonText }).then(async () => {
       await IStoreUser.Logout();
       location.reload();
-    } catch (e) {
-      console.log('sign out', e);
-    }
+    });
   }
 }
 </script>

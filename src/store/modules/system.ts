@@ -9,6 +9,7 @@ import {
   setSidebarStatus,
   setThemes
 } from '@/utils/cookies';
+import { themeTool } from '@/themes';
 import store from '@/store';
 
 export enum DeviceType {
@@ -90,10 +91,19 @@ class System extends VuexModule implements IStateSystem {
   }
 
   @Mutation
-  private SET_THEME(type: string, color: string) {
-    if (!['normally', 'light'].includes(type)) return;
-    this.theme.type = type;
-    this.theme.color = color;
+  private async SET_THEME(type?: string, color?: string) {
+    if (!type) {
+      type = 'normally';
+    }
+    if (!['normally', 'light'].includes(type)) {
+      throw Error('SET_THEME: the parameter type must be "normally" or "light".');
+    }
+    if (!color) {
+      color = '#28a745';
+    }
+
+    this.theme = { type, color };
+    await themeTool.set(this.theme);
     setThemes(type, color);
   }
 
@@ -135,6 +145,11 @@ class System extends VuexModule implements IStateSystem {
   public SetThemes(themes: IStateTheme) {
     const { type, color } = themes;
     this.SET_THEME(type, color);
+  }
+
+  @Action
+  public SetThemeDefault() {
+    this.SET_THEME();
   }
 }
 

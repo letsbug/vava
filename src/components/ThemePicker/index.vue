@@ -36,15 +36,22 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { IStateTheme } from '@/store/modules/system';
-import Theme from '@/themes';
+import { IStoreSystem, IStateTheme } from '@/store/modules/system';
 
 @Component({ name: 'ThemePicker' })
 export default class extends Vue {
   stylePresets: string[] = ['normally', 'light'];
   colorPresets: string[] = ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'];
 
-  styles: IStateTheme = Theme.themes;
+  styles: IStateTheme = IStoreSystem.theme;
+
+  mounted() {
+    if (!this.styles.color || !this.styles.type) {
+      IStoreSystem.SetThemeDefault();
+    } else {
+      IStoreSystem.SetThemes(this.styles);
+    }
+  }
 
   onColorPickerChange(val: any) {
     if (!val) this.styles.color = this.colorPresets[4];
@@ -52,13 +59,12 @@ export default class extends Vue {
 
   handleSubmit() {
     this.handleHideThemePicker();
-    Theme.set(this.styles);
+    IStoreSystem.SetThemes(this.styles);
   }
 
   restoreDefault() {
-    this.styles = Theme.normal;
     this.handleHideThemePicker();
-    Theme.set(this.styles);
+    IStoreSystem.SetThemeDefault();
   }
 
   handleHideThemePicker() {

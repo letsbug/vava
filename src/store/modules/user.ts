@@ -55,7 +55,7 @@ class User extends VuexModule implements IStateUser {
   public id: string | number = '';
   public username: string = '';
   public password: string = '';
-  public token?: string = '';
+  public token?: string = getUserToken();
   public expire: number = 7;
   public roles: ITypeRoles[] = [];
   public nickname?: string = '';

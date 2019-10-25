@@ -1,6 +1,6 @@
 import 'highlight.js/styles/github.css';
 import highlight from 'highlight.js';
-import { DirectiveOptions } from 'vue';
+import { DirectiveOptions } from 'vue/types/options';
 
 export const Hightlight: DirectiveOptions = {
   bind: (el: HTMLElement) => {

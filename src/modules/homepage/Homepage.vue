@@ -33,7 +33,7 @@ export default class extends Vue {
   }
 
   async mounted() {
-    const { data } = (await xhr(`./static/svgs/${this.roles[0]}_${this.sex}.svg`)) as any;
+    const { data } = (await xhr(`./assets/svgs/${this.roles[0]}_${this.sex}.svg`)) as any;
     (this.$refs['roleImage'] as HTMLDivElement).innerHTML = data;
   }
 }

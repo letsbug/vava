@@ -43,7 +43,7 @@ class Notification extends VuexModule implements IStateNotification {
     });
   }
 
-  @Action({ rawError: true })
+  @Action
   public async GetNotifications(pages: { page: number; limit: number }) {
     const { page, limit } = pages;
     const { data } = await apiNotificationList(page, limit);

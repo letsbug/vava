@@ -1,7 +1,6 @@
 import 'nprogress/nprogress.css';
 import router from '@/router';
 import NProgress from 'nprogress';
-import { getUserToken } from '@/utils/cookies';
 import { Message } from 'element-ui';
 import { IStoreUser } from '@/store/modules/user';
 import { IStoreRoutes } from '@/store/modules/routes';
@@ -14,7 +13,7 @@ const whitelist = ['/login', '/join', '/password'];
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
 
-  if (getUserToken()) {
+  if (IStoreUser.token) {
     if (whitelist.includes(to.path)) {
       // When the user has already logged in.
       next('/');
