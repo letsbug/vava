@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 // Read and swagger config file
-const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger-config.yaml'));
+const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger.yml'));
 // Create mock functions based on swaggerConfig
 const options = {
   security: {

@@ -19,7 +19,7 @@ tags:
     description: Roles related api.
   - name: notification
     description: Notifications data related api.
-  - name: statistics
+  - name: pageviews
     description: Statistics data related api.
   - name: painted-face
     description: Painted face data related api.
@@ -783,13 +783,13 @@ paths:
                         $ref: '#/components/schemas/User'
         401:
           $ref: '#/components/responses/Unauthorized'
-  /statistics:
+  /pageviews:
     get:
       tags:
-        - statistics
-      summary: Get page views statistics.
-      description: Get pv, uv, cvr, areas, ages, traffics statistics.
-      operationId: getPageViews
+        - pageviews
+      summary: Get page views.
+      description: Get pv, uv, cvr, areas, ages, traffics.
+      operationId: getPageviews
       parameters:
         - name: start
           in: query
@@ -817,7 +817,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Statistics'
+                      $ref: '#/components/schemas/Pageviews'
 components:
   securitySchemes:
     AuthAccessToken:
@@ -926,7 +926,7 @@ components:
        - timestamp
        - importance
        - author
-    Statistics:
+    Pageviews:
       type: object
       properties:
         date:

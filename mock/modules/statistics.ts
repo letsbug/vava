@@ -46,7 +46,7 @@ export const getTotalCounts = (req: Request, res: Response) => {
   return res.json(_res);
 };
 
-export const getPageViews = (req: Request, res: Response) => {
+export const getPageviews = (req: Request, res: Response) => {
   const { start, end } = convertParams(req);
 
   const data = pageViews.filter((v: any) => {
