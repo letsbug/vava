@@ -30,7 +30,6 @@ router.beforeEach(async (to, from, next) => {
     try {
       await IStoreUser.GetUserInfo();
       const roles = IStoreUser.roles;
-      debugger;
 
       // generate accessible routes through roles
       IStoreRoutes.GenerateRoutes(roles);

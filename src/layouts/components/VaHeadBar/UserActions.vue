@@ -52,7 +52,7 @@ export default class extends Vue {
     this.userPickerVisible = true;
   }
   async onChooseUser(user: IStateUser) {
-    await this.$store.dispatch('user_switch', user.token);
+    await IStoreUser.SwitchUser(user.token!);
 
     this.userPickerVisible = false;
     this.$nextTick(() => {
@@ -76,7 +76,7 @@ export default class extends Vue {
         return false;
       }
 
-      await this.$store.dispatch('user_logout');
+      await IStoreUser.Logout();
       location.reload();
     } catch (e) {
       console.log('sign out', e);

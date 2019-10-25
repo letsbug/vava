@@ -2,7 +2,7 @@ import Layout from '@/layouts/index.vue';
 import { RouteConfig } from 'vue-router';
 
 const externals: RouteConfig = {
-  path: 'externals',
+  path: '/externals',
   component: Layout,
   meta: { sort: 11 },
   children: [

@@ -157,6 +157,7 @@ import { mixins } from 'vue-class-component';
 import TableDemoMixins from './mixins';
 import { apiList, apiUpdates, apiAuditors } from '@/apis/articles';
 import { MessageType } from 'element-ui/types/message';
+import { IStoreUser } from '@/store/modules/user';
 
 @Component({ name: 'FullFeature' })
 export default class extends mixins(TableDemoMixins) {
@@ -206,7 +207,7 @@ export default class extends mixins(TableDemoMixins) {
   rebuildEditData() {
     this.editForm = {
       isEdit: false,
-      author: this.$store.getters.user.username,
+      author: IStoreUser.username,
       title: '',
       summery: '',
       content: '',

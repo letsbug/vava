@@ -49,12 +49,8 @@ import { VueRouter } from 'vue-router/types/router';
 
 @Component({ name: 'VaTabsBar', components: { ScrollPane, Breadcrumb, ContextMenu } })
 export default class extends Vue {
-  private tabsOptions: any[] = [
-    { name: this.$t('tabBar.close'), callback: this.close },
-    { name: this.$t('tabBar.closeOthers'), callback: this.closeOthers },
-    { name: this.$t('tabBar.closeAll'), callback: this.closeAll }
-  ];
-  private selectedTab: any = {};
+  tabsOptions: any[] = [];
+  selectedTab: any = {};
 
   get history() {
     return IStoreTabs.history;
@@ -63,7 +59,7 @@ export default class extends Vue {
     return IStoreSystem.device === DeviceType.Mobile;
   }
 
-  @Watch('$route', { immediate: true })
+  @Watch('$route')
   onRouteChange() {
     this.add();
     this.scrollToCurrentTab();
@@ -71,6 +67,11 @@ export default class extends Vue {
   }
 
   mounted() {
+    this.tabsOptions = [
+      { name: this.$t('tabBar.close'), callback: this.close },
+      { name: this.$t('tabBar.closeOthers'), callback: this.closeOthers },
+      { name: this.$t('tabBar.closeAll'), callback: this.closeAll }
+    ];
     this.add();
     this.reCalcContextStatus();
   }
@@ -78,6 +79,9 @@ export default class extends Vue {
   isActive(route: RouteConfig) {
     return route.path === this.$route.path;
   }
+
+  generateTitle = generateTitle;
+
   scrollToCurrentTab() {
     const tabs = this.$refs['tabs'] as any[];
     if (tabs && tabs.length > 0) {
@@ -91,36 +95,41 @@ export default class extends Vue {
       });
     }
   }
+
   add() {
     if (this.isMobile) return;
     const { name, path, meta } = this.$route;
     if (meta.notab || !name || path === '/home') return;
-    this.$store.dispatch('tabs_add', this.$route);
+    IStoreTabs.Add(this.$route);
   }
+
   close(target: RouteConfig) {
     if (!target) throw new Error('Unknown target tabs which you want to close.');
-    this.$store.dispatch('tabs_del', target).then(routes => {
-      if (!this.isActive(target)) return;
-      const latest = routes.splice(-1)[0];
-      this.$router.push({ path: latest ? latest.path : '/home' });
-    });
+    IStoreTabs.Remove(target);
+    if (!this.isActive(target)) return;
+    // TODO fix bugs there
+    // const latest = routes.splice(-1)[0];
+    // this.$router.push({ path: latest ? latest.path : '/home' });
   }
+
   closeOthers(target: RouteConfig) {
     if (!target) throw new Error('Unknown target tabs which you want to not close.');
     this.$router.push(target);
-    this.$store.dispatch('tabs_del_others', target);
+    IStoreTabs.RemoveOthers(target);
   }
+
   closeAll() {
-    this.$store.dispatch('tabs_empty').then(() => {
-      this.$router.push('/');
-    });
+    IStoreTabs.Empty();
+    this.$router.push('/');
   }
+
   reCalcContextStatus() {
     const tabsLength = this.history.length;
     this.$set(this.tabsOptions[0], 'disabled', tabsLength < 1);
     this.$set(this.tabsOptions[1], 'disabled', tabsLength < 2);
     this.$set(this.tabsOptions[2], 'disabled', tabsLength < 2);
   }
+
   openContextMenu($e: MouseEvent, tar: RouteConfig) {
     (this.$refs['tabsContext'] as any).open($e);
     this.selectedTab = tar;

@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { RouteConfig } from 'vue-router';
+import { IStoreTabs } from '@/store/modules/tabs';
 
 export default class extends Vue {
   private doing: boolean = false;
@@ -25,9 +26,8 @@ export default class extends Vue {
     this.doing = true;
 
     setTimeout(() => {
-      this.$store.dispatch('tabs_del', this.$route).then(() => {
-        this.replace(this.$route);
-      });
+      IStoreTabs.Remove(this.$route);
+      this.replace(this.$route);
     }, 1000);
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <a id="screenFull" class="va-nav-item" @click="toggle">
-    <va-icon :icon="isFullScreen ? 'action-screen-small' : 'action-screen-full'" class="handle-screen-full" />
+    <va-icon :icon="isFullscreen ? 'action-screen-small' : 'action-screen-full'" class="handle-screen-full" />
   </a>
 </template>
 
@@ -12,7 +12,7 @@ const sf = screenfull as Screenfull;
 
 @Component({ name: 'ScreenFull' })
 export default class extends Vue {
-  private isFullscreen: boolean = false;
+  isFullscreen: boolean = false;
 
   get supported() {
     const s = sf && sf.isEnabled;

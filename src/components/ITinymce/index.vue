@@ -6,6 +6,7 @@
 
 <script>
 import { plugins, toolbar } from './plugins';
+import { IStoreSystem } from '@/store/modules/system';
 
 export default {
   props: {
@@ -43,7 +44,7 @@ export default {
   },
   computed: {
     language() {
-      return this.languages[this.$store.getters.language];
+      return this.languages[IStoreSystem.language];
     }
   },
   watch: {

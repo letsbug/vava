@@ -1,10 +1,15 @@
 <template>
-  <div :class="{ expanded: visible && (route.children.length > 1 || route.meta.alwaysShow) }" class="va-side-nav">
-    <template v-if="route.children.length > 1 || route.meta.alwaysShow">
+  <div
+    :class="{
+      expanded: visible && ((route.children && route.children.length > 1) || (route.meta && route.meta.alwaysShow))
+    }"
+    class="va-side-nav"
+  >
+    <template v-if="(route.children && route.children.length > 1) || (route.meta && route.meta.alwaysShow)">
       <template v-if="sidebarOpened">
         <a
           :data-path="route.path"
-          :class="{ active: current === route.path }"
+          :class="{ active: isCurrent }"
           class="nav-title expander"
           @click="sidebarOpened && (visible = !visible)"
         >
@@ -87,14 +92,15 @@ import ElCollapseTransition from 'element-ui/lib/transitions/collapse-transition
 
 @Component({ name: 'NavItem', components: { ElCollapseTransition } })
 export default class extends Vue {
-  private visible: boolean = false;
+  visible: boolean = false;
 
   @Prop({ required: true })
-  private route!: RouteConfig;
+  route!: RouteConfig;
 
   get current() {
     return this.$route.matched[0].path;
   }
+
   get sidebarOpened() {
     return IStoreSystem.sidebar.opened;
   }
@@ -103,9 +109,12 @@ export default class extends Vue {
   onSidebarStatusChange(val: boolean) {
     if (this.isCurrent()) this.visible = val;
   }
+
   mounted() {
     this.visible = this.isCurrent();
   }
+
+  generateTitle = generateTitle;
 
   isExternal(link: string) {
     return /^(https?:|mailto:|tel:|tencent:)/.test(link);

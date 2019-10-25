@@ -20,7 +20,7 @@ import { Route, RouteRecord } from 'vue-router';
 
 @Component({ name: 'Breadcrumb' })
 export default class extends Vue {
-  private routes: RouteRecord[] = [];
+  routes: RouteRecord[] = [];
 
   @Watch('$route', { immediate: true })
   private onRouteChange(route: Route) {
@@ -39,5 +39,7 @@ export default class extends Vue {
     }
     return name.trim().toLowerCase() === 'homepage';
   }
+
+  generateTitle = generateTitle;
 }
 </script>

@@ -94,7 +94,7 @@ export default class extends Vue {
   }
 
   handleMarkRead(row: ITypeNotification) {
-    if (row && row.isUnread) this.$store.dispatch('notification_read', [row.id]);
+    if (row && row.isUnread) IStoreNotification.Read(row);
   }
 
   handleMarkAllRead() {

@@ -1,13 +1,14 @@
 export default {
   roles: {
     title: 'role',
-    SuperAdmin: 'Super Admin',
-    AccessManager: 'Access Manager',
-    UserManager: 'User Manager',
-    ProManager: 'Project Manager',
-    Auditor: 'Auditor',
-    Editor: 'Editor',
-    Visitor: 'Visitor'
+    0: 'System Admin',
+    1: 'Super Admin',
+    2: 'Access Manager',
+    3: 'User Manager',
+    4: 'Project Manager',
+    5: 'Auditor',
+    6: 'Editor',
+    7: 'Visitor'
   },
   login: {
     title: 'Sign in to VAVA',

@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { IStoreSystem } from '@/store/modules/system';
 
 @Component({ name: 'LanguagePicker' })
 export default class extends Vue {
@@ -23,7 +24,7 @@ export default class extends Vue {
   private className!: string;
 
   get language() {
-    return this.$store.getters.language;
+    return IStoreSystem.language;
   }
 
   private pickLang(target: string) {

@@ -1,5 +1,6 @@
 import Layout from '@/layouts/index.vue';
 import { RouteConfig } from 'vue-router';
+import { ITypeRoles } from '@/store/modules/user';
 
 const permissions: RouteConfig = {
   path: '/permission',
@@ -9,7 +10,16 @@ const permissions: RouteConfig = {
   meta: {
     title: 'permission',
     icon: 'mark-vip',
-    roles: ['SuperAdmin', 'Assigner', 'Auditor', 'Editor', 'Visitor'],
+    roles: [
+      ITypeRoles.systemAdmin,
+      ITypeRoles.superAdmin,
+      ITypeRoles.accessManager,
+      ITypeRoles.userManager,
+      ITypeRoles.proManager,
+      ITypeRoles.auditor,
+      ITypeRoles.editor,
+      ITypeRoles.visitor
+    ],
     alwaysShow: true,
     sort: 2
   },
@@ -18,8 +28,8 @@ const permissions: RouteConfig = {
       path: 'admin',
       name: 'PermissionAdmin',
       meta: {
-        title: 'Admin & Assigner',
-        roles: ['SuperAdmin', 'Assigner']
+        title: 'Admins',
+        roles: [ITypeRoles.systemAdmin, ITypeRoles.superAdmin]
       },
       component: () => import('@/modules/permission/index.vue')
     },
@@ -27,8 +37,8 @@ const permissions: RouteConfig = {
       path: 'auditor',
       name: 'PermissionAuditor',
       meta: {
-        title: 'Auditor',
-        roles: ['Auditor'] // admin always has all permissions
+        title: 'Managers',
+        roles: [ITypeRoles.accessManager, ITypeRoles.userManager, ITypeRoles.proManager] // admin always has all permissions
       },
       component: () => import('@/modules/permission/index.vue')
     },
@@ -36,8 +46,8 @@ const permissions: RouteConfig = {
       path: 'editor',
       name: 'PermissionEditor',
       meta: {
-        title: 'Editor',
-        roles: ['Editor'] // admin always has all permissions
+        title: 'Auditor & Editor',
+        roles: [ITypeRoles.auditor, ITypeRoles.editor] // admin always has all permissions
       },
       component: () => import('@/modules/permission/index.vue')
     },
@@ -46,7 +56,7 @@ const permissions: RouteConfig = {
       name: 'PermissionVisitor',
       meta: {
         title: 'Visitor',
-        roles: ['Visitor'] // admin always has all permissions
+        roles: [ITypeRoles.visitor] // admin always has all permissions
       },
       component: () => import('@/modules/permission/index.vue')
     }

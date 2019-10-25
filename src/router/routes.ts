@@ -50,11 +50,12 @@ export const constantRoutes: RouteConfig[] = [
     path: '/search/:keyword',
     component: Layout,
     redirect: '/search/',
+    meta: { hidden: true },
     children: [
       {
         path: '',
         name: 'GlobalSearch',
-        meta: { title: 'search', icon: 'action-search', notab: true, hidden: true },
+        meta: { title: 'search', icon: 'action-search', notab: true },
         component: () => import('@/modules/search/GlobalSearch.vue')
       }
     ]

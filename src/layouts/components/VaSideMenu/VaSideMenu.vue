@@ -23,14 +23,17 @@ import { Component, Vue } from 'vue-property-decorator';
 import { IStoreRoutes } from '@/store/modules/routes';
 import { generateTitle } from '@/i18n';
 import NavItem from './NavItem.vue';
+import { RouteConfig } from 'vue-router';
 
 @Component({ name: 'VaSideMenu', components: { NavItem } })
 export default class extends Vue {
   get routes() {
-    return IStoreRoutes.routes;
+    return IStoreRoutes.routes.filter((route: RouteConfig) => {
+      return !(route.meta && route.meta.hidden);
+    });
   }
 
-  generateTitle: Function = generateTitle;
+  generateTitle = generateTitle;
 }
 </script>
 
