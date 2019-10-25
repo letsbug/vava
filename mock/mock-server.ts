@@ -12,6 +12,7 @@ import { authAccessToken } from './security';
 const app = express();
 const port = 9091;
 const { connector, summarise } = require('swagger-routes-express');
+const SwaggerUi = require('swagger-ui-dist').absolutePath();
 
 // Compression
 app.use(compression());
@@ -22,6 +23,7 @@ app.use(cors());
 // POST, PUT, DELETE body parser
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
+app.use(express.static(SwaggerUi));
 // No cache
 app.use((req, res, next) => {
   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -31,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 // Read and swagger config file
-const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger.yml'));
+const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger-config.yaml'));
 // Create mock functions based on swaggerConfig
 const options = {
   security: {

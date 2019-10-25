@@ -78,9 +78,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -114,9 +114,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -149,9 +149,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -191,9 +191,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -227,38 +227,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
         401:
           $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/NotFound'
-  /pageviews:
-    get:
-      tags:
-        - articles
-      summary: Get Pageviews Data
-      description: Return a list of pageviews for each platforms.
-      operationId: getPageViews
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                  data:
-                    type: object
-                    properties:
-                      pageviews:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Pageviews'
   /notifications:
     get:
       tags:
@@ -281,7 +256,7 @@ paths:
             type: integer
             format: int32
             minimum: 0
-            maximum: 50
+            maximum: 100
       responses:
         200:
           description: OK
@@ -290,9 +265,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -352,9 +327,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -375,9 +350,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: integer
                     format: int32
@@ -563,9 +538,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -597,9 +572,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
   /users/login:
     post:
       tags:
@@ -639,9 +614,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -665,9 +640,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
   /users/{username}:
     get:
       tags:
@@ -692,9 +667,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -798,9 +773,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  code:
+                  status:
                     type: integer
-                    format: int32
+                    format: int16
                   data:
                     type: object
                     properties:
@@ -808,6 +783,41 @@ paths:
                         $ref: '#/components/schemas/User'
         401:
           $ref: '#/components/responses/Unauthorized'
+  /statistics:
+    get:
+      tags:
+        - statistics
+      summary: Get page views statistics.
+      description: Get pv, uv, cvr, areas, ages, traffics statistics.
+      operationId: getPageViews
+      parameters:
+        - name: start
+          in: query
+          description: The start time for pv.
+          schema:
+            type: integer
+            format: int64
+        - name: end
+          in: query
+          description: The end time for pv.
+          schema:
+            type: integer
+            format: int64
+      response:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    format: int16
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Statistics'
 components:
   securitySchemes:
     AuthAccessToken:
@@ -916,48 +926,25 @@ components:
        - timestamp
        - importance
        - author
-    Pageviews:
+    Statistics:
       type: object
       properties:
-        key:
-          type: string
-          enum:
-            - PC
-            - Mobile
-            - iOS
-            - Android
-        pageviews:
+        date:
+          $ref: '#/components/schemas/Timestamp'
+        pv:
           type: integer
           format: int32
-          example: 1024
+        uv:
+          type: integer
+          format: int32
+        cvr:
+          type: integer
+          format: int32
       required:
-        - key
-        - pageviews
-    Transaction:
-      type: object
-      properties:
-        orderId:
-          type: string
-          format: uuid
-        timestamp:
-          $ref: '#/components/schemas/Timestamp'
-        username:
-          type: string
-          example: San Zhang
-        price:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-            - success
-            - pending
-      required:
-        - orderId
-        - timestamp
-        - username
-        - price
-        - status
+        - date
+        - pv
+        - uv
+        - cvr
     Role:
       type: object
       properties:
@@ -1013,11 +1000,7 @@ components:
         - password
         - roles
     Timestamp:
-      oneOf:
-      - type: integer
-        format: int32
-        example: 1559605283
-      - type: string
-        format: date-time
-        example: 2019-10-19T17:32:28Z
+      type: integer
+      format: int64
+      example: 1559605283000
     AnyValue: {}

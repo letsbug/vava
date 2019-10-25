@@ -78,7 +78,7 @@ export function generateAreas(pv: number) {
  * @param date
  * @returns {{date: *, uv: number, pv: number, cvr: number}}
  */
-export function generatePV(date: string | number | Date) {
+export function generatePV(date: number) {
   const pv = Math.floor(Math.random() * 8999 + 1000);
   const uv = generateUV(pv);
   const cvr = +(Math.random() * 0.5 + 0.4).toFixed(4);

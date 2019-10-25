@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "serve": "npm run serve:mock && npm run serve:dev",
+    "serve": "concurrently 'npm:serve:mock' 'npm:serve:dev'",
     "serve:mock": "cd mock && ts-node-dev mock-server.ts",
     "serve:dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -76,6 +76,8 @@
     "svg-sprite-loader": "^4.1.6",
     "svgo": "^1.3.0",
     "swagger-routes-express": "^3.0.5",
+    "swagger-ui": "^3.24.0",
+    "swagger-ui-dist": "^3.24.0",
     "ts-node-dev": "^1.0.0-pre.43",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
