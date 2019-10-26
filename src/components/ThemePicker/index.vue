@@ -46,7 +46,6 @@ export default class extends Vue {
   styles: IStateTheme = { ...IStoreSystem.theme };
 
   mounted() {
-    console.log(this.styles);
     if (!this.styles.color || !this.styles.type) {
       IStoreSystem.SetThemeDefault();
     } else {

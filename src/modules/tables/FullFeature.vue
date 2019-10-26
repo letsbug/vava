@@ -54,17 +54,17 @@
       empty-text="Sorry! This category have nothing data."
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="38" />
+      <el-table-column type="selection" width="42" />
       <el-table-column type="index" width="36" align="center" />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable />
-      <el-table-column label="CREATE" prop="display" width="116" sortable>
+      <el-table-column label="CREATE" prop="timestamp" width="116" sortable>
         <template slot-scope="scope">
-          {{ scope.row.display | dateAgo }}
+          {{ scope.row.timestamp | parseTimeGap }}
         </template>
       </el-table-column>
       <el-table-column label="AUTHOR" prop="author" width="104" show-overflow-tooltip sortable />
       <el-table-column label="AUDITOR" prop="auditor" width="110" show-overflow-tooltip sortable />
-      <el-table-column label="LEVEL" prop="level" width="90" align="center" sortable />
+      <el-table-column label="FROM" prop="source" width="90" align="center" sortable />
       <el-table-column
         label="STATUS"
         prop="status"
@@ -74,14 +74,14 @@
         class-name="has-actions actions-small"
       >
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | articleStatus" size="small">
-            {{ scope.row.status }}
+          <el-tag :type="scope.row.status | articleStatusStyles" size="small">
+            {{ scope.row.status | articleStatusNames }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="PV" prop="pv" width="66" sortable>
+      <el-table-column label="PAGEVIEWS" prop="pv" width="106" sortable align="center">
         <template slot-scope="scope">
-          {{ scope.row.pv | numberShort }}
+          {{ scope.row.pageviews | numberShort }}
         </template>
       </el-table-column>
       <el-table-column label="ACTIONS" width="165" class-name="has-actions actions-small">
@@ -90,7 +90,7 @@
             type="primary"
             size="small"
             icon="el-icon-check"
-            :disabled="scope.row.status === 'audited'"
+            :disabled="scope.row.status === 4"
             @click="handleBatchUpdate(true, scope.row)"
           />
           <el-button type="primary" size="small" icon="el-icon-edit" @click="handleEdit(scope.row)" />
@@ -197,7 +197,7 @@ export default class extends mixins(TableDemoMixins) {
         return v;
       });
       // this.pages = res.pages;
-      this.total = res.pages.total;
+      this.total = res.page.total;
       this.loading = false;
     });
   }

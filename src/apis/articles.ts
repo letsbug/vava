@@ -1,8 +1,8 @@
 import Request from '@/utils/request';
 
-export const apiList = (page: number, size: number, title?: string, level?: number, status?: number) => {
-  const params = { page, size, title, level, status };
-  return Request.post('/articles/list', params);
+export const apiList = (page: number, limit: number, title?: string, level?: number, status?: number) => {
+  const params = { page, limit, title, level, status };
+  return Request.get('/articles', { params });
 };
 
 export const apiDetail = (id: string) => {

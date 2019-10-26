@@ -34,10 +34,10 @@
       </el-table-column>
       <el-table-column label="CREATE" prop="display" width="116">
         <template slot-scope="scope">
-          {{ scope.row.display | dateAgo }}
+          {{ scope.row.timestamp | parseTimeGap }}
         </template>
       </el-table-column>
-      <el-table-column label="LEVEL" prop="level" width="60" align="center" />
+      <el-table-column label="FROM" prop="source" width="90" align="center" />
       <el-table-column
         label="STATUS"
         prop="status"
@@ -46,19 +46,19 @@
         class-name="has-actions actions-small table-status"
       >
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | articleStatus" size="small">
-            {{ scope.row.status }}
+          <el-tag :type="scope.row.status | articleStatusStyles" size="small">
+            {{ scope.row.status | articleStatusNames }}
           </el-tag>
         </template>
       </el-table-column>
       <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip />
       <el-table-column label="AUDITOR" prop="auditor" width="96" show-overflow-tooltip />
-      <el-table-column label="PV" prop="pv" width="60">
+      <el-table-column label="PAGEVIEWS" prop="pv" width="106" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pv | numberShort }}
+          {{ scope.row.pageviews | numberShort }}
         </template>
       </el-table-column>
-      <el-table-column label="ACTIONS" width="90" align="center" class-name="has-actions table-actions actions-small">
+      <el-table-column label="ACTIONS" width="100" align="center" class-name="has-actions table-actions actions-small">
         <template slot-scope="scope">
           <el-button
             v-if="scope.row.editing"
@@ -81,9 +81,9 @@
     <el-pagination
       v-if="list && list.length > 0"
       :page-sizes="[10, 30, 50]"
-      :current-page="pages.page"
-      :page-size="pages.size"
-      :total="pages.total"
+      :current-page="page"
+      :page-size="limit"
+      :total="total"
       class="excel-pagination"
       background
       layout="total, sizes, prev, pager, next, jumper"

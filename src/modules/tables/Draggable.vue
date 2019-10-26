@@ -13,21 +13,21 @@
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip />
       <el-table-column label="CREATE" prop="display" width="116">
         <template slot-scope="scope">
-          {{ scope.row.display | dateAgo }}
+          {{ scope.row.timestamp | parseTimeGap }}
         </template>
       </el-table-column>
       <el-table-column label="AUTHOR" prop="author" width="96" show-overflow-tooltip />
-      <el-table-column label="LEVEL" prop="level" width="60" align="center" />
+      <el-table-column label="FROM" prop="source" width="90" align="center" />
       <el-table-column label="STATUS" prop="status" width="100" align="center" class-name="has-actions actions-small">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | articleStatus" size="small">
-            {{ scope.row.status }}
+          <el-tag :type="scope.row.status | articleStatusStyles" size="small">
+            {{ scope.row.status | articleStatusNames }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="PV" prop="pv" width="66">
+      <el-table-column label="PAGEVIEWS" prop="pv" width="106" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pv | numberShort }}
+          {{ scope.row.pageviews | numberShort }}
         </template>
       </el-table-column>
       <el-table-column label="DRAG" width="66" align="center">
@@ -73,7 +73,7 @@ export default class extends mixins(TableDemoMixins) {
     this.loading = true;
     apiList(this.page, this.limit).then((res: any) => {
       this.list = res.data;
-      // this.pages = res.pages;
+      this.total = res.page.total;
       this.$nextTick(() => {
         this.sortSetup();
       });

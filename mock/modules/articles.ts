@@ -8,7 +8,7 @@ const total = 103;
 const editor = 'Tom';
 const auditor = 'John';
 
-const random = (index: number) => ({
+const random = (index: number): ITypeArticle => ({
   id: index,
   timestamp: faker.date.past().getTime(),
   author: editor,
@@ -27,6 +27,7 @@ for (let i = 0; i < total; i++) {
 
 export const getArticles = (req: Request, res: Response) => {
   let { title, page, limit } = req.query;
+  console.log(req.query);
   page = page || 1;
   limit = limit || 20;
 
