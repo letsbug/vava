@@ -59,26 +59,40 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Watch, Vue } from 'vue-property-decorator';
 import { Brand, LanguagePicker, UserPicker, Copyright } from '@/components';
 import { validAccount, validPassword } from '@/utils/validators';
 import { Form } from 'element-ui';
 import { IStoreUser, IStateUser } from '@/store/modules/user';
+import { Dictionary } from 'vue-router/types/router';
+import { Route } from 'vue-router';
 
 @Component({ name: 'Login', components: { Brand, LanguagePicker, UserPicker, Copyright } })
 export default class extends Vue {
   // metaInfo: { title: 'Sign in to Vava' }
-  backdrop: HTMLElement | undefined;
+  private backdrop: HTMLElement | undefined;
 
-  form = { username: '', password: '', remember: false };
-  rules = {
+  private form = { username: '', password: '', remember: false };
+  private rules = {
     username: [{ validator: validAccount, trigger: 'blur' }],
     password: [{ validator: validPassword, trigger: 'blur' }]
   };
-  loading = false;
-  password = true;
-  expires = 7;
-  userPickerVisible = false;
+  private loading: boolean = false;
+  private password: boolean = true;
+  private expires: number = 7;
+  private userPickerVisible: boolean = false;
+
+  private redirect?: string;
+  private queries: Dictionary<string> = {};
+
+  @Watch('$route', { immediate: true })
+  private onRouteChange(route: Route) {
+    const query = route.query as Dictionary<string>;
+    if (query) {
+      this.redirect = query.redirect;
+      this.queries = this.convertRouteQueries(query);
+    }
+  }
 
   mounted() {
     this.backdrop = this.$refs['appBackDrop'] as HTMLElement;
@@ -93,22 +107,35 @@ export default class extends Vue {
     this.loading = false;
   }
 
-  fillLoginForm(user: IStateUser) {
+  private fillLoginForm(user: IStateUser) {
     this.form.username = user.username;
     this.form.password = user.password;
     this.userPickerVisible = false;
     (this.$refs['loginForm'] as Form).validate();
   }
-  handleLogin() {
+
+  private handleLogin() {
     (this.$refs['loginForm'] as Form).validate(async (v: boolean) => {
       if (!v) return false;
       this.loading = true;
       await IStoreUser.Login(this.form);
-      (this.$message as any).closeAll();
-      this.$router.push((this.$route.query['redirect'] || '/') + '');
-      this.loading = false;
-      return true;
+      this.$router.replace({ path: this.redirect || '/', query: this.queries });
+      setTimeout(() => {
+        this.loading = false;
+      }, 0.5 * 1000);
     });
+  }
+
+  private convertRouteQueries(query: Dictionary<string>) {
+    return Object.keys(query).reduce(
+      (acc, cur) => {
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur];
+        }
+        return acc;
+      },
+      {} as Dictionary<string>
+    );
   }
 }
 </script>

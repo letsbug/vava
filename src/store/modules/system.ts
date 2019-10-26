@@ -140,15 +140,6 @@ class System extends VuexModule implements IStateSystem {
       this.SET_THEME(themes);
     });
   }
-
-  @Action
-  public SetThemeDefault() {
-    const normally: IStateTheme = {
-      type: 'normally',
-      color: '#28a745'
-    };
-    this.SetThemes(normally);
-  }
 }
 
 export const IStoreSystem = getModule(System);

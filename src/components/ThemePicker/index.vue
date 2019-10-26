@@ -40,34 +40,45 @@ import { IStoreSystem, IStateTheme } from '@/store/modules/system';
 
 @Component({ name: 'ThemePicker' })
 export default class extends Vue {
-  stylePresets: string[] = ['normally', 'light'];
-  colorPresets: string[] = ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'];
+  private stylePresets: string[] = ['normally', 'light'];
+  private colorPresets: string[] = [
+    '#dc3545',
+    '#fe613c',
+    '#ffc107',
+    '#4ec1fa',
+    '#28a745',
+    '#007bff',
+    '#2f54eb',
+    '#6f42c1'
+  ];
 
-  styles: IStateTheme = { ...IStoreSystem.theme };
+  private styles: IStateTheme = { ...IStoreSystem.theme };
 
   mounted() {
     if (!this.styles.color || !this.styles.type) {
-      IStoreSystem.SetThemeDefault();
+      this.restoreDefault();
     } else {
       IStoreSystem.SetThemes(this.styles);
     }
   }
 
-  onColorPickerChange(val: any) {
+  private onColorPickerChange(val: any) {
     if (!val) this.styles.color = this.colorPresets[4];
   }
 
-  handleSubmit() {
+  private handleSubmit() {
     this.handleHideThemePicker();
     IStoreSystem.SetThemes({ ...this.styles });
   }
 
-  restoreDefault() {
+  private restoreDefault() {
     this.handleHideThemePicker();
-    IStoreSystem.SetThemeDefault();
+    const themes: IStateTheme = { type: this.stylePresets[0], color: this.colorPresets[4] };
+    this.styles = themes;
+    IStoreSystem.SetThemes(themes);
   }
 
-  handleHideThemePicker() {
+  private handleHideThemePicker() {
     document.documentElement.click();
   }
 }

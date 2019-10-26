@@ -56,7 +56,7 @@ class User extends VuexModule implements IStateUser {
   public id: string | number = '';
   public username: string = '';
   public password: string = '';
-  public token?: string = getUserToken();
+  public token: string = getUserToken() || '';
   public expire: number = 7;
   public roles: ITypeRoles[] = [];
   public nickname?: string = '';
@@ -75,7 +75,7 @@ class User extends VuexModule implements IStateUser {
 
   @Mutation
   private SET_TOKEN(token: string) {
-    this.token = token || '';
+    this.token = token;
   }
 
   @Mutation

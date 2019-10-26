@@ -1,3 +1,4 @@
+import { networkInterfaces } from 'os';
 import express from 'express';
 import bodyParser from 'body-parser';
 import compression from 'compression';
@@ -12,7 +13,21 @@ import { authAccessToken } from './security';
 const app = express();
 const port = 9091;
 const { connector, summarise } = require('swagger-routes-express');
-// const SwaggerUi = require('swagger-ui-dist').absolutePath();
+const ip = ((): string => {
+  const network = networkInterfaces();
+  let ip = '';
+  for (const devName in network) {
+    const ifc = network[devName];
+    for (let i = 0; i < ifc.length; i++) {
+      const alias = ifc[i];
+      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+        ip = alias.address;
+        break;
+      }
+    }
+  }
+  return ip;
+})();
 
 // Compression
 app.use(compression());
@@ -80,4 +95,6 @@ function onError(error: any) {
 // Listen on provided port, on all network interfaces.
 server.listen(port);
 server.on('error', onError);
-console.log('Mock server started on port ' + port + '!');
+console.log('  Mock server running at:');
+console.log(`  - Local:   http://localhost:${port}`);
+console.log(`  - Network: http://${ip}:${port}`);
