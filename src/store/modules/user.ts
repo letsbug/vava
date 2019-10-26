@@ -11,7 +11,8 @@ const TOKEN_EXPIRE =
 
 export enum ITypeSex {
   female,
-  male
+  male,
+  unknown
 }
 
 export enum ITypeRoles {

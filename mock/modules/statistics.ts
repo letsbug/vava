@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Response, Request } from 'express';
 import { IResponses } from '../response';
-import { generatePV, generateAreas, generateAges, generateTraffics } from './pv-generator';
+import { ITypeStatistics, ITypeStatisticsBasic, ITypeStatisticsArea } from '@/apis/types';
+import { generatePV, generateAreas } from './pv-generator';
 
-const count = 365 * 2; // 2 years
-const pageViews: any = [];
+const count = 365;
+const pageViews: ITypeStatisticsBasic[] = [];
 
 const oneDay = 24 * 3600 * 1000;
 let now = new Date().getTime();
@@ -13,52 +14,30 @@ for (let i = 0; i < count; i++) {
   pageViews.push(generatePV(now));
 }
 
-const isInRange = (start: number, end: number, curr: number) => {
-  return curr >= start && curr <= end;
-};
-const convertParams = (req: Request) => {
-  let { start, end } = req.body;
-
+const beforeFilter = (req: Request) => {
+  let { start, end } = req.query;
   if (!start || !end) {
     end = new Date().getTime();
     start = new Date().getTime() - oneDay * 30;
   }
-
   return { start, end };
 };
 
-export const getTotalCounts = (req: Request, res: Response) => {
-  const { start, end } = convertParams(req);
-  let pv = 0;
-  let uv = 0;
-  let cvr = 0;
+export const getPageViews = (req: Request, res: Response) => {
+  let { start, end } = beforeFilter(req);
 
-  pageViews.forEach((v: any) => {
-    if (isInRange(start, end, v.date)) {
-      pv += v.pv;
-      uv += v.uv;
-      cvr += v.cvr;
-    }
+  let totalPv = 0;
+  const data = pageViews.filter(v => {
+    totalPv += v.pv;
+    return v.date >= start && v.date <= end;
   });
+  const areas = generateAreas(totalPv);
 
   const _res = IResponses.STATUS_SUCCESS;
-  _res.data = { pv, uv, cvr };
+  _res.data = { basic: data, areas } as ITypeStatistics;
+  _res.page = undefined;
+
   return res.json(_res);
 };
 
-export const getPageviews = (req: Request, res: Response) => {
-  const { start, end } = convertParams(req);
-
-  const data = pageViews.filter((v: any) => {
-    return isInRange(start, end, v.date);
-  });
-
-  // const areas = generateAreas(totalPV);
-  // const ages = generateAges(totalUV);
-  // const traffics = generateTraffics(totalPV);
-
-  const _res = IResponses.STATUS_SUCCESS;
-  _res.data = data;
-
-  return res.json(_res);
-};
+export const getAgesCounts = (req: Request, res: Response) => {};

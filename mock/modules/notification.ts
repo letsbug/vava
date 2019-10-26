@@ -10,7 +10,8 @@ const random = (index: number) => ({
   id: index,
   title: faker.lorem.sentence(6, 10),
   timestamp: faker.date.past().getTime(),
-  isUnread: faker.random.boolean()
+  isUnread: faker.random.boolean(),
+  from: faker.random.arrayElement(['system', 'user-a', 'user-b', 'user-c'])
 });
 
 for (let i = 0; i < total; i++) {
@@ -27,7 +28,7 @@ export const getNotificationsUnreadCount = (req: Request, res: Response) => {
 
 export const getNotifications = (req: Request, res: Response) => {
   const { page, limit } = req.query;
-  const list = notifications.filter((v, i) => i < page * limit && i >= page * (limit - 1));
+  const list = notifications.filter((v, i) => i < page * limit && i >= limit * (page - 1));
 
   const _res = IResponses.STATUS_SUCCESS;
   _res.data = list;

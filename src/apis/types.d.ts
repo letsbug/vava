@@ -7,19 +7,38 @@ export enum ITypeArticleStatus {
   deleted
 }
 
-export interface ITypeChartData {
-  key: string;
-  value: number | string;
+export interface ITypeStatisticsGender {
+  male: number;
+  female: number;
+  unknown: number;
+}
+
+export interface ITypeStatisticsArea {
+  name: string;
+  value: number;
+}
+
+export interface ITypeStatisticsTraffic {
+  type: 'source' | 'interview';
+  url: string;
+  pageviews: number;
+}
+
+export interface ITypeStatisticsBasic {
+  date: number;
+  pv: number;
+  uv: number;
+  cvr: number;
 }
 
 export interface ITypeStatistics {
-  pv: any;
-  uv: any;
-  cvr: any;
+  basic: ITypeStatisticsBasic[];
+  areas: ITypeStatisticsArea[];
 }
 
 export interface ITypeNotification {
   id: string | number;
+  from: string;
   title: string;
   timestamp: Date | string | number;
   isUnread: boolean;

@@ -12,7 +12,7 @@ import { authAccessToken } from './security';
 const app = express();
 const port = 9091;
 const { connector, summarise } = require('swagger-routes-express');
-const SwaggerUi = require('swagger-ui-dist').absolutePath();
+// const SwaggerUi = require('swagger-ui-dist').absolutePath();
 
 // Compression
 app.use(compression());
@@ -23,7 +23,7 @@ app.use(cors());
 // POST, PUT, DELETE body parser
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
-app.use(express.static(SwaggerUi));
+// app.use(express.static(SwaggerUi));
 // No cache
 app.use((req, res, next) => {
   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -50,11 +50,8 @@ console.log(apiSummary);
 
 // Catch 404 error
 app.use((req, res) => {
-  const err = new Error('Not Found');
-  res.status(404).json({
-    message: err.message,
-    error: err
-  });
+  const error = new Error('Not Found');
+  res.status(404).json({ message: error.message, error });
 });
 
 // Create HTTP server.

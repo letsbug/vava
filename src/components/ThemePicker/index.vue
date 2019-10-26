@@ -43,9 +43,10 @@ export default class extends Vue {
   stylePresets: string[] = ['normally', 'light'];
   colorPresets: string[] = ['#dc3545', '#fe613c', '#ffc107', '#4ec1fa', '#28a745', '#007bff', '#2f54eb', '#6f42c1'];
 
-  styles: IStateTheme = IStoreSystem.theme;
+  styles: IStateTheme = { ...IStoreSystem.theme };
 
   mounted() {
+    console.log(this.styles);
     if (!this.styles.color || !this.styles.type) {
       IStoreSystem.SetThemeDefault();
     } else {
@@ -54,13 +55,12 @@ export default class extends Vue {
   }
 
   onColorPickerChange(val: any) {
-    console.log(val);
     if (!val) this.styles.color = this.colorPresets[4];
   }
 
   handleSubmit() {
     this.handleHideThemePicker();
-    IStoreSystem.SetThemes(this.styles);
+    IStoreSystem.SetThemes({ ...this.styles });
   }
 
   restoreDefault() {

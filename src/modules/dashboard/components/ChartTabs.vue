@@ -39,8 +39,8 @@ import ICountTo from 'vue-count-to';
 @Component({ name: 'ChartTabs', components: { ICountTo } })
 export default class extends mixins(EChartsMixins) {
   @Prop({ required: true }) title!: string;
-  @Prop({ required: true }) category!: Array<any>;
-  @Prop({ default: null }) total!: number | null;
+  @Prop({ required: true }) category!: Array<number>;
+  @Prop({ required: true }) total!: number;
   // Overwrite mixins
   @Prop({ default: null }) chartData!: Array<any>;
   @Prop({ default: 'normal' }) dataType!: string;

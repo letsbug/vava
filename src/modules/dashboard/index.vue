@@ -27,7 +27,7 @@
     <!-- panel groups -->
     <el-row :gutter="panelGutter" class="panel-groups">
       <template v-for="(key, i) in Object.keys(data)">
-        <el-col :key="key" :xs="6" :sm="6" :lg="6">
+        <el-col :key="i" :xs="6" :sm="6" :lg="6">
           <chart-tabs
             ref="panel_chart"
             :title="$t(`dashboard.${key}`)"
@@ -72,15 +72,21 @@ import { IStoreSystem, DeviceType } from '@/store/modules/system';
 import { getPaveViews } from '@/apis/statistics';
 import EChartsMixins from './components/mixins';
 import { ElLoadingComponent } from 'element-ui/types/loading';
+import { ITypeStatistics, ITypeStatisticsArea, ITypeStatisticsBasic } from '@/apis/types';
 
 @Component({ name: 'Dashboard', components: { ChartTabs, ChartDetails, ChartAges, TrafficAnalysis } })
 export default class extends Vue {
   // metaInfo: { title: 'Dashboard' },
+  private loadingInstance: ElLoadingComponent = Loading.service({
+    lock: true,
+    text: 'loading...',
+    background: 'rgba(255, 255, 255, .5)'
+  });
 
   dateRange = 31;
   datePreset = [31, 61, 92, 183, 365];
   profilePreset = ['pv', 'sales'];
-  category: any[] = [];
+  category: number[] = [];
   data: { [key: string]: any } = {
     pv: { total: 0, data: [] },
     uv: { total: 0, data: [] },
@@ -93,15 +99,13 @@ export default class extends Vue {
     },
     countries: { total: 0, data: [] }
   };
-  activeIndex = 0;
+  activeIndex: number = 0;
   detailData = [];
   attach = {
     ages: [],
     sources: [],
     interviews: []
   };
-
-  loadingInstance!: ElLoadingComponent;
 
   get isMobile() {
     return IStoreSystem.device === DeviceType.Mobile;
@@ -111,13 +115,9 @@ export default class extends Vue {
   }
 
   mounted() {
-    this.loadingInstance = Loading.service({
-      lock: true,
-      text: 'loading...',
-      background: 'rgba(255, 255, 255, .5)'
-    });
-    this.requestPv();
+    this.requestPageViews();
   }
+
   updated() {
     this.checkDetails();
     (this.$refs['chartAges'] as EChartsMixins).draw();
@@ -128,36 +128,45 @@ export default class extends Vue {
     (this.$refs['chartDetails'] as EChartsMixins).draw();
   }
 
-  requestPv() {
+  requestPageViews() {
     getPaveViews().then((res: any) => {
-      this.loadingInstance.close();
-
       if (!res.success) return;
 
-      this.data.pv.total = res.totalPV;
-      this.data.uv.total = res.totalUV;
-      this.data.cvr.total = res.averageCVR;
-      this.data.countries.total = res.areas.length;
+      const { basic, areas } = res.data as ITypeStatistics;
+      // this.data.countries.total = res.areas.length;
 
-      res.data.forEach((v: any) => {
+      basic.forEach(v => {
         this.category.push(v.date);
+
         this.data.pv.data.push(v.pv);
+        this.data.pv.total += v.pv;
+
         this.data.uv.data.push(v.uv);
+        this.data.uv.total += v.uv;
+
         this.data.cvr.data.push((v.cvr * 100).toFixed(2));
+        this.data.cvr.total += v.cvr;
       });
 
-      this.data.countries.data = res.areas;
-      this.attach.ages = res.ages;
-      this.attach.sources = res.traffics.source;
-      this.attach.interviews = res.traffics.interview;
+      this.data.cvr.total = this.data.cvr.total / basic.length;
+
+      this.data.countries.data = areas;
+      this.data.countries.total = areas.length;
+      // this.attach.ages = res.ages;
+      // this.attach.sources = res.traffics.source;
+      // this.attach.interviews = res.traffics.interview;
 
       if (!this.isMobile) {
         (this.$refs['panel_chart'] as EChartsMixins[]).forEach(cop => {
           cop.draw();
         });
       }
+
+      this.loadingInstance.close();
     });
   }
+
+  requestAgesCounts() {}
 }
 </script>
 

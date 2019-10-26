@@ -18,7 +18,7 @@ const dashboard: RouteConfig = {
         title: 'dashboard',
         icon: 'chart-dashboard',
         roles: [ITypeRoles.systemAdmin, ITypeRoles.superAdmin],
-        nobg: true,
+        withoutBackground: true,
         nocache: true
       },
       component: () => import('@/modules/dashboard/index.vue')

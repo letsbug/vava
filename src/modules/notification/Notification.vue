@@ -39,13 +39,13 @@
       </el-table-column>
       <el-table-column width="160" label="date">
         <template slot-scope="scope">
-          <span>{{ scope.row.date | dateFormat('yyyy.MM.dd hh:mm:ss') }}</span>
+          <span>{{ scope.row.timestamp | parseDate('yyyy.MM.dd hh:mm:ss') }}</span>
         </template>
       </el-table-column>
       <el-table-column width="120" label="date">
         <template slot-scope="scope">
           <span :class="transUnreadClass(scope.row)">
-            {{ scope.row.date | dateAgo }}
+            {{ scope.row.timestamp | parseTimeGap }}
           </span>
         </template>
       </el-table-column>
@@ -81,7 +81,7 @@ export default class extends Vue {
   }
 
   transUnreadClass(row: ITypeNotification) {
-    return row.isUnread ? 'unread' : '';
+    return { unread: row.isUnread };
   }
 
   handleShowDetail(row: ITypeNotification) {

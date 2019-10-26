@@ -53,3 +53,11 @@ export const getArticle = (req: Request, res: Response) => {
   _res.data = articles.find(v => v.id === id);
   return res.json(_res);
 };
+
+export const createArticle = (req: Request, res: Response) => {
+  return res.json(IResponses.STATUS_SUCCESS);
+};
+
+export const updateArticle = (req: Request, res: Response) => {
+  return res.json(IResponses.STATUS_SUCCESS);
+};

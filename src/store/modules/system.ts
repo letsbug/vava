@@ -91,8 +91,11 @@ class System extends VuexModule implements IStateSystem {
   }
 
   @Mutation
-  private SET_THEME(type: string, color: string) {
-    this.theme = { type, color };
+  private SET_THEME(theme: IStateTheme) {
+    const { type, color } = theme;
+    if (this.theme.type !== type || this.theme.color !== color) {
+      this.theme = theme;
+    }
   }
 
   //
@@ -134,7 +137,7 @@ class System extends VuexModule implements IStateSystem {
     const { type, color } = themes;
     themeTool.set(themes).then(() => {
       setThemes(type, color);
-      this.SET_THEME(type, color);
+      this.SET_THEME(themes);
     });
   }
 

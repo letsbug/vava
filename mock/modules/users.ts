@@ -89,6 +89,10 @@ export const getMeInfo = (req: Request, res: Response) => {
   return res.json(_res);
 };
 
+export const registerUser = (req: Request, res: Response) => {
+  return res.json(IResponses.STATUS_SUCCESS);
+};
+
 export const updateUser = (req: Request, res: Response) => {
   return res.json(IResponses.STATUS_SUCCESS);
 };
