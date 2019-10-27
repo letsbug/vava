@@ -3,7 +3,7 @@
     <el-table
       v-loading="loading"
       :data="list"
-      :default-sort="{ prop: 'display', order: 'descending' }"
+      :default-sort="{ prop: 'timestamp', order: 'descending' }"
       tooltip-effect="theme"
       fit
       highlight-current-row
@@ -11,7 +11,7 @@
     >
       <el-table-column type="index" width="36" align="right" sortable />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip sortable />
-      <el-table-column label="CREATE" prop="display" width="116" sortable>
+      <el-table-column label="CREATE" prop="timestamp" width="116" sortable>
         <template slot-scope="scope">
           {{ scope.row.timestamp | parseTimeGap }}
         </template>
@@ -32,7 +32,7 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="PAGEVIEWS" prop="pv" width="106" sortable align="center">
+      <el-table-column label="PAGEVIEWS" prop="pageviews" width="126" sortable align="center">
         <template slot-scope="scope">
           {{ scope.row.pageviews | numberShort }}
         </template>
@@ -41,7 +41,7 @@
 
     <el-pagination
       v-if="list && list.length > 0"
-      :page-sizes="[10, 30, 50]"
+      :page-sizes="sizes"
       :current-page="page"
       :page-size="limit"
       :total="total"

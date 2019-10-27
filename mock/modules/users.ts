@@ -64,14 +64,10 @@ export const getUsers = (req: Request, res: Response) => {
     nickname = nickname.toLowerCase();
   }
   const list = userList.filter(u => {
-    let is = true;
-    if (nickname) {
-      is = u.nickname!.toLowerCase().includes(nickname);
+    if (nickname && !u.nickname!.toLowerCase().includes(nickname)) {
+      return false;
     }
-    if (phone) {
-      is = phone === u.phone;
-    }
-    return is;
+    return !(phone && phone !== u.phone);
   });
 
   const _res = IResponses.STATUS_SUCCESS;

@@ -47,8 +47,8 @@ export interface ITypeNotification {
 export interface ITypeArticle {
   id: string | number;
   timestamp: number;
-  author: string | number;
-  auditor?: string | number;
+  author: string;
+  auditor?: string;
   title: string;
   summery?: string;
   content: string;

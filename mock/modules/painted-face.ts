@@ -2,8 +2,9 @@ import faker from 'faker';
 import { Request, Response } from 'express';
 import { IResponses } from '../response';
 import { ITypePaintedFace } from '@/apis/types';
+import Dictionary from './dictionaries';
 
-const editors = ['Tom', 'Karen', 'Jennifer', 'Anna', 'Peter'];
+const editors = Dictionary.username;
 const now = new Date();
 now.setDate(now.getDate() - 1);
 

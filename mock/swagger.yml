@@ -247,6 +247,16 @@ paths:
           description: Used to filter articles by matched title substring.
           schema:
             $ref: '#/components/schemas/Article/properties/title'
+        - name: status
+          in: query
+          description: Used to filter articles by status.
+          schema:
+            $ref: '#/components/schemas/Article/properties/status'
+        - name: author
+          in: query
+          description: Used to filter articles by matched username substring.
+          schema:
+            type: string
         - name: page
           in: query
           description: The wanted page number (one page).
@@ -342,32 +352,21 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: article
-          in: query
+        - name: title
+          in: body
           required: true
           description: data for the updated article.
           schema:
-            $ref: '#/components/schemas/Article'
+            type: string
       responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: integer
-                    format: int16
-                  data:
-                    type: object
-                    properties:
-                      article:
-                        $ref: '#/components/schemas/Article'
+        default:
+          description: register successfully
+          content: {}
         401:
           $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/NotFound'
+        x-codegen-request-body-name: body
     delete:
       tags:
         - articles

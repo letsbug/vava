@@ -23,7 +23,10 @@ const originSite = ['google.com', 'bing.com', 'yahoo.com', 'sogou.com', 'github.
 
 const pages = ['/home', '/dashboard', '/permission', '/table', '/excel', '/icons'];
 
+const username: string[] = ['Tom', 'Karen', 'Jennifer', 'Anna', 'Peter'];
+
 export default {
+  username,
   countries,
   ages,
   originSite,

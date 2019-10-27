@@ -26,11 +26,14 @@ const articleStatusNames = (status: number) => {
   return statusMap[status];
 };
 
+const sizesPreset = [15, 30, 50];
+
 @Component({ name: 'TableDemoMixins', filters: { articleStatusStyles, articleStatusNames } })
 export default class extends Vue {
   protected loading: boolean = false;
+  protected sizes: number[] = sizesPreset;
   protected page: number = 1;
-  protected limit: number = 15;
+  protected limit: number = sizesPreset[0];
   protected total: number = 0;
   protected list: any[] = [];
 

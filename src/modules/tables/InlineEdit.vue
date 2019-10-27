@@ -32,7 +32,7 @@
           </transition-group>
         </template>
       </el-table-column>
-      <el-table-column label="CREATE" prop="display" width="116">
+      <el-table-column label="CREATE" prop="timestamp" width="116">
         <template slot-scope="scope">
           {{ scope.row.timestamp | parseTimeGap }}
         </template>
@@ -80,7 +80,7 @@
 
     <el-pagination
       v-if="list && list.length > 0"
-      :page-sizes="[10, 30, 50]"
+      :page-sizes="sizes"
       :current-page="page"
       :page-size="limit"
       :total="total"
@@ -105,7 +105,7 @@ export default class extends mixins(TableDemoMixins) {
   handleEdit(row: any) {
     row.submitting = true;
     row.originalTitle = row.title;
-    apiUpdate({ id: row.id, title: row.title }).then((res: any) => {
+    apiUpdate(row.id, row.title).then((res: any) => {
       if (res.success) row.editing = false;
       this.$message({
         type: res.success ? 'success' : 'error',

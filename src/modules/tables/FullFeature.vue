@@ -6,20 +6,18 @@
       </el-form-item>
       <el-form-item>
         <el-select v-model="filterData.status" value="" placeholder="Status" style="width: 120px;">
-          <el-option v-for="(st, i) in statusMap" :key="st" :label="st" :value="i === 0 ? null : st" />
+          <el-option v-for="(st, i) in statusMap" :key="st" :label="st" :value="i" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-select v-model="filterData.level" value="" placeholder="Level" style="width: 80px;">
-          <el-option v-for="(lv, i) in levelMap" :key="lv" :label="lv" :value="i === 0 ? null : lv" />
-        </el-select>
+        <el-input v-model="filterData.author" placeholder="Author" clearable />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="getList">
           Search
         </el-button>
       </el-form-item>
-      <el-form-item>
+      <el-form-item class="float-r">
         <el-button-group style="vertical-align: top;">
           <el-button type="primary" icon="el-icon-plus" @click="handleEdit()">
             Add
@@ -79,7 +77,7 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="PAGEVIEWS" prop="pv" width="106" sortable align="center">
+      <el-table-column label="PAGEVIEWS" prop="pageviews" width="126" sortable align="center">
         <template slot-scope="scope">
           {{ scope.row.pageviews | numberShort }}
         </template>
@@ -100,8 +98,8 @@
     </el-table>
 
     <el-pagination
-      v-if="list && list.length > 0"
-      :page-sizes="[10, 30, 50]"
+      v-if="list && list.length >= limit"
+      :page-sizes="sizes"
       :current-page="page"
       :page-size="limit"
       :total="total"
@@ -112,7 +110,7 @@
       @current-change="handlePageChange"
     />
 
-    <el-dialog :visible.sync="dialogVisible" :title="`Article ${editForm.isEdit ? 'Edit' : 'Add'}`" width="50%">
+    <el-dialog :visible.sync="dialogVisible" :title="`Article ${editForm.isEdit ? 'Edit' : 'Add'} Form`" width="50%">
       <el-form :model="editForm" label-width="80px" style="margin-right: 60px">
         <el-form-item label="Title" prop="title">
           <el-input v-model="editForm.title" placeholder="Article title" />
@@ -122,13 +120,6 @@
         </el-form-item>
         <el-form-item label="Content" prop="content">
           <el-input v-model="editForm.content" placeholder="Article content" />
-        </el-form-item>
-        <el-form-item label="Level" prop="level">
-          <el-select v-model="editForm.level" value placeholder="Article level">
-            <template v-for="(lv, i) in levelMap">
-              <el-option v-if="i !== 0" :key="lv" :label="lv" :value="lv" />
-            </template>
-          </el-select>
         </el-form-item>
         <el-form-item label="Auditor" prop="auditor">
           <el-autocomplete
@@ -155,20 +146,22 @@
 import { Component } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import TableDemoMixins from './mixins';
-import { apiList, apiUpdates, apiAuditors } from '@/apis/articles';
+import { apiList, apiUpdates } from '@/apis/articles';
 import { MessageType } from 'element-ui/types/message';
 import { IStoreUser } from '@/store/modules/user';
+
+const statusMap = ['all status', 'draft', 'committed', 'failing', 'auditing', 'audited', 'deleted'];
 
 @Component({ name: 'FullFeature' })
 export default class extends mixins(TableDemoMixins) {
   // metaInfo: { title: 'Sortable table' }
 
-  filterData = { title: '', status: 0, level: 0 };
-  statusMap = ['all', 'draft', 'committed', 'failing', 'auditing', 'audited', 'deleted'];
+  statusMap = statusMap;
+  filterData = { title: '', status: 0, author: '' };
   levelMap = ['all', 1, 2, 3, 4, 5];
   selected: any[] = [];
   dialogVisible = false;
-  auditors = [];
+  auditors: any[] = ['Tom', 'Karen', 'Jennifer', 'Anna', 'Peter'];
   editForm: any = null;
 
   created() {
@@ -176,19 +169,15 @@ export default class extends mixins(TableDemoMixins) {
   }
 
   mounted() {
-    apiAuditors().then(res => {
-      this.auditors = res.data.map((v: any) => {
-        this.$set(v, 'value', v.username);
-        return v;
-      });
+    this.auditors = this.auditors.map((v: any) => {
+      return { value: v };
     });
   }
 
   getList() {
     this.loading = true;
-    const { title, level, status } = this.filterData;
-
-    apiList(this.page, this.limit, title, level, status).then((res: any) => {
+    let { title, author, status } = this.filterData;
+    apiList(this.page, this.limit, title, author, status === 0 ? undefined : status - 1).then((res: any) => {
       if (!res.success) return;
       this.list = res.data.map((v: any) => {
         this.$set(v, 'editing', false);
@@ -211,7 +200,6 @@ export default class extends mixins(TableDemoMixins) {
       title: '',
       summery: '',
       content: '',
-      level: '',
       auditor: ''
     };
   }
