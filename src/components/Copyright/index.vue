@@ -1,6 +1,6 @@
 <template>
   <div class="va-copyright">
-    <small>© 2018 letsbug.</small>
+    <small>© {{ new Date().getFullYear() }} letsbug.</small>
   </div>
 </template>
 

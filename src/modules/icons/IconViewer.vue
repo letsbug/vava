@@ -9,7 +9,7 @@
       <el-col v-for="icon of icons" :key="icon" :xl="3" :lg="4" :md="6" :sm="6" :xs="8">
         <div class="grid-content" @click="clipboard(generateIconCode(icon), $event)">
           <div class="va-panels has-interaction icon-item">
-            <va-icon :icon="icon" />
+            <va-icon class="disabled" :icon="icon" />
             <span>{{ icon }}</span>
           </div>
         </div>
@@ -60,5 +60,9 @@ export default class extends Vue {
       font-size: $font-size-h6;
     }
   }
+}
+
+.disabled {
+  pointer-events: none;
 }
 </style>
