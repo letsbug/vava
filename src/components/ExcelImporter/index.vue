@@ -48,9 +48,9 @@ import { Input } from 'element-ui';
 @Component({ name: 'ExcelImporter' })
 export default class extends Vue {
   // Allow import by drag and drop one file
-  @Prop() enableDragDrop: boolean = false;
-  @Prop() beforeImport: Function | null = null;
-  @Prop() onSuccess: Function | null = null;
+  @Prop({ default: false }) enableDragDrop!: boolean;
+  @Prop({ default: null }) beforeImport!: Function | null;
+  @Prop({ default: null }) onSuccess!: Function | null;
 
   working: boolean = false;
   file: File | null = null;

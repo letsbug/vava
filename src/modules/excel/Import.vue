@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <excel-importer :before-import="beforeImport" :on-success="onSuccess" enable-drag-drop />
+    <excel-importer :before-import="beforeImport" :on-success="onSuccess" :enable-drag-drop="true" />
     <br />
     <el-table
       :empty-text="$t('excelImport.emptyHint')"
