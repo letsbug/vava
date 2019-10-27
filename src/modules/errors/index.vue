@@ -26,7 +26,7 @@ export default class extends Vue {
 
   get flag() {
     const random = Math.floor(Math.random() * 4 + 1);
-    return `./static/images/errors/err-${random}.gif`;
+    return `./assets/img/errors/${this.code}.gif`;
   }
 
   get noGoBack() {

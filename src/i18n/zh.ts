@@ -189,9 +189,7 @@ export default {
     filename: '文件名',
     fileType: '文件类型',
     autoWidth: '自动列宽',
-    execute: '导出',
-    currentPage: '当前页',
-    allPages: '所有页'
+    execute: '导出'
   },
   excelImport: {
     browse: '浏览',

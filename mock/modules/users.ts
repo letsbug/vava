@@ -7,12 +7,14 @@ export const userList: IStateUser[] = [];
 const count = 20;
 const roles: number[] = [0, 1, 2, 3, 4, 5, 6];
 const passwordPreset = 'a12345678';
+const now = new Date().getTime();
 
 function generateUser(index: number) {
   const phone = faker.phone.phoneNumber();
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
   const avatar = index < roles.length ? `./assets/img/avatars/${index + 1}.gif` : undefined;
+  const birthday = faker.date.past().getTime();
 
   return {
     id: index,
@@ -26,7 +28,13 @@ function generateUser(index: number) {
     qq: faker.random.number({ min: 100000000, max: 20000000000 }),
     avatar,
     sex: faker.random.arrayElement([0, 1]), // 0: female, 1: male
-    intro: faker.lorem.sentence(6, 10)
+    intro: faker.lorem.sentence(6, 10),
+    birthday,
+    age: (now - birthday) / 1000 / 60 / 60 / 24 / 365,
+    height: faker.random.number(200),
+    weight: faker.random.number(200),
+    city: faker.address.city(),
+    postcode: faker.address.zipCode()
   };
 }
 
@@ -72,6 +80,7 @@ export const getUsers = (req: Request, res: Response) => {
 
   const _res = IResponses.STATUS_SUCCESS;
   _res.data = list;
+  _res.page = undefined;
   return res.json(_res);
 };
 

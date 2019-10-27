@@ -19,50 +19,37 @@
       <el-form-item :label="$t('excelExport.autoWidth')">
         <el-switch v-model="exportOpts.cellAutoWidth" />
       </el-form-item>
-      <el-form-item :label="$t('excelExport.execute')">
-        <el-button-group style="vertical-align: top;">
-          <el-button :disabled="exportOpts.exporting" type="primary" @click="handleExport(list)">
-            {{ $t('excelExport.currentPage') }}
-          </el-button>
-          <el-button :disabled="exportOpts.exporting" type="primary" @click="handleExportAll">
-            {{ $t('excelExport.allPages') }}
-          </el-button>
-        </el-button-group>
-        <i v-show="exportOpts.exporting" class="el-icon-loading export-handler-loading"></i>
+      <el-form-item class="float-r">
+        <el-button
+          :disabled="exportOpts.exporting"
+          :loading="exportOpts.exporting"
+          type="primary"
+          @click="handleExport(list)"
+        >
+          {{ $t('excelExport.execute') }}
+        </el-button>
       </el-form-item>
     </el-form>
 
     <!-- table list -->
     <el-table v-loading="loading" :data="list" tooltip-effect="light">
-      <el-table-column prop="name" label="name" width="120" show-overflow-tooltip />
-      <el-table-column prop="card" label="ID Card" show-overflow-tooltip />
-      <el-table-column prop="city" label="city" width="70" show-overflow-tooltip />
-      <el-table-column prop="postcode" label="zip" width="70" />
-      <el-table-column prop="tel" label="tel" width="110" />
-      <el-table-column prop="mobile" label="mobile" width="105" />
-      <el-table-column prop="fax" label="fax" width="110" />
-      <el-table-column prop="email" label="email" show-overflow-tooltip />
+      <el-table-column prop="nickname" label="name" width="120" show-overflow-tooltip />
+      <el-table-column prop="city" label="city" width="120" show-overflow-tooltip />
+      <el-table-column prop="postcode" label="zip" width="100" />
+      <el-table-column prop="phone" label="tel" width="100" show-overflow-tooltip />
+      <el-table-column prop="sex" label="sex" width="110">
+        <template slot-scope="scope">{{ ['female', 'male'][scope.row.sex] }}</template>
+      </el-table-column>
       <el-table-column prop="qq" label="QQ" width="110" />
-      <el-table-column prop="company" label="company" show-overflow-tooltip />
+      <el-table-column prop="email" label="email" show-overflow-tooltip />
+      <el-table-column prop="intro" label="intro" show-overflow-tooltip />
     </el-table>
-
-    <el-pagination
-      v-if="list && list.length > 0"
-      :page-sizes="[10, 30, 50]"
-      :current-page="pages.page"
-      :page-size="pages.size"
-      :total="pages.total"
-      layout="total, sizes, prev, pager, next, jumper"
-      class="excel-pagination"
-      @size-change="handleSizeChange"
-      @current-change="handlePageChange"
-    />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { apiContactAll, apiContactList } from '@/apis/contacts';
+import { apiUserMocks } from '@/apis/account';
 import { parseDate, parseTimeGap } from '@/utils/datetime';
 import { exportJson2Excel } from '@/vendor/export-excel';
 
@@ -71,35 +58,23 @@ export default class extends Vue {
   filenameDefault = `xlsx-${parseDate(new Date(), 'yyyy.MM.dd hh:mm')}`;
   exportOpts = {
     filename: '',
-    tHeader: ['NAME', 'ID CARD', 'CITY', 'ZIP', 'TEL', 'MOBILE', 'FAX', 'EMAIL', 'QQ', 'COMPANY'],
-    exportProps: ['name', 'card', 'city', 'postcode', 'tel', 'mobile', 'fax', 'email', 'qq', 'company'],
+    tHeader: ['NAME', 'CITY', 'ZIP', 'TEL', 'SEX', 'QQ', 'EMAIL', 'INTRO'],
+    exportProps: ['nickname', 'city', 'postcode', 'phone', 'sex', 'qq', 'email', 'intro'],
     cellAutoWidth: false,
     type: 'xlsx',
     exporting: false
   };
   list = null;
   loading = false;
-  pages = { page: 1, size: 10, total: 0 };
 
   created() {
     this.getContacts();
   }
 
-  handlePageChange(val: any) {
-    this.pages.page = val;
-    this.getContacts();
-  }
-
-  handleSizeChange(val: number) {
-    this.pages.size = val;
-    this.getContacts();
-  }
-
   getContacts() {
     this.loading = true;
-    apiContactList(this.pages).then((res: any) => {
+    apiUserMocks().then((res: any) => {
       this.loading = false;
-      this.pages = res.pages;
       this.list = res.data;
     });
   }
@@ -118,13 +93,6 @@ export default class extends Vue {
 
     exportJson2Excel(tHeader, data, filename, undefined, undefined, autoWidth, bookType);
     this.exportOpts.exporting = false;
-  }
-
-  handleExportAll() {
-    this.exportOpts.exporting = true;
-    apiContactAll().then(res => {
-      this.handleExport(res);
-    });
   }
 }
 </script>

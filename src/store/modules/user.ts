@@ -45,6 +45,8 @@ export interface IStateUser {
   height?: number;
   weight?: number;
   intro?: string;
+  city?: string;
+  postcode?: string;
 }
 
 @Module({ dynamic: true, store, name: 'user' })

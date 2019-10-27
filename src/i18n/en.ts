@@ -189,9 +189,7 @@ export default {
     filename: 'Filename',
     fileType: 'File Type',
     autoWidth: 'Cell Auto-Width',
-    execute: 'Export',
-    currentPage: 'Current Page',
-    allPages: 'All Pages'
+    execute: 'Export'
   },
   excelImport: {
     browse: 'Browse',
