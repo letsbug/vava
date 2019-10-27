@@ -12,7 +12,9 @@
       <el-table-column type="index" width="36" />
       <el-table-column property="username" label="Username" min-width="110" show-overflow-tooltip />
       <el-table-column label="Password" min-width="110" show-overflow-tooltip>**********</el-table-column>
-      <el-table-column property="roles" label="Roles" min-width="110" show-overflow-tooltip />
+      <el-table-column property="roles" label="Roles" min-width="110" show-overflow-tooltip>
+        <template slot-scope="scope">{{ $t(`roles.${scope.row.roles}`) }}</template>
+      </el-table-column>
       <el-table-column label="option" width="80">
         <template slot-scope="scope">
           <a class="linker" @click="handleChoose(scope.row)">Choose</a>

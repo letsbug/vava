@@ -399,6 +399,42 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/NotFound'
+  /articles/histories/{id}:
+    get:
+      tags:
+        - articles
+      summary: Get an Article histories
+      description: Get Article histories by ID
+      operationId: getArticleHistories
+      security:
+        - AuthAccessToken: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Article id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    format: int16
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Article'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
   /notifications:
     get:
       tags:

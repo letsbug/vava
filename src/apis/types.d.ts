@@ -46,20 +46,17 @@ export interface ITypeNotification {
 
 export interface ITypeArticle {
   id: string | number;
-  timestamp: Date | string | number;
+  timestamp: number;
   author: string | number;
-  auditor: string | number;
+  auditor?: string | number;
   title: string;
-  summery: string;
+  summery?: string;
   content: string;
   status: ITypeArticleStatus;
-  source: string;
-  pageviews: number;
+  source?: string;
+  pageviews?: number;
 }
 
-export interface ITypePaintedFace {
+export interface ITypePaintedFace extends ITypeArticle {
   version: string | number;
-  timestamp: string | number | Date;
-  user: string;
-  word: string;
 }

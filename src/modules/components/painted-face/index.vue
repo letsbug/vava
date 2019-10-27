@@ -5,7 +5,7 @@
         {{ $t('router.paintedFace') }}
         <small class="text-muted">{{ subtitle }}</small>
       </h5>
-      <div v-if="selected === 0" class="compare-content" v-html="history[selected].word"></div>
+      <div v-if="selected === 0" class="compare-content" v-html="history[selected].content"></div>
       <div v-else class="compare-content" v-html="compareResult"></div>
     </el-col>
     <el-col :span="6">
@@ -15,15 +15,23 @@
           :key="i"
           :color="selected > -1 ? (i === selected ? colorMap[ht.version] : colorMap[-1]) : colorMap[ht.version]"
           :icon="selected === i ? 'el-icon-check' : null"
-          :timestamp="dateFormat(ht.mtime, 'yyyy.MM.dd hh:mm:ss')"
+          :timestamp="dateFormat(ht.timestamp, 'yyyy.MM.dd hh:mm:ss')"
           :class="{ checked: selected === i || selected === -1 }"
           placement="top"
           @click.native="selected = selected === i ? -1 : i"
         >
           <div>
-            By: <strong>{{ ht.user }}</strong>
+            By: <strong>{{ ht.author }}</strong>
           </div>
-          <div>Version: {{ ht.version + 1 }}</div>
+          <div>
+            Version: {{ ht.version + 1 }}
+            <el-tag v-if="ht.version === 0" :type="i !== selected ? 'info' : ''" size="small">{{
+              $i18n.locale === 'en' ? ' Initialize' : ' 初始版本'
+            }}</el-tag>
+            <el-tag v-if="ht.version === history.length - 1" :type="i !== selected ? 'info' : ''" size="small">{{
+              $i18n.locale === 'en' ? ' Current' : ' 当前版本'
+            }}</el-tag>
+          </div>
         </el-timeline-item>
       </el-timeline>
     </el-col>
@@ -32,37 +40,37 @@
 
 <script lang="ts">
 import { Component, Watch, Vue } from 'vue-property-decorator';
-import { histories } from '@/apis/paintedFace';
+import { apiHistories } from '@/apis/painted-face';
 import IPaintedFace from '@/vendor/painted-face';
 import { parseDate } from '@/utils/datetime';
+import { ITypePaintedFace } from '@/apis/types';
 
 @Component({ name: 'PaintedFace' })
 export default class extends Vue {
-  history: any[] = [];
-  compareResult: string = '';
-  colorMap: { [key: string]: string } = {
+  private history: ITypePaintedFace[] = [];
+  private compareResult: string = '';
+  private colorMap: { [key: string]: string } = {
     '-1': '#e4e7ed',
     0: '#343a40',
     1: '#dc4371',
-    2: '#dc9599',
-    3: '#dc4ab1',
-    4: '#bf6bdc',
-    5: '#b9a3fe',
-    6: '#8596fe',
-    7: '#489dfe',
-    8: '#1ecafe',
-    9: '#0cfecf',
-    10: '#07fe7c',
-    11: '#a0fe52',
-    12: '#ecfeb5',
-    13: '#fee439',
-    14: '#feb280',
-    15: '#fe7e46',
-    16: '#fe6c08'
+    2: '#dc4ab1',
+    3: '#bf6bdc',
+    4: '#b9a3fe',
+    5: '#8596fe',
+    6: '#489dfe',
+    7: '#1ecafe',
+    8: '#0cfecf',
+    9: '#07fe7c',
+    10: '#a0fe52',
+    11: '#ecfeb5',
+    12: '#fee439',
+    13: '#feb280',
+    14: '#fe7e46',
+    15: '#fe6c08'
   };
-  selected: number = -1;
+  private selected: number = -1;
 
-  get subtitle() {
+  private get subtitle() {
     return this.$i18n.locale === 'en'
       ? 'Rich text document history version comparison tool'
       : '富文本文档历史版本比对工具';
@@ -72,13 +80,19 @@ export default class extends Vue {
   onSelectedChange() {
     this.compare();
   }
-  async mounted() {
-    this.history = (await histories()) as any;
 
+  async mounted() {
+    const id = 1;
+    const { data } = (await apiHistories(id)) as any;
+
+    if (!data || data.length < 1) {
+      return;
+    }
+    this.history = data;
     this.compare();
   }
 
-  generator(raw: any) {
+  private generator(raw: any) {
     const { fragment } = raw;
     let { type } = raw;
     type = type === '+' ? 'add' : type === '-' ? 'sub' : '';
@@ -96,7 +110,7 @@ export default class extends Vue {
     return result;
   }
 
-  compare() {
+  private compare() {
     const selected = this.selected;
     if (selected === 0) {
       return;
@@ -106,7 +120,9 @@ export default class extends Vue {
       selected === -1 ? this.history : this.history.filter(v => +v.version === selected || +v.version === selected - 1);
 
     const paintedFace = new IPaintedFace({
-      content: 'word',
+      content: 'content',
+      user: 'author',
+      mtime: 'timestamp',
       initialVersion: 0
     });
     const compareResult = paintedFace.execute(history);
@@ -119,7 +135,7 @@ export default class extends Vue {
     this.compareResult = result;
   }
 
-  dateFormat = parseDate;
+  private dateFormat = parseDate;
 }
 </script>
 
@@ -165,6 +181,10 @@ export default class extends Vue {
   .el-timeline-item__node {
     transition: all, $transition-duration;
   }
+}
+
+.el-tag {
+  margin-left: $spacer-sm;
 }
 
 [oper-type='sub'] {
