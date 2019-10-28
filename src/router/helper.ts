@@ -70,9 +70,6 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.afterEach((to: Route) => {
-  NProgress.done();
-
-  console.log(to);
   let title: string = to.matched[1].meta.title;
   if (!title) {
     title = 'A magic vue admin template';
@@ -80,4 +77,6 @@ router.afterEach((to: Route) => {
     title = generateTitle(title) as string;
   }
   document.title = title + ' · VAVA';
+
+  NProgress.done();
 });
