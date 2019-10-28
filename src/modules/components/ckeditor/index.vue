@@ -1,5 +1,7 @@
 <template>
-  <div class="va-body-container">CKEditor Demo</div>
+  <div class="va-body-container">
+    <div ref="editorWrapper" class="editor-wrapper"></div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -19,8 +21,16 @@ export default class extends Vue {
 林坤明说，选择温家宝，着重在和谐过该工具查询相应的颜色对应的代码。... 在线调色板 网页常用色彩 ，“这才是我们最需要”，温家宝在任内帮台湾创造很多就业机会tttt，带来很多外汇，虽然可能政治理念不同，但“我们要称赞对手”，只要对台湾好，台湾人都会感恩。
 至于是否担心引发争议，林坤明表示aaa，民众应该思考，“一个人对你这pppp么好，开放这么多，为什么不认为是对你好，要感恩”，而台湾人最懂得感恩。(本文来源：自由时报、中央社)`;
 
+  private editor: any;
+
   mounted() {
-    console.log(ClassicEditor);
+    ClassicEditor.create(this.$refs.editorWrapper as HTMLElement)
+      .then((editor: any) => {
+        console.log(editor);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   }
 }
 </script>
