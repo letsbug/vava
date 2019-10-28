@@ -1,10 +1,13 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { ECharts } from 'echarts';
+import { ECharts, EChartOption } from 'echarts';
 import { IStoreSystem, DeviceType } from '@/store/modules/system';
+import { parseDate } from '@/utils/datetime';
 
 @Component({ name: 'EChartsMixins' })
 export default class extends Vue {
   @Prop({ required: true }) protected chartData!: Array<any>;
+
+  private sidebar!: HTMLDivElement | null;
 
   protected tooltip = {
     backgroundColor: 'rgba(255, 255, 255, .86)',
@@ -12,7 +15,18 @@ export default class extends Vue {
     padding: [7, 12],
     textStyle: { color: '#343a40', fontSize: 12 }
   };
-  private sidebar!: HTMLDivElement | null;
+  protected xAxis: EChartOption.XAxis = {
+    type: 'category',
+    axisLine: { show: false },
+    axisTick: { show: false },
+    axisLabel: {
+      color: '#6a6d71',
+      formatter: (params: any) => {
+        return parseDate(params, 'yyyy/MM/dd');
+      }
+    }
+  };
+
   protected chart!: ECharts | null;
 
   get isMobile() {
