@@ -9,7 +9,7 @@
       row-key="id"
       empty-text="Sorry! This category have nothing data."
     >
-      <el-table-column type="index" width="36" align="right" />
+      <el-table-column type="index" width="42" align="right" />
       <el-table-column label="TITLE" prop="title" show-overflow-tooltip class-name="has-actions actions-small">
         <template slot-scope="scope">
           <transition-group name="transform-fade">
