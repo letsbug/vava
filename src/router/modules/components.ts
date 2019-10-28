@@ -30,15 +30,15 @@ const components: RouteConfig = {
     //   },
     //   component: () => import('@/modules/components/rich-editor.vue')
     // },
-    // {
-    //   path: 'ck-editor',
-    //   name: 'CKEditor',
-    //   meta: {
-    //     title: 'ckEditor',
-    //     icon: 'thing-editor-tinymce'
-    //   },
-    //   component: () => import('@/modules/components/ckeditor.vue')
-    // },
+    {
+      path: 'ck-editor',
+      name: 'CKEditor',
+      meta: {
+        title: 'ckEditor',
+        icon: 'thing-editor-tinymce'
+      },
+      component: () => import('@/modules/components/ckeditor/index.vue')
+    },
     {
       path: 'painted-face',
       name: 'PaintedFace',
