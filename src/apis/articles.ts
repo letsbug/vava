@@ -5,9 +5,8 @@ export const apiList = (page: number, limit: number, title?: string, author?: st
   return Request.get('/articles', { params });
 };
 
-export const apiDetail = (id: string) => {
-  const params = { id };
-  return Request.get('/articles/detail', { params: params });
+export const apiDetail = (id: string | number) => {
+  return Request.get(`/articles/${id}`);
 };
 
 export const apiUpdate = (id: string | number, title: string) => {

@@ -317,25 +317,14 @@ paths:
             type: integer
             format: int64
       responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: integer
-                    format: int16
-                  data:
-                    type: object
-                    properties:
-                      article:
-                        $ref: '#/components/schemas/Article'
+        default:
+          description: register successfully
+          content: {}
         401:
           $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/NotFound'
+        x-codegen-request-body-name: body
     put:
       tags:
         - articles

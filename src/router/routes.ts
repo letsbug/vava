@@ -29,19 +29,19 @@ export const constantRoutes: RouteConfig[] = [
   {
     path: '/login',
     component: () => import('@/modules/account/Login.vue'),
-    meta: { hidden: true }
+    meta: { hidden: true, title: 'Sign in' }
   },
 
   {
     path: '/join',
     component: () => import('@/modules/account/Join.vue'),
-    meta: { hidden: true }
+    meta: { hidden: true, title: 'Join to' }
   },
 
   {
     path: '/password',
     component: () => import('@/modules/account/PasswordReset.vue'),
-    meta: { hidden: true }
+    meta: { hidden: true, title: 'Reset my password' }
   },
 
   { path: '/error', component: () => import('@/modules/errors/index.vue'), meta: { hidden: true } },

@@ -70,7 +70,8 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.afterEach((to: Route) => {
-  let title: string = to.matched[1].meta.title;
+  const route = to.matched[1];
+  let title: string = route ? route.meta.title : '';
   if (!title) {
     title = 'A magic vue admin template';
   } else {

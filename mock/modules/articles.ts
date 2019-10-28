@@ -9,6 +9,15 @@ const total = 103;
 const editors = Dictionary.username;
 const auditor = 'John';
 
+const randomParagraph = (): string => {
+  const count = faker.random.number({ min: 5, max: 10 });
+  let paragraphs: string = '';
+  for (let i = 0; i < count; i++) {
+    paragraphs += `<p>${faker.lorem.paragraphs()}</p>`;
+  }
+  return paragraphs;
+};
+
 const random = (index: number): ITypeArticle => {
   const status = faker.random.arrayElement([0, 1, 2, 3, 4, 5]);
   return {
@@ -18,7 +27,7 @@ const random = (index: number): ITypeArticle => {
     auditor: status === 4 ? auditor : undefined,
     title: faker.lorem.sentence(6, 10),
     summery: faker.lorem.sentences(2),
-    content: '<p>' + faker.lorem.paragraphs(5) + '</p>',
+    content: randomParagraph(),
     status: status,
     source: faker.random.arrayElement(['platform-a', 'platform-b', 'platform-c', 'platform-d']),
     pageviews: status === 4 ? faker.random.number({ min: 100, max: 29999 }) : undefined
@@ -62,7 +71,8 @@ export const getArticle = (req: Request, res: Response) => {
   }
 
   const _res = IResponses.STATUS_SUCCESS;
-  _res.data = articles.find(v => v.id === id);
+  _res.data = articles.find(v => v.id === parseInt(id));
+  _res.page = undefined;
   return res.json(_res);
 };
 
