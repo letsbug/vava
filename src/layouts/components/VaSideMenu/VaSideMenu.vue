@@ -27,13 +27,13 @@ import { RouteConfig } from 'vue-router';
 
 @Component({ name: 'VaSideMenu', components: { NavItem } })
 export default class extends Vue {
-  get routes() {
+  private get routes() {
     return IStoreRoutes.routes.filter((route: RouteConfig) => {
       return !(route.meta && route.meta.hidden);
     });
   }
 
-  generateTitle = generateTitle;
+  private generateTitle = generateTitle;
 }
 </script>
 

@@ -21,15 +21,15 @@ import { IStoreUser, ITypeRoles } from '@/store/modules/user';
 
 @Component({ name: 'Homepage', components: { GithubCorner } })
 export default class extends Vue {
-  get nickname() {
+  private get nickname() {
     return IStoreUser.nickname;
   }
 
-  get sex() {
+  private get sex() {
     return IStoreUser.sex;
   }
 
-  get roles() {
+  private get roles() {
     return IStoreUser.roles;
   }
 

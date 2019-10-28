@@ -30,10 +30,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({ name: 'VaBrand' })
 export default class extends Vue {
-  @Prop({ default: false })
-  hasTitle!: boolean;
+  @Prop({ default: false }) hasTitle!: boolean;
 
-  @Prop({ default: false })
-  hasLink!: boolean;
+  @Prop({ default: false }) hasLink!: boolean;
 }
 </script>

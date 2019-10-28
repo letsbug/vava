@@ -19,9 +19,9 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({ name: 'Exception' })
 export default class extends Vue {
   // metaInfo: { title: 'Exception' },
-  handlers: number[] = [401, 403, 404, 500];
+  private handlers: number[] = [401, 403, 404, 500];
 
-  trigger(code: string) {
+  private trigger(code: string) {
     this.$router.push({
       path: '/error',
       replace: true,

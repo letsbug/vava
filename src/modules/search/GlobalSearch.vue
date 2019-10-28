@@ -22,7 +22,7 @@ export default class extends Vue {
   //   };
   // }
 
-  get keyword() {
+  private get keyword() {
     return this.$route.params['keyword'];
   }
 }

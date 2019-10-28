@@ -25,15 +25,15 @@ const WIDTH = 992;
 
 @Component({ name: 'Layout', components: { VaSideMenu, VaHeadBar, VaTabsBar, VaFootBar, VaMain } })
 export default class extends Vue {
-  get sidebarOpened() {
+  private get sidebarOpened() {
     return IStoreSystem.sidebar.opened;
   }
 
-  get sidebarStatus() {
+  private get sidebarStatus() {
     return `sidebar-${this.sidebarOpened ? 'expanded' : 'collapse'}`;
   }
 
-  get device() {
+  private get device() {
     return IStoreSystem.device;
   }
 
@@ -56,11 +56,11 @@ export default class extends Vue {
     window.removeEventListener('resize', this.resizeHandler);
   }
 
-  isMobile() {
+  private isMobile() {
     return document.body.getBoundingClientRect().width <= WIDTH;
   }
 
-  resizeHandler() {
+  private resizeHandler() {
     if (document.hidden) {
       return;
     }

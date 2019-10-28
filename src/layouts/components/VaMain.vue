@@ -16,19 +16,19 @@ import { IStoreTabs } from '@/store/modules/tabs';
 
 @Component({ name: 'VaMain' })
 export default class extends Vue {
-  get isMobile() {
+  private get isMobile() {
     return IStoreSystem.device === 0;
   }
 
-  get cachedRoutes() {
+  private get cachedRoutes() {
     return IStoreTabs.cached;
   }
 
-  get key() {
+  private get key() {
     return this.$route.name;
   }
 
-  get background() {
+  private get background() {
     return this.$route.meta['withoutBackground'] ? 'no-bg' : '';
   }
 }

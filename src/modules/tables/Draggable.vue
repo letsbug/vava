@@ -51,7 +51,7 @@ import Sortable, { SortableEvent } from 'sortablejs';
 export default class extends mixins(TableDemoMixins) {
   // metaInfo: { title: 'Draggable Table' }
 
-  sortSetup() {
+  private sortSetup() {
     const el = document.querySelectorAll('.el-table__body-wrapper > table > tbody')[0];
     Sortable.create(el as HTMLElement, {
       handle: '.handle-drag',

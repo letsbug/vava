@@ -92,21 +92,21 @@ import ElCollapseTransition from 'element-ui/lib/transitions/collapse-transition
 
 @Component({ name: 'NavItem', components: { ElCollapseTransition } })
 export default class extends Vue {
-  visible: boolean = false;
+  private visible: boolean = false;
 
   @Prop({ required: true })
-  route!: RouteConfig;
+  private route!: RouteConfig;
 
-  get current() {
+  private get current() {
     return this.$route.matched[0].path;
   }
 
-  get sidebarOpened() {
+  private get sidebarOpened() {
     return IStoreSystem.sidebar.opened;
   }
 
   @Watch('sidebarOpened')
-  onSidebarStatusChange(val: boolean) {
+  private onSidebarStatusChange(val: boolean) {
     if (this.isCurrent()) this.visible = val;
   }
 
@@ -114,13 +114,13 @@ export default class extends Vue {
     this.visible = this.isCurrent();
   }
 
-  generateTitle = generateTitle;
+  private generateTitle = generateTitle;
 
-  isExternal(link: string) {
+  private isExternal(link: string) {
     return /^(https?:|mailto:|tel:|tencent:)/.test(link);
   }
 
-  isCurrent() {
+  private isCurrent() {
     return this.current === this.route.path;
   }
 }

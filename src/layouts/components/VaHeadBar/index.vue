@@ -76,23 +76,23 @@ export default class extends Vue {
   private page: number = 1;
   private limit: number = 20;
 
-  get isMobile() {
+  private get isMobile() {
     return IStoreSystem.device === 0;
   }
 
-  get sidebarOpened() {
+  private get sidebarOpened() {
     return IStoreSystem.sidebar.opened;
   }
 
-  get currRouteIsSearch() {
+  private get currRouteIsSearch() {
     return /^\/search/.test(this.$route.path) ? 'active' : '';
   }
 
-  get notificationHasUnread() {
+  private get notificationHasUnread() {
     return IStoreNotification.unread > 0;
   }
 
-  get notificationTips() {
+  private get notificationTips() {
     return this.$t(`header.notification${this.notificationHasUnread ? 'Has' : 'No'}`);
   }
 
@@ -100,11 +100,11 @@ export default class extends Vue {
     IStoreNotification.GetNotifications({ page: this.page, limit: this.limit });
   }
 
-  toggleSidebar() {
+  private toggleSidebar() {
     IStoreSystem.ToggleSidebar();
   }
 
-  handleSearch() {
+  private handleSearch() {
     const old = this.search.old;
     const key = this.search.keyword;
     if (!key || key === old) return;

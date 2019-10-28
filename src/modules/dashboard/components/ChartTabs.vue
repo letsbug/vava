@@ -49,9 +49,9 @@ export default class extends mixins(EChartsMixins) {
   @Prop({ default: 0 }) decimals!: number;
   @Prop({ default: false }) active!: boolean;
 
-  animateDuration: number = 1500;
+  private animateDuration: number = 1500;
 
-  get totalSpanClass() {
+  private get totalSpanClass() {
     return {
       'text-primary': !this.chartData && !this.isMobile,
       'null-data': !this.chartData && !this.isMobile,
@@ -60,7 +60,7 @@ export default class extends mixins(EChartsMixins) {
   }
 
   @Watch('themeColor')
-  onThemeColorChange() {
+  private onThemeColorChange() {
     if (!this.chart) return;
     const options = {
       color: [this.themeColor],
@@ -75,7 +75,7 @@ export default class extends mixins(EChartsMixins) {
     this.chart.setOption(options as EChartOption<EChartOption.SeriesLine>);
   }
 
-  areaColor() {
+  private areaColor() {
     return `${this.themeColor}30`;
   }
 

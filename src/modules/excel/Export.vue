@@ -55,8 +55,8 @@ import { exportJson2Excel } from '@/vendor/export-excel';
 
 @Component({ name: 'Export' })
 export default class extends Vue {
-  filenameDefault = `xlsx-${parseDate(new Date(), 'yyyy.MM.dd hh:mm')}`;
-  exportOpts = {
+  private filenameDefault = `xlsx-${parseDate(new Date(), 'yyyy.MM.dd hh:mm')}`;
+  private exportOpts = {
     filename: '',
     tHeader: ['NAME', 'CITY', 'ZIP', 'TEL', 'SEX', 'QQ', 'EMAIL', 'INTRO'],
     exportProps: ['nickname', 'city', 'postcode', 'phone', 'sex', 'qq', 'email', 'intro'],
@@ -64,14 +64,14 @@ export default class extends Vue {
     type: 'xlsx',
     exporting: false
   };
-  list = null;
-  loading = false;
+  private list = null;
+  private loading = false;
 
   created() {
     this.getContacts();
   }
 
-  getContacts() {
+  private getContacts() {
     this.loading = true;
     apiUserMocks().then((res: any) => {
       this.loading = false;
@@ -79,11 +79,11 @@ export default class extends Vue {
     });
   }
 
-  formatJson(props: string[], json: any[]) {
+  private formatJson(props: string[], json: any[]) {
     return json.map((v: { [key: string]: any }) => props.map((k: string) => v[k]));
   }
 
-  handleExport(data: any) {
+  private handleExport(data: any) {
     this.exportOpts.exporting = true;
     const tHeader = this.exportOpts.tHeader;
     const filename = this.exportOpts.filename || this.filenameDefault;

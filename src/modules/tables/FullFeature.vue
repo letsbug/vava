@@ -156,13 +156,13 @@ const statusMap = ['all status', 'draft', 'committed', 'failing', 'auditing', 'a
 export default class extends mixins(TableDemoMixins) {
   // metaInfo: { title: 'Sortable table' }
 
-  statusMap = statusMap;
-  filterData = { title: '', status: 0, author: '' };
-  levelMap = ['all', 1, 2, 3, 4, 5];
-  selected: any[] = [];
-  dialogVisible = false;
-  auditors: any[] = ['Tom', 'Karen', 'Jennifer', 'Anna', 'Peter'];
-  editForm: any = null;
+  private statusMap = statusMap;
+  private filterData = { title: '', status: 0, author: '' };
+  private levelMap = ['all', 1, 2, 3, 4, 5];
+  private selected: any[] = [];
+  private dialogVisible = false;
+  private auditors: any[] = ['Tom', 'Karen', 'Jennifer', 'Anna', 'Peter'];
+  private editForm: any = null;
 
   created() {
     this.rebuildEditData();
@@ -190,10 +190,10 @@ export default class extends mixins(TableDemoMixins) {
       this.loading = false;
     });
   }
-  handleSelectionChange(val: any[]) {
+  private handleSelectionChange(val: any[]) {
     this.selected = val;
   }
-  rebuildEditData() {
+  private rebuildEditData() {
     this.editForm = {
       isEdit: false,
       author: IStoreUser.username,
@@ -203,21 +203,21 @@ export default class extends mixins(TableDemoMixins) {
       auditor: ''
     };
   }
-  handleEdit(rowData: any) {
+  private handleEdit(rowData: any) {
     this.dialogVisible = true;
     if (rowData) this.editForm = Object.assign({}, rowData);
     else this.rebuildEditData();
   }
-  inputQueryFilter(queryString: string) {
+  private inputQueryFilter(queryString: string) {
     return (restaurant: any) => {
       return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
     };
   }
-  inputQuerySearch(str: string, callback: Function) {
+  private inputQuerySearch(str: string, callback: Function) {
     const res = str ? this.auditors.filter(this.inputQueryFilter(str)) : this.auditors;
     callback(res);
   }
-  handleBatchUpdate(isAudit: boolean, rowData: any) {
+  private handleBatchUpdate(isAudit: boolean, rowData: any) {
     const status = { status: isAudit ? 'audited' : 'deleted' };
     let lst: any[] = [];
     if (rowData) {

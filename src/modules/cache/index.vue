@@ -14,6 +14,6 @@ export default class extends Vue {
   //   title: 'Cache'
   // }
 
-  input: string = '';
+  private input: string = '';
 }
 </script>

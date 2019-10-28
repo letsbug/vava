@@ -11,3 +11,14 @@ export { default as ScreenFull } from './ScreenFull/index.vue';
 export { default as ThemePicker } from './ThemePicker/index.vue';
 export { default as UserPicker } from './UserPicker/index.vue';
 export { default as VaIcons } from './VaIcons/index.vue';
+
+export interface IContextOptions {
+  label: string;
+  command?: Function;
+  disabled?: boolean;
+}
+
+export interface IContextAxis {
+  top: number | string;
+  left: number | string;
+}

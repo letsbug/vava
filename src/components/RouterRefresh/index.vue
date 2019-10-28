@@ -22,7 +22,7 @@ export default class extends Vue {
     });
   }
 
-  handleRefresh() {
+  private handleRefresh() {
     if (this.doing) return;
     this.doing = true;
 

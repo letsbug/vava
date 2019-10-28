@@ -32,7 +32,7 @@ export default class extends mixins(EChartsMixins) {
     });
   }
 
-  calcColors(tar: string) {
+  private calcColors(tar: string) {
     return Color.convert(`color(${tar} tint(80%))`);
   }
 

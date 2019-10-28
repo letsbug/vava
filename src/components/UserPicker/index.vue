@@ -31,30 +31,30 @@ import { apiUserMocks } from '@/apis/account';
 
 @Component({ name: 'UserPicker' })
 export default class extends Vue {
-  @Prop({ default: false }) visible!: boolean;
-  @Prop({ default: null }) title!: string | null;
+  @Prop({ default: false }) private visible!: boolean;
+  @Prop({ default: null }) private title!: string | null;
 
-  dialogVisible: boolean = false;
-  list: any[] = [];
+  private dialogVisible: boolean = false;
+  private list: IStateUser[] = [];
 
   @Watch('visible')
-  onVisibleChange(v: boolean) {
+  private onVisibleChange(v: boolean) {
     if (this.list.length === 0) {
       this.loadList();
     }
     this.dialogVisible = v;
   }
 
-  async loadList() {
+  private async loadList() {
     const { data } = await apiUserMocks();
     this.list = data;
   }
 
-  handleChoose(user: IStateUser) {
+  private handleChoose(user: IStateUser) {
     this.$emit('on-change', user);
   }
 
-  handleClose() {
+  private handleClose() {
     this.$emit('update:visible', false);
   }
 }

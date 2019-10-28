@@ -102,7 +102,7 @@ import { apiUpdate } from '@/apis/articles';
 @Component({ name: 'InlineEdit' })
 export default class extends mixins(TableDemoMixins) {
   // metaInfo: { title: 'Editable Table' },
-  handleEdit(row: any) {
+  private handleEdit(row: any) {
     row.submitting = true;
     row.originalTitle = row.title;
     apiUpdate(row.id, row.title).then((res: any) => {
@@ -116,7 +116,7 @@ export default class extends mixins(TableDemoMixins) {
     });
   }
 
-  handleCancel(row: any) {
+  private handleCancel(row: any) {
     row.title = row.originalTitle;
     row.editing = false;
   }

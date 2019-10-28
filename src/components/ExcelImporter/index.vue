@@ -52,18 +52,18 @@ export default class extends Vue {
   @Prop({ default: null }) beforeImport!: Function | null;
   @Prop({ default: null }) onSuccess!: Function | null;
 
-  working: boolean = false;
-  file: File | null = null;
-  excelData: { [key: string]: any } = {
+  private working: boolean = false;
+  private file: File | null = null;
+  private excelData: { [key: string]: any } = {
     header: null,
     results: null
   };
 
-  isExcel(file: File) {
+  private isExcel(file: File) {
     return /\.(xlsx|xls|csv)$/.test(file.name);
   }
 
-  getHeaderRow(sheet: { [key: string]: any }) {
+  private getHeaderRow(sheet: { [key: string]: any }) {
     const headers = [];
     const range = XLSX.utils.decode_range(sheet['!ref']);
     const R = range.s.r;
@@ -80,13 +80,13 @@ export default class extends Vue {
     return headers;
   }
 
-  generateData(header: any, results: any) {
+  private generateData(header: any, results: any) {
     this.excelData.header = header;
     this.excelData.results = results;
     this.onSuccess && this.onSuccess(this.excelData);
   }
 
-  readerData(rawFile: File) {
+  private readerData(rawFile: File) {
     const reader = new FileReader();
     reader.onload = e => {
       const data = (e.target as FileReader).result;
@@ -101,7 +101,7 @@ export default class extends Vue {
     reader.readAsArrayBuffer(rawFile);
   }
 
-  import(rawFile: File) {
+  private import(rawFile: File) {
     this.working = true;
     this.file = rawFile;
     (this.$refs['excelImportInput'] as HTMLInputElement).value = ''; // fix can't select the same excel
@@ -115,13 +115,13 @@ export default class extends Vue {
     before && this.readerData(rawFile);
   }
 
-  onDragOver(e: DragEvent) {
+  private onDragOver(e: DragEvent) {
     if (e.dataTransfer) {
       e.dataTransfer.dropEffect = 'copy';
     }
   }
 
-  handleDrop(e: DragEvent) {
+  private handleDrop(e: DragEvent) {
     if (!e.dataTransfer) {
       return;
     }

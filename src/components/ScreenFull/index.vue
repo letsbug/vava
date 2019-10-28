@@ -14,7 +14,7 @@ const sf = screenfull as Screenfull;
 export default class extends Vue {
   isFullscreen: boolean = false;
 
-  get supported() {
+  private get supported() {
     const s = sf && sf.isEnabled;
     if (!s)
       this.$message({
@@ -30,7 +30,7 @@ export default class extends Vue {
     }
   }
 
-  beforeDestory() {
+  beforeDestroy() {
     if (this.supported) {
       sf.off('change', this.change);
     }

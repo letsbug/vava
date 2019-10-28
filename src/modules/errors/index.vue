@@ -20,16 +20,16 @@ import { Copyright } from '@/components';
 export default class extends Vue {
   // metaInfo: { title: 'Oops! got an error!' },
 
-  get code() {
+  private get code() {
     return this.$route.query['code'] || 404;
   }
 
-  get flag() {
+  private get flag() {
     const random = Math.floor(Math.random() * 4 + 1);
     return `./assets/img/errors/${this.code}.gif`;
   }
 
-  get noGoBack() {
+  private get noGoBack() {
     return this.$route.query['noGoBack'];
   }
 }

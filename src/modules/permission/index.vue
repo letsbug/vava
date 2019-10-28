@@ -30,29 +30,29 @@ import { IStoreUser, IStateUser } from '@/store/modules/user';
 
 @Component({ name: 'Admin', components: { UserPicker } })
 export default class extends Vue {
-  userPickerVisible: boolean = false;
+  private userPickerVisible: boolean = false;
 
-  get avatar() {
+  private get avatar() {
     return IStoreUser.avatar;
   }
 
-  get username() {
+  private get username() {
     return IStoreUser.username;
   }
 
-  get roles() {
+  private get roles() {
     return IStoreUser.roles.map(v => this.$t(`roles.${v}`)).join('、');
   }
 
-  get allowRoles() {
+  private get allowRoles() {
     const role = [...this.$route.meta.roles];
     return role.map(v => this.$t(`roles.${v}`)).join(' & ');
   }
 
-  async onChooseUser(user: IStateUser) {
+  private async onChooseUser(user: IStateUser) {
     await IStoreUser.SwitchUser(user);
-
     this.userPickerVisible = false;
+
     this.$nextTick(() => {
       this.$router.replace({
         path: '/redirect' + this.$route.fullPath

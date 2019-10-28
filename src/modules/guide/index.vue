@@ -15,7 +15,7 @@ import 'driver.js/dist/driver.min.css';
 @Component({ name: 'Guide' })
 export default class extends Vue {
   // metaInfo: { title: 'Guide' }
-  driver!: Driver;
+  private driver!: Driver;
 
   mounted() {
     this.driver = new Driver({
@@ -26,7 +26,7 @@ export default class extends Vue {
     });
   }
 
-  start() {
+  private start() {
     this.driver.defineSteps(steps);
     this.driver.start();
   }

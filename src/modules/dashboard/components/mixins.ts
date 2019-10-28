@@ -29,11 +29,11 @@ export default class extends Vue {
 
   protected chart!: ECharts | null;
 
-  get isMobile() {
+  protected get isMobile() {
     return IStoreSystem.device === DeviceType.Mobile;
   }
 
-  get themeColor() {
+  protected get themeColor() {
     return IStoreSystem.theme.color;
   }
 
@@ -51,13 +51,13 @@ export default class extends Vue {
     }
   }
 
-  resizeHandler = () => {
+  private resizeHandler = () => {
     if (this.chart) this.chart.resize();
   };
 
   protected init() {}
 
-  draw() {
+  public draw() {
     if (!this.chartData || this.chartData.length < 1) return;
 
     this.init();

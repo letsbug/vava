@@ -3,7 +3,7 @@
     <ul v-show="visible" ref="contextMenus" :style="axis" class="va-context-menu" @click.stop>
       <li
         v-for="item in options"
-        :key="item.name"
+        :key="item.label"
         :class="{ disabled: item.disabled, divided: item.divided }"
         class="va-context-menu-item"
         @click="handleClick(item)"
@@ -16,29 +16,21 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+import { IContextOptions, IContextAxis } from '@/components';
 
 @Component({ name: 'ContextMenu' })
 export default class extends Vue {
-  visible: boolean = false;
-  axis: any = {};
+  private visible: boolean = false;
+  private axis?: IContextAxis = { top: 0, left: 0 };
 
-  @Prop({ required: true })
-  options!: any[];
+  @Prop({ required: true }) private options!: IContextOptions[];
 
-  @Prop({ default: null })
-  private target!: any;
+  @Prop({ default: null }) private target!: any;
 
   @Watch('visible')
   private onVisibleChange(visible: boolean) {
     if (visible) document.body.addEventListener('click', this.close);
     else document.body.removeEventListener('click', this.close);
-  }
-
-  created() {
-    this.options.forEach(v => {
-      if (!v.name) throw new Error("The object of the array is missing the 'name' parameter.");
-      if (!v.callback) throw new Error("The object of the array is missing the 'callback' parameter.");
-    });
   }
 
   mounted() {
@@ -51,13 +43,15 @@ export default class extends Vue {
     }
   }
 
-  handleClick(data: any) {
+  private handleClick(data: IContextOptions) {
     if (data.disabled) return;
-    if (data.callback && typeof data.callback === 'function') data.callback(this.target);
+    if (data.command && typeof data.command === 'function') {
+      data.command(this.target);
+    }
     this.close();
   }
 
-  open($event: MouseEvent) {
+  public open($event: MouseEvent) {
     this.axis = {
       top: $event.clientY + 'px',
       left: $event.clientX + 'px'
@@ -65,10 +59,10 @@ export default class extends Vue {
     this.visible = true;
   }
 
-  close() {
+  public close() {
     this.visible = false;
     setTimeout(() => {
-      this.axis = {};
+      this.axis = { top: 0, left: 0 };
     }, 300);
   }
 }

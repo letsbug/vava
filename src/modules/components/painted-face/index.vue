@@ -77,7 +77,7 @@ export default class extends Vue {
   }
 
   @Watch('selected')
-  onSelectedChange() {
+  private onSelectedChange() {
     this.compare();
   }
 

@@ -37,7 +37,7 @@ export default class extends Vue {
   protected total: number = 0;
   protected list: any[] = [];
 
-  get keyword() {
+  protected get keyword() {
     return this.$route.params['keyword'];
   }
 
@@ -45,7 +45,7 @@ export default class extends Vue {
     this.getList();
   }
 
-  getList() {
+  protected getList() {
     this.loading = true;
     apiList(this.page, this.limit).then((res: any) => {
       if (!res.success) return;
@@ -61,12 +61,12 @@ export default class extends Vue {
     });
   }
 
-  handlePageChange(val: number) {
+  protected handlePageChange(val: number) {
     this.page = val;
     this.getList();
   }
 
-  handleSizeChange(val: number) {
+  protected handleSizeChange(val: number) {
     this.limit = val;
     this.getList();
   }

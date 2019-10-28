@@ -114,28 +114,28 @@ import { Form } from 'element-ui';
 export default class extends Vue {
   // metaInfo: { title: 'Reset your password' },
 
-  step = 1;
-  form = {
+  private step = 1;
+  private form = {
     username: 'Example@email.com',
     securityCode: 'ABC123',
     password: '',
     confirm: ''
   };
-  rules = {
+  private rules = {
     username: [{ validator: this.validName, trigger: 'blur' }],
     securityCode: [{ validator: validCaptcha, trigger: 'blur' }],
     password: [{ validator: validPassword, trigger: 'blur' }],
     confirm: [{ validator: this.validConfirm, trigger: 'blur' }]
   };
-  pwdType = {
+  private pwdType = {
     password: true,
     confirm: true
   };
-  timing = false;
-  loading = false;
-  counter = 0;
+  private timing = false;
+  private loading = false;
+  private counter = 0;
 
-  validAccount() {
+  private validAccount() {
     let valid = false;
     (this.$refs['formAccount'] as Form).validate((v: boolean) => {
       valid = v;
@@ -143,7 +143,7 @@ export default class extends Vue {
     return valid;
   }
 
-  validSecurityCode() {
+  private validSecurityCode() {
     let valid = false;
     (this.$refs['formSecurityCode'] as Form).validate((v: boolean) => {
       valid = v;
@@ -151,7 +151,7 @@ export default class extends Vue {
     return valid;
   }
 
-  timingSecurityBtn() {
+  private timingSecurityBtn() {
     this.counter = 60;
     this.timing = true;
     const timer = setInterval(() => {
@@ -163,24 +163,24 @@ export default class extends Vue {
     }, 1000);
   }
 
-  sendSecurityCode() {
+  private sendSecurityCode() {
     if (!this.validAccount() || this.timing) return false;
     this.timingSecurityBtn();
   }
 
-  submitSecurityCode() {
+  private submitSecurityCode() {
     if (!this.validAccount() || !this.validSecurityCode()) return false;
     this.step = 2;
   }
 
-  resetSubmit() {
+  private resetSubmit() {
     (this.$refs['confirmPassword'] as Form).validate((v: boolean) => {
       if (!v) return false;
       this.$message.success('Password validate success, do something...');
     });
   }
 
-  validName(r: any, v: string, c: Function) {
+  private validName(r: any, v: string, c: Function) {
     if (!v || isEmpty(v)) {
       c(new Error('Please enter your email address or phone number!'));
     } else if (!isEmail(v) && !isMobile(v)) {
@@ -188,7 +188,7 @@ export default class extends Vue {
     } else c();
   }
 
-  validConfirm(r: any, v: string, c: Function) {
+  private validConfirm(r: any, v: string, c: Function) {
     if (!v || isEmpty(v)) c(new Error('Please confirm your password!'));
     else if (v !== this.form.password) c(new Error("Password confirmation doesn't match the password!"));
     else c();

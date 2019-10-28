@@ -4,25 +4,27 @@
   </el-scrollbar>
 </template>
 
-<script>
-export default {
-  data() {
-    return { left: 0 };
-  },
-  methods: {
-    handleScroll(e) {
-      const data = e.wheelDelta;
-      const wrapper = this.$refs['scrollPane'].$refs['wrap'];
-      wrapper.scrollLeft = wrapper.scrollLeft - data / 3;
-    },
-    scrollTo(target) {
-      const container = this.$refs['scrollPane'].$el;
-      const containerWidth = container.offsetWidth;
-      const wrapper = this.$refs['scrollPane'].$refs['wrap'];
-      const targetLeft = target.offsetLeft;
-      const targetWidth = target.offsetWidth;
-      wrapper.scrollLeft = targetLeft > containerWidth ? targetLeft - containerWidth + targetWidth : targetLeft;
-    }
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({ name: 'ITabScrollPane' })
+export default class extends Vue {
+  private left: number = 0;
+
+  handleScroll(e: WheelEvent) {
+    console.log(e);
+    const data = e.deltaY;
+    const wrapper = (this.$refs['scrollPane'] as any).$refs['wrap'];
+    wrapper.scrollLeft = wrapper.scrollLeft - data / 3;
   }
-};
+
+  scrollTo(target: HTMLElement) {
+    const container = (this.$refs['scrollPane'] as any).$el;
+    const containerWidth = container.offsetWidth;
+    const wrapper = (this.$refs['scrollPane'] as any).$refs['wrap'];
+    const targetLeft = target.offsetLeft;
+    const targetWidth = target.offsetWidth;
+    wrapper.scrollLeft = targetLeft > containerWidth ? targetLeft - containerWidth + targetWidth : targetLeft;
+  }
+}
 </script>

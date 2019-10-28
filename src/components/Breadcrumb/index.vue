@@ -40,6 +40,6 @@ export default class extends Vue {
     return name.trim().toLowerCase() === 'homepage';
   }
 
-  generateTitle = generateTitle;
+  private generateTitle = generateTitle;
 }
 </script>

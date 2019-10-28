@@ -20,10 +20,13 @@ import { handleClipboard } from '@/utils/clipboard';
 
 @Component({ name: 'Clipboard' })
 export default class extends Vue {
-  url: string = 'https://github.com/letsbug/vava';
-  timing: boolean = false;
-  clipboard = handleClipboard;
-  onSuccess() {
+  private url: string = 'https://github.com/letsbug/vava';
+
+  private timing: boolean = false;
+
+  private clipboard = handleClipboard;
+
+  private onSuccess() {
     this.timing = true;
 
     setTimeout(() => {

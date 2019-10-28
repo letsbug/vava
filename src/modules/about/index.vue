@@ -25,7 +25,7 @@ export default class extends Vue {
   // metaInfo: {
   //   title: 'About VAVA'
   // },
-  features: any[] = [
+  private features: any[] = [
     { name: 'Login / Logout' },
     { name: 'Permission Authentication', children: ['Page permission'] },
     { name: 'Exceptions', children: ['500', '404', '403', '...'] },

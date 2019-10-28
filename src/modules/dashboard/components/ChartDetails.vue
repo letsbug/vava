@@ -16,15 +16,15 @@ export default class extends mixins(EChartsMixins) {
   @Prop({ required: true, default: false }) isPercent!: boolean;
   @Prop({ required: true, default: false }) isChartMap!: boolean;
 
-  chartTypeChanged: boolean = false;
+  private chartTypeChanged: boolean = false;
 
   @Watch('isChartMap')
-  onIsChartMapChange() {
+  private onIsChartMapChange() {
     this.chartTypeChanged = true;
   }
 
   @Watch('themeColor')
-  onThemeColorChange() {
+  private onThemeColorChange() {
     if (!this.chart) return;
 
     const options = this.isChartMap
@@ -51,15 +51,15 @@ export default class extends mixins(EChartsMixins) {
     this.chart.setOption(options as EChartOption<EChartOption.SeriesLine>);
   }
 
-  areaColor() {
+  private areaColor() {
     return `${this.themeColor}30`;
   }
 
-  colorStart() {
+  private colorStart() {
     return Color.convert(`color(${this.themeColor} tint(90%))`);
   }
 
-  optionsLine() {
+  private optionsLine() {
     const grid = this.isMobile
       ? { top: 10, right: 0, bottom: 20, left: 0 }
       : { top: 40, right: 40, bottom: 40, left: 60 };
@@ -110,7 +110,7 @@ export default class extends mixins(EChartsMixins) {
     };
   }
 
-  optionsMap() {
+  private optionsMap() {
     const category = this.chartData.map(v => v.name).slice(0, 5);
 
     const title = Object.assign(

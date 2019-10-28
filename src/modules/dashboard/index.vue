@@ -83,11 +83,11 @@ export default class extends Vue {
     background: 'rgba(255, 255, 255, .5)'
   });
 
-  dateRange = 31;
-  datePreset = [31, 61, 92, 183, 365];
-  profilePreset = ['pv', 'sales'];
-  category: number[] = [];
-  data: { [key: string]: any } = {
+  private dateRange = 31;
+  private datePreset = [31, 61, 92, 183, 365];
+  private profilePreset = ['pv', 'sales'];
+  private category: number[] = [];
+  private data: { [key: string]: any } = {
     pv: { total: 0, data: [] },
     uv: { total: 0, data: [] },
     cvr: {
@@ -99,18 +99,18 @@ export default class extends Vue {
     },
     countries: { total: 0, data: [] }
   };
-  activeIndex: number = 0;
-  detailData = [];
-  attach = {
+  private activeIndex: number = 0;
+  private detailData = [];
+  private attach = {
     ages: [],
     sources: [],
     interviews: []
   };
 
-  get isMobile() {
+  private get isMobile() {
     return IStoreSystem.device === DeviceType.Mobile;
   }
-  get panelGutter() {
+  private get panelGutter() {
     return this.isMobile ? 0 : 15;
   }
 
@@ -123,12 +123,12 @@ export default class extends Vue {
     (this.$refs['chartAges'] as EChartsMixins).draw();
   }
 
-  checkDetails() {
+  private checkDetails() {
     this.detailData = this.data[Object.keys(this.data)[this.activeIndex]].data;
     (this.$refs['chartDetails'] as EChartsMixins).draw();
   }
 
-  requestPageViews() {
+  private requestPageViews() {
     getPaveViews().then((res: any) => {
       if (!res.success) return;
 

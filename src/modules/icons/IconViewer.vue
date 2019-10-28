@@ -26,14 +26,12 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({ name: 'IconViewer' })
 export default class extends Vue {
   // metaInfo: { title: 'Icons' }
-  icons: string[] = icons;
+  private icons: string[] = icons;
 
-  generateIconCode(name: string) {
+  private clipboard = handleClipboard;
+
+  private generateIconCode(name: string) {
     return `<va-icon icon="${name}"/>`;
-  }
-
-  clipboard(code: string, e: MouseEvent) {
-    handleClipboard(code, e);
   }
 }
 </script>

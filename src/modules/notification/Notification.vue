@@ -70,21 +70,21 @@ import { ITypeNotification } from '@/apis/types';
 @Component({ name: 'Notification' })
 export default class extends Vue {
   // metaInfo: { title: 'Notifications' }
-  multipleSelection!: any[];
+  private multipleSelection!: any[];
 
-  get notifications() {
+  private get notifications() {
     return IStoreNotification.list;
   }
 
-  get hasUnread() {
+  private get hasUnread() {
     return IStoreNotification.unread > 0;
   }
 
-  transUnreadClass(row: ITypeNotification) {
+  private transUnreadClass(row: ITypeNotification) {
     return { unread: row.isUnread };
   }
 
-  handleShowDetail(row: ITypeNotification) {
+  private handleShowDetail(row: ITypeNotification) {
     this.$alert(row.title, 'notification', {
       confirmButtonText: 'Ok',
       callback: () => {
@@ -93,11 +93,11 @@ export default class extends Vue {
     });
   }
 
-  handleMarkRead(row: ITypeNotification) {
+  private handleMarkRead(row: ITypeNotification) {
     if (row && row.isUnread) IStoreNotification.Read(row);
   }
 
-  handleMarkAllRead() {
+  private handleMarkAllRead() {
     const message = this.$t('notification.confirm') as string;
     const title = this.$t('options.confirm.title') as string;
     const options = {

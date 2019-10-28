@@ -11,7 +11,7 @@ import { DeviceType } from '@/store/modules/system'
       </router-link>
 
       <!-- Closable tab control list -->
-      <scroll-pane ref="scrollPane" class="tabs-scroll-pane">
+      <i-tab-scroll-pane ref="scrollPane" class="tabs-scroll-pane">
         <template v-for="route in history">
           <router-link
             v-if="!route.notab"
@@ -29,7 +29,7 @@ import { DeviceType } from '@/store/modules/system'
             </span>
           </router-link>
         </template>
-      </scroll-pane>
+      </i-tab-scroll-pane>
 
       <!-- Closeable tabs context menu -->
       <context-menu ref="tabsContext" :options="tabsOptions" :target="selectedTab" class="tabs-context-menu" />
@@ -43,24 +43,25 @@ import { DeviceType, IStoreSystem } from '@/store/modules/system';
 import { IStoreTabs } from '@/store/modules/tabs';
 import { generateTitle } from '@/i18n';
 import { Breadcrumb, ContextMenu } from '@/components';
-import ScrollPane from './ScrollPane.vue';
+import ITabScrollPane from './ScrollPane.vue';
 import { Route, RouteConfig, RouteRecord } from 'vue-router';
 import { VueRouter } from 'vue-router/types/router';
+import { IContextOptions } from '@/components';
 
-@Component({ name: 'VaTabsBar', components: { ScrollPane, Breadcrumb, ContextMenu } })
+@Component({ name: 'VaTabsBar', components: { ITabScrollPane, Breadcrumb, ContextMenu } })
 export default class extends Vue {
-  tabsOptions: any[] = [];
-  selectedTab: any = {};
+  private tabsOptions: IContextOptions[] = [];
+  private selectedTab: any = {};
 
-  get history() {
+  private get history() {
     return IStoreTabs.history;
   }
-  get isMobile() {
+  private get isMobile() {
     return IStoreSystem.device === DeviceType.Mobile;
   }
 
   @Watch('$route')
-  onRouteChange() {
+  private onRouteChange() {
     this.add();
     this.scrollToCurrentTab();
     this.reCalcContextStatus();
@@ -68,21 +69,21 @@ export default class extends Vue {
 
   mounted() {
     this.tabsOptions = [
-      { name: this.$t('tabBar.close'), callback: this.close },
-      { name: this.$t('tabBar.closeOthers'), callback: this.closeOthers },
-      { name: this.$t('tabBar.closeAll'), callback: this.closeAll }
+      { label: this.$t('tabBar.close') as string, command: this.close },
+      { label: this.$t('tabBar.closeOthers') as string, command: this.closeOthers },
+      { label: this.$t('tabBar.closeAll') as string, command: this.closeAll }
     ];
     this.add();
     this.reCalcContextStatus();
   }
 
-  isActive(route: RouteConfig) {
+  private isActive(route: RouteConfig) {
     return route.path === this.$route.path;
   }
 
-  generateTitle = generateTitle;
+  private generateTitle = generateTitle;
 
-  scrollToCurrentTab() {
+  private scrollToCurrentTab() {
     const tabs = this.$refs['tabs'] as any[];
     if (tabs && tabs.length > 0) {
       this.$nextTick(() => {
@@ -96,14 +97,14 @@ export default class extends Vue {
     }
   }
 
-  add() {
+  private add() {
     if (this.isMobile) return;
     const { name, path, meta } = this.$route;
     if (meta.notab || !name || path === '/home') return;
     IStoreTabs.Add(this.$route);
   }
 
-  async close(target: RouteConfig) {
+  private async close(target: RouteConfig) {
     if (!target) throw new Error('Unknown target tabs which you want to close.');
     await IStoreTabs.Remove(target);
     if (!this.isActive(target)) {
@@ -114,25 +115,25 @@ export default class extends Vue {
     await this.$router.push({ path: latest ? latest.path : '/home' });
   }
 
-  closeOthers(target: RouteConfig) {
+  private closeOthers(target: RouteConfig) {
     if (!target) throw new Error('Unknown target tabs which you want to not close.');
     this.$router.push(target);
     IStoreTabs.RemoveOthers(target);
   }
 
-  closeAll() {
+  private closeAll() {
     IStoreTabs.Empty();
     this.$router.push('/');
   }
 
-  reCalcContextStatus() {
+  private reCalcContextStatus() {
     const tabsLength = this.history.length;
     this.$set(this.tabsOptions[0], 'disabled', tabsLength < 1);
     this.$set(this.tabsOptions[1], 'disabled', tabsLength < 2);
     this.$set(this.tabsOptions[2], 'disabled', tabsLength < 2);
   }
 
-  openContextMenu($e: MouseEvent, tar: RouteConfig) {
+  private openContextMenu($e: MouseEvent, tar: RouteConfig) {
     (this.$refs['tabsContext'] as any).open($e);
     this.selectedTab = tar;
   }

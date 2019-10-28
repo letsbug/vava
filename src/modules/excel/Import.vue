@@ -22,11 +22,12 @@ import { ExcelImporter } from '@/components';
 
 @Component({ name: 'Import', components: { ExcelImporter } })
 export default class extends Vue {
-  allowSizeMax = 1; // unit: MB
-  tableData: any[] = [];
-  tableHeader: any[] = [];
+  private allowSizeMax = 1; // unit: MB
+  private tableData: any[] = [];
+  private tableHeader: any[] = [];
 
   beforeRouteLeave(to: RouteConfig, _: RouteConfig, next: Function) {
+    console.log('---------------------------------');
     const tableData = this.tableData;
     if (tableData && tableData.length > 0) {
       this.$confirm(this.$t('excelImport.exitHint') as string, this.$t('options.confirm.title') as string, {
@@ -36,7 +37,7 @@ export default class extends Vue {
     } else next();
   }
 
-  beforeImport(file: File) {
+  private beforeImport(file: File) {
     const allowSizeMax = this.allowSizeMax;
     const isLtMax = file.size / 1024 / 1024 < allowSizeMax;
 
@@ -45,7 +46,7 @@ export default class extends Vue {
     return isLtMax;
   }
 
-  onSuccess(data: { results: any[]; header: any[] }) {
+  private onSuccess(data: { results: any[]; header: any[] }) {
     const { results, header } = data;
     this.tableData = results;
     this.tableHeader = header;

@@ -45,10 +45,10 @@ export default class extends Vue {
   @Prop({ required: true }) sources!: Array<any>;
   @Prop({ required: true }) interviews!: Array<any>;
 
-  tabs: string[] = ['TOP6 SOURCE', 'TOP6 INTERVIEW'];
-  actives: number = 0;
+  private tabs: string[] = ['TOP6 SOURCE', 'TOP6 INTERVIEW'];
+  private actives: number = 0;
 
-  calcRatio(val: number, total: number) {
+  private calcRatio(val: number, total: number) {
     return ((val / total) * 100).toFixed(2) + '%';
   }
 }

@@ -4,6 +4,8 @@ import NProgress from 'nprogress';
 import { Message } from 'element-ui';
 import { IStoreUser } from '@/store/modules/user';
 import { IStoreRoutes } from '@/store/modules/routes';
+import { Route } from 'vue-router';
+import { generateTitle } from '@/i18n';
 
 NProgress.configure({ showSpinner: false });
 
@@ -67,6 +69,15 @@ router.beforeEach(async (to, from, next) => {
   }
 });
 
-router.afterEach(() => {
+router.afterEach((to: Route) => {
   NProgress.done();
+
+  console.log(to);
+  let title: string = to.matched[1].meta.title;
+  if (!title) {
+    title = 'A magic vue admin template';
+  } else {
+    title = generateTitle(title) as string;
+  }
+  document.title = title + ' · VAVA';
 });

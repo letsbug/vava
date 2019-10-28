@@ -21,11 +21,6 @@ import * as Directives from '@/directives';
 // import hmt from "vue-ba";
 // import vga from 'vue-analytics'
 
-// import { mockXHR } from "../mock";
-// if (process.env.NODE_ENV === "production") {
-//   mockXHR();
-// }
-
 Vue.use(Element, {
   size: 'medium',
   i18n: (path: string, option: string) => i18n.t(path, option)
