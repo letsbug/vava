@@ -2,13 +2,13 @@
   <transition name="el-zoom-in-top">
     <ul v-show="visible" ref="contextMenus" :style="axis" class="va-context-menu" @click.stop>
       <li
-        v-for="item in options"
-        :key="item.label"
+        v-for="(item, i) in options"
+        :key="i"
         :class="{ disabled: item.disabled, divided: item.divided }"
         class="va-context-menu-item"
         @click="handleClick(item)"
       >
-        {{ item.name }}
+        {{ item.label }}
       </li>
     </ul>
   </transition>
