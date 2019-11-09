@@ -32,6 +32,7 @@ export default {
     richText: 'Rich Text',
     countTo: 'Count To',
     paintedFace: 'Painted Face',
+    watermark: 'Watermark',
     tables: 'Tables',
     inlineEdit: 'Inline Edit',
     sortable: 'Sortable',

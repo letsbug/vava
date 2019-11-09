@@ -24,29 +24,31 @@ export enum IWaterMarkerPlacement {
  */
 export interface IWaterMarkerOption {
   fileSize?: number;
-  fileType?: string;
   placement?: IWaterMarkerPlacement;
   ratio?: number;
   opacity?: number;
+  // rotate?: number;
   horizontal?: number;
   vertical?: number;
 }
 
 const jpeg = 'image/jpeg';
-const types: { [key: string]: string } = {
-  png: 'image/png',
-  jpg: jpeg,
-  jpeg
-};
 
 class IWaterMarker implements IWaterMarkerOption {
+  public static supportedTypes: { [key: string]: string } = {
+    png: 'image/png',
+    jpg: jpeg,
+    jpeg
+  };
+
   fileSize!: number;
-  fileType!: string;
   placement: IWaterMarkerPlacement;
   ratio: number;
   opacity: number;
+  // rotate: number;
   horizontal: number;
   vertical: number;
+
   private canvas: HTMLCanvasElement;
 
   constructor(options?: IWaterMarkerOption) {
@@ -54,36 +56,32 @@ class IWaterMarker implements IWaterMarkerOption {
       {},
       {
         fileSize: 100,
-        fileType: 'png',
         placement: IWaterMarkerPlacement.center,
         ratio: 20,
         opacity: 80,
+        // rotate: -15,
         horizontal: 15,
         vertical: 15
       },
       options
     );
 
-    const { fileType, fileSize, placement, ratio, opacity, horizontal, vertical } = options;
+    const { fileSize, placement, ratio, opacity, /*rotate,*/ horizontal, vertical } = options;
 
-    if (!Object.keys(types).includes(fileType!)) {
-      throw Error('unknown file type: ' + options.fileType);
-    }
-
-    this.fileType = fileType!;
     this.fileSize = fileSize!;
     this.placement = placement!;
     this.ratio = ratio!;
     this.opacity = opacity!;
+    // this.rotate = rotate!;
     this.horizontal = horizontal!;
     this.vertical = vertical!;
 
     this.canvas = document.createElement('canvas');
   }
 
-  public beforeGenerate(file: File) {
-    if (file.type !== types[this.fileType]) {
-      Message.error(`上传头像图片只能是 ${this.fileType.toUpperCase()} 格式!`);
+  public validate(file: File) {
+    if (!Object.values(IWaterMarker.supportedTypes).includes(file.type)) {
+      Message.error('上传的水印图片只能是 PNG 或 JPG 格式!');
       return false;
     }
     const size = this.fileSize;
@@ -122,40 +120,70 @@ class IWaterMarker implements IWaterMarkerOption {
   private position(tWidth: number, tHeight: number, mWidth: number, mHeight: number) {
     let left: number = 0;
     let top: number = 0;
-    if (this.placement === IWaterMarkerPlacement.topStart) {
-      left = this.horizontal;
+    const placement = this.placement;
+    if (placement === IWaterMarkerPlacement.topStart) {
       top = this.vertical;
+      left = this.horizontal;
+    } else if (placement === IWaterMarkerPlacement.top) {
+      top = this.vertical;
+      left = (tWidth - mWidth) / 2;
+    } else if (placement === IWaterMarkerPlacement.topEnd) {
+      top = this.vertical;
+      left = tWidth - mWidth - this.horizontal;
+    } else if (placement === IWaterMarkerPlacement.centerStart) {
+      top = (tHeight - mHeight) / 2;
+      left = this.horizontal;
+    } else if (placement === IWaterMarkerPlacement.center) {
+      top = (tHeight - mHeight) / 2;
+      left = (tWidth - mWidth) / 2;
+    } else if (placement === IWaterMarkerPlacement.centerEnd) {
+      top = (tHeight - mHeight) / 2;
+      left = tWidth - mWidth - this.horizontal;
+    } else if (placement === IWaterMarkerPlacement.bottomStart) {
+      top = tHeight - mHeight - this.vertical;
+      left = this.horizontal;
+    } else if (placement === IWaterMarkerPlacement.bottom) {
+      top = tHeight - mHeight - this.vertical;
+      left = (tWidth - mWidth) / 2;
+    } else if (placement === IWaterMarkerPlacement.bottomEnd) {
+      top = tHeight - mHeight - this.vertical;
+      left = tWidth - mWidth - this.horizontal;
     }
 
     return { left, top };
   }
 
-  public generate(target: string, marker: string, callback: Function) {
-    const m = IWaterMarker.generateImage(marker);
-    const t = IWaterMarker.generateImage(target);
+  private drawMarker() {}
 
-    t.onload = () => {
-      this.canvas.width = t.width;
-      this.canvas.height = t.height;
-      const ctx = <CanvasRenderingContext2D>this.canvas.getContext('2d');
-      // draw target image first.
-      ctx.beginPath();
-      ctx.drawImage(t, 0, 0);
-      ctx.closePath();
-      ctx.save();
+  public generate(target: string, marker: string) {
+    return new Promise<string>(resolve => {
+      const m = IWaterMarker.generateImage(marker);
+      const t = IWaterMarker.generateImage(target);
 
-      // draw marker image last
-      const { width, height } = this.size(t, m);
-      const { left, top } = this.position(t.width, t.height, width, height);
+      t.onload = () => {
+        this.canvas.width = t.width;
+        this.canvas.height = t.height;
+        const ctx = <CanvasRenderingContext2D>this.canvas.getContext('2d');
+        // draw target image first.
+        ctx.beginPath();
+        ctx.drawImage(t, 0, 0);
+        ctx.closePath();
+        ctx.save();
 
-      ctx.globalAlpha = this.opacity / 100;
-      ctx.beginPath();
-      ctx.drawImage(m, left, top, width, height);
-      ctx.closePath();
-      ctx.save();
-      const base64Url = this.canvas.toDataURL();
-      callback && callback(base64Url);
-    };
+        // draw marker image last
+        const { width, height } = this.size(t, m);
+        const { left, top } = this.position(t.width, t.height, width, height);
+
+        ctx.globalAlpha = this.opacity / 100;
+        // ctx.rotate((this.rotate * Math.PI) / 180);
+        ctx.beginPath();
+        ctx.drawImage(m, left, top, width, height);
+        ctx.closePath();
+        ctx.save();
+        const base64Url = this.canvas.toDataURL();
+        resolve(base64Url);
+      };
+    });
   }
 }
 

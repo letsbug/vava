@@ -32,6 +32,7 @@ export default {
     richText: '富文本编辑器',
     countTo: '数字计数器',
     paintedFace: '大花脸',
+    watermark: '水印生成',
     table: '表格',
     inlineEdit: '行内编辑',
     sortable: '排序',

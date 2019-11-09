@@ -33,7 +33,7 @@ const components: RouteConfig = {
     {
       path: 'watermark',
       name: 'Watermark',
-      meta: { title: 'Watermark', icon: 'mark-watermark' },
+      meta: { title: 'watermark', icon: 'mark-watermark' },
       component: () => import('@/modules/components/watermark/index.vue')
     }
   ]
