@@ -1,7 +1,6 @@
 import { Message } from 'element-ui';
 
 export enum IWaterMarkerPlacement {
-  tile,
   topStart,
   top,
   topEnd,
@@ -100,18 +99,20 @@ class IWaterMarker implements IWaterMarkerOption {
   }
 
   private size(target: HTMLImageElement, marker: HTMLImageElement) {
-    const rm = marker.width / marker.height; // 水印宽高比
-    const ts = (target.width + target.height) / 2;
-
+    const tw = target.width;
+    const th = target.height;
+    const mw = marker.width;
+    const mh = marker.height;
+    const ratio = mw / mh;
     let width: number;
     let height: number;
 
-    if (rm > 0) {
-      height = ts * (this.ratio / 100);
-      width = rm * height;
+    if (tw - mw > th - mh) {
+      height = (th * this.ratio) / 100;
+      width = height * ratio;
     } else {
-      width = ts * (this.ratio / 100);
-      height = width / rm;
+      width = (tw * this.ratio) / 100;
+      height = width / ratio;
     }
 
     return { width, height };
@@ -152,8 +153,6 @@ class IWaterMarker implements IWaterMarkerOption {
 
     return { left, top };
   }
-
-  private drawMarker() {}
 
   public generate(target: string, marker: string) {
     return new Promise<string>(resolve => {

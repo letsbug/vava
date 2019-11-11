@@ -21,13 +21,7 @@ import { IWaterMarkerPlacement } from '@/utils/watermarker'
         <h6>Position</h6>
         <div class="positions">
           <template v-for="(p, i) in positions">
-            <span
-              v-if="+i !== 0"
-              :key="i"
-              class="item"
-              :class="{ active: options.placement === +i }"
-              @click="options.placement = options.placement === +i ? 0 : +i"
-            >
+            <span :key="i" class="item" :class="{ active: options.placement === +i }" @click="options.placement = +i">
               {{ p }}
             </span>
           </template>
@@ -62,7 +56,6 @@ export default class extends Vue {
   private origin: string = './assets/img/dashboard-preview.png';
   private target: string = this.origin;
   private positions: string[] = [
-    'tile',
     'top start',
     'top',
     'top end',
@@ -113,6 +106,7 @@ $positions-item-size: ($uploader-size - $border-default-width) / 3;
 }
 
 /deep/ .el-upload {
+  display: block;
   width: $uploader-size;
   height: $uploader-size;
   text-align: center;
@@ -123,6 +117,7 @@ $positions-item-size: ($uploader-size - $border-default-width) / 3;
 .upload-preview {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 .positions {
