@@ -1,7 +1,7 @@
 <template>
   <div class="va-body-container">
     <pre v-highlight>
-      <code class="html" style="padding-bottom: 0!important;" v-html="$t('about.intro')"></code>
+      <code class="html" style="padding-bottom: 0!important;" v-html="$t('about.intro')"/>
       <code class="html" style="padding-top: 0!important;">
         <h5 class="paragraph-indent"><strong>Features:</strong></h5>
         <ul class="features">

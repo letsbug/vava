@@ -9,7 +9,7 @@
     <h6 v-if="!isMobile" class="panel-card-title" :class="active ? 'text-primary' : 'text-secondary'">
       <span>{{ title }}</span>
       <a class="handle-tab-detail" :class="{ 'text-primary': active }">
-        <i class="el-icon-arrow-right float-r handle-tab-detail"></i>
+        <i class="el-icon-arrow-right float-r handle-tab-detail" />
       </a>
     </h6>
     <i-count-to
@@ -25,7 +25,7 @@
     <h6 v-if="isMobile" class="panel-card-title is-mobile" :class="active ? 'text-primary' : 'text-secondary'">
       {{ title }}
     </h6>
-    <div v-if="!isMobile && chartData" ref="chartEl" class="panel-card-chart"></div>
+    <div v-if="!isMobile && chartData" ref="chartEl" class="panel-card-chart" />
   </div>
 </template>
 

@@ -7,7 +7,7 @@
       <va-main />
       <va-foot-bar />
     </div>
-    <div class="va-side-backdrop" @click.prevent="IStoreSystem.CloseSidebar()"></div>
+    <div class="va-side-backdrop" @click.prevent="IStoreSystem.CloseSidebar()" />
   </div>
 </template>
 

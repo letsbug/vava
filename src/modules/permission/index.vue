@@ -19,7 +19,7 @@
     <user-picker :visible.sync="userPickerVisible" @on-change="onChooseUser" />
 
     <br />
-    <h2 v-html="$t('permissions.title', { role: allowRoles })"></h2>
+    <h2 v-html="$t('permissions.title', { role: allowRoles })" />
   </div>
 </template>
 

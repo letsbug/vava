@@ -24,7 +24,7 @@
         </span>
       </template>
       <span class="working-flag">
-        <i class="el-icon-loading"></i>
+        <i class="el-icon-loading" />
       </span>
     </a>
     <div v-else class="text-center">

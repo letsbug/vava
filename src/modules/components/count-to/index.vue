@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <pre v-highlight><code class="html" v-html="$t('countTo.intro')"></code></pre>
+    <pre v-highlight><code class="html" v-html="$t('countTo.intro')"/></pre>
     <div class="text-center text-primary">
       <i-count-to
         ref="countToViewer"
@@ -25,7 +25,7 @@
         </span>
         <span class="form-params">
           <el-button type="text" size="small" @click="handleSwap">
-            <i class="el-icon-sort" style="transform: rotate(90deg)"></i>
+            <i class="el-icon-sort" style="transform: rotate(90deg)" />
           </el-button>
         </span>
         <span class="form-params">

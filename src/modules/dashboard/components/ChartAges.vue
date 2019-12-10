@@ -1,5 +1,5 @@
 <template>
-  <div class="va-panels chart-detail-wrapper"></div>
+  <div class="va-panels chart-detail-wrapper" />
 </template>
 
 <script lang="ts">

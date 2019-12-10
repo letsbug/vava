@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <pre v-highlight><code class="html" v-html="$t('guide.hint')"></code></pre>
+    <pre v-highlight><code class="html" v-html="$t('guide.hint')"/></pre>
     <br />
     <el-button type="primary" @click.prevent.stop="start">{{ $t('guide.start') }}</el-button>
   </div>

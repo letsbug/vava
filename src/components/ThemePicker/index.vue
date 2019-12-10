@@ -17,7 +17,7 @@
             :style="`background-color:${pre}`"
             @click="styles.color = pre"
           >
-            <i v-if="pre === styles.color" class="el-icon-check"></i>
+            <i v-if="pre === styles.color" class="el-icon-check" />
           </span>
           <el-color-picker v-model="styles.color" size="mini" @change="onColorPickerChange" />
         </div>

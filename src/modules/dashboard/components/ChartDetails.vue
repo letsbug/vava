@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ x2: isMobile && isChartMap }" class="va-panels chart-detail-wrapper" style="transition: none;"></div>
+  <div :class="{ x2: isMobile && isChartMap }" class="va-panels chart-detail-wrapper" style="transition: none;" />
 </template>
 
 <script lang="ts">

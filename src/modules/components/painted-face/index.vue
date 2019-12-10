@@ -5,8 +5,8 @@
         {{ $t('router.paintedFace') }}
         <small class="text-muted">{{ subtitle }}</small>
       </h5>
-      <div v-if="selected === 0" class="compare-content" v-html="history[selected].content"></div>
-      <div v-else class="compare-content" v-html="compareResult"></div>
+      <div v-if="selected === 0" class="compare-content" v-html="history[selected].content" />
+      <div v-else class="compare-content" v-html="compareResult" />
     </el-col>
     <el-col :span="6">
       <el-timeline>

@@ -17,7 +17,7 @@
           <span class="item-name">
             {{ generateTitle(route.meta.title) }}
           </span>
-          <i class="el-icon-arrow-right expander-icon"></i>
+          <i class="el-icon-arrow-right expander-icon" />
         </a>
         <el-collapse-transition>
           <ul v-show="visible" class="nav-dropdown">
@@ -61,7 +61,7 @@
             <span class="item-name">
               {{ generateTitle(route.meta.title) }}
             </span>
-            <i class="el-icon-arrow-right expander-icon"></i>
+            <i class="el-icon-arrow-right expander-icon" />
           </a>
         </el-popover>
       </template>

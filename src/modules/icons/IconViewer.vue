@@ -3,8 +3,8 @@
     <h4 class="va-body-title">
       {{ $t('icons.usage') }}
     </h4>
-    <pre v-highlight><code class="html" v-html="$t('icons.content')"></code></pre>
-    <h4 class="va-body-title" v-html="$t('icons.list')"></h4>
+    <pre v-highlight><code class="html" v-html="$t('icons.content')"/></pre>
+    <h4 class="va-body-title" v-html="$t('icons.list')" />
     <el-row>
       <el-col v-for="icon of icons" :key="icon" :xl="3" :lg="4" :md="6" :sm="6" :xs="8">
         <div class="grid-content" @click="clipboard(generateIconCode(icon), $event)">

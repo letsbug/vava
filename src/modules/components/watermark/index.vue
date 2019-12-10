@@ -14,7 +14,7 @@ import { IWaterMarkerPlacement } from '@/utils/watermarker'
           :on-change="onInputMarker"
         >
           <img v-if="markerBlob" :src="markerBlob" class="upload-preview" alt />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <i v-else class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
       </el-col>
       <el-col :span="8">

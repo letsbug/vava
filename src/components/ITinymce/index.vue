@@ -1,6 +1,6 @@
 <template>
   <div class="tinymce-wrapper rich-text-wrapper">
-    <textarea :id="id"></textarea>
+    <textarea :id="id" />
   </div>
 </template>
 

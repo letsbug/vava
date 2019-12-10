@@ -53,7 +53,7 @@
         <template slot-scope="scope">
           <el-tooltip v-if="scope.row.isUnread" :content="$t('notification.mark')" placement="left">
             <a @click="handleMarkRead(scope.row)">
-              <i class="el-icon-check"></i>
+              <i class="el-icon-check" />
             </a>
           </el-tooltip>
         </template>
