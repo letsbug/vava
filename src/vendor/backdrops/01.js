@@ -205,6 +205,7 @@ class Build {
 
     for (let i = 0; i < this.varr.length; i++) {
       for (const val in this.calc[i]) {
+        // eslint-disable-next-line no-prototype-builtins
         if (this.calc[i].hasOwnProperty(val)) {
           this.calc[i][val] += this.vel;
           if (this.calc[i][val] > this.lim) this.calc[i][val] = 0;

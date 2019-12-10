@@ -89,7 +89,7 @@ paths:
       tags:
         - user
       summary: Logs out current logged in user session
-      operationId: logoutUser
+      operationId: logout
       responses:
         default:
           description: successful operation

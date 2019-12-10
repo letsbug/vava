@@ -54,7 +54,7 @@
 
     <copyright />
 
-    <canvas id="appBackDrop" ref="appBackDrop"></canvas>
+    <canvas id="appBackDrop" ref="appBackDrop" />
   </div>
 </template>
 
@@ -70,23 +70,23 @@ import { Route } from 'vue-router';
 @Component({ name: 'Login', components: { Brand, LanguagePicker, UserPicker, Copyright } })
 export default class extends Vue {
   // metaInfo: { title: 'Sign in to Vava' }
-  private backdrop: HTMLElement | undefined;
+  backdrop: HTMLElement | undefined;
 
-  private form = { username: '', password: '', remember: false };
-  private rules = {
+  form = { username: '', password: '', remember: false };
+  rules = {
     username: [{ validator: validAccount, trigger: 'blur' }],
     password: [{ validator: validPassword, trigger: 'blur' }]
   };
-  private loading: boolean = false;
-  private password: boolean = true;
-  private expires: number = 7;
-  private userPickerVisible: boolean = false;
+  loading: boolean = false;
+  password: boolean = true;
+  expires: number = 7;
+  userPickerVisible: boolean = false;
 
-  private redirect?: string;
-  private queries: Dictionary<string> = {};
+  redirect?: string;
+  queries: Dictionary<string> = {};
 
   @Watch('$route', { immediate: true })
-  private onRouteChange(route: Route) {
+  onRouteChange(route: Route) {
     const query = route.query as Dictionary<string>;
     if (query) {
       this.redirect = query.redirect;
@@ -107,35 +107,32 @@ export default class extends Vue {
     this.loading = false;
   }
 
-  private fillLoginForm(user: IStateUser) {
+  fillLoginForm(user: IStateUser) {
     this.form.username = user.username;
     this.form.password = user.password;
     this.userPickerVisible = false;
     (this.$refs['loginForm'] as Form).validate();
   }
 
-  private handleLogin() {
+  handleLogin() {
     (this.$refs['loginForm'] as Form).validate(async (v: boolean) => {
       if (!v) return false;
       this.loading = true;
       await IStoreUser.Login(this.form);
-      this.$router.replace({ path: this.redirect || '/', query: this.queries });
+      await this.$router.replace({ path: this.redirect || '/', query: this.queries });
       setTimeout(() => {
         this.loading = false;
       }, 0.5 * 1000);
     });
   }
 
-  private convertRouteQueries(query: Dictionary<string>) {
-    return Object.keys(query).reduce(
-      (acc, cur) => {
-        if (cur !== 'redirect') {
-          acc[cur] = query[cur];
-        }
-        return acc;
-      },
-      {} as Dictionary<string>
-    );
+  convertRouteQueries(query: Dictionary<string>) {
+    return Object.keys(query).reduce((acc, cur) => {
+      if (cur !== 'redirect') {
+        acc[cur] = query[cur];
+      }
+      return acc;
+    }, {} as Dictionary<string>);
   }
 }
 </script>
