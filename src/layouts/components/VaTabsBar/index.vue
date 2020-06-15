@@ -43,7 +43,7 @@ import { IStoreTabs } from '@/store/modules/tabs';
 import { generateTitle } from '@/i18n';
 import { Breadcrumb, ContextMenu, IContextOptions } from '@/components';
 import ITabScrollPane from './ScrollPane.vue';
-import { RouteConfig } from 'vue-router';
+import { Route, RouteConfig } from 'vue-router';
 
 @Component({ name: 'VaTabsBar', components: { ITabScrollPane, Breadcrumb, ContextMenu } })
 export default class extends Vue {
@@ -74,7 +74,7 @@ export default class extends Vue {
     this.reCalcContextStatus();
   }
 
-  private isActive(route: RouteConfig) {
+  private isActive(route: Route) {
     return route.path === this.$route.path;
   }
 
@@ -102,7 +102,7 @@ export default class extends Vue {
     IStoreTabs.Add(route);
   }
 
-  private async close(target: RouteConfig) {
+  private async close(target: Route) {
     if (!target) throw new Error('Unknown target tabs which you want to close.');
     await IStoreTabs.Remove(target);
     if (!this.isActive(target)) {
@@ -113,9 +113,9 @@ export default class extends Vue {
     await this.$router.push({ path: latest ? latest.path : '/home' });
   }
 
-  private closeOthers(target: RouteConfig) {
+  private closeOthers(target: Route) {
     if (!target) throw new Error('Unknown target tabs which you want to not close.');
-    this.$router.push(target);
+    this.$router.push(target.fullPath);
     IStoreTabs.RemoveOthers(target);
   }
 

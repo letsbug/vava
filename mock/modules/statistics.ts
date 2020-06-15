@@ -1,7 +1,7 @@
-import { Response, Request } from 'express';
+import { Request, Response } from 'express';
 import { IResponses } from '../response';
-import { ITypeStatistics, ITypeStatisticsBasic, ITypeStatisticsArea } from '@/apis/types';
-import { generatePV, generateAreas } from './pv-generator';
+import { ITypeStatistics, ITypeStatisticsBasic } from '@/apis/types';
+import { generateAreas, generatePV } from './pv-generator';
 
 const count = 365;
 const pageViews: ITypeStatisticsBasic[] = [];
@@ -15,19 +15,16 @@ for (let i = 0; i < count; i++) {
 }
 
 const beforeFilter = (req: Request) => {
-  let { start, end } = req.query;
-  if (!start || !end) {
-    end = new Date().getTime();
-    start = new Date().getTime() - oneDay * 30;
-  }
+  const start = req.query.start || new Date().getTime();
+  const end = req.query.start || new Date().getTime() - oneDay * 30;
   return { start, end };
 };
 
 export const getPageViews = (req: Request, res: Response) => {
-  let { start, end } = beforeFilter(req);
+  const { start, end } = beforeFilter(req);
 
   let totalPv = 0;
-  const data = pageViews.filter(v => {
+  const data = pageViews.filter((v) => {
     totalPv += v.pv;
     return v.date >= start && v.date <= end;
   });

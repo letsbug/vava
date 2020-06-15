@@ -34,7 +34,7 @@ function generateUser(index: number) {
     height: faker.random.number(200),
     weight: faker.random.number(200),
     city: faker.address.city(),
-    postcode: faker.address.zipCode()
+    postcode: faker.address.zipCode(),
   };
 }
 
@@ -48,7 +48,7 @@ for (let i = roles.length; i < count; i++) {
 
 export const login = (req: Request, res: Response) => {
   const { username, password } = req.body;
-  const user = userList.find(u => u.username === username);
+  const user = userList.find((u) => u.username === username);
 
   if (!user || password !== passwordPreset) {
     const obj = IResponses.STATUS_WRONG_USER;
@@ -57,7 +57,7 @@ export const login = (req: Request, res: Response) => {
 
   const _res = IResponses.STATUS_SUCCESS;
   _res.data = {
-    accessToken: user.token
+    accessToken: user.token,
   };
   return res.json(_res);
 };
@@ -67,12 +67,11 @@ export const logout = (req: Request, res: Response) => {
 };
 
 export const getUsers = (req: Request, res: Response) => {
-  let { phone, nickname } = req.query;
-  if (nickname) {
-    nickname = nickname.toLowerCase();
-  }
-  const list = userList.filter(u => {
-    if (nickname && !u.nickname!.toLowerCase().includes(nickname)) {
+  const { phone } = req.query;
+  const nickname = (req.query.nickname as string).toLowerCase();
+
+  const list = userList.filter((u) => {
+    if (nickname && !u.nickname!.toLowerCase().includes(nickname as string)) {
       return false;
     }
     return !(phone && phone !== u.phone);
@@ -86,7 +85,7 @@ export const getUsers = (req: Request, res: Response) => {
 
 export const getMeInfo = (req: Request, res: Response) => {
   const token = req.header('X-Access-Token');
-  const info = userList.find(u => u.token === token);
+  const info = userList.find((u) => u.token === token);
 
   const _res = IResponses.STATUS_SUCCESS;
   _res.data = info;

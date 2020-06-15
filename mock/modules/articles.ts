@@ -30,7 +30,7 @@ const random = (index: number): ITypeArticle => {
     content: randomParagraph(),
     status: status,
     source: faker.random.arrayElement(['platform-a', 'platform-b', 'platform-c', 'platform-d']),
-    pageviews: status === 4 ? faker.random.number({ min: 100, max: 29999 }) : undefined
+    pageviews: status === 4 ? faker.random.number({ min: 100, max: 29999 }) : undefined,
   };
 };
 
@@ -39,11 +39,11 @@ for (let i = 0; i < total; i++) {
 }
 
 export const getArticles = (req: Request, res: Response) => {
-  let { title, status, author, page, limit } = req.query;
-  page = page || 1;
-  limit = limit || 20;
+  const { title, status, author } = req.query as any;
+  const page = (req.query as any).page || 1;
+  const limit = (req.query as any).limit || 20;
 
-  let list = articles.filter(v => {
+  let list = articles.filter((v) => {
     if (title && !v.title.includes(title)) {
       return false;
     }
@@ -71,7 +71,7 @@ export const getArticle = (req: Request, res: Response) => {
   }
 
   const _res = IResponses.STATUS_SUCCESS;
-  _res.data = articles.find(v => v.id === parseInt(id));
+  _res.data = articles.find((v) => v.id === parseInt(id));
   _res.page = undefined;
   return res.json(_res);
 };

@@ -6,14 +6,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { RouteConfig } from 'vue-router';
+import { Route } from 'vue-router';
 import { IStoreTabs } from '@/store/modules/tabs';
 
 @Component({ name: 'RouteRefresher' })
 export default class extends Vue {
   private doing: boolean = false;
 
-  private replace(route: RouteConfig) {
+  private replace(route: Route) {
     this.$nextTick(() => {
       this.$router.replace({
         path: '/redirect' + route.path,
