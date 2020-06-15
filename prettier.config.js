@@ -5,5 +5,5 @@ module.exports = {
   printWidth: 120,
   singleQuote: true,
   semi: true,
-  endOfLine: 'auto' // 换行符
+  endOfLine: 'auto', // 换行符
 };

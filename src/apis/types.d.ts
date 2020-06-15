@@ -4,7 +4,7 @@ export enum ITypeArticleStatus {
   failing,
   auditing,
   audited,
-  deleted
+  deleted,
 }
 
 export interface ITypeStatisticsGender {

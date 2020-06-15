@@ -12,14 +12,14 @@ ctx.strokeStyle = new Color(150).style;
 
 const mousePosition = {
   x: (30 * canvas.width) / 100,
-  y: (30 * canvas.height) / 100
+  y: (30 * canvas.height) / 100,
 };
 
 const dots = {
   nb: 300,
   distance: 50,
   d_radius: 100,
-  array: []
+  array: [],
 };
 
 function colorValue(min) {
@@ -137,12 +137,12 @@ function animateDots() {
   requestAnimationFrame(animateDots);
 }
 
-window.addEventListener('mousemove', function(e) {
+window.addEventListener('mousemove', function (e) {
   mousePosition.x = e.pageX;
   mousePosition.y = e.pageY;
 });
 
-window.addEventListener('mouseleave', function() {
+window.addEventListener('mouseleave', function () {
   mousePosition.x = canvas.width / 2;
   mousePosition.y = canvas.height / 2;
 });

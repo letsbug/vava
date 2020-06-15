@@ -24,7 +24,7 @@ export default class extends Vue {
 
   @Watch('$route', { immediate: true })
   private onRouteChange(route: Route) {
-    let routes = route.matched.filter(v => v.name);
+    let routes = route.matched.filter((v) => v.name);
     const first: RouteRecord = routes[0];
     if (!this.isHomePage(first)) {
       routes = [{ path: '/home', meta: { title: 'home' }, redirect: '/home' } as RouteRecord].concat(routes);

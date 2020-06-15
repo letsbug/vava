@@ -14,7 +14,7 @@ export function xhr(url: string, async: boolean = true) {
         const urlArr = client.responseURL.split('/');
         resolve({
           data: client.response,
-          url: urlArr[urlArr.length - 1]
+          url: urlArr[urlArr.length - 1],
         });
       } else reject(new Error(client.statusText));
     };

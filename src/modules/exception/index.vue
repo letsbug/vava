@@ -25,7 +25,7 @@ export default class extends Vue {
     this.$router.push({
       path: '/error',
       replace: true,
-      query: { code: code }
+      query: { code: code },
     });
   }
 }

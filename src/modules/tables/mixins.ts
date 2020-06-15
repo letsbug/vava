@@ -9,7 +9,7 @@ const articleStatusStyles = (status: string) => {
     2: 'danger',
     3: 'primary',
     4: 'success',
-    5: 'info'
+    5: 'info',
   };
   return statusMap[status];
 };
@@ -21,7 +21,7 @@ const articleStatusNames = (status: number) => {
     2: 'failing',
     3: 'auditing',
     4: 'audited',
-    5: 'deleted'
+    5: 'deleted',
   };
   return statusMap[status];
 };

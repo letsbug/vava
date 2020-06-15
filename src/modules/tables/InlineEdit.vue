@@ -110,7 +110,7 @@ export default class extends mixins(TableDemoMixins) {
       this.$message({
         type: res.success ? 'success' : 'error',
         message: res.success ? 'Modify successfully' : res.message,
-        center: true
+        center: true,
       });
       row.submitting = false;
     });

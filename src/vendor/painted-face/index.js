@@ -3,7 +3,7 @@
 const fields = {};
 
 const mergeRangeTypes = {
-  '==': function(mergeResult, mergeIndex, compareResult, compareIndex) {
+  '==': function (mergeResult, mergeIndex, compareResult, compareIndex) {
     const mergeRange = mergeResult[mergeIndex];
     const compareRange = compareResult.ranges[compareIndex];
     const mep2 = mergeRange.ep2;
@@ -12,7 +12,7 @@ const mergeRangeTypes = {
       const range1 = Object.assign({}, compareRange, {
         user: mergeRange[fields.user],
         version: mergeRange[fields.version],
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
       mergeResult.splice(mergeIndex, 1, range1);
 
@@ -21,7 +21,7 @@ const mergeRangeTypes = {
       const range2 = Object.assign({}, mergeRange, {
         sp1: mergeRange.ep1 - fragment.length,
         sp2: mergeRange.ep2 - fragment.length,
-        fragment: fragment
+        fragment: fragment,
       });
       mergeResult.splice(mergeIndex + 1, 0, range2);
     } else {
@@ -33,7 +33,7 @@ const mergeRangeTypes = {
         ep1: compareRange.sp1 + length,
         ep2: compareRange.sp2 + length,
         fragment: compareRange.fragment.substr(0, length),
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
       mergeResult.splice(mergeIndex, 1, range1);
       compareResult.ranges.splice(compareIndex, 1, Object.assign({}, range1));
@@ -41,7 +41,7 @@ const mergeRangeTypes = {
       const range2 = Object.assign({}, compareRange, {
         sp1: range1.ep1,
         sp2: range1.ep2,
-        fragment: compareRange.fragment.substr(length)
+        fragment: compareRange.fragment.substr(length),
       });
 
       if (range2.fragment.length > 0) {
@@ -50,16 +50,16 @@ const mergeRangeTypes = {
     }
   },
 
-  '=+': function(mergeResult, mergeIndex, compareResult, compareIndex) {
+  '=+': function (mergeResult, mergeIndex, compareResult, compareIndex) {
     // const mergeRange = mergeResult[mergeIndex]
     const compareRange = compareResult.ranges[compareIndex];
     const range = Object.assign({}, compareRange, {
-      lv: compareRange[fields.version] // lastversion
+      lv: compareRange[fields.version], // lastversion
     });
     mergeResult.splice(mergeIndex, 0, range);
   },
 
-  '=-': function(mergeResult, mergeIndex, compareResult, compareIndex) {
+  '=-': function (mergeResult, mergeIndex, compareResult, compareIndex) {
     const mergeRange = mergeResult[mergeIndex];
     const compareRange = compareResult.ranges[compareIndex];
     const mep2 = mergeRange.ep2;
@@ -72,7 +72,7 @@ const mergeRangeTypes = {
         const range = Object.assign({}, mergeRange, {
           ep1: mergeRange.sp1 + length,
           ep2: mergeRange.sp2 + length,
-          fragment: compareRange.fragment
+          fragment: compareRange.fragment,
         });
         offset++;
         mergeResult.splice(mergeIndex, 0, range);
@@ -80,14 +80,14 @@ const mergeRangeTypes = {
 
       const range1 = Object.assign({}, compareRange, {
         version: mergeRange[fields.version],
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
 
       const fragment = mergeRange.fragment.substr(length);
       const range2 = Object.assign({}, mergeRange, {
         sp1: mergeRange.ep1 - fragment.length,
         sp2: mergeRange.ep2 - fragment.length,
-        fragment: fragment
+        fragment: fragment,
       });
 
       mergeResult.splice(mergeIndex + offset, 1, range1, range2);
@@ -98,7 +98,7 @@ const mergeRangeTypes = {
         ep1: compareRange.sp1 + length,
         ep2: compareRange.sp2,
         fragment: mergeRange.fragment,
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
       mergeResult.splice(mergeIndex, 1, range1);
       compareResult.ranges.splice(compareIndex, 1, Object.assign({}, range1));
@@ -107,7 +107,7 @@ const mergeRangeTypes = {
         sp1: range1.ep1,
         sp2: range1.ep2,
         fragment: compareRange.fragment.substr(length),
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
 
       if (range2.fragment.length > 0) {
@@ -116,7 +116,7 @@ const mergeRangeTypes = {
     }
   },
 
-  '+=': function(mergeResult, mergeIndex, compareResult, compareIndex) {
+  '+=': function (mergeResult, mergeIndex, compareResult, compareIndex) {
     const mergeRange = mergeResult[mergeIndex];
     const compareRange = compareResult.ranges[compareIndex];
     const mep2 = mergeRange.ep2;
@@ -127,14 +127,14 @@ const mergeRangeTypes = {
         ep1: compareRange.sp1,
         user: mergeRange[fields.user],
         version: mergeRange[fields.version],
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
 
       const length = compareRange.fragment.length;
       const fragment = mergeRange.fragment.substr(length);
       const range2 = Object.assign({}, mergeRange, {
         sp2: mergeRange.ep2 - fragment.length,
-        fragment: fragment
+        fragment: fragment,
       });
 
       mergeResult.splice(mergeIndex, 1, range1, range2);
@@ -148,7 +148,7 @@ const mergeRangeTypes = {
         ep1: compareRange.sp1,
         ep2: compareRange.sp2 + length,
         fragment: mergeRange.fragment,
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
       mergeResult.splice(mergeIndex, 1, range1);
       compareResult.ranges.splice(compareIndex, 1, Object.assign({}, range1));
@@ -157,7 +157,7 @@ const mergeRangeTypes = {
       const range2 = Object.assign({}, compareRange, {
         sp1: compareRange.ep1 - fragment.length,
         sp2: compareRange.ep2 - fragment.length,
-        fragment: fragment
+        fragment: fragment,
       });
 
       if (range2.fragment.length > 0) {
@@ -166,16 +166,16 @@ const mergeRangeTypes = {
     }
   },
 
-  '++': function(mergeResult, mergeIndex, compareResult, compareIndex) {
+  '++': function (mergeResult, mergeIndex, compareResult, compareIndex) {
     // const mergeRange = mergeResult[mergeIndex]
     const compareRange = compareResult.ranges[compareIndex];
     const range = Object.assign({}, compareRange, {
-      lv: compareRange[fields.version] // lastversion
+      lv: compareRange[fields.version], // lastversion
     });
     mergeResult.splice(mergeIndex, 0, range);
   },
 
-  '+-': function(mergeResult, mergeIndex, compareResult, compareIndex) {
+  '+-': function (mergeResult, mergeIndex, compareResult, compareIndex) {
     const mergeRange = mergeResult[mergeIndex];
     const compareRange = compareResult.ranges[compareIndex];
     const mep2 = mergeRange.ep2;
@@ -186,13 +186,13 @@ const mergeRangeTypes = {
       const range = Object.assign({}, mergeRange, {
         ep1: mergeRange.sp1 + length,
         ep2: mergeRange.sp2 + length,
-        fragment: compareRange.fragment
+        fragment: compareRange.fragment,
       });
 
       mergeResult.splice(mergeIndex, 0, range);
 
       const range1 = Object.assign({}, compareRange, {
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
 
       const fragment = mergeRange.fragment.substr(length);
@@ -201,7 +201,7 @@ const mergeRangeTypes = {
         version: mergeRange[fields.version],
         sp1: mergeRange.ep1,
         sp2: mergeRange.ep2 - fragment.length,
-        fragment: fragment
+        fragment: fragment,
       });
 
       mergeResult.splice(mergeIndex + 1, 1, range1, range2);
@@ -212,7 +212,7 @@ const mergeRangeTypes = {
         ep1: compareRange.sp1 + length,
         ep2: compareRange.sp2,
         fragment: mergeRange.fragment,
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
       mergeResult.splice(mergeIndex + 1, 0, range1);
       compareResult.ranges.splice(compareIndex, 1, Object.assign({}, range1));
@@ -221,14 +221,14 @@ const mergeRangeTypes = {
         sp1: range1.ep1,
         sp2: range1.ep2,
         fragment: compareRange.fragment.substr(length),
-        lv: compareRange[fields.version] // lastversion
+        lv: compareRange[fields.version], // lastversion
       });
 
       if (range2.fragment.length > 0) {
         compareResult.ranges.splice(compareIndex + 1, 0, range2);
       }
     }
-  }
+  },
 };
 
 class StringIndex {
@@ -247,7 +247,7 @@ class StringIndex {
         item = {
           show: 1,
           pos: sortedCharValue.length,
-          index: [i]
+          index: [i],
         };
         charValueIndex[value] = item;
         sortedCharValue.push(value);
@@ -401,7 +401,7 @@ class IPaintedFace {
         sp1: range.sp2,
         ep1: range.ep2,
         sp2: range.sp1,
-        ep2: range.ep1
+        ep2: range.ep1,
       };
     }
 
@@ -426,7 +426,7 @@ class IPaintedFace {
       const versionObj = compareRange.type === '+' ? rightVersion : leftVersion;
       const itemRange = Object.assign({}, compareRange, {
         version: versionObj.version,
-        lv: rightVersion.version // 最近的版本lastversion
+        lv: rightVersion.version, // 最近的版本lastversion
       });
 
       mergeResult.push(itemRange);
@@ -464,7 +464,7 @@ class IPaintedFace {
     if (mergeIndex >= mergeResult.length) {
       mergeResult.push(
         Object.assign({}, compareRange, {
-          lv: compareRange.version // 最近的版本lastversion
+          lv: compareRange.version, // 最近的版本lastversion
         })
       );
       return;
@@ -546,7 +546,7 @@ class IPaintedFace {
           user: rightVersion[fields.user],
           mtime: rightVersion[fields.mtime],
           version: rightVersion[fields.version],
-          fragment: leftContent.substring(modifyLeftPos, leftPos)
+          fragment: leftContent.substring(modifyLeftPos, leftPos),
         });
         modifyLeftPos = -1;
       }
@@ -562,7 +562,7 @@ class IPaintedFace {
           user: rightVersion[fields.user],
           mtime: rightVersion[fields.mtime],
           version: rightVersion[fields.version],
-          fragment: leftContent.substring(leftPos, range.sp1)
+          fragment: leftContent.substring(leftPos, range.sp1),
         });
       }
 
@@ -589,7 +589,7 @@ class IPaintedFace {
           user: rightVersion[fields.user],
           mtime: rightVersion[fields.mtime],
           version: rightVersion[fields.version],
-          fragment: fragment
+          fragment: fragment,
         });
         modifyRightPos = -1;
       }
@@ -605,7 +605,7 @@ class IPaintedFace {
           user: rightVersion[fields.user],
           mtime: rightVersion[fields.mtime],
           version: rightVersion[fields.version],
-          fragment: rightContent.substring(rightPos, range.sp2)
+          fragment: rightContent.substring(rightPos, range.sp2),
         });
       }
 
@@ -662,7 +662,7 @@ class IPaintedFace {
         user: rightVersion[fields.user],
         mtime: rightVersion[fields.mtime],
         version: rightVersion[fields.version],
-        fragment: leftContent.substring(modifyLeftPos, leftPos)
+        fragment: leftContent.substring(modifyLeftPos, leftPos),
       });
       modifyLeftPos = -1;
     }
@@ -677,7 +677,7 @@ class IPaintedFace {
         user: rightVersion[fields.user],
         mtime: rightVersion[fields.mtime],
         version: rightVersion[fields.version],
-        fragment: leftContent.substring(leftPos)
+        fragment: leftContent.substring(leftPos),
       });
     }
 
@@ -692,7 +692,7 @@ class IPaintedFace {
         user: rightVersion[fields.user],
         mtime: rightVersion[fields.mtime],
         version: rightVersion[fields.version],
-        fragment: rightContent.substring(modifyRightPos, rightPos)
+        fragment: rightContent.substring(modifyRightPos, rightPos),
       });
       modifyRightPos = -1;
     }
@@ -707,14 +707,14 @@ class IPaintedFace {
         user: rightVersion[fields.user],
         mtime: rightVersion[fields.mtime],
         version: rightVersion[fields.version],
-        fragment: rightContent.substring(rightPos)
+        fragment: rightContent.substring(rightPos),
       });
     }
 
     return {
       ranges: ranges,
       left: leftVersion,
-      right: rightVersion
+      right: rightVersion,
     };
   }
 }

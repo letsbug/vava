@@ -1,6 +1,6 @@
 <template>
   <div class="va-body-container">
-    <pre v-highlight><code class="html" v-html="$t('richText.intro')"></code></pre>
+    <pre v-highlight><code class="html" v-html="$t('richText.intro')"/></pre>
     <br />
     <!--<i-tinymce v-model="content" @on-inited="onTinyInited" />-->
     <tinymce-editor v-model="content" />
@@ -16,17 +16,17 @@ import { Highlight } from '@/directives';
 export default {
   name: 'RichEditor',
   metaInfo: {
-    title: 'Rich editor demo'
+    title: 'Rich editor demo',
   },
   directives: {
-    Highlight
+    Highlight,
   },
   components: {
-    TinymceEditor: Editor
+    TinymceEditor: Editor,
   },
   data() {
     return {
-      content: content
+      content: content,
     };
   },
   created() {
@@ -38,6 +38,6 @@ export default {
     //     this.loading.close()
     //   }, 300)
     // }
-  }
+  },
 };
 </script>

@@ -3,7 +3,7 @@
     class="va-panels panel-card"
     :class="{
       'border-primary': active && !isMobile,
-      'text-primary': active && isMobile
+      'text-primary': active && isMobile,
     }"
   >
     <h6 v-if="!isMobile" class="panel-card-title" :class="active ? 'text-primary' : 'text-secondary'">
@@ -55,7 +55,7 @@ export default class extends mixins(EChartsMixins) {
     return {
       'text-primary': !this.chartData && !this.isMobile,
       'null-data': !this.chartData && !this.isMobile,
-      'text-center': this.isMobile
+      'text-center': this.isMobile,
     };
   }
 
@@ -67,10 +67,10 @@ export default class extends mixins(EChartsMixins) {
       series: [
         {
           areaStyle: {
-            color: this.areaColor()
-          }
-        }
-      ]
+            color: this.areaColor(),
+          },
+        },
+      ],
     };
     this.chart.setOption(options as EChartOption<EChartOption.SeriesLine>);
   }
@@ -87,25 +87,25 @@ export default class extends mixins(EChartsMixins) {
     this.chart.setOption({
       color: [this.themeColor],
       tooltip: {
-        show: false
+        show: false,
       },
       grid: {
         top: 12,
         right: 7,
         bottom: 7,
-        left: 7
+        left: 7,
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
         data: this.category,
         show: false,
-        inverse: true
+        inverse: true,
       },
       yAxis: {
         type: 'value',
         boundaryGap: false,
-        show: false
+        show: false,
       },
       series: [
         {
@@ -114,9 +114,9 @@ export default class extends mixins(EChartsMixins) {
           sampling: 'average',
           showSymbol: false,
           smooth: true,
-          areaStyle: { color: this.areaColor() }
-        }
-      ]
+          areaStyle: { color: this.areaColor() },
+        },
+      ],
     });
   }
 }

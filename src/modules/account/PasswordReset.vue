@@ -119,17 +119,17 @@ export default class extends Vue {
     username: 'Example@email.com',
     securityCode: 'ABC123',
     password: '',
-    confirm: ''
+    confirm: '',
   };
   private rules = {
     username: [{ validator: this.validName, trigger: 'blur' }],
     securityCode: [{ validator: validCaptcha, trigger: 'blur' }],
     password: [{ validator: validPassword, trigger: 'blur' }],
-    confirm: [{ validator: this.validConfirm, trigger: 'blur' }]
+    confirm: [{ validator: this.validConfirm, trigger: 'blur' }],
   };
   private pwdType = {
     password: true,
-    confirm: true
+    confirm: true,
   };
   private timing = false;
   private loading = false;

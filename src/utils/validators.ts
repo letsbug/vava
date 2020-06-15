@@ -13,7 +13,7 @@ const messages = {
   email: '（例：example@xx.com）',
   mobile: '只能是数字',
   phone: '（区号-电话号码）',
-  captcha: '（仅限数字和大写字母）'
+  captcha: '（仅限数字和大写字母）',
 };
 
 /**

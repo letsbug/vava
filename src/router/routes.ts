@@ -21,27 +21,27 @@ export const constantRoutes: RouteConfig[] = [
     children: [
       {
         path: '/redirect/:path*',
-        component: () => import('@/modules/redirect/index.vue')
-      }
-    ]
+        component: () => import('@/modules/redirect/index.vue'),
+      },
+    ],
   },
 
   {
     path: '/login',
     component: () => import('@/modules/account/Login.vue'),
-    meta: { hidden: true, title: 'Sign in' }
+    meta: { hidden: true, title: 'Sign in' },
   },
 
   {
     path: '/join',
     component: () => import('@/modules/account/Join.vue'),
-    meta: { hidden: true, title: 'Join to' }
+    meta: { hidden: true, title: 'Join to' },
   },
 
   {
     path: '/password',
     component: () => import('@/modules/account/PasswordReset.vue'),
-    meta: { hidden: true, title: 'Reset my password' }
+    meta: { hidden: true, title: 'Reset my password' },
   },
 
   { path: '/error', component: () => import('@/modules/errors/index.vue'), meta: { hidden: true } },
@@ -56,9 +56,9 @@ export const constantRoutes: RouteConfig[] = [
         path: '',
         name: 'GlobalSearch',
         meta: { title: 'search', icon: 'action-search', notab: true },
-        component: () => import('@/modules/search/GlobalSearch.vue')
-      }
-    ]
+        component: () => import('@/modules/search/GlobalSearch.vue'),
+      },
+    ],
   },
 
   {
@@ -70,9 +70,9 @@ export const constantRoutes: RouteConfig[] = [
         path: 'home',
         name: 'Homepage',
         meta: { title: 'home', icon: 'thing-house', nobg: true, nocache: true },
-        component: () => import('@/modules/homepage/Homepage.vue')
-      }
-    ]
+        component: () => import('@/modules/homepage/Homepage.vue'),
+      },
+    ],
   },
 
   {
@@ -84,9 +84,9 @@ export const constantRoutes: RouteConfig[] = [
         path: '',
         name: 'About',
         meta: { title: 'about', icon: 'mark-states-info', nocache: true },
-        component: () => import('@/modules/about/index.vue')
-      }
-    ]
+        component: () => import('@/modules/about/index.vue'),
+      },
+    ],
   },
 
   {
@@ -98,10 +98,10 @@ export const constantRoutes: RouteConfig[] = [
         path: '',
         name: 'Guide',
         meta: { title: 'guide', icon: 'action-guide' },
-        component: () => import('@/modules/guide/index.vue')
-      }
-    ]
-  }
+        component: () => import('@/modules/guide/index.vue'),
+      },
+    ],
+  },
 ];
 
 const errorRoute = { path: '*', redirect: '/error', hidden: true };
@@ -110,7 +110,7 @@ const errorRoute = { path: '*', redirect: '/error', hidden: true };
 const routeFiles = require.context('./modules', true, /\.ts$/);
 const modules: RouteConfig[] = routeFiles
   .keys()
-  .map(path => routeFiles(path).default)
+  .map((path) => routeFiles(path).default)
   .sort((a, b) => (a.meta.sort > b.meta.sort ? 1 : -1));
 
 modules.push(errorRoute);

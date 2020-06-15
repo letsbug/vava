@@ -3,7 +3,7 @@
  */
 
 export { parseURL } from './urls';
-export { default as Token } from './cookies';
-export { default as Regulars } from './regexps';
-export { default as Dater } from './datetime';
-export { default as clipboard } from './clipboard';
+export * as Token from './cookies';
+export * as Regulars from './regexps';
+export * as Dater from './datetime';
+export * as clipboard from './clipboard';

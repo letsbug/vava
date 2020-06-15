@@ -8,7 +8,7 @@ const createRouter = () =>
   new Router({
     linkExactActiveClass: 'active',
     routes: constantRoutes,
-    scrollBehavior: (to, from, savedPosition) => savedPosition || { x: 0, y: 0 }
+    scrollBehavior: (to, from, savedPosition) => savedPosition || { x: 0, y: 0 },
   });
 
 const router = createRouter();

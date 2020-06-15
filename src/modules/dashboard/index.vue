@@ -80,7 +80,7 @@ export default class extends Vue {
   private loadingInstance: ElLoadingComponent = Loading.service({
     lock: true,
     text: 'loading...',
-    background: 'rgba(255, 255, 255, .5)'
+    background: 'rgba(255, 255, 255, .5)',
   });
 
   private dateRange = 31;
@@ -95,16 +95,16 @@ export default class extends Vue {
       data: [],
       dataType: 'percent',
       suffix: ' %',
-      decimals: 2
+      decimals: 2,
     },
-    countries: { total: 0, data: [] }
+    countries: { total: 0, data: [] },
   };
   private activeIndex: number = 0;
   private detailData = [];
   private attach = {
     ages: [],
     sources: [],
-    interviews: []
+    interviews: [],
   };
 
   private get isMobile() {
@@ -135,7 +135,7 @@ export default class extends Vue {
       const { basic, areas } = res.data as ITypeStatistics;
       // this.data.countries.total = res.areas.length;
 
-      basic.forEach(v => {
+      basic.forEach((v) => {
         this.category.push(v.date);
 
         this.data.pv.data.push(v.pv);
@@ -157,7 +157,7 @@ export default class extends Vue {
       // this.attach.interviews = res.traffics.interview;
 
       if (!this.isMobile) {
-        (this.$refs['panel_chart'] as EChartsMixins[]).forEach(cop => {
+        (this.$refs['panel_chart'] as EChartsMixins[]).forEach((cop) => {
           cop.draw();
         });
       }

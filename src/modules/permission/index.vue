@@ -41,12 +41,12 @@ export default class extends Vue {
   }
 
   private get roles() {
-    return IStoreUser.roles.map(v => this.$t(`roles.${v}`)).join('、');
+    return IStoreUser.roles.map((v) => this.$t(`roles.${v}`)).join('、');
   }
 
   private get allowRoles() {
     const role = [...this.$route.meta.roles];
-    return role.map(v => this.$t(`roles.${v}`)).join(' & ');
+    return role.map((v) => this.$t(`roles.${v}`)).join(' & ');
   }
 
   private async onChooseUser(user: IStateUser) {
@@ -55,7 +55,7 @@ export default class extends Vue {
 
     this.$nextTick(() => {
       this.$router.replace({
-        path: '/redirect' + this.$route.fullPath
+        path: '/redirect' + this.$route.fullPath,
       });
     });
   }

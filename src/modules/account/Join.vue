@@ -6,7 +6,7 @@
 export default {
   name: 'Join',
   metaInfo: {
-    title: 'Join Vava'
-  }
+    title: 'Join Vava',
+  },
 };
 </script>

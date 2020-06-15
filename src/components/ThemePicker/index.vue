@@ -23,7 +23,7 @@
         </div>
       </div>
       <hr />
-      <div class="theme-input" style="text-align: right">
+      <div class="theme-input" style="text-align: right;">
         <el-button size="mini" @click="restoreDefault">{{ $t('theme.actions.default') }}</el-button>
         <el-button size="mini" type="primary" @click="handleSubmit">{{ $t('theme.actions.confirm') }}</el-button>
       </div>
@@ -49,7 +49,7 @@ export default class extends Vue {
     '#28a745',
     '#007bff',
     '#2f54eb',
-    '#6f42c1'
+    '#6f42c1',
   ];
 
   private styles: IStateTheme = { ...IStoreSystem.theme };

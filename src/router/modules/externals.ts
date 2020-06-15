@@ -8,9 +8,9 @@ const externals: RouteConfig = {
   children: [
     {
       path: 'https://google.com',
-      meta: { title: 'externalLink', icon: 'thing-clip' }
-    }
-  ]
+      meta: { title: 'externalLink', icon: 'thing-clip' },
+    },
+  ],
 };
 
 export default externals;

@@ -57,7 +57,7 @@ export default class extends mixins(TableDemoMixins) {
       handle: '.handle-drag',
       ghostClass: 'sortable-ghost',
       animation: 70,
-      setData: dataTransfer => {
+      setData: (dataTransfer) => {
         // to avoid Firefox bug
         // Detail see : https://github.com/RubaXa/Sortable/issues/1012
         dataTransfer.setData('Text', '');
@@ -65,7 +65,7 @@ export default class extends mixins(TableDemoMixins) {
       onEnd: (evt: SortableEvent) => {
         const targetRow = this.list.splice(evt.oldIndex!, 1)[0];
         this.list.splice(evt.newIndex!, 0, targetRow);
-      }
+      },
     });
   }
 

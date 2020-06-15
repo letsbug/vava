@@ -51,7 +51,7 @@ function maxOrbit(x, y) {
   return diameter / 2;
 }
 
-const Star = function() {
+const Star = function () {
   this.orbitRadius = random(maxOrbit(w, h));
   this.radius = random(60, this.orbitRadius) / 12;
   this.orbitX = w / 2;
@@ -64,7 +64,7 @@ const Star = function() {
   stars[count] = this;
 };
 
-Star.prototype.draw = function() {
+Star.prototype.draw = function () {
   const x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX;
   const y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY;
   const twinkle = random(10);

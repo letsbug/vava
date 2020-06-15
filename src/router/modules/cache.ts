@@ -11,9 +11,9 @@ const cache: RouteConfig = {
       path: '',
       name: 'Cache',
       meta: { title: 'cache', icon: 'chart-bar' },
-      component: () => import('@/modules/cache/index.vue')
-    }
-  ]
+      component: () => import('@/modules/cache/index.vue'),
+    },
+  ],
 };
 
 export default cache;

@@ -34,9 +34,9 @@ const generateArray = (table: HTMLElement) => {
       if (rowspanStr) {
         rowspan = parseInt(rowspanStr);
       }
-      let cellValue = cell.innerText;
+      const cellValue = cell.innerText;
       // Skip ranges
-      ranges.forEach(function(range) {
+      ranges.forEach(function (range) {
         if (R >= range.s.r && R <= range.e.r && outRow.length >= range.s.c && outRow.length <= range.e.c) {
           for (let i = 0; i <= range.e.c - range.s.c; ++i) outRow.push(null);
         }
@@ -48,12 +48,12 @@ const generateArray = (table: HTMLElement) => {
         ranges.push({
           s: {
             r: R,
-            c: outRow.length
+            c: outRow.length,
           },
           e: {
             r: R + rowspan - 1,
-            c: outRow.length + colspan - 1
-          }
+            c: outRow.length + colspan - 1,
+          },
         });
       }
       // Handle Value
@@ -75,12 +75,12 @@ const sheetFromDataArrays = (data: any) => {
   const range = {
     s: {
       c: 10000000,
-      r: 10000000
+      r: 10000000,
     },
     e: {
       c: 0,
-      r: 0
-    }
+      r: 0,
+    },
   };
   for (let R = 0; R !== data.length; ++R) {
     for (let C = 0; C !== data[R].length; ++C) {
@@ -91,12 +91,12 @@ const sheetFromDataArrays = (data: any) => {
       const cell = {
         v: data[R][C],
         t: '',
-        z: ''
+        z: '',
       };
       if (cell.v == null) continue;
       const cell_ref = XLSX.utils.encode_cell({
         c: C,
-        r: R
+        r: R,
       });
 
       if (typeof cell.v === 'number') cell.t = 'n';
@@ -147,12 +147,12 @@ export const exportTable2Excel = (id: string) => {
     const wbout = XLSX.write(wb, {
       bookType: 'xlsx',
       bookSST: false,
-      type: 'binary'
+      type: 'binary',
     });
 
     saveAs(
       new Blob([s2ab(wbout)], {
-        type: 'application/octet-stream'
+        type: 'application/octet-stream',
       }),
       'test.xlsx'
     );
@@ -182,7 +182,7 @@ export const exportJson2Excel = (
     if (!ws['!merges']) {
       ws['!merges'] = [];
     }
-    merges.forEach(item => {
+    merges.forEach((item) => {
       ws['!merges'].push(XLSX.utils.decode_range(item));
     });
   }
@@ -194,22 +194,22 @@ export const exportJson2Excel = (
         // 先判断是否为 null/undefined
         if (val == null) {
           return {
-            wch: 10
+            wch: 10,
           };
           // 再判断是否为中文
         } else if (val.toString().charCodeAt(0) > 255) {
           return {
-            wch: val.toString().length * 2
+            wch: val.toString().length * 2,
           };
         } else {
           return {
-            wch: val.toString().length
+            wch: val.toString().length,
           };
         }
       })
     );
     // 以第一行为初始值
-    let result = colWidth[0];
+    const result = colWidth[0];
     for (let i = 1; i < colWidth.length; i++) {
       for (let j = 0; j < colWidth[i].length; j++) {
         if (result[j]['wch'] < colWidth[i][j]['wch']) {
@@ -227,12 +227,12 @@ export const exportJson2Excel = (
   const wbout = XLSX.write(wb, {
     bookType: bookType as any,
     bookSST: false,
-    type: 'binary'
+    type: 'binary',
   });
 
   saveAs(
     new Blob([s2ab(wbout)], {
-      type: 'application/octet-stream'
+      type: 'application/octet-stream',
     }),
     `${filename}.${bookType}`
   );

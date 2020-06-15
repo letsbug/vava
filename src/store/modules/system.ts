@@ -7,14 +7,14 @@ import {
   setLanguage,
   setUiSize,
   setSidebarStatus,
-  setThemes
+  setThemes,
 } from '@/utils/cookies';
 import { themeTool } from '@/themes';
 import store from '@/store';
 
 export enum DeviceType {
   Mobile,
-  Desktop
+  Desktop,
 }
 
 export interface IStateTheme {
@@ -43,7 +43,7 @@ class System extends VuexModule implements IStateSystem {
   public device: DeviceType = DeviceType.Desktop;
   public sidebar = {
     opened: getSidebarStatus() !== 'closed',
-    withoutAnimation: false
+    withoutAnimation: false,
   };
   public size: string = getUiSize();
   public theme: IStateTheme = getThemes();

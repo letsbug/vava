@@ -19,7 +19,7 @@ export default class extends Vue {
     if (!s)
       this.$message({
         type: 'warning',
-        message: 'Your browser can not work'
+        message: 'Your browser can not work',
       });
     return s;
   }

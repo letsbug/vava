@@ -13,7 +13,7 @@ export default class extends Vue {
     backgroundColor: 'rgba(255, 255, 255, .86)',
     extraCssText: 'box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);',
     padding: [7, 12],
-    textStyle: { color: '#343a40', fontSize: 12 }
+    textStyle: { color: '#343a40', fontSize: 12 },
   };
   protected xAxis: EChartOption.XAxis = {
     type: 'category',
@@ -23,8 +23,8 @@ export default class extends Vue {
       color: '#6a6d71',
       formatter: (params: any) => {
         return parseDate(params, 'yyyy/MM/dd');
-      }
-    }
+      },
+    },
   };
 
   protected chart!: ECharts | null;

@@ -15,7 +15,7 @@ class Notification extends VuexModule implements IStateNotification {
   //
 
   public list: ITypeNotification[] = [];
-  public unread: number = this.list.filter(v => v.isUnread).length;
+  public unread: number = this.list.filter((v) => v.isUnread).length;
 
   //
   // Mutations
@@ -28,7 +28,7 @@ class Notification extends VuexModule implements IStateNotification {
 
   @Mutation
   private READ(notification: ITypeNotification) {
-    for (let n of this.list) {
+    for (const n of this.list) {
       if (n.id === notification.id) {
         n.isUnread = false;
         break;
@@ -38,7 +38,7 @@ class Notification extends VuexModule implements IStateNotification {
 
   @Mutation
   private READ_ALL() {
-    this.list.forEach(v => {
+    this.list.forEach((v) => {
       v.isUnread = false;
     });
   }

@@ -2,7 +2,7 @@
   <div class="va-error-wrapper">
     <img :src="flag" alt="" />
     <br />
-    <h4 style="margin: 0">Oops! {{ code }} !!!</h4>
+    <h4 style="margin: 0;">Oops! {{ code }} !!!</h4>
     <h5>{{ $t(`errors.type${code}`) }}</h5>
     <p>
       <a v-if="!noGoBack" href="/" class="linker" @click.prevent.stop="$router.go(-1)">{{ $t('errors.actionBack') }}</a>

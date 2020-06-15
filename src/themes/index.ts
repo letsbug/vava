@@ -18,9 +18,9 @@ class Theme {
       '#bfe5c7': 'light-7',
       '#d4edda': 'light-8',
       '#eaf6ec': 'light-9',
-      '40,167,69': 'themeOpacityPrimary'
+      '40,167,69': 'themeOpacityPrimary',
     };
-    Object.keys(colorMap).forEach(key => {
+    Object.keys(colorMap).forEach((key) => {
       const value = colorMap[key];
       data = data.replace(new RegExp(key, 'ig'), value);
     });
@@ -50,7 +50,7 @@ class Theme {
       document.head.appendChild(styleTag);
     }
 
-    Object.keys(newPrimaries).forEach(key => {
+    Object.keys(newPrimaries).forEach((key) => {
       const reg = new RegExp(key, 'g');
       cssText = cssText.replace(reg, newPrimaries[key]);
     });

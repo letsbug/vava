@@ -23,16 +23,16 @@ import * as Directives from '@/directives';
 
 Vue.use(Element, {
   size: 'medium',
-  i18n: (path: string, option: string) => i18n.t(path, option)
+  i18n: (path: string, option: string) => i18n.t(path, option),
 });
 
 // register global filters.
-Object.keys(filters).forEach(key => {
+Object.keys(filters).forEach((key) => {
   Vue.filter(key, (filters as { [key: string]: Function })[key]);
 });
 
 // Inject global directives, or local calls, as needed.
-Object.keys(Directives).forEach(key => {
+Object.keys(Directives).forEach((key) => {
   Vue.directive(key, (Directives as { [key: string]: DirectiveOptions })[key]);
 });
 
@@ -52,5 +52,5 @@ new Vue({
   router,
   store,
   i18n,
-  render: h => h(App)
+  render: (h) => h(App),
 });

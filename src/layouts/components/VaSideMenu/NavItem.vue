@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      expanded: visible && ((route.children && route.children.length > 1) || (route.meta && route.meta.alwaysShow))
+      expanded: visible && ((route.children && route.children.length > 1) || (route.meta && route.meta.alwaysShow)),
     }"
     class="va-side-nav"
   >

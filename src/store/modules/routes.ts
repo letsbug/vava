@@ -5,11 +5,11 @@ import { ITypeRoles } from '@/store/modules/user';
 import store from '@/store';
 
 const hasPermission = (roles: ITypeRoles[], route: RouteConfig) =>
-  route.meta && route.meta.roles ? roles.some(role => route.meta.roles.includes(role)) : true;
+  route.meta && route.meta.roles ? roles.some((role) => route.meta.roles.includes(role)) : true;
 
 const filterAsyncRoutes = (asyncRouteMap: RouteConfig[], roles: ITypeRoles[]) => {
   const list: RouteConfig[] = [];
-  asyncRouteMap.forEach(route => {
+  asyncRouteMap.forEach((route) => {
     const tmp = { ...route };
     if (hasPermission(roles, tmp)) {
       if (tmp.children && tmp.children.length > 0) {

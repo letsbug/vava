@@ -62,7 +62,7 @@ export default class extends Vue {
     exportProps: ['nickname', 'city', 'postcode', 'phone', 'sex', 'qq', 'email', 'intro'],
     cellAutoWidth: false,
     type: 'xlsx',
-    exporting: false
+    exporting: false,
   };
   private list = null;
   private loading = false;

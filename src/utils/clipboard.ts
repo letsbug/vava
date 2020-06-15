@@ -3,7 +3,7 @@ import Clipboard from 'clipboard';
 
 export const handleClipboard = (text: string, event: MouseEvent, callback?: Function) => {
   const clipboard = new Clipboard(event.target as Element, {
-    text: () => text
+    text: () => text,
   });
 
   clipboard.on('success', () => {

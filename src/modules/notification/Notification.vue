@@ -89,7 +89,7 @@ export default class extends Vue {
       confirmButtonText: 'Ok',
       callback: () => {
         this.handleMarkRead(row);
-      }
+      },
     });
   }
 
@@ -104,7 +104,7 @@ export default class extends Vue {
       confirmButtonText: this.$t('notification.button') as string,
       callback: (action: string) => {
         if (action === 'confirm') IStoreNotification.ReadAll();
-      }
+      },
     };
     this.$confirm(message, title, options);
   }

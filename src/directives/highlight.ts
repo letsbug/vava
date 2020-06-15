@@ -5,8 +5,8 @@ import { DirectiveOptions } from 'vue/types/options';
 export const Highlight: DirectiveOptions = {
   bind: (el: HTMLElement) => {
     const blocks = el.querySelectorAll('pre code');
-    blocks.forEach(block => {
+    blocks.forEach((block) => {
       highlight.highlightBlock(block);
     });
-  }
+  },
 };

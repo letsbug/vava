@@ -25,7 +25,7 @@
         </span>
         <span class="form-params">
           <el-button type="text" size="small" @click="handleSwap">
-            <i class="el-icon-sort" style="transform: rotate(90deg)" />
+            <i class="el-icon-sort" style="transform: rotate(90deg);" />
           </el-button>
         </span>
         <span class="form-params">
@@ -99,7 +99,7 @@ export default class extends Vue {
     separator: ',',
     prefix: '$',
     suffix: '',
-    easing: true
+    easing: true,
   };
   paramsOrigin = {};
 
@@ -114,7 +114,7 @@ export default class extends Vue {
   }
   handleStart() {
     (this.$refs['countToViewer'] as any).reset();
-    (this.$refs['countToViewer'] as any).start(function() {
+    (this.$refs['countToViewer'] as any).start(function () {
       console.log('Clicked start button');
     });
   }

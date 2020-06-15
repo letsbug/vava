@@ -10,7 +10,7 @@ export const statusMap: { [key: string]: string } = {
   430: '登录失败，未知用户名！',
   431: '登录失败，密码错误！',
   500: '服务器异常，请稍后再试！',
-  502: '服务器内部错误，请联系系统管理员！'
+  502: '服务器内部错误，请联系系统管理员！',
 };
 
 const friendlyErrors = (error: AxiosError) => {
@@ -40,7 +40,7 @@ const onAccessExpired = () => {
   MessageBox.confirm(statusMap[401], '确认登出', {
     confirmButtonText: '确认登出',
     cancelButtonText: '留在该页面',
-    type: 'warning'
+    type: 'warning',
   }).then(async () => {
     await IStoreUser.ClearToken();
     location.reload();
@@ -50,7 +50,7 @@ const onAccessExpired = () => {
 const Request = Axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   withCredentials: true,
-  timeout: 6000
+  timeout: 6000,
 });
 
 // request interceptor

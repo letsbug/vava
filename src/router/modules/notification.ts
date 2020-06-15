@@ -7,16 +7,16 @@ const notifications: RouteConfig = {
   redirect: '/notification/',
   meta: {
     hidden: true,
-    sort: 10
+    sort: 10,
   },
   children: [
     {
       path: '',
       name: 'Notification',
       meta: { title: 'notification', icon: 'notice' },
-      component: () => import('@/modules/notification/Notification.vue')
-    }
-  ]
+      component: () => import('@/modules/notification/Notification.vue'),
+    },
+  ],
 };
 
 export default notifications;

@@ -12,7 +12,7 @@ const TOKEN_EXPIRE =
 export enum ITypeSex {
   female,
   male,
-  unknown
+  unknown,
 }
 
 export enum ITypeRoles {
@@ -23,7 +23,7 @@ export enum ITypeRoles {
   proManager,
   auditor,
   editor,
-  visitor
+  visitor,
 }
 
 export interface IStateUser {
@@ -108,9 +108,8 @@ class User extends VuexModule implements IStateUser {
 
   @Action
   public async Login(userInfo: { username: string; password: string; remember?: boolean }) {
-    let { username, password, remember } = userInfo;
-    username = username.trim();
-    const { data } = await apiLogin(username, password);
+    const { username, password, remember } = userInfo;
+    const { data } = await apiLogin(username.trim(), password);
     setUserToken(data.accessToken, remember ? this.expire : 0);
     this.SET_TOKEN(data.accessToken);
   }
@@ -148,7 +147,7 @@ class User extends VuexModule implements IStateUser {
     }
     await apiLogout();
     resetRouter();
-    this.ClearToken();
+    await this.ClearToken();
   }
 
   @Action

@@ -69,7 +69,7 @@ import { IStoreNotification } from '@/store/modules/notification';
 
 @Component({
   name: 'VaHeadBar',
-  components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions }
+  components: { Breadcrumb, RouterRefresh, ScreenFull, LanguagePicker, ThemePicker, UserActions },
 })
 export default class extends Vue {
   private search = { old: '', keyword: '' };

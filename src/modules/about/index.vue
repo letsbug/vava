@@ -31,14 +31,14 @@ export default class extends Vue {
     { name: 'Exceptions', children: ['500', '404', '403', '...'] },
     {
       name: 'Global Features',
-      children: ['Sidebar & Responsive', 'I18n', 'Themes switch', 'Router history tabs', 'Svg sprite', 'Screen full']
+      children: ['Sidebar & Responsive', 'I18n', 'Themes switch', 'Router history tabs', 'Svg sprite', 'Screen full'],
     },
     { name: 'Editor', children: ['Rich text editor'] },
     { name: 'Excel', children: ['Export', 'Import'] },
     { name: 'Table' },
     { name: 'Dashboard' },
     { name: 'Guide for novice users' },
-    { name: 'Clipboard' }
+    { name: 'Clipboard' },
   ];
 }
 </script>

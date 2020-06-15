@@ -32,7 +32,7 @@ export default class extends Vue {
     if (tableData && tableData.length > 0) {
       this.$confirm(this.$t('excelImport.exitHint') as string, this.$t('options.confirm.title') as string, {
         type: 'warning',
-        callback: (action: string) => action === 'confirm' && next()
+        callback: (action: string) => action === 'confirm' && next(),
       });
     } else next();
   }

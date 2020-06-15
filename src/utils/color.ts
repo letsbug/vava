@@ -10,7 +10,7 @@ const formula: { [key: string]: string } = {
   'light-6': 'color(primary tint(60%))',
   'light-7': 'color(primary tint(70%))',
   'light-8': 'color(primary tint(80%))',
-  'light-9': 'color(primary tint(90%))'
+  'light-9': 'color(primary tint(90%))',
 };
 
 export function rgb2Hex(rgb: string) {
@@ -38,7 +38,7 @@ export function hex2Rgb(hex: string, onlyNum?: boolean) {
 export function generateColors(primary: string) {
   const colors: { [key: string]: string } = {};
 
-  Object.keys(formula).forEach(key => {
+  Object.keys(formula).forEach((key) => {
     const value = formula[key].replace(/primary/g, primary);
     colors[key] = color.convert(value);
   });

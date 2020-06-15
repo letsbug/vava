@@ -9,7 +9,7 @@ export enum IWaterMarkerPlacement {
   centerEnd,
   bottomStart,
   bottom,
-  bottomEnd
+  bottomEnd,
 }
 
 /**
@@ -37,7 +37,7 @@ class IWaterMarker implements IWaterMarkerOption {
   public static supportedTypes: { [key: string]: string } = {
     png: 'image/png',
     jpg: jpeg,
-    jpeg
+    jpeg,
   };
 
   fileSize!: number;
@@ -60,7 +60,7 @@ class IWaterMarker implements IWaterMarkerOption {
         opacity: 80,
         // rotate: -15,
         horizontal: 15,
-        vertical: 15
+        vertical: 15,
       },
       options
     );
@@ -155,7 +155,7 @@ class IWaterMarker implements IWaterMarkerOption {
   }
 
   public generate(target: string, marker: string) {
-    return new Promise<string>(resolve => {
+    return new Promise<string>((resolve) => {
       const m = IWaterMarker.generateImage(marker);
       const t = IWaterMarker.generateImage(target);
 

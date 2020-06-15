@@ -75,7 +75,7 @@ export default class extends Vue {
   form = { username: '', password: '', remember: false };
   rules = {
     username: [{ validator: validAccount, trigger: 'blur' }],
-    password: [{ validator: validPassword, trigger: 'blur' }]
+    password: [{ validator: validPassword, trigger: 'blur' }],
   };
   loading: boolean = false;
   password: boolean = true;

@@ -8,7 +8,7 @@ export default {
     4: 'Project Manager',
     5: 'Auditor',
     6: 'Editor',
-    7: 'Visitor'
+    7: 'Visitor',
   },
   login: {
     title: 'Sign in to VAVA',
@@ -18,7 +18,7 @@ export default {
     rememberDefault: 'Cookie are stored for 10 minutes by default',
     login: 'Sign in',
     list: 'No account yet?',
-    listHint: 'Pick any one to log in!'
+    listHint: 'Pick any one to log in!',
   },
   router: {
     home: 'Home',
@@ -48,7 +48,7 @@ export default {
     externalLink: 'External Link',
     others: 'Others',
     // hidden in side bar
-    notification: 'Notification'
+    notification: 'Notification',
   },
   header: {
     search: 'search something...',
@@ -64,31 +64,31 @@ export default {
     logout: {
       title: 'Sign out',
       confirm: 'Exit the currently logged in account?',
-      button: 'Sure Exit'
-    }
+      button: 'Sure Exit',
+    },
   },
   tabBar: {
     close: 'Close',
     closeOthers: 'Close Others',
-    closeAll: 'Close All'
+    closeAll: 'Close All',
   },
   options: {
     confirm: {
       title: 'Are you sure?',
-      sure: 'Sure'
-    }
+      sure: 'Sure',
+    },
   },
   theme: {
     themeStyle: 'Theme style',
     themeColor: 'Theme color',
     styles: {
       normally: 'Normally',
-      light: 'Light'
+      light: 'Light',
     },
     actions: {
       default: 'Default',
-      confirm: 'Ok'
-    }
+      confirm: 'Ok',
+    },
   },
   // About forms validates
   validate: {
@@ -105,8 +105,8 @@ export default {
       email: '(eg. example@domain)',
       mobile: 'can be only number',
       phone: '(Area code-phone number)',
-      captcha: '(only numbers and capital letters)'
-    }
+      captcha: '(only numbers and capital letters)',
+    },
   },
   // About pages
   errors: {
@@ -116,19 +116,19 @@ export default {
     type401: 'Unauthorized! This requests require authentication.',
     type403: "You do not have access to this page! Want it? I won't give it to you!!!",
     type404: 'The page you want to see may have moved ...',
-    type500: "The server doesn't want to talk to you and throws you an error code ..."
+    type500: "The server doesn't want to talk to you and throws you an error code ...",
   },
   homepage: {
-    welcome: 'Welcome back, dear '
+    welcome: 'Welcome back, dear ',
   },
   about: {
     intro:
-      "<p class=\"paragraph-indent\">VAVA is a back-end integration solution based on 'vue.js' and 'element-ui'. it is detached from my own project and remains iterative and optimized. It uses the latest front-end technology stack. Built-in authority verification, dynamic routing, theme switch and other background basic functions.</p>"
+      "<p class=\"paragraph-indent\">VAVA is a back-end integration solution based on 'vue.js' and 'element-ui'. it is detached from my own project and remains iterative and optimized. It uses the latest front-end technology stack. Built-in authority verification, dynamic routing, theme switch and other background basic functions.</p>",
   },
   guide: {
     hint:
       'It can give novice users some basic operating guidelines, based on the <a class="link-theme" href="https://www.npmjs.com/package/driver.js" target="_blank">driver.js</a> implementation.',
-    start: 'Try It'
+    start: 'Try It',
   },
   dashboard: {
     filters: {
@@ -138,33 +138,33 @@ export default {
       183: 'half a year',
       365: 'in a year',
       pv: 'Page Views',
-      sales: 'Sales'
+      sales: 'Sales',
     },
     average: 'Average: ',
     pv: 'pv',
     uv: 'uv',
     cvr: 'cvr',
-    countries: 'countries'
+    countries: 'countries',
   },
   cache: {
-    hint: 'Test route cache in desktop, input something, and jump to others route and back.'
+    hint: 'Test route cache in desktop, input something, and jump to others route and back.',
   },
   notification: {
     title: 'notification',
     mark: 'mark as read',
     markAll: 'mark all as read',
     confirm: 'You will mark all unread notifications as read.',
-    button: 'Mark All'
+    button: 'Mark All',
   },
   permissions: {
     yours: 'Your roles: {roles}',
-    title: 'This page is accessible only to <span class="text-error">{role}</span>.'
+    title: 'This page is accessible only to <span class="text-error">{role}</span>.',
   },
   richText: {
     intro:
       'Rich text as the background of the most core, the most basic, but also annoying features, is really a headache! After nearly a week of experimenting with some familiar rich text, ' +
       'I decided to use <a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>. ' +
-      'Because there is no background, can not achieve the function of image upload, so the picture here can only add existing links. Here are the actual results:'
+      'Because there is no background, can not achieve the function of image upload, so the picture here can only add existing links. Here are the actual results:',
   },
   countTo: {
     intro:
@@ -173,24 +173,24 @@ export default {
     methods: 'Methods: ',
     start: 'Start',
     pauseResume: 'Pause/Resume',
-    reset: 'Reset'
+    reset: 'Reset',
   },
   icons: {
     usage: 'Usage',
     content: 'Just use <strong>va-icon</strong> component to use icons, Like &lt;va-icon icon="dashboard"/&gt;.',
-    list: 'Icons<small class="text-muted hidden-sm-and-down">Click them to copy HTML.</small>'
+    list: 'Icons<small class="text-muted hidden-sm-and-down">Click them to copy HTML.</small>',
   },
   exception: {
     404: 'Trigger 404 error',
     403: 'Trigger 403 error',
     401: 'Trigger 401 error',
-    500: 'Trigger 500 error'
+    500: 'Trigger 500 error',
   },
   excelExport: {
     filename: 'Filename',
     fileType: 'File Type',
     autoWidth: 'Cell Auto-Width',
-    execute: 'Export'
+    execute: 'Export',
   },
   excelImport: {
     browse: 'Browse',
@@ -202,6 +202,6 @@ export default {
     errorExcess: 'Only support importing one file!',
     errorTypes: 'Only supports import .xlsx, .xls, .csv suffix files',
     emptyHint: 'Please import an excel first.',
-    exitHint: 'You have an excel that has been imported. Are you sure you want to leave?'
-  }
+    exitHint: 'You have an excel that has been imported. Are you sure you want to leave?',
+  },
 };

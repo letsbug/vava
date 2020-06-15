@@ -194,7 +194,7 @@ export const isAddressCode = (v: string) => {
     71: '台湾',
     81: '香港',
     82: '澳门',
-    91: '国外'
+    91: '国外',
   };
   const check = /^[1-9]\d{5}$/.test(v);
   return check && address[parseInt(v.substring(0, 2))];

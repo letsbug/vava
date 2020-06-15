@@ -8,7 +8,7 @@ const dashboard: RouteConfig = {
   component: Layout,
   meta: {
     roles: [ITypeRoles.systemAdmin, ITypeRoles.superAdmin],
-    sort: 0
+    sort: 0,
   },
   children: [
     {
@@ -19,11 +19,11 @@ const dashboard: RouteConfig = {
         icon: 'chart-dashboard',
         roles: [ITypeRoles.systemAdmin, ITypeRoles.superAdmin],
         withoutBackground: true,
-        nocache: true
+        nocache: true,
       },
-      component: () => import('@/modules/dashboard/index.vue')
-    }
-  ]
+      component: () => import('@/modules/dashboard/index.vue'),
+    },
+  ],
 };
 
 export default dashboard;

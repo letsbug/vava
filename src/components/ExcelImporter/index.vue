@@ -56,7 +56,7 @@ export default class extends Vue {
   private file: File | null = null;
   private excelData: { [key: string]: any } = {
     header: null,
-    results: null
+    results: null,
   };
 
   private isExcel(file: File) {
@@ -88,7 +88,7 @@ export default class extends Vue {
 
   private readerData(rawFile: File) {
     const reader = new FileReader();
-    reader.onload = e => {
+    reader.onload = (e) => {
       const data = (e.target as FileReader).result;
       const workbook = XLSX.read(data, { type: 'array' });
       const firstSheetName = workbook.SheetNames[0];

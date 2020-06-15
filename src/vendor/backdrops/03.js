@@ -13,7 +13,7 @@ class Line {
     this.y = height / 2 + 1;
     this.target = {
       x: width / 2,
-      y: height / 2
+      y: height / 2,
     };
     this.dist = 0;
     this.angle = 0;
@@ -37,7 +37,7 @@ class Line {
 
     this.path.push({
       x: this.x,
-      y: this.y
+      y: this.y,
     });
     if (this.path.length > this.count) {
       this.path.shift();

@@ -8,7 +8,7 @@ export default {
     4: '项目管理员',
     5: '审核员',
     6: '编辑员',
-    7: '访客'
+    7: '访客',
   },
   login: {
     title: 'VAVA 系统登录',
@@ -18,7 +18,7 @@ export default {
     rememberDefault: 'Cookie默认保存10分钟',
     login: '登 录',
     list: '还没账户？',
-    listHint: '随便选一个去登录吧！'
+    listHint: '随便选一个去登录吧！',
   },
   router: {
     home: '首页',
@@ -48,7 +48,7 @@ export default {
     externalLink: '外部链接',
     others: '其它',
     // hidden in side bar
-    notification: '通知中心'
+    notification: '通知中心',
   },
   header: {
     search: '全局搜索...',
@@ -64,31 +64,31 @@ export default {
     logout: {
       title: '退出系统',
       confirm: '确定退出当前登录的账户吗？',
-      button: '确定'
-    }
+      button: '确定',
+    },
   },
   tabBar: {
     close: '关闭',
     closeOthers: '关闭其它',
-    closeAll: '关闭所有'
+    closeAll: '关闭所有',
   },
   options: {
     confirm: {
       title: '操作确认',
-      sure: '确定'
-    }
+      sure: '确定',
+    },
   },
   theme: {
     themeStyle: '主题风格',
     themeColor: '主题颜色',
     styles: {
       normally: '正常',
-      light: '明亮'
+      light: '明亮',
     },
     actions: {
       default: '恢复默认',
-      confirm: '确定'
-    }
+      confirm: '确定',
+    },
   },
   // About forms validates
   validate: {
@@ -105,8 +105,8 @@ export default {
       email: '（例：example@xx.com）',
       mobile: '只能是数字',
       phone: '（区号-电话号码）',
-      captcha: '（仅限数字和大写字母）'
-    }
+      captcha: '（仅限数字和大写字母）',
+    },
   },
   // About pages
   errors: {
@@ -116,19 +116,19 @@ export default {
     type401: '你未经授权！这个请求需要身份验证！',
     type403: '你没有这个页面的访问权限！想要吗？我不会给你的！！！',
     type404: '哎呀！！！这里什么都没有！',
-    type500: '服务器不想理你，还丢给了你这个错误代码 ...'
+    type500: '服务器不想理你，还丢给了你这个错误代码 ...',
   },
   homepage: {
-    welcome: '欢迎回来，亲爱的 '
+    welcome: '欢迎回来，亲爱的 ',
   },
   about: {
     intro:
-      '<p class="paragraph-indent">vava 是一个基于vue.js和element-ui构建的，从我自己项目中剥离出来，并一直保持迭代和优化的一个后台集成解决方案。它使用了时下最新的前端技术栈，内置了权限验证、动态路由、主题切换等后台基本功能。</p>'
+      '<p class="paragraph-indent">vava 是一个基于vue.js和element-ui构建的，从我自己项目中剥离出来，并一直保持迭代和优化的一个后台集成解决方案。它使用了时下最新的前端技术栈，内置了权限验证、动态路由、主题切换等后台基本功能。</p>',
   },
   guide: {
     hint:
       '可以给新手用户一些基本的操作指引，基于<a class="link-theme" href="https://www.npmjs.com/package/driver.js" target="_blank">driver.js</a>实现。',
-    start: '试试效果'
+    start: '试试效果',
   },
   dashboard: {
     filters: {
@@ -138,33 +138,33 @@ export default {
       183: '半年内',
       365: '一年内',
       pv: '访问量',
-      sales: '销售额'
+      sales: '销售额',
     },
     average: '日均：',
     pv: '浏览量',
     uv: '访客数',
     cvr: '转化率',
-    countries: '国家总数'
+    countries: '国家总数',
   },
   cache: {
-    hint: '此页面用于测试页面缓存功能，方法：在输入框随便输入一些东西，然后切换路由再切换回来。'
+    hint: '此页面用于测试页面缓存功能，方法：在输入框随便输入一些东西，然后切换路由再切换回来。',
   },
   notification: {
     title: '通知中心',
     mark: '标记为已读',
     markAll: '标记所有为已读',
     confirm: '确定将所有未读消息标记为已读吗？',
-    button: '确定'
+    button: '确定',
   },
   permissions: {
     yours: '你的角色：{roles}',
-    title: '这个页面只有 <span class="text-error">{role}</span> 能访问。'
+    title: '这个页面只有 <span class="text-error">{role}</span> 能访问。',
   },
   richText: {
     intro:
       '富文本作为后台最核心的，最基本的，同时又是坑最多功能，真的是叫人头疼！折腾了近一周的时间，常见的富文本基本都试了一下，' +
       '最终还是决定使用 <a class="link-theme" href="https://www.tiny.cloud/" target="_blank">TinyMCE</a> ' +
-      '实现富文本编辑功能。因为没有后台，无法实现图片上传的功能，所以这里的图片仅能添加已有链接。以下为实际效果：'
+      '实现富文本编辑功能。因为没有后台，无法实现图片上传的功能，所以这里的图片仅能添加已有链接。以下为实际效果：',
   },
   countTo: {
     intro:
@@ -173,24 +173,24 @@ export default {
     methods: '方法: ',
     start: '开始',
     pauseResume: '暂停/恢复',
-    reset: '重置'
+    reset: '重置',
   },
   icons: {
     usage: '使用方法',
     content: '使用 <strong>va-icon</strong> 组件来使用内置图标, 例如： &lt;va-icon icon="dashboard"/&gt;.',
-    list: '图标列表<small class="text-muted hidden-sm-and-down">点击任意一个直接复制代码.</small>'
+    list: '图标列表<small class="text-muted hidden-sm-and-down">点击任意一个直接复制代码.</small>',
   },
   exception: {
     404: '触发404',
     403: '触发403',
     401: '触发401',
-    500: '触发500'
+    500: '触发500',
   },
   excelExport: {
     filename: '文件名',
     fileType: '文件类型',
     autoWidth: '自动列宽',
-    execute: '导出'
+    execute: '导出',
   },
   excelImport: {
     browse: '浏览',
@@ -202,6 +202,6 @@ export default {
     errorExcess: '只能导入一个文件',
     errorTypes: '只能支持导入 .xlsx, .xls, .csv 后缀的文件',
     emptyHint: '请先上传一个excel文件。',
-    exitHint: '你有一个已经导入的excel文件. 确定离开当前页面吗？'
-  }
+    exitHint: '你有一个已经导入的excel文件. 确定离开当前页面吗？',
+  },
 };

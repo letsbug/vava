@@ -18,7 +18,7 @@ const opts = {
   startColor: 0.2,
   fullColor: 0.5,
   stopColor: 0.6,
-  timeToColorChange: 3
+  timeToColorChange: 3,
 };
 const particles = [];
 let tick = 0;
@@ -27,7 +27,7 @@ function Particle() {
   this.reset();
 }
 
-Particle.prototype.reset = function() {
+Particle.prototype.reset = function () {
   this.x = Math.pow(Math.random(), 1 / 4);
   this.y = h / 2;
   const color = opts.templateParticleColor.replace('hue', this.x * 360 * 2 + tick * opts.timeToColorChange);
@@ -51,7 +51,7 @@ Particle.prototype.reset = function() {
   this.tick = this.time + opts.overTime;
 };
 
-Particle.prototype.step = function() {
+Particle.prototype.step = function () {
   let size;
   if (this.tick <= this.time) {
     this.x += this.vx *= opts.sliding;
@@ -78,7 +78,7 @@ Particle.prototype.step = function() {
 ctx.fillStyle = '#fff';
 ctx.fillRect(0, 0, w, h);
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
   canvas.width = w = window.innerWidth;
   canvas.height = h = window.innerHeight;
 
@@ -101,7 +101,7 @@ function anim() {
     particles.push(new Particle());
   }
 
-  particles.map(function(particle) {
+  particles.map(function (particle) {
     particle.step();
   });
 }

@@ -14,17 +14,17 @@ Vue.use(VueI18n);
 const messages = {
   en: {
     ...enLocale,
-    ...ElementEn
+    ...ElementEn,
   },
   zh: {
     ...zhLocale,
-    ...ElementZh
-  }
+    ...ElementZh,
+  },
 };
 
 const i18n = new VueI18n({
   locale: getLanguage(),
-  messages
+  messages,
 });
 
 export const generateTitle = (title: string) => (i18n.te(`router.${title}`) ? i18n.t(`router.${title}`) : title);

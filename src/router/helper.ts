@@ -12,7 +12,7 @@ NProgress.configure({ showSpinner: false });
 // Route redirect whitelist.
 const whitelist = ['/login', '/join', '/password'];
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to: Route, _: Route, next: Function) => {
   NProgress.start();
 
   if (IStoreUser.token) {
@@ -63,7 +63,7 @@ router.beforeEach(async (to, from, next) => {
       Message({
         type: 'error',
         message: 'Your login has expired. Please login again.',
-        duration: 0
+        duration: 0,
       });
     }
   }

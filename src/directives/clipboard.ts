@@ -22,19 +22,19 @@ const bindUpdate = (el: HTMLElement, binding: DirectiveBinding, isBind?: boolean
 
   clipboardInterface = new Clipboard(el, {
     text: () => binding.value,
-    action: () => (binding.arg === 'cut' ? 'cut' : 'copy')
+    action: () => (binding.arg === 'cut' ? 'cut' : 'copy'),
   });
 
   if (!isBind) {
     return;
   }
 
-  clipboardInterface.on('success', event => {
+  clipboardInterface.on('success', (event) => {
     const callback = onSuccess;
     callback && callback(event);
   });
 
-  clipboardInterface.on('error', event => {
+  clipboardInterface.on('error', (event) => {
     const callback = onError;
     callback && callback(event);
   });
@@ -58,5 +58,5 @@ export const clipboard: DirectiveOptions = {
       clipboardInterface && clipboardInterface.destroy();
       clipboardInterface = null;
     }
-  }
+  },
 };

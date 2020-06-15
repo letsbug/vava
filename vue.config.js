@@ -28,10 +28,10 @@ module.exports = {
         target: `http://127.0.0.1:${mockServerPort}/mock-api`,
         changeOrigin: true,
         pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
-        }
-      }
-    }
+          ['^' + process.env.VUE_APP_BASE_API]: '',
+        },
+      },
+    },
   },
   configureWebpack(config) {
     // console.log(config)
@@ -41,7 +41,7 @@ module.exports = {
       algorithm: 'gzip',
       test: new RegExp('\\.(js|css)$'),
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     });
     if (process.env.VUE_APP_FLAG !== 'dev') {
       config.plugins.push(compressPlugin);
@@ -53,7 +53,7 @@ module.exports = {
 
     config.set('name', name);
 
-    config.plugin('html').tap(args => {
+    config.plugin('html').tap((args) => {
       const arg = args[0];
       arg.meta = metas;
       return args;
@@ -62,10 +62,7 @@ module.exports = {
     config.output.filename('[name].[hash].js').end();
 
     // svg loader
-    config.module
-      .rule('svg')
-      .exclude.add(resolve('src/icons'))
-      .end();
+    config.module.rule('svg').exclude.add(resolve('src/icons')).end();
     config.module
       .rule('icons')
       .test(/\.svg$/)
@@ -74,7 +71,7 @@ module.exports = {
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
       .options({
-        symbolId: 'icon-[name]'
+        symbolId: 'icon-[name]',
       })
       .end();
 
@@ -82,7 +79,7 @@ module.exports = {
       .rule('vue')
       .use('vue-loader')
       .loader('vue-loader')
-      .tap(options => {
+      .tap((options) => {
         options.compilerOptions.preserveWhitespace = true;
         return options;
       })
@@ -92,7 +89,7 @@ module.exports = {
     // config.when(process.env.NODE_ENV === 'development', config => config.devtool('cheap-source-map'))
 
     // package sets
-    config.when(process.env.NODE_ENV !== 'development', config => {
+    config.when(process.env.NODE_ENV !== 'development', (config) => {
       config.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {
@@ -100,38 +97,38 @@ module.exports = {
             name: 'chunk-libs',
             test: /[\\/]node_modules[\\/]/,
             priority: 10,
-            chunks: 'initial' // only package third parties that are initially dependent
+            chunks: 'initial', // only package third parties that are initially dependent
           },
           commons: {
             name: 'chunk-commons',
             test: resolve('src/components'), // can customize your rules
             minChunks: 2, //  minimum common number
             priority: 5,
-            reuseExistingChunk: true
+            reuseExistingChunk: true,
           },
           element: {
             name: 'chunk-element', // split elementUI into a single package
             priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // in order to adapt to cnpm
           },
           echarts: {
             name: 'chunk-echarts',
             priority: 20,
-            test: /[\\/]node_modules[\\/]echarts[\\/]/
+            test: /[\\/]node_modules[\\/]echarts[\\/]/,
           },
           xlsx: {
             name: 'chunk-xlsx',
             priority: 20,
-            test: /[\\/]node_modules[\\/]xlsx[\\/]/
+            test: /[\\/]node_modules[\\/]xlsx[\\/]/,
           },
           highlight: {
             name: 'chunk-highlight',
             priority: 20,
-            test: /[\\/]node_modules[\\/]highlight.js[\\/]/
-          }
-        }
+            test: /[\\/]node_modules[\\/]highlight.js[\\/]/,
+          },
+        },
       });
       config.optimization.runtimeChunk('single');
     });
-  }
+  },
 };

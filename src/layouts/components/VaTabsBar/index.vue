@@ -1,4 +1,3 @@
-import { DeviceType } from '@/store/modules/system'
 <template>
   <div class="va-tabs-bar">
     <!-- breadcrumb -->
@@ -42,11 +41,9 @@ import { Component, Vue, Watch } from 'vue-property-decorator';
 import { DeviceType, IStoreSystem } from '@/store/modules/system';
 import { IStoreTabs } from '@/store/modules/tabs';
 import { generateTitle } from '@/i18n';
-import { Breadcrumb, ContextMenu } from '@/components';
+import { Breadcrumb, ContextMenu, IContextOptions } from '@/components';
 import ITabScrollPane from './ScrollPane.vue';
-import { Route, RouteConfig, RouteRecord } from 'vue-router';
-import { VueRouter } from 'vue-router/types/router';
-import { IContextOptions } from '@/components';
+import { RouteConfig } from 'vue-router';
 
 @Component({ name: 'VaTabsBar', components: { ITabScrollPane, Breadcrumb, ContextMenu } })
 export default class extends Vue {
@@ -71,7 +68,7 @@ export default class extends Vue {
     this.tabsOptions = [
       { label: this.$t('tabBar.close') as string, command: this.close },
       { label: this.$t('tabBar.closeOthers') as string, command: this.closeOthers },
-      { label: this.$t('tabBar.closeAll') as string, command: this.closeAll }
+      { label: this.$t('tabBar.closeAll') as string, command: this.closeAll },
     ];
     this.add();
     this.reCalcContextStatus();
@@ -99,9 +96,10 @@ export default class extends Vue {
 
   private add() {
     if (this.isMobile) return;
-    const { name, path, meta } = this.$route;
-    if (meta.notab || !name || path === '/home') return;
-    IStoreTabs.Add(this.$route);
+    const route = this.$route;
+    const { name, path, meta } = route;
+    if (!route || meta.notab || !name || path === '/home') return;
+    IStoreTabs.Add(route);
   }
 
   private async close(target: RouteConfig) {

@@ -30,22 +30,22 @@ export default class extends mixins(EChartsMixins) {
     const options = this.isChartMap
       ? {
           visualMap: {
-            inRange: { color: [this.colorStart(), this.themeColor] }
+            inRange: { color: [this.colorStart(), this.themeColor] },
           },
           series: [
             {},
             {
-              itemStyle: { color: this.themeColor }
-            }
-          ]
+              itemStyle: { color: this.themeColor },
+            },
+          ],
         }
       : {
           color: [this.themeColor],
           series: [
             {
-              areaStyle: { color: this.areaColor() }
-            }
-          ]
+              areaStyle: { color: this.areaColor() },
+            },
+          ],
         };
 
     this.chart.setOption(options as EChartOption<EChartOption.SeriesLine>);
@@ -70,7 +70,7 @@ export default class extends mixins(EChartsMixins) {
       tooltip: Object.assign({}, this.tooltip, {
         trigger: 'axis',
         formatter: (params: EChartOption.Tooltip.Format[]) =>
-          `${params[0].name}<br />${params[0].marker}${params[0].value}${this.isPercent ? '%' : ''}`
+          `${params[0].name}<br />${params[0].marker}${params[0].value}${this.isPercent ? '%' : ''}`,
       }),
       xAxis: {
         type: 'category',
@@ -80,22 +80,22 @@ export default class extends mixins(EChartsMixins) {
         data: this.category,
         inverse: true,
         axisLabel: {
-          color: '#6a6d71'
-        }
+          color: '#6a6d71',
+        },
       },
       yAxis: {
         type: 'value',
         axisLine: { show: false },
         axisTick: { show: false },
         splitLine: {
-          lineStyle: { color: '#e6edf1' }
+          lineStyle: { color: '#e6edf1' },
         },
         axisLabel: {
-          color: '#6a6d71'
-        }
+          color: '#6a6d71',
+        },
       },
       axisPointer: {
-        lineStyle: { color: '#ced4da' }
+        lineStyle: { color: '#ced4da' },
       },
       series: [
         {
@@ -104,26 +104,26 @@ export default class extends mixins(EChartsMixins) {
           sampling: 'average',
           showSymbol: false,
           smooth: true,
-          areaStyle: { color: this.areaColor() }
-        }
-      ]
+          areaStyle: { color: this.areaColor() },
+        },
+      ],
     };
   }
 
   private optionsMap() {
-    const category = this.chartData.map(v => v.name).slice(0, 5);
+    const category = this.chartData.map((v) => v.name).slice(0, 5);
 
     const title = Object.assign(
       {
         text: 'TOP5 COUNTRIES FOR PV',
-        textStyle: { color: '#6a6d71', fontSize: 14 }
+        textStyle: { color: '#6a6d71', fontSize: 14 },
       },
       this.isMobile ? { top: '45%', left: 'center' } : { left: '65.6%', top: 20 }
     );
     const geo = Object.assign(
       {
         map: 'world',
-        itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' }
+        itemStyle: { areaColor: '#e9ebf0', borderColor: '#e9ebf0' },
       },
       this.isMobile ? { top: 0, right: 0, bottom: '60%', left: 0 } : { top: 30, right: '40%', bottom: 30, left: 30 }
     );
@@ -136,7 +136,7 @@ export default class extends mixins(EChartsMixins) {
       tooltip: Object.assign({}, this.tooltip, {
         trigger: 'item',
         formatter: (params: EChartOption.Tooltip.Format) =>
-          params.data ? `${params.marker}${params.name}: ${params.value}` : undefined
+          params.data ? `${params.marker}${params.name}: ${params.value}` : undefined,
       }),
       visualMap: [
         {
@@ -147,14 +147,14 @@ export default class extends mixins(EChartsMixins) {
           text: ['High', 'Low'], // 文本，默认为数值文本
           seriesIndex: 0,
           calculable: false,
-          show: false
-        }
+          show: false,
+        },
       ],
       geo,
       grid,
       xAxis: {
         type: 'value',
-        show: false
+        show: false,
       },
       yAxis: {
         type: 'category',
@@ -165,26 +165,26 @@ export default class extends mixins(EChartsMixins) {
           inside: true,
           margin: 0,
           verticalAlign: 'bottom',
-          padding: [0, 0, 16, 0]
+          padding: [0, 0, 16, 0],
         },
         data: category,
-        inverse: true
+        inverse: true,
       },
       series: [
         {
           type: 'map',
           data: this.chartData,
-          geoIndex: 0
+          geoIndex: 0,
         },
         {
           type: 'bar',
           barWidth: 6,
           label: { show: true, position: 'right', color: '#343a40' },
           itemStyle: { barBorderRadius: 3, color: this.themeColor },
-          data: this.chartData.map(v => v.value).slice(0, 5),
-          silent: true
-        }
-      ]
+          data: this.chartData.map((v) => v.value).slice(0, 5),
+          silent: true,
+        },
+      ],
     };
   }
 

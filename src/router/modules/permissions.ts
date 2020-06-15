@@ -18,10 +18,10 @@ const permissions: RouteConfig = {
       ITypeRoles.proManager,
       ITypeRoles.auditor,
       ITypeRoles.editor,
-      ITypeRoles.visitor
+      ITypeRoles.visitor,
     ],
     alwaysShow: true,
-    sort: 2
+    sort: 2,
   },
   children: [
     {
@@ -29,38 +29,38 @@ const permissions: RouteConfig = {
       name: 'PermissionAdmin',
       meta: {
         title: 'Admins',
-        roles: [ITypeRoles.systemAdmin, ITypeRoles.superAdmin]
+        roles: [ITypeRoles.systemAdmin, ITypeRoles.superAdmin],
       },
-      component: () => import('@/modules/permission/index.vue')
+      component: () => import('@/modules/permission/index.vue'),
     },
     {
       path: 'auditor',
       name: 'PermissionAuditor',
       meta: {
         title: 'Managers',
-        roles: [ITypeRoles.accessManager, ITypeRoles.userManager, ITypeRoles.proManager] // admin always has all permissions
+        roles: [ITypeRoles.accessManager, ITypeRoles.userManager, ITypeRoles.proManager], // admin always has all permissions
       },
-      component: () => import('@/modules/permission/index.vue')
+      component: () => import('@/modules/permission/index.vue'),
     },
     {
       path: 'editor',
       name: 'PermissionEditor',
       meta: {
         title: 'Auditor & Editor',
-        roles: [ITypeRoles.auditor, ITypeRoles.editor] // admin always has all permissions
+        roles: [ITypeRoles.auditor, ITypeRoles.editor], // admin always has all permissions
       },
-      component: () => import('@/modules/permission/index.vue')
+      component: () => import('@/modules/permission/index.vue'),
     },
     {
       path: 'visitor',
       name: 'PermissionVisitor',
       meta: {
         title: 'Visitor',
-        roles: [ITypeRoles.visitor] // admin always has all permissions
+        roles: [ITypeRoles.visitor], // admin always has all permissions
       },
-      component: () => import('@/modules/permission/index.vue')
-    }
-  ]
+      component: () => import('@/modules/permission/index.vue'),
+    },
+  ],
 };
 
 export default permissions;

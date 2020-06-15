@@ -40,10 +40,10 @@ export const parseDate = (date: Date | number | string, format: string = 'yyyy.M
     'd+': date.getDate(),
     'h+': date.getHours(),
     'm+': date.getMinutes(),
-    's+': date.getSeconds()
+    's+': date.getSeconds(),
   };
 
-  Object.keys(o).forEach(k => {
+  Object.keys(o).forEach((k) => {
     if (new RegExp(`(${k})`).test(format)) {
       const str = o[k] + '';
       format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? str : `00${str}`.substr(str.length));

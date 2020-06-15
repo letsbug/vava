@@ -54,7 +54,7 @@ export default class extends Vue {
   public open($event: MouseEvent) {
     this.axis = {
       top: $event.clientY + 'px',
-      left: $event.clientX + 'px'
+      left: $event.clientX + 'px',
     };
     this.visible = true;
   }

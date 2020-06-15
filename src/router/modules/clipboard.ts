@@ -11,9 +11,9 @@ const clipboard: RouteConfig = {
       path: '',
       name: 'Clipboard',
       meta: { title: 'clipboard', icon: 'action-clipboard' },
-      component: () => import('@/modules/clipboard/index.vue')
-    }
-  ]
+      component: () => import('@/modules/clipboard/index.vue'),
+    },
+  ],
 };
 
 export default clipboard;

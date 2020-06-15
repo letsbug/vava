@@ -13,11 +13,11 @@ const icons: RouteConfig = {
       meta: {
         title: 'iconViewer',
         icon: 'file-folder',
-        nocache: true
+        nocache: true,
       },
-      component: () => import('@/modules/icons/IconViewer.vue')
-    }
-  ]
+      component: () => import('@/modules/icons/IconViewer.vue'),
+    },
+  ],
 };
 
 export default icons;

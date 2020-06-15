@@ -3,28 +3,27 @@ module.exports = {
   env: {
     node: true,
     browser: true,
-    es6: true
+    es6: true,
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser'
+    parser: '@typescript-eslint/parser',
   },
-  extends: [
-    'plugin:vue/essential',
-    '@vue/prettier',
-    '@vue/typescript'
-  ],
+  extends: ['plugin:vue/essential', '@vue/prettier', '@vue/typescript'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'prettier/prettier': ['error'],
-    'vue/html-self-closing': ['error', {
-      'html': {
-        'void': 'always',
-        'normal': 'always',
-        'component': 'always'
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          void: 'always',
+          normal: 'always',
+          component: 'always',
+        },
+        svg: 'any',
+        math: 'always',
       },
-      'svg': 'any',
-      'math': 'always'
-    }]
-  }
-}
+    ],
+  },
+};

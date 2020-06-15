@@ -4,24 +4,24 @@ const steps = [
     popover: {
       title: 'Hamburger',
       description: 'Open or close the sidebar menus',
-      position: 'bottom'
-    }
+      position: 'bottom',
+    },
   },
   {
     element: '.handle-refresh',
     popover: {
       title: 'Refresh',
       description: 'Refresh current route if necessary',
-      position: 'bottom'
-    }
+      position: 'bottom',
+    },
   },
   {
     element: '#screenFull',
     popover: {
       title: 'Screen full',
       description: 'Bring the page into fullscreen',
-      position: 'bottom'
-    }
+      position: 'bottom',
+    },
   },
   {
     element: '#themePicker',
@@ -29,8 +29,8 @@ const steps = [
       title: 'Theme picker',
       description: 'Switch your favorite beautiful theme colors',
       position: 'left',
-      offset: 5
-    }
+      offset: 5,
+    },
   },
   {
     element: '.va-lang-picker',
@@ -38,25 +38,25 @@ const steps = [
       title: 'Language picker',
       description: 'Switch the system language',
       position: 'left',
-      offset: 5
-    }
+      offset: 5,
+    },
   },
   {
     element: '.va-tabs-bar',
     popover: {
       title: 'Tabs container',
       description: 'The history of the page you visited, Right-click on a TAB that can be closed for more action',
-      position: 'bottom'
-    }
+      position: 'bottom',
+    },
   },
   {
     element: '#tabsRightOptions',
     popover: {
       title: 'Tabs actions',
       description: 'Close tabs actions, or right-click on a TAB that can be closed for more action',
-      position: 'left'
-    }
-  }
+      position: 'left',
+    },
+  },
 ];
 
 export default steps;

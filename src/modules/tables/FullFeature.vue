@@ -111,7 +111,7 @@
     />
 
     <el-dialog :visible.sync="dialogVisible" :title="`Article ${editForm.isEdit ? 'Edit' : 'Add'} Form`" width="50%">
-      <el-form :model="editForm" label-width="80px" style="margin-right: 60px">
+      <el-form :model="editForm" label-width="80px" style="margin-right: 60px;">
         <el-form-item label="Title" prop="title">
           <el-input v-model="editForm.title" placeholder="Article title" />
         </el-form-item>
@@ -200,7 +200,7 @@ export default class extends mixins(TableDemoMixins) {
       title: '',
       summery: '',
       content: '',
-      auditor: ''
+      auditor: '',
     };
   }
   private handleEdit(rowData: any) {
@@ -223,7 +223,7 @@ export default class extends mixins(TableDemoMixins) {
     if (rowData) {
       lst = [Object.assign({}, rowData, status)];
     } else {
-      this.selected.forEach(v => {
+      this.selected.forEach((v) => {
         lst.push(Object.assign({}, v, status));
       });
     }
@@ -237,7 +237,7 @@ export default class extends mixins(TableDemoMixins) {
             this.$message({
               center: true,
               type: res.success ? 'success' : 'error',
-              message: `${isAudit ? 'Audit' : 'Delete'} executed ${res.success ? 'successfully' : 'failed'}.`
+              message: `${isAudit ? 'Audit' : 'Delete'} executed ${res.success ? 'successfully' : 'failed'}.`,
             });
             if (res.success) {
               if (rowData) rowData.status = status.status;
@@ -248,7 +248,7 @@ export default class extends mixins(TableDemoMixins) {
             }
           });
         }
-      }
+      },
     };
     this.$confirm(
       `Are you sure you want to ${isAudit ? 'audit' : 'delete'} ${lst.length > 1 ? 'these' : 'this'} data?`,

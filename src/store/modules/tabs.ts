@@ -21,7 +21,7 @@ class Tabs extends VuexModule implements IStateTabs {
 
   @Mutation
   private ADD_HISTORY(route: RouteConfig) {
-    if (this.history.some(r => r.path === route.path)) return;
+    if (this.history.some((r) => r.path === route.path)) return;
     this.history.push(route);
   }
 
@@ -56,14 +56,14 @@ class Tabs extends VuexModule implements IStateTabs {
 
   @Mutation
   private DEL_OTHER_HISTORY(route: RouteConfig) {
-    this.history = this.history.filter(v => {
+    this.history = this.history.filter((v) => {
       return v.path === route.path;
     });
   }
 
   @Mutation
   private DEL_OTHER_CACHED(route: RouteConfig) {
-    this.cached = this.cached.filter(v => {
+    this.cached = this.cached.filter((v) => {
       return v === route.name;
     });
   }

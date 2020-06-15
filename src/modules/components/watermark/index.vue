@@ -64,7 +64,7 @@ export default class extends Vue {
     'center end',
     'bottom start',
     'bottom',
-    'bottom end'
+    'bottom end',
   ];
 
   private options: IWaterMarkerOption = {
@@ -72,7 +72,7 @@ export default class extends Vue {
     ratio: 20,
     opacity: 70,
     horizontal: 15,
-    vertical: 15
+    vertical: 15,
   };
   private marker: IWaterMarker = new IWaterMarker(this.options);
 

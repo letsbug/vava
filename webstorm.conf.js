@@ -21,7 +21,7 @@ function resolve(dir) {
 module.exports = {
   resolve: {
     alias: {
-      '@': resolve('./src')
-    }
-  }
+      '@': resolve('./src'),
+    },
+  },
 };

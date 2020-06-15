@@ -14,7 +14,7 @@ import { ITypeArticle } from '@/apis/types';
 @Component({ name: 'DemoCKEditor' })
 export default class extends Vue {
   private config: { [key: string]: string } = {
-    language: 'zh-cn'
+    language: 'zh-cn',
   };
   private article: ITypeArticle = {
     id: '',
@@ -22,7 +22,7 @@ export default class extends Vue {
     content: '',
     timestamp: 0,
     author: '',
-    status: 0
+    status: 0,
   };
 
   private editor: any;

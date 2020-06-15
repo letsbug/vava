@@ -22,7 +22,7 @@ export default class extends Vue {
       opacity: 0.4,
       padding: 5,
       allowClose: false,
-      overlayClickNext: true
+      overlayClickNext: true,
     });
   }
 

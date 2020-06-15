@@ -66,7 +66,7 @@ export default class extends Vue {
     12: '#fee439',
     13: '#feb280',
     14: '#fe7e46',
-    15: '#fe6c08'
+    15: '#fe6c08',
   };
   private selected: number = -1;
 
@@ -117,13 +117,15 @@ export default class extends Vue {
     }
 
     const history =
-      selected === -1 ? this.history : this.history.filter(v => +v.version === selected || +v.version === selected - 1);
+      selected === -1
+        ? this.history
+        : this.history.filter((v) => +v.version === selected || +v.version === selected - 1);
 
     const paintedFace = new IPaintedFace({
       content: 'content',
       user: 'author',
       mtime: 'timestamp',
-      initialVersion: 0
+      initialVersion: 0,
     });
     const compareResult = paintedFace.execute(history);
     let result = '';

@@ -12,22 +12,22 @@ export default {
   props: {
     id: {
       type: String,
-      default: `app-tiny-${+new Date() + Math.floor(Math.random() * 1000)}`
+      default: `app-tiny-${+new Date() + Math.floor(Math.random() * 1000)}`,
     },
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     height: {
       type: Number,
       required: false,
-      default: 400
+      default: 400,
     },
     fixedToolbarContainer: {
       type: String,
       default: undefined,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {
@@ -37,21 +37,21 @@ export default {
       imageTools: {
         image_caption: true,
         image_advtab: true,
-        imagetools_cors_hosts: ['www.tinymce.com']
+        imagetools_cors_hosts: ['www.tinymce.com'],
       },
-      hasChange: false
+      hasChange: false,
     };
   },
   computed: {
     language() {
       return this.languages[IStoreSystem.language];
-    }
+    },
   },
   watch: {
     language() {
       this.destroy();
       this.$nextTick(() => this.init());
-    }
+    },
   },
   created() {
     if (!this.fixedToolbarContainer) return;
@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     init() {
-      const init_instance_callback = editor => {
+      const init_instance_callback = (editor) => {
         if (this.value) {
           editor.setContent(this.value);
         }
@@ -98,7 +98,7 @@ export default {
         end_container_on_empty_block: true,
         default_link_target: '_blank',
         nonbreaking_force_tab: true,
-        init_instance_callback
+        init_instance_callback,
       };
       window.tinymce.init(Object.assign({}, defaultOptions, this.imageTools));
       this.$emit('on-inited');
@@ -107,8 +107,8 @@ export default {
       const tiny = window.tinymce.get(this.id);
       console.log('exec destroy method: ', this.id, tiny);
       if (tiny) tiny.destroy();
-    }
-  }
+    },
+  },
 };
 </script>
 

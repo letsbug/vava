@@ -16,8 +16,8 @@ const { connector, summarise } = require('swagger-routes-express');
 const ip = ((): string => {
   const network = networkInterfaces();
   let ip = '';
-  for (const devName in network) {
-    const ifc = network[devName];
+  Object.keys(network).forEach((devName) => {
+    const ifc = network[devName] || [];
     for (let i = 0; i < ifc.length; i++) {
       const alias = ifc[i];
       if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
@@ -25,7 +25,7 @@ const ip = ((): string => {
         break;
       }
     }
-  }
+  });
   return ip;
 })();
 
@@ -52,8 +52,8 @@ const apiDefinition = yaml.load(path.resolve(__dirname, 'swagger.yml'));
 // Create mock functions based on swaggerConfig
 const options = {
   security: {
-    AuthAccessToken: authAccessToken
-  }
+    AuthAccessToken: authAccessToken,
+  },
 };
 
 const connectSwagger = connector(apis, apiDefinition, options);
